@@ -1,5 +1,5 @@
 import {readHostPackageConfig} from '@reskript/core';
-import {BuildSettings, DevServerSettings, RollupSettings, PlaySettings, ProjectSettings} from './interface';
+import {BuildSettings, DevServerSettings, ProjectSettings} from './interface';
 
 type PartialBuildSettings = BuildSettings & {
     script: Partial<BuildSettings['script']>;
@@ -45,28 +45,11 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
     };
 };
 
-const fillRollupSettings = (settings?: Partial<RollupSettings>): RollupSettings => {
-    return {
-        styleOutput: 'index',
-        target: 'universal',
-        ...settings,
-    };
-};
-
-const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
-    return {
-        extraResources: [],
-        ...settings,
-    };
-};
-
 interface PartialProjectSettings {
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;
     devServer?: Partial<ProjectSettings['devServer']>;
-    rollup?: Partial<ProjectSettings['rollup']>;
-    play?: Partial<ProjectSettings['play']>;
 }
 
 export const fillProjectSettings = (settings: PartialProjectSettings = {}): ProjectSettings => {
@@ -75,7 +58,5 @@ export const fillProjectSettings = (settings: PartialProjectSettings = {}): Proj
         featureMatrix: settings.featureMatrix ?? {stable: {}, dev: {}},
         build: fillBuildSettings(settings.build),
         devServer: fillDevServerSettings(settings.devServer),
-        rollup: fillRollupSettings(settings.rollup),
-        play: fillPlaySettings(settings.play),
     };
 };

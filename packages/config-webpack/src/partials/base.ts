@@ -79,7 +79,6 @@ const factory: ConfigurationFactory = entry => {
         buildVersion,
         buildTime,
         entries,
-        cache = true,
         projectSettings: {
             build: {
                 thirdParty,
@@ -107,7 +106,7 @@ const factory: ConfigurationFactory = entry => {
         exclude: ['node_modules', 'externals'],
         extensions: ['js', 'jsx', 'ts', 'tsx'],
         emitError: true,
-        emitWarning: usage === 'devServer' || usage === 'play',
+        emitWarning: usage === 'devServer',
     };
     const styleLintOptions = {
         config: getStyleLintConfig(),
@@ -152,13 +151,11 @@ const factory: ConfigurationFactory = entry => {
                 'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
             },
         },
-        cache: cache
-            ? {
-                type: 'filesystem',
-                version: computeCacheKey(entry),
-                name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
-            }
-            : false,
+        cache: {
+            type: 'filesystem',
+            version: computeCacheKey(entry),
+            name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
+        },
         snapshot: {
             module: {
                 timestamp: usage !== 'build',

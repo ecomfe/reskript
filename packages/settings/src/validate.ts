@@ -119,32 +119,6 @@ const schema: any = {
             additionalProperties: false,
             type: 'object',
         },
-        rollup: {
-            properties: {
-                styleOutput: {
-                    enum: ['extract', 'index', 'inject'],
-                    type: 'string',
-                },
-                target: {
-                    enum: ['node', 'universal', 'web'],
-                    type: 'string',
-                },
-            },
-            additionalProperties: false,
-            type: 'object',
-        },
-        play: {
-            properties: {
-                extraResources: {
-                    items: {
-                        type: 'string',
-                    },
-                    type: 'array',
-                },
-            },
-            additionalProperties: false,
-            type: 'object',
-        },
         plugins: {
             anyOf: [
                 {

@@ -12,7 +12,7 @@ interface BuildContext {
     readonly mode: WorkMode;
     readonly buildVersion: string;
     readonly buildTime: string;
-    readonly usage: 'build' | 'devServer' | 'test' | 'play';
+    readonly usage: 'build' | 'devServer' | 'test';
     readonly srcDirectory: string;
     readonly hostPackageName: string;
     readonly projectSettings: ProjectSettings;
@@ -98,7 +98,7 @@ loaders: {
 interface BuildEntry extends RuntimeBuildEnv {
     readonly cwd: string;
     readonly mode: WorkMode;
-    readonly usage: 'build' | 'devServer' | 'test' | 'play';
+    readonly usage: 'build' | 'devServer' | 'test';
     readonly srcDirectory: string;
     readonly hostPackageName: string;
     readonly projectSettings: ProjectSettings;
