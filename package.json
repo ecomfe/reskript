@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "reskript",
+  "version": "0.0.1",
+  "repository": "https://github.com/ecomfe/reskript",
+  "author": "otakustay <otakustay@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "lerna run lint --parallel",
+    "test": "lerna run test --parallel",
+    "build": "lerna run build",
+    "release": "lerna version --conventional-commits --no-push --force-publish",
+    "ci": "yarn && yarn build && yarn lint && yarn test",
+    "preversion": "yarn ci",
+    "prepack": "yarn && yarn build",
+    "local-publish": "yarn && yarn build && node scripts/local-publish.js",
+    "deploy": "npm_config_registry=https://registry.npmjs.org/ lerna publish from-package --dist-tag=next --pre-dist-tag=next"
+  },
+  "devDependencies": {
+    "husky": "^4.3.8",
+    "lerna": "^3.22.1"
+  },
+  "resolutions": {
+    "**/@types/webpack": "^4.41.22"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node scripts/ensure-less-version.js && yarn lint --exclude-dependents --since HEAD",
+      "pre-push": "yarn ci"
+    }
+  }
+}

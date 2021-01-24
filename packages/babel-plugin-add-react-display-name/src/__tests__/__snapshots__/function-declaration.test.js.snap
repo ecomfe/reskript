@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`function declaration export default a render function 1`] = `
+"// export default a render function
+
+/* eslint-disable */
+export default function () {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}"
+`;
+
+exports[`function declaration export default anonymous function 1`] = `
+"// export default anonymous function
+
+/* eslint-disable */
+export default function _ExportDefaultAnonymous() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+_ExportDefaultAnonymous.displayName = \\"ExportDefaultAnonymous\\";"
+`;
+
+exports[`function declaration export default anonymous function as a module's index 1`] = `
+"// export default anonymous function as a module's index
+
+/* eslint-disable */
+export default function _ExportDefaultIndex() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+_ExportDefaultIndex.displayName = \\"ExportDefaultIndex\\";"
+`;
+
+exports[`function declaration export default function containing nested function component 1`] = `
+"// export default function containing nested function component
+
+/* eslint-disable */
+export default function () {
+  function Foo() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+  Foo.displayName = \\"Foo\\";
+  return Foo;
+}
+;"
+`;
+
+exports[`function declaration export default named function 1`] = `
+"// export default named function
+
+/* eslint-disable */
+export default function Foo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`function declaration index.*.js is not a module entry 1`] = `
+"// index.*.js is not a module entry
+
+/* eslint-disable */
+export default function () {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}"
+`;
+
+exports[`function declaration render function returns jsx 1`] = `
+"// render function returns jsx
+
+/* eslint-disable */
+function renderFoo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}"
+`;
+
+exports[`function declaration return jsx 1`] = `
+"// return jsx
+
+/* eslint-disable */
+function Foo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`function declaration return non jsx 1`] = `
+"// return non jsx
+
+/* eslint-disable */
+function Foo() {
+  return 'Hello';
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`function declaration with too many parameters 1`] = `
+"// with too many parameters
+
+/* eslint-disable */
+function Foo(x, y) {
+  return /*#__PURE__*/React.createElement(\\"div\\", null, x + y);
+}"
+`;

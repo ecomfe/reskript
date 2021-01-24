@@ -1,0 +1,26 @@
+{
+  "name": "@reskript/core",
+  "version": "1.0.0-beta.25",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.com"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "lint": "eslint src",
+    "test": "echo 'No test in @reskript/core'"
+  },
+  "devDependencies": {
+    "eslint": "^7.18.0",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "find-up": "^5.0.0",
+    "pkg-dir": "^5.0.0"
+  }
+}

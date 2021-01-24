@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`class declaration export default anonymous class 1`] = `
+"// export default anonymous class
+
+/* eslint-disable */
+import { Component } from 'react';
+export default class _ExportDefaultAnonymous extends Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+_ExportDefaultAnonymous.displayName = \\"ExportDefaultAnonymous\\";"
+`;
+
+exports[`class declaration extends Component from react default import 1`] = `
+"// extends Component from react default import
+
+/* eslint-disable */
+import React from 'react';
+
+class Foo extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`class declaration extends Component from react default import 2`] = `
+"// extends Component from react default import
+
+/* eslint-disable */
+import MyReact from 'react';
+
+class Foo extends MyReact.PureComponent {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`class declaration extends Component from react namespace import 1`] = `
+"// extends Component from react namespace import
+
+/* eslint-disable */
+import * as React from 'react';
+
+class Foo extends React.Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`class declaration extends Component named import from react 1`] = `
+"// extends Component named import from react
+
+/* eslint-disable */
+import { Component } from 'react';
+
+class Foo extends Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`class declaration extends PureComponent named import from react 1`] = `
+"// extends PureComponent named import from react
+
+/* eslint-disable */
+import { PureComponent } from 'react';
+
+class Foo extends PureComponent {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`class declaration extends a very complex expression 1`] = `
+"// extends a very complex expression
+
+/* eslint-disable */
+class Foo extends class {} {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}"
+`;
+
+exports[`class declaration extends non react default base class 1`] = `
+"// extends non react default base class
+
+/* eslint-disable */
+class Foo extends Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}"
+`;
+
+exports[`class declaration extends non react named base class 1`] = `
+"// extends non react named base class
+
+/* eslint-disable */
+class Foo extends namespace.Component {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}"
+`;
+
+exports[`class declaration without super class 1`] = `
+"// without super class
+
+/* eslint-disable */
+class Foo {
+  render() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+}"
+`;

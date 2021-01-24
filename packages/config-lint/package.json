@@ -1,0 +1,44 @@
+{
+  "name": "@reskript/config-lint",
+  "version": "1.0.0-beta.25",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "config"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.com"
+  },
+  "scripts": {
+    "build": "rm -rf dist config && tsc && node scripts/post-build.js",
+    "lint": "eslint src scripts",
+    "test": "echo 'No test in @reskript/config-lint'"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/eslint-plugin": "^7.12.1",
+    "@ecomfe/eslint-config": "^7.0.0",
+    "@ecomfe/stylelint-config": "^1.1.1",
+    "@reskript/config-babel": "^1.0.0-beta.25",
+    "@reskript/eslint-plugin": "^1.0.0-beta.25",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-reskript": "^0.1.2",
+    "resolve": "^1.19.0"
+  },
+  "peerDependencies": {
+    "eslint": "7.x",
+    "stylelint": "13.x",
+    "typescript": "4.x"
+  }
+}

@@ -1,0 +1,98 @@
+@default-base-font-family: "Helvetica Neue", Arial, sans-serif;
+@default-heading-font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+@default-code-font-family: Monaco, Consolas, monospace;
+
+.font-family(base) {
+    font-family: @default-base-font-family;
+}
+
+.font-family(heading) {
+    font-family: @default-heading-font-family;
+}
+
+.font-family(code) {
+    font-family: @default-code-font-family;
+}
+
+.centered-line(@height) {
+    height: @height;
+    line-height: @height;
+}
+
+.clearfix() {
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.ellipsis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.size(@size) {
+    width: @size;
+    height: @size;
+}
+
+.size(@wdith, @height) {
+    width: @wdith;
+    height: @height;
+}
+
+.deprecate(@name) {
+    @v: ~`(() => console.warn('mixin @{name} called from ' + this.v.value.parent._fileInfo.filename + ' will be deprecated.'))()`;
+}
+
+.absolute(@top) {
+    .deprecate(absolute);
+    position: absolute;
+    top: @top;
+}
+
+.align-items(@align) {
+    .deprecate(align-items);
+    align-items: @align;
+}
+
+.box-sizing(@boxmodel) {
+    .deprecate(box-sizing);
+    box-sizing: @boxmodel;
+}
+
+.display(@value) {
+    .deprecate(display);
+    display: @value;
+}
+
+.inline-block() {
+    .deprecate(inline-block);
+    display: inline-block;
+}
+
+.justify-content(@align) {
+    .deprecate(justify-content);
+    justify-content: @align;
+}
+
+.rotate(@angle) {
+    .deprecate(rotate);
+    transform: rotate(@arguments);
+}
+
+.transform(...) {
+    .deprecate(transform);
+    transform: @arguments;
+}
+
+.transition(@transition, ...) {
+    .deprecate(transition);
+    @transitions: ~`(function() { var args = "@{arguments}".replace(/[[\]]/g, ""); if(!args.match(/[^,]\s+[^,]/)) { args = args.replace(/,(?=[^()]*\))/g, "%est%").replace(/,/g, "").replace(/%est%/g, ","); } return args;})()`;
+    transition: @transitions;
+}

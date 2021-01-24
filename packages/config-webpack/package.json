@@ -1,0 +1,79 @@
+{
+  "name": "@reskript/config-webpack",
+  "version": "1.0.0-beta.25",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.com"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc && cp -r src/assets dist",
+    "lint": "eslint src",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/less": "^3.0.2",
+    "@types/lodash": "^4.14.168",
+    "@types/mini-css-extract-plugin": "^1.2.1",
+    "@types/stylelint": "^9.10.1",
+    "@types/stylelint-webpack-plugin": "^2.1.0",
+    "@types/webpack-merge": "^4.1.5",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3",
+    "webpack": "^5.16.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@ecomfe/class-names-loader": "^1.0.0",
+    "@ecomfe/svg-mixed-loader": "^1.0.1",
+    "@reskript/config-babel": "^1.0.0-beta.25",
+    "@reskript/config-lint": "^1.0.0-beta.25",
+    "@reskript/core": "^1.0.0-beta.25",
+    "@reskript/settings": "^1.0.0-beta.25",
+    "@types/webpack": "^4.41.26",
+    "autoprefixer": "^10.2.3",
+    "babel-loader": "^8.2.2",
+    "case-sensitive-paths-webpack-plugin": "^2.3.0",
+    "chalk": "^4.1.0",
+    "change-case": "^4.1.2",
+    "classnames": "^2.2.6",
+    "core-js": "^3.8.3",
+    "css-loader": "^5.0.1",
+    "cssnano": "^4.1.10",
+    "eslint-webpack-plugin": "^2.4.3",
+    "file-loader": "^6.2.0",
+    "find-up": "^5.0.0",
+    "hasha": "^5.2.0",
+    "html-webpack-plugin": "^5.0.0-beta.5",
+    "less": "3.9.0",
+    "less-loader": "^7.3.0",
+    "less-plugin-functions": "^1.0.0",
+    "less-plugin-npm-import": "^2.1.0",
+    "lodash": "^4.17.20",
+    "mini-css-extract-plugin": "^1.3.4",
+    "postcss": "^8.2.4",
+    "postcss-loader": "^4.2.0",
+    "regenerator-runtime": "^0.13.7",
+    "resolve": "^1.19.0",
+    "style-loader": "^2.0.0",
+    "style-resources-loader": "^1.4.1",
+    "stylelint-webpack-plugin": "^2.1.0",
+    "svgo": "^1.3.2",
+    "svgo-loader": "^2.2.1",
+    "unixify": "^1.0.0",
+    "url-loader": "^4.1.0",
+    "webpack-merge": "^5.7.3",
+    "worker-loader": "^3.0.7"
+  },
+  "peerDependencies": {
+    "eslint": "7.x",
+    "stylelint": "13.x",
+    "typescript": "4.x",
+    "webpack": "5.x"
+  }
+}

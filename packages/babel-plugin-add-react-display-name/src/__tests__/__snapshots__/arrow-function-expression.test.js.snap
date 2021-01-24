@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`arrow function expression as class member 1`] = `
+"function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// as class member
+
+/* eslint-disable */
+class Foo {
+  constructor() {
+    _defineProperty(this, \\"Bar\\", () => {
+      return /*#__PURE__*/React.createElement(\\"div\\", null);
+    });
+  }
+
+}"
+`;
+
+exports[`arrow function expression as named export 1`] = `
+"// as named export
+
+/* eslint-disable */
+export const Foo = () => /*#__PURE__*/React.createElement(\\"div\\", null);
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`arrow function expression assigned to object property 1`] = `
+"// assigned to object property
+
+/* eslint-disable */
+import { Component } from 'react';
+const global = {
+  namespace: {}
+};
+
+global.namespace.Foo = () => {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+};
+
+global.namespace.Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`arrow function expression assignment to variable 1`] = `
+"// assignment to variable
+
+/* eslint-disable */
+let Foo;
+
+Foo = () => {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+};
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`arrow function expression export default anonymous arrow function 1`] = `
+"const _ExportDefaultAnonymous = () => /*#__PURE__*/React.createElement(\\"div\\", null);
+
+// export default anonymous arrow function
+
+/* eslint-disable */
+export default _ExportDefaultAnonymous;
+_ExportDefaultAnonymous.displayName = \\"ExportDefaultAnonymous\\";"
+`;
+
+exports[`arrow function expression export default arrow function as a module's index 1`] = `
+"const _ExportDefaultIndex = () => /*#__PURE__*/React.createElement(\\"div\\", null);
+
+// export default arrow function as a module's index
+
+/* eslint-disable */
+export default _ExportDefaultIndex;
+_ExportDefaultIndex.displayName = \\"ExportDefaultIndex\\";"
+`;
+
+exports[`arrow function expression in iife 1`] = `
+"// in iife
+
+/* eslint-disable */
+(() => {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+})();"
+`;
+
+exports[`arrow function expression nested in child scope as a variable 1`] = `
+"// nested in child scope as a variable
+
+/* eslint-disable */
+const factory = () => {
+  const Foo = () => {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  };
+
+  Foo.displayName = \\"Foo\\";
+  return Foo;
+};"
+`;
+
+exports[`arrow function expression nested in child scope as an assignment 1`] = `
+"// nested in child scope as an assignment
+
+/* eslint-disable */
+const initialize = () => {
+  window.Foo = () => {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  };
+
+  window.Foo.displayName = \\"Foo\\";
+};"
+`;
+
+exports[`arrow function expression returned from function 1`] = `
+"// returned from function
+
+/* eslint-disable */
+const factory = () => () => {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+};"
+`;
+
+exports[`arrow function expression simple arror function assigned to variable 1`] = `
+"// simple arror function assigned to variable
+
+/* eslint-disable */
+const Foo = () => {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+};
+
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`arrow function expression simple non component function 1`] = `
+"// simple non component function
+
+/* eslint-disable */
+const renderFoo = name => /*#__PURE__*/React.createElement(\\"div\\", null, name);"
+`;
+
+exports[`arrow function expression without body block 1`] = `
+"// without body block
+
+/* eslint-disable */
+const Foo = () => /*#__PURE__*/React.createElement(\\"div\\", null);
+
+Foo.displayName = \\"Foo\\";"
+`;

@@ -1,0 +1,13 @@
+This project has reportLintErrors option disabled in settings.js,
+and there is no pre-commit hook to lint your files,
+you should at least install husky to enable pre-commit hook.
+
+  npm install --save-dev husky@next
+
+Then add this part to your package.json:
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "skr lint --staged"
+    }
+  }

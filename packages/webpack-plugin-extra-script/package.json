@@ -1,0 +1,24 @@
+{
+  "name": "@reskript/webpack-plugin-extra-script",
+  "version": "1.0.0-beta.25",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.com"
+  },
+  "scripts": {
+    "build": "echo 'done'",
+    "test": "jest",
+    "lint": "eslint *.js"
+  },
+  "devDependencies": {
+    "@types/webpack": "^4.41.26",
+    "eslint": "^7.18.0",
+    "html-webpack-plugin": "^5.0.0-beta.5",
+    "typescript": "^4.1.3"
+  }
+}

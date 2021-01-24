@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`type script export default arrow function as a module's index 1`] = `
+"const _DefaultExport = () => /*#__PURE__*/React.createElement(\\"div\\", null);
+
+// export default arrow function as a module's index
+
+/* eslint-disable */
+export default _DefaultExport;
+_DefaultExport.displayName = \\"DefaultExport\\";"
+`;
