@@ -12,7 +12,7 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
         polyfill,
         defaultImportOptimization,
         // 对于需要构建产物用的场合，默认不给热更新
-        hot: (usage === 'devServer' || usage === 'play') ? hot : 'none',
+        hot: usage === 'devServer' ? hot : 'none',
         hostType: 'application',
     };
     const internalCreatedBabelConfig = getBabelConfig(babelConfigOptions);

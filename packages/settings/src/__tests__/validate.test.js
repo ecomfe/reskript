@@ -33,26 +33,6 @@ describe('validate', () => {
         expect(() => validate(settings)).toThrow();
     });
 
-    test('additional properties in rollup', () => {
-        const settings = {
-            rollup: {
-                foo: 'bar',
-            },
-        };
-
-        expect(() => validate(settings)).toThrow();
-    });
-
-    test('additional properties in play', () => {
-        const settings = {
-            play: {
-                foo: 'bar',
-            },
-        };
-
-        expect(() => validate(settings)).toThrow();
-    });
-
     test('invalid plugins', () => {
         const settings = {
             plugins: [

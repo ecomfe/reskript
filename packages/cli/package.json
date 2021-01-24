@@ -16,7 +16,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "eslint src",
-    "test": "echo 'No test in @reskript/cli-play'"
+    "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
     "@types/semver": "^7.3.4",
