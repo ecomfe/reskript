@@ -1,0 +1,17 @@
+{
+  "name": "@reskript/site",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "test": "echo 'No test in @reskript/docs'"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  }
+}
