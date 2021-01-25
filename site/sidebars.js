@@ -3,6 +3,13 @@ module.exports = {
         'getting-started',
         {
             type: 'category',
+            label: '应用开发',
+            items: [
+                'app/quick-start',
+            ],
+        },
+        {
+            type: 'category',
             label: '配置',
             items: [
                 'settings/settings',
