@@ -8,6 +8,8 @@ module.exports = {
                 'settings/settings',
                 'settings/feature-matrix',
                 'settings/build',
+                'settings/dev-server',
+                'settings/plugins',
             ],
         },
     ],
