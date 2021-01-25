@@ -68,7 +68,8 @@ module.exports = {
         "module": "CommonJS",
         "target": "es2018",
         "outDir": "dist",
-        "emit": false,
+        "noEmit": true,
+        "jsx": "react-jsx",
         "esModuleInterop": true,
         "moduleResolution": "node",
         "strict": true,
@@ -76,12 +77,35 @@ module.exports = {
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
         "keyofStringsOnly": true,
-        "skipLibCheck": true
+        "skipLibCheck": true，
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     }
 }
 ```
 
 以上是一个比较精简可用的配置，使用`emit: false`可以让TypeScript不要去处理代码的生成，获得更好的类型检查的性能。
+
+### 别名配置
+
+虽然`reSKRipt`完整地封装了`webpack`的功能，你不再需要自行做任何的配置。但是也正因为`webpack`的配置被隐藏在工具内，会让代码编辑器无法正确地读取配置来提供编码辅助，最为典型的是`import`语句中的路径会因为别名等原因无法找到，显示出预期外的错误。
+
+为此，我们要在项目目录下放一个`webpack.config.js`，里面内容如下：
+
+```js
+const path = require('path');
+
+module.exports = {
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+        },
+    },
+};
+```
+
+这个文件不需要包含任何的其它配置，仅仅用作编辑器识别路径别名。它和实际的构建也没有关系，**任何时候你都不需要改动这个文件**。
 
 ### 项目配置
 
@@ -109,6 +133,7 @@ exports.devServer = {
         index.tsx # 主入口文件
 .eslintrc.js
 .stylelint.config.js
+webpack.config.js
 settings.js
 package.json
 package-lock.json
@@ -116,7 +141,7 @@ package-lock.json
 
 建立`src/entries/index.tsx`，并输入以下代码：
 
-```ts
+```tsx
 import {FC} from 'react';
 import {render} from 'react-dom';
 

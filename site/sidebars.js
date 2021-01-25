@@ -6,6 +6,7 @@ module.exports = {
             label: '应用开发',
             items: [
                 'app/quick-start',
+                'app/component',
             ],
         },
         {
