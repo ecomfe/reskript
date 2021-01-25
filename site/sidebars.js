@@ -12,5 +12,15 @@ module.exports = {
                 'settings/plugins',
             ],
         },
+        {
+            type: 'category',
+            label: '命令行',
+            items: [
+                'cli/build',
+                'cli/dev',
+                'cli/lint',
+                'cli/test',
+            ],
+        },
     ],
 };
