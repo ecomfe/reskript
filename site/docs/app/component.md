@@ -123,6 +123,21 @@ export default App;
 
 我们推荐对于`src/`下第一层的目录内的模块，比如`src/components/*`，都使用`@/`的形式引用。这样你在代码位置发生变化的时候，可以尽可能地不需要调整`import`的相对路径。
 
+## 调试观察
+
+将应用通过`npm start`重新运行起来，并打开React的开发者工具，观察在组件树中的组件。
+
+你会发现虽然代码会经过`babel`转义甚至压缩（当然在开发模式下并不压缩），但在React开发者工具中，依然能看到组件的名称：
+
+```
+▾ App
+    ▸ Header
+    ▸ Content
+    ▸ Footer
+```
+
+这是因为`reSKRipt`会在编译代码的时候，自动识别出React组件，并为它们加上`displayName`属性。我们会尽可能地适应不同的组件编写方式，除了高阶组件（HOC）以外，你可以放心地将`displayName`的声明交给`reSKRipt`处理，都将给你一个优秀的运行时调试体验。
+
 ## 总结
 
 在本章节中，我们了解到在编写一个组件在`reSKRipt`的支持下十分容易，不需要关注具体的构建等配置，同时工具提供了以下的能力：
@@ -131,3 +146,4 @@ export default App;
 - 推荐最顶层的组件各自有独立的目录，并以`src/components/SomeComponent/index.tsx`的形式存在。
 - 可以直接使用`styled-components`，在构建过程中有相应的插件等提供帮助。
 - 引用`antd`时有相应的优化，会只引入对应的组件，控制包的大小。
+- `reSKRipt`会自动声明组件的`displayName`提升调试体验。
