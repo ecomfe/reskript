@@ -16,6 +16,14 @@ module.exports = {
         },
         {
             type: 'category',
+            label: '高阶应用',
+            items: [
+                'advanced/config-insiders',
+                'advanced/multiple-entry',
+            ],
+        },
+        {
+            type: 'category',
             label: '配置',
             items: [
                 'settings/settings',
@@ -35,5 +43,13 @@ module.exports = {
                 'cli/test',
             ],
         },
+        {
+            type: 'category',
+            label: '插件',
+            items: [
+                'plugins/qiankun',
+            ],
+        },
+        'faq',
     ],
 };
