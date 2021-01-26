@@ -8,6 +8,7 @@ module.exports = {
                 'app/quick-start',
                 'app/component',
                 'app/style',
+                'app/svg',
             ],
         },
         {
