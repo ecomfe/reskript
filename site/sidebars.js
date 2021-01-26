@@ -10,6 +10,7 @@ module.exports = {
                 'app/style',
                 'app/svg',
                 'app/local-dev',
+                'app/unit-test',
                 'app/build-deploy',
             ],
         },
