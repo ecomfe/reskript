@@ -7,6 +7,7 @@ module.exports = {
             items: [
                 'app/quick-start',
                 'app/component',
+                'app/style',
             ],
         },
         {
