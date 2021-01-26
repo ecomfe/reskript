@@ -9,6 +9,8 @@ module.exports = {
                 'app/component',
                 'app/style',
                 'app/svg',
+                'app/local-dev',
+                'app/build-deploy',
             ],
         },
         {
