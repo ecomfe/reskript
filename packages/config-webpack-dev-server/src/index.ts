@@ -10,7 +10,7 @@ import {merge} from 'webpack-merge';
 import pkgDir from 'pkg-dir';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
-import {BuildEntry} from '@reskript/settings';
+import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 
 const devHost = internalIp.v4.sync();
 
@@ -119,5 +119,7 @@ export const createWebpackDevServerConfig = (
         {devServer: baseConfig},
         {devServer: addition}
     );
-    return buildEntry.projectSettings.devServer.finalize(mergedConfig.devServer, buildEntry);
+    const finalized = buildEntry.projectSettings.devServer.finalize(mergedConfig.devServer, buildEntry);
+    warnAndExitOnInvalidFinalizeReturn(finalized, 'devServer');
+    return finalized;
 };

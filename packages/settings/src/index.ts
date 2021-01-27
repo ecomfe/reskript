@@ -2,6 +2,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
+import chalk from 'chalk';
+import dedent from 'dedent';
 import {ProjectAware} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
@@ -101,6 +103,17 @@ export const watchProjectSettings = (cmd: ProjectAware, commandName: string): Ob
     };
 
     return cache.listen;
+};
+
+export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): void => {
+    if (!value) {
+        const message = dedent`
+            Your ${scope}.finalize returns nothing.
+            You may forget to write a return statement in ${scope}.finalize, or some plugin has a broken implement.
+        `;
+        console.error(chalk.red(message));
+        process.exit(2);
+    }
 };
 
 export {fillProjectSettings};

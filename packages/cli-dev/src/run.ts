@@ -2,7 +2,12 @@ import {noop} from 'lodash';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
-import {readProjectSettings, watchProjectSettings, BuildEnv} from '@reskript/settings';
+import {
+    readProjectSettings,
+    watchProjectSettings,
+    BuildEnv,
+    warnAndExitOnInvalidFinalizeReturn,
+} from '@reskript/settings';
 import {createWebpackConfig, BuildContext, collectEntries, createRuntimeBuildEnv} from '@reskript/config-webpack';
 import {readHostPackageConfig} from '@reskript/core';
 import internalIp from 'internal-ip';
@@ -43,6 +48,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const config = createWebpackConfig(buildContext, [extra]);
     const devServerConfig = createWebpackDevServerConfig(buildContext, cmd.proxyDomain, config.devServer);
     const finalizedDevServerConfig = buildContext.projectSettings.devServer.finalize(devServerConfig, buildContext);
+    warnAndExitOnInvalidFinalizeReturn(finalizedDevServerConfig, 'devServer');
     WebpackDevServer.addDevServerEntrypoints(config, finalizedDevServerConfig);
     const compiler = webpack(config);
     const server = new WebpackDevServer(compiler, finalizedDevServerConfig);

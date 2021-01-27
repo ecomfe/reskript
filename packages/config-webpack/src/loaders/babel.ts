@@ -1,6 +1,6 @@
 import {sync as resolve} from 'resolve';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
-import {BuildEntry} from '@reskript/settings';
+import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = (entry: BuildEntry) => {
@@ -17,6 +17,7 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
     };
     const internalCreatedBabelConfig = getBabelConfig(babelConfigOptions);
     const finalizedBabelConfig = build.script.finalize(internalCreatedBabelConfig, entry);
+    warnAndExitOnInvalidFinalizeReturn(finalizedBabelConfig, 'build.script');
 
     return {
         loader: resolve('babel-loader'),
