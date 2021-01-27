@@ -20,6 +20,7 @@ module.exports = {
             items: [
                 'advanced/config-insiders',
                 'advanced/multiple-entry',
+                'advanced/browsers-list',
             ],
         },
         {
