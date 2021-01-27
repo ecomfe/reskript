@@ -8,6 +8,7 @@ import {ProjectAware} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
 import {fillProjectSettings} from './defaults';
+import {applyPlugins} from './plugins';
 
 export * from './interface';
 
@@ -25,12 +26,7 @@ const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSetting
     const {plugins = [], ...clientSettings} = requiredSettings;
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
-    const pluginsToApply = typeof plugins === 'function' ? plugins(commandName) : plugins;
-    const settings = pluginsToApply.reduce(
-        (baseSettings, apply) => apply(baseSettings, pluginOptions),
-        rawSettings
-    );
-    return settings;
+    return applyPlugins(rawSettings, plugins, pluginOptions);
 };
 
 const computeSettingsHash = (cwd: string): string => {
