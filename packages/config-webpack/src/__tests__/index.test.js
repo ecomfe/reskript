@@ -2,6 +2,8 @@ import {readProjectSettings} from '@reskript/settings';
 import {createWebpackConfig} from '../index';
 import compiler from './compiler';
 
+jest.useFakeTimers();
+
 describe('createWebpackConfig', () => {
     test('returns configuration', () => {
         const projectSettings = readProjectSettings({cwd: __dirname}, 'build');
