@@ -50,7 +50,7 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
         output: {
             path: path.join(cwd, 'dist'),
             // 在使用`HotModuleReplacementPlugin`时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
-            filename: '[name].[hash].js',
+            filename: '[name].[contenthash].js',
         },
         resolve: {
             // `webpack-dev-server`需要在构建时注入自己的客户端，而客户端放在`reskript`下面，

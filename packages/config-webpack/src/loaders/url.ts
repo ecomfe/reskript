@@ -6,7 +6,7 @@ const factory: LoaderFactory = entry => {
         loader: resolve('url-loader'),
         options: {
             limit: entry.projectSettings.build.largeAssetSize,
-            name: '[name].[hash].[ext]',
+            name: '[name].[contenthash].[ext]',
         },
     };
 };

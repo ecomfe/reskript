@@ -5,7 +5,7 @@ const factory: LoaderFactory = () => {
     return {
         loader: resolve('worker-loader'),
         options: {
-            filename: '[name].[hash].js',
+            filename: '[name].[contenthash].js',
             inline: 'no-fallback',
         },
     };
