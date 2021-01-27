@@ -2,14 +2,14 @@
 title: 配置文件
 ---
 
-你可以在应用的根目录下放置一个`settings.js`文件来声明所有`reSKRipt`需要的配置，该配置文件是一个标准的CommonJS模块，可以通过`exports`对象导出以下的对象：
+你可以在应用的根目录下放置一个`reskript.config.js`文件来声明所有`reSKRipt`需要的配置，该配置文件是一个标准的CommonJS模块，可以通过`exports`对象导出以下的对象：
 
 - `exports.featureMatrix`：参考[特性矩阵](feature-matrix)。
 - `exports.build`：参考[构建](build)。
 - `exports.devServer`：参考[调试服务器]](dev-server)。
 - `exports.plugins`：参考[插件](plugins)。
 
-一个经典的`settings.js`类似如下：
+一个经典的`reskript.config.js`类似如下：
 
 ```js
 exports.featureMatrix = {
@@ -63,7 +63,7 @@ interface BuildEnv extends WorkModeAware {
     readonly srcDirectory: string;
     // 当前代码库的包名，默认读取`package.json`中的`name`字段
     readonly hostPackageName: string;
-    // `settings.js`中定义的配置
+    // `reskript.config.js`中定义的配置
     readonly projectSettings: ProjectSettings;
 }
 ```

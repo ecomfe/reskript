@@ -12,7 +12,7 @@ import {fillProjectSettings} from './defaults';
 export * from './interface';
 
 const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
-    const location = path.join(cmd.cwd, 'settings.js');
+    const location = path.join(cmd.cwd, 'reskript.config.js');
 
     if (!fs.existsSync(location)) {
         return fillProjectSettings({});
@@ -34,7 +34,7 @@ const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSetting
 };
 
 const computeSettingsHash = (cwd: string): string => {
-    const location = path.join(cwd, 'settings.js');
+    const location = path.join(cwd, 'reskript.config.js');
 
     if (!fs.existsSync(location)) {
         return '';
@@ -76,7 +76,7 @@ export const watchProjectSettings = (cmd: ProjectAware, commandName: string): Ob
         return cache.listen;
     }
 
-    const settingsLocation = path.join(cmd.cwd, 'settings.js');
+    const settingsLocation = path.join(cmd.cwd, 'reskript.config.js');
     const listeners = new Set<Listener>();
     const watcher = chokidar.watch(settingsLocation);
     const notify = async (): Promise<void> => {

@@ -24,7 +24,7 @@ GET https://randomuser.me/api?results=10&page=1
 
 ## 配置代理
 
-打开项目中的`settings.js`，可以找到原本的`exports.devServer`配置。在最初的[第一个应用](./quick-start)章节中，我们仅在这个对象中声明了`port`属性。此刻，我们为它加上几个新的配置：
+打开项目中的`reskript.config.js`，可以找到原本的`exports.devServer`配置。在最初的[第一个应用](./quick-start)章节中，我们仅在这个对象中声明了`port`属性。此刻，我们为它加上几个新的配置：
 
 ```js
 exports.devServer = {
@@ -41,7 +41,7 @@ exports.devServer = {
 
 对应的，`localhost:8081/api/list`会被代理到`randomuser.me/api/list`，所有的参数也会被透明地传递过去。
 
-**在修改`settings.js`后，如果你原本已经在命令行中运行了`skr dev`，它会自动地完成重启，应用最新的配置，你不需要去关注它的状态。**
+**在修改`reskript.config.js`后，如果你原本已经在命令行中运行了`skr dev`，它会自动地完成重启，应用最新的配置，你不需要去关注它的状态。**
 
 ## 编写请求和组件
 
@@ -118,5 +118,5 @@ export default UserList;
 
 本章节展示了前端应用与后端服务连通的方式，可以看到`reSKRipt`的一系列功能：
 
-- 通过`settings.js`中的`exports.devServer`可以配置指定的URL前缀代理至后端，也可以配置后端服务的所在域名。
+- 通过`reskript.config.js`中的`exports.devServer`可以配置指定的URL前缀代理至后端，也可以配置后端服务的所在域名。
 - 被代理的请求将完全透明地返回后端的响应，前端可以接收响应后进行视图的开发。

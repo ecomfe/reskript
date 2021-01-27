@@ -73,7 +73,7 @@ export default async (cmd: DevCommandLineArgs): Promise<void> => {
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;
     const restart = async () => {
-        console.log('Detected settings.js change, restarting dev server...');
+        console.log('Detected reskript.config.js change, restarting dev server...');
         if (nextStart) {
             return;
         }

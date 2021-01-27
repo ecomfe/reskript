@@ -138,5 +138,5 @@ const schema: any = {
 };
 
 export default (value: any): void => {
-    validate(schema, value, {name: 'Your settings.js'});
+    validate(schema, value, {name: 'Your reskript.config.js'});
 };

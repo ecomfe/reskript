@@ -4,7 +4,7 @@ title: 构建配置
 
 ## 配置结构
 
-`settings.js`中的`exports.build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
+`reskript.config.js`中的`exports.build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
 
 ```ts
 interface BuildStyleSettings {

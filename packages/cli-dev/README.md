@@ -21,11 +21,11 @@ Options:
   -h, --help               output usage information
 ```
 
-在调试过程中，会监听`settings.js`的变更并重启调试服务器，重启后不会自动打开网页。
+在调试过程中，会监听`reskript.config.js`的变更并重启调试服务器，重启后不会自动打开网页。
 
 ## 配置调试服务器
 
-由`settings.js`导出`devServer`对象，可包含以下属性：
+由`reskript.config.js`导出`devServer`对象，可包含以下属性：
 
 ```ts
 interface DevServerSettings {

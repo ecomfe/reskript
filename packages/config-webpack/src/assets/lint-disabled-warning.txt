@@ -1,4 +1,4 @@
-This project has reportLintErrors option disabled in settings.js,
+This project has reportLintErrors option disabled in reskript.config.js,
 and there is no pre-commit hook to lint your files,
 you should at least install husky to enable pre-commit hook.
 

@@ -109,7 +109,7 @@ module.exports = {
 
 ### 项目配置
 
-在项目目录下创建一个`settings.js`文件，简单地填空如下内容：
+在项目目录下创建一个`reskript.config.js`文件，简单地填空如下内容：
 
 ```js
 exports.build = {
@@ -134,7 +134,7 @@ exports.devServer = {
 .eslintrc.js
 .stylelint.config.js
 webpack.config.js
-settings.js
+reskript.config.js
 package.json
 package-lock.json
 ```

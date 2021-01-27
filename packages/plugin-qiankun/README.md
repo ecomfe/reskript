@@ -22,7 +22,7 @@ npm i -D @reskript/plugin-qiankun
 ### 增加插件
 
 ```javascript
-// settings.js
+// reskript.config.js
 const {default: qiankun} = require('@reskript/plugin-qiankun');
 
 exports.plugins = [

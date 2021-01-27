@@ -8,7 +8,7 @@ title: 特性矩阵配置
 
 ### 定义矩阵
 
-在`settings.js`中增加`exports.featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
+在`reskript.config.js`中增加`exports.featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
 
 ```js
 exports.featureMatrix = {

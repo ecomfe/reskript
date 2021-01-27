@@ -13,12 +13,12 @@ title: 本地调试
 --mode [value]           设置构建的环境模式，可以为development或production，默认为production
 --src [value]            指定项目源码所在的目录，默认为src
 --build-target [value]   指定调试的特性名称，默认为dev
---proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖settings.js中的devServer.defaultProxyDomain配置
+--proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖reskript.config.js中的devServer.defaultProxyDomain配置
 --open [value]           选择自动打开浏览器页面的地址，可以为local（打开localhost）或remote（打开远程IP，用于远程开发场景），默认为local
 -h, --help               显示帮助信息
 ```
 
-除命令行参数外，`settings.js`中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
+除命令行参数外，`reskript.config.js`中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
 
 ## 本地与线上差异
 

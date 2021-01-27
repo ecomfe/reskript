@@ -51,7 +51,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs): Configuration[] => {
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
-        console.error(chalk.red(`Feature ${cmd.featureOnly} is not configured in settings.js`));
+        console.error(chalk.red(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`));
         process.exit(2);
     }
 

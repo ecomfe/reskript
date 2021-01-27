@@ -39,7 +39,7 @@ import {readProjectSettings, BuildEnv} from '@reskript/settings';
 
 const createBuildConfiguration = () => {
     const cwd = process.cwd();
-    // 给定当前的项目目录`cmd`，读取`settings.js`
+    // 给定当前的项目目录`cmd`，读取`reskript.config.js`
     const projectSettings = readProjectSettings({cwd}, 'build');
     // 自动读取`src/entries/*.js`来生成应用入口
     const entries = collectEntries(cmd.cwd, cmd.src);
@@ -71,7 +71,7 @@ const createBuildConfiguration = () => {
 
 ## 复用loader
 
-如果默认的构建配置外加`settings.js`无法满足，或需要在`settings.js`中的`build.finalize`部分复用一些默认的配置，则可以使用`loaders`对象来创建不同的loader配置：
+如果默认的构建配置外加`reskript.config.js`无法满足，或需要在`reskript.config.js`中的`build.finalize`部分复用一些默认的配置，则可以使用`loaders`对象来创建不同的loader配置：
 
 ```typescript
 import {loaders} from '@reskript/config-webpack';
@@ -135,7 +135,7 @@ rules: {
 type RuleFactory = (entry: BuildEntry) => RuleSetRule;
 ```
 
-对于需要修改某一个规则的情况，可以通过`build.finalize`来进行修改，但建议直接覆盖全部的`module.rules`，不要依赖在数组中找到对应的规则。如某个项目需要将`.css`文件的规则修改，则可以在`settings.js`中写如下配置：
+对于需要修改某一个规则的情况，可以通过`build.finalize`来进行修改，但建议直接覆盖全部的`module.rules`，不要依赖在数组中找到对应的规则。如某个项目需要将`.css`文件的规则修改，则可以在`reskript.config.js`中写如下配置：
 
 ```typescript
 const {omit} = require('lodash');

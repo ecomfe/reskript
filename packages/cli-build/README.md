@@ -13,7 +13,7 @@
         *.var.less # .var.less会被提取作为LESS编译时的变量，内部仅可声明变量（以及注释）
     /entries
         index.js # 主入口
-settings.js # 系统配置文件
+reskript.config.js # 系统配置文件
 ```
 
 其中`*.global.less`事实上可以放置在任意位置，只要是以`.global.less`结尾的，均不会经过CSS Modules处理。
@@ -53,11 +53,11 @@ Options:
 
 ## 系统配置
 
-对于应用，在项目的根目录下的`settings.js`中可以有`featureMatrix`、`build`和`plugins`导出控制构建。
+对于应用，在项目的根目录下的`reskript.config.js`中可以有`featureMatrix`、`build`和`plugins`导出控制构建。
 
 ### Feature Matrix
 
-由`settings.js`导出`featureMatrix`对象，该对象的每一个属性均代表一个Feature集合。
+由`reskript.config.js`导出`featureMatrix`对象，该对象的每一个属性均代表一个Feature集合。
 
 通常推荐应用包含以下3个Feature集合：
 
@@ -77,7 +77,7 @@ exports.featureMatrix = {
 
 ### 构建配置
 
-由`settings.js`导出`builld`对象，可以包含以下属性：
+由`reskript.config.js`导出`builld`对象，可以包含以下属性：
 
 ```typescript
 interface BuildStyleSettings {
@@ -124,7 +124,7 @@ interface BuildSettings {
 
 ### 使用插件
 
-由`settings.js`导出`plugins`数组，数组中的每一项为一个函数，函数接受`settings.js`导出的`{featureMatrix, build, devServer, final}`对象和当前命令行参数，并返回一个相同的对象。
+由`reskript.config.js`导出`plugins`数组，数组中的每一项为一个函数，函数接受`reskript.config.js`导出的`{featureMatrix, build, devServer, final}`对象和当前命令行参数，并返回一个相同的对象。
 
 插件会按顺序被依次调用，最终返回的对象用于各种功能。
 

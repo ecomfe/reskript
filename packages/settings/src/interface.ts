@@ -89,7 +89,7 @@ export interface BuildEnv extends WorkModeAware {
     readonly srcDirectory: string;
     // 当前代码库的包名，默认读取`package.json`中的`name`字段
     readonly hostPackageName: string;
-    // `settings.js`中定义的配置
+    // `reskript.config.js`中定义的配置
     readonly projectSettings: ProjectSettings;
 }
 

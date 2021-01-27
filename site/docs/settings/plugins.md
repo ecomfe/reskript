@@ -4,7 +4,7 @@ title: 插件配置
 
 ## 插件定义
 
-在`reSKRipt`中，插件是一个“增加当前`settings.js`配置的函数”。一个单独的插件从类型上可以描述为：
+在`reSKRipt`中，插件是一个“增加当前`reskript.config.js`配置的函数”。一个单独的插件从类型上可以描述为：
 
 ```ts
 interface ProjectAware {
@@ -16,7 +16,7 @@ type SettingsPlugin = (settings: ProjectSettings, cmd: ProjectAware) => ProjectS
 
 其中`ProjectSettings`包含了`build`、`devServer`、`featureMatrix`等部分，但不包含`plugins`本身，即你不可能“用一个插件去控制另一个插件”。
 
-而`settings.js`中的`exports.plugins`是系列的插件的声明，也可以是一个返回插件集合的函数：
+而`reskript.config.js`中的`exports.plugins`是系列的插件的声明，也可以是一个返回插件集合的函数：
 
 ```ts
 type Plugins = SettingsPlugin[] | ((commandName: string) => SettingsPlugin[]);

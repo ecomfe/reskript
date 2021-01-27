@@ -4,7 +4,7 @@ title: 调试服务器配置
 
 ## 配置结构
 
-`settings.js`中的`exports.devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
+`reskript.config.js`中的`exports.devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
 
 ```ts
 interface DevServerSettings {
@@ -92,7 +92,7 @@ exports.devServer = {
 
 ### 更换代理目标
 
-在有些团队中，不同的开发人员、版本会需要将后端API请求代理到不同的机器或域名、IP上去。但我们不希望每个人都修改一份自己的`settings.js`并引起合并冲突等问题。
+在有些团队中，不同的开发人员、版本会需要将后端API请求代理到不同的机器或域名、IP上去。但我们不希望每个人都修改一份自己的`reskript.config.js`并引起合并冲突等问题。
 
 为此，在`skr dev`的命令行上，我们支持`--proxy-domain`参数来覆盖`defaultProxyDomain`这一配置：
 

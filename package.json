@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "lint": "lerna run lint --parallel",
-    "test": "lerna run test --parallel",
+    "test": "lerna run test --concurrency=1",
     "build": "lerna run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
     "ci": "yarn && yarn build && yarn lint && yarn test",

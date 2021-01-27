@@ -35,7 +35,7 @@ const computeCacheKey = (entry: BuildContext): string => {
     hash.update(entry.cwd);
     updateHashFromFile(hash, path.join(__dirname, '..', '..', 'package.json'));
 
-    const settingsLocation = path.join(entry.cwd, 'settings.js');
+    const settingsLocation = path.join(entry.cwd, 'reskript.config.js');
     if (fs.existsSync(settingsLocation)) {
         hash.update(fs.readFileSync(settingsLocation));
     }
