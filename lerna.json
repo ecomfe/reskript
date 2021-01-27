@@ -16,6 +16,9 @@
         "**/jest.config.js",
         "**/tsconfig.json"
       ]
+    },
+    "publish": {
+      "message": "chore(release): publish %s"
     }
   }
 }
