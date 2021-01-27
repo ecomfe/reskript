@@ -9,6 +9,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             ...config.output,
             library: `${appName}-[name]`,
             libraryTarget: 'umd',
+            jsonpFunction: `webpackJsonp_${appName}`,
             globalObject: 'window',
         };
         return config;
