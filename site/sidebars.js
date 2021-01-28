@@ -21,6 +21,7 @@ module.exports = {
                 'advanced/config-insiders',
                 'advanced/multiple-entry',
                 'advanced/browsers-list',
+                'advanced/debug-component',
             ],
         },
         {
@@ -31,6 +32,7 @@ module.exports = {
                 'settings/feature-matrix',
                 'settings/build',
                 'settings/dev-server',
+                'settings/play',
                 'settings/plugins',
             ],
         },

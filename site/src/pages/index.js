@@ -15,7 +15,7 @@ function Home() {
         <Layout description="reSKRipt">
             <div className="container" style={{position: 'fixed', left: '50%', top: '50%', transform: 'translate(-50%, -100%)', width: 800}}>
                 <div style={{display: 'flex'}}>
-                    <div style={{width: 200}}>
+                    <div style={{width: 200, marginRight: 40, display: 'flex', alignItems: 'center'}}>
                         <img src={useBaseUrl('images/logo.svg')} width={200} height={200} />
                     </div>
                     <div style={{flex: 1}}>

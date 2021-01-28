@@ -70,12 +70,17 @@ export interface DevServerSettings {
     readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration;
 }
 
+export interface PlaySettings {
+    injectResources: string[];
+}
+
 export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;
 
 export interface ProjectSettings extends ProjectAware {
     readonly featureMatrix: FeatureMatrix;
     readonly build: BuildSettings;
     readonly devServer: DevServerSettings;
+    readonly play: PlaySettings;
 }
 
 export interface ClientProjectSettings extends ProjectSettings {

@@ -119,6 +119,18 @@ const schema: any = {
             additionalProperties: false,
             type: 'object',
         },
+        play: {
+            properties: {
+                injectResources: {
+                    items: {
+                        type: 'string',
+                    },
+                    type: 'array',
+                },
+            },
+            additionalProperties: false,
+            type: 'object',
+        },
         plugins: {
             anyOf: [
                 {

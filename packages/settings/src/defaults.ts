@@ -1,5 +1,5 @@
 import {readHostPackageConfig} from '@reskript/core';
-import {BuildSettings, DevServerSettings, ProjectSettings} from './interface';
+import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings} from './interface';
 
 type PartialBuildSettings = BuildSettings & {
     script: Partial<BuildSettings['script']>;
@@ -45,11 +45,19 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
     };
 };
 
+const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
+    return {
+        injectResources: [],
+        ...settings,
+    };
+};
+
 interface PartialProjectSettings {
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;
     devServer?: Partial<ProjectSettings['devServer']>;
+    play?: Partial<ProjectSettings['play']>;
 }
 
 export const fillProjectSettings = (settings: PartialProjectSettings = {}): ProjectSettings => {
@@ -58,5 +66,6 @@ export const fillProjectSettings = (settings: PartialProjectSettings = {}): Proj
         featureMatrix: settings.featureMatrix ?? {stable: {}, dev: {}},
         build: fillBuildSettings(settings.build),
         devServer: fillDevServerSettings(settings.devServer),
+        play: fillPlaySettings(settings.play),
     };
 };
