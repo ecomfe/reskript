@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "1.0.0-beta.26",
+  "version": "1.0.0-beta.27",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@reskript/config-webpack": "^1.0.0-beta.26",
-    "@reskript/core": "^1.0.0-beta.26",
-    "@reskript/settings": "^1.0.0-beta.26",
+    "@reskript/config-webpack": "^1.0.0-beta.27",
+    "@reskript/core": "^1.0.0-beta.27",
+    "@reskript/settings": "^1.0.0-beta.27",
     "@types/webpack": "^4.41.26",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "internal-ip": "^6.2.0",
