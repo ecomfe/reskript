@@ -14,7 +14,7 @@ title: 单独编译JavaScript
 --out [directory]  输出的目录，只能指定目录，编译的文件按目录结构输出到目标内
 --clean            在编译前删除目标目录中的全部内容
 --copy             将非JavaScript和TypeScript的文件原样复制到输出目录中
--h, --help              显示帮助信息
+-h, --help         显示帮助信息
 ```
 
 ## 调试文件编译

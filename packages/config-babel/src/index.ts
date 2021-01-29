@@ -27,9 +27,9 @@ const coreJSPreset = () => {
 };
 
 export const getParseOnlyBabelConfig = (options: BabelConfigOptions = {}): TransformOptions => {
-    const {polyfill = false, modules = false} = options;
+    const {polyfill = false, modules = false, hostType} = options;
     const presets: Array<PluginItem | false> = [
-        polyfill && coreJSPreset,
+        polyfill && hostType === 'application' && coreJSPreset,
         [
             resolve('@babel/preset-env'),
             {

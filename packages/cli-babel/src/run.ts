@@ -5,7 +5,7 @@ import rimraf from 'rimraf';
 import pLimit from 'p-limit';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
-import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
+import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
 
 const transformFile = async (file: string, baseIn: string, baseOut: string, options: TransformOptions) => {
@@ -80,7 +80,7 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
         defaultImportOptimization: true,
     };
     const babelConfig: TransformOptions = {
-        ...getBabelConfig(babelConfigOptions),
+        ...getTransformBabelConfig(babelConfigOptions),
         sourceMaps: !!cmd.out,
     };
     if (path.extname(file)) {
