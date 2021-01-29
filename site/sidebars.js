@@ -44,6 +44,8 @@ module.exports = {
                 'cli/dev',
                 'cli/lint',
                 'cli/test',
+                'cli/play',
+                'cli/babel',
             ],
         },
         {
