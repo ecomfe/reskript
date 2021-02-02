@@ -43,7 +43,7 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
                     favicon: resolve('./assets/favicon.ico'),
                 },
                 template: resolve('./assets/playground-entry.ejs'),
-                file: resolve('./assets/playground-entry.js'),
+                file: resolve('./assets/playground-entry.js.tpl'),
             },
         ],
         features: projectSettings.featureMatrix[cmd.buildTarget],
