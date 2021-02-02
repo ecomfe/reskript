@@ -27,8 +27,6 @@
     "@reskript/settings": "^1.0.0-beta.27",
     "loader-utils": "^2.0.0",
     "lodash": "^4.17.20",
-    "monaco-editor-webpack-plugin": "^2.1.0",
-    "react-monaco-editor": "^0.41.2",
     "resolve": "^1.19.0",
     "webpack-dev-server": "^3.11.2"
   },

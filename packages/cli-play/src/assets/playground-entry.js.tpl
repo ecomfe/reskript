@@ -2,9 +2,11 @@
 import React, {Component, useReducer, useCallback} from 'react';
 import {render} from 'react-dom';
 import {debounce} from 'lodash';
-import MonacoEditor from 'react-monaco-editor';
+import Editor, {loader} from "@monaco-editor/react";
 import %COMPONENT_TYPE_NAME% from '%COMPONENT_MODULE_PATH%';
 %EXTRA_IMPORTS%
+
+loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.21.2/min/vs'}});
 
 const DEFAULT_CODE = `const Playground = () => {
     return (
@@ -82,7 +84,7 @@ const App = () => {
         <div style={rootStyle}>
             <div style={editorStyle}>
                 <MonacoEditor
-                    language="javascript"
+                    language="javascriptreact"
                     theme="vs"
                     defaultValue={localStorage.getItem('%COMPONENT_MODULE_PATH%') || DEFAULT_CODE}
                     options={options}

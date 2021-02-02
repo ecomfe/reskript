@@ -2,7 +2,6 @@ import * as path from 'path';
 import webpack from 'webpack';
 import {compact} from 'lodash';
 import {sync as resolve} from 'resolve';
-import MonacoEditorWebpackPlugin from 'monaco-editor-webpack-plugin';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext, loaders} from '@reskript/config-webpack';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
 
@@ -44,10 +43,6 @@ export const createWebpackConfig = (target: string, buildContext: BuildContext):
                 ...(baseConfig.module?.rules ?? []),
             ],
         },
-        plugins: [
-            ...(baseConfig.plugins ?? []),
-            new MonacoEditorWebpackPlugin({languages: ['javascript', 'typescript']}),
-        ],
     };
     return config;
 };
