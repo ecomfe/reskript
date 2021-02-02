@@ -96,6 +96,8 @@ export interface BuildEnv extends WorkModeAware {
     readonly hostPackageName: string;
     // `reskript.config.js`中定义的配置
     readonly projectSettings: ProjectSettings;
+    // 是否启用缓存
+    readonly cache?: boolean;
 }
 
 export interface RuntimeBuildEnv extends BuildEnv {

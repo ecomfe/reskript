@@ -31,6 +31,7 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
         mode: 'development',
         cwd: cmd.cwd,
         srcDirectory: 'src',
+        cache: false,
     };
     const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
     const buildContext: BuildContext = {

@@ -79,6 +79,7 @@ const factory: ConfigurationFactory = entry => {
         buildVersion,
         buildTime,
         entries,
+        cache = true,
         projectSettings: {
             build: {
                 thirdParty,
@@ -151,11 +152,13 @@ const factory: ConfigurationFactory = entry => {
                 'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
             },
         },
-        cache: {
-            type: 'filesystem',
-            version: computeCacheKey(entry),
-            name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
-        },
+        cache: cache
+            ? {
+                type: 'filesystem',
+                version: computeCacheKey(entry),
+                name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
+            }
+            : false,
         snapshot: {
             module: {
                 timestamp: usage !== 'build',
