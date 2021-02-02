@@ -24,7 +24,7 @@
   "dependencies": {
     "@reskript/config-lint": "^1.0.0-beta.27",
     "chalk": "^4.1.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-formatter-pretty": "^4.0.0",
     "g-status": "^2.0.2",
     "globby": "^11.0.2",
