@@ -11,17 +11,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **babel:** skr babel不应该替换core-js的引用 ([0c24ccd](https://github.com/ecomfe/reskript/commit/0c24ccd404c806e6d49ea8b19338e32d59e1aba8))
 
 
+### Features
 
-
-
-# [1.0.0-beta.27](https://github.com/ecomfe/reskript/compare/v1.0.0-beta.26...v1.0.0-beta.27) (2021-01-28)
-
-**Note:** Version bump only for package @reskript/config-babel
-
-
-
-
-
-# 1.0.0-beta.26 (2021-01-27)
-
-**Note:** Version bump only for package @reskript/config-babel
+* **babel:** 增加skr babel命令 ([#8](https://github.com/ecomfe/reskript/issues/8)) ([bf9ba53](https://github.com/ecomfe/reskript/commit/bf9ba533652c2bdd11375f2058a21e9de99c8885))
