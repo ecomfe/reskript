@@ -87,8 +87,8 @@ const App = () => {
         <div style={rootStyle}>
             <div style={editorStyle}>
                 <Editor
-                    language="javascriptreact"
-                    theme="vs"
+                    language="javascript"
+                    theme="light"
                     defaultValue={localStorage.getItem('%COMPONENT_MODULE_PATH%') || DEFAULT_CODE}
                     options={editorOptions}
                     onChange={onSourceChange}
