@@ -15,7 +15,7 @@ const config: {[key: string]: any} = {
     plugins: ['jest', '@reskript'],
     settings: {
         react: {
-            version: '16.8',
+            version: '17.0',
         },
     },
     env: {
