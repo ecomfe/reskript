@@ -21,6 +21,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.0.9",
     "@reskript/config-webpack": "^1.0.0-beta.28",
     "@reskript/config-webpack-dev-server": "^1.0.0-beta.28",
     "@reskript/core": "^1.0.0-beta.28",

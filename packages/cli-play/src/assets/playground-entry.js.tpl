@@ -83,7 +83,7 @@ const App = () => {
     return (
         <div style={rootStyle}>
             <div style={editorStyle}>
-                <MonacoEditor
+                <Editor
                     language="javascriptreact"
                     theme="vs"
                     defaultValue={localStorage.getItem('%COMPONENT_MODULE_PATH%') || DEFAULT_CODE}
