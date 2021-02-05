@@ -34,6 +34,10 @@ class Render extends Component {
     }
 }
 
+const PreviewLayoutWrapper = ({children}) => (
+    %WRAPPER_RETURN%
+);
+
 const useDebouncedCallback = (callback, time, dependencies) => useCallback(
     debounce(callback, time),
     [time, ...dependencies]
@@ -68,14 +72,13 @@ const useDynamicComponent = initialComponentType => {
     return {componentType, key, onSourceChange};
 };
 
-const options = {
+const editorOptions = {
     minimap: {enabled: false},
     scrollBeyondLastLine: false,
 };
-
 const rootStyle = {position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex'};
-const editorStyle = {flex: 1};
-const previewStyle = {flex: 1, margin: 10};
+const editorStyle = {minWidth: '50%', maxWidth: '50%', width: '50%'};
+const previewStyle = {minWidth: '50%', maxWidth: '50%', width: '50%'};
 
 const App = () => {
     const {componentType, key, onSourceChange} = useDynamicComponent(%COMPONENT_TYPE_NAME%);
@@ -87,12 +90,14 @@ const App = () => {
                     language="javascriptreact"
                     theme="vs"
                     defaultValue={localStorage.getItem('%COMPONENT_MODULE_PATH%') || DEFAULT_CODE}
-                    options={options}
+                    options={editorOptions}
                     onChange={onSourceChange}
                 />
             </div>
             <div style={previewStyle}>
-                <Render key={key} target={componentType} />
+                <PreviewLayoutWrapper>
+                    <Render key={key} target={componentType} />
+                </PreviewLayoutWrapper>
             </div>
         </div>
     );

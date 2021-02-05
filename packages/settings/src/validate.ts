@@ -127,6 +127,9 @@ const schema: any = {
                     },
                     type: 'array',
                 },
+                wrapper: {
+                    type: 'string',
+                },
             },
             additionalProperties: false,
             type: 'object',

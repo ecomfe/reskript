@@ -48,6 +48,7 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
 const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     return {
         injectResources: [],
+        wrapper: 'children',
         ...settings,
     };
 };

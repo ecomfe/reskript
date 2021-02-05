@@ -71,7 +71,8 @@ export interface DevServerSettings {
 }
 
 export interface PlaySettings {
-    injectResources: string[];
+    readonly injectResources: string[];
+    readonly wrapper: string;
 }
 
 export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;

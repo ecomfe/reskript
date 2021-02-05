@@ -23,9 +23,9 @@ export const createWebpackConfig = (target: string, buildContext: BuildContext):
         {
             loader: resolve('./loader'),
             options: {
+                ...buildContext.projectSettings.play,
                 componentTypeName,
                 componentModulePath: path.resolve(buildContext.cwd, target),
-                injectResources: buildContext.projectSettings.play.injectResources,
             },
         },
     ];
