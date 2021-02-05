@@ -10,6 +10,8 @@ title: 单组件调试配置
 interface PlaySettings {
     // 注入额外资源
     readonly injectResources: string[];
+    // 用JSX定义组件预览的外层结构
+    readonly wrapper: string;
 }
 ```
 
@@ -30,3 +32,34 @@ exports.play = {
 ```
 
 但LESS的注入不需要在这里声明，依然使用`exports.build.style.resources`来管理。
+
+## 为组件预览增加外层结构
+
+有时候你调试的组件是依赖外层的DOM结构的，例如一个组件返回这样的内容：
+
+```jsx
+<>
+    <div style={{width: 200}}>
+        Sidebar
+    </div>
+    <div style={{flex: 1}}>
+        Content
+    </div>
+</>
+```
+
+那么它就隐式地要求它的父元素是一个`display: flex`的布局。
+
+遇到这种情况，你可以通过`exports.play.wrapper`来定义一个外层的布局，这个定义是一段JSX结构，并可以使用`{children}`放置实际的预览界面，比如：
+
+```js
+exports.play = {
+    wrapper: `
+        <div style={{display: 'flex'}}>
+            {children}
+        </div>
+    `,
+};
+```
+
+注意虽然`wrapper`的**内容**是一段JSX，但它本身是**字符串**类型的。

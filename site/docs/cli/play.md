@@ -13,3 +13,5 @@ title: 调试单个组件
 --build-target [value]   指定调试的特性名称，默认为dev
 -h, --help              显示帮助信息
 ```
+
+参考[配置 - 单组件调试配置](../settings/play)了解更多配置内容。
