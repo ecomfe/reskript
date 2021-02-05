@@ -1,12 +1,15 @@
 /* eslint-disable */
-import React, {Component, useReducer, useCallback} from 'react';
+import React, {Component, useState, useReducer, useEffect, useCallback} from 'react';
 import {render} from 'react-dom';
 import {debounce} from 'lodash';
-import Editor, {loader} from "@monaco-editor/react";
+import MonacoEditor, {loader} from "@monaco-editor/react";
+import localFroage from 'localforage';
 import %COMPONENT_TYPE_NAME% from '%COMPONENT_MODULE_PATH%';
 %EXTRA_IMPORTS%
 
 loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.21.2/min/vs'}});
+
+const storage = localFroage.createInstance({name: '@reskript/cli-play'});
 
 const DEFAULT_CODE = `const Playground = () => {
     return (
@@ -51,7 +54,6 @@ const useDynamicComponent = initialComponentType => {
     const [{componentType, key}, setComponentType] = useReducer(reducer, {componentType: initialComponentType, key: 0});
     const onSourceChange = useDebouncedCallback(
         code => {
-            localStorage.setItem('%COMPONENT_MODULE_PATH%', code);
             try {
                 const {code: functionCode} = Babel.transform(
                     code,
@@ -64,6 +66,7 @@ const useDynamicComponent = initialComponentType => {
             }
             catch (ex) {
             }
+            storage.setItem('%COMPONENT_MODULE_PATH%', code);
         },
         500,
         []
@@ -76,6 +79,41 @@ const editorOptions = {
     minimap: {enabled: false},
     scrollBeyondLastLine: false,
 };
+
+const Editor = ({onSourceChange}) => {
+    const [loading, setLoading] = useState(true);
+    const [sourceInStore, setSourceInStore] = useState('');
+    useEffect(
+        () => {
+            (async () => {
+                try {
+                    const source = await storage.getItem('%COMPONENT_MODULE_PATH%');
+                    setSourceInStore(source);
+                }
+                finally {
+                    setLoading(false);
+                }
+            })();
+            storage
+        },
+        []
+    );
+
+    if (loading) {
+        return null;
+    }
+
+    return (
+        <MonacoEditor
+            language="javascript"
+            theme="light"
+            defaultValue={sourceInStore || DEFAULT_CODE}
+            options={editorOptions}
+            onChange={onSourceChange}
+        />
+    );
+};
+
 const rootStyle = {position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, display: 'flex'};
 const editorStyle = {minWidth: '50%', maxWidth: '50%', width: '50%'};
 const previewStyle = {minWidth: '50%', maxWidth: '50%', width: '50%'};
@@ -86,13 +124,7 @@ const App = () => {
     return (
         <div style={rootStyle}>
             <div style={editorStyle}>
-                <Editor
-                    language="javascript"
-                    theme="light"
-                    defaultValue={localStorage.getItem('%COMPONENT_MODULE_PATH%') || DEFAULT_CODE}
-                    options={editorOptions}
-                    onChange={onSourceChange}
-                />
+                <Editor onSourceChange={onSourceChange} />
             </div>
             <div style={previewStyle}>
                 <PreviewLayoutWrapper>
