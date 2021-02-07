@@ -46,6 +46,7 @@ module.exports = {
                 'cli/test',
                 'cli/play',
                 'cli/babel',
+                'cli/doctor',
             ],
         },
         {

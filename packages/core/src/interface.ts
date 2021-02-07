@@ -26,4 +26,5 @@ export interface PackageJSON {
     readonly version: string;
     readonly dependencies: {[name: string]: string};
     readonly devDependencies: {[name: string]: string};
+    readonly workspaces?: string[] | {packages: string[]};
 }

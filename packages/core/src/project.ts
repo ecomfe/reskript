@@ -1,5 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
+import globby from 'globby';
 import pkgDir from 'pkg-dir';
 import {sync as findUp} from 'find-up';
 import {PackageJSON} from './interface';
@@ -24,9 +25,22 @@ export const findGitRoot = (cwd?: string): string | undefined => {
     return gitDirectory && path.dirname(gitDirectory);
 };
 
+export const isMonorepoRoot = (cwd: string): boolean => {
+    return fs.existsSync(path.join(cwd, 'packages')) && fs.existsSync(path.join(cwd, 'package.json'));
+};
+
 export const isMonorepo = (cwd: string): boolean => {
     const root = findGitRoot() || cwd;
-    return fs.existsSync(path.join(root, 'packages')) && fs.existsSync(path.join(root, 'package.json'));
+    return isMonorepoRoot(root);
+};
+
+export const resolveMonorepoPackageDirectories = async (cwd: string): Promise<string[]> => {
+    const packageInfo = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8')) as PackageJSON;
+    const packages = packageInfo.workspaces
+        ? (Array.isArray(packageInfo.workspaces) ? packageInfo.workspaces : packageInfo.workspaces.packages)
+        : ['packages/*'];
+    const directories = await globby(packages.map(v => `${v}/package.json`));
+    return directories.map(path.dirname);
 };
 
 export const findMonorepoRoot = (cwd: string): string => {
