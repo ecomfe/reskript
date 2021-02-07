@@ -11,7 +11,7 @@ const rule: Rule = ({packageInfo}) => {
 
     for (const peer of REQUIRED_PEERS) {
         if (!packageInfo.dependencies?.[peer] && !packageInfo.devDependencies?.[peer]) {
-            result.errors.push(`Missing peer dependency ${peer}, pleas install it.`);
+            result.errors.push(`Missing peer dependency ${peer}, please install it.`);
         }
     }
 
