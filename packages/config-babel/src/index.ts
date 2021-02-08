@@ -27,9 +27,8 @@ const coreJSPreset = () => {
 };
 
 export const getParseOnlyBabelConfig = (options: BabelConfigOptions = {}): TransformOptions => {
-    const {polyfill = false, modules = false, hostType} = options;
+    const {polyfill = false, modules = false} = options;
     const presets: Array<PluginItem | false> = [
-        polyfill && hostType === 'application' && coreJSPreset,
         [
             resolve('@babel/preset-env'),
             {
@@ -107,10 +106,14 @@ export const getTransformBabelConfig = (options: BabelConfigOptions = {}): Trans
 };
 
 export const getBabelConfig = (options: BabelConfigOptions = {}): TransformOptions => {
-    const {mode = 'development', hot = 'none', hostType = 'application'} = options;
+    const {mode = 'development', hot = 'none', hostType = 'application', polyfill = false} = options;
     const transform = getTransformBabelConfig(options);
     const requireReactOptimization = mode === 'production' && hostType === 'application';
 
+    const presets: Array<PluginItem | false> = [
+        polyfill && hostType === 'application' && coreJSPreset,
+        ...transform.presets || [],
+    ];
     // 考虑到生成的chunk的hash稳定性，此处不使用`babel-plugin-lodash`来缩减lodash的体积了
     const plugins: Array<PluginItem | false> = [
         ...transform.plugins || [],
@@ -118,5 +121,5 @@ export const getBabelConfig = (options: BabelConfigOptions = {}): TransformOptio
         hot === 'all' && [resolve('react-refresh/babel'), {skipEnvCheck: true}],
     ];
 
-    return {presets: transform.presets, plugins: compact(plugins)};
+    return {presets: compact(presets), plugins: compact(plugins)};
 };
