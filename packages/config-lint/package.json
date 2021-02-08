@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-lint",
-  "version": "1.0.0-beta.31",
+  "version": "1.0.0-beta.33",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,8 +24,8 @@
     "@babel/eslint-plugin": "^7.12.13",
     "@ecomfe/eslint-config": "^7.0.0",
     "@ecomfe/stylelint-config": "^1.1.1",
-    "@reskript/config-babel": "1.0.0-beta.31",
-    "@reskript/eslint-plugin": "1.0.0-beta.31",
+    "@reskript/config-babel": "1.0.0-beta.33",
+    "@reskript/eslint-plugin": "1.0.0-beta.33",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "eslint-plugin-babel": "^5.3.1",
