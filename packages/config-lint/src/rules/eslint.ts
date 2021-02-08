@@ -3,7 +3,7 @@ import {getParseOnlyBabelConfig} from '@reskript/config-babel';
 
 // 为了支持 IDE 和代码编辑工具使用 eslint 的配置，在 build 阶段会生成一份 .eslintrc 文件。参阅 scripts/post-build.js
 
-const config: {[key: string]: any} = {
+const config: Record<string, any> = {
     extends: [
         resolve('@ecomfe/eslint-config/strict'),
         resolve('@ecomfe/eslint-config/react/strict'),

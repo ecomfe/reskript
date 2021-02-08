@@ -18,10 +18,10 @@ import {AppEntry, BuildContext} from './interface';
 export {loaders, rules, createHTMLPluginInstances};
 export * from './interface';
 
-const readEntryConfig = (name: string, dir: string): {[key: string]: any} => {
+const readEntryConfig = (name: string, dir: string): Record<string, any> => {
     try {
         // eslint-disable-next-line global-require
-        const config = require(path.join(dir, name + '.config')) as {[key: string]: any};
+        const config = require(path.join(dir, name + '.config')) as Record<string, any>;
         return config;
     }
     catch (ex) {

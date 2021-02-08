@@ -26,7 +26,7 @@ export const revision = (): string => {
 
 const toStringTag = Object.prototype.toString;
 
-const getSchema = (obj: {[key: string]: any}): Array<[string, string]> => {
+const getSchema = (obj: Record<string, any>): Array<[string, string]> => {
     const entries = Object.entries(obj);
     entries.sort(([keyX], [keyY]) => keyX.localeCompare(keyY));
 

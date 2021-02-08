@@ -1,5 +1,5 @@
 import {eslint, stylelint} from './rules';
 
-export const getScriptLintConfig = (): {[key: string]: any} => ({...eslint});
+export const getScriptLintConfig = (): Record<string, any> => ({...eslint});
 
-export const getStyleLintConfig = (): {[key: string]: any} => ({...stylelint});
+export const getStyleLintConfig = (): Record<string, any> => ({...stylelint});

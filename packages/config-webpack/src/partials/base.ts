@@ -15,7 +15,7 @@ import {ConfigurationFactory, BuildContext} from '../interface';
 import {createHTMLPluginInstances} from '../utils';
 import * as rules from '../rules';
 
-const toDefines = (context: {[key: string]: any}, prefix: string): {[key: string]: string} => {
+const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
     const entries = Object.entries(context);
     const defines = entries.map(([key, value]) => [prefix + '.' + key, JSON.stringify(value)]);
     return defines.reduce((output, [key, value]) => Object.assign(output, {[key]: value}), {});
@@ -58,12 +58,9 @@ const computeCacheKey = (entry: BuildContext): string => {
     return key;
 };
 
-// 这东西不在类型定义上
-const runtimeValue: (compute: () => string, dynamic: boolean) => any = (DefinePlugin as any).runtimeValue;
-
-const toDynamicDefines = (context: {[key: string]: any}, prefix: string): {[key: string]: any} => {
+const toDynamicDefines = (context: Record<string, any>, prefix: string): Record<string, any> => {
     const staticDefines = toDefines(context, prefix);
-    return mapValues(staticDefines, v => runtimeValue(() => v, true));
+    return mapValues(staticDefines, v => DefinePlugin.runtimeValue(() => v, true));
 };
 
 // eslint-disable-next-line complexity

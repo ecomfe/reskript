@@ -17,5 +17,5 @@ declare module 'stylelint' {
         results: LintResult[];
     }
 
-    export function lint(config: {[key: string]: any}): Promise<LintReport>;
+    export function lint(config: Record<string, any>): Promise<LintReport>;
 }

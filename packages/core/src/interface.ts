@@ -24,7 +24,7 @@ export interface WorkModeAware extends ProjectAware {
 export interface PackageJSON {
     readonly name: string;
     readonly version: string;
-    readonly dependencies: {[name: string]: string};
-    readonly devDependencies: {[name: string]: string};
+    readonly dependencies: Record<string, string>;
+    readonly devDependencies: Record<string, string>;
     readonly workspaces?: string[] | {packages: string[]};
 }

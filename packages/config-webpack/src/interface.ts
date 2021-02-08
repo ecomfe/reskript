@@ -5,7 +5,7 @@ export interface AppEntry {
     readonly file: string;
     readonly name: string;
     readonly template: string | null;
-    readonly config: {[key: string]: any};
+    readonly config: Record<string, any>;
 }
 
 export interface BuildContext extends RuntimeBuildEnv {
