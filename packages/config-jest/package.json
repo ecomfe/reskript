@@ -8,8 +8,7 @@
     "config"
   ],
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.com"
+    "access": "public"
   },
   "scripts": {
     "build": "rm -rf dist config && tsc && node scripts/post-build.js",

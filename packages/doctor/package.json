@@ -7,8 +7,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.com"
+    "access": "public"
   },
   "bin": "./dist/index.js",
   "scripts": {
