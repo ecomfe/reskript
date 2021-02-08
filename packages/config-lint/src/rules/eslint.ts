@@ -26,8 +26,6 @@ const config: {[key: string]: any} = {
         $build: true,
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Sentry: true,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Weirwood: true,
     },
     rules: {
         'operator-linebreak': [
