@@ -10,9 +10,6 @@
         "skipLibCheck": true,
         "declaration": true,
         "baseUrl": ".",
-        "paths": {
-            "webpack": ["./node_modules/@types/webpack/index.d.ts"],
-        },
     },
     "include": [
         "packages/*/src/**/*.ts"

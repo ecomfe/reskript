@@ -1,5 +1,5 @@
 import {RuntimeBuildEnv, FeatureSet, BuildEntry} from '@reskript/settings';
-import {RuleSetLoader, Configuration} from 'webpack';
+import {Configuration, RuleSetUseItem} from 'webpack';
 
 export interface AppEntry {
     readonly file: string;
@@ -15,6 +15,6 @@ export interface BuildContext extends RuntimeBuildEnv {
     readonly entries: AppEntry[];
 }
 
-export type LoaderFactory = (entry: BuildEntry) => RuleSetLoader | null;
+export type LoaderFactory = (entry: BuildEntry) => RuleSetUseItem | null;
 
 export type ConfigurationFactory = (entry: BuildContext) => Configuration;

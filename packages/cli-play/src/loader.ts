@@ -1,13 +1,13 @@
 import {getOptions} from 'loader-utils';
 import {PlaySettings} from '@reskript/settings';
-import * as webpack from 'webpack';
 
 interface LoaderOptions extends PlaySettings {
     componentTypeName: string;
     componentModulePath: string;
 }
 
-const loader: webpack.loader.Loader = function playEntryLoader(content) {
+// TODO: `webpack`的官方定义里没有`Loader`这个东西：https://github.com/webpack/webpack/issues/11630
+const loader = function playEntryLoader(this: any, content: any) {
     if (this.cacheable) {
         this.cacheable();
     }

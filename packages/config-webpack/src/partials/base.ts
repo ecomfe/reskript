@@ -118,7 +118,8 @@ const factory: ConfigurationFactory = entry => {
     const plugins = [
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
-        new CaseSensitivePathsPlugin(),
+        // TODO: https://github.com/webpack/webpack/pull/11698
+        new CaseSensitivePathsPlugin() as any,
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),

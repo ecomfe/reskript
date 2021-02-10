@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@reskript/core": "1.0.0-beta.33",
-    "@types/webpack": "^4.41.26",
     "@types/webpack-dev-server": "^3.11.1",
     "chalk": "^4.1.0",
     "chokidar": "^3.5.1",

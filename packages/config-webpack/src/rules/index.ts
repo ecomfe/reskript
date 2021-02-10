@@ -1,13 +1,13 @@
 import * as path from 'path';
 import {compact} from 'lodash';
-import {RuleSetRule, RuleSetUseItem, RuleSetLoader} from 'webpack';
+import {RuleSetRule, RuleSetUseItem} from 'webpack';
 import {BuildEntry} from '@reskript/settings';
 import * as loaders from '../loaders';
 
 type LoaderType = keyof typeof loaders;
 
 const createUseWith = (entry: BuildEntry) => {
-    const createLoader = (name: LoaderType): RuleSetLoader | null => {
+    const createLoader = (name: LoaderType): RuleSetUseItem | null => {
         const factory = loaders[name];
         return factory(entry);
     };

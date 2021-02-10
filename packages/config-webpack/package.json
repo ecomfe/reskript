@@ -34,7 +34,6 @@
     "@reskript/config-lint": "1.0.0-beta.33",
     "@reskript/core": "1.0.0-beta.33",
     "@reskript/settings": "1.0.0-beta.33",
-    "@types/webpack": "^4.41.26",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",

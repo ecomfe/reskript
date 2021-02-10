@@ -6,7 +6,8 @@ export const analyze = (context: BuildContext): Configuration => (
     context.isDefaultTarget
         ? {
             plugins: [
-                new BundleAnalyzerPlugin({analyzerMode: 'static', generateStatsFile: true}),
+                // TODO: https://github.com/webpack/webpack/pull/11698
+                new BundleAnalyzerPlugin({analyzerMode: 'static', generateStatsFile: true}) as any,
             ],
         }
         : {}

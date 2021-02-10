@@ -23,9 +23,6 @@
     "husky": "^4.3.8",
     "lerna": "^3.22.1"
   },
-  "resolutions": {
-    "**/@types/webpack": "^4.41.22"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "node scripts/ensure-less-version.js && yarn lint --exclude-dependents --since HEAD",

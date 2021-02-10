@@ -36,12 +36,13 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
     const plugins = [
         ...htmlPlugins,
         new WebpackBar(webpackBarOptions),
+        // TODO: https://github.com/webpack/webpack/pull/11698
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
                 messages: getDevServerMessages(port, openPage),
                 notes: [],
             },
-        }),
+        }) as any,
         hot === 'none' ? null : new HotModuleReplacementPlugin(),
         hot === 'all' ? new ReactRefreshWebpackPlugin({overlay: false, forceEnable: true}) : null,
     ];

@@ -19,10 +19,15 @@ import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} f
 const build = (configuration: Configuration | Configuration[]): Promise<Stats> => {
     const executor = (resolve: (value: Stats) => void) => webpack(
         configuration as Configuration, // https://github.com/Microsoft/TypeScript/issues/14107
-        (err: Error, stats: Stats) => {
+        (err?: Error, stats?: Stats) => {
             if (err) {
                 console.error(err);
                 process.exit(1);
+            }
+
+            if (!stats) {
+                console.error('Unknown error: webpack does not return its build stats');
+                process.exit(2);
             }
 
             const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};

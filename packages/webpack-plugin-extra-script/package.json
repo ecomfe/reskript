@@ -15,7 +15,6 @@
     "lint": "eslint *.js"
   },
   "devDependencies": {
-    "@types/webpack": "^4.41.26",
     "eslint": "^7.19.0",
     "html-webpack-plugin": "^5.0.0",
     "typescript": "^4.1.3"

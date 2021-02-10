@@ -26,7 +26,6 @@
     "@reskript/config-webpack": "1.0.0-beta.33",
     "@reskript/core": "1.0.0-beta.33",
     "@reskript/settings": "1.0.0-beta.33",
-    "@types/webpack": "^4.41.26",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.20",
