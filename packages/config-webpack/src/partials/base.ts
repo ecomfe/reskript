@@ -169,6 +169,7 @@ const factory: ConfigurationFactory = entry => {
             },
         },
         plugins: compact(plugins),
+        optimization: {},
     };
 };
 

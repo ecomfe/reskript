@@ -307,7 +307,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 exports.build = {
     finalize: webpackConfig => {
-        webpackConfig.plugins = webpackConfig.plugins || [];
         webpackConfig.plugins.push(new CopyPlugin({/* 相关配置 */}));
         return webpackConfig;
     },
@@ -328,6 +327,15 @@ exports.build = {
     },
 };
 ```
+
+`reSKRipt`会保证以下的属性是有值的，不会出现`undefined`的情况：
+
+- `plugins`。
+- `module.rules`。
+- `resolve.alias`。
+- `optimization`。
+
+因此，你可以安全地使用`webpackConfig.plugins.push(new CopyPlugin())`这样的代码，而不需要对`plugins`属性判空。
 
 ### 调整已有loader
 
