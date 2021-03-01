@@ -79,7 +79,7 @@ module.exports = {
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
         "keyofStringsOnly": true,
-        "skipLibCheck": true，
+        "skipLibCheck": true,
         "paths": {
             "@/*": ["./src/*"]
         }

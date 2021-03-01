@@ -79,6 +79,7 @@ const factory: ConfigurationFactory = entry => {
         cache = true,
         projectSettings: {
             build: {
+                publicPath,
                 thirdParty,
                 reportLintErrors,
                 style: {
@@ -133,7 +134,7 @@ const factory: ConfigurationFactory = entry => {
         output: {
             path: path.join(cwd, 'dist', 'assets'),
             filename: '[name].[chunkhash].js',
-            publicPath: '/assets/',
+            publicPath: publicPath || '/assets/',
         },
         module: {
             rules: Object.values(rules).map(rule => rule(entry)),

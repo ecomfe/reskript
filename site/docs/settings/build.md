@@ -30,6 +30,8 @@ interface BuildScriptSettings {
 }
 
 interface BuildSettings {
+    // 产出的资源路径前缀
+    readonly publicPath?: string;
     // 是否以第三方库的形式构建，第三方库的构建不使用featureMatrix、不拆分chunk，同时构建产出不带hash、不产出HTML文件
     readonly thirdParty: boolean;
     // 构建过程中检查代码规范，默认值为true。如无特殊原因，禁止关闭这个开关
