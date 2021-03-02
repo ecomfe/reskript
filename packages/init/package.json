@@ -5,7 +5,7 @@
   "license": "MIT",
   "files": [
     "dist",
-    "template"
+    "templates"
   ],
   "publishConfig": {
     "access": "public"
