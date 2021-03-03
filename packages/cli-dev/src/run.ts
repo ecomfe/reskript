@@ -53,17 +53,26 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const compiler = webpack(config);
     const server = new WebpackDevServer(compiler, finalizedDevServerConfig);
     const port = finalizedDevServerConfig.port ?? 8080;
-    const waitServerFinish = (resolve: (arg: any) => void) => server.listen(
-        port,
-        '0.0.0.0',
-        async () => {
-            const host = cmd.open === 'remote' ? await internalIp.v4() : 'localhost';
-            const openURL = `http://${host}:${port}/${projectSettings.devServer.openPage}`;
-            // 这个`setTimeout`用来让`webpackbar`不会卡在99%，原因不明，`setTimeout`万岁！
-            setTimeout(() => open(openURL), 0);
-            resolve(server);
-        }
-    );
+    const waitServerFinish = (resolve: (arg: any) => void) => {
+        const httpServer = server.listen(
+            port,
+            '0.0.0.0',
+            async () => {
+                const host = cmd.open === 'remote' ? await internalIp.v4() : 'localhost';
+                const openURL = `http://${host}:${port}/${projectSettings.devServer.openPage}`;
+                // 这个`setTimeout`用来让`webpackbar`不会卡在99%，原因不明，`setTimeout`万岁！
+                setTimeout(() => open(openURL), 0);
+                resolve(server);
+            }
+        );
+        httpServer.on(
+            'error',
+            (ex: Error) => {
+                console.error(ex.message);
+                process.exit(2);
+            }
+        );
+    };
     return new Promise(waitServerFinish);
 };
 
