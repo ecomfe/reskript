@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-jest",
-  "version": "1.0.0-beta.33",
+  "version": "1.0.0-beta.34",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.12.13",
-    "@reskript/config-babel": "1.0.0-beta.33",
-    "@reskript/core": "1.0.0-beta.33",
-    "@reskript/settings": "1.0.0-beta.33",
+    "@reskript/config-babel": "1.0.0-beta.34",
+    "@reskript/core": "1.0.0-beta.34",
+    "@reskript/settings": "1.0.0-beta.34",
     "babel-jest": "^26.6.3",
     "core-js": "^3.8.3",
     "enzyme": "^3.11.0",
