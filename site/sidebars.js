@@ -21,6 +21,7 @@ module.exports = {
                 'advanced/config-insiders',
                 'advanced/multiple-entry',
                 'advanced/browsers-list',
+                'advanced/web-worker',
                 'advanced/debug-component',
             ],
         },
