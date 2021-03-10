@@ -64,7 +64,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs): Configuration[] => {
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
-    const entries = collectEntries(cmd.cwd, cmd.src);
+    const entries = collectEntries(cmd.cwd, cmd.src, cmd.entriesOnly);
 
     const featureNamesToUse = cmd.featureOnly ? [cmd.featureOnly] : featureNames;
     const toConfiguration = (featureName: string): Configuration => {

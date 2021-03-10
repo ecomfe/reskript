@@ -35,7 +35,7 @@ const resolveEntryTemplate = (name: string, dir: string): string | null => {
     return fs.existsSync(filename) ? filename : null;
 };
 
-export const collectEntries = (cwd: string, srcDirectory: string): AppEntry[] => {
+export const collectEntries = (cwd: string, srcDirectory: string, only?: string[]): AppEntry[] => {
     const entriesFolder = path.join(cwd, srcDirectory, 'entries');
 
     if (!fs.existsSync(entriesFolder)) {
@@ -47,13 +47,18 @@ export const collectEntries = (cwd: string, srcDirectory: string): AppEntry[] =>
     const entryScriptFiles = fs.readdirSync(entriesFolder)
         .filter(f => /\.[jt]sx?$/.test(f) && !f.includes('.config.'))
         .map(f => path.resolve(entriesFolder, f));
-    const toEntry = (file: string): AppEntry => {
+    const toEntry = (file: string): AppEntry | null => {
         const name = path.basename(file, path.extname(file));
+
+        if (only && !only.includes(name)) {
+            return null;
+        }
+
         const template = resolveEntryTemplate(name, entriesFolder);
         const config = readEntryConfig(name, entriesFolder);
         return {name, file, config, template};
     };
-    return entryScriptFiles.map(toEntry);
+    return compact(entryScriptFiles.map(toEntry));
 };
 
 export const createRuntimeBuildEnv = (env: BuildEnv): RuntimeBuildEnv => {

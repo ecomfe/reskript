@@ -2,4 +2,12 @@
 title: FAQ
 ---
 
-本章节计划收录使用`reSKRipt`过程中的常见问题，我们正在收集问题，你可以通过[回复这个议题](https://github.com/ecomfe/reskript/issues/6)来告诉我们你希望了解的内容。
+## 构建相关
+
+> 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
+
+参考[仅构建指定入口](cli/build#仅构建指定入口)使用`--entries-only`参数。
+
+> 我发现有一个第三方包使用了新的JavaScript语法，不经过babel处理就没办法在低版本浏览器中运行。
+
+参考[settings/build#增加babel编译的文件]一章，通过`reskript.config.js`中的`build.script.finalize`配置让babel处理第三方包。
