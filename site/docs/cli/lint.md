@@ -67,16 +67,11 @@ module.exports = {
 npm install --save-dev husky
 ```
 
-随后在`package.json`中增加以下内容：
+随后执行以下命令增加钩子：
 
-```json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "skr lint --staged"
-    }
-  }
-}
+```shell
+npx --no-install husky install \
+  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
 ```
 
 当然你也可以使用[lint-staged](https://www.npmjs.com/package/lint-staged)来实现类似的能力，此时`package.json`中的配置大致是：
@@ -85,11 +80,12 @@ npm install --save-dev husky
 {
   "lint-staged": {
     "*.{js,jsx,ts,tsx,less,css}": "skr lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
+```
+
+对应初始化钩子的命令是：
+
+```shell
+npx --no-install husky add .husky/pre-commit "npx --no-install lint-staged"
 ```

@@ -26,6 +26,7 @@ export default async (cwd: string, options: UserOptions) => {
         'stylelint',
         'typescript',
         'webpack',
+        'husky',
         '@reskript/cli@next',
         '@reskript/cli-dev@next',
         '@reskript/cli-build@next',

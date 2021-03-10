@@ -74,7 +74,7 @@ const src = path.join(__dirname, 'src');
 
 exports.build = {
     script: {
-        babel: resource => resource.includes(src) && resource.includes(`node_modules/some-lib/`),
+        babel: resource => resource.includes(src) || resource.includes(`node_modules/some-lib/`),
     },
 };
 ```
@@ -271,22 +271,16 @@ exports.build = {
 npm install --save-dev husky
 ```
 
-随后，在`package.json`中增加`pre-commit`的钩子：
+随后，加上`pre-commit`的钩子：
 
-```json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "skr lint --staged"
-    }
-  }
-}
+```shell
+npx --no-install husky install \
+  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
 ```
 
-这样的配置会告诉`reSKRipt`你已经承诺在每次代码提交时做好检查，因此`reportLintErrors: false`才会生效。
+这样的配置会告诉`reSKRipt`你已经承诺在每次代码提交时做好检查，此后`reportLintErrors: false`才会生效。
 
 ### 为什么不用`pre-push`
-
 
 当你本地有多个提交时，在`pre-push`检查出代码规范的问题，它可能并不是由最新的提交引入的。
 

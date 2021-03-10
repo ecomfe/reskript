@@ -1,8 +1,3 @@
 {
-    "name": "test-fixture",
-    "husky": {
-        "hooks": {
-            "pre-commit": "echo 'OK'"
-        }
-    }
+    "name": "test-fixture"
 }

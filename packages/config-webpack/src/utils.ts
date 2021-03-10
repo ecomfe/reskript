@@ -57,6 +57,10 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
 };
 
 export const checkPreCommitHookWhenLintDisabled = (cwd: string): void => {
+    if (fs.existsSync(path.join(cwd, '.husky', 'pre-commit'))) {
+        return;
+    }
+
     const packageConfig = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8'));
 
     if (!get(packageConfig, ['husky', 'hooks', 'pre-commit'])) {

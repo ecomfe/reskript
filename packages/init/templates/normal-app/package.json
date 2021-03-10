@@ -9,10 +9,5 @@
     "lint": "skr lint",
     "lint-staged": "skr lint --staged",
     "test": "skr test --target=react"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
   }
 }
