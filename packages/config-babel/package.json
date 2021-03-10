@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-babel",
-  "version": "1.0.0-beta.34",
+  "version": "1.0.0-beta.35",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -15,7 +15,7 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "@reskript/core": "1.0.0-beta.34",
+    "@reskript/core": "1.0.0-beta.35",
     "@types/babel__core": "^7.1.12",
     "@types/resolve": "^1.19.0",
     "eslint": "^7.19.0",
@@ -41,8 +41,8 @@
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.13",
     "@babel/traverse": "^7.12.13",
-    "@reskript/babel-plugin-add-react-display-name": "1.0.0-beta.34",
-    "@reskript/babel-plugin-resolve-core-js": "1.0.0-beta.34",
+    "@reskript/babel-plugin-add-react-display-name": "1.0.0-beta.35",
+    "@reskript/babel-plugin-resolve-core-js": "1.0.0-beta.35",
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^4.1.0",
