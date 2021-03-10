@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-test",
-  "version": "1.0.0-beta.35",
+  "version": "1.0.0-beta.36",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -20,9 +20,9 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "@reskript/config-jest": "1.0.0-beta.35",
-    "@reskript/core": "1.0.0-beta.35",
-    "@reskript/settings": "1.0.0-beta.35",
+    "@reskript/config-jest": "1.0.0-beta.36",
+    "@reskript/core": "1.0.0-beta.36",
+    "@reskript/settings": "1.0.0-beta.36",
     "jest-cli": "^26.6.3",
     "lodash": "^4.17.20"
   }

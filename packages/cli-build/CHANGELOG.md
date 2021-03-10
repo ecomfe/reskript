@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.36](https://github.com/ecomfe/reskript/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2021-03-10)
+
+
+### Bug Fixes
+
+* **build:** --no-source-maps参数解析错误 ([9496c39](https://github.com/ecomfe/reskript/commit/9496c3903204449de867f30992a85e9d222b0569))
+* **build:** 构建产出报告丢失 ([8e991ae](https://github.com/ecomfe/reskript/commit/8e991ae64afd75c472fdac8768cab3c7aa8954f3))
+
+
+
+
+
 # [1.0.0-beta.35](https://github.com/ecomfe/reskript/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2021-03-10)
 
 
