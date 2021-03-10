@@ -19,7 +19,13 @@ process.env.OPEN_MATCH_HOST_ONLY = 'true';
 const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const projectSettings = readProjectSettings(cmd, 'dev');
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
-    const entries = collectEntries(cmd.cwd, cmd.src);
+    const entries = collectEntries(cmd.cwd, cmd.src, [cmd.entry]);
+
+    if (!entries.length) {
+        console.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
+        process.exit(3);
+    }
+
     const buildEnv: BuildEnv = {
         hostPackageName,
         usage: 'devServer',
@@ -46,7 +52,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const extra = createWebpackDevServerPartial(buildContext);
 
     const config = createWebpackConfig(buildContext, [extra]);
-    const devServerConfig = createWebpackDevServerConfig(buildContext, cmd.proxyDomain, config.devServer);
+    const devServerConfig = createWebpackDevServerConfig(buildContext, cmd.entry, cmd.proxyDomain, config.devServer);
     const finalizedDevServerConfig = buildContext.projectSettings.devServer.finalize(devServerConfig, buildContext);
     warnAndExitOnInvalidFinalizeReturn(finalizedDevServerConfig, 'devServer');
     WebpackDevServer.addDevServerEntrypoints(config, finalizedDevServerConfig);

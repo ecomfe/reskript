@@ -13,6 +13,7 @@ const command: CommandConfig<DevCommandLineArgs> = {
         ['--build-target [value]', 'set build target, default to "dev"', 'dev'],
         ['--proxy-domain [domain]', 'set api proxy domain, only domain part (www.example.com) is required'],
         ['--open [value]', 'choose open "local" (localhost) or "remote" (ip) browser page', 'local'],
+        ['--entry [value]', 'specify an entry as the default page', 'index'],
     ],
 };
 

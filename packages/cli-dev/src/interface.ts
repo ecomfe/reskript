@@ -5,4 +5,5 @@ export interface DevCommandLineArgs extends WorkModeAware {
     readonly buildTarget: string;
     readonly proxyDomain?: string;
     readonly open: 'remote' | 'local';
+    readonly entry: string;
 }

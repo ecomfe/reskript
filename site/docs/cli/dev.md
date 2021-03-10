@@ -15,6 +15,7 @@ title: 本地调试
 --build-target [value]   指定调试的特性名称，默认为dev
 --proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖reskript.config.js中的devServer.defaultProxyDomain配置
 --open [value]           选择自动打开浏览器页面的地址，可以为local（打开localhost）或remote（打开远程IP，用于远程开发场景），默认为local
+--entry [value]          指定用来调试的入口，即在src/entries下的文件名（不包含后缀名），默认为index
 -h, --help               显示帮助信息
 ```
 
@@ -36,6 +37,14 @@ skr dev --mode=production --build-target=stable
 上面的命令就可以指定线上版本的`stable`特性集，且打开所有的生产环境优化来进行本地调试，理论上线上的问题均能复现，除非是因为微前端集成等运行环境不同产生的。
 
 当然，打开`--mode=production`会非常严重地影响本地构建的速度，同时也会让热更新等功能失效，所以正常情况下没必要开启这个参数。
+
+## 调试其它入口
+
+假设应用有`src/entries/index.tsx`和`src/entries/mobile.tsx`两个入口，默认情况下使用`skr dev`只能调试到`index`这个入口，另一个入口是无法被访问到的。
+
+你可以使用`skr dev --entry=mobile`来启动调试服务器并将`mobile.tsx`指定为入口。
+
+一次调试仅能指定一个入口，考虑到路由冲突（如`index`入口中有`/mobile`这个路由，同时又有`mobile`这个入口），当前无法同时调试多入口。
 
 ## 远程开发
 

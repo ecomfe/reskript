@@ -75,6 +75,7 @@ const createAgent = (possibleProxyURL?: string) => {
 
 export const createWebpackDevServerConfig = (
     buildEntry: BuildEntry,
+    targetEntry: string,
     proxyDomain: string | undefined,
     addition: DevServerConfiguration = {}
 ): DevServerConfiguration => {
@@ -112,7 +113,7 @@ export const createWebpackDevServerConfig = (
             ignored: /node_modules/,
         },
         historyApiFallback: {
-            index: '/assets/index.html',
+            index: `/assets/${targetEntry}.html`,
             disableDotRule: true,
         },
     };
