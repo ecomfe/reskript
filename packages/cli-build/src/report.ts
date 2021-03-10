@@ -58,7 +58,7 @@ const getExtensionConfig = (extension: string): {order: number, color: typeof Fo
 };
 
 const extractBuildInfo = (stats: Stats) => {
-    const {children = []} = stats.toJson('minimal');
+    const {children = []} = stats.toJson('normal');
     const entrypoints = flatMap(children, child => Object.values(child?.entrypoints ?? {}));
     const initialChunks = flatMap(entrypoints, entry => entry.chunks);
     const assets = flatMap(children.map(child => child.assets ?? [])) as WebpackCompileAsset[];
