@@ -16,6 +16,7 @@ title: 构建应用
 --feature-only [value]  只构建指定的特性名称，其它的特性名称不参与构建
 --analyze               启用对构建产物的分析功能
 --profile               在构建产出中加入性能追踪的能力
+--no-source-maps        构建时不产出source map
 --clean                 构建前删除上一次构建的产出
 -h, --help              显示帮助信息
 ```

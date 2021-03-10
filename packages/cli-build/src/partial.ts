@@ -23,3 +23,9 @@ export const profile = (): Configuration => {
         },
     };
 };
+
+export const noSourceMaps = (): Configuration => {
+    return {
+        devtool: false,
+    };
+};

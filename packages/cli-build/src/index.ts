@@ -14,6 +14,7 @@ const command: CommandConfig<BuildCommandLineArgs> = {
         ['--feature-only [value]', 'build named feature only, ignore other features'],
         ['--analyze', 'enable bundle analytics', false],
         ['--profile', 'enable react profiling mode', false],
+        ['--no-source-maps', 'disable generation of source maps', false],
         ['--clean', 'remove dist directory before build', false],
     ],
 };
