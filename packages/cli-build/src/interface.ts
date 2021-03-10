@@ -8,7 +8,7 @@ export interface BuildCommandLineArgs extends WorkModeAware {
     readonly analyze: boolean;
     readonly clean: boolean;
     readonly profile: boolean;
-    readonly noSourceMaps: boolean;
+    readonly sourceMaps: boolean;
 }
 
 export interface WebpackCompileAsset {

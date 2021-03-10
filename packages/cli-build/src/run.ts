@@ -87,7 +87,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs): Configuration[] => {
         const extras = [
             cmd.analyze && partials.analyze(buildContext),
             cmd.profile && partials.profile(),
-            cmd.noSourceMaps && partials.noSourceMaps(),
+            !cmd.sourceMaps && partials.noSourceMaps(),
         ];
         return createWebpackConfig(buildContext, compact(extras));
     };
