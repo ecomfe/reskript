@@ -10,4 +10,4 @@ title: FAQ
 
 > 我发现有一个第三方包使用了新的JavaScript语法，不经过babel处理就没办法在低版本浏览器中运行。
 
-参考[settings/build#增加babel编译的文件]一章，通过`reskript.config.js`中的`build.script.finalize`配置让babel处理第三方包。
+参考[增加babel编译的文件](settings/build#增加babel编译的文件)一章，通过`reskript.config.js`中的`build.script.finalize`配置让babel处理第三方包。
