@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack",
-  "version": "1.0.0-beta.36",
+  "version": "1.0.0-beta.37",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -30,10 +30,10 @@
     "@babel/core": "^7.12.13",
     "@ecomfe/class-names-loader": "^1.0.0",
     "@ecomfe/svg-mixed-loader": "^1.0.1",
-    "@reskript/config-babel": "1.0.0-beta.36",
-    "@reskript/config-lint": "1.0.0-beta.36",
-    "@reskript/core": "1.0.0-beta.36",
-    "@reskript/settings": "1.0.0-beta.36",
+    "@reskript/config-babel": "1.0.0-beta.37",
+    "@reskript/config-lint": "1.0.0-beta.37",
+    "@reskript/core": "1.0.0-beta.37",
+    "@reskript/settings": "1.0.0-beta.37",
     "autoprefixer": "^10.2.4",
     "babel-loader": "^8.2.2",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",

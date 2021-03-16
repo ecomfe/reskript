@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.37](https://github.com/ecomfe/reskript/compare/v1.0.0-beta.36...v1.0.0-beta.37) (2021-03-16)
+
+
+### Features
+
+* **build:** 构建后报告初始加载资源数量 ([4ecd9c6](https://github.com/ecomfe/reskript/commit/4ecd9c67b726ab195933f0a1413893e7122cccbd))
+
+
+
+
+
 # [1.0.0-beta.36](https://github.com/ecomfe/reskript/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2021-03-10)
 
 
