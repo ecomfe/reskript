@@ -97,6 +97,7 @@ export const drawBuildReport = (stats: Stats[]): void => {
     const initialSegments = templateSegments.filter(segment => segment.indicator === 'initial');
     const initialLoadingSize = sumBy(initialSegments, segment => segment.sizeInBytes);
     console.log('');
+    console.log(`Total initial requests: ${initialChunks.size}`);
     console.log(`Total initial size: ${prettyBytes(initialLoadingSize)} (not gzipped)`);
 };
 
