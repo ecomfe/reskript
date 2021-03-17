@@ -16,8 +16,8 @@
     "test": "echo 'No test in @reskript/doctor'"
   },
   "devDependencies": {
-    "eslint": "^7.19.0",
-    "typescript": "^4.1.3"
+    "eslint": "^7.22.0",
+    "typescript": "^4.2.3"
   },
   "dependencies": {
     "@reskript/core": "1.0.0-beta.37",

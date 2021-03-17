@@ -14,4 +14,3 @@ test('dev server container', () => {
     const settings = plugin('test-app')(projectSettings);
     expect(typeof settings.devServer.finalize).toBe('function');
 });
-
