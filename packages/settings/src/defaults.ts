@@ -29,6 +29,16 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
             modules: true,
             ...settings?.style,
         },
+        inspect: {
+            ...settings?.inspect,
+            initialResources: {
+                count: 'print',
+                totalSize: 'print',
+                sizeDeviation: 'off',
+                disallowImports: 'off',
+                ...settings?.inspect?.initialResources,
+            },
+        },
     };
 };
 

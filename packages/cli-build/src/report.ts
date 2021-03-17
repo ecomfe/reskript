@@ -2,8 +2,7 @@ import * as path from 'path';
 import ConsoleTable, {Column} from 'tty-table';
 import chalk, {ForegroundColor} from 'chalk';
 import {Stats} from 'webpack';
-import {isEmpty, difference, flatMap, uniqBy, sortBy, max, sumBy} from 'lodash';
-import prettyBytes from 'pretty-bytes';
+import {isEmpty, difference, flatMap, uniqBy, sortBy, max} from 'lodash';
 import {ProjectSettings} from '@reskript/settings';
 import {WebpackCompileAsset} from './interface';
 
@@ -93,12 +92,6 @@ export const drawBuildReport = (stats: Stats[]): void => {
     for (const {color, name, size, indicator} of templateSegments) {
         console.log(chalk[color](`${name.padStart(maxNameLength)} ${size.padEnd(maxSizeLength)} ${indicator}`));
     }
-
-    const initialSegments = templateSegments.filter(segment => segment.indicator === 'initial');
-    const initialLoadingSize = sumBy(initialSegments, segment => segment.sizeInBytes);
-    console.log('');
-    console.log(`Total initial requests: ${initialChunks.size}`);
-    console.log(`Total initial size: ${prettyBytes(initialLoadingSize)} (not gzipped)`);
 };
 
 export interface WebpackResult {

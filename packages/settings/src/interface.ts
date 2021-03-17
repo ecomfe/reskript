@@ -34,6 +34,21 @@ export interface BuildScriptSettings {
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
 
+export type Severity = 'off' | 'print' | 'warning' | 'error';
+
+export type RuleConfig<T> = 'off' | 'print' | [Severity, T];
+
+export interface BuildInspectInitialResource {
+    readonly count: RuleConfig<number>;
+    readonly totalSize: RuleConfig<number>;
+    readonly sizeDeviation: RuleConfig<number>;
+    readonly disallowImports: RuleConfig<string[]>;
+}
+
+export interface BuildInspectSettings {
+    initialResources: BuildInspectInitialResource;
+}
+
 export interface BuildSettings {
     // 产出的资源路径前缀
     readonly publicPath?: string;
@@ -53,6 +68,7 @@ export interface BuildSettings {
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
     readonly finalize: (webpackConfig: WebpackConfiguration, env: BuildEntry) => WebpackConfiguration;
+    readonly inspect: BuildInspectSettings;
 }
 
 export interface DevServerSettings {

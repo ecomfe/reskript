@@ -11,10 +11,11 @@ import {
     checkProjectSettings,
     BuildContext,
 } from '@reskript/config-webpack';
-import {readProjectSettings, BuildEnv} from '@reskript/settings';
+import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import * as partials from './partial';
 import {BuildCommandLineArgs} from './interface';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
+import inspect from './inspect';
 
 const build = (configuration: Configuration | Configuration[]): Promise<Stats> => {
     const executor = (resolve: (value: Stats) => void) => webpack(
@@ -51,8 +52,7 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
     return new Promise(executor);
 };
 
-const createConfigurations = (cmd: BuildCommandLineArgs): Configuration[] => {
-    const projectSettings = readProjectSettings(cmd, 'build');
+const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: ProjectSettings): Configuration[] => {
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
@@ -102,7 +102,8 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
         rimraf.sync(path.join(cmd.cwd, 'dist'));
     }
 
-    const [initial, ...configurations] = createConfigurations(cmd);
+    const projectSettings = readProjectSettings(cmd, 'build');
+    const [initial, ...configurations] = createConfigurations(cmd, projectSettings);
 
     if (!initial) {
         const error = 'No build configuration created, you are possibly providing a feature matrix with dev only';
@@ -114,4 +115,6 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     const initialStats = await build([initial]);
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
+    console.log('');
+    inspect(initialStats, projectSettings.build.inspect);
 };

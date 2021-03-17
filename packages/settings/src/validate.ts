@@ -1,5 +1,27 @@
 import {validate} from 'schema-utils';
 
+const ruleConfig = (valueSchema: any) => {
+    return {
+        anyOf: [
+            {
+                type: 'string',
+                enum: ['off', 'print'],
+            },
+            {
+                type: 'array',
+                items: [
+                    {
+                        type: 'string',
+                        enum: ['off', 'print', 'warning', 'error'],
+                    },
+                    valueSchema,
+                ],
+                additionalItems: false,
+            },
+        ],
+    };
+};
+
 // `schema`并不是一个完全符合JSON Schema的东西
 const schema: any = {
     properties: {
@@ -80,6 +102,22 @@ const schema: any = {
                                 {type: 'boolean'},
                                 {instanceof: 'Function'},
                             ],
+                        },
+                    },
+                    additionalProperties: false,
+                },
+                inspect: {
+                    type: 'object',
+                    properties: {
+                        initialResources: {
+                            type: 'object',
+                            properties: {
+                                count: ruleConfig({type: 'number'}),
+                                totalSize: ruleConfig({type: 'number'}),
+                                sizeDeviation: ruleConfig({type: 'number'}),
+                                disallowImports: ruleConfig({type: 'array', items: {type: 'string'}}),
+                            },
+                            additionalProperties: false,
                         },
                     },
                     additionalProperties: false,
