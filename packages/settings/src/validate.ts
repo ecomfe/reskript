@@ -12,7 +12,7 @@ const ruleConfig = (valueSchema: any) => {
                 items: [
                     {
                         type: 'string',
-                        enum: ['off', 'print', 'warning', 'error'],
+                        enum: ['off', 'print', 'warn', 'error'],
                     },
                     valueSchema,
                 ],

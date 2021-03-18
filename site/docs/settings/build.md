@@ -39,7 +39,7 @@ interface BuildInspectInitialResource {
     readonly count: RuleConfig<number>;
     // 初始加载的资源总大小，配置值为最大允许的体积，以字节为单位
     readonly totalSize: RuleConfig<number>;
-    // 初始加载的各资源之间的体积差异，配置值为体积的标准差，超过该值即报告
+    // 初始加载的各资源之间的体积差异，配置值为单个资源的尺寸与所有资源尺寸平均值的差异系数，如0.3指尺寸必须在平均值的0.7-1.3倍之间
     readonly sizeDeviation: RuleConfig<number>;
     // 禁止在初始加载资源中包含某些第三方依赖，配置值为依赖名称的数组
     readonly disallowImports: RuleConfig<string[]>;
@@ -431,5 +431,3 @@ exports.build = {
     },
 };
 ```
-
-**注意：当前还不支持`sizeDeviation`的检查，同时并不支持`count`和`totalSize`的阈值检查。**
