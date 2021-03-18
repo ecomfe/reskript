@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-lint",
-  "version": "1.0.0-beta.37",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -15,13 +15,13 @@
     "test": "echo 'No test in @reskript/cli-lint'"
   },
   "devDependencies": {
-    "@reskript/core": "1.0.0-beta.37",
+    "@reskript/core": "1.0.0",
     "@types/eslint": "^7.2.7",
     "@types/lodash": "^4.14.168",
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@reskript/config-lint": "1.0.0-beta.37",
+    "@reskript/config-lint": "1.0.0",
     "chalk": "^4.1.0",
     "eslint": "^7.22.0",
     "eslint-formatter-pretty": "^4.0.0",

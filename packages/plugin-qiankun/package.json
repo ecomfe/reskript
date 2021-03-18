@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-qiankun",
-  "version": "1.0.0-beta.37",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -22,7 +22,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@reskript/settings": "1.0.0-beta.37",
+    "@reskript/settings": "1.0.0",
     "dedent": "^0.7.0",
     "esbuild": "^0.9.3",
     "qiankun": "^2.4.0"
