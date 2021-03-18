@@ -17,7 +17,7 @@
     "preversion": "yarn ci",
     "prepack": "yarn && yarn build",
     "local-publish": "yarn && yarn build && node scripts/local-publish.js",
-    "deploy": "npm_config_registry=https://registry.npmjs.org/ lerna publish from-package --dist-tag=next --pre-dist-tag=next",
+    "deploy": "lerna publish from-package",
     "prepare": "husky install"
   },
   "devDependencies": {

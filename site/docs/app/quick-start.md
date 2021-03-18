@@ -21,10 +21,8 @@ npm init -y
 作为一个简单的应用，我们假设需要使用构建、本地调试、代码检查这几项功能，参考[快速上手](../getting-started)将相关的依赖安装上：
 
 ```shell
-npm install --save-dev eslint stylelint typescript webpack @reskript/cli@next @reskript/cli-build@next @reskript/cli-dev@next @reskript/cli-lint@next @reskript/config-lint@next
+npm install --save-dev eslint stylelint typescript webpack @reskript/cli @reskript/cli-build @reskript/cli-dev @reskript/cli-lint @reskript/config-lint
 ```
-
-**注意：因为当前我们的`1.x`版本还处在测试阶段，所以需要在相关的包后面加上`@next`标记。**
 
 **另请注意：`NodeJS 15.x`和`NPM 7.x`现在还录能完全兼容地安装这些依赖，你可能需要切换到`NodeJS 14.x`，可以考虑使用[nvm](https://github.com/nvm-sh/nvm)来管理你的NodeJS版本。**
 

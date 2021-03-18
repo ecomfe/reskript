@@ -9,10 +9,8 @@ title: 单元测试
 由于单元测试并不是一个必备的步骤，所以我们在[第一个应用](./quick-start)一章中并没有安装相关的依赖，在此补上我们必备的包：
 
 ```shell
-npm install --save-dev @reskript/cli-test@next @testing-library/react
+npm install --save-dev @reskript/cli-test @testing-library/react
 ```
-
-**同样的，由于当前还处于测试阶段，你需要使用`@next`标记安装最新版本。**
 
 随后我们在`package.json`中的`scripts`里增加一条运行测试的命令：
 
