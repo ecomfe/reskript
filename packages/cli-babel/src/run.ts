@@ -18,7 +18,7 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
 
     if (!result || result.code == null || result.map == null) {
         console.error(`Failed to transform ${file}`);
-        process.exit(2);
+        process.exit(20);
     }
 
     const relative = path.relative(baseIn, file);
@@ -46,7 +46,7 @@ const copyFile = async (file: string, baseIn: string, baseOut: string) => {
 const printInConsole = (code: string | null | undefined) => {
     if (code == null) {
         console.error('Transform failed');
-        process.exit(2);
+        process.exit(20);
     }
 
     // eslint-disable-next-line no-console
@@ -60,7 +60,7 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
 
     if (!path.extname(file) && !cmd.out) {
         console.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
-        process.exit(1);
+        process.exit(21);
     }
 
     if (cmd.out) {

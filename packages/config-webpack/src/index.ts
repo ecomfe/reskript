@@ -40,7 +40,7 @@ export const collectEntries = (cwd: string, srcDirectory: string, only?: string[
 
     if (!fs.existsSync(entriesFolder)) {
         console.error(chalk.red(`No ${srcDirectory}/entries dir found`));
-        process.exit(1);
+        process.exit(24);
     }
 
     // 要`*.js`但不要`*.config.js`

@@ -23,7 +23,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
 
     if (!entries.length) {
         console.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
-        process.exit(3);
+        process.exit(21);
     }
 
     const buildEnv: BuildEnv = {
@@ -75,7 +75,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
             'error',
             (ex: Error) => {
                 console.error(ex.message);
-                process.exit(2);
+                process.exit(22);
             }
         );
     };

@@ -52,7 +52,7 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
 
     if (conflicts.length > 0) {
         console.error(`Build target ${conflicts.join(' & ')} have incompatible feature schema`);
-        process.exit(1);
+        process.exit(21);
     }
 };
 
@@ -66,7 +66,7 @@ export const checkPreCommitHookWhenLintDisabled = (cwd: string): void => {
     if (!get(packageConfig, ['husky', 'hooks', 'pre-commit'])) {
         const warning = fs.readFileSync(path.join(__dirname, 'assets/lint-disabled-warning.txt'), 'utf-8');
         console.warn(chalk.yellowBright(warning));
-        process.exit(1);
+        process.exit(21);
     }
 };
 

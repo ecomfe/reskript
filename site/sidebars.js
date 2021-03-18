@@ -48,6 +48,7 @@ module.exports = {
                 'cli/play',
                 'cli/babel',
                 'cli/doctor',
+                'cli/exit-code',
                 'cli/init',
             ],
         },

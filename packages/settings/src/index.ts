@@ -108,7 +108,7 @@ export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): v
             You may forget to write a return statement in ${scope}.finalize, or some plugin has a broken implement.
         `;
         console.error(chalk.red(message));
-        process.exit(2);
+        process.exit(21);
     }
 };
 

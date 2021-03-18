@@ -23,7 +23,7 @@ export default async (cwd: string) => {
             all files allowed before initialization are: ${[...ALLOWED_EXISTING_FILES.values()].join(', ')}
         `;
         console.error(chalk.red(message));
-        process.exit(1);
+        process.exit(24);
     }
 };
 

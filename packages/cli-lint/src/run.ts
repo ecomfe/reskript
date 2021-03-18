@@ -33,6 +33,6 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<void> 
     else {
         const output = eslintPrettyFormatter(lintResults);
         console.log(output);
-        process.exit(1);
+        process.exit(25);
     }
 };

@@ -14,14 +14,14 @@ const buildCommand = async ({command, description, args, run}: CommandConfig<any
 const main = async (): Promise<void> => {
     if (semver.lt(process.version, '8.9.0')) {
         console.error(chalk.yellow('Require node >= v8.9.0 to be installed'));
-        process.exit(1);
+        process.exit(10);
     }
 
     process.on(
         'unhandledRejection',
         e => {
             console.error(e);
-            process.exit(2);
+            process.exit(99);
         }
     );
 
@@ -29,7 +29,7 @@ const main = async (): Promise<void> => {
 
     if (!route) {
         console.log('No command is given, you can install any @reskript/cli-* package to install a command');
-        process.exit(2);
+        process.exit(12);
     }
 
     try {
@@ -38,7 +38,7 @@ const main = async (): Promise<void> => {
 
         if (!command) {
             console.error(chalk.red(`@reskript/cli-${route} is not a CLI package`));
-            process.exit(2);
+            process.exit(11);
         }
 
         buildCommand(command);
@@ -46,7 +46,7 @@ const main = async (): Promise<void> => {
     }
     catch {
         console.error(chalk.red(`${route} command not available, you may install @reskript/cli-${route}`));
-        process.exit(3);
+        process.exit(11);
     }
 };
 

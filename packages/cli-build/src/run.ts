@@ -23,12 +23,12 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
         (err?: Error, stats?: Stats) => {
             if (err) {
                 console.error(err);
-                process.exit(1);
+                process.exit(22);
             }
 
             if (!stats) {
                 console.error('Unknown error: webpack does not return its build stats');
-                process.exit(2);
+                process.exit(22);
             }
 
             const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};
@@ -42,7 +42,7 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
             }
 
             if (stats.hasErrors()) {
-                process.exit(1);
+                process.exit(22);
             }
 
             resolve(stats);
@@ -57,7 +57,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
         console.error(chalk.red(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`));
-        process.exit(2);
+        process.exit(21);
     }
 
     checkProjectSettings(projectSettings);
@@ -108,7 +108,7 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     if (!initial) {
         const error = 'No build configuration created, you are possibly providing a feature matrix with dev only';
         console.error(chalk.red(error));
-        process.exit(2);
+        process.exit(21);
     }
 
     // 由于webpack 5.x有很强的缓存能力，所以先构建一次做好缓存，后面几个再并行构建速度反而会变快

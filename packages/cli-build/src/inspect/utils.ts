@@ -58,6 +58,6 @@ export const run = (processors: Array<RuleProcessor<any>>): void => {
     );
 
     if (results.has('error')) {
-        process.exit(10);
+        process.exit(23);
     }
 };
