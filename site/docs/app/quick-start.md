@@ -6,7 +6,7 @@ title: 第一个应用
 
 ## 初始化项目
 
-你也可以用[@reskript/init](../cli/init)来初始化项目，以下为手动初始化的过程，着眼于帮助你了解`reSKRipt`的相关依赖和工作过程。
+你也可以用[@reskript/init](../../cli/init)来初始化项目，以下为手动初始化的过程，着眼于帮助你了解`reSKRipt`的相关依赖和工作过程。
 
 你需要将一个目录转为一个标准的NodeJS项目，即需要`package.json`：
 

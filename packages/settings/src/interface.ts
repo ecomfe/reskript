@@ -34,14 +34,19 @@ export interface BuildScriptSettings {
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
 
-export type Severity = 'off' | 'print' | 'warning' | 'error';
+export type Severity = 'off' | 'print' | 'warn' | 'error';
 
+// 产物检查的规则配置，为数组的时候，第2个元素是具体的配置
 export type RuleConfig<T> = 'off' | 'print' | [Severity, T];
 
 export interface BuildInspectInitialResource {
+    // 初始加载资源数量，配置值为最大允许数量
     readonly count: RuleConfig<number>;
+    // 初始加载的资源总大小，配置值为最大允许的体积，以字节为单位
     readonly totalSize: RuleConfig<number>;
+    // 初始加载的各资源之间的体积差异，配置值为体积的标准差，超过该值即报告
     readonly sizeDeviation: RuleConfig<number>;
+    // 禁止在初始加载资源中包含某些第三方依赖，配置值为依赖名称的数组
     readonly disallowImports: RuleConfig<string[]>;
 }
 
@@ -68,6 +73,7 @@ export interface BuildSettings {
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
     readonly finalize: (webpackConfig: WebpackConfiguration, env: BuildEntry) => WebpackConfiguration;
+    // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }
 

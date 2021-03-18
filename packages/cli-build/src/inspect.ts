@@ -7,7 +7,7 @@ import {BuildInspectSettings, RuleConfig, Severity} from '@reskript/settings';
 const SEVERITY_PREFIX: Record<Severity, string> = {
     'off': '   ',
     'print': chalk.bgWhite.black(' I '),
-    'warning': chalk.bgYellow.white(' W '),
+    'warn': chalk.bgYellow.white(' W '),
     'error': chalk.bgRed.white(' E '),
 };
 

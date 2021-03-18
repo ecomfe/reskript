@@ -29,6 +29,26 @@ interface BuildScriptSettings {
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
 
+type Severity = 'off' | 'print' | 'warn' | 'error';
+
+// 产物检查的规则配置，为数组的时候，第2个元素是具体的配置
+type RuleConfig<T> = 'off' | 'print' | [Severity, T];
+
+interface BuildInspectInitialResource {
+    // 初始加载资源数量，配置值为最大允许数量
+    readonly count: RuleConfig<number>;
+    // 初始加载的资源总大小，配置值为最大允许的体积，以字节为单位
+    readonly totalSize: RuleConfig<number>;
+    // 初始加载的各资源之间的体积差异，配置值为体积的标准差，超过该值即报告
+    readonly sizeDeviation: RuleConfig<number>;
+    // 禁止在初始加载资源中包含某些第三方依赖，配置值为依赖名称的数组
+    readonly disallowImports: RuleConfig<string[]>;
+}
+
+interface BuildInspectSettings {
+    initialResources: BuildInspectInitialResource;
+}
+
 interface BuildSettings {
     // 产出的资源路径前缀
     readonly publicPath?: string;
@@ -50,6 +70,8 @@ interface BuildSettings {
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
     readonly finalize: (webpackConfig: WebpackConfiguration, env: BuildEntry) => WebpackConfiguration;
+    // 配置对最终产出的检查规则
+    readonly inspect: BuildInspectSettings;
 }
 ```
 
@@ -368,3 +390,46 @@ exports.build = {
     },
 };
 ```
+
+## 检查最终构建产物
+
+在要求比较严格的项目中，有需要对最终产物的组成进行检查，并应用一些自动化的规则，确保如资源数量、大小等符合预期。
+
+你可以使用`reskript.config.js`中的`exports.build.inspect`来配置构建产物的检查规则，具体的配置结构参考上文。
+
+### 规则配置
+
+在产物检查的配置中，大部分检查项都可以配置为以下形式：
+
+- `"off"`：指关闭该项的检查。
+- `"print"`：指仅打印该检查项的结果，但不做任何的阈值判断和拦截。
+- `[severity, config]`：配置该项的报告类型，以及指定规则检查的阈值。
+
+不同规则的`config`阈值不同，比如`initialResources.count`用来检查初始加载的资源数量，那么它的阈值就是个数字，资源数量超过该值时报警。
+
+当`severity`设为`"warn"`时，会在构建日志中报告，但构建仍然成功。如果值为`"error"`时，则除了日志报告外，还会使构建进程异常退出。
+
+### 示例
+
+#### 初始资源检查
+
+假设你的产品并没有使用HTTP/2，考虑到浏览器的单域名并发能力和用户的普遍网速，你的要求如下：
+
+> 产品打开时，初始加载的资源不能超过6个，总大小不能超过2MB，各资源的体积尽量平均以最大限度利用并发能力。同时产品初始资源不包含任何和图表（`echarts`）有关的模块，不包含和编辑器（`monaco-editor`和`codemirror`）有关的模块。
+
+为了严格控制产品性能，你要求一但违反上面的规则，构建应当失败，开发者需要修复相关问题。则配置如下所示：
+
+```js
+exports.build = {
+    inspect: {
+        initialResources: {
+            count: ['error', 6],
+            totalSize: ['error', 2 * 1024 * 1024],
+            sizeDeviation: ['error', 0.2],
+            disallowImports: ['error', ['echarts', 'monaco-editor', 'codemirror']],
+        },
+    },
+};
+```
+
+**注意：当前还不支持`sizeDeviation`的检查，同时并不支持`count`和`totalSize`的阈值检查。**
