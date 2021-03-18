@@ -22,9 +22,9 @@
     "@types/stylelint-webpack-plugin": "^2.1.0",
     "@types/webpack-merge": "^5.0.0",
     "jest": "^26.6.3",
-    "ts-jest": "^26.5.3",
+    "ts-jest": "^26.5.4",
     "typescript": "^4.2.3",
-    "webpack": "^5.26.0"
+    "webpack": "^5.26.3"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
@@ -48,7 +48,7 @@
     "find-up": "^5.0.0",
     "hasha": "^5.2.0",
     "html-webpack-plugin": "^5.3.1",
-    "less": "3.9.0",
+    "less": "4.1.1",
     "less-loader": "^8.0.0",
     "less-plugin-functions": "^1.0.0",
     "less-plugin-npm-import": "^2.1.0",

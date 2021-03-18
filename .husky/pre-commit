@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-node scripts/ensure-less-version.js && yarn lint --exclude-dependents --since HEAD
+yarn lint --exclude-dependents --since HEAD
