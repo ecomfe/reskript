@@ -11,6 +11,7 @@ const factory: LoaderFactory = ({projectSettings}) => {
         options: {
             sourceMap: extract,
             lessOptions: {
+                math: 'always',
                 javascriptEnabled: true,
                 modifyVars: lessVariables,
                 plugins: [
