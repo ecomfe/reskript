@@ -48,6 +48,7 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
         port: 8788,
         apiPrefixes: [],
         defaultProxyDomain: '',
+        proxyRewrite: {},
         hot: 'all',
         openPage: '',
         finalize: config => config,

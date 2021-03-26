@@ -137,6 +137,12 @@ const schema: any = {
                 defaultProxyDomain: {
                     type: 'string',
                 },
+                proxyRewrite: {
+                    additionalProperties: {
+                        type: 'string',
+                    },
+                    type: 'object',
+                },
                 hot: {
                     enum: ['all', 'none', 'simple'],
                     type: 'string',

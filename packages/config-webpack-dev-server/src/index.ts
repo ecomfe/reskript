@@ -82,17 +82,32 @@ export const createWebpackDevServerConfig = (
     const {
         apiPrefixes = [],
         defaultProxyDomain = '',
+        proxyRewrite,
         https,
         port,
         hot = 'none',
         openPage = '',
     } = buildEntry.projectSettings.devServer;
     const devHost = internalIp.v4.sync();
-    const urlPrefix = (https ? 'https://' : 'http://') + (proxyDomain || defaultProxyDomain);
     const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
-    const proxy = apiPrefixes.reduce(
-        (proxy, prefix) => ({...proxy, [prefix]: {agent, target: urlPrefix, changeOrigin: true}}),
-        {}
+    const proxyRules = [
+        ...Object.entries(proxyRewrite),
+        ...apiPrefixes.map(path => [path, `${proxyDomain || defaultProxyDomain}/${path}`]),
+    ];
+    const proxy = proxyRules.reduce(
+        (proxy, [prefix, target]) => {
+            const parsedURL = new URL(`http://${target}`);
+            proxy[prefix] = {
+                agent,
+                target: `${https ? 'https' : 'http'}://${parsedURL.host}${parsedURL.port ? ':' + parsedURL.port : ''}`,
+                pathRewrite: {
+                    [`^${prefix}`]: parsedURL.pathname.replace(/^\//, ''),
+                },
+                changeOrigin: true,
+            };
+            return proxy;
+        },
+        {} as Record<string, any>
     );
 
     const baseConfig: DevServerConfiguration = {

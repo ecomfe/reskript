@@ -86,6 +86,8 @@ export interface DevServerSettings {
     readonly apiPrefixes: string[];
     // 默认的代理后端路径，可以被`--proxy-domain`命令行参数覆盖
     readonly defaultProxyDomain: string;
+    // 重写部分请求URL，优先于apiPrefixes
+    readonly proxyRewrite: Record<string, string>;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
     readonly hot: 'none' | 'simple' | 'all';
     // 服务启动后打开的页面
