@@ -55,6 +55,9 @@ const schema: any = {
                 thirdParty: {
                     type: 'boolean',
                 },
+                publicPath: {
+                    type: 'string',
+                },
                 finalize: {
                     instanceof: 'Function',
                 },
