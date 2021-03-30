@@ -50,6 +50,8 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
     return {
         output: {
             path: path.join(cwd, 'dist'),
+            // 不要让构建时的`publicPath`影响调试，调试永远走本地
+            publicPath: '/assets/',
             // 在使用`HotModuleReplacementPlugin`时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
             filename: '[name].[contenthash].js',
         },
