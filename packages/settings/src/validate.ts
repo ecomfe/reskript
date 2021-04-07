@@ -110,11 +110,14 @@ const schema: any = {
                         polyfill: {
                             type: 'boolean',
                         },
-                        finalize: {
-                            instanceof: 'Function',
+                        displayName: {
+                            type: 'boolean',
                         },
                         defaultImportOptimization: {
                             type: 'boolean',
+                        },
+                        finalize: {
+                            instanceof: 'Function',
                         },
                     },
                     additionalProperties: false,

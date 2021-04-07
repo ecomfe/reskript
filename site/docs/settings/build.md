@@ -23,6 +23,8 @@ interface BuildScriptSettings {
     readonly babel: boolean | ((resoruce: string) => boolean);
     // 是否自动引入core-js的相应polyfill，默认为true。如果你使用了其它方式引入polyfill，设置为false即可
     readonly polyfill: boolean;
+    // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
+    readonly displayName: boolean | 'auto';
     // 是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
     readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置

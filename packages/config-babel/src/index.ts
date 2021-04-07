@@ -10,6 +10,7 @@ export interface BabelConfigOptions {
     readonly polyfill?: boolean;
     readonly modules?: false | 'commonjs';
     readonly defaultImportOptimization?: boolean;
+    readonly displayName?: boolean | 'auto';
 }
 
 // https://github.com/babel/babel/issues/10379#issuecomment-527077992
@@ -77,11 +78,17 @@ export const getParseOnlyBabelConfig = (options: BabelConfigOptions = {}): Trans
 
 export const getTransformBabelConfig = (options: BabelConfigOptions = {}): TransformOptions => {
     const minimal = getParseOnlyBabelConfig(options);
-    const {mode = 'development', defaultImportOptimization = true} = options;
+    const {mode = 'development', defaultImportOptimization = true, displayName = true} = options;
+    const requireDisplayName = displayName === true || (displayName === 'auto' && mode === 'development');
     const plugins: Array<PluginItem | false> = [
         // 这东西必须放在最前面，不然`export default class`会被其它插件转义掉没机会确认真实的名字
-        resolve('@reskript/babel-plugin-add-react-display-name'),
-        resolve('babel-plugin-styled-components'),
+        requireDisplayName && resolve('@reskript/babel-plugin-add-react-display-name'),
+        [
+            resolve('babel-plugin-styled-components'),
+            {
+                displayName: requireDisplayName,
+            },
+        ],
         ...minimal.plugins || [],
         defaultImportOptimization && [
             resolve('babel-plugin-import'),

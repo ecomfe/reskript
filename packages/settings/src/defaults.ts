@@ -18,8 +18,9 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
         script: {
             babel: true,
             polyfill: true,
-            finalize: config => config,
+            displayName: true,
             defaultImportOptimization: true,
+            finalize: config => config,
             ...settings?.script,
         },
         style: {

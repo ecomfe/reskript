@@ -5,12 +5,13 @@ import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = (entry: BuildEntry) => {
     const {usage, mode, projectSettings: {build, devServer}} = entry;
-    const {script: {polyfill, defaultImportOptimization}} = build;
+    const {script: {polyfill, defaultImportOptimization, displayName}} = build;
     const {hot} = devServer;
     const babelConfigOptions: BabelConfigOptions = {
         mode,
         polyfill,
         defaultImportOptimization,
+        displayName,
         // 对于需要构建产物用的场合，默认不给热更新
         hot: usage === 'devServer' ? hot : 'none',
         hostType: 'application',
