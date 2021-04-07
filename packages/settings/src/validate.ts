@@ -1,5 +1,29 @@
 import {validate} from 'schema-utils';
 
+const sourceFilterSchema = {
+    type: 'object',
+    properties: {
+        includes: {
+            items: {
+                type: 'string',
+            },
+            type: 'array',
+        },
+        excludes: {
+            items: {
+                type: 'string',
+            },
+            type: 'array',
+        },
+    },
+    additionalProperties: false,
+};
+
+const severitySchema = {
+    type: 'string',
+    enum: ['off', 'print', 'warn', 'error'],
+};
+
 const ruleConfig = (valueSchema: any) => {
     return {
         anyOf: [
@@ -10,10 +34,23 @@ const ruleConfig = (valueSchema: any) => {
             {
                 type: 'array',
                 items: [
-                    {
-                        type: 'string',
-                        enum: ['off', 'print', 'warn', 'error'],
-                    },
+                    severitySchema,
+                    valueSchema,
+                ],
+                additionalItems: false,
+            },
+        ],
+    };
+};
+
+const optionalRuleConfig = (valueSchema: any) => {
+    return {
+        anyOf: [
+            severitySchema,
+            {
+                type: 'array',
+                items: [
+                    severitySchema,
                     valueSchema,
                 ],
                 additionalItems: false,
@@ -122,6 +159,7 @@ const schema: any = {
                             },
                             additionalProperties: false,
                         },
+                        duplicatePackages: optionalRuleConfig(sourceFilterSchema),
                     },
                     additionalProperties: false,
                 },

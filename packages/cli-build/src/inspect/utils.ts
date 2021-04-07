@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import {RuleConfig, Severity} from '@reskript/settings';
+import {RuleConfig, OptionalRuleConfig, Severity} from '@reskript/settings';
 
 const SEVERITY_PREFIX: Record<Severity, string> = {
     'off': '   ',
@@ -12,7 +12,9 @@ export const createPrint = (severity: Severity) => (message: string) => {
     console.log(`${SEVERITY_PREFIX[severity]} ${message}`);
 };
 
-export const normalizeRuleConfig = <T>(config: RuleConfig<T>, defaultConfigValue: T): [Severity, T] => {
+type UniversalRuleConfig<T> = RuleConfig<T> | OptionalRuleConfig<T>;
+
+export const normalizeRuleConfig = <T>(config: UniversalRuleConfig<T>, defaultConfigValue: T): [Severity, T] => {
     if (typeof config === 'string') {
         return [config, defaultConfigValue];
     }
@@ -28,7 +30,7 @@ export interface CheckHelper {
 export type Check<T> = (configValue: T, helpers: CheckHelper) => boolean;
 
 export interface RuleProcessor<T> {
-    config: RuleConfig<T>;
+    config: UniversalRuleConfig<T>;
     defaultConfigValue: T;
     check: Check<T>;
 }

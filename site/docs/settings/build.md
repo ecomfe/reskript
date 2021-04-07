@@ -34,6 +34,14 @@ type Severity = 'off' | 'print' | 'warn' | 'error';
 // 产物检查的规则配置，为数组的时候，第2个元素是具体的配置
 type RuleConfig<T> = 'off' | 'print' | [Severity, T];
 
+type OptionalRuleConfig<T> = Severity | [Severity, T];
+
+// 设置对名称的过滤规则，includs会优先于excludes起作用
+interface SourceFilter {
+    includes?: string[];
+    excludes?: string[];
+}
+
 interface BuildInspectInitialResource {
     // 初始加载资源数量，配置值为最大允许数量
     readonly count: RuleConfig<number>;
@@ -46,7 +54,8 @@ interface BuildInspectInitialResource {
 }
 
 interface BuildInspectSettings {
-    initialResources: BuildInspectInitialResource;
+    readonly initialResources: BuildInspectInitialResource;
+    readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
 }
 
 interface BuildSettings {
@@ -431,3 +440,34 @@ exports.build = {
     },
 };
 ```
+
+#### 检查重复引入的第三方库
+
+由于NPM管理依赖多版本的逻辑，以及不同的第三方库之间依赖关系的未知性，很可能在一个构建的最终产物中，某个包有很多不同版本同时存在。这会造成额外的资源体积、脚本解析和执行时间，对于有副作用的模块更可能导致实际运行出现不可预期的行为。
+
+你可以使用`inspect.duplicatePackages`来检查这些重复的引入，例如你的要求如下：
+
+> 检查所有重复引入的依赖包，但对于仅用作开发的`tslib`这个包不做报警。相关结果只打印出来，不要中断构建的正常进行。
+
+你可以使用如下的配置：
+
+```js
+exports.build = {
+    inspect: {
+        duplicatePackages: ['warn', {excludes: ['tslib']}],
+    },
+};
+```
+
+最后你可能得到类似这样的报告产出：
+
+```
+ W  Found duplicate package immer
+      at /path/to/project/node_modules/immer
+      at /path/to/project/node_modules/@huse/methods/node_modules/immer
+ W  Found duplicate package color-name
+      at /path/to/project/node_modules/color-name
+      at /path/to/project/node_modules/color-convert/node_modules/color-name
+```
+
+每一条报警信息都会告诉你被重复引入的包名，以及被引入的各个版本所在的绝对路径。

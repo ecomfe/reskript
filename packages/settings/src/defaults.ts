@@ -30,6 +30,7 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
             ...settings?.style,
         },
         inspect: {
+            duplicatePackages: 'off',
             ...settings?.inspect,
             initialResources: {
                 count: 'print',

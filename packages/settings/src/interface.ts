@@ -39,6 +39,13 @@ export type Severity = 'off' | 'print' | 'warn' | 'error';
 // 产物检查的规则配置，为数组的时候，第2个元素是具体的配置
 export type RuleConfig<T> = 'off' | 'print' | [Severity, T];
 
+export type OptionalRuleConfig<T> = Severity | [Severity, T];
+
+export interface SourceFilter {
+    includes?: string[];
+    excludes?: string[];
+}
+
 export interface BuildInspectInitialResource {
     // 初始加载资源数量，配置值为最大允许数量
     readonly count: RuleConfig<number>;
@@ -51,7 +58,8 @@ export interface BuildInspectInitialResource {
 }
 
 export interface BuildInspectSettings {
-    initialResources: BuildInspectInitialResource;
+    readonly initialResources: BuildInspectInitialResource;
+    readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
 }
 
 export interface BuildSettings {
