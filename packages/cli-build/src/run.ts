@@ -60,6 +60,11 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
         process.exit(21);
     }
 
+    if (cmd.analyze && !cmd.buildTarget) {
+        console.error(chalk.red('--analyze must be used with --build-target to specify only one target'));
+        process.exit(21);
+    }
+
     checkProjectSettings(projectSettings);
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
