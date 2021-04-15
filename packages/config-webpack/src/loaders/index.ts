@@ -5,6 +5,7 @@ export {default as cssModules} from './cssModules';
 export {default as postCSS} from './postCSS';
 export {default as postCSSModules} from './postCSSModules';
 export {default as less} from './less';
+export {default as lessSafe} from './lessSafe';
 export {default as url} from './url';
 export {default as img} from './img';
 export {default as worker} from './worker';

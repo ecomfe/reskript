@@ -81,21 +81,21 @@ export const script = (entry: BuildEntry): RuleSetRule => {
 export const less = (entry: BuildEntry): RuleSetRule => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
-    const finalLoader = (usage === 'build' && extract) ? 'cssExtract' : 'style';
+    const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
 
     return {
         test: /\.less$/,
         oneOf: [
             {
                 test: /\.global\.less$/,
-                use: use(finalLoader, 'css', 'postCSS', 'less', 'styleResources'),
+                use: use(final, 'css', 'postCSS', 'less', 'lessSafe', 'styleResources'),
             },
             {
                 resource: normalizeRuleMatch(cwd, modules),
-                use: use('classNames', finalLoader, 'cssModules', 'postCSSModules', 'less', 'styleResources'),
+                use: use('classNames', final, 'cssModules', 'postCSSModules', 'less', 'lessSafe', 'styleResources'),
             },
             {
-                use: use(finalLoader, 'css', 'postCSS', 'less', 'styleResources'),
+                use: use(final, 'css', 'postCSS', 'less', 'lessSafe', 'styleResources'),
             },
         ],
     };
@@ -104,21 +104,21 @@ export const less = (entry: BuildEntry): RuleSetRule => {
 export const css = (entry: BuildEntry): RuleSetRule => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
-    const finalLoader = (usage === 'build' && extract) ? 'cssExtract' : 'style';
+    const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
 
     return {
         test: /\.css$/,
         oneOf: [
             {
                 test: /\.global\.css$/,
-                use: use(finalLoader, 'css', 'postCSS'),
+                use: use(final, 'css', 'postCSS'),
             },
             {
                 resource: normalizeRuleMatch(cwd, modules),
-                use: use('classNames', finalLoader, 'cssModules', 'postCSSModules'),
+                use: use('classNames', final, 'cssModules', 'postCSSModules'),
             },
             {
-                use: use(finalLoader, 'css', 'postCSS'),
+                use: use(final, 'css', 'postCSS'),
             },
         ],
     };

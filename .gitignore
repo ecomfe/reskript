@@ -12,4 +12,4 @@ yarn-error.log
 .DS_Store
 /*/*/dist
 /*/*/config
-packages/eslint-plugin/coverage
+packages/*/coverage
