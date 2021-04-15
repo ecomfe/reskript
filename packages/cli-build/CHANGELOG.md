@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/ecomfe/reskript/compare/v1.1.0...v1.2.0) (2021-04-15)
+
+
+### Bug Fixes
+
+* **build:** 在指定analyze但没有build-target时报错退出 ([9b0c020](https://github.com/ecomfe/reskript/commit/9b0c020829787ada850d868f1a5308665aa19624))
+
+
+### Features
+
+* **build:** 分析产出中重复引入的依赖包 ([#15](https://github.com/ecomfe/reskript/issues/15)) ([9e01f1e](https://github.com/ecomfe/reskript/commit/9e01f1eea1a2373b329edf544fefe25f95fa68b3))
+
+
+
+
+
 # [1.1.0](https://github.com/ecomfe/reskript/compare/v1.0.0...v1.1.0) (2021-03-31)
 
 **Note:** Version bump only for package @reskript/cli-build

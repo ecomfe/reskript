@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-lint",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,8 +24,8 @@
     "@babel/eslint-plugin": "^7.13.10",
     "@ecomfe/eslint-config": "^7.0.0",
     "@ecomfe/stylelint-config": "^1.1.1",
-    "@reskript/config-babel": "1.1.0",
-    "@reskript/eslint-plugin": "1.1.0",
+    "@reskript/config-babel": "1.2.0",
+    "@reskript/eslint-plugin": "1.2.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "eslint-plugin-babel": "^5.3.1",
