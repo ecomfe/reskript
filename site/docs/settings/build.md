@@ -60,6 +60,21 @@ interface BuildInspectSettings {
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
 }
 
+type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
+
+interface InternalRules {
+    readonly script: RuleFactory;
+    readonly less: RuleFactory;
+    readonly css: RuleFactory;
+    readonly image: RuleFactory;
+    readonly svg: RuleFactory;
+    readonly file: RuleFactory;
+}
+
+interface BuildInternals {
+    readonly rules: InternalRules;
+}
+
 interface BuildSettings {
     // 产出的资源路径前缀
     readonly publicPath?: string;
@@ -80,7 +95,7 @@ interface BuildSettings {
     // 控制脚本编译的配置
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
-    readonly finalize: (webpackConfig: WebpackConfiguration, env: BuildEntry) => WebpackConfiguration;
+    readonly finalize: (webpackConfig: WebpackConfiguration, buildEntry: BuildEntry, internals: BuildInternals) => WebpackConfiguration;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }
@@ -368,7 +383,7 @@ exports.build = {
 
 虽然通过`exports.build.finalize`可以灵活地调整`webpack`配置，但你几乎不可能直接去修改已有的loader规则，比如你想让所有的图片不再使用默认的`url-loader`，而是用`responsive-loader`代替，但你是没办法在`webpackConfig.module.rules`中找到处理图片的那条规则的。
 
-在这种时候，你只能完全重写整个`module.rules`配置，我们通过`@reskript/config-webpack`导出了`rules`对象来让你进一步复用某些规则，`rules`中有以下的规则：
+在这种时候，你只能完全重写整个`module.rules`配置，我们在`build.finalize`函数的第三个参数`internals`中提供了了`rules`对象来让你进一步复用某些规则，`rules`中有以下的规则：
 
 - `script`：处理`.js`、`.jsx`、`.ts`、`.tsx`等脚本文件。
 - `less`：处理`.less`样式文件。
@@ -380,17 +395,15 @@ exports.build = {
 每一个规则都是一个`(entry: BuildEntry) => RuleSetRule`的函数，因此`exports.build.finalize`中的第二个参数就起到了作用：
 
 ```js
-const {rules} = require('@reskript/config-webpack');
-
 exports.build = {
-    finalize: (webpackConfig, buildEntry) => {
+    finalize: (webpackConfig, buildEntry, internals) => {
         // 需要把整个rules都重写
         webpackConfig.module.rules = [
-            rules.script(buildEntry),
-            rules.less(buildEntry),
-            rules.css(buildEntry),
-            rules.svg(buildEntry),
-            rules.file(buildEntry),
+            internals.rules.script(buildEntry),
+            internals.rules.less(buildEntry),
+            internals.rules.css(buildEntry),
+            internals.rules.svg(buildEntry),
+            internals.rules.file(buildEntry),
             // 在上面没有引用rules.image，自定义图片的处理规则
             {
                 test: /\.(jpe?g|png|webp)$/i,

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {ProjectAware, WorkModeAware} from '@reskript/core';
-import {Configuration as WebpackConfiguration} from 'webpack';
+import {Configuration as WebpackConfiguration, RuleSetRule} from 'webpack';
 import {Configuration as WebpackDevServerConfiguration} from 'webpack-dev-server';
 import {TransformOptions} from '@babel/core';
 
@@ -64,6 +64,21 @@ export interface BuildInspectSettings {
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
 }
 
+export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
+
+export interface InternalRules {
+    readonly script: RuleFactory;
+    readonly less: RuleFactory;
+    readonly css: RuleFactory;
+    readonly image: RuleFactory;
+    readonly svg: RuleFactory;
+    readonly file: RuleFactory;
+}
+
+export interface BuildInternals {
+    readonly rules: InternalRules;
+}
+
 export interface BuildSettings {
     // 产出的资源路径前缀
     readonly publicPath?: string;
@@ -82,7 +97,11 @@ export interface BuildSettings {
     readonly style: BuildStyleSettings;
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
-    readonly finalize: (webpackConfig: WebpackConfiguration, env: BuildEntry) => WebpackConfiguration;
+    readonly finalize: (
+        webpackConfig: WebpackConfiguration,
+        buildEntry: BuildEntry,
+        internals: BuildInternals
+    ) => WebpackConfiguration;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }

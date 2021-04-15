@@ -49,9 +49,9 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             ...settings,
             build: {
                 ...settings.build,
-                finalize: (config, env) => {
-                    const before = settings.build.finalize?.(config, env);
-                    return finalizeBuild(before, env);
+                finalize: (config, env, internals) => {
+                    const before = settings.build.finalize?.(config, env, internals);
+                    return finalizeBuild(before, env, internals);
                 },
             },
             devServer: {

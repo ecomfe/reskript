@@ -3,7 +3,13 @@ import * as fs from 'fs';
 import chalk from 'chalk';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
-import {BuildEnv, RuntimeBuildEnv, ProjectSettings, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import {
+    BuildEnv,
+    RuntimeBuildEnv,
+    ProjectSettings,
+    warnAndExitOnInvalidFinalizeReturn,
+    BuildInternals,
+} from '@reskript/settings';
 import * as loaders from './loaders';
 import * as rules from './rules';
 import {
@@ -76,7 +82,10 @@ export const createWebpackConfig = (context: BuildContext, extras: Configuration
     // eslint-disable-next-line global-require
     const configurations = partials.map(n => require(`./partials/${n}`).default(context) as Partial<Configuration>);
     const internalCreated = mergeBuiltin([...configurations, ...extras]);
-    const finalized = context.projectSettings.build.finalize(internalCreated, context);
+    const internals: BuildInternals = {
+        rules,
+    };
+    const finalized = context.projectSettings.build.finalize(internalCreated, context, internals);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'build');
     return finalized;
 };
