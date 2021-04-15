@@ -33,6 +33,7 @@
     "@reskript/config-babel": "1.2.0",
     "@reskript/config-lint": "1.2.0",
     "@reskript/core": "1.2.0",
+    "@reskript/less-safe-loader": "1.2.0",
     "@reskript/settings": "1.2.0",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
