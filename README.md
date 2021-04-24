@@ -53,7 +53,7 @@ npm install --save-dev eslint stylelint typescript webpack
 
 reSKRipt 由多个包组成，你可以按照下面描述的不同场景选择性安装：
 
-> 我想用 webpack 构建我的应用
+- 我想用 webpack 构建我的应用
 
 ```bash
 npm install --save-dev @reskript/cli @reskript/cli-build
@@ -61,7 +61,7 @@ npm install --save-dev @reskript/cli @reskript/cli-build
 skr build
 ```
 
-> 我想用 webpack-dev-server 调试我的应用
+- 我想用 webpack-dev-server 调试我的应用
 
 ```bash
 npm install --save-dev @reskript/cli @reskript/cli-dev
@@ -69,13 +69,13 @@ npm install --save-dev @reskript/cli @reskript/cli-dev
 skr dev
 ```
 
-> 我想基于已有的 webpack 配置自己定义构建
+- 我想基于已有的 webpack 配置自己定义构建
 
 ```bash
 npm install --save-dev @reskript/config-webpack
 ```
 
-> 我想检查我的代码规范
+- 我想检查我的代码规范
 
 ```bash
 npm install --save-dev @reskript/cli @reskript/cli-lint
@@ -83,13 +83,13 @@ npm install --save-dev @reskript/cli @reskript/cli-lint
 skr lint
 ```
 
-> 我直接使用 eslint、通过 vscode 的 eslint 插件检查代码，但想使用已有的规则配置
+- 我直接使用 eslint、通过 vscode 的 eslint 插件检查代码，但想使用已有的规则配置
 
 ```bash
 npm install --save-dev @reskript/config-lint
 ```
 
-> 我想用jest 进行单元测试
+- 我想用jest 进行单元测试
 
 ```bash
 npm install --save-dev @reskript/cli @reskript/cli-test
@@ -97,7 +97,7 @@ npm install --save-dev @reskript/cli @reskript/cli-test
 skr test
 ```
 
-> 我想基于已有的 jest 配置进一步定制我的单元测试
+- 我想基于已有的 jest 配置进一步定制我的单元测试
 
 ```bash
 npm install --save-dev @reskript/config-jest
