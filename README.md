@@ -6,7 +6,7 @@
 
 <div align="center">
 
-基于 React 与 Ant Design 开发命令行工具套件
+基于 React 与 Ant Design 开发的命令行工具套件
 
 </div>
 
