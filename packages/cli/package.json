@@ -19,13 +19,13 @@
   },
   "devDependencies": {
     "@types/semver": "^7.3.4",
-    "eslint": "^7.22.0",
-    "typescript": "^4.2.3"
+    "eslint": "^7.25.0",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
     "@reskript/core": "1.2.1",
-    "chalk": "^4.1.0",
-    "commander": "^7.1.0",
-    "semver": "^7.3.4"
+    "chalk": "^4.1.1",
+    "commander": "^7.2.0",
+    "semver": "^7.3.5"
   }
 }

@@ -17,12 +17,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "builtins": "^3.0.1"
+    "builtins": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.13.10",
-    "@babel/eslint-plugin": "^7.13.10",
-    "eslint": "^7.22.0",
+    "@babel/eslint-parser": "^7.13.14",
+    "@babel/eslint-plugin": "^7.13.16",
+    "eslint": "^7.25.0",
     "jest": "^26.6.3"
   }
 }
