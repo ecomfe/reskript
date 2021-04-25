@@ -462,14 +462,14 @@ exports.build = {
 
 你可以使用`inspect.duplicatePackages`来检查这些重复的引入，例如你的要求如下：
 
-> 检查所有重复引入的依赖包，但对于仅用作开发的`tslib`这个包不做报警。相关结果只打印出来，不要中断构建的正常进行。
+> 检查所有重复引入的依赖包，但对于仅用作开发的`tslib`这个包和`eslint-`开头的包不做报警。相关结果只打印出来，不要中断构建的正常进行。
 
 你可以使用如下的配置：
 
 ```js
 exports.build = {
     inspect: {
-        duplicatePackages: ['warn', {excludes: ['tslib']}],
+        duplicatePackages: ['warn', {excludes: ['tslib', 'eslint-*']}],
     },
 };
 ```

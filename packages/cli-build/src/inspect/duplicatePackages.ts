@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import {StatsCompilation} from 'webpack';
 import {compact, flatMap, uniq} from 'lodash';
+import matcher from 'matcher';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
 import {RuleProcessor} from './utils';
 
@@ -31,14 +32,17 @@ const parseName = (name: string): LibraryInfo | null => {
         path: pathPrefix + packageName,
     };
 };
+const hasMatchInArray = (value: string, array: string[]) => {
+    return array.some(pattern => matcher.isMatch(value, pattern));
+};
 
 // 以`includes`为优先
 const isIncluded = (name: string, includes?: string[], excludes?: string[]): boolean => {
     if (includes) {
-        return includes.includes(name);
+        return hasMatchInArray(name, includes);
     }
 
-    if (excludes && excludes.includes(name)) {
+    if (excludes && hasMatchInArray(name, excludes)) {
         return false;
     }
 
@@ -58,7 +62,7 @@ const versionOfPackage = async (location: string): Promise<string> => {
 
 const toPackageImportDescription = async (location: string): Promise<string> => {
     const version = await versionOfPackage(location);
-    return `      at ${location} (${version})`;
+    return `      at ${location} (v${version})`;
 };
 
 export default (compilations: StatsCompilation[], settings: BuildInspectSettings['duplicatePackages']) => {
