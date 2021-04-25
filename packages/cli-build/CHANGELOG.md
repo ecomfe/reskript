@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/ecomfe/reskript/compare/v1.2.1...v1.3.0) (2021-04-25)
+
+
+### Features
+
+* **build:** 检查重复包的时候提示各引入位置的版本号 ([#38](https://github.com/ecomfe/reskript/issues/38)) ([8719c92](https://github.com/ecomfe/reskript/commit/8719c927c47a1028d8e97055fa9100d2077fd0b1))
+* **build:** 重复包检测支持通配符匹配包名 ([ee0b906](https://github.com/ecomfe/reskript/commit/ee0b90636fa8bd2b2289157655a62ed41766da42))
+
+
+
+
+
 ## [1.2.1](https://github.com/ecomfe/reskript/compare/v1.2.0...v1.2.1) (2021-04-15)
 
 **Note:** Version bump only for package @reskript/cli-build
