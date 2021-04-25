@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import {StatsCompilation} from 'webpack';
 import {compact, flatMap, uniq} from 'lodash';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
@@ -43,11 +45,27 @@ const isIncluded = (name: string, includes?: string[], excludes?: string[]): boo
     return true;
 };
 
+const versionOfPackage = async (location: string): Promise<string> => {
+    try {
+        const packageConfigContent = await fs.promises.readFile(path.join(location, 'package.json'), 'utf-8');
+        const packageConfig = JSON.parse(packageConfigContent);
+        return packageConfig.version;
+    }
+    catch {
+        return 'unknown';
+    }
+};
+
+const toPackageImportDescription = async (location: string): Promise<string> => {
+    const version = await versionOfPackage(location);
+    return `      at ${location} (${version})`;
+};
+
 export default (compilations: StatsCompilation[], settings: BuildInspectSettings['duplicatePackages']) => {
     const processor: RuleProcessor<SourceFilter> = {
         config: settings,
         defaultConfigValue: {},
-        check: ({includes, excludes}, {report}) => {
+        check: async ({includes, excludes}, {report}) => {
             const names = extractUniqueModules(compilations);
             const occurences = names.reduce(
                 (occurences, current) => {
@@ -69,7 +87,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectSettings
             );
             for (const [name, paths] of occurences.entries()) {
                 if (paths.size > 1 && isIncluded(name, includes, excludes)) {
-                    const locations = [...paths].map(s => `      at ${s}`);
+                    const locations = await Promise.all([...paths].map(toPackageImportDescription));
                     report(`Found duplicate package ${name}\n${locations.join('\n')}`);
                 }
             }

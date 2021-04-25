@@ -35,7 +35,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
     const count: RuleProcessor<number> = {
         config: settings.count,
         defaultConfigValue: Infinity,
-        check: (max, {notice, report}) => {
+        check: async (max, {notice, report}) => {
             notice(`Initial resource count: ${initialChunks.length}`);
             if (initialChunks.length > max) {
                 report(`Too many initial resoures, max allowed is ${max}`);
@@ -46,7 +46,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
     const totalSize: RuleProcessor<number> = {
         config: settings.totalSize,
         defaultConfigValue: Infinity,
-        check: (max, {notice, report}) => {
+        check: async (max, {notice, report}) => {
             const totalSize = sumBy(initialChunks, chunk => chunk.size);
             notice(`Initial resource size: ${prettyBytes(totalSize)} (not gzipped)`);
             if (totalSize > max) {
@@ -58,7 +58,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
     const sizeDeviation: RuleProcessor<number> = {
         config: settings.sizeDeviation,
         defaultConfigValue: Infinity,
-        check: (max, {report}) => {
+        check: async (max, {report}) => {
             const average = meanBy(initialChunks, chunk => chunk.size);
             const abnormalChunks = initialChunks.filter(chunk => (chunk.size - average) / average > max);
             for (const chunk of abnormalChunks) {
@@ -70,7 +70,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
     const disallowImports: RuleProcessor<string[]> = {
         config: settings.disallowImports,
         defaultConfigValue: [],
-        check: (disallowImports, {report}) => {
+        check: async (disallowImports, {report}) => {
             const unwantedChunkImports = findDisallowedImportsInChunks(initialChunks, disallowImports);
             for (const {file, moduleName} of unwantedChunkImports) {
                 report(`Initial chunk ${file} includes disallowed module ${moduleName}`);

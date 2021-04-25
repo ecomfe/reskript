@@ -26,6 +26,7 @@
     "chalk": "^4.1.0",
     "eslint": "^7.22.0",
     "lodash": "^4.17.21",
+    "p-reduce": "^3.0.0",
     "pretty-bytes": "^5.6.0",
     "rimraf": "^3.0.2",
     "tty-table": "^4.1.3",
