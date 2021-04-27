@@ -28,7 +28,6 @@ ruleTester.run('deps-break-line', rule, {
     valid: [
         testCase('valid'),
     ],
-
     invalid: [
         testCase(
             'invalid',

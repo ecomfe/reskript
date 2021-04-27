@@ -1,4 +1,4 @@
-const HOOK_NAME_REG = /^use/ig;
+const {isHookName} = require('../../utils');
 
 const addBlockFix = indexes => {
     return fixer => {
@@ -8,16 +8,18 @@ const addBlockFix = indexes => {
 
 const ruleCallback = context => {
     return node => {
-        HOOK_NAME_REG.lastIndex = 0;
+        if (!isHookName(node.callee.name)) {
+            return;
+        }
+
         const args = node.arguments;
         // collect error prev node
         const errorIndexes = [];
         if (
-            HOOK_NAME_REG.test(node.callee.name)
-          && args.length > 1
-          && args[args.length - 1].type === 'ArrayExpression'
+            args.length > 1
+            && args[args.length - 1].type === 'ArrayExpression'
         ) {
-            const nodeList = [node].concat(args).concat(node);
+            const nodeList = [node, ...args, node];
             const length = nodeList.length - 1;
             for (let i = 0; i < length; i++) {
                 const currentNode = nodeList[i];
@@ -50,13 +52,10 @@ module.exports = {
         type: 'suggestion',
         docs: {
             description: 'except react hooks\'s arguments in different line',
-            category: 'Fill me in',
+            category: 'reskript',
             recommended: false,
         },
         fixable: 'whitespace', // or "code" or "whitespace"
-        schema: [
-            // fill in your schema
-        ],
         messages: {
             hookArgumentsBreakLine: 'hook {{name}} and its arguments should list in different lines',
         },
