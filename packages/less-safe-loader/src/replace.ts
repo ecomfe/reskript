@@ -1,4 +1,5 @@
 const CALC_EXPRESSION_START = 'calc(';
+const CALC_EXPRESSION_END = ')';
 
 const findMatchedEndBracketIndex = (source: string, start: number, skip: number = 0): number => {
     const nextStartBracketIndex = source.indexOf('(', start);
@@ -18,11 +19,14 @@ const findMatchedEndBracketIndex = (source: string, start: number, skip: number 
 };
 
 const replaceCalcCallExpression = (expression: string) => {
-    const varUsageReplace = expression.replace(
+    const calcBody = expression.slice(CALC_EXPRESSION_START.length, -CALC_EXPRESSION_END.length);
+    const innerBracketMatch = /^~['"](.+)['"]$/.exec(calcBody);
+    const bareBody = innerBracketMatch ? innerBracketMatch[1] : calcBody;
+    const varUsageReplacedBody = bareBody.replace(
         /@([a-zA-Z0-9-]+)/g,
         '@{$1}'
     );
-    return `~'${varUsageReplace}'`;
+    return '~\'' + CALC_EXPRESSION_START + varUsageReplacedBody + CALC_EXPRESSION_END + '\'';
 };
 
 // 这个处理肯定不是完美的，比如`content: "calc(xxx)"`也会被替换，不过我相信没人这么干，本着不被发现就不算BUG的原则，暂时无视
