@@ -4,11 +4,11 @@ const rule = require('../index');
 const RuleTester = require('eslint').RuleTester;
 
 const code = file => {
-    try {
-        return fs.readFileSync(path.join(__dirname, 'fixtures', `${file}.js`), 'utf-8');
-    } catch (err) {
-        return null;
+    const filePath = path.join(__dirname, 'fixtures', `${file}.js`);
+    if (fs.existsSync(filePath)) {
+        return fs.readFileSync(filePath, 'utf-8');
     }
+    return null;
 };
 
 const testCase = (file, errors = []) => {
