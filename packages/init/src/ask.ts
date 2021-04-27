@@ -21,6 +21,11 @@ const questions: QuestionCollection<UserOptions> = [
         validate: (value: string) => !!value.length,
     },
     {
+        name: 'gerrit',
+        message: 'Are you developing on Gerrit which creates a Change-Id line in your commit',
+        type: 'confirm',
+    },
+    {
         name: 'devServerPort',
         message: 'Choose a port for dev server',
         type: 'number',

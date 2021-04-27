@@ -6,5 +6,5 @@ import husky from './husky';
 export default async (cwd: string, options: UserOptions) => {
     await copy(cwd, options);
     await install(cwd, options);
-    await husky(cwd);
+    await husky(cwd, options);
 };
