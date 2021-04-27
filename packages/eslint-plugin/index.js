@@ -11,5 +11,6 @@ module.exports = {
     rules: {
         'import-order': require('./rules/import-order'),
         'no-excessive-hook': require('./rules/no-excessive-hook'),
+        'hooks-deps-break-line': require('./rules/hooks-deps-break-line'),
     },
 };
