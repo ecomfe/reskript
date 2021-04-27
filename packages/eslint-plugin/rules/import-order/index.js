@@ -29,6 +29,18 @@ const importSourceType = name => {
     return 'package';
 };
 
+const sortImportsFix = (context, imports) => {
+    const sourceCode = context.getSourceCode();
+    const sortedImports = [...imports].sort((a, b) => a.priority - b.priority);
+
+    return fixer => {
+        return imports.map(({node}, index) => {
+            const text = sourceCode.getText(sortedImports[index].node);
+            return fixer.replaceTextRange(node.range, text);
+        });
+    };
+};
+
 const relativeLevelCount = (path, startIndex = 0, totalCount = 0) => {
     if (path.substr(startIndex, RELATIVE_HINT.length) === RELATIVE_HINT) {
         return relativeLevelCount(path, startIndex + RELATIVE_HINT.length, totalCount - 1);
@@ -56,6 +68,7 @@ const reportOutOfOrder = (context, imports) => {
         const error = {
             node,
             message: `Import of ${source} should be placed before ${firstPriorImport.source}`,
+            fix: sortImportsFix(context, imports),
         };
         context.report(error);
     }
@@ -64,6 +77,7 @@ const reportOutOfOrder = (context, imports) => {
 module.exports = {
     meta: {
         type: 'layout',
+        fixable: 'whitespace',
         docs: {
             description: 'Enforce a convention in the order of statements',
             category: 'reskript',
