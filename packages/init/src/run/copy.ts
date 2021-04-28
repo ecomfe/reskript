@@ -10,7 +10,7 @@ export default async (cwd: string, options: UserOptions) => {
     spinner.start();
 
     const templateDirectory = path.join(__dirname, '..', '..', 'templates', 'normal-app');
-    const files = await globby(`${templateDirectory}/**`);
+    const files = await globby(`${templateDirectory}/**`, {dot: true});
     const copyFile = async (file: string) => {
         const relative = path.relative(templateDirectory, file);
         const destination = path.join(cwd, relative);

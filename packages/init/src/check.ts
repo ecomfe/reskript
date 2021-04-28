@@ -6,7 +6,7 @@ import dedent from 'dedent';
 const ALLOWED_EXISTING_FILES = new Set(['package.json', 'README.md', 'LICENSE', '.gitignore', '.npmrc', '.yarnrc']);
 
 const checkDirectoryHasTooManyFiles = async (cwd: string) => {
-    const files = await globby(`${cwd}/**`);
+    const files = await globby(`${cwd}/**`, {dot: true});
 
     if (files.length > ALLOWED_EXISTING_FILES.size) {
         return true;

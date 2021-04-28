@@ -25,4 +25,9 @@ describe('replace', () => {
         const input = 'padding-right: calc(@drawer-header-close-padding - var(--scroll-bar))';
         expect(replace(input)).toBe('padding-right: ~\'calc(@{drawer-header-close-padding} - var(--scroll-bar))\'');
     });
+
+    test('brackets inside calc', () => {
+        const input = 'width: calc(~"100vh - @{top}")';
+        expect(replace(input)).toBe('width: ~\'calc(100vh - @{top})\'');
+    });
 });
