@@ -26,7 +26,7 @@ export default async (cwd: string, options: UserOptions) => {
         'stylelint',
         'typescript',
         'webpack',
-        'husky',
+        options.gerrit ? 'husky@4.x' : 'husky',
         '@reskript/cli',
         '@reskript/cli-dev',
         '@reskript/cli-build',
