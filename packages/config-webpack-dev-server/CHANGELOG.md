@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Bug Fixes
+
+* **dev-server:** proxy-domain有端口时的兼容处理 ([#47](https://github.com/ecomfe/reskript/issues/47)) ([5bf0b0c](https://github.com/ecomfe/reskript/commit/5bf0b0cb4b11d561ebc5810a755e776ca7d40d40))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 **Note:** Version bump only for package @reskript/config-webpack-dev-server

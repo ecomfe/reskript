@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Bug Fixes
+
+* **build:** less-safe-loader处理引号在calc内部的情况 ([#43](https://github.com/ecomfe/reskript/issues/43)) ([05acee8](https://github.com/ecomfe/reskript/commit/05acee8d95bf4e648c4c5842152feff4d1b27218))
+* **build:** 在指定analyze参数时，产出包检查不应该强制退出构建 ([#49](https://github.com/ecomfe/reskript/issues/49)) ([d782f8c](https://github.com/ecomfe/reskript/commit/d782f8c3f321c61b33bbd3e3646c66e112aaf300))
+* **dev-server:** proxy-domain有端口时的兼容处理 ([#47](https://github.com/ecomfe/reskript/issues/47)) ([5bf0b0c](https://github.com/ecomfe/reskript/commit/5bf0b0cb4b11d561ebc5810a755e776ca7d40d40))
+* **init:** init支持与Gerrit兼容 ([#44](https://github.com/ecomfe/reskript/issues/44)) ([51fd87f](https://github.com/ecomfe/reskript/commit/51fd87fee8bcd2ad9816544cf053cf3f78cc2b79))
+* **init:** init时没有把隐藏文件复制过去 ([#42](https://github.com/ecomfe/reskript/issues/42)) ([9124efb](https://github.com/ecomfe/reskript/commit/9124efbe1392285f8b5b61729d8809f55962ff60))
+
+
+### Features
+
+* **build:** 增加配置支持生成HTML时注入应用容器div ([#50](https://github.com/ecomfe/reskript/issues/50)) ([49633c5](https://github.com/ecomfe/reskript/commit/49633c5d1d19d5882b91750bf99c0077ff72d941))
+* **lint:** import-order规则支持自动修复 ([#46](https://github.com/ecomfe/reskript/issues/46)) ([f59ee92](https://github.com/ecomfe/reskript/commit/f59ee92186692bae8778f25bb66b2f8e63baf46b))
+* **lint:** 增加一个eslint规则检查hook调用的deps参数另起一行 ([#45](https://github.com/ecomfe/reskript/issues/45)) ([169f9f3](https://github.com/ecomfe/reskript/commit/169f9f333ef169d2b91e1b5d04638ed7c9fb9e80))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 

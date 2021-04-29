@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Bug Fixes
+
+* **build:** less-safe-loader处理引号在calc内部的情况 ([#43](https://github.com/ecomfe/reskript/issues/43)) ([05acee8](https://github.com/ecomfe/reskript/commit/05acee8d95bf4e648c4c5842152feff4d1b27218))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 

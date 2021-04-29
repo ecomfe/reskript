@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Features
+
+* **lint:** import-order规则支持自动修复 ([#46](https://github.com/ecomfe/reskript/issues/46)) ([f59ee92](https://github.com/ecomfe/reskript/commit/f59ee92186692bae8778f25bb66b2f8e63baf46b))
+* **lint:** 增加一个eslint规则检查hook调用的deps参数另起一行 ([#45](https://github.com/ecomfe/reskript/issues/45)) ([169f9f3](https://github.com/ecomfe/reskript/commit/169f9f333ef169d2b91e1b5d04638ed7c9fb9e80))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 **Note:** Version bump only for package @reskript/eslint-plugin

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Bug Fixes
+
+* **build:** 在指定analyze参数时，产出包检查不应该强制退出构建 ([#49](https://github.com/ecomfe/reskript/issues/49)) ([d782f8c](https://github.com/ecomfe/reskript/commit/d782f8c3f321c61b33bbd3e3646c66e112aaf300))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 **Note:** Version bump only for package @reskript/cli-build

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
+
+
+### Bug Fixes
+
+* **init:** init支持与Gerrit兼容 ([#44](https://github.com/ecomfe/reskript/issues/44)) ([51fd87f](https://github.com/ecomfe/reskript/commit/51fd87fee8bcd2ad9816544cf053cf3f78cc2b79))
+* **init:** init时没有把隐藏文件复制过去 ([#42](https://github.com/ecomfe/reskript/issues/42)) ([9124efb](https://github.com/ecomfe/reskript/commit/9124efbe1392285f8b5b61729d8809f55962ff60))
+
+
+
+
+
 ## [1.3.1](https://github.com/ecomfe/reskript/compare/v1.3.0...v1.3.1) (2021-04-26)
 
 **Note:** Version bump only for package @reskript/init
