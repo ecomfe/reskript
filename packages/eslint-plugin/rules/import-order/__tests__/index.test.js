@@ -3,7 +3,13 @@ const fs = require('fs');
 const rule = require('../index');
 const {RuleTester} = require('eslint');
 
-const code = file => fs.readFileSync(path.join(__dirname, 'fixtures', `${file}.js`), 'utf-8');
+const code = file => {
+    const filePath = path.join(__dirname, 'fixtures', `${file}.js`);
+    if (fs.existsSync(filePath)) {
+        return fs.readFileSync(filePath, 'utf-8');
+    }
+    return null;
+};
 
 const testCase = (file, errors = []) => {
     return {
@@ -13,6 +19,7 @@ const testCase = (file, errors = []) => {
             ecmaVersion: 2018,
             sourceType: 'module',
         },
+        output: code(`${file}.output`),
     };
 };
 
