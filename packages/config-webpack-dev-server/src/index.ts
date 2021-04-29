@@ -98,10 +98,10 @@ export const createWebpackDevServerConfig = (
     ];
     const proxy = proxyRules.reduce(
         (proxy, [prefix, target]) => {
-            const parsedURL = new URL(`http://${target}`);
+            const parsedURL = new URL(`${https ? 'https' : 'http'}://${target}`);
             proxy[prefix] = {
                 agent,
-                target: `${https ? 'https' : 'http'}://${parsedURL.host}${parsedURL.port ? ':' + parsedURL.port : ''}`,
+                target: `${parsedURL.protocol}//${parsedURL.hostname}${parsedURL.port ? ':' + parsedURL.port : ''}`,
                 pathRewrite: {
                     [`^${prefix}`]: parsedURL.pathname.replace(/^\//, ''),
                 },
