@@ -36,7 +36,11 @@ export interface RuleProcessor<T> {
     check: Check<T>;
 }
 
-export const run = async (processors: Array<RuleProcessor<any>>): Promise<void> => {
+export interface InspectOptions {
+    exitOnError: boolean;
+}
+
+export const run = async (processors: Array<RuleProcessor<any>>, options: InspectOptions): Promise<void> => {
     const results = await pReduce(
         processors,
         async (results, processor) => {
@@ -61,7 +65,7 @@ export const run = async (processors: Array<RuleProcessor<any>>): Promise<void> 
         new Set<Severity>()
     );
 
-    if (results.has('error')) {
+    if (results.has('error') && options.exitOnError) {
         process.exit(23);
     }
 };

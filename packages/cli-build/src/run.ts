@@ -121,5 +121,5 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
     console.log('');
-    inspect(initialStats, projectSettings.build.inspect);
+    inspect(initialStats, projectSettings.build.inspect, {exitOnError: !cmd.analyze});
 };
