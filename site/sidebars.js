@@ -16,18 +16,6 @@ module.exports = {
         },
         {
             type: 'category',
-            label: '高阶应用',
-            items: [
-                'advanced/lint-rules',
-                'advanced/config-insiders',
-                'advanced/multiple-entry',
-                'advanced/browsers-list',
-                'advanced/web-worker',
-                'advanced/debug-component',
-            ],
-        },
-        {
-            type: 'category',
             label: '配置',
             items: [
                 'settings/settings',
@@ -51,6 +39,18 @@ module.exports = {
                 'cli/doctor',
                 'cli/exit-code',
                 'cli/init',
+            ],
+        },
+        {
+            type: 'category',
+            label: '高阶应用',
+            items: [
+                'advanced/lint-rules',
+                'advanced/config-insiders',
+                'advanced/multiple-entry',
+                'advanced/browsers-list',
+                'advanced/web-worker',
+                'advanced/debug-component',
             ],
         },
         {

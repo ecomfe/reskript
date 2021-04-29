@@ -1,5 +1,5 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import chalk from 'chalk';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
@@ -35,10 +35,12 @@ const readEntryConfig = (name: string, dir: string): Record<string, any> => {
     }
 };
 
-const resolveEntryTemplate = (name: string, dir: string): string | null => {
+const DEFAULT_HTML_TEMPLATE = path.resolve(__dirname, 'assets', 'default-html.ejs');
+
+const resolveEntryTemplate = (name: string, dir: string): string => {
     const filename = path.join(dir, name + '.ejs');
 
-    return fs.existsSync(filename) ? filename : null;
+    return fs.existsSync(filename) ? filename : DEFAULT_HTML_TEMPLATE;
 };
 
 export const collectEntries = (cwd: string, srcDirectory: string, only?: string[]): AppEntry[] => {

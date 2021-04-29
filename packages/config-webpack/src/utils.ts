@@ -77,6 +77,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry, env: BuildEntry): HTML
             build: {
                 appTitle,
                 favicon,
+                appContainerId,
             },
         },
         buildVersion,
@@ -89,6 +90,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry, env: BuildEntry): HTML
     const baseConfig = {
         favicon,
         filename,
+        appContainerId,
         mode,
         buildVersion,
         buildTime,

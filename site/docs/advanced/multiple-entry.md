@@ -60,7 +60,15 @@ title: 多应用入口
 
 可以看到这个HTML包含了基本的元素，包括`title`、`meta[charset]`、`meta[viewport]`等，构建会生成一个`meta[app-version]`的标签，它的值格式为`{git-version}/{target}@{build-time}`，它能告诉你这个文件是从哪一个git提交上进行构建，构建时使用的目标（后续介绍）是什么，在什么时间完成构建，便于发现问题时进行排查。除此之外，HTML中仅包含了所有对应的JavaScript文件的引用，并没有其它的内容。
 
-当然很多时候，我们希望能够定制HTML的结构，比如加入一些系统加载的动画等。在这种情况下，我们在`src/entries`下放置一个与对应的JavaScript文件同名的`.ejs`文件，例如我们编写一个`src/entries/index.ejs`文件，写入以下内容：
+如果你需要应用放置在一个固定的`<div>`元素中，比如常见的`<div id="root">`，可以通过[构建配置](../settings/build)中的`appContainerId`来设置，不需要额外增加自己的自定义模板文件，比如用下面的配置就能默认生成一个`<div id="root"></div>`在HTML中：
+
+```js
+exports.build = {
+    appContainerId: 'root',
+};
+```
+
+当然很多时候，我们还是希望能够定制HTML的结构，比如加入一些系统加载的动画等。在这种情况下，我们在`src/entries`下放置一个与对应的JavaScript文件同名的`.ejs`文件，例如我们编写一个`src/entries/index.ejs`文件，写入以下内容：
 
 ```html
 <!DOCTYPE html>

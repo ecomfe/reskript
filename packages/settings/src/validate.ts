@@ -83,6 +83,9 @@ const schema: any = {
                 favicon: {
                     type: 'string',
                 },
+                appContainerId: {
+                    type: 'string',
+                },
                 largeAssetSize: {
                     type: 'number',
                 },

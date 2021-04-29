@@ -92,6 +92,8 @@ export interface BuildSettings {
     readonly appTitle: string;
     // favicon的位置
     readonly favicon?: string;
+    // 在HTML中增加一个放应用的`<div>`元素，`id`属性由这个配置指定。如果不配置，就不会自动增加这元素。自定义HTML模板时这个配置失效
+    readonly appContainerId?: string;
     // 构建过程中需要排除的Feature名称，默认排除'dev'，其它均会被构建
     readonly excludeFeatures: string[];
     readonly style: BuildStyleSettings;
