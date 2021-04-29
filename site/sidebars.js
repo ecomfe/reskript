@@ -18,6 +18,7 @@ module.exports = {
             type: 'category',
             label: '高阶应用',
             items: [
+                'advanced/lint-rules',
                 'advanced/config-insiders',
                 'advanced/multiple-entry',
                 'advanced/browsers-list',

@@ -6,8 +6,7 @@ const BASE_PRIORITY = {
     native: 0,
     package: 100,
     alias: 200,
-    types: 300,
-    relative: 400,
+    relative: 300,
 };
 
 const RELATIVE_HINT = '..';
@@ -21,9 +20,6 @@ const importSourceType = name => {
     }
     if (name.startsWith('@/')) {
         return 'alias';
-    }
-    if (name.startsWith('types/')) {
-        return 'types';
     }
 
     return 'package';
