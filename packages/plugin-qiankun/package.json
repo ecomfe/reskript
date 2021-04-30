@@ -24,7 +24,7 @@
   "dependencies": {
     "@reskript/settings": "1.4.0",
     "dedent": "^0.7.0",
-    "esbuild": "^0.11.14",
-    "qiankun": "^2.4.0"
+    "esbuild": "^0.11.16",
+    "qiankun": "^2.4.1"
   }
 }
