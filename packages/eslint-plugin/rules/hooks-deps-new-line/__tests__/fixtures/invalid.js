@@ -1,1 +1,1 @@
-useInvalidDemo(argument1,[argument2]);
+useInvalidDemo(()=>{},[argument2]);

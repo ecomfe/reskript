@@ -1,1 +1,1 @@
-const demo = useInvalidDemo(argument1,[argument2]);
+const demo = useInvalidDemo(()=>{},[argument2]);
