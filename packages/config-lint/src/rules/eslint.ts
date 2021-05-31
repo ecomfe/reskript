@@ -47,6 +47,7 @@ const config: Record<string, any> = {
         // 与ES6参数默认值冲突
         'react/require-default-props': 'off',
         '@reskript/import-order': 'error',
+        '@reskript/hooks-deps-new-line': 'error',
         '@reskript/no-excessive-hook': 'warn',
         // TODO: 这条规则太复杂，暂时配不出来，基本检查由`camelcase`规则负责
         '@typescript-eslint/naming-convention': 'off',
