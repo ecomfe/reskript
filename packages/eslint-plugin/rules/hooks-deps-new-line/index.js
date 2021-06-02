@@ -6,6 +6,12 @@ const addBlockFix = indexes => {
     };
 };
 
+const functionExpression = ['ArrowFunctionExpression', 'FunctionExpression'];
+
+const isArgsValid = args => {
+    return args.length !== 2 || !functionExpression.includes(args[0].type) || args[1].type !== 'ArrayExpression';
+};
+
 const ruleCallback = context => {
     return node => {
         if (!isHookName(node.callee.name)) {
@@ -13,36 +19,37 @@ const ruleCallback = context => {
         }
 
         const args = node.arguments;
+
+        if (isArgsValid(args)) {
+            // just work with 2 arguments;
+            return;
+        }
         // collect error prev node
         const errorIndexes = [];
+        const nodeList = [node, ...args, node];
+        const length = nodeList.length - 1;
 
-        if (args.length > 1 && args[args.length - 1].type === 'ArrayExpression') {
-
-            const nodeList = [node, ...args, node];
-            const length = nodeList.length - 1;
-
-            for (let i = 0; i < length; i++) {
-                const currentNode = nodeList[i];
-                const nextNode = nodeList[i + 1];
-                if (currentNode.loc.start.line === nextNode.loc.end.line) {
-                    // because the last node is the callee function , use previous node`s end index
-                    errorIndexes.push(
-                        i === length - 1 ? currentNode.range[1] : nextNode.range[0]
-                    );
-                }
+        for (let i = 0; i < length; i++) {
+            const currentNode = nodeList[i];
+            const nextNode = nodeList[i + 1];
+            if (currentNode.loc.start.line === nextNode.loc.end.line) {
+                // because the last node is the callee function , use previous node`s end index
+                errorIndexes.push(
+                    i === length - 1 ? currentNode.range[1] : nextNode.range[0]
+                );
             }
-            // report together
-            if (errorIndexes.length > 0) {
-                context.report({
-                    loc: node.loc,
-                    node,
-                    messageId: 'hookArgumentsBreakLine',
-                    data: {
-                        name: node.callee.name,
-                    },
-                    fix: addBlockFix(errorIndexes),
-                });
-            }
+        }
+        // report together
+        if (errorIndexes.length > 0) {
+            context.report({
+                loc: node.loc,
+                node,
+                messageId: 'hookArgumentsBreakLine',
+                data: {
+                    name: node.callee.name,
+                },
+                fix: addBlockFix(errorIndexes),
+            });
         }
     };
 };
