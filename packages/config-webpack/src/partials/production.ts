@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import {Configuration} from 'webpack';
 import {omitBy} from 'lodash';
 import {sync as findUp} from 'find-up';

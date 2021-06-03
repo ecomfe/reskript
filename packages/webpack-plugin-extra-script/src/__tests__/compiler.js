@@ -1,8 +1,8 @@
-const path = require('path');
-const fs = require('fs');
-const webpack = require('webpack');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const ExtraScriptPlugin = require('../index');
+import path from 'path';
+import fs from 'fs';
+import webpack from 'webpack';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import ExtraScriptPlugin from '../index';
 
 module.exports = (scriptOrFactory, options) => {
     const compiler = webpack({

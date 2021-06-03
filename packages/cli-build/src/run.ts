@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import rimraf from 'rimraf';
 import chalk from 'chalk';
 import {compact, difference, uniq} from 'lodash';

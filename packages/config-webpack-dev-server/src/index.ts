@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import internalIp from 'internal-ip';
 import {compact} from 'lodash';
 import {HotModuleReplacementPlugin, Configuration} from 'webpack';

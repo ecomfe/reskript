@@ -1,4 +1,4 @@
-const compiler = require('./compiler');
+import compiler from './compiler';
 
 test('remote script', async () => {
     const html = await compiler({src: '/extra.js'});

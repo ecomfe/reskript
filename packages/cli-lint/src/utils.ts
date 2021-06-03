@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import globby from 'globby';
 import status, {GitStatusItem} from 'g-status';
 import {isEmpty, flatMap, flatten} from 'lodash';

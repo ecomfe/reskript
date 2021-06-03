@@ -18,6 +18,7 @@ import {
     checkFeatureMatrixSchema,
     checkPreCommitHookWhenLintDisabled,
     createHTMLPluginInstances,
+    hasServiceWorker,
 } from './utils';
 import {AppEntry, BuildContext} from './interface';
 
@@ -79,10 +80,25 @@ export const createRuntimeBuildEnv = (env: BuildEnv): RuntimeBuildEnv => {
     };
 };
 
+const importPartialWith = (context: BuildContext) => (name: string) => {
+    try {
+        // eslint-disable-next-line global-require
+        return require(`./partials/${name}`).default(context);
+    }
+    catch (ex) {
+        console.error(chalk.red(`Unable to load configuration partial ${name}`));
+        throw ex;
+    }
+};
+
 export const createWebpackConfig = (context: BuildContext, extras: Configuration[] = []): Configuration => {
-    const partials = compact(['base', context.mode, context.projectSettings.build.thirdParty && 'external']);
-    // eslint-disable-next-line global-require
-    const configurations = partials.map(n => require(`./partials/${n}`).default(context) as Partial<Configuration>);
+    const partials = [
+        'base',
+        context.mode,
+        context.usage === 'build' && hasServiceWorker(context) && 'serviceWorker',
+        context.projectSettings.build.thirdParty && 'external',
+    ];
+    const configurations = compact(partials).map(importPartialWith(context));
     const internalCreated = mergeBuiltin([...configurations, ...extras]);
     const internals: BuildInternals = {
         rules,
