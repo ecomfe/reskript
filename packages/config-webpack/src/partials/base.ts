@@ -1,5 +1,5 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import * as crypto from 'crypto';
 import {sync as resolve} from 'resolve';
 import {compact, mapValues} from 'lodash';

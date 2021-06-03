@@ -1,5 +1,5 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import {execSync} from 'child_process';
 import {get, isEqual} from 'lodash';
 import chalk from 'chalk';
@@ -144,4 +144,9 @@ export const createHTMLPluginInstances = (buildContext: BuildContext): HtmlWebpa
         : [];
 
     return [...pluginsWithinTarget, ...pluginsOfDefault];
+};
+
+export const hasServiceWorker = (context: BuildContext) => {
+    const serviceWorkerSource = path.join(context.cwd, context.srcDirectory, 'service-worker.js');
+    return fs.existsSync(serviceWorkerSource);
 };

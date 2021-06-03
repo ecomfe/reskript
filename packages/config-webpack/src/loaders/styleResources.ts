@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import {sync as resolve} from 'resolve';
 import {compact} from 'lodash';
 import unixify from 'unixify';

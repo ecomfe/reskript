@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import {sync as resolve} from 'resolve';
 import hasha from 'hasha';
 import {paramCase} from 'change-case';

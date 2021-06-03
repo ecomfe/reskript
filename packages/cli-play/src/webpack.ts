@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import webpack from 'webpack';
 import {compact} from 'lodash';
 import {sync as resolve} from 'resolve';

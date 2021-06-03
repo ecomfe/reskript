@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import ConsoleTable, {Column} from 'tty-table';
 import chalk, {ForegroundColor} from 'chalk';
 import {Stats} from 'webpack';

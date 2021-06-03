@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import {compact} from 'lodash';
 import {RuleSetRule, RuleSetUseItem} from 'webpack';
 import {BuildEntry} from '@reskript/settings';

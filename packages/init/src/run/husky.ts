@@ -1,5 +1,5 @@
 import path from 'path';
-import fs = require('fs');
+import fs from 'fs';
 import childProcess from 'child_process';
 import {UserOptions} from '../interface';
 
