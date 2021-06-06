@@ -12,37 +12,16 @@ import {
 } from '@reskript/settings';
 import * as loaders from './loaders';
 import * as rules from './rules';
-import {
-    revision,
-    mergeBuiltin,
-    checkFeatureMatrixSchema,
-    checkPreCommitHookWhenLintDisabled,
-    createHTMLPluginInstances,
-    hasServiceWorker,
-} from './utils';
+import {revision, hasServiceWorker} from './utils/info';
+import {mergeBuiltin} from './utils/merge';
+import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate';
+import {createHTMLPluginInstances} from './utils/html';
+import {readEntryConfig, resolveEntryTemplate} from './utils/entry';
 import {AppEntry, BuildContext} from './interface';
 
 export {loaders, rules, createHTMLPluginInstances};
 export * from './interface';
 
-const readEntryConfig = (name: string, dir: string): Record<string, any> => {
-    try {
-        // eslint-disable-next-line global-require
-        const config = require(path.join(dir, name + '.config')) as Record<string, any>;
-        return config;
-    }
-    catch (ex) {
-        return {};
-    }
-};
-
-const DEFAULT_HTML_TEMPLATE = path.resolve(__dirname, 'assets', 'default-html.ejs');
-
-const resolveEntryTemplate = (name: string, dir: string): string => {
-    const filename = path.join(dir, name + '.ejs');
-
-    return fs.existsSync(filename) ? filename : DEFAULT_HTML_TEMPLATE;
-};
 
 export const collectEntries = (cwd: string, srcDirectory: string, only?: string[]): AppEntry[] => {
     const entriesFolder = path.join(cwd, srcDirectory, 'entries');

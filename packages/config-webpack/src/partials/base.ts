@@ -4,7 +4,7 @@ import * as crypto from 'crypto';
 import {sync as resolve} from 'resolve';
 import {compact, mapValues} from 'lodash';
 import {paramCase} from 'change-case';
-import {DefinePlugin, ContextReplacementPlugin} from 'webpack';
+import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
@@ -12,7 +12,8 @@ import StyleLintPlugin from 'stylelint-webpack-plugin';
 import {findGitRoot} from '@reskript/core';
 import {getScriptLintConfig, getStyleLintConfig} from '@reskript/config-lint';
 import {ConfigurationFactory, BuildContext} from '../interface';
-import {createHTMLPluginInstances} from '../utils';
+import {createHTMLPluginInstances} from '../utils/html';
+import {convertToWebpackEntry} from '../utils/entry';
 import * as rules from '../rules';
 
 const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
@@ -130,7 +131,14 @@ const factory: ConfigurationFactory = entry => {
     return {
         mode,
         context: cwd,
-        entry: entries.reduce((entry, {name, file}) => ({...entry, [name]: file}), {}),
+        entry: entries.reduce(
+            (webpackEntry, appEntry) => {
+                const currentWebpackEntry = convertToWebpackEntry(appEntry);
+                webpackEntry[appEntry.name] = currentWebpackEntry;
+                return webpackEntry;
+            },
+            {} as EntryObject
+        ),
         output: {
             path: path.join(cwd, 'dist', 'assets'),
             filename: '[name].[chunkhash].js',

@@ -40,8 +40,10 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
             {
                 name: 'index',
                 config: {
-                    title: 'PlayGround',
-                    favicon: resolve('./assets/favicon.ico'),
+                    html: {
+                        title: 'PlayGround',
+                        favicon: resolve('./assets/favicon.ico'),
+                    },
                 },
                 template: resolve('./assets/playground-entry.ejs'),
                 file: resolve('./assets/playground-entry.js.tpl'),

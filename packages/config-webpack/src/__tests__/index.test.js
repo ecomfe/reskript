@@ -156,3 +156,34 @@ describe('finalize', () => {
         expect(typeof finalize.mock.calls[0][1]).toBe('object');
     });
 });
+
+describe('custom entry config', () => {
+    test('can specify a custom webpack entry descriptor', () => {
+        const context = {
+            cwd: __dirname,
+            mode: 'development',
+            usage: 'build',
+            srcDirectory: 'src',
+            hostPackageName: 'test',
+            buildVersion: '000000',
+            buildTime: (new Date()).toISOString(),
+            features: {},
+            buildTarget: 'stable',
+            isDefaultTarget: false,
+            projectSettings: readProjectSettings({cwd: __dirname}, 'build'),
+            entries: [
+                {
+                    name: 'service-worker',
+                    file: './service-worker.js',
+                    config: {
+                        entry: {
+                            filename: 'service-worker.js',
+                        },
+                    },
+                },
+            ],
+        };
+        const config = createWebpackConfig(context);
+        expect(config.entry['service-worker'].filename).toBe('service-worker.js');
+    });
+});
