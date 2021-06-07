@@ -10,12 +10,12 @@
 //
 // - `--no-build`：默认在复制以前会做一次构建，用该参数可以跳过构建直接复制，连续做测试的时候可能有用
 // - `--copy-all`：默认只覆盖目标项目中安装过的`@reskript/*`包，用该参数可以把所有的包复制过去，可以用来测新开发的包
-const path = require('path');
-const fs = require('fs');
-const {execSync} = require('child_process');
-const cpy = require('cpy');
-const yargs = require('yargs/yargs')
-const {hideBin} = require('yargs/helpers')
+import path from 'node:path';
+import fs from 'node:fs';
+import childeProcess from 'node:child_process';
+import cpy from 'cpy';
+import yargs from 'yargs';
+import {hideBin} from 'yargs/helpers';
 
 const argv = yargs(hideBin(process.argv)).argv
 const [destination] = argv._;
@@ -25,40 +25,38 @@ if (!destination || !destination.startsWith('/') || destination.includes('node_m
     process.exit(1);
 }
 
-process.chdir(path.join(__dirname, '..'));
-
 if (!argv.noBuild) {
     console.log('Building...');
-    execSync('yarn build');
+    childeProcess.execSync('yarn build');
 }
 
-const copy = async package => {
-    const target = path.join(destination, 'node_modules', '@reskript', package);
+const copy = async packageName => {
+    const target = path.join(destination, 'node_modules', '@reskript', packageName);
     if (!argv.copyAll && !fs.existsSync(target)) {
         return;
     }
 
     fs.mkdirSync(target, {recursive: true});
-    const {files} = JSON.parse(fs.readFileSync(`packages/${package}/package.json`, 'utf-8'));
+    const {files} = JSON.parse(fs.readFileSync(`packages/${packageName}/package.json`, 'utf-8'));
 
     if (files) {
         await cpy(
             [...files, 'package.json'],
             target,
-            {cwd: path.resolve(`packages/${package}`), parents: true}
+            {cwd: path.resolve(`packages/${packageName}`), parents: true}
         );
     }
     else {
-        await cpy(`packages/${package}/**`, target);
+        await cpy(`packages/${packageName}/**`, target);
     }
 
-    console.log(`Copied ${package}`);
+    console.log(`Copied ${packageName}`);
 }
 
 (async () => {
     const packages = fs.readdirSync('packages');
-    for (const package of packages) {
-        await copy(package);
+    for (const packageName of packages) {
+        await copy(packageName);
     }
 
     fs.chmodSync(`${destination}/node_modules/.bin/skr`, 0o755);

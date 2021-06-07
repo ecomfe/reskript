@@ -18,9 +18,9 @@
     "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
-    "@types/semver": "^7.3.5",
-    "eslint": "^7.25.0",
-    "typescript": "^4.2.4"
+    "@types/semver": "^7.3.6",
+    "eslint": "^7.28.0",
+    "typescript": "^4.3.2"
   },
   "dependencies": {
     "@reskript/core": "1.4.0",
