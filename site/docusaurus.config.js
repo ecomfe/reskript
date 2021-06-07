@@ -31,6 +31,10 @@ module.exports = {
         footer: {
             style: 'dark',
         },
+        algolia: {
+            apiKey: 'a5cdc28c7cd73f7dc170c8deb130303d',
+            indexName: 'reskript',
+        },
     },
     presets: [
         [
