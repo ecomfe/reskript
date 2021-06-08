@@ -104,6 +104,10 @@ interface BuildInfo {
 
 `react`和`react-dom`会根据当前的`mode`选择不同的文件，算是非常标准的优化项。
 
+如果`src/service-worker.js`中有``self.__WB_MANIFEST`字样，使用[workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)的`InjectManifest`注入资源路径。
+
+会自动向生成的HTML中注入`navigator.serviceWorker.register`相关的代码。
+
 ## 调试服务器
 
 ### 文件监听

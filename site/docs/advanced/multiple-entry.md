@@ -124,7 +124,7 @@ exports.build = {
 我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
 
 ```javascript
-module.exports = {
+exports.html = {
     meta: {
         'X-UA-Compatible': {
             'http-equiv': 'X-UA-Compatible',
@@ -153,4 +153,20 @@ module.exports = {
 
 可以看到一个`X-UA-Compatible`已经加入到了`<head>`中。
 
-总而言之，同名的`.config.js`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
+总而言之，同名的`.config.js`中的`exports.html`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
+
+## 自定义入口配置
+
+在正常逻辑下，`reSKRipt`会根据入口（`src/entries/*`）文件生成对应的带有哈希的文件。如果你熟悉[Webpack的入口配置](https://webpack.js.org/concepts/entry-points/#entrydescription-object)，我们支持你做一些自定义的配置。
+
+假设我们希望一个入口在产出时不要加上哈希，并指定一个固定的产出文件名，我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
+
+```javascript
+exports.entry = {
+    filename: 'hello.dist.js',
+};
+```
+
+随后运行`skr build`，并查看`dist/assets`目录，可以看到`hello.dist.js`文件，并且该文件没有默认的哈希部分。
+
+你同样可以参考此方法配置诸如`dependOn`、`library`等属性，请注意你无法配置`import`属性，该属性强制为`src/entries/hello.js`。
