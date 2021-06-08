@@ -8,6 +8,18 @@ import {transformFileAsync, TransformOptions} from '@babel/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
 
+const changeExtension = (file: string, extension: string) => {
+    const normalized = path.normalize(file);
+    const parsed = path.parse(normalized);
+    const changed = {...parsed, base: undefined, ext: extension};
+    return path.format(changed);
+};
+
+const writeFile = async (file: string, content: string) => {
+    await fs.mkdir(path.dirname(file), {recursive: true});
+    await fs.writeFile(file, content);
+};
+
 const transformFile = async (file: string, baseIn: string, baseOut: string, options: TransformOptions) => {
     // 定义文件不处理
     if (file.endsWith('.d.ts')) {
@@ -22,11 +34,10 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
     }
 
     const relative = path.relative(baseIn, file);
-    const base = path.basename(relative, path.extname(relative));
-    const destination = `${path.join(baseOut, base)}.js`;
+    const destination = path.join(baseOut, changeExtension(relative, '.js'));
     const writingFiles = [
-        fs.writeFile(destination, result.code + `\n//# sourceMappingURL=${destination}.map`),
-        fs.writeFile(`${destination}.map`, JSON.stringify(result.map)),
+        writeFile(destination, result.code + `\n//# sourceMappingURL=${destination}.map`),
+        writeFile(`${destination}.map`, JSON.stringify(result.map)),
     ];
     await Promise.all(writingFiles);
 };

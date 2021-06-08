@@ -22,7 +22,7 @@ title: 单独编译JavaScript
 有时候在开发中遇到一个文件源码看上去没问题，但在编译后就有问题，就会想调试一下`babel`的输出。此时可以直接用`skr babel`指定单个文件，且不传递`--out`参数：
 
 ```shell
-skr build some/file.js
+skr babel some/file.js
 ```
 
 文件会在编译后输出到命令行，且在命令行中的输出带有语法高亮。
@@ -36,5 +36,5 @@ skr build some/file.js
 一般编译一个工具库，可用的命令如下：
 
 ```shell
-skr build src --out=dist --copy --clean
+skr babel src --out=dist --copy --clean
 ```
