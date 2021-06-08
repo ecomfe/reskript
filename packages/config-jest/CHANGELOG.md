@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/ecomfe/reskript/compare/v1.4.0...v1.5.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **build:** 更新class-names-loader兼容旧版本浏览器 ([#51](https://github.com/ecomfe/reskript/issues/51)) ([abf649a](https://github.com/ecomfe/reskript/commit/abf649a0aaed2ed100bbe12aeb3e2f478b5a6b05))
+
+
+### Features
+
+* **test:** skr test增加--collectCoverageFrom参数并可以指定测试文件范围 ([#63](https://github.com/ecomfe/reskript/issues/63)) ([0e996a3](https://github.com/ecomfe/reskript/commit/0e996a38fa3917b61550078bd94a8773248dfbe4))
+
+
+
+
+
 # [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
 
 **Note:** Version bump only for package @reskript/config-jest

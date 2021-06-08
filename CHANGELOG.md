@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/ecomfe/reskript/compare/v1.4.0...v1.5.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **build:** 告诉用户不要修改webpack.config.js ([#60](https://github.com/ecomfe/reskript/issues/60)) ([4c0bc5f](https://github.com/ecomfe/reskript/commit/4c0bc5f1e0627471b2f56c54bd7da082072cdeaf))
+* **build:** 更新class-names-loader兼容旧版本浏览器 ([#51](https://github.com/ecomfe/reskript/issues/51)) ([abf649a](https://github.com/ecomfe/reskript/commit/abf649a0aaed2ed100bbe12aeb3e2f478b5a6b05))
+* **lint:** hooks-deps-new-line规则只适用于第一个参数是函数的情况 ([#55](https://github.com/ecomfe/reskript/issues/55)) ([80377eb](https://github.com/ecomfe/reskript/commit/80377eb36f044e829701cc3034e55a6d2c92684a))
+
+
+### Features
+
+* **build:** 支持自定义入口配置，如指定输出文件名 ([#56](https://github.com/ecomfe/reskript/issues/56)) ([84fa53b](https://github.com/ecomfe/reskript/commit/84fa53b72fedb041db77cf7f3b1c209823b185fb))
+* **build:** 自动构建service worker ([#53](https://github.com/ecomfe/reskript/issues/53)) ([f1e42c5](https://github.com/ecomfe/reskript/commit/f1e42c5df7cf3b2fe1951f087530fe93096b3baf))
+* **lint:** import-order规则支持node协议路径 ([#58](https://github.com/ecomfe/reskript/issues/58)) ([9ad4798](https://github.com/ecomfe/reskript/commit/9ad4798a992f58597daf3515f79e133a5c866a5c))
+* **test:** skr test增加--collectCoverageFrom参数并可以指定测试文件范围 ([#63](https://github.com/ecomfe/reskript/issues/63)) ([0e996a3](https://github.com/ecomfe/reskript/commit/0e996a38fa3917b61550078bd94a8773248dfbe4))
+
+
+
+
+
 # [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
 
 
