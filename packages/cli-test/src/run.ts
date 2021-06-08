@@ -31,9 +31,9 @@ const resolveJestConfig = (jestConfigOptions: JestConfigOptions): string => {
     }
 };
 
-export default async (cmd: TestCommandLineArgs): Promise<void> => {
-    const {coverage, watch, cwd, src, target, changedSince} = cmd;
-    const argv: string[] = [];
+export default async (files: string[], cmd: TestCommandLineArgs): Promise<void> => {
+    const {coverage, watch, cwd, src, target, changedSince, collectCoverageFrom} = cmd;
+    const argv: string[] = [...files];
 
     if (coverage) {
         argv.push('--coverage');
@@ -43,6 +43,9 @@ export default async (cmd: TestCommandLineArgs): Promise<void> => {
     }
     if (changedSince) {
         argv.push('--changedSince', changedSince);
+    }
+    if (collectCoverageFrom) {
+        argv.push('--collectCoverageFrom', collectCoverageFrom);
     }
 
     const {featureMatrix: {dev: features}} = readProjectSettings(cmd, 'test');
