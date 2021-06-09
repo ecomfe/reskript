@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-build",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -20,9 +20,9 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "@reskript/config-webpack": "1.5.0",
-    "@reskript/core": "1.5.0",
-    "@reskript/settings": "1.5.0",
+    "@reskript/config-webpack": "1.6.0",
+    "@reskript/core": "1.6.0",
+    "@reskript/settings": "1.6.0",
     "chalk": "^4.1.1",
     "eslint": "^7.28.0",
     "lodash": "^4.17.21",
