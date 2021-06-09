@@ -127,6 +127,12 @@ export const createWebpackDevServerConfig = (
         hotOnly: hot === 'all',
         publicPath: '/assets/',
         stats: 'normal',
+        // 微前端跨域用
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Authorization',
+        },
         watchOptions: {
             ignored: /node_modules/,
         },
