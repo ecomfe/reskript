@@ -18,7 +18,7 @@ import {
 import {logger, readHostPackageConfig} from '@reskript/core';
 import internalIp from 'internal-ip';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
-import {DevCommandLineArgs} from './interface';
+import {DevCommandLineArgs, LegacyDevCommandLineArgs} from './interface';
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
@@ -27,7 +27,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
-        srcDirectory: cmd.src,
+        srcDirectory: cmd.srcDir,
         entryDirectory: cmd.entriesDir,
         only: [cmd.entry],
     };
@@ -43,7 +43,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
         usage: 'devServer',
         mode: cmd.mode ?? 'development',
         cwd: cmd.cwd,
-        srcDirectory: cmd.src,
+        srcDirectory: cmd.srcDir,
         // `react-refresh`无法在`production`模式下工作，所以在该模式下直接禁用掉热更新
         projectSettings: {
             ...projectSettings,
@@ -94,7 +94,20 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     return new Promise(waitServerFinish);
 };
 
-export default async (cmd: DevCommandLineArgs): Promise<void> => {
+const fixArgs = (cmd: LegacyDevCommandLineArgs): DevCommandLineArgs => {
+    if (cmd.src) {
+        logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
+        return {
+            ...cmd,
+            srcDir: cmd.srcDir === 'src' ? cmd.src : cmd.srcDir,
+        };
+    }
+
+    return output;
+};
+
+export default async (rawCmd: LegacyDevCommandLineArgs): Promise<void> => {
+    const cmd = fixArgs(rawCmd);
     process.env.NODE_ENV = cmd.mode || 'development';
 
     let startingServer = startDevServer(cmd);
