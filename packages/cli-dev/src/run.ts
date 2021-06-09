@@ -8,7 +8,13 @@ import {
     BuildEnv,
     warnAndExitOnInvalidFinalizeReturn,
 } from '@reskript/settings';
-import {createWebpackConfig, BuildContext, collectEntries, createRuntimeBuildEnv} from '@reskript/config-webpack';
+import {
+    createWebpackConfig,
+    BuildContext,
+    collectEntries,
+    createRuntimeBuildEnv,
+    EntryLocation,
+} from '@reskript/config-webpack';
 import {readHostPackageConfig} from '@reskript/core';
 import internalIp from 'internal-ip';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
@@ -19,7 +25,13 @@ process.env.OPEN_MATCH_HOST_ONLY = 'true';
 const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const projectSettings = readProjectSettings(cmd, 'dev');
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
-    const entries = collectEntries(cmd.cwd, cmd.src, [cmd.entry]);
+    const entryLocation: EntryLocation = {
+        cwd: cmd.cwd,
+        srcDirectory: cmd.src,
+        entryDirectory: cmd.entriesDir,
+        only: [cmd.entry],
+    };
+    const entries = collectEntries(entryLocation);
 
     if (!entries.length) {
         console.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);

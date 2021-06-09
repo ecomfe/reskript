@@ -16,37 +16,24 @@ import {revision, hasServiceWorker} from './utils/info';
 import {mergeBuiltin} from './utils/merge';
 import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate';
 import {createHTMLPluginInstances} from './utils/html';
-import {readEntryConfig, resolveEntryTemplate} from './utils/entry';
-import {AppEntry, BuildContext} from './interface';
+import {resolveEntry} from './utils/entry';
+import {AppEntry, BuildContext, EntryLocation} from './interface';
 
 export {loaders, rules, createHTMLPluginInstances};
 export * from './interface';
 
+export const collectEntries = (location: EntryLocation): AppEntry[] => {
+    const {cwd, srcDirectory, entryDirectory, only} = location;
+    const directory = path.join(cwd, srcDirectory, entryDirectory);
 
-export const collectEntries = (cwd: string, srcDirectory: string, only?: string[]): AppEntry[] => {
-    const entriesFolder = path.join(cwd, srcDirectory, 'entries');
-
-    if (!fs.existsSync(entriesFolder)) {
-        console.error(chalk.red(`No ${srcDirectory}/entries dir found`));
+    if (!fs.existsSync(directory)) {
+        console.error(chalk.red(`No ${srcDirectory}/${entryDirectory} directory found`));
         process.exit(24);
     }
 
-    // 要`*.js`但不要`*.config.js`
-    const entryScriptFiles = fs.readdirSync(entriesFolder)
-        .filter(f => /\.[jt]sx?$/.test(f) && !f.includes('.config.'))
-        .map(f => path.resolve(entriesFolder, f));
-    const toEntry = (file: string): AppEntry | null => {
-        const name = path.basename(file, path.extname(file));
-
-        if (only && !only.includes(name)) {
-            return null;
-        }
-
-        const template = resolveEntryTemplate(name, entriesFolder);
-        const config = readEntryConfig(name, entriesFolder);
-        return {name, file, config, template};
-    };
-    return compact(entryScriptFiles.map(toEntry));
+    const files = fs.readdirSync(directory);
+    const shouldInclude = (name: string) => (only ? only.includes(name) : true);
+    return compact(files.map(f => resolveEntry(path.resolve(directory, f), shouldInclude)));
 };
 
 export const createRuntimeBuildEnv = (env: BuildEnv): RuntimeBuildEnv => {

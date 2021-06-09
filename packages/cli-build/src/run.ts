@@ -10,6 +10,7 @@ import {
     createRuntimeBuildEnv,
     checkProjectSettings,
     BuildContext,
+    EntryLocation,
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import * as partials from './partial';
@@ -69,7 +70,13 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
-    const entries = collectEntries(cmd.cwd, cmd.src, cmd.entriesOnly);
+    const entryLocation: EntryLocation = {
+        cwd: cmd.cwd,
+        srcDirectory: cmd.src,
+        entryDirectory: cmd.entriesDir,
+        only: cmd.entriesOnly,
+    };
+    const entries = collectEntries(entryLocation);
 
     const featureNamesToUse = cmd.featureOnly ? [cmd.featureOnly] : featureNames;
     const toConfiguration = (featureName: string): Configuration => {

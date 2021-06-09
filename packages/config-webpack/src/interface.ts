@@ -3,6 +3,13 @@ import {Configuration, RuleSetUseItem, EntryObject} from 'webpack';
 
 type EntryDescriptor = Exclude<EntryObject[string], string | string[]>;
 
+export interface EntryLocation {
+    cwd: string;
+    srcDirectory: string;
+    entryDirectory: string;
+    only?: string[];
+}
+
 export interface EntryConfig {
     entry?: Omit<EntryDescriptor, 'import'>;
     html?: Record<string, any>;

@@ -9,7 +9,8 @@ const command: CommandConfig<DevCommandLineArgs> = {
     args: [
         ['--cwd [value]', 'override current working directory', process.cwd()],
         ['--mode [value]', 'set build mode, default to "development"', 'development'],
-        ['--src [value]', 'specify the dir containing source files relative to cwd', 'src'],
+        ['--src [value]', 'specify the directory containing source files relative to cwd', 'src'],
+        ['--entries-dir [value]', 'specify the directory containing entry files', 'entries'],
         ['--build-target [value]', 'set build target, default to "dev"', 'dev'],
         ['--proxy-domain [domain]', 'set api proxy domain, only domain part (www.example.com) is required'],
         ['--open [value]', 'choose open "local" (localhost) or "remote" (ip) browser page', 'local'],

@@ -2,6 +2,7 @@ import {WorkModeAware} from '@reskript/core';
 
 export interface BuildCommandLineArgs extends WorkModeAware {
     readonly src: string;
+    readonly entriesDir: string;
     readonly buildTarget?: string;
     readonly featureOnly?: string;
     readonly entriesOnly?: string[];

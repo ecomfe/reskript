@@ -9,7 +9,8 @@ const command: CommandConfig<BuildCommandLineArgs> = {
     args: [
         ['--cwd [value]', 'override current working directory', process.cwd()],
         ['--mode [value]', 'set build mode, default to "production"', 'production'],
-        ['--src [value]', 'specify the dir containing source files relative to cwd', 'src'],
+        ['--src [value]', 'specify the directory containing source files relative to cwd', 'src'],
+        ['--entries-dir [value]', 'specify the directory containing entry files', 'entries'],
         ['--build-target [value]', 'create index.html according to specific target'],
         ['--feature-only [value]', 'build named feature only, ignore other features'],
         ['--entries-only [entries...]', 'specify one or more entries to build, excludes other entries from build'],

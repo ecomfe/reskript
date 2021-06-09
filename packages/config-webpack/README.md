@@ -39,10 +39,15 @@ import {readProjectSettings, BuildEnv} from '@reskript/settings';
 
 const createBuildConfiguration = () => {
     const cwd = process.cwd();
-    // 给定当前的项目目录`cmd`，读取`reskript.config.js`
+    // 给定当前的项目目录`cwd`，读取`reskript.config.js`
     const projectSettings = readProjectSettings({cwd}, 'build');
+    const entryLocation = {
+        cwd,,
+        srcDirectory: 'src',
+        entryDirectory: projectSettings.build.entries,
+    };
     // 自动读取`src/entries/*.js`来生成应用入口
-    const entries = collectEntries(cmd.cwd, cmd.src);
+    const entries = collectEntries(entryLocation);
     // 创建一个`BuildEnv`对象，这个对象是`BuildContext`的一小部分
     const buildEnv: BuildEnv = {
         projectSettings,
