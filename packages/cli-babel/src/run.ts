@@ -5,6 +5,7 @@ import rimraf from 'rimraf';
 import pLimit from 'p-limit';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
+import {logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
 
@@ -29,7 +30,7 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
     const result = await transformFileAsync(file, options);
 
     if (!result || result.code == null || result.map == null) {
-        console.error(`Failed to transform ${file}`);
+        logger.error(`Failed to transform ${file}`);
         process.exit(20);
     }
 
@@ -56,7 +57,7 @@ const copyFile = async (file: string, baseIn: string, baseOut: string) => {
 
 const printInConsole = (code: string | null | undefined) => {
     if (code == null) {
-        console.error('Transform failed');
+        logger.error('Transform failed');
         process.exit(20);
     }
 
@@ -70,7 +71,7 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
     }
 
     if (!path.extname(file) && !cmd.out) {
-        console.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
+        logger.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
         process.exit(21);
     }
 

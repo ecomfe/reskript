@@ -10,6 +10,6 @@ declare module 'tty-table' {
 
     export default class ConsoleTable {
         constructor(headers: Column[], rows: string[][] | object[]);
-        render(): void;
+        render(): string;
     }
 }

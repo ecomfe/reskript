@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@reskript/config-lint": "1.5.0",
-    "chalk": "^4.1.1",
+    "@reskript/core": "1.5.0",
     "eslint": "^7.28.0",
     "eslint-formatter-pretty": "^4.1.0",
     "g-status": "^2.0.2",

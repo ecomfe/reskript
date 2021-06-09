@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import chalk from 'chalk';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
 import {
@@ -10,6 +9,7 @@ import {
     warnAndExitOnInvalidFinalizeReturn,
     BuildInternals,
 } from '@reskript/settings';
+import {logger} from '@reskript/core';
 import * as loaders from './loaders';
 import * as rules from './rules';
 import {revision, hasServiceWorker} from './utils/info';
@@ -27,7 +27,7 @@ export const collectEntries = (location: EntryLocation): AppEntry[] => {
     const directory = path.join(cwd, srcDirectory, entryDirectory);
 
     if (!fs.existsSync(directory)) {
-        console.error(chalk.red(`No ${srcDirectory}/${entryDirectory} directory found`));
+        logger.error(`No ${srcDirectory}/${entryDirectory} directory found`);
         process.exit(24);
     }
 
@@ -52,7 +52,7 @@ const importPartialWith = (context: BuildContext) => (name: string) => {
         return require(`./partials/${name}`).default(context);
     }
     catch (ex) {
-        console.error(chalk.red(`Unable to load configuration partial ${name}`));
+        logger.error(`Unable to load configuration partial ${name}`);
         throw ex;
     }
 };

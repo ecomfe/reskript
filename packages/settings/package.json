@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
-    "@types/dedent": "^0.7.0",
     "eslint": "^7.28.0",
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
@@ -25,9 +24,7 @@
   "dependencies": {
     "@reskript/core": "1.5.0",
     "@types/webpack-dev-server": "^3.11.4",
-    "chalk": "^4.1.1",
     "chokidar": "^3.5.1",
-    "dedent": "^0.7.0",
     "hasha": "^5.2.0",
     "lodash": "^4.17.21",
     "schema-utils": "^3.0.0"

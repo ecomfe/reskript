@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-import {isMonorepoRoot, resolveMonorepoPackageDirectories} from '@reskript/core';
+import {logger, isMonorepoRoot, resolveMonorepoPackageDirectories} from '@reskript/core';
 import check from './check';
 
 (async () => {
@@ -12,7 +12,7 @@ import check from './check';
         }
     }
     else {
-        console.log(cwd);
+        logger.log(cwd);
         check(cwd);
     }
 })();

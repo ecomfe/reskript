@@ -1,7 +1,7 @@
-import chalk from 'chalk';
 import {sumBy, stubTrue} from 'lodash';
 import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
+import {logger} from '@reskript/core';
 import {LintCommandLineArgs} from './interface';
 import lintScripts from './script';
 import lintStyles from './style';
@@ -28,11 +28,11 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<void> 
 
     const isCleanLint = sumBy(lintResults, ({errorCount, warningCount}) => errorCount + warningCount) === 0;
     if (isCleanLint) {
-        console.log(chalk.green.bold('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!'));
+        logger.log.green('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!');
     }
     else {
         const output = eslintPrettyFormatter(lintResults);
-        console.log(output);
+        logger.log(output);
         process.exit(25);
     }
 };

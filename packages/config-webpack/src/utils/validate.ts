@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import {get, isEqual} from 'lodash';
-import chalk from 'chalk';
+import {logger} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';
 
 const toStringTag = Object.prototype.toString;
@@ -31,7 +31,7 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
     );
 
     if (conflicts.length > 0) {
-        console.error(`Build target ${conflicts.join(' & ')} have incompatible feature schema`);
+        logger.error(`Build target ${conflicts.join(' & ')} have incompatible feature schema`);
         process.exit(21);
     }
 };
@@ -44,8 +44,22 @@ export const checkPreCommitHookWhenLintDisabled = (cwd: string): void => {
     const packageConfig = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8'));
 
     if (!get(packageConfig, ['husky', 'hooks', 'pre-commit'])) {
-        const warning = fs.readFileSync(path.join(__dirname, '..', 'assets', 'lint-disabled-warning.txt'), 'utf-8');
-        console.warn(chalk.yellowBright(warning));
+        const warning = `
+            This project has reportLintErrors option disabled in reskript.config.js,
+            and there is no pre-commit hook to lint your files,
+            you should at least install husky to enable pre-commit hook.
+
+            npm install --save-dev husky
+
+            Then initialize husky hooks in your project:
+
+            npx --no-install husky install
+
+            And create hook in your project root:
+
+            npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
+        `;
+        logger.warn(warning);
         process.exit(21);
     }
 };

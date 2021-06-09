@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import {execSync} from 'child_process';
+import {logger} from '@reskript/core';
 import {BuildContext} from '../interface';
 
 export const revision = (): string => {
@@ -8,7 +9,7 @@ export const revision = (): string => {
         return execSync('git rev-parse --short HEAD', {stdio: 'pipe'}).toString().trim();
     }
     catch (ex) {
-        console.log('Not a git repository, fallback to default revision');
+        logger.log('Not a git repository, fallback to default revision');
         return '0000000';
     }
 };

@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import pReduce from 'p-reduce';
+import {logger} from '@reskript/core';
 import {RuleConfig, OptionalRuleConfig, Severity} from '@reskript/settings';
 
 const SEVERITY_PREFIX: Record<Severity, string> = {
@@ -10,7 +11,7 @@ const SEVERITY_PREFIX: Record<Severity, string> = {
 };
 
 export const createPrint = (severity: Severity) => (message: string) => {
-    console.log(`${SEVERITY_PREFIX[severity]} ${message}`);
+    logger.log(`${SEVERITY_PREFIX[severity]} ${message}`);
 };
 
 type UniversalRuleConfig<T> = RuleConfig<T> | OptionalRuleConfig<T>;

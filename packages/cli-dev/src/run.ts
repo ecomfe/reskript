@@ -15,7 +15,7 @@ import {
     createRuntimeBuildEnv,
     EntryLocation,
 } from '@reskript/config-webpack';
-import {readHostPackageConfig} from '@reskript/core';
+import {logger, readHostPackageConfig} from '@reskript/core';
 import internalIp from 'internal-ip';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {DevCommandLineArgs} from './interface';
@@ -34,7 +34,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const entries = collectEntries(entryLocation);
 
     if (!entries.length) {
-        console.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
+        logger.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
         process.exit(21);
     }
 
@@ -86,7 +86,7 @@ const startDevServer = (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
         httpServer.on(
             'error',
             (ex: Error) => {
-                console.error(ex.message);
+                logger.error(ex.message);
                 process.exit(22);
             }
         );
@@ -100,7 +100,7 @@ export default async (cmd: DevCommandLineArgs): Promise<void> => {
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;
     const restart = async () => {
-        console.log('Detected reskript.config.js change, restarting dev server...');
+        logger.log('Detected reskript.config.js change, restarting dev server...');
         if (nextStart) {
             return;
         }

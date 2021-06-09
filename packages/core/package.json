@@ -15,10 +15,13 @@
     "test": "echo 'No test in @reskript/core'"
   },
   "devDependencies": {
+    "@types/dedent": "^0.7.0",
     "eslint": "^7.28.0",
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "chalk": "^4.1.1",
+    "dedent": "^0.7.0",
     "find-up": "^5.0.0",
     "globby": "^11.0.3",
     "pkg-dir": "^5.0.0"

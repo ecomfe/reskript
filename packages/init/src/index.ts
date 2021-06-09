@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-import chalk from 'chalk';
+import {logger} from '@reskript/core';
 import preCheckCurrentWorkingDirectory from './check';
 import askForOptions from './ask';
 import run from './run';
@@ -11,7 +11,7 @@ import run from './run';
     const options = await askForOptions();
     await run(cwd, options);
 
-    console.log('Project initialization complete');
-    console.log(`You can run ${chalk.bold('npm start')} to start a dev server`);
-    console.log('Follow todo list in browser to complete last steps');
+    logger.log('Project initialization complete');
+    logger.log('You can run "npm start" to start a dev server');
+    logger.log('Follow todo list in browser to complete last steps');
 })();

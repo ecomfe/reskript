@@ -17,13 +17,12 @@
     "test": "echo 'No test in @reskript/init'"
   },
   "devDependencies": {
-    "@types/dedent": "^0.7.0",
     "@types/inquirer": "^7.3.1",
     "eslint": "^7.28.0",
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "dedent": "^0.7.0",
+    "@reskript/core": "1.5.0",
     "globby": "^11.0.3",
     "inquirer": "^8.1.0",
     "lodash": "^4.17.21",

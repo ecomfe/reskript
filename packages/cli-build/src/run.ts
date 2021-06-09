@@ -1,9 +1,8 @@
 import path from 'path';
 import rimraf from 'rimraf';
-import chalk from 'chalk';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {readHostPackageConfig} from '@reskript/core';
+import {logger, readHostPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -23,12 +22,12 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
         configuration as Configuration, // https://github.com/Microsoft/TypeScript/issues/14107
         (err?: Error, stats?: Stats) => {
             if (err) {
-                console.error(err);
+                logger.error(err.toString());
                 process.exit(22);
             }
 
             if (!stats) {
-                console.error('Unknown error: webpack does not return its build stats');
+                logger.error('Unknown error: webpack does not return its build stats');
                 process.exit(22);
             }
 
@@ -57,12 +56,12 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
-        console.error(chalk.red(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`));
+        logger.error(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`);
         process.exit(21);
     }
 
     if (cmd.analyze && !cmd.buildTarget) {
-        console.error(chalk.red('--analyze must be used with --build-target to specify only one target'));
+        logger.error('--analyze must be used with --build-target to specify only one target');
         process.exit(21);
     }
 
@@ -119,7 +118,7 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
 
     if (!initial) {
         const error = 'No build configuration created, you are possibly providing a feature matrix with dev only';
-        console.error(chalk.red(error));
+        logger.error(error);
         process.exit(21);
     }
 
@@ -127,6 +126,6 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     const initialStats = await build([initial]);
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
-    console.log('');
+    logger.lineBreak();
     inspect(initialStats, projectSettings.build.inspect, {exitOnError: !cmd.analyze});
 };
