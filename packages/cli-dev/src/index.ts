@@ -14,7 +14,8 @@ const command: CommandConfig<DevCommandLineArgs> = {
         ['--entries-dir [value]', 'specify the directory containing entry files', 'entries'],
         ['--build-target [value]', 'set build target, default to "dev"', 'dev'],
         ['--proxy-domain [domain]', 'set api proxy domain, only domain part (www.example.com) is required'],
-        ['--open [value]', 'choose open "local" (localhost) or "remote" (ip) browser page', 'local'],
+        ['--open [value]', '[DEPRECATED] use --host instead'],
+        ['--host [value]', 'default server host, "localhost" or "loopback" or "ip" or custom host string'],
         ['--entry [value]', 'specify an entry as the default page', 'index'],
     ],
 };

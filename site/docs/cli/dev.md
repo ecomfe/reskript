@@ -14,7 +14,7 @@ title: 本地调试
 --src-dir [value]        指定项目源码所在的目录，默认为src
 --build-target [value]   指定调试的特性名称，默认为dev
 --proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖reskript.config.js中的devServer.defaultProxyDomain配置
---open [value]           选择自动打开浏览器页面的地址，可以为local（打开localhost）或remote（打开远程IP，用于远程开发场景），默认为local
+--host [value]           设置默认的本地服务器域，可以用localhost、loopback（对应127.0.0.1）、ip（对应本机的局域网IP），也可以指定一个自定义的域名或IP
 --entry [value]          指定用来调试的入口，即在src/entries下的文件名（不包含后缀名），默认为index
 -h, --help               显示帮助信息
 ```
@@ -48,14 +48,24 @@ skr dev --mode=production --build-target=stable
 
 ## 远程开发
 
-如果你处在一个远程开发的环境，包括但不限于使用远程桌面、vscode remote等，此时你在启动本地调试环境后，是无法用`localhost:8080`来访问到页面的。
+如果你处在一个远程开发的环境，包括但不限于使用远程桌面、VSCode Remote等，此时你在启动本地调试环境后，是无法用`localhost:8080`来访问到页面的。
 
-你可以使用`--open=remote`参数来让`skr dev`默认打开远程IP的页面：
+你可以使用`--host=ip`参数来让`skr dev`默认打开远程IP的页面：
 
 ```shell
-skr dev --open=remote
+skr dev --host=ip
 ```
 
 `reSKRipt`会找到机器上一个可用的IP地址，绝大部分情况下这个IP是正确的，如果出现一些原因导致IP无法访问，你就不得不自己研究如何访问到开发机了。
 
 由于在大部分的公司环境里用的是动态的IP分配，一台电脑的IP是会变化的，所以如果你是在自己的电脑上启动调试，最好不要去使用IP访问，避免休眠再开机后因为IP变化导致页面访问不到。
+
+## 微前端开发
+
+如果你本地启动的应用会被另一个地址的微服务框架加载，那么默认的使用`/assets`作为路径的资源都会在另一个地址上失效。此时同样可以使用`--host`参数进行兼容，即便是本地开发，你也可以这样使用：
+
+```shell
+skr dev --host=localhost
+```
+
+此时虽然依然通过`http://localhost:8080`访问你的应用，但所有的资源路径都会被强制设定为`http://localhost:8080/assets/*`这样的绝对地址，因此在另一个IP、域名、端口下也可以顺利加载。
