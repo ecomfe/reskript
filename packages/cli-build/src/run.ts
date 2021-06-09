@@ -13,7 +13,7 @@ import {
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import * as partials from './partial';
-import {BuildCommandLineArgs} from './interface';
+import {BuildCommandLineArgs, LegacyBuildCommandLineArgs} from './interface';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
 import inspect from './inspect';
 
@@ -71,7 +71,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
-        srcDirectory: cmd.src,
+        srcDirectory: cmd.srcDir,
         entryDirectory: cmd.entriesDir,
         only: cmd.entriesOnly,
     };
@@ -85,7 +85,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
             usage: 'build',
             mode: cmd.mode,
             cwd: cmd.cwd,
-            srcDirectory: cmd.src,
+            srcDirectory: cmd.srcDir,
         };
         const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
         const buildContext: BuildContext = {
@@ -106,7 +106,20 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     return featureNamesToUse.map(toConfiguration);
 };
 
-export default async (cmd: BuildCommandLineArgs): Promise<void> => {
+const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
+    if (cmd.src) {
+        logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
+        return {
+            ...cmd,
+            srcDir: cmd.srcDir === 'src' ? cmd.src : cmd.srcDir,
+        };
+    }
+
+    return cmd;
+};
+
+export default async (rawCmd: BuildCommandLineArgs): Promise<void> => {
+    const cmd = fixArgs(rawCmd);
     process.env.NODE_ENV = cmd.mode;
 
     if (cmd.clean) {
