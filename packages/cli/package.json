@@ -12,6 +12,9 @@
   "bin": {
     "skr": "./dist/index.js"
   },
+  "engines": {
+    "node": ">=14.13.1"
+  },
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "eslint src",
