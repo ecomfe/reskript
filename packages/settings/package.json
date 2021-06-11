@@ -19,11 +19,11 @@
     "eslint": "^7.28.0",
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1"
   },
   "dependencies": {
     "@reskript/core": "1.6.0",
-    "@types/webpack-dev-server": "^3.11.4",
     "chokidar": "^3.5.1",
     "hasha": "^5.2.0",
     "lodash": "^4.17.21",

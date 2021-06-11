@@ -1,4 +1,4 @@
-import {getOptions} from 'loader-utils';
+import {LoaderContext} from 'webpack';
 import {PlaySettings} from '@reskript/settings';
 
 interface LoaderOptions extends PlaySettings {
@@ -6,13 +6,12 @@ interface LoaderOptions extends PlaySettings {
     componentModulePath: string;
 }
 
-// TODO: `webpack`的官方定义里没有`Loader`这个东西：https://github.com/webpack/webpack/issues/11630
-const loader = function playEntryLoader(this: any, content: any) {
+const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, content: any) {
     if (this.cacheable) {
         this.cacheable();
     }
 
-    const options = getOptions(this) as unknown as LoaderOptions;
+    const options = this.getOptions();
     const extraImports = options.injectResources.map(e => `import '${e}';`).join('\n');
     const replacements: Array<[RegExp, string]> = [
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
