@@ -31,3 +31,13 @@ title: FAQ
 - [调整webpack配置](settings/build#自定义调整webpack配置)。
 - [调整webpack-dev-server配置](settings/dev-server#扩展配置)。
 - [调整babel配置](settings/build#扩展babel配置)。
+
+> 我在运行`eslint`时出现`ESLint couldn't find the plugin "xxx".`这样的错误。
+
+在你的`.eslintrc.js`中增加一行代码：
+
+```javascript
+require('@reskript/config-lint/patch');
+```
+
+具体参考[Lint配置](cli/lint#自定义配置)。

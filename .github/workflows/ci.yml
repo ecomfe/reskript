@@ -16,14 +16,17 @@ jobs:
         node-version: [16.x]
 
     steps:
+    - uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.0.2
     - uses: actions/checkout@v2
     - name: CI
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn build
-    - run: yarn lint
-    - run: yarn test
+    - run: pnpm install
+    - run: pnpm run build
+    - run: pnpm run lint
+    - run: pnpm run test
       env:
         CI: true

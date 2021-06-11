@@ -7,6 +7,7 @@ const RESTRICTED_DEPENDENCIES = [
     ['img-loader', '3.x'],
     ['p-reduce', '2.x'],
     ['log-symbols', '4.x'],
+    ['@types/webpack-dev-server', '3.11.2'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {
