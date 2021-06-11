@@ -2,6 +2,10 @@
   "name": "@reskript/config-lint",
   "version": "1.6.0",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./patch": "./dist/patch.js"
+  },
   "license": "MIT",
   "files": [
     "dist",
@@ -26,6 +30,7 @@
     "@ecomfe/stylelint-config": "^1.1.1",
     "@reskript/config-babel": "1.6.0",
     "@reskript/eslint-plugin": "1.6.0",
+    "@rushstack/eslint-patch": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
     "eslint-plugin-babel": "^5.3.1",
