@@ -2683,14 +2683,6 @@
   resolved "https://registry.npmjs.org/@types/less/-/less-3.0.2.tgz#2761d477678c8374cb9897666871662eb1d1115e"
   integrity sha512-62vfe65cMSzYaWmpmhqCMMNl0khen89w57mByPi1OseGfcV/LV03fO8YVrNj7rFQsRWNJo650WWyh6m7p8vZmA==
 
-"@types/loader-utils@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/@types/loader-utils/-/loader-utils-2.0.2.tgz#2999dc2a3330b3ac0b2eaa9e01328b3484ef1112"
-  integrity sha512-y3UaQ1rIkp2Nzv67Wa/MS7GJM958CDyWkMmnFneTRcWKlaSPreESrwruQ2WhEapQHCV6HJ2Pj62k0BB7mtQNHw==
-  dependencies:
-    "@types/node" "*"
-    "@types/webpack" "^4"
-
 "@types/lodash@^4.14.170":
   version "4.14.170"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
@@ -2819,13 +2811,6 @@
   resolved "https://registry.npmjs.org/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
 
-"@types/stylelint-webpack-plugin@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/@types/stylelint-webpack-plugin/-/stylelint-webpack-plugin-2.1.0.tgz#2d07e8c9dee4c34355372e44ffdcffc45111b137"
-  integrity sha512-yNCBkjgglLZ6+IAwNF/WjgcPR0lHumn2URBt5hAcjxdUvm+2eY+fSz2IzBt6iJGGZ8E56hofg6mUGdU9QaRmjg==
-  dependencies:
-    stylelint-webpack-plugin "*"
-
 "@types/stylelint@^13.13.0":
   version "13.13.0"
   resolved "https://registry.npmjs.org/@types/stylelint/-/stylelint-13.13.0.tgz#8e0d99f1133b235f6ac629a8e6162e61e6854e34"
@@ -2869,13 +2854,6 @@
     "@types/webpack" "^4"
     http-proxy-middleware "^1.0.0"
 
-"@types/webpack-merge@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/@types/webpack-merge/-/webpack-merge-5.0.0.tgz#818a13948c1642bde7e2f4f079335a5f85365699"
-  integrity sha512-CFedsXD/7vmJ66PaC3eavdqqNZujWlvdkGFcizi0QPtDswK75DV7a5GTKzL9Ev6d0okLurq+ebQjwIEFmP9aZw==
-  dependencies:
-    webpack-merge "*"
-
 "@types/webpack-sources@*":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@types/webpack-sources/-/webpack-sources-2.1.0.tgz#8882b0bd62d1e0ce62f183d0d01b72e6e82e8c10"
@@ -2896,14 +2874,6 @@
     "@types/webpack-sources" "*"
     anymatch "^3.0.0"
     source-map "^0.6.0"
-
-"@types/webpackbar@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/@types/webpackbar/-/webpackbar-4.0.1.tgz#51cb3de91c5c04a1ea5b1abe47decf80c459662e"
-  integrity sha512-9zcuW4FEVfujEv0xzYW0u7gkeyQflQB/5FRCI3exnmEeLHiQaxucQgJiKD2IY2YG4dLP/XmAvpoduKFqNaiBQQ==
-  dependencies:
-    "@types/node" "*"
-    "@types/webpack" "^4"
 
 "@types/workbox-webpack-plugin@^5.1.6":
   version "5.1.6"
@@ -13321,7 +13291,7 @@ stylehacks@^5.0.1:
     browserslist "^4.16.0"
     postcss-selector-parser "^6.0.4"
 
-stylelint-webpack-plugin@*, stylelint-webpack-plugin@^2.1.0:
+stylelint-webpack-plugin@^2.1.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/stylelint-webpack-plugin/-/stylelint-webpack-plugin-2.1.1.tgz#1c8ae72a4e5818f7e5925e3fff10502ad34a52a5"
   integrity sha512-WHdaWCp4NANcTcltuRjZCjM7jVhdaSg7ag/sQLE22Bf84g5nQC4nBBK8FBdHAssJsho0fDRiwyrzGsIPO+b94A==
@@ -14405,7 +14375,7 @@ webpack-log@^2.0.0:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
-webpack-merge@*, webpack-merge@^5.8.0:
+webpack-merge@^5.8.0:
   version "5.8.0"
   resolved "https://registry.npmjs.org/webpack-merge/-/webpack-merge-5.8.0.tgz#2b39dbf22af87776ad744c390223731d30a68f61"
   integrity sha512-/SaI7xY0831XwP6kzuwhKWVKDP9t1QY1h65lAFLbZqMPIuYcD9QAW4u9STIbU9kaJbPBB/geU/gLr1wDjOhQ+Q==
