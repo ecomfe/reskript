@@ -13,7 +13,8 @@ process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const buildContext = createBuildContext(cmd);
-    const extra = createWebpackDevServerPartial(buildContext);
+    const host = await resolveHost(cmd.host);
+    const extra = createWebpackDevServerPartial(buildContext, host);
     const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
     const config = createWebpackConfig(buildContext, [extra, {output: {publicPath}}]);
     const devServerConfig = createWebpackDevServerConfig(
@@ -31,7 +32,6 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
     const port = finalizedDevServerConfig.port ?? 8080;
     await startServer(server, port);
 
-    const host = await resolveHost(cmd.host);
     const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
     open(openURL);
 

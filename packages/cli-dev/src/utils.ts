@@ -17,7 +17,7 @@ export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
             return '127.0.0.1';
         case 'ip': {
             const ip = await internalIp.v4();
-            return ip;
+            return ip ?? 'localhost';
         }
         default:
             return hostType;

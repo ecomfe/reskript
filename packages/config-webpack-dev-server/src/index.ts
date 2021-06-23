@@ -1,5 +1,4 @@
 import path from 'path';
-import internalIp from 'internal-ip';
 import {compact} from 'lodash';
 import {HotModuleReplacementPlugin, Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
@@ -12,22 +11,11 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 
-const devHost = internalIp.v4.sync();
+const getDevServerMessages = (host: string, port: number, openPage: string = ''): string[] => [
+    `Your application is running here: http://${host}:${port}/${openPage}`,
+];
 
-const getDevServerMessages = (port: number, openPage: string = ''): string[] => {
-    const prefix = 'Your application is running here';
-    const messages = [`${prefix}: http://localhost:${port}/${openPage}`];
-
-    if (devHost) {
-        const devHostPrefix = 'or';
-        const devHostMsg = ' '.repeat(prefix.length - devHostPrefix.length)
-            + devHostPrefix + `: http://${devHost}:${port}/${openPage}`;
-        messages.push(devHostMsg);
-    }
-    return messages;
-};
-
-export const createWebpackDevServerPartial = (context: BuildContext): Configuration => {
+export const createWebpackDevServerPartial = (context: BuildContext, host = 'localhost'): Configuration => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage}}} = context;
     const webpackBarOptions = {
         name: '@reskript/dev',
@@ -39,7 +27,7 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
         // TODO: https://github.com/webpack/webpack/pull/11698
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
-                messages: getDevServerMessages(port, openPage),
+                messages: getDevServerMessages(host, port, openPage),
                 notes: [],
             },
         }) as any,
@@ -91,7 +79,6 @@ export const createWebpackDevServerConfig = (
         hot = 'none',
         openPage = '',
     } = buildEntry.projectSettings.devServer;
-    const devHost = internalIp.v4.sync();
     const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
     const proxyRules = [
         ...Object.entries(proxyRewrite),
@@ -119,7 +106,6 @@ export const createWebpackDevServerConfig = (
         openPage,
         disableHostCheck: true,
         host: '0.0.0.0',
-        public: `${devHost}:${port}`, // `port`不可能是80的，所以不用判断是不是去掉了
         quiet: true,
         compress: true,
         inline: true,
