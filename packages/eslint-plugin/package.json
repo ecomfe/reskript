@@ -20,9 +20,9 @@
     "builtins": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.14.4",
+    "@babel/eslint-parser": "^7.14.7",
     "@babel/eslint-plugin": "^7.13.16",
-    "eslint": "^7.28.0",
-    "jest": "^27.0.4"
+    "eslint": "^7.29.0",
+    "jest": "^27.0.5"
   }
 }

@@ -16,15 +16,15 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.14",
-    "eslint": "^7.28.0",
-    "jest": "^27.0.4",
+    "eslint": "^7.29.0",
+    "jest": "^27.0.5",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2",
+    "typescript": "^4.3.4",
     "webpack": "^5.38.1"
   },
   "dependencies": {
     "@reskript/core": "1.6.0",
-    "chokidar": "^3.5.1",
+    "chokidar": "^3.5.2",
     "hasha": "^5.2.0",
     "lodash": "^4.17.21",
     "schema-utils": "^3.0.0"

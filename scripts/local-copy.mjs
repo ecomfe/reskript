@@ -27,7 +27,7 @@ if (!destination || !destination.startsWith('/') || destination.includes('node_m
 
 if (!argv.noBuild) {
     console.log('Building...');
-    childeProcess.execSync('yarn build');
+    childeProcess.execSync('pnpm run build');
 }
 
 const copy = async packageName => {

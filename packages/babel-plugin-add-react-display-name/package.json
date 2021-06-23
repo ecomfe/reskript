@@ -19,15 +19,15 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
     "@types/babel__core": "^7.1.14",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "glob": "^7.1.7",
-    "jest": "^27.0.4",
+    "jest": "^27.0.5",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/traverse": "^7.14.2",
+    "@babel/core": "^7.14.6",
+    "@babel/traverse": "^7.14.7",
     "lodash": "^4.17.21"
   }
 }
