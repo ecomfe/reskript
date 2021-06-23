@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const prettier = require('prettier');
-const {getScriptLintConfig} = require('../dist');
+const {getScriptLintConfig, getStyleLintConfig} = require('../dist');
 
 const dumpAsModule = (json, destination) => {
     const body = JSON.stringify(json, null, '  ').replace(/"%(.+)%"/g, '$1');
@@ -21,10 +21,20 @@ const dumpAsModule = (json, destination) => {
     );
 };
 
-const config = getScriptLintConfig();
-config.extends = config.extends.map(v => `%require.resolve('${v.replace(/^.+node_modules\//, '')}')%`);
-config.parserOptions.babelOptions = '%require(\'@reskript/config-babel\').getParseOnlyBabelConfig(),%';
+const dumpScriptConfig = () => {
+    const config = getScriptLintConfig();
+    config.extends = config.extends.map(v => `%require.resolve('${v.replace(/^.+node_modules\//, '')}')%`);
+    config.parserOptions.babelOptions = '%require(\'@reskript/config-babel\').getParseOnlyBabelConfig(),%';
+    dumpAsModule(config, path.join(destination, 'eslint.js'));
+};
+
+const dumpStyleConfig = () => {
+    const config = getStyleLintConfig();
+    config.extends = `%require.resolve('${config.extends.replace(/^.+node_modules\//, '')}')%`;
+    dumpAsModule(config, path.join(destination, 'stylelint.js'));
+};
 
 const destination = path.join(__dirname, '..', 'config');
 fs.mkdirSync(destination, {recursive: true});
-dumpAsModule(config, path.join(destination, 'eslint.js'));
+dumpScriptConfig();
+dumpStyleConfig();
