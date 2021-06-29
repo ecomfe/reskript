@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/ecomfe/reskript/compare/v1.6.0...v1.6.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* **cli:** 限制Node版本支持ESM和Node协议 ([823172a](https://github.com/ecomfe/reskript/commit/823172a9000eacfb0c0655e81268d9cb58e1b9ba))
+
+
+
+
+
 # [1.6.0](https://github.com/ecomfe/reskript/compare/v1.5.0...v1.6.0) (2021-06-09)
 
 **Note:** Version bump only for package @reskript/cli

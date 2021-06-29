@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/ecomfe/reskript/compare/v1.6.0...v1.6.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* **lint:** config-lint需要导出stylelint配置 ([#69](https://github.com/ecomfe/reskript/issues/69)) ([8e3ed95](https://github.com/ecomfe/reskript/commit/8e3ed954fdf0d1a154a8bf065f5fd6028075ff1a))
+
+
+
+
+
 # [1.6.0](https://github.com/ecomfe/reskript/compare/v1.5.0...v1.6.0) (2021-06-09)
 
 **Note:** Version bump only for package @reskript/config-lint
