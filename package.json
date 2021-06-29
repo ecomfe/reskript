@@ -16,6 +16,7 @@
     "ci": "pnpm install && pnpm run build && pnpm run lint && pnpm run test",
     "preversion": "pnpm run ci",
     "prepack": "pnpm install && pnpm run build",
+    "version": "pnpm install && git add pnpm-lock.yaml",
     "local-publish": "pnpm install && pnpm run build && node scripts/local-publish.js",
     "deploy": "lerna publish from-package",
     "prepare": "husky install"
