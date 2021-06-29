@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./patch": "./dist/patch.js"
+    "./patch": "./dist/patch.js",
+    "./config/*": "./config/*.js"
   },
   "license": "MIT",
   "files": [
