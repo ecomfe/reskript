@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 node scripts/check-deps.mjs
-pnpm run -r --filter "...[HEAD]" lint
+pnpm run -r --filter "...{packages}[HEAD]" lint

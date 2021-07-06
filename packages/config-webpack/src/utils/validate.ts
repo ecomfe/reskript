@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import {get, isEqual} from 'lodash';
-import {logger} from '@reskript/core';
+import {logger, findGitRoot} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';
 
 const toStringTag = Object.prototype.toString;
@@ -37,7 +37,7 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
 };
 
 export const checkPreCommitHookWhenLintDisabled = (cwd: string): void => {
-    if (fs.existsSync(path.join(cwd, '.husky', 'pre-commit'))) {
+    if (fs.existsSync(path.join(findGitRoot(cwd) ?? cwd, '.husky', 'pre-commit'))) {
         return;
     }
 
