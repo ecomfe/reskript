@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/ecomfe/reskript/compare/v1.6.2...v1.7.0) (2021-07-06)
+
+
+### Bug Fixes
+
+* **plugin-qiankun:** qiankun的入口脚本也要加上跨域头 ([#73](https://github.com/ecomfe/reskript/issues/73)) ([82d6f72](https://github.com/ecomfe/reskript/commit/82d6f72190fe32dc276bf89bedc921b7b24cd073))
+
+
+
+
+
 ## [1.6.2](https://github.com/ecomfe/reskript/compare/v1.6.1...v1.6.2) (2021-06-29)
 
 **Note:** Version bump only for package @reskript/plugin-qiankun

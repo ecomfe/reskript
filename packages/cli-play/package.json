@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-play",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.1",
-    "@reskript/config-webpack": "1.6.2",
-    "@reskript/config-webpack-dev-server": "1.6.2",
-    "@reskript/core": "1.6.2",
-    "@reskript/settings": "1.6.2",
+    "@reskript/config-webpack": "1.7.0",
+    "@reskript/config-webpack-dev-server": "1.7.0",
+    "@reskript/core": "1.7.0",
+    "@reskript/settings": "1.7.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.21",
     "resolve": "^1.20.0",

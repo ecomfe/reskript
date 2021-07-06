@@ -74,7 +74,7 @@ importers:
 
   packages/cli:
     specifiers:
-      '@reskript/core': 1.6.2
+      '@reskript/core': 1.7.0
       '@types/semver': ^7.3.6
       commander: ^7.2.0
       eslint: ^7.29.0
@@ -92,8 +92,8 @@ importers:
   packages/cli-babel:
     specifiers:
       '@babel/core': ^7.14.6
-      '@reskript/config-babel': 1.6.2
-      '@reskript/core': 1.6.2
+      '@reskript/config-babel': 1.7.0
+      '@reskript/core': 1.7.0
       cli-highlight: ^2.1.11
       eslint: ^7.29.0
       globby: ^11.0.4
@@ -114,9 +114,9 @@ importers:
 
   packages/cli-build:
     specifiers:
-      '@reskript/config-webpack': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-webpack': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/lodash': ^4.14.170
       '@types/rimraf': ^3.0.0
       chalk: ^4.1.1
@@ -151,10 +151,10 @@ importers:
 
   packages/cli-dev:
     specifiers:
-      '@reskript/config-webpack': 1.6.2
-      '@reskript/config-webpack-dev-server': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-webpack': 1.7.0
+      '@reskript/config-webpack-dev-server': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/lodash': ^4.14.170
       '@types/webpack-dev-server': 3.11.2
       better-opn: ^3.0.0
@@ -186,8 +186,8 @@ importers:
 
   packages/cli-lint:
     specifiers:
-      '@reskript/config-lint': 1.6.2
-      '@reskript/core': 1.6.2
+      '@reskript/config-lint': 1.7.0
+      '@reskript/core': 1.7.0
       '@types/eslint': ^7.2.13
       '@types/lodash': ^4.14.170
       eslint: ^7.29.0
@@ -216,10 +216,10 @@ importers:
   packages/cli-play:
     specifiers:
       '@monaco-editor/react': ^4.2.1
-      '@reskript/config-webpack': 1.6.2
-      '@reskript/config-webpack-dev-server': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-webpack': 1.7.0
+      '@reskript/config-webpack-dev-server': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/webpack-dev-server': 3.11.2
       eslint: ^7.29.0
       localforage: ^1.9.0
@@ -246,9 +246,9 @@ importers:
 
   packages/cli-test:
     specifiers:
-      '@reskript/config-jest': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-jest': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/lodash': ^4.14.170
       eslint: ^7.29.0
       jest-cli: ^27.0.5
@@ -284,9 +284,9 @@ importers:
       '@babel/preset-react': ^7.13.13
       '@babel/preset-typescript': ^7.13.0
       '@babel/traverse': ^7.14.7
-      '@reskript/babel-plugin-add-react-display-name': 1.6.2
-      '@reskript/babel-plugin-resolve-core-js': 1.6.2
-      '@reskript/core': 1.6.2
+      '@reskript/babel-plugin-add-react-display-name': 1.7.0
+      '@reskript/babel-plugin-resolve-core-js': 1.7.0
+      '@reskript/core': 1.7.0
       '@types/babel__core': ^7.1.14
       '@types/resolve': ^1.20.0
       babel-plugin-import: ^1.13.3
@@ -368,9 +368,9 @@ importers:
   packages/config-jest:
     specifiers:
       '@babel/core': ^7.14.6
-      '@reskript/config-babel': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-babel': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/enzyme': ^3.10.8
       '@types/enzyme-adapter-react-16': ^1.0.6
       babel-jest: ^27.0.5
@@ -412,8 +412,8 @@ importers:
       '@babel/eslint-plugin': ^7.13.16
       '@ecomfe/eslint-config': ^7.1.0
       '@ecomfe/stylelint-config': ^1.1.1
-      '@reskript/config-babel': 1.6.2
-      '@reskript/eslint-plugin': 1.6.2
+      '@reskript/config-babel': 1.7.0
+      '@reskript/eslint-plugin': 1.7.0
       '@rushstack/eslint-patch': ^1.0.6
       '@typescript-eslint/eslint-plugin': ^4.28.0
       '@typescript-eslint/parser': ^4.28.0
@@ -450,12 +450,12 @@ importers:
       '@babel/core': ^7.14.6
       '@ecomfe/class-names-loader': ^2.0.0
       '@ecomfe/svg-mixed-loader': ^1.0.1
-      '@reskript/config-babel': 1.6.2
-      '@reskript/config-lint': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/less-safe-loader': 1.6.2
-      '@reskript/settings': 1.6.2
-      '@reskript/webpack-plugin-extra-script': 1.6.2
+      '@reskript/config-babel': 1.7.0
+      '@reskript/config-lint': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/less-safe-loader': 1.7.0
+      '@reskript/settings': 1.7.0
+      '@reskript/webpack-plugin-extra-script': 1.7.0
       '@types/less': ^3.0.2
       '@types/lodash': ^4.14.170
       '@types/mini-css-extract-plugin': ^1.4.3
@@ -557,9 +557,9 @@ importers:
   packages/config-webpack-dev-server:
     specifiers:
       '@pmmmwh/react-refresh-webpack-plugin': ^0.4.3
-      '@reskript/config-webpack': 1.6.2
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/config-webpack': 1.7.0
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       '@types/lodash': ^4.14.170
       '@types/webpack-dev-server': 3.11.2
       eslint: ^7.29.0
@@ -618,8 +618,8 @@ importers:
 
   packages/doctor:
     specifiers:
-      '@reskript/core': 1.6.2
-      '@reskript/settings': 1.6.2
+      '@reskript/core': 1.7.0
+      '@reskript/settings': 1.7.0
       eslint: ^7.29.0
       log-symbols: ^4.1.0
       ora: ^5.4.0
@@ -650,7 +650,7 @@ importers:
 
   packages/init:
     specifiers:
-      '@reskript/core': 1.6.2
+      '@reskript/core': 1.7.0
       '@types/inquirer': ^7.3.2
       eslint: ^7.29.0
       globby: ^11.0.4
@@ -685,7 +685,7 @@ importers:
 
   packages/plugin-qiankun:
     specifiers:
-      '@reskript/settings': 1.6.2
+      '@reskript/settings': 1.7.0
       '@types/dedent': ^0.7.0
       dedent: ^0.7.0
       esbuild: ^0.12.9
@@ -708,7 +708,7 @@ importers:
 
   packages/settings:
     specifiers:
-      '@reskript/core': 1.6.2
+      '@reskript/core': 1.7.0
       '@types/babel__core': ^7.1.14
       chokidar: ^3.5.2
       eslint: ^7.29.0
