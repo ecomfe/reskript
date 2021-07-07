@@ -28,18 +28,21 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<void> 
 
     const hasError = lintResults.some(v => v.errorCount > 0);
     const hasWarn = lintResults.some(v => v.warningCount > 0);
-    const isLintPassed = cmd.strict ? hasError || hasWarn : hasError;
-    if (isLintPassed) {
-        if (hasWarn) {
-            logger.log.yellow('(；′⌒`) Nice work, still looking forward to see all warnings fixed!');
-        }
-        else {
-            logger.log.green('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!');
-        }
-    }
-    else {
+    const isLintFailed = cmd.strict ? hasError || hasWarn : hasError;
+
+    if (hasError || hasWarn) {
         const output = eslintPrettyFormatter(lintResults);
         logger.log(output);
+    }
+
+    if (isLintFailed) {
         process.exit(25);
+    }
+
+    if (hasWarn) {
+        logger.log.yellow('(；′⌒`) Nice work, still looking forward to see all warnings fixed!');
+    }
+    else {
+        logger.log.green('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!');
     }
 };
