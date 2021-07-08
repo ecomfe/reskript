@@ -4,6 +4,10 @@ title: FAQ
 
 ## 构建相关
 
+> 我的项目用`sass`作为样式语言，没办法切换到`less`。
+
+参考[复用现有的`loader`](settings/build#复用现有的loader)章节来自定义`sass-loader`实现构建。
+
 > 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
 
 参考[仅构建指定入口](cli/build#仅构建指定入口)使用`skr build --entries-only`参数。

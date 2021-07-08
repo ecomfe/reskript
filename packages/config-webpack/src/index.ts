@@ -17,6 +17,7 @@ import {mergeBuiltin} from './utils/merge';
 import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate';
 import {createHTMLPluginInstances} from './utils/html';
 import {resolveEntry} from './utils/entry';
+import {introduceLoader, introduceLoaders} from './utils/loader';
 import {AppEntry, BuildContext, EntryLocation} from './interface';
 
 export {loaders, rules, createHTMLPluginInstances};
@@ -68,6 +69,8 @@ export const createWebpackConfig = (context: BuildContext, extras: Configuration
     const internalCreated = mergeBuiltin([...configurations, ...extras]);
     const internals: BuildInternals = {
         rules,
+        loader: introduceLoader,
+        loaders: introduceLoaders,
     };
     const finalized = context.projectSettings.build.finalize(internalCreated, context, internals);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'build');

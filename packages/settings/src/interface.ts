@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {ProjectAware, WorkModeAware} from '@reskript/core';
-import {Configuration as WebpackConfiguration, RuleSetRule} from 'webpack';
+import {Configuration as WebpackConfiguration, RuleSetRule, RuleSetUseItem} from 'webpack';
 import {Configuration as WebpackDevServerConfiguration} from 'webpack-dev-server';
 import {TransformOptions} from '@babel/core';
 
@@ -69,6 +69,8 @@ export interface BuildInspectSettings {
 
 export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
 
+export type LoaderFactory = (buildEntry: BuildEntry) => RuleSetUseItem | null;
+
 export interface InternalRules {
     readonly script: RuleFactory;
     readonly less: RuleFactory;
@@ -78,8 +80,28 @@ export interface InternalRules {
     readonly file: RuleFactory;
 }
 
+export type LoaderType =
+    | 'babel'
+    | 'style'
+    | 'css'
+    | 'cssModules'
+    | 'postCSS'
+    | 'postCSSModules'
+    | 'less'
+    | 'lessSafe'
+    | 'url'
+    | 'img'
+    | 'worker'
+    | 'styleResources'
+    | 'classNames'
+    | 'cssExtract'
+    | 'svg'
+    | 'svgo';
+
 export interface BuildInternals {
     readonly rules: InternalRules;
+    readonly loader: (name: LoaderType, buildEntry: BuildEntry) => RuleSetUseItem | null;
+    readonly loaders: (names: Array<LoaderType | false>, buildEntry: BuildEntry) => RuleSetUseItem[];
 }
 
 export interface BuildSettings {

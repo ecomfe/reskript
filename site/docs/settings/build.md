@@ -403,7 +403,7 @@ exports.build = {
 
 因此，你可以安全地使用`webpackConfig.plugins.push(new CopyPlugin())`这样的代码，而不需要对`plugins`属性判空。
 
-### 调整已有loader
+### 调整已有`webpack`规则
 
 虽然通过`exports.build.finalize`可以灵活地调整`webpack`配置，但你几乎不可能直接去修改已有的loader规则，比如你想让所有的图片不再使用默认的`url-loader`，而是用`responsive-loader`代替，但你是没办法在`webpackConfig.module.rules`中找到处理图片的那条规则的。
 
@@ -438,6 +438,82 @@ exports.build = {
     },
 };
 ```
+
+### 复用现有的`loader`
+
+承接上文，有时候你在处理一个自定义的文件类型的时候，又想能够尽量复用`reSKRipt`内置的`loader`逻辑，这也是可以做到的。`build.finalize`函数的第三个参数`internals`中提供了如下2个函数：
+
+```ts
+type LoaderType =
+    | 'babel'
+    | 'style'
+    | 'css'
+    | 'cssModules'
+    | 'postCSS'
+    | 'postCSSModules'
+    | 'less'
+    | 'lessSafe'
+    | 'url'
+    | 'img'
+    | 'worker'
+    | 'styleResources'
+    | 'classNames'
+    | 'cssExtract'
+    | 'svg'
+    | 'svgo';
+
+
+function loader(name: LoaderType, buildEntry: BuildEntry): RuleSetUseItem | null;
+
+function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): RuleSetUseItem[];
+}
+```
+
+其中`loader`函数可以生成一个`loader`声明，例如`loader('css', buildEntry)`就可能返回类似这样的结构：
+
+```js
+{
+    loader: resolve('css-loader'),
+    options: {
+        sourceMap: true,
+        modules: false,
+    },
+}
+```
+
+这可以直接用在`webpack`的`module.rules`配置中。
+
+:::note
+
+有一些规则在特写情况下会返回`null`，所以记得处理空值。
+
+:::
+
+而`loaders`函数则更智能一些，你可以传递多个`LoaderType`或者`false`，它会去除其中的`false`值，将剩余的创建出对应的`loader`声明，再去除`null`的部分，返回一个完全可用的定义。
+
+一个典型的场景是你需要处理`.sass`文件，且希望它们都具备`reSKRipt`原本的CSS Modules等样式处理能力以及[神奇的样式函数功能](../app/style/#了解样式函数)，那么你就需要借用`loaders`函数引入类似`postcss-loader`、`css-loader`、`style-loader`等：
+
+```js
+exports.build = {
+    finalize: (webpackConfig, buildEntry, internals) => {
+        const sassRule = {
+            test: /\.s[ac]ss$/,
+            use: [
+                ...internals.loaders(['classNames', 'style', 'cssModules', 'postCSSModules'], buildEntry),
+                'sass-loader',
+            ],
+        };
+        webpackConfig.module.rules.push(sassRule);
+        return webpackConfig;
+    },
+};
+```
+
+:::note
+
+请注意，`loaders`函数中的参数顺序依然是自右向左的，这与`webpack`的`loader`一致。
+
+:::
 
 ## 检查最终构建产物
 
