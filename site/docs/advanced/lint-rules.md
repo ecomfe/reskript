@@ -2,7 +2,7 @@
 title: 额外的编码规范
 ---
 
-除了延用[@ecomfe/eslint-config](https://github.com/ecomfe/eslint-config)的编码规范外，为了让React应用更加可靠、可读，`reSKRipt`额外内置了几个编码规范。
+除了沿用[@ecomfe/eslint-config](https://github.com/ecomfe/eslint-config)的编码规范外，为了让React应用更加可靠、可读，`reSKRipt`额外内置了几个编码规范。
 
 ## import-order
 
