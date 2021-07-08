@@ -107,6 +107,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
 };
 
 const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
+    // DEPRECATED: 2.0废弃
     if (cmd.src) {
         logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
         return {

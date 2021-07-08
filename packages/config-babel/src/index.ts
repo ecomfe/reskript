@@ -2,8 +2,10 @@ import {compact} from 'lodash';
 import {sync as resolve} from 'resolve';
 import {PluginItem, TransformOptions} from '@babel/core';
 import {WorkMode} from '@reskript/core';
+import {ThirdPartyUse} from '@reskript/settings';
 
 export interface BabelConfigOptions {
+    readonly uses?: ThirdPartyUse[];
     readonly mode?: WorkMode;
     readonly hot?: 'none' | 'simple' | 'all';
     readonly hostType?: 'application' | 'library';
@@ -12,6 +14,12 @@ export interface BabelConfigOptions {
     readonly defaultImportOptimization?: boolean;
     readonly displayName?: boolean | 'auto';
 }
+
+const DEFAULT_USES: BabelConfigOptions['uses'] = ['antd', 'lodash'];
+
+const shouldEnable = (library: ThirdPartyUse, config: BabelConfigOptions['uses'] = DEFAULT_USES) => {
+    return config.includes(library);
+};
 
 // https://github.com/babel/babel/issues/10379#issuecomment-527077992
 const coreJSPreset = () => {
@@ -76,21 +84,31 @@ export const getParseOnlyBabelConfig = (options: BabelConfigOptions = {}): Trans
     };
 };
 
+const requireAntdOptimization = (options: BabelConfigOptions) => {
+    const {uses, defaultImportOptimization = true} = options;
+    return defaultImportOptimization && shouldEnable('antd', uses);
+};
+
+const requireLodashOptimization = (options: BabelConfigOptions) => {
+    const {uses, mode = 'development', defaultImportOptimization = true} = options;
+    return defaultImportOptimization && shouldEnable('lodash', uses) && mode === 'production';
+};
+
 export const getTransformBabelConfig = (options: BabelConfigOptions = {}): TransformOptions => {
     const minimal = getParseOnlyBabelConfig(options);
-    const {mode = 'development', defaultImportOptimization = true, displayName = true} = options;
+    const {uses, mode = 'development', displayName = true} = options;
     const requireDisplayName = displayName === true || (displayName === 'auto' && mode === 'development');
     const plugins: Array<PluginItem | false> = [
         // 这东西必须放在最前面，不然`export default class`会被其它插件转义掉没机会确认真实的名字
         requireDisplayName && resolve('@reskript/babel-plugin-add-react-display-name'),
-        [
+        shouldEnable('styled-components', uses) && [
             resolve('babel-plugin-styled-components'),
             {
                 displayName: requireDisplayName,
             },
         ],
         ...minimal.plugins || [],
-        defaultImportOptimization && [
+        requireAntdOptimization(options) && [
             resolve('babel-plugin-import'),
             {
                 libraryName: 'antd',
@@ -98,7 +116,7 @@ export const getTransformBabelConfig = (options: BabelConfigOptions = {}): Trans
                 style: true,
             },
         ],
-        defaultImportOptimization && mode === 'production' && [
+        requireLodashOptimization(options) && [
             resolve('babel-plugin-lodash'),
             {
                 id: ['lodash', 'lodash-decorators'],

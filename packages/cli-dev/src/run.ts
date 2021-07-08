@@ -40,10 +40,12 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 
 const fixArgs = (cmd: LegacyDevCommandLineArgs): DevCommandLineArgs => {
     const output = {...cmd};
+    // DEPRECATED: 2.0废弃
     if (cmd.src) {
         logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
         output.srcDir = cmd.srcDir === 'src' ? cmd.src : cmd.srcDir;
     }
+    // DEPRECATED: 2.0废弃
     if (cmd.open) {
         logger.warn('[DEPRECATED]: --open arg is deprecated, use --host instead');
         const openToHostMapping = {

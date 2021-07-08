@@ -7,8 +7,11 @@ import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './inter
 import validate from './validate';
 import {fillProjectSettings} from './defaults';
 import {applyPlugins} from './plugins';
+import {warnDeprecatedInProjectSettings} from './warn';
 
 export * from './interface';
+export {fillProjectSettings};
+
 
 const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
     const location = path.join(cmd.cwd, 'reskript.config.js');
@@ -22,6 +25,7 @@ const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSetting
     const requiredSettings = require(location) as ClientProjectSettings;
     validate(requiredSettings);
     const {plugins = [], ...clientSettings} = requiredSettings;
+    warnDeprecatedInProjectSettings(clientSettings);
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);
@@ -109,5 +113,3 @@ export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): v
         process.exit(21);
     }
 };
-
-export {fillProjectSettings};

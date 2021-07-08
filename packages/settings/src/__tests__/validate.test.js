@@ -5,6 +5,14 @@ describe('validate', () => {
         expect(() => validate({})).not.toThrow();
     });
 
+    test('uses pass', () => {
+        expect(() => validate({build: {uses: ['antd']}})).not.toThrow();
+    });
+
+    test('uses invalid value', () => {
+        expect(() => validate({build: {uses: ['unwanted']}})).toThrow();
+    });
+
     test('additional properties', () => {
         const settings = {
             foo: 'bar',

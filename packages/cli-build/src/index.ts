@@ -9,6 +9,7 @@ const command: CommandConfig<BuildCommandLineArgs> = {
     args: [
         ['--cwd [value]', 'override current working directory', process.cwd()],
         ['--mode [value]', 'set build mode, default to "production"', 'production'],
+        // DEPRECATED: 2.0废弃
         ['--src [value]', '[DEPRECATED] use --src-dir instead'],
         ['--src-dir [value]', 'specify the directory containing source files relative to cwd', 'src'],
         ['--entries-dir [value]', 'specify the directory containing entry files', 'entries'],

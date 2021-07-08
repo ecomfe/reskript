@@ -71,6 +71,13 @@ const schema: any = {
         },
         build: {
             properties: {
+                uses: {
+                    items: {
+                        enum: ['antd', 'lodash', 'styled-components'],
+                        type: 'string',
+                    },
+                    type: 'array',
+                },
                 appTitle: {
                     type: 'string',
                 },
