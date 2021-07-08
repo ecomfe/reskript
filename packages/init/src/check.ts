@@ -2,10 +2,10 @@ import path from 'path';
 import globby from 'globby';
 import {logger} from '@reskript/core';
 
-const ALLOWED_EXISTING_FILES = new Set(['package.json', 'README.md', 'LICENSE', '.gitignore', '.npmrc', '.yarnrc']);
+const ALLOWED_EXISTING_FILES = new Set(['package.json', 'README.md', 'LICENSE', '.gitignore', '.npmrc', '.yarnrc', '.git']);
 
 const checkDirectoryHasTooManyFiles = async (cwd: string) => {
-    const files = await globby(`${cwd}/**`, {dot: true});
+    const files = await globby(`${cwd}/**`, {dot: true, onlyFiles: false, deep: 1});
 
     if (files.length > ALLOWED_EXISTING_FILES.size) {
         return true;
