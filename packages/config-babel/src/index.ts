@@ -53,6 +53,7 @@ export const getParseOnlyBabelConfig = (options: BabelConfigOptions = {}): Trans
             resolve('@babel/preset-react'),
             {
                 runtime: 'automatic',
+                importSource: shouldEnable('emotion') ? '@emotion/react' : 'react',
             },
         ],
     ];
@@ -105,6 +106,14 @@ export const getTransformBabelConfig = (options: BabelConfigOptions = {}): Trans
             resolve('babel-plugin-styled-components'),
             {
                 displayName: requireDisplayName,
+                minify: mode === 'production',
+            },
+        ],
+        shouldEnable('emotion', uses) && [
+            resolve('@emotion/babel-plugin'),
+            {
+                sourceMap: mode === 'development',
+                autoLabel: mode === 'production' ? 'never' : 'always',
             },
         ],
         ...minimal.plugins || [],

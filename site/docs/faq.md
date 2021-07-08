@@ -41,3 +41,7 @@ require('@reskript/config-lint/patch');
 ```
 
 具体参考[Lint配置](cli/lint#自定义配置)。
+
+> 我想用`emotion`管理样式，但构建会报错。
+
+参考[特殊第三方库的优化](settings/build#特殊第三方库的优化)使用`build.uses`配置打开相应的功能。

@@ -73,7 +73,7 @@ const schema: any = {
             properties: {
                 uses: {
                     items: {
-                        enum: ['antd', 'lodash', 'styled-components'],
+                        enum: ['antd', 'lodash', 'styled-components', 'emotion'],
                         type: 'string',
                     },
                     type: 'array',
