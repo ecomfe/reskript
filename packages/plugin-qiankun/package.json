@@ -16,15 +16,15 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "eslint": "^7.29.0",
-    "jest": "^27.0.5",
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "@reskript/settings": "1.7.1",
     "dedent": "^0.7.0",
-    "esbuild": "^0.12.9",
-    "qiankun": "^2.4.2"
+    "esbuild": "^0.12.15",
+    "qiankun": "^2.4.3"
   }
 }

@@ -87,7 +87,7 @@ export const isExpressionContextElligible = ({node, parentPath}: ComponentPath):
         return false;
     }
 
-    return parentPath.parentPath.node.type === 'ExpressionStatement';
+    return parentPath.parentPath?.node.type === 'ExpressionStatement';
 };
 
 export const isClassDefinitionElligible = (path: ClassPath): boolean => {
@@ -250,7 +250,7 @@ export const insertDisplayNameAfter = (path: ComponentPath, types: typeof babel.
         ? replaceDefaultExportWithAssignable(path, types, componentName as string)
         : path;
 
-    const blockStatement = exportDeclarationPath.find(path => path.parentPath.isBlock());
+    const blockStatement = exportDeclarationPath.find(path => !!path.parentPath?.isBlock());
 
     /* istanbul ignore next */
     if (!blockStatement) {

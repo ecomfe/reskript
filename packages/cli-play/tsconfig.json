@@ -3,6 +3,10 @@
     "compilerOptions": {
         "rootDir": "src",
         "outDir": "dist",
+        "types": [
+            "webpack",
+            "webpack-dev-server"
+        ]
     },
     "include": ["src"]
 }

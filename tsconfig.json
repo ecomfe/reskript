@@ -10,6 +10,9 @@
         "skipLibCheck": true,
         "declaration": true,
         "baseUrl": ".",
+        "types": [
+            "webpack"
+        ]
     },
     "include": [
         "packages/*/src/**/*.ts"

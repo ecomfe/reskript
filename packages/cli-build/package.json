@@ -15,17 +15,17 @@
     "test": "echo 'No test in @reskript/cli-build'"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.170",
-    "@types/rimraf": "^3.0.0",
-    "typescript": "^4.3.4",
-    "webpack": "^5.38.1"
+    "@types/lodash": "^4.14.171",
+    "@types/rimraf": "^3.0.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.44.0"
   },
   "dependencies": {
     "@reskript/config-webpack": "1.7.1",
     "@reskript/core": "1.7.1",
     "@reskript/settings": "1.7.1",
     "chalk": "^4.1.1",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "lodash": "^4.17.21",
     "matcher": "^4.0.0",
     "p-reduce": "^2.1.0",
