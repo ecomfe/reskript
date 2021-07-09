@@ -8,6 +8,8 @@ title: FAQ
 
 参考[复用现有的`loader`](settings/build#复用现有的loader)章节来自定义`sass-loader`实现构建。
 
+如果希望一个与`reSKRipt`的`less`处理一致的方案，请使用[@reskript/plugin-sass](plugins/sass)插件，具体的`.less`文件处理逻辑请参考[编写样式](app/style)章节的说明。
+
 > 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
 
 参考[仅构建指定入口](cli/build#仅构建指定入口)使用`skr build --entries-only`参数。

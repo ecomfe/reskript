@@ -52,7 +52,7 @@ interface Options {
     template?: string | TemplateConfig;
 }
 
-export default (appName: string, options?: Options): SettingsPlugin;
+function qiankun(appName: string, options?: Options): SettingsPlugin;
 ```
 
 插件的第一个参数`appName`，指定应用的名称，这个名称会被用在：

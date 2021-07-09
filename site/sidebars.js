@@ -58,6 +58,7 @@ module.exports = {
             type: 'category',
             label: '插件',
             items: [
+                'plugins/sass',
                 'plugins/qiankun',
             ],
         },

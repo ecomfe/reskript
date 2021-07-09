@@ -60,7 +60,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             devServer: {
                 ...settings.devServer,
                 finalize: (config, env) => {
-                    const before = settings.devServer.finalize?.(config, env);
+                    const before = settings.devServer.finalize(config, env);
                     return finalizeDevServer(before, env);
                 },
             },
