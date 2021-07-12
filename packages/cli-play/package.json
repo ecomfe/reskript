@@ -15,6 +15,7 @@
     "test": "echo 'No test in @reskript/cli-play'"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.0",
     "@types/webpack-dev-server": "3.11.2",
     "eslint": "^7.30.0",
     "typescript": "^4.3.5",
@@ -26,6 +27,7 @@
     "@reskript/config-webpack-dev-server": "1.8.0",
     "@reskript/core": "1.8.0",
     "@reskript/settings": "1.8.0",
+    "debounce": "^1.2.1",
     "localforage": "^1.9.0",
     "lodash": "^4.17.21",
     "resolve": "^1.20.0",

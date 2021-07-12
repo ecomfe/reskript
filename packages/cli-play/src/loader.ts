@@ -1,3 +1,4 @@
+import path from 'path';
 import {LoaderContext} from 'webpack';
 import {PlaySettings} from '@reskript/settings';
 
@@ -14,6 +15,7 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
     const options = this.getOptions();
     const extraImports = options.injectResources.map(e => `import '${e}';`).join('\n');
     const replacements: Array<[RegExp, string]> = [
+        [/%PLAYGROUND_PATH%/g, path.resolve(__dirname, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
         [/%EXTRA_IMPORTS%/g, extraImports],

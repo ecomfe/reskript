@@ -220,7 +220,9 @@ importers:
       '@reskript/config-webpack-dev-server': 1.8.0
       '@reskript/core': 1.8.0
       '@reskript/settings': 1.8.0
+      '@types/debounce': ^1.2.0
       '@types/webpack-dev-server': 3.11.2
+      debounce: ^1.2.1
       eslint: ^7.30.0
       localforage: ^1.9.0
       lodash: ^4.17.21
@@ -234,11 +236,13 @@ importers:
       '@reskript/config-webpack-dev-server': link:../config-webpack-dev-server
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
+      debounce: 1.2.1
       localforage: 1.9.0
       lodash: 4.17.21
       resolve: 1.20.0
       webpack-dev-server: 3.11.2_webpack@5.44.0
     devDependencies:
+      '@types/debounce': 1.2.0
       '@types/webpack-dev-server': 3.11.2
       eslint: 7.30.0
       typescript: 4.3.5
@@ -3735,6 +3739,10 @@ packages:
       '@types/node': 16.3.0
     dev: true
 
+  /@types/debounce/1.2.0:
+    resolution: {integrity: sha512-bWG5wapaWgbss9E238T0R6bfo5Fh3OkeoSt245CM7JJwVwpw6MEBCbIxLq5z8KzsE3uJhzcIuQkyiZmzV3M/Dw==}
+    dev: true
+
   /@types/dedent/0.7.0:
     resolution: {integrity: sha512-EGlKlgMhnLt/cM4DbUSafFdrkeJoC9Mvnj0PUCU7tFmTjMjNRT957kXCx0wYm3JuEq4o4ZsS5vG+NlkM2DMd2A==}
     dev: true
@@ -6115,6 +6123,10 @@ packages:
   /dateformat/3.0.3:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
     dev: true
+
+  /debounce/1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
