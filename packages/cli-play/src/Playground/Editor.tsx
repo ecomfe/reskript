@@ -1,15 +1,6 @@
 import {useMemo} from 'react';
-import dedent from 'dedent';
 import MonacoEditor, {loader} from '@monaco-editor/react';
 import {debounce} from 'debounce';
-
-const defaultCode = (componentName: string) => dedent`
-    export default function Repl() {
-        return (
-            <${componentName} />
-        );
-    };
-`;
 
 loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.21.2/min/vs'}});
 
@@ -19,11 +10,11 @@ const editorOptions = {
 };
 
 interface Props {
-    componentName: string;
+    source: string;
     onSourceChange: (value: string) => void;
 }
 
-export default function Editor({componentName, onSourceChange}: Props) {
+export default function Editor({source, onSourceChange}: Props) {
     const notifySourceChange = useMemo(
         () => {
             const skipUndefinedValue = (value: string | undefined) => {
@@ -40,7 +31,7 @@ export default function Editor({componentName, onSourceChange}: Props) {
         <MonacoEditor
             language="javascript"
             theme="light"
-            defaultValue={defaultCode(componentName)}
+            value={source}
             options={editorOptions}
             onChange={notifySourceChange}
         />

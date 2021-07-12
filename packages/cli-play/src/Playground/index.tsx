@@ -1,70 +1,18 @@
-import React, {useReducer, useCallback, ComponentType, CSSProperties, ReactNode} from 'react';
+import {useState, CSSProperties, ReactNode, useCallback} from 'react';
+import dedent from 'dedent';
+import {PlayCase} from '../interface';
 import Render from './Render';
 import Editor from './Editor';
+import Footer from './Footer';
+import {useDynamicComponent, DynamicContext} from './hooks';
 
-// eslint-disable-next-line init-declarations
-declare const Babel: any;
-
-function Empty() {
-    return <div>Component not prepared</div>;
-}
-
-interface DynamicState {
-    currentComponentType: ComponentType;
-    key: number;
-}
-
-const reducer = (state: DynamicState, nextComponentType: ComponentType) => {
-    return {
-        currentComponentType: nextComponentType,
-        key: state.key + 1,
+const defaultCode = (componentName: string) => dedent`
+    export default function Repl() {
+        return (
+            <${componentName} />
+        );
     };
-};
-
-interface DynamicContext {
-    componentName: string;
-    componentType: ComponentType<any>;
-    injects: Record<string, unknown>;
-}
-
-const useDynamicComponent = ({componentName, componentType, injects}: DynamicContext) => {
-    const [{currentComponentType, key}, setComponentType] = useReducer(
-        reducer,
-        {currentComponentType: componentType, key: 0}
-    );
-    const onSourceChange = useCallback(
-        (code: string) => {
-            try {
-                const {code: functionCode} = Babel.transform(
-                    code,
-                    {
-                        presets: [
-                            'es2015',
-                            [
-                                'react',
-                                {
-                                    // TODO: 考虑`emotion`
-                                    runtime: 'classic',
-                                },
-                            ],
-                        ],
-                    }
-                );
-                const mod = {exports: {default: Empty}};
-                // eslint-disable-next-line no-new-func
-                const factory = new Function('module', 'exports', 'React', componentName, 'I', functionCode);
-                factory(mod, mod.exports, React, componentType, injects);
-                setComponentType(mod.exports.default);
-            }
-            catch {
-                // Ignore
-            }
-        },
-        [componentName, componentType, injects]
-    );
-
-    return {currentComponentType, key, onSourceChange};
-};
+`;
 
 const rootStyle: CSSProperties = {
     position: 'fixed',
@@ -73,25 +21,46 @@ const rootStyle: CSSProperties = {
     right: 0,
     bottom: 0,
     display: 'grid',
-    gridAutoFlow: 'column',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplate: `
+        "editor preview"
+        "footer footer" 40px / 1fr 1fr
+    `,
 };
 
 interface Props extends DynamicContext {
+    componentFileName: string;
+    cases: PlayCase[];
     renderPreview: (content: ReactNode) => ReactNode;
 }
 
-export default function Playground({renderPreview, componentName, componentType, injects}: Props) {
+export default function Playground(props: Props) {
+    const {componentName, componentType, injects, componentFileName, cases, renderPreview} = props;
+    const [source, setSource] = useState(defaultCode(componentName));
     const {currentComponentType, key, onSourceChange} = useDynamicComponent({componentName, componentType, injects});
+    const updateSource = useCallback(
+        (source: string) => {
+            setSource(source);
+            onSourceChange(source);
+        },
+        [onSourceChange]
+    );
+    const selectCase = useCallback(
+        (selectedCase: PlayCase) => {
+            const source = dedent(selectedCase.code);
+            updateSource(source);
+        },
+        [updateSource]
+    );
 
     return (
         <div style={rootStyle}>
-            <div>
-                <Editor componentName={componentName} onSourceChange={onSourceChange} />
+            <div style={{gridArea: 'editor'}}>
+                <Editor source={source} onSourceChange={updateSource} />
             </div>
-            <div>
+            <div style={{gridArea: 'preview'}}>
                 {renderPreview(<Render key={key} target={currentComponentType} />)}
             </div>
+            <Footer title={componentFileName} cases={cases} onSelectCase={selectCase} />
         </div>
     );
 }

@@ -29,6 +29,7 @@ const generateConfigurationBlockCode = (componentModulePath: string): string => 
 interface LoaderOptions extends PlaySettings {
     componentTypeName: string;
     componentModulePath: string;
+    cwd: string;
 }
 
 const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, content: any) {
@@ -41,6 +42,7 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
     const replacements: Array<[RegExp, string]> = [
         [/%PLAYGROUND_PATH%/g, path.resolve(__dirname, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
+        [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
         [/%EXTRA_IMPORTS%/g, extraImports],
         [/%WRAPPER_RETURN%/g, options.wrapper],

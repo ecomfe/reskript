@@ -10,6 +10,8 @@ render(
         componentName="%COMPONENT_TYPE_NAME%"
         componentType={Target}
         injects={injects}
+        componentFileName='%COMPONENT_MODULE_PATH_RELATIVE%'
+        cases={cases}
         renderPreview={renderPreview}
     />,
     document.body.appendChild(document.createElement('div'))

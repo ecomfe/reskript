@@ -25,6 +25,7 @@ export const createWebpackConfig = (target: string, buildContext: BuildContext):
             options: {
                 ...buildContext.projectSettings.play,
                 componentTypeName,
+                cwd: buildContext.cwd,
                 componentModulePath: path.resolve(buildContext.cwd, target),
             },
         },
