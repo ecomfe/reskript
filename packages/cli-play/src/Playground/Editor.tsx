@@ -3,10 +3,10 @@ import dedent from 'dedent';
 import MonacoEditor, {loader} from '@monaco-editor/react';
 import {debounce} from 'debounce';
 
-const defaultCode = (componentTypeName: string) => dedent`
+const defaultCode = (componentName: string) => dedent`
     export default function Repl() {
         return (
-            <${componentTypeName} />
+            <${componentName} />
         );
     };
 `;
@@ -19,11 +19,11 @@ const editorOptions = {
 };
 
 interface Props {
-    componentTypeName: string;
+    componentName: string;
     onSourceChange: (value: string) => void;
 }
 
-export default function Editor({componentTypeName, onSourceChange}: Props) {
+export default function Editor({componentName, onSourceChange}: Props) {
     const notifySourceChange = useMemo(
         () => {
             const skipUndefinedValue = (value: string | undefined) => {
@@ -40,7 +40,7 @@ export default function Editor({componentTypeName, onSourceChange}: Props) {
         <MonacoEditor
             language="javascript"
             theme="light"
-            defaultValue={defaultCode(componentTypeName)}
+            defaultValue={defaultCode(componentName)}
             options={editorOptions}
             onChange={notifySourceChange}
         />

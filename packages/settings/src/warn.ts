@@ -13,4 +13,5 @@ export const warnDeprecatedInProjectSettings = (settings: DeepPartial<ProjectSet
         logger.warn('[DEPRECATED]: build.script.defaultImportOptimization is deprecated, use build.uses instead');
         logger.warn(`To see a complete guide to build.uses, please visit ${DOCUMENT_LINK}`);
     }
+    // TODO: 把`play.wrapper`干掉
 };

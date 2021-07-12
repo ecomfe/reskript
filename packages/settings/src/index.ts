@@ -12,7 +12,6 @@ import {warnDeprecatedInProjectSettings} from './warn';
 export * from './interface';
 export {fillProjectSettings};
 
-
 const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
     const location = path.join(cmd.cwd, 'reskript.config.js');
 

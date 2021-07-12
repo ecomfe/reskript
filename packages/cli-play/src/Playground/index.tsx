@@ -1,4 +1,4 @@
-import React, {createElement, useReducer, useCallback, ComponentType, CSSProperties, ReactNode} from 'react';
+import React, {useReducer, useCallback, ComponentType, CSSProperties, ReactNode} from 'react';
 import Render from './Render';
 import Editor from './Editor';
 
@@ -10,14 +10,28 @@ function Empty() {
 }
 
 interface DynamicState {
-    componentType: ComponentType;
+    currentComponentType: ComponentType;
     key: number;
 }
 
-const reducer = (state: DynamicState, componentType: ComponentType) => ({componentType, key: state.key + 1});
+const reducer = (state: DynamicState, nextComponentType: ComponentType) => {
+    return {
+        currentComponentType: nextComponentType,
+        key: state.key + 1,
+    };
+};
 
-const useDynamicComponent = (componentTypeName: string, playingComponentType: ComponentType) => {
-    const [{componentType, key}, setComponentType] = useReducer(reducer, {componentType: playingComponentType, key: 0});
+interface DynamicContext {
+    componentName: string;
+    componentType: ComponentType<any>;
+    injects: Record<string, unknown>;
+}
+
+const useDynamicComponent = ({componentName, componentType, injects}: DynamicContext) => {
+    const [{currentComponentType, key}, setComponentType] = useReducer(
+        reducer,
+        {currentComponentType: componentType, key: 0}
+    );
     const onSourceChange = useCallback(
         (code: string) => {
             try {
@@ -38,18 +52,18 @@ const useDynamicComponent = (componentTypeName: string, playingComponentType: Co
                 );
                 const mod = {exports: {default: Empty}};
                 // eslint-disable-next-line no-new-func
-                const factory = new Function('module', 'exports', 'React', componentTypeName, functionCode);
-                factory(mod, mod.exports, React, playingComponentType);
+                const factory = new Function('module', 'exports', 'React', componentName, 'I', functionCode);
+                factory(mod, mod.exports, React, componentType, injects);
                 setComponentType(mod.exports.default);
             }
             catch {
                 // Ignore
             }
         },
-        [componentTypeName, playingComponentType]
+        [componentName, componentType, injects]
     );
 
-    return {componentType, key, onSourceChange};
+    return {currentComponentType, key, onSourceChange};
 };
 
 const rootStyle: CSSProperties = {
@@ -63,22 +77,20 @@ const rootStyle: CSSProperties = {
     gridTemplateColumns: '1fr 1fr',
 };
 
-interface Props {
-    componentTypeName: string;
-    defaultComponentType: ComponentType<any>;
-    wrapperComponent: ComponentType<{children: ReactNode}>;
+interface Props extends DynamicContext {
+    renderPreview: (content: ReactNode) => ReactNode;
 }
 
-export default function Playground({componentTypeName, defaultComponentType, wrapperComponent}: Props) {
-    const {componentType, key, onSourceChange} = useDynamicComponent(componentTypeName, defaultComponentType);
+export default function Playground({renderPreview, componentName, componentType, injects}: Props) {
+    const {currentComponentType, key, onSourceChange} = useDynamicComponent({componentName, componentType, injects});
 
     return (
         <div style={rootStyle}>
             <div>
-                <Editor componentTypeName={componentTypeName} onSourceChange={onSourceChange} />
+                <Editor componentName={componentName} onSourceChange={onSourceChange} />
             </div>
             <div>
-                {createElement(wrapperComponent, null, <Render key={key} target={componentType} />)}
+                {renderPreview(<Render key={key} target={currentComponentType} />)}
             </div>
         </div>
     );
