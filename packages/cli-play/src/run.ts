@@ -7,7 +7,7 @@ import {createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server'
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import {readHostPackageConfig} from '@reskript/core';
 import {createWebpackConfig} from './webpack';
-import {PlayCase, PlayCommandLineArgs} from './interface';
+import {CasePatch, PlayCase, PlayCommandLineArgs} from './interface';
 import createService from './service';
 
 const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
@@ -78,8 +78,27 @@ const registerSersvice = (config: DevServerConfiguration | undefined, target: st
                 json(),
                 (req, res) => {
                     const caseToSave = req.body as PlayCase;
-                    service.saveCase(caseToSave);
-                    res.status(204).end();
+                    try {
+                        service.saveCase(caseToSave);
+                        res.status(204).end();
+                    }
+                    catch {
+                        res.status(500).end();
+                    }
+                }
+            );
+            app.put(
+                '/play/cases/:name',
+                json(),
+                (req, res) => {
+                    const caseToSave = req.body as CasePatch;
+                    try {
+                        service.updateCase(req.params.name, caseToSave);
+                        res.status(204).end();
+                    }
+                    catch {
+                        res.status(500).end();
+                    }
                 }
             );
         },

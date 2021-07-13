@@ -100,6 +100,30 @@ export const useCases = () => {
         },
         []
     );
+    const updateCase = useCallback(
+        async (source: string) => {
+            const currentCase = cases?.[selectedCaseIndex];
+
+            if (!currentCase) {
+                return;
+            }
+
+            const response = await fetch(
+                `/play/cases/${encodeURIComponent(currentCase.name)}`,
+                {
+                    method: 'PUT',
+                    body: JSON.stringify({code: source}),
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                }
+            );
+            await response.text();
+            const newCases = await listCases();
+            setCases(newCases);
+        },
+        [cases, selectedCaseIndex]
+    );
     useEffect(
         () => {
             setCases(null);
@@ -113,6 +137,7 @@ export const useCases = () => {
         selectedCaseIndex,
         setSelectedCaseIndex,
         saveCase,
+        updateCase,
         selectedCase: cases?.[selectedCaseIndex] ?? null,
     };
 };

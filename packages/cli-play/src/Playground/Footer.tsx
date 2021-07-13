@@ -9,6 +9,7 @@ interface Props {
     selectedCaseIndex: number;
     onSelectCase: (index: number) => void;
     onSaveCase: () => void;
+    onUpdateCase: () => void;
 }
 
 const wrapperStyle: CSSProperties = {
@@ -27,7 +28,7 @@ const titleStyle: CSSProperties = {
     margin: 0,
 };
 
-export default function Footer({title, cases, selectedCaseIndex, onSelectCase, onSaveCase}: Props) {
+export default function Footer({title, cases, selectedCaseIndex, onSelectCase, onSaveCase, onUpdateCase}: Props) {
     return (
         <footer style={wrapperStyle}>
             <h2 style={titleStyle}>{title}</h2>
@@ -35,9 +36,8 @@ export default function Footer({title, cases, selectedCaseIndex, onSelectCase, o
                 选择用例：
                 <CaseSelect dataSource={cases} value={selectedCaseIndex} onChange={onSelectCase} />
             </div>
-            <div>
-                <Button onClick={onSaveCase}>保存用例</Button>
-            </div>
+            <Button onClick={onSaveCase}>保存为新用例</Button>
+            <Button disabled={selectedCaseIndex < 0} onClick={onUpdateCase}>更新当前用例</Button>
         </footer>
     );
 }

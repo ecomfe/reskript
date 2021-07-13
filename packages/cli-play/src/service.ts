@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import {PlayCase} from './interface';
-import {parseMarkdownToCases, serializeCaseToMarkdown} from './utils/case';
+import {CasePatch, PlayCase} from './interface';
+import {parseMarkdownToCases, replaceCodeBlockForCase, serializeCaseToMarkdown} from './utils/case';
 
 export default (componentModulePath: string) => {
     const directory = path.dirname(componentModulePath);
@@ -23,6 +23,15 @@ export default (componentModulePath: string) => {
                 : `# ${file} reSKRipt Case`;
             const nextConetnt = content + '\n\n' + serializeCaseToMarkdown(caseToSave) + '\n';
             fs.writeFileSync(caseFileName, nextConetnt);
+        },
+        updateCase: (name: string, patch: CasePatch) => {
+            if (!fs.existsSync(caseFileName)) {
+                return;
+            }
+
+            const content = fs.readFileSync(caseFileName, 'utf-8');
+            const nextContent = replaceCodeBlockForCase(content, name, patch.code);
+            fs.writeFileSync(caseFileName, nextContent);
         },
     };
 };

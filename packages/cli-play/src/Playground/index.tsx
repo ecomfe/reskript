@@ -33,7 +33,7 @@ interface Props extends DynamicContext {
 
 export default function Playground(props: Props) {
     const {componentName, componentType, injects, componentFileName, renderPreview} = props;
-    const {cases, selectedCaseIndex, setSelectedCaseIndex, saveCase} = useCases();
+    const {cases, selectedCaseIndex, setSelectedCaseIndex, saveCase, updateCase} = useCases();
     const [source, setSource] = useState(defaultCode(componentName));
     const {currentComponentType, key, onSourceChange} = useDynamicComponent({componentName, componentType, injects});
     const updateSource = useCallback(
@@ -57,6 +57,10 @@ export default function Playground(props: Props) {
         () => saveCase(source),
         [saveCase, source]
     );
+    const updateCaseWithCurrentSource = useCallback(
+        () => updateCase(source),
+        [source, updateCase]
+    );
 
     return (
         <div style={rootStyle}>
@@ -72,6 +76,7 @@ export default function Playground(props: Props) {
                 selectedCaseIndex={selectedCaseIndex}
                 onSelectCase={selectCaseByIndex}
                 onSaveCase={saveCaseWithCurrentSource}
+                onUpdateCase={updateCaseWithCurrentSource}
             />
         </div>
     );

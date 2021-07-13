@@ -22,3 +22,10 @@
     color: #0476c7;
     border-color: #0476c7;
 }
+
+.button:disabled {
+    color: #cccccc;
+    border-color: #e0e0e0;
+    background-color: #fafafa;
+    cursor: not-allowed;
+}

@@ -1,4 +1,4 @@
-import {findLast} from 'lodash';
+import {findLast, compact} from 'lodash';
 import parse from 'remark-parse';
 import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
@@ -17,12 +17,14 @@ const stringifyNodesToMarkdown = (nodes: Content[]): string => {
     return serializer.stringify(root);
 };
 
+const findReplCodeBlock = (nodes: Content[]) => findLast(nodes, v => v.type === 'code' && v.lang === 'jsx');
+
 const parseToCase = ([heading, ...nodes]: Content[]): PlayCase | null => {
     if (heading.type !== 'heading' || heading.depth !== 2) {
         return null;
     }
 
-    const replCodeBlock = findLast(nodes, v => v.type === 'code' && v.lang === 'jsx');
+    const replCodeBlock = findReplCodeBlock(nodes);
 
     if (!replCodeBlock) {
         return null;
@@ -37,20 +39,17 @@ const parseToCase = ([heading, ...nodes]: Content[]): PlayCase | null => {
 };
 
 interface ParseContext {
-    cases: PlayCase[];
+    saved: Content[][];
     workingInProgress: Content[];
 }
 
-export const parseMarkdownToCases = (markdown: string) => {
+export const splitToCaseNodes = (markdown: string): Content[][] => {
     const root = parser.parse(markdown) as Root;
-    const {cases, workingInProgress} = root.children.reduce(
+    const {saved, workingInProgress} = root.children.reduce(
         (context, node) => {
             // 每个二级标题是一个用例
             if (node.type === 'heading' && node.depth === 2) {
-                const currentCase = parseToCase(context.workingInProgress);
-                if (currentCase) {
-                    context.cases.push(currentCase);
-                }
+                context.saved.push(context.workingInProgress);
                 context.workingInProgress = [node];
             }
             else {
@@ -58,10 +57,14 @@ export const parseMarkdownToCases = (markdown: string) => {
             }
             return context;
         },
-        {cases: [], workingInProgress: []} as ParseContext
+        {saved: [], workingInProgress: []} as ParseContext
     );
-    const lastCase = parseToCase(workingInProgress);
-    return lastCase ? [...cases, lastCase] : cases;
+    return [...saved, workingInProgress];
+};
+
+export const parseMarkdownToCases = (markdown: string): PlayCase[] => {
+    const nodes = splitToCaseNodes(markdown);
+    return compact(nodes.map(parseToCase));
 };
 
 export const serializeCaseToMarkdown = (caseToSerialize: PlayCase): string => {
@@ -73,4 +76,34 @@ export const serializeCaseToMarkdown = (caseToSerialize: PlayCase): string => {
     }
     lines.push('', '```jsx', caseToSerialize.code.trim(), '```');
     return lines.join('\n');
+};
+
+const isMatchCaseName = (nodes: Content[], name: string): boolean => {
+    const [heading] = nodes;
+    return heading.type === 'heading' && heading.depth === 2 && (heading.children[0] as Text).value === name;
+};
+
+export const replaceCodeBlockForCase = (markdown: string, caseName: string, newCode: string) => {
+    const nodes = splitToCaseNodes(markdown);
+    const nodesToUpdate = nodes.find(v => isMatchCaseName(v, caseName));
+
+    if (!nodesToUpdate) {
+        throw new Error(`Cannot find a case named ${caseName}`);
+    }
+
+    const replCodeBlock = findReplCodeBlock(nodesToUpdate);
+    const start = replCodeBlock?.position?.start.offset;
+    const end = replCodeBlock?.position?.end.offset;
+
+    if (!start || !end) {
+        throw new Error(`Cannot find code block in case named ${caseName}`);
+    }
+
+    const newCodeBlockContent = [
+        '```jsx',
+        newCode.trim(),
+        '```',
+    ];
+
+    return markdown.slice(0, start) + newCodeBlockContent.join('\n') + markdown.slice(end);
 };

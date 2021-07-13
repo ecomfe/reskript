@@ -11,6 +11,8 @@ export interface PlayCase {
     code: string;
 }
 
+export type CasePatch = Omit<PlayCase, 'name'>;
+
 export interface PlayConfiguration {
     readonly wrapper: ComponentType<{children: ReactNode}>;
     readonly provides: Record<string, unknown>;
