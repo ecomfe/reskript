@@ -7,11 +7,12 @@ export interface PlayCommandLineArgs extends ProjectAware {
 
 export interface PlayCase {
     name: string;
+    description: string;
     code: string;
 }
 
 export interface PlayConfiguration {
     readonly wrapper: ComponentType<{children: ReactNode}>;
-    readonly cases: PlayCase[];
+    // TODO: 改叫`provides`
     readonly injects: Record<string, unknown>;
 }

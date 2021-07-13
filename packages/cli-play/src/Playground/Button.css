@@ -1,0 +1,24 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 24px;
+    font-size: 12px;
+    appearance: none;
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    color: #108cee;
+    border: 1px solid #108cee;
+}
+
+.button:hover {
+    color: #41a7fa;
+    border-color: #41a7fa;
+}
+
+.button:active,
+.button:focus {
+    color: #0476c7;
+    border-color: #0476c7;
+}

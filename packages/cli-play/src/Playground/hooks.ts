@@ -1,4 +1,6 @@
-import React, {createElement, useReducer, useCallback, ComponentType} from 'react';
+import React, {createElement, useState, useEffect, useReducer, useCallback, ComponentType} from 'react';
+import {PlayCase} from '../interface';
+import {formatTime} from './utils';
 
 // eslint-disable-next-line init-declarations
 declare const Babel: any;
@@ -62,4 +64,55 @@ export const useDynamicComponent = ({componentName, componentType, injects}: Dyn
     );
 
     return {currentComponentType, key, onSourceChange};
+};
+
+const listCases = async () => {
+    const response = await fetch('/play/cases');
+    const cases = await response.json() as PlayCase[];
+    return cases;
+};
+
+export const useCases = () => {
+    const [cases, setCases] = useState<PlayCase[] | null>(null);
+    const [selectedCaseIndex, setSelectedCaseIndex] = useState(-1);
+    const saveCase = useCallback(
+        async (source: string) => {
+            const caseToSave: PlayCase = {
+                name: `Created at ${formatTime(new Date())}`,
+                description: '',
+                code: source,
+            };
+            const response = await fetch(
+                '/play/cases',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(caseToSave),
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                }
+            );
+            await response.text();
+            const newCases = await listCases();
+            setCases(newCases);
+            const newCaseIndex = newCases.findIndex(v => v.name === caseToSave.name);
+            setSelectedCaseIndex(newCaseIndex);
+        },
+        []
+    );
+    useEffect(
+        () => {
+            setCases(null);
+            listCases().then(setCases);
+        },
+        []
+    );
+
+    return {
+        cases,
+        selectedCaseIndex,
+        setSelectedCaseIndex,
+        saveCase,
+        selectedCase: cases?.[selectedCaseIndex] ?? null,
+    };
 };

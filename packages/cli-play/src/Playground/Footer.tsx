@@ -1,19 +1,24 @@
-import {useCallback, CSSProperties, ChangeEvent} from 'react';
+import {CSSProperties} from 'react';
 import {PlayCase} from '../interface';
+import CaseSelect from './CaseSelect';
+import Button from './Button';
 
 interface Props {
-    cases: PlayCase[];
     title: string;
-    onSelectCase: (value: PlayCase) => void;
+    cases: PlayCase[] | null;
+    selectedCaseIndex: number;
+    onSelectCase: (index: number) => void;
+    onSaveCase: () => void;
 }
 
 const wrapperStyle: CSSProperties = {
     gridArea: 'footer',
     display: 'grid',
     gridAutoFlow: 'column',
-    gridTemplateColumns: '1fr auto',
+    gridTemplateColumns: '1fr repeat(2, auto)',
     alignItems: 'center',
     padding: '0 20px',
+    columnGap: 12,
 };
 
 const titleStyle: CSSProperties = {
@@ -22,27 +27,16 @@ const titleStyle: CSSProperties = {
     margin: 0,
 };
 
-export default function Footer({title, cases, onSelectCase}: Props) {
-    const selectCase = useCallback(
-        (e: ChangeEvent<HTMLSelectElement>) => {
-            const index = parseInt(e.target.value, 10);
-            if (index >= 0) {
-                const selectedCase = cases[index];
-                onSelectCase(selectedCase);
-            }
-        },
-        [cases, onSelectCase]
-    );
-
+export default function Footer({title, cases, selectedCaseIndex, onSelectCase, onSaveCase}: Props) {
     return (
         <footer style={wrapperStyle}>
             <h2 style={titleStyle}>{title}</h2>
             <div>
                 选择用例：
-                <select onChange={selectCase}>
-                    <option value={-1}>选择用例</option>
-                    {cases.map((v, i) => <option key={v.name} value={i}>{v.name}</option>)}
-                </select>
+                <CaseSelect dataSource={cases} value={selectedCaseIndex} onChange={onSelectCase} />
+            </div>
+            <div>
+                <Button onClick={onSaveCase}>保存用例</Button>
             </div>
         </footer>
     );

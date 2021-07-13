@@ -1,5 +1,3 @@
-const I = {};
+const injects = {};
 
 const renderPreview = content => content;
-
-const cases = [];

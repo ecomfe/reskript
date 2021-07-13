@@ -1,10 +1,9 @@
 import {useState, CSSProperties, ReactNode, useCallback} from 'react';
 import dedent from 'dedent';
-import {PlayCase} from '../interface';
 import Render from './Render';
 import Editor from './Editor';
 import Footer from './Footer';
-import {useDynamicComponent, DynamicContext} from './hooks';
+import {useDynamicComponent, DynamicContext, useCases} from './hooks';
 
 const defaultCode = (componentName: string) => dedent`
     export default function Repl() {
@@ -29,12 +28,12 @@ const rootStyle: CSSProperties = {
 
 interface Props extends DynamicContext {
     componentFileName: string;
-    cases: PlayCase[];
     renderPreview: (content: ReactNode) => ReactNode;
 }
 
 export default function Playground(props: Props) {
-    const {componentName, componentType, injects, componentFileName, cases, renderPreview} = props;
+    const {componentName, componentType, injects, componentFileName, renderPreview} = props;
+    const {cases, selectedCaseIndex, setSelectedCaseIndex, saveCase} = useCases();
     const [source, setSource] = useState(defaultCode(componentName));
     const {currentComponentType, key, onSourceChange} = useDynamicComponent({componentName, componentType, injects});
     const updateSource = useCallback(
@@ -44,12 +43,19 @@ export default function Playground(props: Props) {
         },
         [onSourceChange]
     );
-    const selectCase = useCallback(
-        (selectedCase: PlayCase) => {
-            const source = dedent(selectedCase.code);
-            updateSource(source);
+    const selectCaseByIndex = useCallback(
+        (index: number) => {
+            setSelectedCaseIndex(index);
+            const selectedCase = cases?.[index];
+            if (selectedCase) {
+                updateSource(selectedCase.code);
+            }
         },
-        [updateSource]
+        [cases, setSelectedCaseIndex, updateSource]
+    );
+    const saveCaseWithCurrentSource = useCallback(
+        () => saveCase(source),
+        [saveCase, source]
     );
 
     return (
@@ -60,7 +66,13 @@ export default function Playground(props: Props) {
             <div style={{gridArea: 'preview'}}>
                 {renderPreview(<Render key={key} target={currentComponentType} />)}
             </div>
-            <Footer title={componentFileName} cases={cases} onSelectCase={selectCase} />
+            <Footer
+                title={componentFileName}
+                cases={cases}
+                selectedCaseIndex={selectedCaseIndex}
+                onSelectCase={selectCaseByIndex}
+                onSaveCase={saveCaseWithCurrentSource}
+            />
         </div>
     );
 }

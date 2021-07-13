@@ -1,6 +1,6 @@
 import * as configuration from '%CONFIGURATION_PATH%';
 
-const [injects, renderPreview, cases] = ((configuration) => {
+const [injects, renderPreview] = ((configuration) => {
     const {Wrapper} = configuration;
 
     return [
@@ -8,6 +8,5 @@ const [injects, renderPreview, cases] = ((configuration) => {
         content => {
             return Wrapper ? <Wrapper>{content}</Wrapper> : content;
         },
-        configuration.cases || []
     ];
 })(configuration);
