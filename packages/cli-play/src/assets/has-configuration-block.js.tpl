@@ -1,10 +1,10 @@
 import * as configuration from '%CONFIGURATION_PATH%';
 
-const [injects, renderPreview] = ((configuration) => {
+const [provides, renderPreview] = ((configuration) => {
     const {Wrapper} = configuration;
 
     return [
-        configuration.injects || {},
+        configuration.provides || {},
         content => {
             return Wrapper ? <Wrapper>{content}</Wrapper> : content;
         },

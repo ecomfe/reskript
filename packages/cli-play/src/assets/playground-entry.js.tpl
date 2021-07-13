@@ -9,7 +9,7 @@ render(
     <Playground
         componentName="%COMPONENT_TYPE_NAME%"
         componentType={Target}
-        injects={injects}
+        injects={provides}
         componentFileName='%COMPONENT_MODULE_PATH_RELATIVE%'
         renderPreview={renderPreview}
     />,

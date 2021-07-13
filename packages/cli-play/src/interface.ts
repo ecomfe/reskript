@@ -13,6 +13,5 @@ export interface PlayCase {
 
 export interface PlayConfiguration {
     readonly wrapper: ComponentType<{children: ReactNode}>;
-    // TODO: 改叫`provides`
-    readonly injects: Record<string, unknown>;
+    readonly provides: Record<string, unknown>;
 }
