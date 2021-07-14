@@ -19,6 +19,7 @@ title: 构建应用
 --profile                   在构建产出中加入性能追踪的能力
 --no-source-maps            构建时不产出source map
 --clean                     构建前删除上一次构建的产出
+--cache-dir                 指定构建缓存的存放目录，默认为node_modules/.cache/webpack
 -h, --help                  显示帮助信息
 ```
 

@@ -78,6 +78,7 @@ const factory: ConfigurationFactory = entry => {
         buildTime,
         entries,
         cache = true,
+        cacheDirectory,
         projectSettings: {
             build: {
                 publicPath,
@@ -163,6 +164,7 @@ const factory: ConfigurationFactory = entry => {
             ? {
                 type: 'filesystem',
                 version: computeCacheKey(entry),
+                cacheDirectory: cacheDirectory ? path.join(cwd, cacheDirectory) : undefined,
                 name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
             }
             : false,

@@ -86,6 +86,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
             mode: cmd.mode,
             cwd: cmd.cwd,
             srcDirectory: cmd.srcDir,
+            cacheDirectory: cmd.cacheDir,
         };
         const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
         const buildContext: BuildContext = {

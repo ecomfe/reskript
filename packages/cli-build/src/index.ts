@@ -20,6 +20,7 @@ const command: CommandConfig<BuildCommandLineArgs> = {
         ['--profile', 'enable react profiling mode', false],
         ['--no-source-maps', 'disable generation of source maps', false],
         ['--clean', 'remove dist directory before build', false],
+        ['--cache-dir [value]', 'specify the directory to store build cache'],
     ],
 };
 

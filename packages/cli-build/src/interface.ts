@@ -11,6 +11,7 @@ export interface LegacyBuildCommandLineArgs extends WorkModeAware {
     readonly clean: boolean;
     readonly profile: boolean;
     readonly sourceMaps: boolean;
+    readonly cacheDir?: string;
 }
 
 export type BuildCommandLineArgs = Omit<LegacyBuildCommandLineArgs, 'src'>;

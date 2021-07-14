@@ -183,6 +183,8 @@ export interface BuildEnv extends WorkModeAware {
     readonly projectSettings: ProjectSettings;
     // 是否启用缓存
     readonly cache?: boolean;
+    // 缓存的目录，默认为`node_modules/.cache`
+    readonly cacheDirectory?: string;
 }
 
 export interface RuntimeBuildEnv extends BuildEnv {
