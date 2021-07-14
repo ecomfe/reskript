@@ -10,7 +10,7 @@ const defaultCode = (componentName: string) => dedent`
         return (
             <${componentName} />
         );
-    };
+    }
 `;
 
 const rootStyle: CSSProperties = {
