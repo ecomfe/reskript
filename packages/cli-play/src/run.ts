@@ -1,14 +1,13 @@
 import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration} from 'webpack-dev-server';
-import {json} from 'body-parser';
 import {sync as resolve} from 'resolve';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
-import {readHostPackageConfig} from '@reskript/core';
+import {logger, readHostPackageConfig} from '@reskript/core';
 import {createWebpackConfig} from './webpack';
-import {CasePatch, PlayCase, PlayCommandLineArgs} from './interface';
-import createService from './service';
+import {PlayCommandLineArgs} from './interface';
+import setupServer from './server';
 
 const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
     const userProjectSettings = readProjectSettings(cmd, 'dev');
@@ -60,47 +59,24 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
 
 const registerSersvice = (config: DevServerConfiguration | undefined, target: string): DevServerConfiguration => {
     const prevBefore = config?.before;
-    const service = createService(target);
+
+    if (Array.isArray(config?.proxy)) {
+        logger.error('Sorry we don\'t allow devServer.proxy to be an array');
+        process.exit(21);
+    }
 
     return {
         ...config,
         before: (app, server, compiler) => {
             prevBefore?.(app, server, compiler);
-            app.get(
-                '/play/cases',
-                (req, res) => {
-                    const cases = service.listCases();
-                    res.json(cases);
-                }
-            );
-            app.post(
-                '/play/cases',
-                json(),
-                (req, res) => {
-                    const caseToSave = req.body as PlayCase;
-                    try {
-                        service.saveCase(caseToSave);
-                        res.status(204).end();
-                    }
-                    catch {
-                        res.status(500).end();
-                    }
-                }
-            );
-            app.put(
-                '/play/cases/:name',
-                json(),
-                (req, res) => {
-                    const caseToSave = req.body as CasePatch;
-                    try {
-                        service.updateCase(req.params.name, caseToSave);
-                        res.status(204).end();
-                    }
-                    catch {
-                        res.status(500).end();
-                    }
-                }
-            );
+            setupServer(app, target);
+        },
+        proxy: {
+            ...config?.proxy,
+            '/io-play': {
+                target: 'http://localhost:9998/io-play',
+                ws: true,
+            },
         },
     };
 };

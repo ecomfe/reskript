@@ -1,4 +1,5 @@
 import React, {createElement, useState, useEffect, useReducer, useCallback, ComponentType} from 'react';
+import io from 'socket.io-client';
 import {PlayCase} from '../interface';
 import {formatTime} from './utils';
 
@@ -72,9 +73,13 @@ const listCases = async () => {
     return cases;
 };
 
+interface State {
+    cases: PlayCase[] | null;
+    selectedIndex: number;
+}
+
 export const useCases = () => {
-    const [cases, setCases] = useState<PlayCase[] | null>(null);
-    const [selectedCaseIndex, setSelectedCaseIndex] = useState(-1);
+    const [state, setState] = useState<State>({cases: null, selectedIndex: -1});
     const saveCase = useCallback(
         async (source: string) => {
             const caseToSave: PlayCase = {
@@ -94,15 +99,14 @@ export const useCases = () => {
             );
             await response.text();
             const newCases = await listCases();
-            setCases(newCases);
             const newCaseIndex = newCases.findIndex(v => v.name === caseToSave.name);
-            setSelectedCaseIndex(newCaseIndex);
+            setState({cases: newCases, selectedIndex: newCaseIndex});
         },
         []
     );
     const updateCase = useCallback(
         async (source: string) => {
-            const currentCase = cases?.[selectedCaseIndex];
+            const currentCase = state.cases?.[state.selectedIndex];
 
             if (!currentCase) {
                 return;
@@ -120,24 +124,45 @@ export const useCases = () => {
             );
             await response.text();
             const newCases = await listCases();
-            setCases(newCases);
+            setState(s => ({...s, cases: newCases}));
         },
-        [cases, selectedCaseIndex]
+        [state.cases, state.selectedIndex]
     );
     useEffect(
         () => {
-            setCases(null);
-            listCases().then(setCases);
+            listCases().then(cases => setState(s => ({...s, cases})));
+        },
+        []
+    );
+    useEffect(
+        () => {
+            const socket = io({path: '/io-play'});
+            socket.on(
+                'cases',
+                (newCases: PlayCase[]) => {
+                    const applyNewCases = ({cases, selectedIndex}: State) => {
+                        const currentSelectedCase = cases?.[selectedIndex];
+                        const newSelectedIndex = currentSelectedCase
+                            ? newCases.findIndex(v => v.name === currentSelectedCase.name)
+                            : -1;
+                        return {cases: newCases, selectedIndex: newSelectedIndex};
+                    };
+                    setState(applyNewCases);
+                }
+            );
+            return () => {
+                socket.disconnect();
+            };
         },
         []
     );
 
     return {
-        cases,
-        selectedCaseIndex,
-        setSelectedCaseIndex,
+        cases: state.cases,
+        selectedCaseIndex: state.selectedIndex,
+        setCaseState: setState,
+        setState,
         saveCase,
         updateCase,
-        selectedCase: cases?.[selectedCaseIndex] ?? null,
     };
 };

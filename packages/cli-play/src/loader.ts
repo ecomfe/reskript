@@ -2,12 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import {LoaderContext} from 'webpack';
 import {PlaySettings} from '@reskript/settings';
-
-const resolveConfigurationPath = (componentModulePath: string): string => {
-    const directory = path.dirname(componentModulePath);
-    const file = path.basename(componentModulePath, path.extname(componentModulePath));
-    return path.join(directory, '__repl__', `${file}.play.js`);
-};
+import {resolveConfigurationPath} from './utils/path';
 
 const generateConfigurationBlockCode = (componentModulePath: string): string => {
     const configurationPath = resolveConfigurationPath(componentModulePath);
