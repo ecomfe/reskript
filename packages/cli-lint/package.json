@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-lint",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -20,8 +20,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@reskript/config-lint": "1.8.0",
-    "@reskript/core": "1.8.0",
+    "@reskript/config-lint": "1.9.0",
+    "@reskript/core": "1.9.0",
     "eslint": "^7.30.0",
     "eslint-formatter-pretty": "^4.1.0",
     "g-status": "^2.0.2",
