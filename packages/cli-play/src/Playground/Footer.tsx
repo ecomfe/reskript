@@ -20,6 +20,7 @@ const wrapperStyle: CSSProperties = {
     alignItems: 'center',
     padding: '0 20px',
     columnGap: 12,
+    backgroundColor: '#f3f3f3',
 };
 
 const titleStyle: CSSProperties = {

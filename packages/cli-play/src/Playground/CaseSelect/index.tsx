@@ -1,6 +1,6 @@
 import {useCallback, ChangeEvent} from 'react';
-import {PlayCase} from '../interface';
-import './Select.css';
+import {PlayCase} from '../../interface';
+import './index.css';
 
 interface Props {
     dataSource: PlayCase[] | null;

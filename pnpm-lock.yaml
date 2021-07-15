@@ -222,15 +222,18 @@ importers:
       '@reskript/settings': 1.9.0
       '@types/debounce': ^1.2.0
       '@types/jest': ^26.0.24
+      '@types/marked': ^2.0.4
       '@types/mdast': ^3.0.4
       '@types/webpack-dev-server': 3.11.2
       body-parser: ^1.19.0
       chokidar: ^3.5.2
+      cpy-cli: ^3.1.1
       debounce: ^1.2.1
       eslint: ^7.30.0
       jest: ^27.0.6
       localforage: ^1.9.0
       lodash: ^4.17.21
+      marked: ^2.1.3
       remark-gfm: ^1.0.0
       remark-parse: ^9.0.0
       remark-stringify: ^9.0.1
@@ -253,6 +256,7 @@ importers:
       debounce: 1.2.1
       localforage: 1.9.0
       lodash: 4.17.21
+      marked: 2.1.3
       remark-gfm: 1.0.0
       remark-parse: 9.0.0
       remark-stringify: 9.0.1
@@ -264,8 +268,10 @@ importers:
     devDependencies:
       '@types/debounce': 1.2.0
       '@types/jest': 26.0.24
+      '@types/marked': 2.0.4
       '@types/mdast': 3.0.4
       '@types/webpack-dev-server': 3.11.2
+      cpy-cli: 3.1.1
       eslint: 7.30.0
       jest: 27.0.6
       ts-jest: 27.0.3_jest@27.0.6+typescript@4.3.5
@@ -3926,6 +3932,10 @@ packages:
     resolution: {integrity: sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==}
     dev: true
 
+  /@types/marked/2.0.4:
+    resolution: {integrity: sha512-L9VRSe0Id8xbPL99mUo/4aKgD7ZoRwFZqUQScNKHi2pFjF9ZYSMNShUHD6VlMT6J/prQq0T1mxuU25m3R7dFzg==}
+    dev: true
+
   /@types/mdast/3.0.4:
     resolution: {integrity: sha512-gIdhbLDFlspL53xzol2hVzrXAbzt71erJHoOwQZWssjaiouOotf03lNtMmFm9VfFkvnLWccSVjUAZGQ5Kqw+jA==}
     dependencies:
@@ -5970,6 +5980,15 @@ packages:
       make-dir: 3.1.0
       nested-error-stacks: 2.1.0
       p-event: 4.2.0
+    dev: true
+
+  /cpy-cli/3.1.1:
+    resolution: {integrity: sha512-HCpNdBkQy3rw+uARLuIf0YurqsMXYzBa9ihhSAuxYJcNIrqrSq3BstPfr0cQN38AdMrQiO9Dp4hYy7GtGJsLPg==}
+    engines: {node: '>=8'}
+    hasBin: true
+    dependencies:
+      cpy: 8.1.2
+      meow: 6.1.1
     dev: true
 
   /cpy/8.1.2:
@@ -10459,6 +10478,12 @@ packages:
       repeat-string: 1.6.1
     dev: false
 
+  /marked/2.1.3:
+    resolution: {integrity: sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==}
+    engines: {node: '>= 10'}
+    hasBin: true
+    dev: false
+
   /matcher/1.1.1:
     resolution: {integrity: sha512-+BmqxWIubKTRKNWx/ahnCkk3mG8m7OturVlqq6HiojGJTd5hVYbgZm6WzcYPCoB+KBT4Vd6R7WSRG2OADNaCjg==}
     engines: {node: '>=4'}
@@ -10582,6 +10607,23 @@ packages:
       redent: 1.0.0
       trim-newlines: 1.0.0
     dev: false
+
+  /meow/6.1.1:
+    resolution: {integrity: sha512-3YffViIt2QWgTy6Pale5QpopX/IvU3LPL03jOTqp6pGj3VjesdO/U8CuHMKpnQr4shCNCM5fd5XFFvIIl6JBHg==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@types/minimist': 1.2.2
+      camelcase-keys: 6.2.2
+      decamelize-keys: 1.1.0
+      hard-rejection: 2.1.0
+      minimist-options: 4.1.0
+      normalize-package-data: 2.5.0
+      read-pkg-up: 7.0.1
+      redent: 3.0.0
+      trim-newlines: 3.0.1
+      type-fest: 0.13.1
+      yargs-parser: 18.1.3
+    dev: true
 
   /meow/7.1.1:
     resolution: {integrity: sha512-GWHvA5QOcS412WCo8vwKDlTelGLsCGBVevQB5Kva961rmNfun0PCbv5+xta2kUMFJyR8/oWnn7ddeKdosbAPbA==}

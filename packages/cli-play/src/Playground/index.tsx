@@ -1,9 +1,13 @@
 import {useState, CSSProperties, ReactNode, useCallback} from 'react';
 import dedent from 'dedent';
+import Sidebar from './Sidebar';
 import Render from './Render';
 import Editor from './Editor';
 import Footer from './Footer';
+import CaseDescription from './CaseDescription';
+import Help from './Help';
 import {useDynamicComponent, DynamicContext, useCases} from './hooks';
+import {PanelType} from './interface';
 
 const defaultCode = (componentName: string) => dedent`
     export default function Repl() {
@@ -21,20 +25,31 @@ const rootStyle: CSSProperties = {
     bottom: 0,
     display: 'grid',
     gridTemplate: `
-        "editor preview"
-        "footer footer" 40px / 1fr 1fr
+        "sidebar main preview"
+        "sidebar footer footer" 40px / 40px minmax(0, 1fr) 1fr
     `,
 };
 
 interface Props extends DynamicContext {
-    componentFileName: string;
+    componentFilePath: string;
+    configurationFilePath: string;
+    configurationSourceCode: string;
     renderPreview: (content: ReactNode) => ReactNode;
 }
 
 export default function Playground(props: Props) {
-    const {componentName, componentType, injects, componentFileName, renderPreview} = props;
-    const {cases, selectedCaseIndex, setCaseState, saveCase, updateCase} = useCases();
+    const {
+        componentName,
+        componentType,
+        injects,
+        componentFilePath,
+        configurationFilePath,
+        configurationSourceCode,
+        renderPreview,
+    } = props;
+    const [panelType, setPanelType] = useState<PanelType>('source');
     const [source, setSource] = useState(defaultCode(componentName));
+    const {cases, selectedCaseIndex, setCaseState, saveCase, updateCase} = useCases(source);
     const {currentComponentType, key, onSourceChange} = useDynamicComponent({componentName, componentType, injects});
     const updateSource = useCallback(
         (source: string) => {
@@ -53,30 +68,41 @@ export default function Playground(props: Props) {
         },
         [cases, setCaseState, updateSource]
     );
-    const saveCaseWithCurrentSource = useCallback(
-        () => saveCase(source),
-        [saveCase, source]
-    );
-    const updateCaseWithCurrentSource = useCallback(
-        () => updateCase(source),
-        [source, updateCase]
-    );
+    const renderMainContent = () => {
+        switch (panelType) {
+            case 'source':
+                return <Editor source={source} onSourceChange={updateSource} />;
+            case 'help':
+                return (
+                    <Help
+                        componentFilePath={componentFilePath}
+                        configurationFilePath={configurationFilePath}
+                        configurationSourceCode={configurationSourceCode}
+                    />
+                );
+            case 'description':
+                return <CaseDescription content={cases?.[selectedCaseIndex]?.description} />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <div style={rootStyle}>
-            <div style={{gridArea: 'editor'}}>
-                <Editor source={source} onSourceChange={updateSource} />
+            <Sidebar panelType={panelType} onNavigate={setPanelType} />
+            <div style={{gridArea: 'main'}}>
+                {renderMainContent()}
             </div>
-            <div style={{gridArea: 'preview'}}>
+            <div style={{gridArea: 'preview', borderLeft: '1px solid #eee'}}>
                 {renderPreview(<Render key={key} target={currentComponentType} />)}
             </div>
             <Footer
-                title={componentFileName}
+                title={componentFilePath}
                 cases={cases}
                 selectedCaseIndex={selectedCaseIndex}
                 onSelectCase={selectCaseByIndex}
-                onSaveCase={saveCaseWithCurrentSource}
-                onUpdateCase={updateCaseWithCurrentSource}
+                onSaveCase={saveCase}
+                onUpdateCase={updateCase}
             />
         </div>
     );

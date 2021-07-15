@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import './Button.css';
+import './index.css';
 
 export interface Props {
     disabled?: boolean;

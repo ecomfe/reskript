@@ -78,10 +78,10 @@ interface State {
     selectedIndex: number;
 }
 
-export const useCases = () => {
+export const useCases = (source: string) => {
     const [state, setState] = useState<State>({cases: null, selectedIndex: -1});
     const saveCase = useCallback(
-        async (source: string) => {
+        async () => {
             const caseToSave: PlayCase = {
                 name: `Created at ${formatTime(new Date())}`,
                 description: '',
@@ -102,10 +102,10 @@ export const useCases = () => {
             const newCaseIndex = newCases.findIndex(v => v.name === caseToSave.name);
             setState({cases: newCases, selectedIndex: newCaseIndex});
         },
-        []
+        [source]
     );
     const updateCase = useCallback(
-        async (source: string) => {
+        async () => {
             const currentCase = state.cases?.[state.selectedIndex];
 
             if (!currentCase) {
@@ -126,7 +126,7 @@ export const useCases = () => {
             const newCases = await listCases();
             setState(s => ({...s, cases: newCases}));
         },
-        [state.cases, state.selectedIndex]
+        [source, state.cases, state.selectedIndex]
     );
     useEffect(
         () => {

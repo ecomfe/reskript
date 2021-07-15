@@ -5,12 +5,18 @@ import Target from '%COMPONENT_MODULE_PATH%';
 %EXTRA_IMPORTS%
 %CONFIGURATION_BLOCK%
 
+const playground = {
+    componentName: "%COMPONENT_TYPE_NAME%",
+    componentFilePath: '%COMPONENT_MODULE_PATH_RELATIVE%',
+    configurationFilePath: '%CONFIGURATION_FILE_PATH%',
+    configurationSourceCode: '%CONFIGURATION_SOURCE%',
+};
+
 render(
     <Playground
-        componentName="%COMPONENT_TYPE_NAME%"
+        {...playground}
         componentType={Target}
         injects={provides}
-        componentFileName='%COMPONENT_MODULE_PATH_RELATIVE%'
         renderPreview={renderPreview}
     />,
     document.body.appendChild(document.createElement('div'))

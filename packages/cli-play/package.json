@@ -10,15 +10,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc && cp -r src/assets dist && cp src/Playground/*.css dist/Playground",
+    "build": "rm -rf dist && tsc && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
     "lint": "eslint src",
     "test": "jest"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.0",
     "@types/jest": "^26.0.24",
+    "@types/marked": "^2.0.4",
     "@types/mdast": "^3.0.4",
     "@types/webpack-dev-server": "3.11.2",
+    "cpy-cli": "^3.1.1",
     "eslint": "^7.30.0",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.3",
@@ -36,6 +38,7 @@
     "debounce": "^1.2.1",
     "localforage": "^1.9.0",
     "lodash": "^4.17.21",
+    "marked": "^2.1.3",
     "remark-gfm": "^1.0.0",
     "remark-parse": "^9.0.0",
     "remark-stringify": "^9.0.1",

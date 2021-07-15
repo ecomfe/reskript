@@ -1,0 +1,37 @@
+.sidebar {
+    grid-area: sidebar;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #f3f3f3;
+}
+
+.sidebar .item {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sidebar .item.active {
+    background-color: #108cee;
+}
+
+.sidebar .item:hover {
+    background-color: #41a7fa;
+}
+
+.sidebar .item .icon {
+    color: #636363;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .item.active .icon,
+.sidebar .item:hover .icon {
+    color: #fff;
+}
