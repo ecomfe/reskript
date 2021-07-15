@@ -6,12 +6,16 @@ type LeafType = string | number | boolean | undefined | null | Function | RegExp
 
 type DeepPartial<T> = T extends LeafType ? T : {[K in keyof T]?: DeepPartial<T[K]>};
 
-const DOCUMENT_LINK = 'https://ecomfe.github.io/reskript/docs/settings/build#特殊第三方库的优化';
 
 export const warnDeprecatedInProjectSettings = (settings: DeepPartial<ProjectSettings>): void => {
     if (settings.build?.script?.defaultImportOptimization !== undefined) {
+        const documentLink = 'https://ecomfe.github.io/reskript/docs/settings/build#特殊第三方库的优化';
         logger.warn('[DEPRECATED]: build.script.defaultImportOptimization is deprecated, use build.uses instead');
-        logger.warn(`To see a complete guide to build.uses, please visit ${DOCUMENT_LINK}`);
+        logger.warn(`To see a complete guide to build.uses, please visit ${documentLink}`);
     }
-    // TODO: 把`play.wrapper`干掉
+    if (settings.play?.wrapper !== undefined) {
+        const documentLink = 'https://ecomfe.github.io/reskript/docs/advanced/debug-component#自定义调试预览的布局';
+        logger.warn('[DEPRECATED]: play.wrapper is deprecated, use standalone play configuration instead');
+        logger.warn(`To see a complete guide to custom wapper in play configuration, please visit ${documentLink}`);
+    }
 };
