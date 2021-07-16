@@ -14,8 +14,6 @@ const transformAndSnapshot = (description, inputCode, filename, test) => test(
                 filename,
                 presets: [
                     // eslint-disable-next-line global-require
-                    require('@babel/preset-typescript'),
-                    // eslint-disable-next-line global-require
                     require('@babel/preset-react'),
                 ],
                 plugins: [

@@ -1,7 +1,11 @@
 {
-  "name": "@reskript/babel-plugin-add-react-display-name",
+  "name": "@reskript/babel-plugin-debug-react-component-file-name",
   "version": "1.9.0",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./useComponentFile": "./dist/useComponentFile.js"
+  },
   "license": "MIT",
   "files": [
     "dist"
@@ -15,7 +19,6 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.13.13",
     "@types/babel__core": "^7.1.15",
     "eslint": "^7.30.0",
     "jest": "^27.0.6",
@@ -24,6 +27,10 @@
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/traverse": "^7.14.7"
+    "@babel/traverse": "^7.14.7",
+    "@reskript/babel-utils": "1.9.0"
+  },
+  "peerDependencies": {
+    "react": "17.x"
   }
 }

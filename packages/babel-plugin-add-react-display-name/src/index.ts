@@ -18,7 +18,7 @@ interface FileState {
     };
 }
 
-const plugin = ({types}: BabelCore): PluginObj<FileState> => {
+export default function addReactDisplayName({types}: BabelCore): PluginObj<FileState> {
     /* eslint-disable @typescript-eslint/naming-convention */
     return {
         visitor: {
@@ -53,6 +53,4 @@ const plugin = ({types}: BabelCore): PluginObj<FileState> => {
         },
     };
     /* eslint-enable @typescript-eslint/naming-convention */
-};
-
-export default plugin;
+}

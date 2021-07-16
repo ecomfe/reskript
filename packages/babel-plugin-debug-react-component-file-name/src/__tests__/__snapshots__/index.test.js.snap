@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`export default component 1`] = `
+"import useComponentFile from \\"@reskript/babel-plugin-debug-react-component-file-name/useComponentFile\\";
+// export default component
+export default function Foo() {
+  useComponentFile(\\"export-default-component.js\\")
+  return 'foo';
+}"
+`;
+
+exports[`multiple components 1`] = `
+"import useComponentFile from \\"@reskript/babel-plugin-debug-react-component-file-name/useComponentFile\\";
+
+// multiple components
+function Foo() {
+  useComponentFile(\\"multiple-components.js\\")
+  return 'foo';
+}
+
+function Bar() {
+  useComponentFile(\\"multiple-components.js\\")
+  return 'bar';
+}"
+`;
+
+exports[`no component 1`] = `
+"// no component
+function foo() {
+  return 'foo';
+}"
+`;
+
+exports[`outside src directory 1`] = `
+"// outside src directory
+export default function Foo() {
+  return 'foo';
+}"
+`;

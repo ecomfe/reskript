@@ -4,10 +4,12 @@ import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings
 import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = (entry: BuildEntry) => {
-    const {usage, mode, projectSettings: {build, devServer}} = entry;
+    const {usage, mode, cwd, srcDirectory, projectSettings: {build, devServer}} = entry;
     const {uses, script: {polyfill, defaultImportOptimization, displayName}} = build;
     const {hot} = devServer;
     const babelConfigOptions: BabelConfigOptions = {
+        cwd,
+        srcDirectory,
         mode,
         polyfill,
         uses,

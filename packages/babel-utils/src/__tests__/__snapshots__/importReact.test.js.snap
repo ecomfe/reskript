@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`already imported 1`] = `
+"// already imported
+import { useEffect } from 'react';
+useEffect"
+`;
+
+exports[`has default react import 1`] = `
+"// has default react import
+import React from 'react';
+React.useEffect"
+`;
+
+exports[`has namespace react import 1`] = `
+"// has namespace react import
+import * as React from 'react';
+React.useEffect"
+`;
+
+exports[`has unmatched import 1`] = `
+"// has unmatched import
+import { useMemo, useEffect } from 'react';
+useEffect"
+`;
+
+exports[`no react import 1`] = `
+"import { useEffect } from \\"react\\";
+// no react import
+export const add = (x, y) => x + y;
+useEffect"
+`;

@@ -17,7 +17,7 @@ interface PluginState {
     };
 }
 
-const plugin = (): PluginObj<PluginState> => {
+export default function resolveCoreJS(): PluginObj<PluginState> {
     /* eslint-disable @typescript-eslint/naming-convention */
     return {
         visitor: {
@@ -32,6 +32,4 @@ const plugin = (): PluginObj<PluginState> => {
         },
     };
     /* eslint-enable @typescript-eslint/naming-convention */
-};
-
-export default plugin;
+}
