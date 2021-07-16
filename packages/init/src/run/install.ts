@@ -1,14 +1,16 @@
 import childProcess from 'child_process';
+import {promisify} from 'util';
 import {compact} from 'lodash';
 import ora from 'ora';
 import {UserOptions} from '../interface';
 
+const execAsync = promisify(childProcess.exec);
+
 const exec = (cwd: string, command: string) => {
-    childProcess.execSync(
+    execAsync(
         command,
         {
             cwd,
-            stdio: 'ignore',
         }
     );
 };
@@ -39,12 +41,12 @@ export default async (cwd: string, options: UserOptions) => {
     ];
 
     if (options.packageManager === 'npm') {
-        exec(cwd, `npm install ${dependencies.join(' ')}`);
-        exec(cwd, `npm install -D ${compact(devDependencies).join(' ')}`);
+        await exec(cwd, `npm install ${dependencies.join(' ')}`);
+        await exec(cwd, `npm install -D ${compact(devDependencies).join(' ')}`);
     }
     else {
-        exec(cwd, `yarn add ${dependencies.join(' ')}`);
-        exec(cwd, `yarn add -D ${compact(devDependencies).join(' ')}`);
+        await exec(cwd, `yarn add ${dependencies.join(' ')}`);
+        await exec(cwd, `yarn add -D ${compact(devDependencies).join(' ')}`);
     }
 
     spinner.succeed();
