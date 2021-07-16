@@ -1,9 +1,11 @@
 import path from 'path';
 import fs from 'fs';
 import {json} from 'body-parser';
-import {PlayCase, CasePatch} from '../interface';
-import {parseMarkdownToCases, serializeCaseToMarkdown, replaceCodeBlockForCase} from '../utils/case';
+import {currentUserName} from '@reskript/core';
+import {PlayCase, CasePatch, PlayCaseInfo} from '../interface';
+import {parseMarkdownToCases, serializeCaseToMarkdown, replaceCodeBlockForCase, replaceLastRun} from '../utils/case';
 import {resolveComponentName, resolveCasePath} from '../utils/path';
+import {formatTime} from '../utils/time';
 import {ExpressApp} from './interface';
 
 const createService = (componentModulePath: string) => {
@@ -23,7 +25,16 @@ const createService = (componentModulePath: string) => {
 
             return [];
         },
-        saveCase: (caseToSave: PlayCase) => {
+        saveCase: (infoToSave: PlayCaseInfo) => {
+            const now = new Date();
+            const user = currentUserName();
+            const caseToSave: PlayCase = {
+                ...infoToSave,
+                createAt: formatTime(now),
+                createBy: user,
+                lastRunAt: formatTime(now),
+                lastRunBy: user,
+            };
             const content = fs.existsSync(casePath)
                 ? fs.readFileSync(casePath, 'utf-8').trim()
                 : `# ${componentName} reSKRipt Case`;
@@ -37,6 +48,15 @@ const createService = (componentModulePath: string) => {
 
             const content = fs.readFileSync(casePath, 'utf-8');
             const nextContent = replaceCodeBlockForCase(content, name, patch.code);
+            writeContent(nextContent);
+        },
+        touchCase: (name: string) => {
+            if (!fs.existsSync(casePath)) {
+                return;
+            }
+
+            const content = fs.readFileSync(casePath, 'utf-8');
+            const nextContent = replaceLastRun(content, name, formatTime(new Date()), currentUserName());
             writeContent(nextContent);
         },
     };
@@ -74,6 +94,18 @@ export default (app: ExpressApp, componentModulePath: string): void => {
             const caseToSave = req.body as CasePatch;
             try {
                 service.updateCase(req.params.name, caseToSave);
+                res.status(204).end();
+            }
+            catch {
+                res.status(500).end();
+            }
+        }
+    );
+    app.put(
+        '/play/cases/:name/TOUCH',
+        (req, res) => {
+            try {
+                service.touchCase(req.params.name);
                 res.status(204).end();
             }
             catch {

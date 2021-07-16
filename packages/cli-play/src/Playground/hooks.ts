@@ -1,7 +1,7 @@
 import React, {createElement, useState, useEffect, useReducer, useCallback, ComponentType} from 'react';
 import io from 'socket.io-client';
-import {PlayCase} from '../interface';
-import {formatTime} from './utils';
+import {PlayCase, PlayCaseInfo} from '../interface';
+import {formatTime} from '../utils/time';
 
 // eslint-disable-next-line init-declarations
 declare const Babel: any;
@@ -82,7 +82,7 @@ export const useCases = (source: string) => {
     const [state, setState] = useState<State>({cases: null, selectedIndex: -1});
     const saveCase = useCallback(
         async () => {
-            const caseToSave: PlayCase = {
+            const caseToSave: PlayCaseInfo = {
                 name: `Created at ${formatTime(new Date())}`,
                 description: '',
                 code: source,

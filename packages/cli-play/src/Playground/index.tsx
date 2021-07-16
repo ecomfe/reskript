@@ -59,11 +59,12 @@ export default function Playground(props: Props) {
         [onSourceChange]
     );
     const selectCaseByIndex = useCallback(
-        (index: number) => {
+        async (index: number) => {
             setCaseState(s => ({...s, selectedIndex: index}));
             const selectedCase = cases?.[index];
             if (selectedCase) {
                 updateSource(selectedCase.code);
+                await fetch(`/play/cases/${selectedCase.name}/TOUCH`, {method: 'PUT'});
             }
         },
         [cases, setCaseState, updateSource]
@@ -81,7 +82,7 @@ export default function Playground(props: Props) {
                     />
                 );
             case 'description':
-                return <CaseDescription content={cases?.[selectedCaseIndex]?.description} />;
+                return <CaseDescription currentCase={cases?.[selectedCaseIndex]} />;
             default:
                 return null;
         }
