@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
-    "@babel/traverse": "^7.14.7"
+    "@babel/traverse": "^7.14.7",
+    "@reskript/babel-utils": "1.9.0"
   }
 }

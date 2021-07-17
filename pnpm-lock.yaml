@@ -25,6 +25,7 @@ importers:
       '@babel/core': ^7.14.6
       '@babel/preset-react': ^7.13.13
       '@babel/traverse': ^7.14.7
+      '@reskript/babel-utils': 1.9.0
       '@types/babel__core': ^7.1.15
       eslint: ^7.30.0
       jest: ^27.0.6
@@ -33,6 +34,7 @@ importers:
     dependencies:
       '@babel/core': 7.14.6
       '@babel/traverse': 7.14.7
+      '@reskript/babel-utils': link:../babel-utils
     devDependencies:
       '@babel/preset-react': 7.14.5_@babel+core@7.14.6
       '@types/babel__core': 7.1.15
@@ -41,7 +43,7 @@ importers:
       ts-jest: 27.0.3_jest@27.0.6+typescript@4.3.5
       typescript: 4.3.5
 
-  packages/babel-plugin-debug-component-file-name:
+  packages/babel-plugin-debug-react-component-file-name:
     specifiers:
       '@babel/core': ^7.14.6
       '@babel/traverse': ^7.14.7
@@ -352,6 +354,7 @@ importers:
       '@babel/traverse': ^7.14.7
       '@emotion/babel-plugin': ^11.3.0
       '@reskript/babel-plugin-add-react-display-name': 1.9.0
+      '@reskript/babel-plugin-debug-react-component-file-name': 1.9.0
       '@reskript/babel-plugin-resolve-core-js': 1.9.0
       '@reskript/core': 1.9.0
       '@reskript/settings': 1.9.0
@@ -389,6 +392,7 @@ importers:
       '@babel/traverse': 7.14.7
       '@emotion/babel-plugin': 11.3.0_@babel+core@7.14.6
       '@reskript/babel-plugin-add-react-display-name': link:../babel-plugin-add-react-display-name
+      '@reskript/babel-plugin-debug-react-component-file-name': link:../babel-plugin-debug-react-component-file-name
       '@reskript/babel-plugin-resolve-core-js': link:../babel-plugin-resolve-core-js
       '@reskript/settings': link:../settings
       babel-plugin-import: 1.13.3
