@@ -48,7 +48,7 @@ exports.devServer = {
 我们尝试来实现一个用户的列表，将它放到`src/components/UserList/index.tsx`中：
 
 ```tsx
-import {FC, useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Table} from 'antd';
 
 interface User {
@@ -81,7 +81,7 @@ const columns = [
 
 const rowKey = (record: User) => record.login.uuid;
 
-const UserList: FC = () => {
+export default function UserList() {
     const [users, setUsers] = useState(null);
     useEffect(
         () => {
@@ -103,9 +103,7 @@ const UserList: FC = () => {
             pagination={false}
         />
     );
-};
-
-export default UserList;
+}
 ```
 
 接着尝试自行将它添加到`App`组件中，并在浏览器中观察最终页面的效果。

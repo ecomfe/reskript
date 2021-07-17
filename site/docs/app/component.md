@@ -33,13 +33,9 @@ npm install --save-dev @types/styled-components
 然后我们将其中的实现移到`App/index.tsx`中去：
 
 ```tsx
-import {FC} from 'react';
-
-const App: FC = () => (
-    <h1>Hello World</h1>
-);
-
-export default App;
+export default function App() {
+    return <h1>Hello World</h1>;
+}
 ```
 
 之后`entries/index.ts`只要引入组件就行了：
@@ -76,7 +72,6 @@ render(
 可以随便写一些内容，比如我们这样实现一个`Footer`组件：
 
 ```tsx
-import {FC} from 'react';
 import styled from 'styled-components';
 import {Typography} from 'antd';
 
@@ -89,7 +84,7 @@ const Layout = styled`
     align-items: center;
 `;
 
-const Footer: FC = () => {
+function Footer() {
     const now = new Date();
 
     return (
@@ -97,7 +92,7 @@ const Footer: FC = () => {
             <Typography.Text>Copyright {now.getFullYear()} all rights reserved.</Typography.Text>
         </Layout>
     );
-};
+}
 ```
 
 在上面的代码中，我们使用了`styled-components`和`antd`。事实上`reSKRipt`在这两个第三方库上都有相应的优化，其中**`styled-components`生成的组件会有自动的`displayName`**用于更好地调试，而**`antd`的引用则会被优化精简，不会引入完整的`antd`代码**，可以有效地控制产出的体积。
@@ -105,20 +100,19 @@ const Footer: FC = () => {
 我们也可以在`App`中重新引入这些组件组成一个完整的页面：
 
 ```tsx
-import {FC} from 'react';
 import Header from '@/components/Header';
 import Content from '@/components/Content';
 import Footer from '@/components/Footer';
 
-const App: FC = () => (
-    <>
-        <Header />
-        <Content />
-        <Footer />
-    </>
-);
-
-export default App;
+export default function App() {
+    return (
+        <>
+            <Header />
+            <Content />
+            <Footer />
+        </>
+    );
+}
 ```
 
 我们推荐对于`src/`下第一层的目录内的模块，比如`src/components/*`，都使用`@/`的形式引用。这样你在代码位置发生变化的时候，可以尽可能地不需要调整`import`的相对路径。

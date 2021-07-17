@@ -95,9 +95,7 @@ export function Wrapper({children}) {
 `provides`对象可以提供任何内容，包括并不限于项目内的其它模块和组件、第三方的包和函数（如`ramda`）、硬编码的常量、帮助调试的额外组件等。这些代码会最终通过webpack被编译在调试环境中，与你项目本身的代码无异。
 
 :::note
-
 不过`React`这东西并不需要通过`provides`来注入，在调试环境中默认注入了`React`这个全局变量，你可以直接使用`React.useState`、`React.createElement`等。
-
 :::
 
 ### 自定义调试预览的布局
@@ -132,9 +130,7 @@ export function Wrapper({children}) {
 每一个用例文件是一个标准的markdown文件，支持[github flavored markdown](https://github.github.com/gfm/)格式。
 
 :::note
-
 建议不要去手动创建这个文件，当你在界面上保存用例时，文件会自动按正确的格式创建。
-
 :::
 
 在文件中，每一个二级标题（`## title`）对应一个用例名称，在这个二级标题下面的内容中，最后一个语言指定为`jsx`的代码块是这个用例对应的代码，其它内容则被视为用例的补充说明。参考这样一个文件：
@@ -180,9 +176,7 @@ export default function Repl() {
 你可以手动编辑这个markdown文件管理用例，也可以在调试现场来联动它。
 
 :::caution
-
 在为用例编写描述时，必须在创建和执行时间**后面**追加内容，否则会导致用例文件的解析出现问题。
-
 :::
 
 ### 选择用例

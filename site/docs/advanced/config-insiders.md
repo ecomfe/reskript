@@ -16,21 +16,27 @@ title: 配置解密
 
 ### 组件名称
 
-所有的React组件会给加上`displayName`，支持这些形式：
+所有的React组件会给加上`displayName`，支持函数定义形式的组件，任何函数定义名称为`PascalCase`均被认为是组件：
 
-- `function FooBar`，函数名是PascalCase就算。
-- `const FooBar = () => {}`，函数名是PascalCase就算。
-- `export default () => {}`，且在函数体里有JSX元素。
-- `class FooBar extends Component`，要有`import {Component} from 'react'`，对`PureComponent`也生效。
-- `class FooBar extends React.Component`。
+```tsx
+function FooBar() {
+    return <div />;
+}
+```
 
-组件的`displayName`会用下面的规则去猜：
+组件的`displayName`会以函数名为准。
 
-- 如果函数或类有名字，就直接用这个名字。
-- 如果没有名字（`export default () => {}`），就取文件名。
-- 如果文件名不是PascalCase的，比如是`FooBar/index.tsx`，就取它所在的目录名。
+### 组件源码路径
 
-如果以上都出问题，最后也会有`displayName`，但具体是个啥就说不准了🐶。
+在进行应用调试时，经常会遇到这样一个情况：虽然找到了一个React组件，但一时对应不上哪个源代码文件里实现了这个文件。考虑到组件层级较深时，经常有一些局部使用的同名组件，比如大家都叫Content，就很尴尬，用displayName也不容易定位。
+
+为此`reSKRipt`在开发模式下会为每一个组件注入一些代码，你可以在React Devtools中看到这个组件对应的源码文件：
+
+![](./assets/debug-component-name.png)
+
+:::note
+所有与组件相关的额外能力，均只支持函数定义形式的组件，即`function FooBar() {}`的形式。其它如函数表达式、箭头函数都均不支持。
+:::
 
 ### 语法支持
 

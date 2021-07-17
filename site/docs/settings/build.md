@@ -484,9 +484,7 @@ function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): Rule
 这可以直接用在`webpack`的`module.rules`配置中。
 
 :::note
-
 有一些规则在特写情况下会返回`null`，所以记得处理空值。
-
 :::
 
 而`loaders`函数则更智能一些，你可以传递多个`LoaderType`或者`false`，它会去除其中的`false`值，将剩余的创建出对应的`loader`声明，再去除`null`的部分，返回一个完全可用的定义。
@@ -510,9 +508,7 @@ exports.build = {
 ```
 
 :::note
-
 请注意，`loaders`函数中的参数顺序依然是自右向左的，这与`webpack`的`loader`一致。
-
 :::
 
 ## 检查最终构建产物
