@@ -52,8 +52,9 @@ const computeCacheKey = (entry: BuildContext): string => {
     const gitRoot = findGitRoot(entry.cwd) ?? entry.cwd;
     updateHashFromFile(hash, path.join(gitRoot, 'node_modules', '.yarn-integrity'));
     updateHashFromFile(hash, path.join(gitRoot, 'package-lock.json'));
+    updateHashFromFile(hash, path.join(gitRoot, 'pnpm-lock.yaml'));
     // `package.json`里可能会有`browsers`之类的配置，所以不能只认lock文件
-    updateHashFromFile(hash, path.join(gitRoot, '.package.json'));
+    updateHashFromFile(hash, path.join(gitRoot, 'package.json'));
     updateHashFromFile(hash, path.join(gitRoot, '.browserslistrc'));
     const key = hash.digest('hex');
     return key;
