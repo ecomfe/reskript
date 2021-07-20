@@ -1,4 +1,3 @@
-// multiple components
 function Foo() {
     return 'foo';
 }

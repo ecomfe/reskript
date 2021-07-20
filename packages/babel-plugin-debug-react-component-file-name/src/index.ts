@@ -3,7 +3,7 @@ import {types, PluginObj, PluginPass} from '@babel/core';
 import {NodePath} from '@babel/traverse';
 import {isComponentDeclaration, findImportStatement, findParentProgram} from '@reskript/babel-utils';
 
-const HOOK_MODULE = '@reskript/babel-plugin-debug-react-component-file-name/useComponentFile';
+const HOOK_MODULE = path.resolve(__dirname, 'useComponentFile');
 
 const insertImportHook = (program: NodePath<types.Program>) => {
     const expression = types.importDeclaration(

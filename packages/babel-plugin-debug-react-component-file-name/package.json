@@ -2,10 +2,6 @@
   "name": "@reskript/babel-plugin-debug-react-component-file-name",
   "version": "1.10.0",
   "main": "dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./useComponentFile": "./dist/useComponentFile.js"
-  },
   "license": "MIT",
   "files": [
     "dist"
@@ -19,6 +15,7 @@
     "lint": "eslint src"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
     "@types/babel__core": "^7.1.15",
     "eslint": "^7.30.0",
     "jest": "^27.0.6",
