@@ -51,6 +51,7 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
         },
         transform: {
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,
+            '^.+\\.(md|mdx|txt|tpl)$': resolve('jest-raw-loader'),
         },
         coverageReporters: ['json-summary', 'lcov', 'text', 'clover'],
         testMatch: ['**/__tests__/**/*.test.{js,jsx,ts,tsx}'],
