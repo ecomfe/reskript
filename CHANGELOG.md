@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **babel:** useComponentFile的引用路径错误 ([890a13a](https://github.com/ecomfe/reskript/commit/890a13a3beb140d4691de85079a69f84fc43bd4c))
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 
