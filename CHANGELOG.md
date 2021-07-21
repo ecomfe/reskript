@@ -3,6 +3,161 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
+
+
+### Bug Fixes
+
+* **build:** 简化组件displayName的处理，只处理函数定义 ([#92](https://github.com/ecomfe/reskript/issues/92)) ([13fdb28](https://github.com/ecomfe/reskript/commit/13fdb283d68f35dc2504503f0fdc9245a3227aff))
+* **build:** 缓存标识增加pnpm-lock的内容 ([9214254](https://github.com/ecomfe/reskript/commit/9214254b3c5141afbf3e84e7d225a9b72fce1208))
+* **init:** 修复 install 过程中 spinner 卡住的 bug ([0cc59d7](https://github.com/ecomfe/reskript/commit/0cc59d7e0e6d64cbabb2ae624b8abf404ea12c30))
+* **play:** 使用play.wrapper配置时显示警告 ([#87](https://github.com/ecomfe/reskript/issues/87)) ([8cfe3f2](https://github.com/ecomfe/reskript/commit/8cfe3f25944a2289ffbf6595a69784f70d33f42f))
+
+
+### Features
+
+* **dev:** 增加一个babel插件为React组件注入对应源码路径 ([#91](https://github.com/ecomfe/reskript/issues/91)) ([fb0132d](https://github.com/ecomfe/reskript/commit/fb0132d31dc83128b8373da7b38ca0c3d32b4a9c))
+* **play:** 在选择用例时更新用例的最后执行时间 ([#89](https://github.com/ecomfe/reskript/issues/89)) ([15b2513](https://github.com/ecomfe/reskript/commit/15b251390eb0aa282174d0109deaf22922745f4d))
+* **play:** 支持显示用例说明和帮助信息 ([#88](https://github.com/ecomfe/reskript/issues/88)) ([6484c77](https://github.com/ecomfe/reskript/commit/6484c77b470c2eb1ebe8f16a8d5974b55b661320))
+* **test:** 允许jest识别一部分纯文本文件 ([ea9e475](https://github.com/ecomfe/reskript/commit/ea9e475735d9eea6c50aacd9061c6add6f48e2cc))
+
+
+
+
+
+# [1.9.0](https://github.com/ecomfe/reskript/compare/v1.8.0...v1.9.0) (2021-07-14)
+
+
+### Bug Fixes
+
+* 文档尽可能兼容Github Pages的展示逻辑 ([#83](https://github.com/ecomfe/reskript/issues/83)) ([bb8bc86](https://github.com/ecomfe/reskript/commit/bb8bc86dcdb61e2c786c0121bce8e440e21120d9))
+
+
+### Features
+
+* **build:** 支持指定cache目录 ([#84](https://github.com/ecomfe/reskript/issues/84)) ([000efd1](https://github.com/ecomfe/reskript/commit/000efd1ee4b3f03c0d714513c9f21cf2da7b3960))
+* **play:** 使用WebSocket实时推送用例文件的修改 ([#85](https://github.com/ecomfe/reskript/issues/85)) ([fa2990b](https://github.com/ecomfe/reskript/commit/fa2990b04bb1f38f9c0aed3429baba03ae7c5576))
+* **play:** 支持将调试中的代码保存为用例 ([#85](https://github.com/ecomfe/reskript/issues/85)) ([429d0a6](https://github.com/ecomfe/reskript/commit/429d0a66f13a9b61850ea6a295149cc4d149bdd3))
+* **play:** 支持自定义调试用例 ([#85](https://github.com/ecomfe/reskript/issues/85)) ([8021d98](https://github.com/ecomfe/reskript/commit/8021d9824149163144105242fa265e259cd7ffad))
+* **play:** 支持调试组件时自定义配置关联依赖注入和自定义布局 ([#85](https://github.com/ecomfe/reskript/issues/85)) ([44d82c6](https://github.com/ecomfe/reskript/commit/44d82c6e564563f435327f926aa28c9e84256999))
+* **play:** 更新当前用例功能 ([#85](https://github.com/ecomfe/reskript/issues/85)) ([cfda004](https://github.com/ecomfe/reskript/commit/cfda004103384728a4e6c9e215497585ae631550))
+
+
+
+
+
+# [1.8.0](https://github.com/ecomfe/reskript/compare/v1.7.1...v1.8.0) (2021-07-09)
+
+
+### Bug Fixes
+
+* **init:** 向初始化允许存在的文件白名单添加.git目录 ([acc8d59](https://github.com/ecomfe/reskript/commit/acc8d59f4c02b47d4373e439668ab2657aefe678))
+
+
+### Features
+
+* **build:** 为build.finalize提供内置的loader ([#70](https://github.com/ecomfe/reskript/issues/70)) ([8fc92dc](https://github.com/ecomfe/reskript/commit/8fc92dcb30603873474183d4e45af93133e4a66d))
+* **build:** 增加配置支持使用方选择性引入第三方库的专项优化 ([#79](https://github.com/ecomfe/reskript/issues/79)) ([f8ea13d](https://github.com/ecomfe/reskript/commit/f8ea13d2c16b11dae1a42d78cfa98d097350ef56))
+* **build:** 支持emotion管理样式 ([#78](https://github.com/ecomfe/reskript/issues/78)) ([e13e9a5](https://github.com/ecomfe/reskript/commit/e13e9a5a4c323c8690be674523041d4a607df9f8))
+* **plugin-sass:** 增加处理SASS样式的插件 ([4859f99](https://github.com/ecomfe/reskript/commit/4859f99a7e1d2cefe8e63ae147e4d970cb20b8e0))
+
+
+
+
+
+## [1.7.1](https://github.com/ecomfe/reskript/compare/v1.7.0...v1.7.1) (2021-07-07)
+
+
+### Bug Fixes
+
+* **lint:** 对lint结果通过与否的判断写反了 ([#71](https://github.com/ecomfe/reskript/issues/71)) ([52ef065](https://github.com/ecomfe/reskript/commit/52ef065f1f6f9101103bba7804e2d0eafc33ede8))
+
+
+
+
+
+# [1.7.0](https://github.com/ecomfe/reskript/compare/v1.6.2...v1.7.0) (2021-07-06)
+
+
+### Bug Fixes
+
+* **build:** monorepo下检测husky错误 ([#72](https://github.com/ecomfe/reskript/issues/72)) ([b86687a](https://github.com/ecomfe/reskript/commit/b86687a7712e4336e98c23457d9bae08a2e49688))
+* **plugin-qiankun:** qiankun的入口脚本也要加上跨域头 ([#73](https://github.com/ecomfe/reskript/issues/73)) ([82d6f72](https://github.com/ecomfe/reskript/commit/82d6f72190fe32dc276bf89bedc921b7b24cd073))
+
+
+### Features
+
+* **lint:** 增加一个严格模式，默认放过警告型错误 ([#71](https://github.com/ecomfe/reskript/issues/71)) ([3efbddf](https://github.com/ecomfe/reskript/commit/3efbddf77f79640fe57670b8e993bded08a16ff4))
+
+
+
+
+
+## [1.6.2](https://github.com/ecomfe/reskript/compare/v1.6.1...v1.6.2) (2021-06-29)
+
+
+### Bug Fixes
+
+* **lint:** config-lint的exports有错误，会无法引用到基础配置 ([86d9c91](https://github.com/ecomfe/reskript/commit/86d9c91d62c76a2800f9163fc5bd6c8d7ab6e2de))
+
+
+
+
+
+## [1.6.1](https://github.com/ecomfe/reskript/compare/v1.6.0...v1.6.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* **cli:** 限制Node版本支持ESM和Node协议 ([823172a](https://github.com/ecomfe/reskript/commit/823172a9000eacfb0c0655e81268d9cb58e1b9ba))
+* **dev:** 调试时指定的host应该同时影响HMR的配置 ([#62](https://github.com/ecomfe/reskript/issues/62)) ([20beb9e](https://github.com/ecomfe/reskript/commit/20beb9eacc8cd249278a94163b60deaeffaa8c45))
+* **lint:** config-lint需要导出stylelint配置 ([#69](https://github.com/ecomfe/reskript/issues/69)) ([8e3ed95](https://github.com/ecomfe/reskript/commit/8e3ed954fdf0d1a154a8bf065f5fd6028075ff1a))
+
+
+
+
+
+# [1.6.0](https://github.com/ecomfe/reskript/compare/v1.5.0...v1.6.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **babel:** 输出文件时没有保留目录结构 ([#61](https://github.com/ecomfe/reskript/issues/61)) ([f219279](https://github.com/ecomfe/reskript/commit/f21927975f9da3f3eb5e1b62a51827f379197570))
+
+
+### Features
+
+* **build:** 在build命令中用--src-dir参数替换原有--src参数 ([#65](https://github.com/ecomfe/reskript/issues/65)) ([c5894ad](https://github.com/ecomfe/reskript/commit/c5894ad4736e6ade78544fa353635af128204a99))
+* **build:** 支持--entries-dir参数指定入口目录 ([#36](https://github.com/ecomfe/reskript/issues/36)) ([dec298d](https://github.com/ecomfe/reskript/commit/dec298d9384849bfd14beaf2ca850b42362cd850))
+* **dev:** 为资源增加跨域头 ([#62](https://github.com/ecomfe/reskript/issues/62)) ([b47cac0](https://github.com/ecomfe/reskript/commit/b47cac0a3d0d346eac2bd5971721f110bc4a0045))
+* **dev:** 在dev命令中用--src-dir参数替换原有--src参数 ([#65](https://github.com/ecomfe/reskript/issues/65)) ([03b654d](https://github.com/ecomfe/reskript/commit/03b654d3553a6914d75402c1af9f5983773bb962))
+* **dev:** 增加--host参数指定调试服务器默认地址，自动生成完整的publicPath ([#62](https://github.com/ecomfe/reskript/issues/62)) ([71b7d6d](https://github.com/ecomfe/reskript/commit/71b7d6db0cce7da200b0c9b154b30dde2c529dc7))
+
+
+
+
+
+# [1.5.0](https://github.com/ecomfe/reskript/compare/v1.4.0...v1.5.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **build:** 告诉用户不要修改webpack.config.js ([#60](https://github.com/ecomfe/reskript/issues/60)) ([4c0bc5f](https://github.com/ecomfe/reskript/commit/4c0bc5f1e0627471b2f56c54bd7da082072cdeaf))
+* **build:** 更新class-names-loader兼容旧版本浏览器 ([#51](https://github.com/ecomfe/reskript/issues/51)) ([abf649a](https://github.com/ecomfe/reskript/commit/abf649a0aaed2ed100bbe12aeb3e2f478b5a6b05))
+* **lint:** hooks-deps-new-line规则只适用于第一个参数是函数的情况 ([#55](https://github.com/ecomfe/reskript/issues/55)) ([80377eb](https://github.com/ecomfe/reskript/commit/80377eb36f044e829701cc3034e55a6d2c92684a))
+
+
+### Features
+
+* **build:** 支持自定义入口配置，如指定输出文件名 ([#56](https://github.com/ecomfe/reskript/issues/56)) ([84fa53b](https://github.com/ecomfe/reskript/commit/84fa53b72fedb041db77cf7f3b1c209823b185fb))
+* **build:** 自动构建service worker ([#53](https://github.com/ecomfe/reskript/issues/53)) ([f1e42c5](https://github.com/ecomfe/reskript/commit/f1e42c5df7cf3b2fe1951f087530fe93096b3baf))
+* **lint:** import-order规则支持node协议路径 ([#58](https://github.com/ecomfe/reskript/issues/58)) ([9ad4798](https://github.com/ecomfe/reskript/commit/9ad4798a992f58597daf3515f79e133a5c866a5c))
+* **test:** skr test增加--collectCoverageFrom参数并可以指定测试文件范围 ([#63](https://github.com/ecomfe/reskript/issues/63)) ([0e996a3](https://github.com/ecomfe/reskript/commit/0e996a38fa3917b61550078bd94a8773248dfbe4))
+
+
+
+
+
 # [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
 
 

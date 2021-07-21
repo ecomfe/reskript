@@ -1,6 +1,6 @@
 {
   "name": "@reskript/eslint-plugin",
-  "version": "1.4.0",
+  "version": "1.10.0",
   "main": "index.js",
   "license": "MIT",
   "files": [
@@ -20,9 +20,9 @@
     "builtins": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.13.14",
+    "@babel/eslint-parser": "^7.14.7",
     "@babel/eslint-plugin": "^7.13.16",
-    "eslint": "^7.25.0",
-    "jest": "^26.6.3"
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6"
   }
 }

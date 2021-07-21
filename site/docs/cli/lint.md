@@ -41,6 +41,8 @@ npm install --save-dev @reskript/config-lint
 你的`.eslintrc.js`中应该是以下的内容：
 
 ```js
+require('@reskript/config-lint/patch');
+
 module.exports = {
     extends: require.resolve('@reskript/config-lint/config/eslint'),
     rules: {
@@ -48,6 +50,8 @@ module.exports = {
     },
 };
 ```
+
+其中第一行用来解决[ESLint无法从共享配置查找插件的问题](https://github.com/eslint/eslint/issues/3458)。
 
 对应`stylelint.config.js`也是类似：
 

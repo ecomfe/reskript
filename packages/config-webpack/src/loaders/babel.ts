@@ -4,12 +4,15 @@ import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings
 import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = (entry: BuildEntry) => {
-    const {usage, mode, projectSettings: {build, devServer}} = entry;
-    const {script: {polyfill, defaultImportOptimization, displayName}} = build;
+    const {usage, mode, cwd, srcDirectory, projectSettings: {build, devServer}} = entry;
+    const {uses, script: {polyfill, defaultImportOptimization, displayName}} = build;
     const {hot} = devServer;
     const babelConfigOptions: BabelConfigOptions = {
+        cwd,
+        srcDirectory,
         mode,
         polyfill,
+        uses,
         defaultImportOptimization,
         displayName,
         // 对于需要构建产物用的场合，默认不给热更新

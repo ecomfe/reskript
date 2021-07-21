@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+# [1.9.0](https://github.com/ecomfe/reskript/compare/v1.8.0...v1.9.0) (2021-07-14)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+# [1.8.0](https://github.com/ecomfe/reskript/compare/v1.7.1...v1.8.0) (2021-07-09)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+## [1.7.1](https://github.com/ecomfe/reskript/compare/v1.7.0...v1.7.1) (2021-07-07)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+# [1.7.0](https://github.com/ecomfe/reskript/compare/v1.6.2...v1.7.0) (2021-07-06)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+## [1.6.2](https://github.com/ecomfe/reskript/compare/v1.6.1...v1.6.2) (2021-06-29)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+## [1.6.1](https://github.com/ecomfe/reskript/compare/v1.6.0...v1.6.1) (2021-06-29)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+# [1.6.0](https://github.com/ecomfe/reskript/compare/v1.5.0...v1.6.0) (2021-06-09)
+
+**Note:** Version bump only for package @reskript/eslint-plugin
+
+
+
+
+
+# [1.5.0](https://github.com/ecomfe/reskript/compare/v1.4.0...v1.5.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **lint:** hooks-deps-new-line规则只适用于第一个参数是函数的情况 ([#55](https://github.com/ecomfe/reskript/issues/55)) ([80377eb](https://github.com/ecomfe/reskript/commit/80377eb36f044e829701cc3034e55a6d2c92684a))
+
+
+### Features
+
+* **lint:** import-order规则支持node协议路径 ([#58](https://github.com/ecomfe/reskript/issues/58)) ([9ad4798](https://github.com/ecomfe/reskript/commit/9ad4798a992f58597daf3515f79e133a5c866a5c))
+
+
+
+
+
 # [1.4.0](https://github.com/ecomfe/reskript/compare/v1.3.1...v1.4.0) (2021-04-29)
 
 

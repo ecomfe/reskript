@@ -6,9 +6,10 @@ export interface JestCommandLineArgs {
     readonly watch: boolean;
     readonly target: TestTarget;
     readonly changedSince: string;
-    readonly src: string;
+    readonly collectCoverageFrom: string;
 }
 
 export interface TestCommandLineArgs extends ProjectAware, JestCommandLineArgs {
+    readonly src: string;
     readonly target: TestTarget;
 }

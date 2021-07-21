@@ -1,7 +1,7 @@
-import chalk from 'chalk';
-import {sumBy, stubTrue} from 'lodash';
+import {stubTrue} from 'lodash';
 import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
+import {logger} from '@reskript/core';
 import {LintCommandLineArgs} from './interface';
 import lintScripts from './script';
 import lintStyles from './style';
@@ -26,13 +26,23 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<void> 
     const [scriptResults, styleResults] = await Promise.all([lintScripts(files, cmd), lintStyles(files, cmd)]);
     const lintResults = filterUnwantedReports([...scriptResults, ...styleResults], cmd);
 
-    const isCleanLint = sumBy(lintResults, ({errorCount, warningCount}) => errorCount + warningCount) === 0;
-    if (isCleanLint) {
-        console.log(chalk.green.bold('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!'));
+    const hasError = lintResults.some(v => v.errorCount > 0);
+    const hasWarn = lintResults.some(v => v.warningCount > 0);
+    const isLintFailed = cmd.strict ? hasError || hasWarn : hasError;
+
+    if (hasError || hasWarn) {
+        const output = eslintPrettyFormatter(lintResults);
+        logger.log(output);
+    }
+
+    if (isLintFailed) {
+        process.exit(25);
+    }
+
+    if (hasWarn) {
+        logger.log.yellow('(；′⌒`) Nice work, still looking forward to see all warnings fixed!');
     }
     else {
-        const output = eslintPrettyFormatter(lintResults);
-        console.log(output);
-        process.exit(25);
+        logger.log.green('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!');
     }
 };

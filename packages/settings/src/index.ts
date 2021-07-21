@@ -1,16 +1,16 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import chalk from 'chalk';
-import dedent from 'dedent';
-import {ProjectAware} from '@reskript/core';
+import {logger, ProjectAware} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
 import {fillProjectSettings} from './defaults';
 import {applyPlugins} from './plugins';
+import {warnDeprecatedInProjectSettings} from './warn';
 
 export * from './interface';
+export {fillProjectSettings};
 
 const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
     const location = path.join(cmd.cwd, 'reskript.config.js');
@@ -24,6 +24,7 @@ const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSetting
     const requiredSettings = require(location) as ClientProjectSettings;
     validate(requiredSettings);
     const {plugins = [], ...clientSettings} = requiredSettings;
+    warnDeprecatedInProjectSettings(clientSettings);
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);
@@ -103,13 +104,11 @@ export const watchProjectSettings = (cmd: ProjectAware, commandName: string): Ob
 
 export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): void => {
     if (!value) {
-        const message = dedent`
+        const message = `
             Your ${scope}.finalize returns nothing.
             You may forget to write a return statement in ${scope}.finalize, or some plugin has a broken implement.
         `;
-        console.error(chalk.red(message));
+        logger.error(message);
         process.exit(21);
     }
 };
-
-export {fillProjectSettings};

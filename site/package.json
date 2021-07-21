@@ -9,9 +9,9 @@
     "test": "echo 'No test in @reskript/docs'"
   },
   "devDependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.70",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "@docusaurus/core": "^2.0.0-beta.3",
+    "@docusaurus/preset-classic": "^2.0.0-beta.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

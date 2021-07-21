@@ -7,6 +7,9 @@ title: 构建配置
 `reskript.config.js`中的`exports.build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
 
 ```ts
+// 以下是工具内置了优化的相关第三方库
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
+
 interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
     readonly extract: boolean;
@@ -25,7 +28,7 @@ interface BuildScriptSettings {
     readonly polyfill: boolean;
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
-    // 是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
+    // 已废弃，使用uses配置代替它。是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
     readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
@@ -76,6 +79,8 @@ interface BuildInternals {
 }
 
 interface BuildSettings {
+    // 指定使用的第三方库，会为这些库做特殊的优化，默认会开启antd和lodash，如果自定义这个数组则要手动补上默认的值
+    readonly uses: ThirdPartyUse[];
     // 产出的资源路径前缀
     readonly publicPath?: string;
     // 是否以第三方库的形式构建，第三方库的构建不使用featureMatrix、不拆分chunk，同时构建产出不带hash、不产出HTML文件
@@ -148,9 +153,18 @@ exports.build = {
 };
 ```
 
-### 特殊包的导入优化
+### 特殊第三方库的优化
 
-`reSKRipt`在默认选项下，对于`antd`和`lodash`的引用有特殊的处理。考虑到这2个库包含了非常多的模块，且一个产品往往用不到全部，因此会使用[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)和[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)来进行优化。你只需要正常地引入这2个包的部分内容，最终构建产出就不会包含其它你未（直接或间接）引用的部分。
+社区上有许多的库需要构建期工具的支持才能取得更好的使用效果。`reSKRipt`在长远的计划上会精选支持高质量、持续维护、对生产效率有足够帮助的库。但默认打开所有相关的优化必定会拖慢构建速度，因此提供了选项由使用者指定你所用的库。
+
+通过`reskript.config.js`中的`exports.build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
+
+- `antd`：对`antd`的导入进行优化，可以参考[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)的相关说明。
+- `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
+- `styled-components`：对`styled-components`的使用进行构建期的优化，可以参考[babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components)的相关说明。
+- `emotion`：对`emotion`样式解决方案进行处理，这个插件是[`emotion`部分功能的必须依赖](https://emotion.sh/docs/@emotion/babel-plugin#features)。**使用`emotion`要求你的`react`版本在`16.14.0`以上。**
+
+`reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
 
 ```js
 // 最终lodash中其它函数都会消失
@@ -159,15 +173,23 @@ import {filter, map} from 'lodash';
 import {Button} from 'antd';
 ```
 
-不过这一优化会与CDN的使用产生冲突，如果你已经决定通过CDN全量引入`antd`和`lodash`，则需要将这个优化关闭：
+如果你自定义这个配置，那么默认的`antd`和`lodash`优化会被取消，你需要自己补充这两个值。假设你在使用着`antd`和`lodash`的同时，又希望使用`styled-components`，则可以这么写：
 
 ```js
 exports.build = {
-    script: {
-        defaultImportOptimization: false,
-    },
+    uses: ['antd', 'lodash', 'styled-components'],
 };
 ```
+
+而假设你使用`ramda`代替了`lodash`，又不希望额外的优化影响构建速度，你也可以自定义这个配置来移除对`lodash`的处理：
+
+```js
+exports.build = {
+    uses: ['antd'],
+};
+```
+
+**另外，`antd`和`lodash`的优化还会与CDN的使用产生冲突，如果你已经决定通过CDN全量引入`antd`和`lodash`，则需要将这个优化关闭。**
 
 ### 扩展`babel`配置
 
@@ -381,7 +403,7 @@ exports.build = {
 
 因此，你可以安全地使用`webpackConfig.plugins.push(new CopyPlugin())`这样的代码，而不需要对`plugins`属性判空。
 
-### 调整已有loader
+### 调整已有`webpack`规则
 
 虽然通过`exports.build.finalize`可以灵活地调整`webpack`配置，但你几乎不可能直接去修改已有的loader规则，比如你想让所有的图片不再使用默认的`url-loader`，而是用`responsive-loader`代替，但你是没办法在`webpackConfig.module.rules`中找到处理图片的那条规则的。
 
@@ -416,6 +438,78 @@ exports.build = {
     },
 };
 ```
+
+### 复用现有的`loader`
+
+承接上文，有时候你在处理一个自定义的文件类型的时候，又想能够尽量复用`reSKRipt`内置的`loader`逻辑，这也是可以做到的。`build.finalize`函数的第三个参数`internals`中提供了如下2个函数：
+
+```ts
+type LoaderType =
+    | 'babel'
+    | 'style'
+    | 'css'
+    | 'cssModules'
+    | 'postCSS'
+    | 'postCSSModules'
+    | 'less'
+    | 'lessSafe'
+    | 'url'
+    | 'img'
+    | 'worker'
+    | 'styleResources'
+    | 'classNames'
+    | 'cssExtract'
+    | 'svg'
+    | 'svgo';
+
+
+function loader(name: LoaderType, buildEntry: BuildEntry): RuleSetUseItem | null;
+
+function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): RuleSetUseItem[];
+}
+```
+
+其中`loader`函数可以生成一个`loader`声明，例如`loader('css', buildEntry)`就可能返回类似这样的结构：
+
+```js
+{
+    loader: resolve('css-loader'),
+    options: {
+        sourceMap: true,
+        modules: false,
+    },
+}
+```
+
+这可以直接用在`webpack`的`module.rules`配置中。
+
+:::note
+有一些规则在特写情况下会返回`null`，所以记得处理空值。
+:::
+
+而`loaders`函数则更智能一些，你可以传递多个`LoaderType`或者`false`，它会去除其中的`false`值，将剩余的创建出对应的`loader`声明，再去除`null`的部分，返回一个完全可用的定义。
+
+一个典型的场景是你需要处理`.sass`文件，且希望它们都具备`reSKRipt`原本的CSS Modules等样式处理能力以及[神奇的样式函数功能](../app/style/#了解样式函数)，那么你就需要借用`loaders`函数引入类似`postcss-loader`、`css-loader`、`style-loader`等：
+
+```js
+exports.build = {
+    finalize: (webpackConfig, buildEntry, internals) => {
+        const sassRule = {
+            test: /\.s[ac]ss$/,
+            use: [
+                ...internals.loaders(['classNames', 'style', 'cssModules', 'postCSSModules'], buildEntry),
+                'sass-loader',
+            ],
+        };
+        webpackConfig.module.rules.push(sassRule);
+        return webpackConfig;
+    },
+};
+```
+
+:::note
+请注意，`loaders`函数中的参数顺序依然是自右向左的，这与`webpack`的`loader`一致。
+:::
 
 ## 检查最终构建产物
 

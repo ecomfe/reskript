@@ -46,6 +46,7 @@ module.exports = {
             label: '高阶应用',
             items: [
                 'advanced/lint-rules',
+                'advanced/service-worker',
                 'advanced/config-insiders',
                 'advanced/multiple-entry',
                 'advanced/browsers-list',
@@ -57,6 +58,7 @@ module.exports = {
             type: 'category',
             label: '插件',
             items: [
+                'plugins/sass',
                 'plugins/qiankun',
             ],
         },

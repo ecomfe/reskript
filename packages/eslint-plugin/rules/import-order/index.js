@@ -3,10 +3,11 @@ const builtins = require('builtins');
 const BUILTIN_MODULES = new Set(builtins());
 
 const BASE_PRIORITY = {
-    native: 0,
-    package: 100,
-    alias: 200,
-    relative: 300,
+    node: 0,
+    native: 100,
+    package: 200,
+    alias: 300,
+    relative: 400,
 };
 
 const RELATIVE_HINT = '..';
@@ -14,6 +15,9 @@ const RELATIVE_HINT = '..';
 const importSourceType = name => {
     if (BUILTIN_MODULES.has(name)) {
         return 'native';
+    }
+    if (name.startsWith('node:')) {
+        return 'node';
     }
     if (name.startsWith('.')) {
         return 'relative';

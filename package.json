@@ -9,22 +9,25 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "lerna run lint --parallel",
-    "test": "lerna run test --concurrency=1",
-    "build": "lerna run build",
+    "lint": "pnpm run -r --parallel lint",
+    "test": "pnpm run -r --stream test",
+    "build": "pnpm run -r build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
-    "ci": "yarn && yarn build && yarn lint && yarn test",
-    "preversion": "yarn ci",
-    "prepack": "yarn && yarn build",
-    "local-publish": "yarn && yarn build && node scripts/local-publish.js",
+    "ci": "pnpm install && pnpm run build && pnpm run lint && pnpm run test",
+    "preversion": "pnpm run ci",
+    "prepack": "pnpm install && pnpm run build",
+    "version": "pnpm install && git add pnpm-lock.yaml",
+    "local-publish": "pnpm install && pnpm run build && node scripts/local-publish.js",
     "deploy": "lerna publish from-package",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "cpy": "^8.1.2",
-    "husky": "^6.0.0",
-    "lerna": "^4.0.0"
+    "husky": "^7.0.1",
+    "lerna": "^4.0.0",
+    "semver": "^7.3.5",
+    "yargs": "^17.0.1"
   }
 }

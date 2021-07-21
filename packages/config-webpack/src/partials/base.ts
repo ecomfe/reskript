@@ -1,10 +1,10 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import * as crypto from 'crypto';
 import {sync as resolve} from 'resolve';
 import {compact, mapValues} from 'lodash';
 import {paramCase} from 'change-case';
-import {DefinePlugin, ContextReplacementPlugin} from 'webpack';
+import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
@@ -12,7 +12,8 @@ import StyleLintPlugin from 'stylelint-webpack-plugin';
 import {findGitRoot} from '@reskript/core';
 import {getScriptLintConfig, getStyleLintConfig} from '@reskript/config-lint';
 import {ConfigurationFactory, BuildContext} from '../interface';
-import {createHTMLPluginInstances} from '../utils';
+import {createHTMLPluginInstances} from '../utils/html';
+import {convertToWebpackEntry} from '../utils/entry';
 import * as rules from '../rules';
 
 const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
@@ -51,8 +52,9 @@ const computeCacheKey = (entry: BuildContext): string => {
     const gitRoot = findGitRoot(entry.cwd) ?? entry.cwd;
     updateHashFromFile(hash, path.join(gitRoot, 'node_modules', '.yarn-integrity'));
     updateHashFromFile(hash, path.join(gitRoot, 'package-lock.json'));
+    updateHashFromFile(hash, path.join(gitRoot, 'pnpm-lock.yaml'));
     // `package.json`里可能会有`browsers`之类的配置，所以不能只认lock文件
-    updateHashFromFile(hash, path.join(gitRoot, '.package.json'));
+    updateHashFromFile(hash, path.join(gitRoot, 'package.json'));
     updateHashFromFile(hash, path.join(gitRoot, '.browserslistrc'));
     const key = hash.digest('hex');
     return key;
@@ -77,6 +79,7 @@ const factory: ConfigurationFactory = entry => {
         buildTime,
         entries,
         cache = true,
+        cacheDirectory,
         projectSettings: {
             build: {
                 publicPath,
@@ -130,7 +133,14 @@ const factory: ConfigurationFactory = entry => {
     return {
         mode,
         context: cwd,
-        entry: entries.reduce((entry, {name, file}) => ({...entry, [name]: file}), {}),
+        entry: entries.reduce(
+            (webpackEntry, appEntry) => {
+                const currentWebpackEntry = convertToWebpackEntry(appEntry);
+                webpackEntry[appEntry.name] = currentWebpackEntry;
+                return webpackEntry;
+            },
+            {} as EntryObject
+        ),
         output: {
             path: path.join(cwd, 'dist', 'assets'),
             filename: '[name].[chunkhash].js',
@@ -155,6 +165,7 @@ const factory: ConfigurationFactory = entry => {
             ? {
                 type: 'filesystem',
                 version: computeCacheKey(entry),
+                cacheDirectory: cacheDirectory ? path.join(cwd, cacheDirectory) : undefined,
                 name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
             }
             : false,

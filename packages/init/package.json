@@ -1,6 +1,6 @@
 {
   "name": "@reskript/init",
-  "version": "1.4.0",
+  "version": "1.10.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,15 +17,14 @@
     "test": "echo 'No test in @reskript/init'"
   },
   "devDependencies": {
-    "@types/dedent": "^0.7.0",
-    "@types/inquirer": "^7.3.1",
-    "eslint": "^7.25.0",
-    "typescript": "^4.2.4"
+    "@types/inquirer": "^7.3.3",
+    "eslint": "^7.30.0",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dedent": "^0.7.0",
-    "globby": "^11.0.3",
-    "inquirer": "^8.0.0",
+    "@reskript/core": "1.10.0",
+    "globby": "^11.0.4",
+    "inquirer": "^8.1.1",
     "lodash": "^4.17.21",
     "ora": "^5.4.0"
   }

@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint --exclude-dependents --since HEAD
+node scripts/check-deps.mjs
+pnpm run -r --parallel --filter "...{packages}[HEAD]" lint

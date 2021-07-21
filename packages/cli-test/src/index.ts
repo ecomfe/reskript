@@ -4,7 +4,7 @@ import run from './run';
 
 const command: CommandConfig<TestCommandLineArgs> = {
     run,
-    command: 'test',
+    command: 'test [files...]',
     description: 'Test with jest',
     args: [
         ['--cwd [value]', 'override current working directory', process.cwd()],
@@ -12,6 +12,7 @@ const command: CommandConfig<TestCommandLineArgs> = {
         ['--watch', 'watch files for changes and rerun tests related to changed files', false],
         ['--target [value]', 'specify test environment of the project is "react" or "node"', 'node'],
         ['--changedSince [value]', 'runs tests related to the changes since the provided branch.', ''],
+        ['--collect-coverage-from [glob]', 'only collect coverage from given glob.', ''],
     ],
 };
 

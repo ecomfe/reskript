@@ -10,11 +10,15 @@
         "skipLibCheck": true,
         "declaration": true,
         "baseUrl": ".",
+        "types": [
+            "webpack"
+        ]
     },
     "include": [
         "packages/*/src/**/*.ts"
     ],
     "exclude": [
-        "**/__tests__/**"
+        "**/__tests__/**",
+        "scripts/**"
     ]
 }

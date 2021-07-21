@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import {ProjectAware, WorkModeAware} from '@reskript/core';
-import {Configuration as WebpackConfiguration, RuleSetRule} from 'webpack';
+import {Configuration as WebpackConfiguration, RuleSetRule, RuleSetUseItem} from 'webpack';
 import {Configuration as WebpackDevServerConfiguration} from 'webpack-dev-server';
 import {TransformOptions} from '@babel/core';
 
@@ -11,6 +11,8 @@ export interface FeatureSet {
 export interface FeatureMatrix {
     [name: string]: FeatureSet;
 }
+
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
 
 export interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
@@ -31,6 +33,7 @@ export interface BuildScriptSettings {
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
     // 是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
+    // DEPRECATED: 待废弃
     readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
@@ -66,6 +69,8 @@ export interface BuildInspectSettings {
 
 export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
 
+export type LoaderFactory = (buildEntry: BuildEntry) => RuleSetUseItem | null;
+
 export interface InternalRules {
     readonly script: RuleFactory;
     readonly less: RuleFactory;
@@ -75,11 +80,33 @@ export interface InternalRules {
     readonly file: RuleFactory;
 }
 
+export type LoaderType =
+    | 'babel'
+    | 'style'
+    | 'css'
+    | 'cssModules'
+    | 'postCSS'
+    | 'postCSSModules'
+    | 'less'
+    | 'lessSafe'
+    | 'url'
+    | 'img'
+    | 'worker'
+    | 'styleResources'
+    | 'classNames'
+    | 'cssExtract'
+    | 'svg'
+    | 'svgo';
+
 export interface BuildInternals {
     readonly rules: InternalRules;
+    readonly loader: (name: LoaderType, buildEntry: BuildEntry) => RuleSetUseItem | null;
+    readonly loaders: (names: Array<LoaderType | false>, buildEntry: BuildEntry) => RuleSetUseItem[];
 }
 
 export interface BuildSettings {
+    // 指定使用的第三方库，会为这些库做特殊的优化
+    readonly uses: ThirdPartyUse[];
     // 产出的资源路径前缀
     readonly publicPath?: string;
     // 是否以第三方库的形式构建，第三方库的构建不使用featureMatrix、不拆分chunk，同时构建产出不带hash、不产出HTML文件
@@ -156,6 +183,8 @@ export interface BuildEnv extends WorkModeAware {
     readonly projectSettings: ProjectSettings;
     // 是否启用缓存
     readonly cache?: boolean;
+    // 缓存的目录，默认为`node_modules/.cache`
+    readonly cacheDirectory?: string;
 }
 
 export interface RuntimeBuildEnv extends BuildEnv {

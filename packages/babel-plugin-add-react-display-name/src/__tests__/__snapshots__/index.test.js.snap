@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`export default a render function 1`] = `
+"// export default a render function
+export default function () {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}"
+`;
+
+exports[`export default function containing nested function component 1`] = `
+"// export default function containing nested function component
+export default function () {
+  function Foo() {
+    return /*#__PURE__*/React.createElement(\\"div\\", null);
+  }
+
+  Foo.displayName = \\"Foo\\";
+  return Foo;
+}
+;"
+`;
+
+exports[`export default named function 1`] = `
+"// export default named function
+export default function Foo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+Foo.displayName = \\"Foo\\";"
+`;
+
+exports[`render function returns jsx 1`] = `
+"// render function returns jsx
+function renderFoo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}"
+`;
+
+exports[`return jsx 1`] = `
+"// return jsx
+function Foo() {
+  return /*#__PURE__*/React.createElement(\\"div\\", null);
+}
+
+Foo.displayName = \\"Foo\\";"
+`;

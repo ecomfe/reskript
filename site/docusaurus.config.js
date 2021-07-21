@@ -3,7 +3,8 @@ module.exports = {
     tagline: '基于React与Ant Design的应用开发命令行工具套件',
     baseUrl: process.env.CI ? '/reskript/' : '/',
     favicon: 'favicon.ico',
-    url: 'https://ecomfe.github.io/reskript',
+    url: 'https://ecomfe.github.io',
+    trailingSlash: false,
     themeConfig: {
         colorMode: {
             defaultMode: 'light',
@@ -30,6 +31,10 @@ module.exports = {
         },
         footer: {
             style: 'dark',
+        },
+        algolia: {
+            apiKey: 'a5cdc28c7cd73f7dc170c8deb130303d',
+            indexName: 'reskript',
         },
     },
     presets: [

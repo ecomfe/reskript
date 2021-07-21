@@ -21,6 +21,9 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             app.get(
                 '/__qiankun_entry__.js',
                 async (req, res) => {
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+                    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
                     const script = await runtimeEntry(appName);
                     res.type('js').end(script);
                 }
@@ -57,7 +60,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             devServer: {
                 ...settings.devServer,
                 finalize: (config, env) => {
-                    const before = settings.devServer.finalize?.(config, env);
+                    const before = settings.devServer.finalize(config, env);
                     return finalizeDevServer(before, env);
                 },
             },

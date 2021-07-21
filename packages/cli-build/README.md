@@ -30,7 +30,7 @@ Build entire app
 Options:
   --cwd [value]           override current working directory (default: process.cwd())
   --mode [value]          set build mode, default to "production" (default: "production")
-  --src [value]           specify the dir containing source files relative to cwd (default: "src")
+  --src-dir [value]       specify the dir containing source files relative to cwd (default: "src")
   --build-target [value]  create index.html according to specific target
   --feature-only [value]  build named feature only, ignore other features
   --analyze               enable bundle analytics

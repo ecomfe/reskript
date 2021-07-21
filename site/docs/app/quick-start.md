@@ -24,7 +24,7 @@ npm init -y
 npm install --save-dev eslint stylelint typescript webpack @reskript/cli @reskript/cli-build @reskript/cli-dev @reskript/cli-lint @reskript/config-lint
 ```
 
-**另请注意：`NodeJS 15.x`和`NPM 7.x`现在还录能完全兼容地安装这些依赖，你可能需要切换到`NodeJS 14.x`，可以考虑使用[nvm](https://github.com/nvm-sh/nvm)来管理你的NodeJS版本。**
+**另请注意：`NodeJS 15.x`和`NPM 7.x`现在还不能完全兼容地安装这些依赖，你可能需要切换到`NodeJS 14.x`，可以考虑使用[nvm](https://github.com/nvm-sh/nvm)来管理你的NodeJS版本。**
 
 当然需要使用`react`进行开发，必要的框架也是不可少的：
 
@@ -151,12 +151,11 @@ package-lock.json
 建立`src/entries/index.tsx`，并输入以下代码：
 
 ```tsx
-import {FC} from 'react';
 import {render} from 'react-dom';
 
-const App: FC = () => (
-    <h1>Hello World</h1>
-);
+function App() {
+    return <h1>Hello World</h1>;
+};
 
 render(
     <App />,

@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import {sync as resolve} from 'resolve';
 import {compact} from 'lodash';
 import unixify from 'unixify';
@@ -9,6 +9,7 @@ const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
     const patterns = [
         ...resources,
         unixify(path.resolve(cwd, srcDirectory, 'styles/*.var.less')),
+        // DEPRECATED: 2.0废弃
         unixify(path.resolve(__dirname, '../assets/est-compat.less')),
     ];
 

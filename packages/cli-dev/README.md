@@ -14,7 +14,7 @@ Start dev server for debugging
 Options:
   --cwd [value]            override current working directory (default: process.cwd())
   --mode [value]           set build mode, default to "development" (default: "development")
-  --src [value]            specify the dir containing source files relative to cwd (default: "src")
+  --src-dir [value]        specify the dir containing source files relative to cwd (default: "src")
   --build-target [value]   set build target, default to "dev" (default: "dev")
   --proxy-domain [domain]  set api proxy domain, only domain part (www.example.com) is required
   --open [value]           choose open "local" (localhost) or "remote" (ip) browser page (default "local")

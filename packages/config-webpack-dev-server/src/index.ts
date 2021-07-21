@@ -1,5 +1,4 @@
-import * as path from 'path';
-import internalIp from 'internal-ip';
+import path from 'path';
 import {compact} from 'lodash';
 import {HotModuleReplacementPlugin, Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
@@ -12,22 +11,11 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 
-const devHost = internalIp.v4.sync();
+const getDevServerMessages = (host: string, port: number, openPage: string = ''): string[] => [
+    `Your application is running here: http://${host}:${port}/${openPage}`,
+];
 
-const getDevServerMessages = (port: number, openPage: string = ''): string[] => {
-    const prefix = 'Your application is running here';
-    const messages = [`${prefix}: http://localhost:${port}/${openPage}`];
-
-    if (devHost) {
-        const devHostPrefix = 'or';
-        const devHostMsg = ' '.repeat(prefix.length - devHostPrefix.length)
-            + devHostPrefix + `: http://${devHost}:${port}/${openPage}`;
-        messages.push(devHostMsg);
-    }
-    return messages;
-};
-
-export const createWebpackDevServerPartial = (context: BuildContext): Configuration => {
+export const createWebpackDevServerPartial = (context: BuildContext, host = 'localhost'): Configuration => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage}}} = context;
     const webpackBarOptions = {
         name: '@reskript/dev',
@@ -39,7 +27,7 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
         // TODO: https://github.com/webpack/webpack/pull/11698
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
-                messages: getDevServerMessages(port, openPage),
+                messages: getDevServerMessages(host, port, openPage),
                 notes: [],
             },
         }) as any,
@@ -50,7 +38,8 @@ export const createWebpackDevServerPartial = (context: BuildContext): Configurat
     return {
         output: {
             path: path.join(cwd, 'dist'),
-            // 不要让构建时的`publicPath`影响调试，调试永远走本地
+            // 不要让构建时的`publicPath`影响调试，调试永远走本地，
+            // 使用本地的地址用于兼容微前端环境：https://github.com/ecomfe/reskript/issues/62
             publicPath: '/assets/',
             // 在使用`HotModuleReplacementPlugin`时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
             filename: '[name].[contenthash].js',
@@ -90,7 +79,6 @@ export const createWebpackDevServerConfig = (
         hot = 'none',
         openPage = '',
     } = buildEntry.projectSettings.devServer;
-    const devHost = internalIp.v4.sync();
     const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
     const proxyRules = [
         ...Object.entries(proxyRewrite),
@@ -118,7 +106,6 @@ export const createWebpackDevServerConfig = (
         openPage,
         disableHostCheck: true,
         host: '0.0.0.0',
-        public: `${devHost}:${port}`, // `port`不可能是80的，所以不用判断是不是去掉了
         quiet: true,
         compress: true,
         inline: true,
@@ -126,6 +113,12 @@ export const createWebpackDevServerConfig = (
         hotOnly: hot === 'all',
         publicPath: '/assets/',
         stats: 'normal',
+        // 微前端跨域用
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Authorization',
+        },
         watchOptions: {
             ignored: /node_modules/,
         },

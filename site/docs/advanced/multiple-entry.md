@@ -124,7 +124,7 @@ exports.build = {
 我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
 
 ```javascript
-module.exports = {
+exports.html = {
     meta: {
         'X-UA-Compatible': {
             'http-equiv': 'X-UA-Compatible',
@@ -153,4 +153,45 @@ module.exports = {
 
 可以看到一个`X-UA-Compatible`已经加入到了`<head>`中。
 
-总而言之，同名的`.config.js`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
+总而言之，同名的`.config.js`中的`exports.html`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
+
+## 自定义入口配置
+
+在正常逻辑下，`reSKRipt`会根据入口（`src/entries/*`）文件生成对应的带有哈希的文件。如果你熟悉[Webpack的入口配置](https://webpack.js.org/concepts/entry-points/#entrydescription-object)，我们支持你做一些自定义的配置。
+
+假设我们希望一个入口在产出时不要加上哈希，并指定一个固定的产出文件名，我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
+
+```javascript
+exports.entry = {
+    filename: 'hello.dist.js',
+};
+```
+
+随后运行`skr build`，并查看`dist/assets`目录，可以看到`hello.dist.js`文件，并且该文件没有默认的哈希部分。
+
+你同样可以参考此方法配置诸如`dependOn`、`library`等属性，请注意你无法配置`import`属性，该属性强制为`src/entries/hello.js`。
+
+## 入口查找规则
+
+对于一个指定的目录`entriesDirectory`（通常是`src/entries`），`reSKRipt`会使用以下规则收集入口：
+
+- `${entriesDirectory}/*.{js,ts,jsx,tsx}`作为入口文件，此时对应名称的`*.ejs`作为可选的HTML模板，`*.config.js`作为可选的入口配置文件。
+- `${entriesDirectory}/*/index.{js,ts,jsx,tsx}`当`*`为一个目录并且有`index`命名的代码文件时，该文件作为入口，对应的`*/index.ejs`作为可选的HTML模板，`*/index.config.js`作为可选的入口配置文件。
+
+以`src/entries`作为入口目录为例，以下均是合法的入口：
+
+- `src/entries/foo.js`、`src/entries/foo.config.js`、`src/entries/foo.ejs`。
+- `src/entries/bar/index.js`、`src/entries/bar/index.config.js`、`src/entries/bar/index.ejs`。
+
+但**目录结构只限一层**，以下**并不是**合法的入口：
+
+- `src/entries/foo/bar/index.js`，多层的目录不予收集。
+- `src/entries/foo/bar.js`，命名不是`index.js`不予收集。
+
+## 指定入口目录
+
+默认情况下，`reSKRipt`使用`src/entries`作为入口目录，在该目录下寻找应用的入口文件。对于一些多页式的应用，往往会约定其它的名称，如`src/pages`目录来集中放置入口文件。这种情况下，可以使用`--entries-dir`指定入口存放的目录，如：
+
+```shell
+skr build --entries-dir=pages
+```

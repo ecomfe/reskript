@@ -1,8 +1,7 @@
 #! /usr/bin/env node
-import program from 'commander';
+import {program} from 'commander';
 import semver from 'semver';
-import chalk from 'chalk';
-import {CommandConfig} from '@reskript/core';
+import {logger, CommandConfig} from '@reskript/core';
 
 const buildCommand = async ({command, description, args, run}: CommandConfig<any>): Promise<void> => {
     const commandConfig = program.command(command);
@@ -13,14 +12,14 @@ const buildCommand = async ({command, description, args, run}: CommandConfig<any
 
 const main = async (): Promise<void> => {
     if (semver.lt(process.version, '8.9.0')) {
-        console.error(chalk.yellow('Require node >= v8.9.0 to be installed'));
+        logger.error('Require node >= v8.9.0 to be installed');
         process.exit(10);
     }
 
     process.on(
         'unhandledRejection',
-        e => {
-            console.error(e);
+        (e: any) => {
+            logger.error(e.toString());
             process.exit(99);
         }
     );
@@ -28,7 +27,7 @@ const main = async (): Promise<void> => {
     const route = process.argv[2];
 
     if (!route) {
-        console.log('No command is given, you can install any @reskript/cli-* package to install a command');
+        logger.error('No command is given, you can install any @reskript/cli-* package to install a command');
         process.exit(12);
     }
 
@@ -37,7 +36,7 @@ const main = async (): Promise<void> => {
         const {default: command} = await import(entry);
 
         if (!command) {
-            console.error(chalk.red(`@reskript/cli-${route} is not a CLI package`));
+            logger.error(`@reskript/cli-${route} is not a CLI package`);
             process.exit(11);
         }
 
@@ -45,7 +44,7 @@ const main = async (): Promise<void> => {
         program.parse(process.argv);
     }
     catch {
-        console.error(chalk.red(`${route} command not available, you may install @reskript/cli-${route}`));
+        logger.error(`${route} command not available, you may install @reskript/cli-${route}`);
         process.exit(11);
     }
 };

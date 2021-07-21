@@ -16,21 +16,27 @@ title: 配置解密
 
 ### 组件名称
 
-所有的React组件会给加上`displayName`，支持这些形式：
+所有的React组件会给加上`displayName`，支持函数定义形式的组件，任何函数定义名称为`PascalCase`均被认为是组件：
 
-- `function FooBar`，函数名是PascalCase就算。
-- `const FooBar = () => {}`，函数名是PascalCase就算。
-- `export default () => {}`，且在函数体里有JSX元素。
-- `class FooBar extends Component`，要有`import {Component} from 'react'`，对`PureComponent`也生效。
-- `class FooBar extends React.Component`。
+```tsx
+function FooBar() {
+    return <div />;
+}
+```
 
-组件的`displayName`会用下面的规则去猜：
+组件的`displayName`会以函数名为准。
 
-- 如果函数或类有名字，就直接用这个名字。
-- 如果没有名字（`export default () => {}`），就取文件名。
-- 如果文件名不是PascalCase的，比如是`FooBar/index.tsx`，就取它所在的目录名。
+### 组件源码路径
 
-如果以上都出问题，最后也会有`displayName`，但具体是个啥就说不准了🐶。
+在进行应用调试时，经常会遇到这样一个情况：虽然找到了一个React组件，但一时对应不上哪个源代码文件里实现了这个文件。考虑到组件层级较深时，经常有一些局部使用的同名组件，比如大家都叫Content，就很尴尬，用displayName也不容易定位。
+
+为此`reSKRipt`在开发模式下会为每一个组件注入一些代码，你可以在React Devtools中看到这个组件对应的源码文件：
+
+![](./assets/debug-component-name.png)
+
+:::note
+所有与组件相关的额外能力，均只支持函数定义形式的组件，即`function FooBar() {}`的形式。其它如函数表达式、箭头函数都均不支持。
+:::
 
 ### 语法支持
 
@@ -103,6 +109,10 @@ interface BuildInfo {
 对于`moment`的本地化语言包有特殊处理，会只引入`en`和`zh-CN`两个，所以你要支持其它语言就比较折腾了，可以提个issue来问。
 
 `react`和`react-dom`会根据当前的`mode`选择不同的文件，算是非常标准的优化项。
+
+如果`src/service-worker.js`中有``self.__WB_MANIFEST`字样，使用[workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)的`InjectManifest`注入资源路径。
+
+会自动向生成的HTML中注入`navigator.serviceWorker.register`相关的代码。
 
 ## 调试服务器
 

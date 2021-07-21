@@ -5,8 +5,21 @@ import rimraf from 'rimraf';
 import pLimit from 'p-limit';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
+import {logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
+
+const changeExtension = (file: string, extension: string) => {
+    const normalized = path.normalize(file);
+    const parsed = path.parse(normalized);
+    const changed = {...parsed, base: undefined, ext: extension};
+    return path.format(changed);
+};
+
+const writeFile = async (file: string, content: string) => {
+    await fs.mkdir(path.dirname(file), {recursive: true});
+    await fs.writeFile(file, content);
+};
 
 const transformFile = async (file: string, baseIn: string, baseOut: string, options: TransformOptions) => {
     // 定义文件不处理
@@ -17,16 +30,15 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
     const result = await transformFileAsync(file, options);
 
     if (!result || result.code == null || result.map == null) {
-        console.error(`Failed to transform ${file}`);
+        logger.error(`Failed to transform ${file}`);
         process.exit(20);
     }
 
     const relative = path.relative(baseIn, file);
-    const base = path.basename(relative, path.extname(relative));
-    const destination = `${path.join(baseOut, base)}.js`;
+    const destination = path.join(baseOut, changeExtension(relative, '.js'));
     const writingFiles = [
-        fs.writeFile(destination, result.code + `\n//# sourceMappingURL=${destination}.map`),
-        fs.writeFile(`${destination}.map`, JSON.stringify(result.map)),
+        writeFile(destination, result.code + `\n//# sourceMappingURL=${destination}.map`),
+        writeFile(`${destination}.map`, JSON.stringify(result.map)),
     ];
     await Promise.all(writingFiles);
 };
@@ -45,7 +57,7 @@ const copyFile = async (file: string, baseIn: string, baseOut: string) => {
 
 const printInConsole = (code: string | null | undefined) => {
     if (code == null) {
-        console.error('Transform failed');
+        logger.error('Transform failed');
         process.exit(20);
     }
 
@@ -59,7 +71,7 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
     }
 
     if (!path.extname(file) && !cmd.out) {
-        console.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
+        logger.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
         process.exit(21);
     }
 

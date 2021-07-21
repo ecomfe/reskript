@@ -1,8 +1,14 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "jsx": "react-jsx",
         "rootDir": "src",
         "outDir": "dist",
+        "allowJs": true,
+        "types": [
+            "webpack",
+            "webpack-dev-server"
+        ]
     },
     "include": ["src"]
 }

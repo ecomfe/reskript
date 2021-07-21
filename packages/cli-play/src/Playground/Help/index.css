@@ -1,0 +1,29 @@
+.help {
+    padding: 16px 8px;
+    font-size: 14px;
+    color: #636363;
+}
+
+.help h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.help p {
+    line-height: 1.5;
+}
+
+.help code {
+    font-family: monospace;
+    padding: 0 4px;
+    color: #000;
+}
+
+.help pre {
+    max-width: 100%;
+    overflow: auto;
+    font-family: monospace;
+    margin: 20px 0;
+    padding: 4px 0;
+}

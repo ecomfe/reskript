@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli",
-  "version": "1.4.0",
+  "version": "1.10.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -12,20 +12,22 @@
   "bin": {
     "skr": "./dist/index.js"
   },
+  "engines": {
+    "node": ">=14.13.1"
+  },
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "eslint src",
     "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
-    "@types/semver": "^7.3.4",
-    "eslint": "^7.25.0",
-    "typescript": "^4.2.4"
+    "@types/semver": "^7.3.7",
+    "eslint": "^7.30.0",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@reskript/core": "1.4.0",
-    "chalk": "^4.1.1",
-    "commander": "^7.2.0",
+    "@reskript/core": "1.10.0",
+    "commander": "^8.0.0",
     "semver": "^7.3.5"
   }
 }

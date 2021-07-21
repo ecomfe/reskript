@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-play",
-  "version": "1.4.0",
+  "version": "1.10.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -10,25 +10,42 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc && cp -r src/assets dist",
+    "build": "rm -rf dist && tsc && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
     "lint": "eslint src",
-    "test": "echo 'No test in @reskript/cli-play'"
+    "test": "jest"
   },
   "devDependencies": {
-    "@types/loader-utils": "^2.0.2",
-    "eslint": "^7.25.0",
-    "typescript": "^4.2.4"
+    "@types/debounce": "^1.2.0",
+    "@types/jest": "^26.0.24",
+    "@types/marked": "^2.0.4",
+    "@types/mdast": "^3.0.4",
+    "@types/webpack-dev-server": "3.11.2",
+    "cpy-cli": "^3.1.1",
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5",
+    "webpack": "^5.44.0"
   },
   "dependencies": {
-    "@monaco-editor/react": "^4.1.3",
-    "@reskript/config-webpack": "1.4.0",
-    "@reskript/config-webpack-dev-server": "1.4.0",
-    "@reskript/core": "1.4.0",
-    "@reskript/settings": "1.4.0",
-    "loader-utils": "^2.0.0",
+    "@monaco-editor/react": "^4.2.1",
+    "@reskript/config-webpack": "1.10.0",
+    "@reskript/config-webpack-dev-server": "1.10.0",
+    "@reskript/core": "1.10.0",
+    "@reskript/settings": "1.10.0",
+    "body-parser": "^1.19.0",
+    "chokidar": "^3.5.2",
+    "debounce": "^1.2.1",
     "localforage": "^1.9.0",
     "lodash": "^4.17.21",
+    "marked": "^2.1.3",
+    "remark-gfm": "^1.0.0",
+    "remark-parse": "^9.0.0",
+    "remark-stringify": "^9.0.1",
     "resolve": "^1.20.0",
+    "socket.io": "^4.1.3",
+    "socket.io-client": "^4.1.3",
+    "unified": "^9.2.1",
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {

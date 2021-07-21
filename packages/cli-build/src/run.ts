@@ -1,19 +1,19 @@
-import * as path from 'path';
+import path from 'path';
 import rimraf from 'rimraf';
-import chalk from 'chalk';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {readHostPackageConfig} from '@reskript/core';
+import {logger, readHostPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
     createRuntimeBuildEnv,
     checkProjectSettings,
     BuildContext,
+    EntryLocation,
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import * as partials from './partial';
-import {BuildCommandLineArgs} from './interface';
+import {BuildCommandLineArgs, LegacyBuildCommandLineArgs} from './interface';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
 import inspect from './inspect';
 
@@ -22,12 +22,12 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
         configuration as Configuration, // https://github.com/Microsoft/TypeScript/issues/14107
         (err?: Error, stats?: Stats) => {
             if (err) {
-                console.error(err);
+                logger.error(err.toString());
                 process.exit(22);
             }
 
             if (!stats) {
-                console.error('Unknown error: webpack does not return its build stats');
+                logger.error('Unknown error: webpack does not return its build stats');
                 process.exit(22);
             }
 
@@ -56,12 +56,12 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
-        console.error(chalk.red(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`));
+        logger.error(`Feature ${cmd.featureOnly} is not configured in reskript.config.js`);
         process.exit(21);
     }
 
     if (cmd.analyze && !cmd.buildTarget) {
-        console.error(chalk.red('--analyze must be used with --build-target to specify only one target'));
+        logger.error('--analyze must be used with --build-target to specify only one target');
         process.exit(21);
     }
 
@@ -69,7 +69,13 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
     const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
-    const entries = collectEntries(cmd.cwd, cmd.src, cmd.entriesOnly);
+    const entryLocation: EntryLocation = {
+        cwd: cmd.cwd,
+        srcDirectory: cmd.srcDir,
+        entryDirectory: cmd.entriesDir,
+        only: cmd.entriesOnly,
+    };
+    const entries = collectEntries(entryLocation);
 
     const featureNamesToUse = cmd.featureOnly ? [cmd.featureOnly] : featureNames;
     const toConfiguration = (featureName: string): Configuration => {
@@ -79,7 +85,8 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
             usage: 'build',
             mode: cmd.mode,
             cwd: cmd.cwd,
-            srcDirectory: cmd.src,
+            srcDirectory: cmd.srcDir,
+            cacheDirectory: cmd.cacheDir,
         };
         const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
         const buildContext: BuildContext = {
@@ -100,7 +107,21 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     return featureNamesToUse.map(toConfiguration);
 };
 
-export default async (cmd: BuildCommandLineArgs): Promise<void> => {
+const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
+    // DEPRECATED: 2.0废弃
+    if (cmd.src) {
+        logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
+        return {
+            ...cmd,
+            srcDir: cmd.srcDir === 'src' ? cmd.src : cmd.srcDir,
+        };
+    }
+
+    return cmd;
+};
+
+export default async (rawCmd: BuildCommandLineArgs): Promise<void> => {
+    const cmd = fixArgs(rawCmd);
     process.env.NODE_ENV = cmd.mode;
 
     if (cmd.clean) {
@@ -112,7 +133,7 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
 
     if (!initial) {
         const error = 'No build configuration created, you are possibly providing a feature matrix with dev only';
-        console.error(chalk.red(error));
+        logger.error(error);
         process.exit(21);
     }
 
@@ -120,6 +141,6 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     const initialStats = await build([initial]);
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
-    console.log('');
+    logger.lineBreak();
     inspect(initialStats, projectSettings.build.inspect, {exitOnError: !cmd.analyze});
 };

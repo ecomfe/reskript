@@ -1,0 +1,36 @@
+{
+  "name": "@reskript/babel-plugin-debug-react-component-file-name",
+  "version": "1.10.0",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./useComponentFile": "./dist/useComponentFile.js"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.1.15",
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/traverse": "^7.14.7",
+    "@reskript/babel-utils": "1.10.0"
+  },
+  "peerDependencies": {
+    "react": "17.x"
+  }
+}

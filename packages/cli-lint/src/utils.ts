@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import globby from 'globby';
 import status, {GitStatusItem} from 'g-status';
 import {isEmpty, flatMap, flatten} from 'lodash';
@@ -47,7 +47,6 @@ export const resolveLintFiles = async (
         // 当前目录可能不在git根目录下，所有的路径要相应做一次修复
         const gitRoot = findGitRoot() || process.cwd();
         const cwdRelative = path.relative(gitRoot, process.cwd());
-        // TODO: 默认仅检查当前目录下的文件，后续考虑提供`--root`参数来强制检查包的根目录下的所有文件
         const paths = extensions.map(extension => `${cwdRelative ? cwdRelative + '/' : ''}*${extension}`);
         const files = await findChangedFiles(paths);
         return files.filter(staged ? isStaged : () => true).map(entry => path.relative(cwdRelative, entry.path));

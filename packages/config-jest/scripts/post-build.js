@@ -13,7 +13,7 @@ const dumpAsModule = (json, destination) => {
         moduleNameMapper: {
             ...json.moduleNameMapper,
             '\\.(css|less)$': '%REQUIRE(\'identity-obj-proxy\')%',
-            '\\$internal/core-js/(.*)$': '%REQUIRE_PATH(\'core-js\')%/$1'
+            '\\$internal/core-js/(.*)$': '%REQUIRE_PATH(\'core-js\')%/$1',
         },
     };
     const jsonText = JSON.stringify(modified, null, '  ');

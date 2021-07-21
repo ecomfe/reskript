@@ -8,6 +8,7 @@ type PartialBuildSettings = BuildSettings & {
 
 const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = process.cwd()): BuildSettings => {
     return {
+        uses: ['antd', 'lodash'],
         thirdParty: false,
         reportLintErrors: true,
         largeAssetSize: 8 * 1024,

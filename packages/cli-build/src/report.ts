@@ -1,8 +1,9 @@
-import * as path from 'path';
+import path from 'path';
 import ConsoleTable, {Column} from 'tty-table';
 import chalk, {ForegroundColor} from 'chalk';
 import {Stats} from 'webpack';
 import {isEmpty, difference, flatMap, uniqBy, sortBy, max} from 'lodash';
+import {logger} from '@reskript/core';
 import {ProjectSettings} from '@reskript/settings';
 import {WebpackCompileAsset} from './interface';
 
@@ -35,7 +36,7 @@ export const drawFeatureMatrix = (projectSettings: ProjectSettings, only?: strin
     const rows = featureNames.map(nameToValues);
     const table = new ConsoleTable(headers, rows);
 
-    console.log(table.render());
+    logger.log(table.render());
 };
 
 
@@ -90,7 +91,7 @@ export const drawBuildReport = (stats: Stats[]): void => {
     const maxNameLength = max(templateSegments.map(segment => segment.name.length)) ?? 0;
     const maxSizeLength = max(templateSegments.map(segment => segment.size.length)) ?? 0;
     for (const {color, name, size, indicator} of templateSegments) {
-        console.log(chalk[color](`${name.padStart(maxNameLength)} ${size.padEnd(maxSizeLength)} ${indicator}`));
+        logger.log(chalk[color](`${name.padStart(maxNameLength)} ${size.padEnd(maxSizeLength)} ${indicator}`));
     }
 };
 
@@ -103,11 +104,9 @@ export interface WebpackResult {
 }
 
 export const printWebpackResult = (type: 'error' | 'warn', result: WebpackResult): void => {
-    const print = type === 'error'
-        ? (message: string) => console.error(chalk.redBright(chalk.bold(message)))
-        : (message: string) => console.warn(chalk.yellowBright(chalk.bold(message)));
+    const print = type === 'error' ? logger.error : logger.warn;
 
-    console.log('');
+    logger.lineBreak();
     print(`Module build failed for ${result.moduleName}`);
     print(result.message);
 };

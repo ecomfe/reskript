@@ -39,8 +39,6 @@ const config: Record<string, any> = {
         ],
         camelcase: ['error', {allow: ['^UNSAFE_']}],
         'react-hooks/exhaustive-deps': 'warn',
-        // TODO: 有BUG待官方修复：https://github.com/babel/eslint-plugin-babel/issues/180
-        'babel/object-curly-spacing': 'off',
         // `useEffect`特别容易弄坏这个规则
         'consistent-return': 'off',
         'no-param-reassign': ['warn', {ignorePropertyModificationsFor: ['current']}],
@@ -49,7 +47,7 @@ const config: Record<string, any> = {
         '@reskript/import-order': 'error',
         '@reskript/hooks-deps-new-line': 'warn',
         '@reskript/no-excessive-hook': 'warn',
-        // TODO: 这条规则太复杂，暂时配不出来，基本检查由`camelcase`规则负责
+        // 这条规则太复杂，暂时配不出来，基本检查由`camelcase`规则负责
         '@typescript-eslint/naming-convention': 'off',
         // 这条规则与实际业务有冲突
         '@typescript-eslint/await-thenable': 'off',

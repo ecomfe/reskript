@@ -1,6 +1,6 @@
 {
   "name": "@reskript/core",
-  "version": "1.4.0",
+  "version": "1.10.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -15,12 +15,15 @@
     "test": "echo 'No test in @reskript/core'"
   },
   "devDependencies": {
-    "eslint": "^7.25.0",
-    "typescript": "^4.2.4"
+    "@types/dedent": "^0.7.0",
+    "eslint": "^7.30.0",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
+    "chalk": "^4.1.1",
+    "dedent": "^0.7.0",
     "find-up": "^5.0.0",
-    "globby": "^11.0.3",
+    "globby": "^11.0.4",
     "pkg-dir": "^5.0.0"
   }
 }

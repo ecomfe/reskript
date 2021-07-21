@@ -1,8 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import ora from 'ora';
-import chalk from 'chalk';
 import logSymbols from 'log-symbols';
+import {logger} from '@reskript/core';
 import {readProjectSettings} from '@reskript/settings';
 import {DoctorContext, DoctorResult} from '../interface';
 import entry from './entry';
@@ -52,9 +52,9 @@ export default async (packageDirectory: string) => {
     }
 
     for (const error of errors) {
-        console.log(chalk.red(`  ${logSymbols.error} ${error}`));
+        logger.error(`  ${logSymbols.error} ${error}`, {dedent: false});
     }
     for (const warning of warnings) {
-        console.log(chalk.yellow(`  ${logSymbols.warning} ${warning}`));
+        logger.warn(`  ${logSymbols.warning} ${warning}`, {dedent: false});
     }
 };

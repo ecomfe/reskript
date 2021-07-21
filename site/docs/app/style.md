@@ -47,8 +47,8 @@ declare module '*.png' {
 }
 
 declare module '*.svg' {
-    import {FC, SVGProps} from 'react';
-    export const ReactComponent: FC<SVGProps<SVGSVGElement>>;
+    import {ComponentType, SVGProps} from 'react';
+    export const ReactComponent: ComponentType<SVGProps<SVGSVGElement>>;
     const url: string;
     export default url;
 }
@@ -208,7 +208,6 @@ c('external-class');
 在了解完`reSKRipt`对样式的处理后，我们简单地为`Header`组件增加一些样式：
 
 ```tsx
-import {FC} from 'react';
 import {Input} from 'antd';
 import logo from './logo.png'; // 图片依然是标准的引入后变成字符串
 import c from './index.less';
@@ -217,14 +216,16 @@ interface Props {
     mode: 'light' | 'dark';
 }
 
-const Header: FC<Props> = ({mode}) => (
-    <header className={c('root', {dark: mode === 'dark'})}>
-        <a className={c.logo} href="/">
-            <img className={c.logoImage} src={logo} alt="回到首页" />
-        </a>
-        <Input.Search className={c.search} />
-    </header>
-);
+function Header({mode}: Props) => {
+    return (
+        <header className={c('root', {dark: mode === 'dark'})}>
+            <a className={c.logo} href="/">
+                <img className={c.logoImage} src={logo} alt="回到首页" />
+            </a>
+            <Input.Search className={c.search} />
+        </header>
+    );
+}
 ```
 
 在将`Header`组件加入`App`并成功运行应用后，观察开发者工具中各个HTML元素的`class`属性，你会发现类似`header-root-8bff2`这样的串。出于调试和问题排查方便，`reSKRipt`将组件的名称、LESS中的类名都放到了这个`class`属性上，并增加了一个哈希值来防止冲突，最终产生了一个同时具备可读性并全局唯一的标识。

@@ -47,6 +47,7 @@ tester.run(
                     'Import of ../bar should be placed before ./utils',
                 ]
             ),
+            testCase('node-invalid', ['Import of node:fs should be placed before path']),
         ],
     }
 );
