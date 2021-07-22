@@ -29,6 +29,18 @@ test('export default component', () => testFixture('src/export-default-component
 
 test('multiple components', () => testFixture('src/multiple-components.js', true));
 
-test('no component', () => testFixture('src/no-component.js', false));
+test('no component with pascal case name', () => testFixture('src/no-component.js', false));
+
+test('simple function', () => testFixture('src/simple-function.js', false));
+
+test('call createElement', () => testFixture('src/create-element.js', true));
+
+test('call React.createElement', () => testFixture('src/react-create-element.js', true));
+
+test('call cloneElement', () => testFixture('src/clone-element.js', true));
+
+test('call React.cloneElement', () => testFixture('src/react-clone-element.js', true));
+
+test('has more than 1 parameters', () => testFixture('src/multiple-parameters.js', false));
 
 test('outside src directory', () => testFixture('outside-src.js', false));

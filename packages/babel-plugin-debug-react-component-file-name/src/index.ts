@@ -46,7 +46,8 @@ export default function debugReactComponentFileName(): PluginObj<PluginState> {
                     return;
                 }
 
-                if (isComponentDeclaration(declaration)) {
+                // 这个插件会插一段不在React里根本跑不了的危险代码，所以要用严格的检查
+                if (isComponentDeclaration(declaration, true)) {
                     const relative = path.relative(srcDirectory, filename);
                     if (!relative.startsWith('..') && prepareHookImport(declaration)) {
                         declaration.get('body').unshiftContainer(
