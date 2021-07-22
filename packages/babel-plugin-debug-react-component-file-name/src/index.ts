@@ -52,9 +52,11 @@ export default function debugReactComponentFileName(): PluginObj<PluginState> {
                     if (!relative.startsWith('..') && prepareHookImport(declaration)) {
                         declaration.get('body').unshiftContainer(
                             'body',
-                            types.callExpression(
-                                types.identifier('useComponentFile'),
-                                [types.stringLiteral(relative)]
+                            types.expressionStatement(
+                                types.callExpression(
+                                    types.identifier('useComponentFile'),
+                                    [types.stringLiteral(relative)]
+                                )
                             )
                         );
                     }
