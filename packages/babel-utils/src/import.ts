@@ -11,6 +11,7 @@ export const findImportStatement = (program: NodePath<Program>, source: string) 
         ImportDeclaration: path => {
             if (path.get('source').node.value === source) {
                 importStatement = path;
+                path.stop();
             }
         },
     };

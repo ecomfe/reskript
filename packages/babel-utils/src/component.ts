@@ -1,6 +1,6 @@
 import path from 'path';
 import * as babel from '@babel/core';
-import {NodePath} from '@babel/traverse';
+import {NodePath, Visitor} from '@babel/traverse';
 
 type FunctionDeclaration = babel.types.FunctionDeclaration;
 
@@ -25,23 +25,20 @@ const resolveCalleeName = (path: NodePath<babel.types.CallExpression>) => {
 // 2. 有任何的JSX语法
 const isFunctionBodyComponentLike = (path: NodePath<FunctionDeclaration>): boolean => {
     let matched = false;
-    babel.traverse(
-        path.node,
-        {
-            JSXElement(path) {
+    const visitor: Visitor = {
+        JSXElement(path) {
+            matched = true;
+            path.stop();
+        },
+        CallExpression(path) {
+            const calleeName = resolveCalleeName(path);
+            if (KEY_REACT_FUNCTIONS.has(calleeName)) {
                 matched = true;
                 path.stop();
-            },
-            CallExpression(path) {
-                const calleeName = resolveCalleeName(path);
-                if (KEY_REACT_FUNCTIONS.has(calleeName)) {
-                    matched = true;
-                    path.stop();
-                }
-            },
+            }
         },
-        path.scope
-    );
+    };
+    path.traverse(visitor);
     return matched;
 };
 
