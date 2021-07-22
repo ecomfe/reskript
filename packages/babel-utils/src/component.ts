@@ -38,12 +38,12 @@ const isFunctionBodyComponentLike = (path: NodePath<FunctionDeclaration>): boole
                     matched = true;
                     path.stop();
                 }
-            }
+            },
         },
         path.scope
     );
     return matched;
-}
+};
 
 export const isComponentDeclaration = (path: NodePath<FunctionDeclaration>, strict?: boolean) => {
     const functionName = path.node.id?.name ?? '';

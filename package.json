@@ -12,10 +12,11 @@
     "lint": "pnpm run -r --parallel lint",
     "test": "pnpm run -r --stream test",
     "build": "pnpm run -r build",
+    "build-clean": "pnpm run -r --parallel clean && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
-    "ci": "pnpm install && pnpm run build && pnpm run lint && pnpm run test",
+    "ci": "pnpm install && pnpm run build-clean && pnpm run lint && pnpm run test",
     "preversion": "pnpm run ci",
-    "prepack": "pnpm install && pnpm run build",
+    "prepack": "pnpm install && pnpm run build-clean",
     "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
     "prepare": "husky install"

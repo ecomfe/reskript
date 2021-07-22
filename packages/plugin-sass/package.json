@@ -10,7 +10,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "clean": "rm -rf dist",
+    "build": "tsc",
     "lint": "eslint src",
     "test": "echo 'No test in @reskript/plugin-sass'"
   },
