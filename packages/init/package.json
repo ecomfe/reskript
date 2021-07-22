@@ -1,6 +1,6 @@
 {
   "name": "@reskript/init",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -23,7 +23,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@reskript/core": "1.10.2",
+    "@reskript/core": "1.10.3",
     "globby": "^11.0.4",
     "inquirer": "^8.1.2",
     "lodash": "^4.17.21",

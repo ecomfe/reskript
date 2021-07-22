@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+
+### Bug Fixes
+
+* **babel:** 对组件函数的检测使用更严格的模式 ([#97](https://github.com/ecomfe/reskript/issues/97)) ([61fc2df](https://github.com/ecomfe/reskript/commit/61fc2df685eb3ad628592cbc0c0e1252def4de7d))
+
+
+
+
+
 ## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
 
 
