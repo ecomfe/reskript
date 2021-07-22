@@ -28,7 +28,7 @@ skr lint src demo *.js
 
 `skr lint`实际上是对[eslint](https://eslint.org/)与[stylelint](https://stylelint.io/)的一个封装，用它们分别检查不同类型的文件，再抹平错误信息的结构。在内部，使用了[@ecomfe/eslint-config](https://github.com/ecomfe/eslint-config)和[@ecomfe/stylelint-config](https://github.com/ecomfe/stylelint-config)作为基础配置，额外增加了一些更严格的规则。
 
-当然`skr lint`也尊重你在本地配置的规则，其行为与`eslint`和`stylelint`一致，也就是说你可以在本地不同的目录下放置`.eslintrc.*`和`.stylelintrc.*`文件来自定义配置。
+当然`skr lint`也尊重你在本地配置的规则，你可以使用本地的配置来指定额外的检查规则。
 
 我们希望你将`@reskript/config-lint`提供的规则作为基础配置，在此基础上做局部的调整。
 
@@ -37,6 +37,13 @@ skr lint src demo *.js
 ```shell
 npm install --save-dev @reskript/config-lint
 ```
+
+随后按照下文来配置额外的规则。在项目中放置这些配置文件的另一个好处是可以与编辑器的插件友好整合，带来编码过程中的检查能力，所以我们非常推荐你生成这几个配置文件。
+
+### JavaScript代码检查
+
+`skr lint`保持与其行为与`eslint`一致的行为，也就是说你可以在本地不同的目录下放置`.eslintrc.*`文件来自定义配置。
+
 
 你的`.eslintrc.js`中应该是以下的内容：
 
@@ -53,15 +60,18 @@ module.exports = {
 
 其中第一行用来解决[ESLint无法从共享配置查找插件的问题](https://github.com/eslint/eslint/issues/3458)。
 
-对应`stylelint.config.js`也是类似：
+### 样式代码检查
+
+很遗憾地，因为种种原因，`skr lint`在样式文件的检查上仅支持当前目录（`process.cwd()`）下的`stylelint.config.js`这一个文件作为自定义配置，不支持任何子目录内的配置文件，也**不支持**诸如`.stylelintrc.json`之类的其它文件：
 
 ```js
 module.exports = {
     extends: require.resolve('@reskript/config-lint/config/stylelint'),
+    rules: {
+      // 其它规则的覆盖
+    },
 };
 ```
-
-在项目中放置这些配置文件的另一个好处是可以与编辑器的插件友好整合，带来编码过程中的检查能力，所以我们非常推荐你生成这几个配置文件。
 
 ## 提交前检查
 
