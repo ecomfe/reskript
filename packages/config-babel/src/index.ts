@@ -46,15 +46,15 @@ export const getBabelConfig = (input?: BabelConfigOptions): TransformOptions => 
         polyfill && hostType === 'application' && coreJSPreset,
         ...transform.presets || [],
     ];
-    // 考虑到生成的chunk的hash稳定性，此处不使用`babel-plugin-lodash`来缩减lodash的体积了
     const plugins: Array<PluginItem | false> = [
-        ...transform.plugins || [],
+        // 这东西必须放在最前面，不然其它插件会转义出如`function Wrapper()`这样的函数，这个插件再插入代码就会出问题
         requireFileName(options) && [
             resolve('@reskript/babel-plugin-debug-react-component-file-name'),
             {
                 srcDirectory: path.resolve(cwd, srcDirectory),
             },
         ],
+        ...transform.plugins || [],
         requireReactOptimization && resolve('babel-plugin-transform-react-remove-prop-types'),
         hot === 'all' && [resolve('react-refresh/babel'), {skipEnvCheck: true}],
     ];

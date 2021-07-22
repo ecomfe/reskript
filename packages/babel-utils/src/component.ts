@@ -6,7 +6,9 @@ type FunctionDeclaration = babel.types.FunctionDeclaration;
 
 export const isComponentDeclaration = (path: NodePath<FunctionDeclaration>) => {
     const functionName = path.node.id?.name ?? '';
-    return /^[A-Z]/.test(functionName);
+    const args = path.node.params;
+
+    return args.length <= 1 && /^[A-Z]/.test(functionName);
 };
 
 export const resolveComponentName = (declaration: NodePath<FunctionDeclaration>, filename: string | undefined) => {
