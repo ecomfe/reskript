@@ -20,10 +20,10 @@
     "builtins": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.14.8",
     "@babel/eslint-parser": "^7.14.7",
     "@babel/eslint-plugin": "^7.13.16",
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "jest": "^27.0.6"
   },
   "peerDependencies": {

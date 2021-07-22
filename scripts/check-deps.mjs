@@ -8,6 +8,8 @@ const RESTRICTED_DEPENDENCIES = [
     ['p-reduce', '2.x'],
     ['log-symbols', '4.x'],
     ['@types/webpack-dev-server', '3.11.2'],
+    ['globby', '11.x'],
+    ['unified', '9.x'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {
