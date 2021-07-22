@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* **lint:** 支持自定义的stylelint配置 ([#96](https://github.com/ecomfe/reskript/issues/96)) ([c7f6726](https://github.com/ecomfe/reskript/commit/c7f67264224dadb69da745c8a4eca44c5f089007))
+
+
+
+
+
 ## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
 
 **Note:** Version bump only for package @reskript/cli-lint
