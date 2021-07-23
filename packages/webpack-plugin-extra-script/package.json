@@ -1,6 +1,6 @@
 {
   "name": "@reskript/webpack-plugin-extra-script",
-  "version": "1.10.3",
+  "version": "1.11.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [

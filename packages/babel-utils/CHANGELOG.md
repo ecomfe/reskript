@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+
+### Performance Improvements
+
+* **babel:** 优化对import语句的处理的性能 ([bc8e0dc](https://github.com/ecomfe/reskript/commit/bc8e0dc3c7fcee555a664b5168cc30683e421f19))
+
+
+
+
+
 ## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
 
 
