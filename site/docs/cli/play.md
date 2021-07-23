@@ -10,7 +10,9 @@ title: 调试单个组件
 
 ```
 --cwd [value]           指定当前工作目录，默认为当前目录
---build-target [value]   指定调试的特性名称，默认为dev
+--build-target [value]  指定调试的特性名称，默认为dev
+--port [value]          指定监听的端口，默认使用9999端口
+--host [value]          设置默认的本地服务器域，可以用localhost、loopback（对应127.0.0.1）、ip（对应本机的局域网IP），也可以指定一个自定义的域名或IP
 -h, --help              显示帮助信息
 ```
 

@@ -86,7 +86,7 @@ export default async (target: string, cmd: PlayCommandLineArgs): Promise<void> =
     prepareEnvironment(cmd.cwd, 'development');
 
     const buildContext = collectBuildContext(cmd);
-    const config = createWebpackConfig(target, buildContext);
+    const config = await createWebpackConfig(target, cmd, buildContext);
     const devServerConfig = createWebpackDevServerConfig(
         buildContext,
         'index',

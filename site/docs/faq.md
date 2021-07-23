@@ -48,6 +48,12 @@ title: FAQ
 
 参考[skr build命令参数](cli/build#参数)中的`--cache-dir`指定一个目录存放缓存，并在CI配置中将该目录设定为持久化。
 
+## 本地调试相关
+
+> 我在远程IDE上开发，启动服务后打开的页面是`localhost`，本机无法访问。
+
+参考[dev命令](cli/dev)与[play命令](cli/play)的文档，其中`--host`参数可以指定绑定的主机名，使用`--host=ip`可显示为远程机器的IP地址。
+
 ## 代码检查相关
 
 > 我在运行`eslint`时出现`ESLint couldn't find the plugin "xxx".`这样的错误。

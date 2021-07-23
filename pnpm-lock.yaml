@@ -265,6 +265,7 @@ importers:
       cpy-cli: ^3.1.1
       debounce: ^1.2.1
       eslint: ^7.31.0
+      internal-ip: ^6.2.0
       jest: ^27.0.6
       localforage: ^1.9.0
       lodash: ^4.17.21
@@ -289,6 +290,7 @@ importers:
       body-parser: 1.19.0
       chokidar: 3.5.2
       debounce: 1.2.1
+      internal-ip: 6.2.0
       localforage: 1.9.0
       lodash: 4.17.21
       marked: 2.1.3

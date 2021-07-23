@@ -5,9 +5,12 @@ import {sync as resolve} from 'resolve';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext, loaders} from '@reskript/config-webpack';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
 import {resolveComponentName} from './utils/path';
+import {PlayCommandLineArgs} from './interface';
+import {resolveHost} from './utils/host';
 
-export const createWebpackConfig = (target: string, buildContext: BuildContext): webpack.Configuration => {
-    const extra = createWebpackDevServerPartial(buildContext);
+export const createWebpackConfig = async (target: string, cmd: PlayCommandLineArgs, buildContext: BuildContext) => {
+    const hostType = await resolveHost(cmd.host);
+    const extra = createWebpackDevServerPartial(buildContext, hostType);
     const baseConfig = createBaseWebpackConfig(buildContext, [extra]);
     const playEntryPath = resolve('./assets/playground-entry.js.tpl');
     const componentTypeName = resolveComponentName(target);

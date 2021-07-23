@@ -36,6 +36,7 @@
     "body-parser": "^1.19.0",
     "chokidar": "^3.5.2",
     "debounce": "^1.2.1",
+    "internal-ip": "^6.2.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.21",
     "marked": "^2.1.3",
