@@ -45,6 +45,7 @@ module.exports = {
             type: 'category',
             label: '高阶应用',
             items: [
+                'advanced/custom-env',
                 'advanced/lint-rules',
                 'advanced/service-worker',
                 'advanced/config-insiders',
