@@ -4,7 +4,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
 import {watchProjectSettings, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {createWebpackConfig} from '@reskript/config-webpack';
-import {logger} from '@reskript/core';
+import {logger, prepareEnvironment} from '@reskript/core';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {DevCommandLineArgs, LegacyDevCommandLineArgs} from './interface';
 import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
@@ -60,7 +60,8 @@ const fixArgs = (cmd: LegacyDevCommandLineArgs): DevCommandLineArgs => {
 
 export default async (rawCmd: LegacyDevCommandLineArgs): Promise<void> => {
     const cmd = fixArgs(rawCmd);
-    process.env.NODE_ENV = cmd.mode || 'development';
+    process.env.NODE_ENV = cmd.mode;
+    prepareEnvironment(cmd.cwd, cmd.mode);
 
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;

@@ -531,6 +531,7 @@ importers:
       '@reskript/less-safe-loader': 1.10.3
       '@reskript/settings': 1.10.3
       '@reskript/webpack-plugin-extra-script': 1.10.3
+      '@reskript/webpack-plugin-interpolate-html': 1.10.3
       '@types/less': ^3.0.3
       '@types/lodash': ^4.14.171
       '@types/mini-css-extract-plugin': ^2.0.1
@@ -584,6 +585,7 @@ importers:
       '@reskript/less-safe-loader': link:../less-safe-loader
       '@reskript/settings': link:../settings
       '@reskript/webpack-plugin-extra-script': link:../webpack-plugin-extra-script
+      '@reskript/webpack-plugin-interpolate-html': link:../webpack-plugin-interpolate-html
       autoprefixer: 10.3.1_postcss@8.3.6
       babel-loader: 8.2.2_ebf1dd6afc3fb7d01e7aaa2e8ca14cbf
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -675,6 +677,8 @@ importers:
       '@types/dedent': ^0.7.0
       chalk: ^4.1.1
       dedent: ^0.7.0
+      dotenv: ^10.0.0
+      dotenv-expand: ^5.1.0
       eslint: ^7.31.0
       find-up: ^5.0.0
       globby: ^11.0.4
@@ -683,6 +687,8 @@ importers:
     dependencies:
       chalk: 4.1.1
       dedent: 0.7.0
+      dotenv: 10.0.0
+      dotenv-expand: 5.1.0
       find-up: 5.0.0
       globby: 11.0.4
       pkg-dir: 5.0.0
@@ -839,6 +845,25 @@ importers:
       ts-jest: ^27.0.4
       typescript: ^4.3.5
       webpack: ^5.46.0
+    devDependencies:
+      eslint: 7.31.0
+      html-webpack-plugin: 5.3.2_webpack@5.46.0
+      jest: 27.0.6
+      ts-jest: 27.0.4_jest@27.0.6+typescript@4.3.5
+      typescript: 4.3.5
+      webpack: 5.46.0
+
+  packages/webpack-plugin-interpolate-html:
+    specifiers:
+      eslint: ^7.31.0
+      html-webpack-plugin: ^5.3.2
+      jest: ^27.0.6
+      lodash: ^4.17.21
+      ts-jest: ^27.0.4
+      typescript: ^4.3.5
+      webpack: ^5.46.0
+    dependencies:
+      lodash: 4.17.21
     devDependencies:
       eslint: 7.31.0
       html-webpack-plugin: 5.3.2_webpack@5.46.0
@@ -6657,6 +6682,15 @@ packages:
     dependencies:
       is-obj: 2.0.0
     dev: true
+
+  /dotenv-expand/5.1.0:
+    resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
+    dev: false
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
+    dev: false
 
   /download/6.2.5:
     resolution: {integrity: sha512-DpO9K1sXAST8Cpzb7kmEhogJxymyVUd5qz/vCOSyvwtp2Klj2XcDt5YUuasgxka44SxF0q5RriKIwJmQHG2AuA==}

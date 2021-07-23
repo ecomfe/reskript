@@ -23,6 +23,8 @@
   "dependencies": {
     "chalk": "^4.1.1",
     "dedent": "^0.7.0",
+    "dotenv": "^10.0.0",
+    "dotenv-expand": "^5.1.0",
     "find-up": "^5.0.0",
     "globby": "^11.0.4",
     "pkg-dir": "^5.0.0"

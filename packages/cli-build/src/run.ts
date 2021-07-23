@@ -2,7 +2,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {logger, readHostPackageConfig} from '@reskript/core';
+import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -123,6 +123,7 @@ const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
 export default async (rawCmd: BuildCommandLineArgs): Promise<void> => {
     const cmd = fixArgs(rawCmd);
     process.env.NODE_ENV = cmd.mode;
+    prepareEnvironment(cmd.cwd, cmd.mode);
 
     if (cmd.clean) {
         rimraf.sync(path.join(cmd.cwd, 'dist'));
