@@ -7,6 +7,7 @@ import {paramCase} from 'change-case';
 import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import {findGitRoot} from '@reskript/core';
@@ -126,6 +127,7 @@ const factory: ConfigurationFactory = entry => {
         new CaseSensitivePathsPlugin() as any,
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
+        new InterpolateHTMLPlugin(process.env),
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];

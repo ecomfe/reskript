@@ -4,7 +4,7 @@ import {sync as resolve} from 'resolve';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
-import {logger, readHostPackageConfig} from '@reskript/core';
+import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
 import {createWebpackConfig} from './webpack';
 import {PlayCommandLineArgs} from './interface';
 import setupServer from './server';
@@ -83,6 +83,7 @@ const registerSersvice = (config: DevServerConfiguration | undefined, target: st
 
 export default async (target: string, cmd: PlayCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = 'development';
+    prepareEnvironment(cmd.cwd, 'development');
 
     const buildContext = collectBuildContext(cmd);
     const config = createWebpackConfig(target, buildContext);
