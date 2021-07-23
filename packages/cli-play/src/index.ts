@@ -9,6 +9,7 @@ const command: CommandConfig<PlayCommandLineArgs> = {
     args: [
         ['--cwd [value]', 'override current working directory', process.cwd()],
         ['--build-target [value]', 'set build target, default to "dev"', 'dev'],
+        ['--port [value]', 'listen on specified port, default to 9999', '9999'],
     ],
 };
 

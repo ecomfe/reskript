@@ -19,7 +19,7 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
         },
         devServer: {
             ...userProjectSettings.devServer,
-            port: 9999,
+            port: parseInt(cmd.port, 10) || 9999,
             openPage: '',
             hot: 'all',
         },
