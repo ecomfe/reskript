@@ -31,6 +31,17 @@ const normalizeRuleMatch = (cwd: string, configured: boolean | ((resource: strin
     }
 };
 
+const assetModuleConfig = (entry: BuildEntry) => {
+    return {
+        type: 'asset',
+        parser: {
+            dataUrlCondition: {
+                maxSize: entry.projectSettings.build.largeAssetSize,
+            },
+        },
+    };
+};
+
 // 在第三方代码与项目代码的处理上，使用的策略是“非`cwd`下的全部算第三方代码”，而不是“包含`node_modules`的算第三方”。
 //
 // 这一逻辑取决于在使用monorepo时的形式，当前monorepo下我们要求被引用的包是构建后的。
@@ -124,7 +135,8 @@ export const image = (entry: BuildEntry): RuleSetRule => {
 
     return {
         test: /\.(jpe?g|png|gif)$/i,
-        use: use('url', 'img'),
+        use: use('img'),
+        ...assetModuleConfig(entry),
     };
 };
 
@@ -139,10 +151,8 @@ export const svg = (entry: BuildEntry): RuleSetRule => {
 };
 
 export const file = (entry: BuildEntry): RuleSetRule => {
-    const use = createUseWith(entry);
-
     return {
         test: /\.(eot|ttf|woff|woff2)(\?.+)?$/,
-        use: use('url'),
+        ...assetModuleConfig(entry),
     };
 };
