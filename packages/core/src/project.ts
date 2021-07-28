@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import globby from 'globby';
+import {sync as globby} from 'globby';
 import pkgDir from 'pkg-dir';
 import {sync as findUp} from 'find-up';
 import {PackageJSON} from './interface';
@@ -34,12 +34,12 @@ export const isMonorepo = (cwd: string): boolean => {
     return isMonorepoRoot(root);
 };
 
-export const resolveMonorepoPackageDirectories = async (cwd: string): Promise<string[]> => {
+export const resolveMonorepoPackageDirectories = (cwd: string): string[] => {
     const packageInfo = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8')) as PackageJSON;
     const packages = packageInfo.workspaces
         ? (Array.isArray(packageInfo.workspaces) ? packageInfo.workspaces : packageInfo.workspaces.packages)
         : ['packages/*'];
-    const directories = await globby(packages.map(v => `${v}/package.json`));
+    const directories = globby(packages.map(v => `${v}/package.json`), {cwd, absolute: true});
     return directories.map(path.dirname);
 };
 
@@ -51,4 +51,25 @@ export const findMonorepoRoot = (cwd: string): string => {
     }
 
     return path.dirname(dir);
+};
+
+export const isProjectSourceIn = (cwd: string) => {
+    const projectDirectory = cwd.endsWith(path.sep) ? cwd : cwd + path.sep;
+
+    return (resource: string) => (
+        resource.includes(projectDirectory)
+            && !resource.includes(projectDirectory + 'externals')
+            && !resource.includes(`${path.sep}node_modules${path.sep}`)
+    );
+};
+
+export const normalizeRuleMatch = (cwd: string, configured: boolean | ((resource: string) => boolean)) => {
+    switch (configured) {
+        case true:
+            return isProjectSourceIn(cwd);
+        case false:
+            return () => false;
+        default:
+            return configured;
+    }
 };

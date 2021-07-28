@@ -1,5 +1,5 @@
-import path from 'path';
 import {RuleSetRule} from 'webpack';
+import {isProjectSourceIn, normalizeRuleMatch} from '@reskript/core';
 import {BuildEntry} from '@reskript/settings';
 import * as loaders from '../loaders';
 import {introduceLoaders} from '../utils/loader';
@@ -8,27 +8,6 @@ type LoaderType = keyof typeof loaders;
 
 const createUseWith = (entry: BuildEntry) => {
     return (...names: Array<LoaderType | false>) => introduceLoaders(names, entry);
-};
-
-const projectSource = (cwd: string) => {
-    const projectDirectory = cwd.endsWith(path.sep) ? cwd : cwd + path.sep;
-
-    return (resource: string) => (
-        resource.includes(projectDirectory)
-            && !resource.includes(projectDirectory + 'externals')
-            && !resource.includes(`${path.sep}node_modules${path.sep}`)
-    );
-};
-
-const normalizeRuleMatch = (cwd: string, configured: boolean | ((resource: string) => boolean)) => {
-    switch (configured) {
-        case true:
-            return projectSource(cwd);
-        case false:
-            return () => false;
-        default:
-            return configured;
-    }
 };
 
 const assetModuleConfig = (entry: BuildEntry) => {
@@ -49,7 +28,7 @@ const assetModuleConfig = (entry: BuildEntry) => {
 export const script = (entry: BuildEntry): RuleSetRule => {
     const {cwd, projectSettings: {build: {script: {babel}}}} = entry;
     const use = createUseWith(entry);
-    const isProjectSource = projectSource(cwd);
+    const isProjectSource = isProjectSourceIn(cwd);
     const isWorker = (resource: string) => isProjectSource(resource) && /\.worker\.[jt]sx?$/.test(resource);
     const rulesWithBabelRequirement = (requireBabel: boolean) => {
         return {

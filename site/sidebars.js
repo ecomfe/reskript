@@ -61,6 +61,7 @@ module.exports = {
             items: [
                 'plugins/sass',
                 'plugins/qiankun',
+                'plugins/workspace-no-build',
             ],
         },
         'faq',

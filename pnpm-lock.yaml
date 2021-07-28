@@ -793,6 +793,7 @@ importers:
 
   packages/plugin-sass:
     specifiers:
+      '@reskript/core': 1.11.2
       '@reskript/settings': 1.11.2
       '@types/sass': ^1.16.1
       eslint: ^7.31.0
@@ -802,12 +803,28 @@ importers:
       typescript: ^4.3.5
       webpack: ^5.46.0
     dependencies:
+      '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       resolve: 1.20.0
       sass: 1.35.2
       sass-loader: 12.1.0_sass@1.35.2+webpack@5.46.0
     devDependencies:
       '@types/sass': 1.16.1
+      eslint: 7.31.0
+      typescript: 4.3.5
+      webpack: 5.46.0
+
+  packages/plugin-workspace-no-build:
+    specifiers:
+      '@reskript/core': 1.11.2
+      '@reskript/settings': 1.11.2
+      eslint: ^7.31.0
+      typescript: ^4.3.5
+      webpack: ^5.46.0
+    dependencies:
+      '@reskript/core': link:../core
+      '@reskript/settings': link:../settings
+    devDependencies:
       eslint: 7.31.0
       typescript: 4.3.5
       webpack: 5.46.0

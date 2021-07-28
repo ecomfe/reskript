@@ -1,29 +1,8 @@
-import path from 'path';
 import {sync as resolve} from 'resolve';
 import sass from 'sass';
+import {normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin, BuildSettings, LoaderType} from '@reskript/settings';
 import {SassLoaderOptions} from './interface';
-
-const projectSource = (cwd: string) => {
-    const projectDirectory = cwd.endsWith(path.sep) ? cwd : cwd + path.sep;
-
-    return (resource: string) => (
-        resource.includes(projectDirectory)
-            && !resource.includes(projectDirectory + 'externals')
-            && !resource.includes(`${path.sep}node_modules${path.sep}`)
-    );
-};
-
-const normalizeRuleMatch = (cwd: string, configured: boolean | ((resource: string) => boolean)) => {
-    switch (configured) {
-        case true:
-            return projectSource(cwd);
-        case false:
-            return () => false;
-        default:
-            return configured;
-    }
-};
 
 export default (options: SassLoaderOptions = {}): SettingsPlugin => {
     const finalizeBuild: BuildSettings['finalize'] = (config, entry, internals) => {
