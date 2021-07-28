@@ -9,7 +9,7 @@ title: 自动接入Qiankun
 这个插件会做以下几件事：
 
 1. 把产出的格式修改为UMD格式，允许在运行时动态加载。
-2. 在`dev-server`上增加一个代理，本地调试时会打开一个`qiankun`的容器页面，并在该页面中加载实际的产品代码。
+2. 如果打开了`setupDevServer`配置，会在`dev-server`上增加一个代理，本地调试时会打开一个`qiankun`的容器页面，并在该页面中加载实际的产品代码。
 
 通过这个插件，可以在本地调试的时候也基于`qiankun`，尽早地发现与其生命周期相关的兼容性问题。
 
@@ -30,7 +30,7 @@ npm i -D @reskript/plugin-qiankun
 const {default: qiankun} = require('@reskript/plugin-qiankun');
 
 exports.plugins = [
-    qiankun('myApp'),
+    qiankun('myApp', options),
 ];
 ```
 
@@ -50,6 +50,7 @@ interface TemplateConfig {
 
 interface Options {
     template?: string | TemplateConfig;
+    setupDevServer?: boolean;
 }
 
 function qiankun(appName: string, options?: Options): SettingsPlugin;
@@ -63,9 +64,17 @@ function qiankun(appName: string, options?: Options): SettingsPlugin;
 
 第二个参数`options`，可选，可以提供以下功能：
 
+#### 打开devServer功能
+
+当`setupDevServer`未赋值或被设置为`true`时，插件会劫持`skr dev`，并注入相关代码，让你的应用跑在一个伪造的`qiankun`运行时内。此时你可以检查自己的应用是否在运行时下可以正确运动。
+
+:::caution
+如果你已经自己架设了整个微前端运行时，比如你有一个主应用和子应用，并从主应用加载子应用进行本地调试，那么你需要设置`setupDevServer`的值为`false`。且打开这个配置会造成多层的微前端嵌套，出现一些预期之外的问题。
+:::
+
 #### 配置模板
 
-`options.template`可以用于配置容器页面的模板。
+`options.template`可以用于配置容器页面的模板，仅在`setupDevServer`为`true`时才有用。
 
 当这个选项的值为字符串时，根据字符串的表现形式，有以下的功能：
 

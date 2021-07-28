@@ -24,7 +24,7 @@ const path = require('path');
 
 exports.play = {
     injectResources: [
-        path.join(__diranme, 'src', 'styles'),
+        path.join(__dirname, 'src', 'styles'),
     ],
 };
 ```

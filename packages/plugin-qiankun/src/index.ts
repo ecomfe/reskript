@@ -57,13 +57,15 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                     return finalizeBuild(before, env, internals);
                 },
             },
-            devServer: {
-                ...settings.devServer,
-                finalize: (config, env) => {
-                    const before = settings.devServer.finalize(config, env);
-                    return finalizeDevServer(before, env);
+            devServer: options?.setupDevServer === false
+                ? settings.devServer
+                : {
+                    ...settings.devServer,
+                    finalize: (config, env) => {
+                        const before = settings.devServer.finalize(config, env);
+                        return finalizeDevServer(before, env);
+                    },
                 },
-            },
         };
     };
 };

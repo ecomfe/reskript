@@ -11,4 +11,5 @@ export interface TemplateConfig {
 
 export interface Options {
     template?: string | TemplateConfig;
+    setupDevServer?: boolean;
 }
