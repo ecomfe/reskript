@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -27,7 +27,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@reskript/core": "1.11.2",
+    "@reskript/core": "1.12.0",
     "commander": "^8.1.0",
     "semver": "^7.3.5"
   }
