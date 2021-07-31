@@ -27,5 +27,8 @@
   "peerDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/traverse": "^7.14.7"
+  },
+  "dependencies": {
+    "glob": "^7.1.7"
   }
 }
