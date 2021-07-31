@@ -49,7 +49,10 @@ export const resolveLintFiles = async (
         const cwdRelative = path.relative(gitRoot, process.cwd());
         const paths = extensions.map(extension => `${cwdRelative ? cwdRelative + '/' : ''}*${extension}`);
         const files = await findChangedFiles(paths);
-        return files.filter(staged ? isStaged : () => true).map(entry => path.relative(cwdRelative, entry.path));
+        return files
+            .filter(staged ? isStaged : () => true)
+            .map(entry => path.relative(cwdRelative, entry.path))
+            .filter(v => !v.startsWith('..'));
     }
 
     const pathToGlob = (file: string): string | string[] => {
