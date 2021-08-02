@@ -16,7 +16,7 @@
     "release": "lerna version --conventional-commits --no-push --force-publish",
     "ci": "pnpm install && pnpm run build-clean && pnpm run lint && pnpm run test",
     "preversion": "pnpm run ci",
-    "prepack": "pnpm install && pnpm run build-clean",
+    "prepack": "pnpm install && pnpm run build-clean && sh scripts/build-check.sh",
     "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
     "prepare": "husky install"
