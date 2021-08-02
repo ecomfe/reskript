@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-play",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -29,10 +29,10 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.1",
-    "@reskript/config-webpack": "1.12.1",
-    "@reskript/config-webpack-dev-server": "1.12.1",
-    "@reskript/core": "1.12.1",
-    "@reskript/settings": "1.12.1",
+    "@reskript/config-webpack": "1.12.2",
+    "@reskript/config-webpack-dev-server": "1.12.2",
+    "@reskript/core": "1.12.2",
+    "@reskript/settings": "1.12.2",
     "body-parser": "^1.19.0",
     "chokidar": "^3.5.2",
     "debounce": "^1.2.1",
