@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* **babel:** babel-utils少了个依赖 ([477a159](https://github.com/ecomfe/reskript/commit/477a159f763261533d91c0acc813d42f012289ac))
+
+
+
+
+
 # [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
 
 **Note:** Version bump only for package @reskript/babel-utils
