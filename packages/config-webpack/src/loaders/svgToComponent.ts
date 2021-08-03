@@ -5,9 +5,8 @@ const factory: LoaderFactory = entry => {
     const {mode, projectSettings: {build: {script: {displayName}}}} = entry;
 
     return {
-        loader: resolve('@reskript/svg-mixed-loader'),
+        loader: resolve('@reskript/svg-to-component-loader'),
         options: {
-            deprecationWarning: mode === 'development',
             displayName: displayName === 'auto' ? mode === 'development' : displayName,
         },
     };

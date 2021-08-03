@@ -14,3 +14,4 @@ export {default as classNames} from './classNames';
 export {default as cssExtract} from './cssExtract';
 export {default as svg} from './svg';
 export {default as svgo} from './svgo';
+export {default as svgToComponent} from './svgToComponent';

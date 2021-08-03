@@ -529,12 +529,13 @@ importers:
     specifiers:
       '@babel/core': ^7.14.8
       '@ecomfe/class-names-loader': ^2.0.0
-      '@ecomfe/svg-mixed-loader': ^1.0.1
       '@reskript/config-babel': 1.12.2
       '@reskript/config-lint': 1.12.2
       '@reskript/core': 1.12.2
       '@reskript/less-safe-loader': 1.12.2
       '@reskript/settings': 1.12.2
+      '@reskript/svg-mixed-loader': 1.12.2
+      '@reskript/svg-to-component-loader': 1.12.2
       '@reskript/webpack-plugin-extra-script': 1.12.2
       '@reskript/webpack-plugin-interpolate-html': 1.12.2
       '@types/less': ^3.0.3
@@ -583,12 +584,13 @@ importers:
     dependencies:
       '@babel/core': 7.14.8
       '@ecomfe/class-names-loader': 2.0.0_webpack@5.47.0
-      '@ecomfe/svg-mixed-loader': 1.0.1_0f9c39d454cb2d148cc0346bc35e4ddb
       '@reskript/config-babel': link:../config-babel
       '@reskript/config-lint': link:../config-lint
       '@reskript/core': link:../core
       '@reskript/less-safe-loader': link:../less-safe-loader
       '@reskript/settings': link:../settings
+      '@reskript/svg-mixed-loader': link:../svg-mixed-loader
+      '@reskript/svg-to-component-loader': link:../svg-to-component-loader
       '@reskript/webpack-plugin-extra-script': link:../webpack-plugin-extra-script
       '@reskript/webpack-plugin-interpolate-html': link:../webpack-plugin-interpolate-html
       autoprefixer: 10.3.1_postcss@8.3.6
@@ -853,6 +855,54 @@ importers:
       schema-utils: 3.1.1
     devDependencies:
       '@types/babel__core': 7.1.15
+      eslint: 7.31.0
+      jest: 27.0.6
+      ts-jest: 27.0.4_jest@27.0.6+typescript@4.3.5
+      typescript: 4.3.5
+      webpack: 5.47.0
+
+  packages/svg-mixed-loader:
+    specifiers:
+      '@types/dedent': ^0.7.0
+      '@types/xml2js': ^0.4.9
+      change-case: ^4.1.2
+      dedent: ^0.7.0
+      eslint: ^7.31.0
+      jest: ^27.0.6
+      ts-jest: ^27.0.4
+      typescript: ^4.3.5
+      webpack: ^5.47.0
+      xml2js: ^0.4.23
+    dependencies:
+      change-case: 4.1.2
+      dedent: 0.7.0
+      xml2js: 0.4.23
+    devDependencies:
+      '@types/dedent': 0.7.0
+      '@types/xml2js': 0.4.9
+      eslint: 7.31.0
+      jest: 27.0.6
+      ts-jest: 27.0.4_jest@27.0.6+typescript@4.3.5
+      typescript: 4.3.5
+      webpack: 5.47.0
+
+  packages/svg-to-component-loader:
+    specifiers:
+      '@types/dedent': ^0.7.0
+      '@types/xml2js': ^0.4.9
+      change-case: ^4.1.2
+      eslint: ^7.31.0
+      jest: ^27.0.6
+      ts-jest: ^27.0.4
+      typescript: ^4.3.5
+      webpack: ^5.47.0
+      xml2js: ^0.4.23
+    dependencies:
+      change-case: 4.1.2
+      xml2js: 0.4.23
+    devDependencies:
+      '@types/dedent': 0.7.0
+      '@types/xml2js': 0.4.9
       eslint: 7.31.0
       jest: 27.0.6
       ts-jest: 27.0.4_jest@27.0.6+typescript@4.3.5
@@ -2435,24 +2485,6 @@ packages:
     resolution: {integrity: sha512-TZdjWeY14jOV+0cwcSaZHKDw0/7u1+xaycfUnGOGVxah6vYKvW/wpWKDadmOaSKFWn9l5UMArryeg3NyLWL2Eg==}
     peerDependencies:
       stylelint: '>=9'
-    dev: false
-
-  /@ecomfe/svg-mixed-loader/1.0.1_0f9c39d454cb2d148cc0346bc35e4ddb:
-    resolution: {integrity: sha512-peTWPkITbvoM5g2/99b3Xtxk8vv0R7UNxwJq72KHvK5Fo7jzoxfpnzQPyfYil0OM67xO1llcJRBJUkVvMf2EGg==}
-    peerDependencies:
-      file-loader: ^6.2.0
-      url-loader: ^4.1.1
-    dependencies:
-      '@babel/core': 7.14.8
-      '@babel/preset-react': 7.14.5_@babel+core@7.14.8
-      change-case: 4.1.2
-      file-loader: 6.2.0_webpack@5.47.0
-      loader-utils: 2.0.0
-      schema-utils: 3.1.1
-      svg-to-jsx: 1.0.3
-      url-loader: 4.1.1_file-loader@6.2.0+webpack@5.47.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@emotion/babel-plugin/11.3.0_@babel+core@7.14.8:
@@ -4055,6 +4087,10 @@ packages:
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
 
+  /@types/node/16.4.10:
+    resolution: {integrity: sha512-TmVHsm43br64js9BqHWqiDZA+xMtbUpI1MBIA0EyiBmoV9pcEYFOSdj5fr6enZNfh4fChh+AGOLIzGwJnkshyQ==}
+    dev: true
+
   /@types/node/16.4.6:
     resolution: {integrity: sha512-FKyawK3o5KL16AwbeFajen8G4K3mmqUrQsehn5wNKs8IzlKHE8TfnSmILXVMVziAEcnB23u1RCFU1NT6hSyr7Q==}
 
@@ -4168,6 +4204,12 @@ packages:
 
   /@types/workbox-webpack-plugin/5.1.8:
     resolution: {integrity: sha512-1RKsHinzZMDmMNS0OouyMQPEfL2oJr4oXPTGI3YwEuCOsIKDSce+l3KW1qY5IufXs3W2g/ZFlWD2X9SkmaSiZA==}
+    dev: true
+
+  /@types/xml2js/0.4.9:
+    resolution: {integrity: sha512-CHiCKIihl1pychwR2RNX5mAYmJDACgFVCMT5OArMaO3erzwXVcBqPcusr+Vl8yeeXukxZqtF8mZioqX+mpjjdw==}
+    dependencies:
+      '@types/node': 16.4.10
     dev: true
 
   /@types/yargs-parser/20.2.1:
@@ -5660,14 +5702,6 @@ packages:
     resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==}
     engines: {node: '>= 10'}
 
-  /cliui/3.2.0:
-    resolution: {integrity: sha1-EgYBU3qRbSmUD5NNo7SNWFo5IT0=}
-    dependencies:
-      string-width: 1.0.2
-      strip-ansi: 3.0.1
-      wrap-ansi: 2.1.0
-    dev: false
-
   /cliui/5.0.0:
     resolution: {integrity: sha512-PYeGSEmmHM6zvoef2w8TPzlrnNpXIjTipYK780YswmIP9vjxmd6Y2a3CB2Ks6/AU8NHjZugXvo8w3oWM2qnwXA==}
     dependencies:
@@ -5729,6 +5763,7 @@ packages:
   /code-point-at/1.1.0:
     resolution: {integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /collect-v8-coverage/1.0.1:
     resolution: {integrity: sha512-iBPtljfCNcTKNAto0KEtDfZ3qzjJvqE3aTGZsbhjSBlorqpXJlaWWtPO35D+ZImoC3KWejX64o+yPGxhWSTzfg==}
@@ -8943,11 +8978,6 @@ packages:
       p-is-promise: 1.1.0
     dev: false
 
-  /invert-kv/1.0.0:
-    resolution: {integrity: sha1-EEqOSqym09jNFXqO+L+rLXo//bY=}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /ip-regex/2.1.0:
     resolution: {integrity: sha1-+ni/XS5pE8kRzp+BnuUUa7bYROk=}
     engines: {node: '>=4'}
@@ -9134,6 +9164,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       number-is-nan: 1.0.1
+    dev: true
 
   /is-fullwidth-code-point/2.0.0:
     resolution: {integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=}
@@ -10108,13 +10139,6 @@ packages:
 
   /known-css-properties/0.21.0:
     resolution: {integrity: sha512-sZLUnTqimCkvkgRS+kbPlYW5o8q5w1cu+uIisKpEWkj31I8mx8kNG162DwRav8Zirkva6N5uoFsm9kzK4mUXjw==}
-    dev: false
-
-  /lcid/1.0.0:
-    resolution: {integrity: sha1-MIrMr6C8SDo4Z7S28rlQYlHRuDU=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      invert-kv: 1.0.0
     dev: false
 
   /lerna/4.0.0:
@@ -11446,6 +11470,7 @@ packages:
   /number-is-nan/1.0.1:
     resolution: {integrity: sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /nwsapi/2.2.0:
     resolution: {integrity: sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==}
@@ -11646,13 +11671,6 @@ packages:
     resolution: {integrity: sha1-/7xJiDNuDoM94MFox+8VISGqf7M=}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /os-locale/1.4.0:
-    resolution: {integrity: sha1-IPnxeuKe00XoveWDsT0gCYA8FNk=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      lcid: 1.0.0
-    dev: false
 
   /os-tmpdir/1.0.2:
     resolution: {integrity: sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=}
@@ -12777,6 +12795,7 @@ packages:
   /q/1.5.1:
     resolution: {integrity: sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=}
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
+    dev: true
 
   /qiankun/2.4.5:
     resolution: {integrity: sha512-nBpnBmczzqUX7rFZHAsWc+mprpe8w65nRYtF3FLQkfgvR39wk/QfqYfdYcDu/ECPfm2Am1xVfqKLZDtTwImRDg==}
@@ -14081,6 +14100,7 @@ packages:
       code-point-at: 1.1.0
       is-fullwidth-code-point: 1.0.0
       strip-ansi: 3.0.1
+    dev: true
 
   /string-width/2.1.1:
     resolution: {integrity: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==}
@@ -14415,17 +14435,6 @@ packages:
 
   /svg-tags/1.0.0:
     resolution: {integrity: sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=}
-    dev: false
-
-  /svg-to-jsx/1.0.3:
-    resolution: {integrity: sha512-sWlK+38oK2GYh5ZbPw/fIrKuwjmhhJk7eYrGBNCZa41im1qcHTY4ei7D5ETzVHIqROSvySV6yAGJcQ3jMbYttA==}
-    hasBin: true
-    dependencies:
-      object-assign: 4.1.1
-      q: 1.5.1
-      xml2js: 0.4.23
-      xmlbuilder: 13.0.2
-      yargs: 3.32.0
     dev: false
 
   /svgo-loader/3.0.0:
@@ -15552,12 +15561,6 @@ packages:
     resolution: {integrity: sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==}
     dev: false
 
-  /window-size/0.1.4:
-    resolution: {integrity: sha1-+OGqHuWlPsW/FR/6CXQqatdpeHY=}
-    engines: {node: '>= 0.10.0'}
-    hasBin: true
-    dev: false
-
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
@@ -15738,14 +15741,6 @@ packages:
       webpack: 5.47.0
     dev: false
 
-  /wrap-ansi/2.1.0:
-    resolution: {integrity: sha1-2Pw9KE3QV5T+hJc8rs3Rz4JP3YU=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      string-width: 1.0.2
-      strip-ansi: 3.0.1
-    dev: false
-
   /wrap-ansi/5.1.0:
     resolution: {integrity: sha512-QC1/iN/2/RPVJ5jYK8BGttj5z83LmSKmvbvrXPNCLZSEb32KKVDJDl/MOt2N01qU2H/FkzEa9PKto1BqDjtd7Q==}
     engines: {node: '>=6'}
@@ -15869,11 +15864,6 @@ packages:
     engines: {node: '>=4.0'}
     dev: false
 
-  /xmlbuilder/13.0.2:
-    resolution: {integrity: sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==}
-    engines: {node: '>=6.0'}
-    dev: false
-
   /xmlchars/2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
 
@@ -15884,10 +15874,6 @@ packages:
   /xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
-
-  /y18n/3.2.2:
-    resolution: {integrity: sha512-uGZHXkHnhF0XeeAPgnKfPv1bgKAYyVvmNL1xlKsPYZPaIHxGti2hHqvOCQv71XMsLxu1QjergkqogUnms5D3YQ==}
-    dev: false
 
   /y18n/4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
@@ -15987,18 +15973,6 @@ packages:
       y18n: 5.0.8
       yargs-parser: 20.2.9
     dev: true
-
-  /yargs/3.32.0:
-    resolution: {integrity: sha1-AwiOnr+edWtpdRYR0qXvWRSCyZU=}
-    dependencies:
-      camelcase: 2.1.1
-      cliui: 3.2.0
-      decamelize: 1.2.0
-      os-locale: 1.4.0
-      string-width: 1.0.2
-      window-size: 0.1.4
-      y18n: 3.2.2
-    dev: false
 
   /yauzl/2.10.0:
     resolution: {integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=}

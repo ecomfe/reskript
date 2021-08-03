@@ -96,7 +96,8 @@ export type LoaderType =
     | 'classNames'
     | 'cssExtract'
     | 'svg'
-    | 'svgo';
+    | 'svgo'
+    | 'svgToComponent';
 
 export interface BuildInternals {
     readonly rules: InternalRules;
