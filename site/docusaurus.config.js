@@ -23,6 +23,11 @@ module.exports = {
                     position: 'left',
                 },
                 {
+                    to: 'blog',
+                    label: 'Blog',
+                    position: 'left'
+                },
+                {
                     to: 'https://github.com/ecomfe/reskript',
                     label: 'GitHub',
                     position: 'right',
