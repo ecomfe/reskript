@@ -1,6 +1,6 @@
 {
   "name": "@reskript/eslint-plugin",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "main": "index.js",
   "license": "MIT",
   "files": [
