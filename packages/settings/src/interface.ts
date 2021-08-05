@@ -12,7 +12,7 @@ export interface FeatureMatrix {
     [name: string]: FeatureSet;
 }
 
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata';
 
 export interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题

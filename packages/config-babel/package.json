@@ -52,6 +52,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.13.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "lodash": "^4.17.21",
     "react-refresh": "^0.10.0",
     "resolve": "^1.20.0"

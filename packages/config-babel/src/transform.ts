@@ -40,6 +40,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 autoLabel: mode === 'production' ? 'never' : 'always',
             },
         ],
+        shouldEnable('reflect-metadata', uses) && resolve('babel-plugin-transform-typescript-metadata'),
         ...minimal.plugins || [],
         requireAntdOptimization(options) && [
             resolve('babel-plugin-import'),

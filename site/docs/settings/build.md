@@ -8,7 +8,7 @@ title: 构建配置
 
 ```ts
 // 以下是工具内置了优化的相关第三方库
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata';
 
 interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
@@ -163,6 +163,7 @@ exports.build = {
 - `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
 - `styled-components`：对`styled-components`的使用进行构建期的优化，可以参考[babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components)的相关说明。
 - `emotion`：对`emotion`样式解决方案进行处理，这个插件是[`emotion`部分功能的必须依赖](https://emotion.sh/docs/@emotion/babel-plugin#features)。**使用`emotion`要求你的`react`版本在`16.14.0`以上。**
+- `reflect-metadata`：在构建TypeScript文件中的装饰器语法时，会额外增加对`Reflect.metadata`相关的代码，主要用于NestJS、或InversifyJS等库。
 
 `reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
 
@@ -460,7 +461,8 @@ type LoaderType =
     | 'classNames'
     | 'cssExtract'
     | 'svg'
-    | 'svgo';
+    | 'svgo'
+    | 'svgToComponent';
 
 
 function loader(name: LoaderType, buildEntry: BuildEntry): RuleSetUseItem | null;

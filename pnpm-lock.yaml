@@ -371,6 +371,7 @@ importers:
       babel-plugin-module-resolver: ^4.1.0
       babel-plugin-styled-components: ^1.13.2
       babel-plugin-transform-react-remove-prop-types: ^0.4.24
+      babel-plugin-transform-typescript-metadata: ^0.3.2
       eslint: ^7.31.0
       jest: ^27.0.6
       lodash: ^4.17.21
@@ -406,6 +407,7 @@ importers:
       babel-plugin-module-resolver: 4.1.0
       babel-plugin-styled-components: 1.13.2
       babel-plugin-transform-react-remove-prop-types: 0.4.24
+      babel-plugin-transform-typescript-metadata: 0.3.2
       lodash: 4.17.21
       react-refresh: 0.10.0
       resolve: 1.20.0
@@ -5027,6 +5029,12 @@ packages:
 
   /babel-plugin-transform-react-remove-prop-types/0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
+    dev: false
+
+  /babel-plugin-transform-typescript-metadata/0.3.2:
+    resolution: {integrity: sha512-mWEvCQTgXQf48yDqgN7CH50waTyYBeP2Lpqx4nNWab9sxEpdXVeKgfj1qYI2/TgUPQtNFZ85i3PemRtnXVYYJg==}
+    dependencies:
+      '@babel/helper-plugin-utils': 7.14.5
     dev: false
 
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.14.8:

@@ -53,3 +53,10 @@ describe('defaultImportOptimization', () => {
         expect(findPluginByKeyword(config.plugins, 'babel-plugin-lodash')).toBe(false);
     });
 });
+
+describe('third party use', () => {
+    test('reflect-metadata', () => {
+        const config = getTransformBabelConfig({...options, uses: ['reflect-metadata']});
+        expect(findPluginByKeyword(config.plugins, 'babel-plugin-transform-typescript-metadata')).toBe(true);
+    });
+});
