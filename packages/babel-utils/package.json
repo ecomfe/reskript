@@ -16,10 +16,10 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/traverse": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/traverse": "^7.15.0",
     "@types/babel__core": "^7.1.15",
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"

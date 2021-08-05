@@ -16,9 +16,9 @@
     "test": "echo 'No test in @reskript/plugin-workspace-no-build'"
   },
   "devDependencies": {
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
     "typescript": "^4.3.5",
-    "webpack": "^5.47.0"
+    "webpack": "^5.48.0"
   },
   "dependencies": {
     "@reskript/core": "1.12.2",

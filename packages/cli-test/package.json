@@ -16,8 +16,8 @@
     "test": "echo 'No test in @reskript/cli-test'"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.171",
-    "eslint": "^7.31.0",
+    "@types/lodash": "^4.14.172",
+    "eslint": "^7.32.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
