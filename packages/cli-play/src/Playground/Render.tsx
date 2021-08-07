@@ -1,4 +1,4 @@
-import {Component, ComponentType} from 'react';
+import {Component, ComponentType, StrictMode} from 'react';
 
 interface RenderProps {
     target: ComponentType;
@@ -23,6 +23,10 @@ export default class Render extends Component<RenderProps, RenderState> {
             return <pre style={{color: 'red'}}>{error}</pre>;
         }
 
-        return <Component />;
+        return (
+            <StrictMode>
+                <Component />
+            </StrictMode>
+        );
     }
 }
