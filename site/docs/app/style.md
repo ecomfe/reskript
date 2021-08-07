@@ -47,10 +47,15 @@ declare module '*.png' {
 }
 
 declare module '*.svg' {
-    import {ComponentType, SVGProps} from 'react';
-    export const ReactComponent: ComponentType<SVGProps<SVGSVGElement>>;
-    const url: string;
+    declare const url: string;
     export default url;
+}
+
+declare module '*.svg?react' {
+    import {ComponentType, SVGProps} from 'react';
+
+    declare const ReactComponent: ComponentType<SVGProps<SVGSVGElement>>;
+    export default ReactComponent;
 }
 ```
 

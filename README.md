@@ -23,7 +23,7 @@
 
 - **样式被转化为函数**：对于样式文件，在引入后会变成一个函数，比如： `import c from './index.less'` 后可以使用 `c('text', {'size-small': props.small})` 这样的形式生成元素的className，内部基于 [classnames](https://www.npmjs.com/package/classnames) 实现。
 
-- **SVG组件化**：可以通过 `import {ReactComponent} from './icon.svg'` 将 SVG 转化为组件，这与 [create-react-app](https://www.npmjs.com/package/create-react-app) 提供的能力相似，但 reSKRipt 使用了自定义的 loader 来实现这一功能，具备更好的转换性能。
+- **SVG组件化**：可以通过 `import ReactComponent from './icon.svg?react'` 将 SVG 转化为组件，这与 [create-react-app](https://www.npmjs.com/package/create-react-app) 提供的能力相似，但 reSKRipt 使用了自定义的 loader 来实现这一功能，具备更好的转换性能。
 
 - **严格的代码检查规则**：基于百度内部的编码规范，使用 [@ecomfe/eslint-config](https://www.npmjs.com/package/@ecomfe/eslint-config) 和 [@ecomfe/stylelint-config](https://www.npmjs.com/package/@ecomfe/stylelint-config) 的严格规则做检查，并在此基础上增加了一系列自己的规则，代码检查远比社区更加严格。
 
