@@ -19,6 +19,11 @@ const testCase = (file, errors = []) => {
             ecmaVersion: 2018,
             sourceType: 'module',
         },
+        settings: {
+            localPackageNames: [
+                '@i/*',
+            ],
+        },
         output: code(`${file}.output`),
     };
 };
@@ -48,6 +53,7 @@ tester.run(
                 ]
             ),
             testCase('node-invalid', ['Import of node:fs should be placed before path']),
+            testCase('local-package', ['Import of lodash should be placed before @i/util']),
         ],
     }
 );

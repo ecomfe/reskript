@@ -6,13 +6,25 @@ const BASE_PRIORITY = {
     node: 0,
     native: 100,
     package: 200,
-    alias: 300,
-    relative: 400,
+    local: 300,
+    alias: 400,
+    relative: 500,
 };
 
 const RELATIVE_HINT = '..';
 
-const importSourceType = name => {
+const isLocalPackage = (declaredPackageNames, currentPackageName) => {
+    const isMatchLocal = pattern => {
+        if (pattern[pattern.length - 1] === '*') {
+            return currentPackageName.startsWith(pattern.slice(0, -1));
+        }
+        return currentPackageName === pattern || currentPackageName.startsWith(pattern + '/');
+    };
+
+    return declaredPackageNames.some(isMatchLocal);
+};
+
+const importSourceType = (name, {localPackageNames}) => {
     if (BUILTIN_MODULES.has(name)) {
         return 'native';
     }
@@ -24,6 +36,9 @@ const importSourceType = name => {
     }
     if (name.startsWith('@/')) {
         return 'alias';
+    }
+    if (isLocalPackage(localPackageNames, name)) {
+        return 'local';
     }
 
     return 'package';
@@ -49,8 +64,8 @@ const relativeLevelCount = (path, startIndex = 0, totalCount = 0) => {
     return totalCount;
 };
 
-const importSourcePriority = name => {
-    const type = importSourceType(name);
+const importSourcePriority = (name, options) => {
+    const type = importSourceType(name, options);
     const priority = BASE_PRIORITY[type];
 
     return type === 'relative' ? priority + relativeLevelCount(name) : priority;
@@ -86,12 +101,13 @@ module.exports = {
         },
     },
     create(context) {
+        const localPackageNames = context.settings.localPackageNames || [];
         const foundImports = [];
 
         return {
             ImportDeclaration(node) {
                 const source = node.source.value;
-                const priority = importSourcePriority(source);
+                const priority = importSourcePriority(source, {localPackageNames});
                 foundImports.push({source, priority, node});
             },
             'Program:exit'() {
