@@ -16,9 +16,10 @@ const removeNamespaceAttributes = (props: Record<string, unknown>): Record<strin
 };
 
 const parseSVG = async (source: string) => {
-    const endOfStartTag = source.indexOf('>');
+    const startOfStartTag = source.indexOf('<svg');
+    const endOfStartTag = source.indexOf('>', startOfStartTag);
     const startOfEndTag = source.lastIndexOf('<');
-    const startTag = source.slice(0, endOfStartTag + 1);
+    const startTag = source.slice(startOfStartTag, endOfStartTag + 1);
     const endTag = source.slice(startOfEndTag);
     const body = source.slice(endOfStartTag + 1, startOfEndTag);
     const parsedWrapper = await parseStringPromise(startTag + endTag);
@@ -38,19 +39,28 @@ export default async function lessSafeLoader(this: LoaderContext<Options>, sourc
     this.cacheable();
     const callback = this.async();
     const {displayName = false} = this.getOptions();
-    const [svgProps, svgBody] = await parseSVG(source);
-    const componentProps = {
-        ...svgProps,
-        dangerouslySetInnerHTML: {
-            __html: svgBody,
-        },
-    };
-    const lines = [
-        'import {createElement} from \'react\';',
-        'export default function SVGToComponent(props) {',
-        `    return createElement('svg', ${JSON.stringify(componentProps)});`,
-        '}',
-        displayName && `SVGToComponent.displayName = ${JSON.stringify(resolveDisplayName(this.resourcePath))};`,
-    ];
-    callback(null, lines.filter(v => !!v).join('\n'));
+    try {
+        const [svgProps, svgBody] = await parseSVG(source);
+        const componentProps = {
+            ...svgProps,
+            dangerouslySetInnerHTML: {
+                __html: svgBody,
+            },
+        };
+        const lines = [
+            'import {createElement} from \'react\';',
+            'export default function SVGToComponent(props) {',
+            `    return createElement('svg', ${JSON.stringify(componentProps)});`,
+            '}',
+            displayName && `SVGToComponent.displayName = ${JSON.stringify(resolveDisplayName(this.resourcePath))};`,
+        ];
+        callback(null, lines.filter(v => !!v).join('\n'));
+    }
+    catch (ex) {
+        const message = [
+            `Failed to parse ${this.resourcePath}`,
+            'please report to https://github.com/ecomfe/reskript/issues/new with svg\'s content',
+        ];
+        callback(new Error(message.join(', ')));
+    }
 }
