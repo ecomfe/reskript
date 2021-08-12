@@ -1,6 +1,6 @@
 {
   "name": "@reskript/less-safe-loader",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [

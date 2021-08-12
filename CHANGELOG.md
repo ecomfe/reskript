@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+
+### Bug Fixes
+
+* **build:** 解析svg时处理XML编码信息部分 ([#112](https://github.com/ecomfe/reskript/issues/112)) ([70ceef2](https://github.com/ecomfe/reskript/commit/70ceef2e71bde4cf5040c063131f98bd6d052110))
+* **play:** 升级monaco-editor兼容play的版本 ([#111](https://github.com/ecomfe/reskript/issues/111)) ([77fd26e](https://github.com/ecomfe/reskript/commit/77fd26ee787f3c4bcfacf1ccb26b6c595f93d073))
+
+
+### Features
+
+* **lint:** import-order规则支持检查本地的包名 ([#110](https://github.com/ecomfe/reskript/issues/110)) ([050084d](https://github.com/ecomfe/reskript/commit/050084da970b475fcc5450c3b57c5f5aa76f29ee))
+
+
+
+
+
 ## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
 
 
