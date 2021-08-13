@@ -3,7 +3,7 @@ const compiler = require('./compiler');
 test('default', async () => {
     const code = await compiler();
     expect(code.includes('export const url = new URL(')).toBe(true);
-    expect(code.includes('export const ReactComponent')).toBe(true);
+    expect(code.includes('export function ReactComponent(props) {')).toBe(true);
     expect(code.includes('export default url')).toBe(true);
 });
 

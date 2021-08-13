@@ -50,7 +50,7 @@ export default async function lessSafeLoader(this: LoaderContext<Options>, sourc
         const lines = [
             'import {createElement} from \'react\';',
             'export default function SVGToComponent(props) {',
-            `    return createElement('svg', ${JSON.stringify(componentProps)});`,
+            `    return createElement('svg', {${JSON.stringify(componentProps).slice(1, -1)}, ...props});`,
             '}',
             displayName && `SVGToComponent.displayName = ${JSON.stringify(resolveDisplayName(this.resourcePath))};`,
         ];

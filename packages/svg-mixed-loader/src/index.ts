@@ -59,10 +59,10 @@ export default async function lessSafeLoader(this: LoaderContext<Options>, sourc
         const lines = [
             'import {createElement} from \'react\';',
             `export const url = new URL('${this.resourcePath}?asset', import.meta.url);`,
-            'export const ReactComponent = props => {',
-            deprecationWarning && `console.warn(${JSON.stringify(deprecationMessage(this.resourcePath))})`,
-            `return createElement('svg', ${JSON.stringify(componentProps)});`,
-            '};',
+            'export function ReactComponent(props) {',
+            deprecationWarning && `    console.warn(${JSON.stringify(deprecationMessage(this.resourcePath))})`,
+            `    return createElement('svg', {${JSON.stringify(componentProps).slice(1, -1)}, ...props});`,
+            '}',
             displayName && `ReactComponent.displayName = ${JSON.stringify(resolveDisplayName(this.resourcePath))};`,
             'export default url;',
         ];
