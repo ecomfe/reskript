@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **build:** 在SVG转成组件时要接受props ([#113](https://github.com/ecomfe/reskript/issues/113)) ([dd594be](https://github.com/ecomfe/reskript/commit/dd594be07c9bc6a3e4549c9f4839318b5e4cd6c1))
+
+
+
+
+
 # [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
 
 
