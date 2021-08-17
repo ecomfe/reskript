@@ -87,7 +87,32 @@ function workspaceNoBuild(options?: Options): SettingsPlugin;
 
 ## 注意点
 
+### 关于源码结构
+
 1. `import`的时候对应的包名是各个名中的`package.json`中的`name`字段声明的，和文件夹名没关系。
 2. 你的源码**必须**在`src`下，这个是硬编码的。
 3. 此时`package.json`中的`main`、`browser`、`module`、`exports`等字段全部失效，只按照`src`下的文件路径来找文件。
 4. 这个插件并不适用于`skr test`，单元测试时依然是正常的路径查找，因此建议你在`package.json`中写`"main": "./src/index.ts"`来让`jest`可以正确地找到文件。经测试，此后`skr test`提供的配置能够正确编译TypeScript文件。
+
+### 关于依赖
+
+如果你的结构是这样的：
+
+```
+/packages
+    /app # 应用主入口
+        package.json # 包含dependencies: react-router-dom, @i/biz
+    /biz # 一个业务模块
+        package.json # 包含devDependencies: react-router-dom和peerDependencies: react-router-dom
+```
+
+根据你使用的包管理工具的不同，可能`app/node_modules/react-router-dom`和`biz/node_modules/react-router-dom`并不能保证指向同一个目录，那么就会引起路由读不到自己的`Context`直接报错之类的问题。
+
+以上以`react-router-dom`为例只是一个通俗的说明，存在此问题的包还有很多。
+
+为了解决这个问题，如果一个包你希望做到“由应用主入口提供，其它业务模块仅声明依赖”，则你需要做以下几点：
+
+1. 对于业务模块，必须用`peerDependencies`和`devDependencies`去依赖它，**切记**一定要在`peerDependencies`中声明。
+2. 对于应用主入口，必须用`dependencies`依赖它。
+
+在满足以上2点的情况下，本插件会做一个特殊的处理，把业务模块的`peerDependencies`都指向主应用的`dependencies`，保证它们是同一个第三方包。

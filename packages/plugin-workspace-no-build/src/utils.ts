@@ -19,21 +19,43 @@ export const resolveParticipant = (defaults: string[], {includes, excludes}: Opt
 interface PackageInfo {
     name: string;
     directory: string;
+    dependencies: Record<string, string>;
+    peerDependencies: Record<string, string>;
+    devDependencies: Record<string, string>;
 }
 
-const buildPackageInfo = (directory: string): PackageInfo => {
+export const buildPackageInfo = (directory: string): PackageInfo => {
     const packageInfo = JSON.parse(fs.readFileSync(path.join(directory, 'package.json'), 'utf-8'));
     return {
         directory,
         name: packageInfo.name,
+        dependencies: packageInfo.dependencies ?? {},
+        peerDependencies: packageInfo.peerDependencies ?? {},
+        devDependencies: packageInfo.devDependencies ?? {},
     };
 };
 
-export const findSiblingPackages = (cwd: string) => {
+export const findSiblingPackages = (cwd: string, self: PackageInfo) => {
     const root = findMonorepoRoot(cwd);
-    const self = buildPackageInfo(cwd);
     const packageDirectories = resolveMonorepoPackageDirectories(root);
     const packages = packageDirectories.map(buildPackageInfo);
     const siblings = packages.filter(v => v.name !== self.name);
     return siblings;
+};
+
+export const buildPeerAlias = (cwd: string, siblings: PackageInfo[], self: PackageInfo): Record<string, string> => {
+    const alias = siblings.reduce(
+        (alias, {name, peerDependencies}) => {
+            for (const dependency of Object.keys(peerDependencies)) {
+                if (!self.dependencies[dependency]) {
+                    console.error(`Dependency ${dependency} is required in ${name} but not installed in ${self.name}.`);
+                    process.exit(24);
+                }
+                alias[dependency] = path.join(cwd, 'node_modules', dependency);
+            }
+            return alias;
+        },
+        {} as Record<string, string>
+    );
+    return alias;
 };
