@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** 修复svg-mixed-loader在Windows系统下的路径问题 ([#114](https://github.com/ecomfe/reskript/issues/114)) ([05cc19c](https://github.com/ecomfe/reskript/commit/05cc19c358972cab8bc80afb4f7de70b98cbc130))
+* **init:** 导入SVG组件的类型声明优化 ([#117](https://github.com/ecomfe/reskript/issues/117)) ([cbd5981](https://github.com/ecomfe/reskript/commit/cbd598169260ecbeb6ac827b2f2efe91eb7edb20))
+* **init:** 异步执行命令的顺序错误 ([#116](https://github.com/ecomfe/reskript/issues/116)) ([d509352](https://github.com/ecomfe/reskript/commit/d509352053d5a9d47cc8c37a8838f57ce9408c62))
+* **plugin-workspace-no-build:** 自动处理业务模块的peer依赖 ([#118](https://github.com/ecomfe/reskript/issues/118)) ([875c9c9](https://github.com/ecomfe/reskript/commit/875c9c97995a0cb57857b4f526a555b37c2de992))
+* **test:** 处理第三方包的ESM在jest中无法解析的问题 ([#115](https://github.com/ecomfe/reskript/issues/115)) ([75d6470](https://github.com/ecomfe/reskript/commit/75d64708799b5bfcf932e88944eaa7f1d5425e85))
+
+
+
+
+
 ## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
 
 

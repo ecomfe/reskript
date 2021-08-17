@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 自动处理业务模块的peer依赖 ([#118](https://github.com/ecomfe/reskript/issues/118)) ([875c9c9](https://github.com/ecomfe/reskript/commit/875c9c97995a0cb57857b4f526a555b37c2de992))
+
+
+
+
+
 ## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
 
 **Note:** Version bump only for package @reskript/plugin-workspace-no-build

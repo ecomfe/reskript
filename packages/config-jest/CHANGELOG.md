@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **test:** 处理第三方包的ESM在jest中无法解析的问题 ([#115](https://github.com/ecomfe/reskript/issues/115)) ([75d6470](https://github.com/ecomfe/reskript/commit/75d64708799b5bfcf932e88944eaa7f1d5425e85))
+
+
+
+
+
 ## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
 
 **Note:** Version bump only for package @reskript/config-jest

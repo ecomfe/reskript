@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** 修复svg-mixed-loader在Windows系统下的路径问题 ([#114](https://github.com/ecomfe/reskript/issues/114)) ([05cc19c](https://github.com/ecomfe/reskript/commit/05cc19c358972cab8bc80afb4f7de70b98cbc130))
+
+
+
+
+
 ## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
 
 

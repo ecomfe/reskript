@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **init:** 导入SVG组件的类型声明优化 ([#117](https://github.com/ecomfe/reskript/issues/117)) ([cbd5981](https://github.com/ecomfe/reskript/commit/cbd598169260ecbeb6ac827b2f2efe91eb7edb20))
+* **init:** 异步执行命令的顺序错误 ([#116](https://github.com/ecomfe/reskript/issues/116)) ([d509352](https://github.com/ecomfe/reskript/commit/d509352053d5a9d47cc8c37a8838f57ce9408c62))
+
+
+
+
+
 ## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
 
 **Note:** Version bump only for package @reskript/init
