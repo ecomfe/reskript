@@ -30,10 +30,8 @@ const reactJestConfig = (configBasePath: string, jestConfigOptions?: JestConfigO
             // 如果自己有`jest.config.js`，需要自己写`global.$features`才行
             $features: jestConfigOptions && jestConfigOptions.features || {},
         },
-        transformIgnorePatterns: [
-            // `node_modules`下所有有`es`目录的包，认为发布的是ES代码，要过babel，下面的正则再看一下怎么优化
-            'node_modules/[^/]+?/(?!(es|node_modules)/)',
-        ],
+        // 默认会忽略`node_modules`，所以这里要设置
+        transformIgnorePatterns: [],
     };
 };
 
@@ -50,6 +48,7 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
             '\\$internal/core-js/(.*)$': path.dirname(resolve('core-js')) + '/$1',
         },
         transform: {
+            'node_modules/.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/thirdPartyTransformer`,
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,
             '^.+\\.(md|mdx|txt|tpl)$': resolve('jest-raw-loader'),
         },

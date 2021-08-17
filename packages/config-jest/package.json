@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "@reskript/config-babel": "1.14.1",
     "@reskript/core": "1.14.1",
     "@reskript/settings": "1.14.1",

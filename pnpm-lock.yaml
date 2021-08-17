@@ -448,6 +448,7 @@ importers:
   packages/config-jest:
     specifiers:
       '@babel/core': ^7.15.0
+      '@babel/plugin-transform-modules-commonjs': ^7.15.0
       '@reskript/config-babel': 1.14.1
       '@reskript/core': 1.14.1
       '@reskript/settings': 1.14.1
@@ -468,6 +469,7 @@ importers:
       unixify: ^1.0.0
     dependencies:
       '@babel/core': 7.15.0
+      '@babel/plugin-transform-modules-commonjs': 7.15.0_@babel+core@7.15.0
       '@reskript/config-babel': link:../config-babel
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
