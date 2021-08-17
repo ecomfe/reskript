@@ -52,10 +52,12 @@ declare module '*.svg' {
 }
 
 declare module '*.svg?react' {
-    import {ComponentType, SVGProps} from 'react';
+    import {ComponentType, SVGAttributes} from 'react';
 
-    declare const ReactComponent: ComponentType<SVGProps<SVGSVGElement>>;
-    export default ReactComponent;
+    export type SVGComponent = ComponentType<SVGAttributes<SVGElement>>;
+
+    declare const Component: SVGComponent;
+    export default Component;
 }
 ```
 
