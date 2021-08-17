@@ -24,8 +24,16 @@ const gerritCompatible = (cwd: string) => {
 };
 
 const noGerrit = (cwd: string) => {
-    exec(cwd, 'npx --no-install husky install');
-    exec(cwd, 'npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"');
+    try {
+        exec(cwd, 'npx --no-install husky install');
+        exec(cwd, 'npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"');
+    }
+    catch {
+        console.error('Husky install failed, maybe this is not a git enabled project.');
+        console.error('You may run these scripts to enable husky later:');
+        console.error('    npx --no-install husky install');
+        console.error('    npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"');
+    }
 };
 
 export default async (cwd: string, options: UserOptions) => {

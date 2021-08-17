@@ -13,6 +13,17 @@
 
 **[reSKRipt](https://ecomfe.github.io/reskript)** 是基于 [React](https://github.com/facebook/react) 与 [Ant Design](https://github.com/ant-design/ant-design) 开发的一套命令行工具套件，整合了代码检查、单元测试、构建、代码转义和本地调试等一系列功能，意图做到在开发业务时无需关心工具选型。
 
+## 快速开始
+
+```shel
+mkdir my-app
+npx @reskript/init my-app
+cd my-app
+npm start
+```
+
+进一步的使用欢迎[参考使用文档](https://ecomfe.github.io/reskript)。
+
 ## 为什么自研
 
 社区中的 [create-react-app](https://www.npmjs.com/package/create-react-app) 提供了最基础的开发体验，而 reSKRipt 则在此基础之上加了一些独特的能力和更多的约束，在此例举一些主要的：

@@ -6,14 +6,7 @@ import {UserOptions} from '../interface';
 
 const execAsync = promisify(childProcess.exec);
 
-const exec = (cwd: string, command: string) => {
-    execAsync(
-        command,
-        {
-            cwd,
-        }
-    );
-};
+const exec = (cwd: string, command: string) => execAsync(command, {cwd});
 
 export default async (cwd: string, options: UserOptions) => {
     const spinner = ora('Installing dependencies');
