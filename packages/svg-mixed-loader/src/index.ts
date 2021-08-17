@@ -56,9 +56,11 @@ export default async function lessSafeLoader(this: LoaderContext<Options>, sourc
                 __html: svgBody,
             },
         };
+        // 处理Windows上的路径问题
+        const resourcePathEscaped = this.resourcePath.replace(/\\/g, '\\\\');
         const lines = [
             'import {createElement} from \'react\';',
-            `export const url = new URL('${this.resourcePath}?asset', import.meta.url);`,
+            `export const url = new URL('${resourcePathEscaped}?asset', import.meta.url).toString();`,
             'export function ReactComponent(props) {',
             deprecationWarning && `    console.warn(${JSON.stringify(deprecationMessage(this.resourcePath))})`,
             `    return createElement('svg', {${JSON.stringify(componentProps).slice(1, -1)}, ...props});`,
