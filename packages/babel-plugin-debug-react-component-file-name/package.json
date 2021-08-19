@@ -1,6 +1,6 @@
 {
   "name": "@reskript/babel-plugin-debug-react-component-file-name",
-  "version": "1.14.2",
+  "version": "1.15.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -26,7 +26,7 @@
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@babel/traverse": "^7.15.0",
-    "@reskript/babel-utils": "1.14.2"
+    "@reskript/babel-utils": "1.15.0"
   },
   "peerDependencies": {
     "react": ">= 17"

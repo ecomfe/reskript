@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 提示入口包安装的依赖版本不兼容子包的要求 ([#121](https://github.com/ecomfe/reskript/issues/121)) ([9b232e8](https://github.com/ecomfe/reskript/commit/9b232e85230d989927f0160d73189394f3072f0e))
+* **plugin-workspace-no-build:** 添加邻居包依赖只处理被主包声明的那部分 ([#125](https://github.com/ecomfe/reskript/issues/125)) ([f145679](https://github.com/ecomfe/reskript/commit/f14567951aeb54ed910bc62ab64b2a591f98200d))
+
+
+### Features
+
+* **flags:** 支持SKR_FLAGS设置遇到废弃配置直接退出 ([#124](https://github.com/ecomfe/reskript/issues/124)) ([7f2658a](https://github.com/ecomfe/reskript/commit/7f2658a890a1f714d1a003aeff44dcd446d447b1))
+* **play:** 支持全局的组件调试配置 ([#120](https://github.com/ecomfe/reskript/issues/120)) ([4c4f068](https://github.com/ecomfe/reskript/commit/4c4f068ef6e58744d889823c379e10ced02e22a8))
+* **play:** 让play支持React 18和并发模式 ([#122](https://github.com/ecomfe/reskript/issues/122)) ([31ec53e](https://github.com/ecomfe/reskript/commit/31ec53e502f3c85357ade52d78cc493d66145cd9))
+* **test:** 支持--maxWorkers参数 ([#126](https://github.com/ecomfe/reskript/issues/126)) ([da406f4](https://github.com/ecomfe/reskript/commit/da406f44242a5c5ac1a59748b7325648a00c8157))
+
+
+
+
+
 ## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
 
 

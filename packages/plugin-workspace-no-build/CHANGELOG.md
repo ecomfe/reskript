@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 提示入口包安装的依赖版本不兼容子包的要求 ([#121](https://github.com/ecomfe/reskript/issues/121)) ([9b232e8](https://github.com/ecomfe/reskript/commit/9b232e85230d989927f0160d73189394f3072f0e))
+* **plugin-workspace-no-build:** 添加邻居包依赖只处理被主包声明的那部分 ([#125](https://github.com/ecomfe/reskript/issues/125)) ([f145679](https://github.com/ecomfe/reskript/commit/f14567951aeb54ed910bc62ab64b2a591f98200d))
+
+
+
+
+
 ## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
 
 

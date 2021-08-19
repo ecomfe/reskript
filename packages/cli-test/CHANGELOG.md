@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Features
+
+* **test:** 支持--maxWorkers参数 ([#126](https://github.com/ecomfe/reskript/issues/126)) ([da406f4](https://github.com/ecomfe/reskript/commit/da406f44242a5c5ac1a59748b7325648a00c8157))
+
+
+
+
+
 ## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
 
 **Note:** Version bump only for package @reskript/cli-test
