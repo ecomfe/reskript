@@ -88,6 +88,10 @@ export function Wrapper({children}) {
 
 ![](./assets/play-conf.png)
 
+:::note
+你也可以[通过配置文件](../settings/play#全局配置)来提供全局的调试配置。
+:::
+
 ### 向调试环境提供额外依赖
 
 配置文件中的`provides`是一个对象，这个对象的中的内容均可以通过`I.*`访问，如上的配置提供了`HeadingRow`这一组件，则对应图中使用`<I.HeadingRow text="Page Title" />`可以直接使用这个组件。

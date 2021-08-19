@@ -26,6 +26,9 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
                 componentTypeName,
                 cwd: buildContext.cwd,
                 componentModulePath: path.resolve(buildContext.cwd, target),
+                globalSetupModulePath: cmd.setup
+                    ? path.resolve(cmd.cwd, cmd.setup)
+                    : buildContext.projectSettings.play.defaultGlobalSetup,
             },
         },
     ];

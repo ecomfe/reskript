@@ -9,6 +9,7 @@ export interface PlayCommandLineArgs extends ProjectAware {
     readonly port: string;
     readonly host: HostType;
     readonly concurrentMode?: boolean;
+    readonly setup?: string;
 }
 
 export interface PlayCaseMeta {

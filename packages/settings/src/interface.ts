@@ -158,7 +158,10 @@ export interface DevServerSettings {
 export interface PlaySettings {
     readonly injectResources: string[];
     readonly wrapper: string;
+    // 默认启用React的并发模式
     readonly defaultEnableConcurrentMode: boolean;
+    // 指定全局配置模块路径
+    readonly defaultGlobalSetup?: string;
 }
 
 export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;

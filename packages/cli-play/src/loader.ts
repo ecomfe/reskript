@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import {LoaderContext} from 'webpack';
 import {PlaySettings} from '@reskript/settings';
-import {resolveConfigurationPath} from './utils/path';
+import {resolveLocalConfigurationPath} from './utils/path';
 
 const readAsSourceString = (filename: string) => {
     const content = (fs.existsSync(filename) ? fs.readFileSync(filename, 'utf-8') : '');
@@ -10,26 +10,22 @@ const readAsSourceString = (filename: string) => {
     return content ? JSON.stringify(content).slice(1, -1).replace(/'/g, '\\\'') : '';
 };
 
-const generateConfigurationBlockCode = (componentModulePath: string): string => {
-    const configurationPath = resolveConfigurationPath(componentModulePath);
-
-    if (fs.existsSync(configurationPath)) {
+const configurationBlockCode = (name: string, modulePath: string | undefined): string => {
+    if (modulePath && fs.existsSync(modulePath)) {
         const content = fs.readFileSync(
-            path.join(__dirname, 'assets', 'has-configuration-block.js.tpl'),
+            path.join(__dirname, 'assets', 'configuration-block.js.tpl'),
             'utf-8'
         );
-        return content.replace('%CONFIGURATION_PATH%', configurationPath);
+        return content.replace(/%MODULE_NAME%/g, name).replace('%CONFIGURATION_PATH%', modulePath);
     }
 
-    return fs.readFileSync(
-        path.join(__dirname, 'assets', 'no-configuration-block.js.tpl'),
-        'utf-8'
-    );
+    return '';
 };
 
 interface LoaderOptions extends PlaySettings {
     componentTypeName: string;
     componentModulePath: string;
+    globalSetupModulePath: string | undefined;
     cwd: string;
 }
 
@@ -42,7 +38,7 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
     const extraImports = options.injectResources.map(e => `import '${e}';`).join('\n');
     const configurationFilePathRelative = path.relative(
         options.cwd,
-        resolveConfigurationPath(options.componentModulePath)
+        resolveLocalConfigurationPath(options.componentModulePath)
     );
     const replacements: Array<[RegExp, string]> = [
         [/%PLAYGROUND_PATH%/g, path.resolve(__dirname, 'Playground')],
@@ -53,7 +49,15 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
         [/%EXTRA_IMPORTS%/g, extraImports],
         [/%WRAPPER_RETURN%/g, options.wrapper],
-        [/%CONFIGURATION_BLOCK%/g, generateConfigurationBlockCode(options.componentModulePath)],
+        [
+            /%CONFIGURATION_INITIALIZE_BLOCK%/g,
+            fs.readFileSync(path.join(__dirname, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
+        ],
+        [/%GLOBAL_CONFIGURATION_BLOCK%/g, configurationBlockCode('globalConfiguration', options.globalSetupModulePath)],
+        [
+            /%LOCAL_CONFIGURATION_BLOCK%/g,
+            configurationBlockCode('localConfiguration', resolveLocalConfigurationPath(options.componentModulePath)),
+        ],
     ];
     const source = replacements.reduce(
         (source, [from, to]) => source.replace(from, to),

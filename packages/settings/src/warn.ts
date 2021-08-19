@@ -18,4 +18,10 @@ export const warnDeprecatedInProjectSettings = (settings: DeepPartial<ProjectSet
         logger.warn('[DEPRECATED]: play.wrapper is deprecated, use standalone play configuration instead');
         logger.warn(`To see a complete guide to custom wapper in play configuration, please visit ${documentLink}`);
     }
+    if (settings.play?.injectResources !== undefined) {
+        // TODO: 改文档链接
+        const documentLink = 'https://ecomfe.github.io/reskript/docs/advanced/debug-component#自定义调试预览的布局';
+        logger.warn('[DEPRECATED]: play.injectResources is deprecated, use defaultGlobalSetup instead');
+        logger.warn(`To see a complete guide to global setup in play configuration, please visit ${documentLink}`);
+    }
 };

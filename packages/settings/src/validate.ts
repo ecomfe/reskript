@@ -231,6 +231,9 @@ const schema: any = {
                 defaultEnableConcurrentMode: {
                     type: 'boolean',
                 },
+                defaultGlobalSetup: {
+                    type: 'string',
+                },
             },
             additionalProperties: false,
             type: 'object',
