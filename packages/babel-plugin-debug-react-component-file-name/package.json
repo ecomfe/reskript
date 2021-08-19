@@ -29,6 +29,6 @@
     "@reskript/babel-utils": "1.14.2"
   },
   "peerDependencies": {
-    "react": "17.x"
+    "react": ">= 17"
   }
 }

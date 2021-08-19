@@ -158,6 +158,7 @@ export interface DevServerSettings {
 export interface PlaySettings {
     readonly injectResources: string[];
     readonly wrapper: string;
+    readonly defaultEnableConcurrentMode: boolean;
 }
 
 export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;

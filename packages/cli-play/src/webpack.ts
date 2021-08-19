@@ -12,7 +12,10 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
     const hostType = await resolveHost(cmd.host);
     const extra = createWebpackDevServerPartial(buildContext, hostType);
     const baseConfig = createBaseWebpackConfig(buildContext, [extra]);
-    const playEntryPath = resolve('./assets/playground-entry.js.tpl');
+    const enableConcurrentMode = cmd.concurrentMode ?? buildContext.projectSettings.play.defaultEnableConcurrentMode;
+    const playEntryPath = enableConcurrentMode
+        ? resolve('./assets/playground-entry-cm.js.tpl')
+        : resolve('./assets/playground-entry.js.tpl');
     const componentTypeName = resolveComponentName(target);
     const entryLoaders = [
         loaders.babel(buildContext),

@@ -63,6 +63,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     return {
         injectResources: [],
         wrapper: 'children',
+        defaultEnableConcurrentMode: false,
         ...settings,
     };
 };

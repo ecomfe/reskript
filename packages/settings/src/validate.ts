@@ -228,6 +228,9 @@ const schema: any = {
                 wrapper: {
                     type: 'string',
                 },
+                defaultEnableConcurrentMode: {
+                    type: 'boolean',
+                },
             },
             additionalProperties: false,
             type: 'object',

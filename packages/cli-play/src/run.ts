@@ -35,6 +35,7 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
         cache: false,
     };
     const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
+    const enableConcurrentMode = cmd.concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
         entries: [
@@ -47,7 +48,9 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
                     },
                 },
                 template: resolve('./assets/playground-entry.ejs'),
-                file: resolve('./assets/playground-entry.js.tpl'),
+                file: enableConcurrentMode
+                    ? resolve('./assets/playground-entry-cm.js.tpl')
+                    : resolve('./assets/playground-entry.js.tpl'),
             },
         ],
         features: projectSettings.featureMatrix[cmd.buildTarget],

@@ -40,8 +40,8 @@
     "unixify": "^1.0.0"
   },
   "peerDependencies": {
-    "react": "17.x",
-    "react-dom": "17.x"
+    "react": ">= 17",
+    "react-dom": ">= 17"
   },
   "peerDependenciesMeta": {
     "react": {
