@@ -13,6 +13,7 @@ const command: CommandConfig<TestCommandLineArgs> = {
         ['--target [value]', 'specify test environment of the project is "react" or "node"', 'node'],
         ['--changedSince [value]', 'runs tests related to the changes since the provided branch.', ''],
         ['--collect-coverage-from [glob]', 'only collect coverage from given glob.', ''],
+        ['--maxWorkers [value]', 'Max used worker count.'],
     ],
 };
 

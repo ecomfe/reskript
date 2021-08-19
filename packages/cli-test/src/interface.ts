@@ -7,6 +7,7 @@ export interface JestCommandLineArgs {
     readonly target: TestTarget;
     readonly changedSince: string;
     readonly collectCoverageFrom: string;
+    readonly maxWorkers?: string;
 }
 
 export interface TestCommandLineArgs extends ProjectAware, JestCommandLineArgs {
