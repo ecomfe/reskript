@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@reskript/core": "1.14.2",
-    "@reskript/settings": "1.14.2"
+    "@reskript/settings": "1.14.2",
+    "semver": "^7.3.5"
   },
   "peerDependencies": {
     "webpack": "5.x"

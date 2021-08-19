@@ -2,7 +2,7 @@ import path from 'path';
 import {logger, isMonorepo, normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin} from '@reskript/settings';
 import {Options} from './interface';
-import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias} from './utils';
+import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias, checkDependencyGraph} from './utils';
 
 const hasValue = <T>(value: T | undefined): value is T => !!value;
 
@@ -19,6 +19,12 @@ export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
     const includedNames = resolveParticipant(siblings.map(v => v.name), options);
     const includedSiblings = includedNames.map(v => siblings.find(s => s.name === v)).filter(hasValue);
     const includedSiblingDirectories = includedSiblings.map(v => v.directory);
+
+    const dependencyGraphChecked = checkDependencyGraph(includedSiblings, self);
+
+    if (!dependencyGraphChecked) {
+        process.exit(24);
+    }
 
     return {
         ...settings,
@@ -45,7 +51,7 @@ export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
                 // 因为`peerDependencies`里也会包含本地的包，所以要先处理这些东西，再用下面的`for`循环把本地包的规则覆盖上去就对了
                 Object.assign(
                     before.resolve?.alias,
-                    buildPeerAlias(cwd, includedSiblings, self)
+                    buildPeerAlias(cwd, includedSiblings)
                 );
                 for (const {name, directory} of includedSiblings) {
                     Object.assign(

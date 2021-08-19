@@ -113,6 +113,7 @@ function workspaceNoBuild(options?: Options): SettingsPlugin;
 为了解决这个问题，如果一个包你希望做到“由应用主入口提供，其它业务模块仅声明依赖”，则你需要做以下几点：
 
 1. 对于业务模块，必须用`peerDependencies`和`devDependencies`去依赖它，**切记**一定要在`peerDependencies`中声明。
-2. 对于应用主入口，必须用`dependencies`依赖它。
+2. 对于应用主入口，必须用`dependencies`或`devDependencies`依赖它。
+3. 依赖的版本必须相互兼容。
 
 在满足以上2点的情况下，本插件会做一个特殊的处理，把业务模块的`peerDependencies`都指向主应用的`dependencies`，保证它们是同一个第三方包。

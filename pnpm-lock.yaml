@@ -828,11 +828,13 @@ importers:
       '@reskript/core': 1.14.2
       '@reskript/settings': 1.14.2
       eslint: ^7.32.0
+      semver: ^7.3.5
       typescript: ^4.3.5
       webpack: ^5.48.0
     dependencies:
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
+      semver: 7.3.5
     devDependencies:
       eslint: 7.32.0
       typescript: 4.3.5

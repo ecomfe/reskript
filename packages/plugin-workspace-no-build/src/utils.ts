@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
-import {findMonorepoRoot, resolveMonorepoPackageDirectories} from '@reskript/core';
+import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger} from '@reskript/core';
+import {minVersion, satisfies} from 'semver';
 import {Options} from './interface';
 
 export const resolveParticipant = (defaults: string[], {includes, excludes}: Options) => {
@@ -43,14 +44,10 @@ export const findSiblingPackages = (cwd: string, self: PackageInfo) => {
     return siblings;
 };
 
-export const buildPeerAlias = (cwd: string, siblings: PackageInfo[], self: PackageInfo): Record<string, string> => {
+export const buildPeerAlias = (cwd: string, siblings: PackageInfo[]): Record<string, string> => {
     const alias = siblings.reduce(
-        (alias, {name, peerDependencies}) => {
+        (alias, {peerDependencies}) => {
             for (const dependency of Object.keys(peerDependencies)) {
-                if (!self.dependencies[dependency]) {
-                    console.error(`Dependency ${dependency} is required in ${name} but not installed in ${self.name}.`);
-                    process.exit(24);
-                }
                 alias[dependency] = path.join(cwd, 'node_modules', dependency);
             }
             return alias;
@@ -58,4 +55,34 @@ export const buildPeerAlias = (cwd: string, siblings: PackageInfo[], self: Packa
         {} as Record<string, string>
     );
     return alias;
+};
+
+export const isVersionCompatible = (current: string, required: string) => {
+    const minInstalledVersion = minVersion(current);
+    return minInstalledVersion && satisfies(minInstalledVersion, required);
+};
+
+export const checkDependencyGraph = (siblings: PackageInfo[], self: PackageInfo): boolean => {
+    const selfDependencies = {...self.devDependencies, ...self.dependencies};
+    const errors: string[] = [];
+    for (const {name, peerDependencies} of siblings) {
+        for (const [dependency, versionRange] of Object.entries(peerDependencies)) {
+            if (!selfDependencies[dependency]) {
+                errors.push(`Dependency ${dependency} is required in ${name} but not installed.`);
+            }
+            else if (!isVersionCompatible(selfDependencies[dependency], versionRange)) {
+                const message = [
+                    `${name} requires version ${versionRange} of ${dependency}`,
+                    `but ${selfDependencies[dependency]} is installed.`,
+                ];
+                errors.push(message.join(' '));
+            }
+        }
+    }
+    if (errors.length) {
+        logger.error('We have detected several errors in your workspace dependency graph:');
+        logger.error(errors.map(v => '    - ' + v).join('\n'), {dedent: false});
+    }
+
+    return !errors.length;
 };
