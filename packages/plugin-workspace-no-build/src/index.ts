@@ -1,10 +1,8 @@
 import path from 'path';
 import {logger, isMonorepo, normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin} from '@reskript/settings';
-import {Options} from './interface';
+import {Options, PackageInfo} from './interface';
 import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias, checkDependencyGraph} from './utils';
-
-const hasValue = <T>(value: T | undefined): value is T => !!value;
 
 export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
     if (!isMonorepo(cwd)) {
@@ -12,13 +10,10 @@ export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
         process.exit(24);
     }
 
-    const incomingBabelFilter = normalizeRuleMatch(cwd, settings.build.script.babel);
-    const incomingModulesFilter = normalizeRuleMatch(cwd, settings.build.style.modules);
     const self = buildPackageInfo(cwd);
     const siblings = findSiblingPackages(cwd, self);
-    const includedNames = resolveParticipant(siblings.map(v => v.name), options);
-    const includedSiblings = includedNames.map(v => siblings.find(s => s.name === v)).filter(hasValue);
-    const includedSiblingDirectories = includedSiblings.map(v => v.directory);
+    const isDependencyOfSelf = ({name}: PackageInfo) => !!(self.dependencies[name] ?? self.devDependencies[name]);
+    const includedSiblings = resolveParticipant(siblings.filter(isDependencyOfSelf), options);
 
     const dependencyGraphChecked = checkDependencyGraph(includedSiblings, self);
 
@@ -26,6 +21,9 @@ export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
         process.exit(24);
     }
 
+    const incomingBabelFilter = normalizeRuleMatch(cwd, settings.build.script.babel);
+    const incomingModulesFilter = normalizeRuleMatch(cwd, settings.build.style.modules);
+    const includedSiblingDirectories = includedSiblings.map(v => v.directory);
     return {
         ...settings,
         build: {

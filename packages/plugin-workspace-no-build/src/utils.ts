@@ -2,9 +2,9 @@ import path from 'path';
 import fs from 'fs';
 import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
-import {Options} from './interface';
+import {Options, PackageInfo} from './interface';
 
-export const resolveParticipant = (defaults: string[], {includes, excludes}: Options) => {
+export const resolveParticipant = (defaults: PackageInfo[], {includes, excludes}: Options) => {
     // 如果2个都没有，就用默认的
     if (!includes && !excludes) {
         return defaults;
@@ -12,18 +12,10 @@ export const resolveParticipant = (defaults: string[], {includes, excludes}: Opt
 
     const excludeSet = new Set(excludes ?? []);
     // 如果有`includes`，那么就直接以此为准，`defaults`这个没用了
-    const base = includes ?? defaults;
+    const base = includes ? defaults.filter(v => includes.includes(v.name)) : defaults;
 
-    return base.filter(v => !excludeSet.has(v));
+    return base.filter(v => !excludeSet.has(v.name));
 };
-
-interface PackageInfo {
-    name: string;
-    directory: string;
-    dependencies: Record<string, string>;
-    peerDependencies: Record<string, string>;
-    devDependencies: Record<string, string>;
-}
 
 export const buildPackageInfo = (directory: string): PackageInfo => {
     const packageInfo = JSON.parse(fs.readFileSync(path.join(directory, 'package.json'), 'utf-8'));
