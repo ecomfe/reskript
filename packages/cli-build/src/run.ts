@@ -2,7 +2,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
+import {logger, prepareEnvironment, readHostPackageConfig, deprecatedWarn} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -110,7 +110,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
 const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
     // DEPRECATED: 2.0废弃
     if (cmd.src) {
-        logger.warn('[DEPRECATED]: --src arg is deprecated, use --src-dir instead');
+        deprecatedWarn('--src arg is deprecated, use --src-dir instead');
         return {
             ...cmd,
             srcDir: cmd.srcDir === 'src' ? cmd.src : cmd.srcDir,

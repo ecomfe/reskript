@@ -2,6 +2,7 @@ import path from 'path';
 import {sync as resolve} from 'resolve';
 import {compact} from 'lodash';
 import unixify from 'unixify';
+import {isFlagEnabled} from '@reskript/core';
 import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
@@ -10,7 +11,7 @@ const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
         ...resources,
         unixify(path.resolve(cwd, srcDirectory, 'styles/*.var.less')),
         // DEPRECATED: 2.0废弃
-        unixify(path.resolve(__dirname, '../assets/est-compat.less')),
+        !isFlagEnabled('deprecation-error') && unixify(path.resolve(__dirname, '../assets/est-compat.less')),
     ];
 
     return {
