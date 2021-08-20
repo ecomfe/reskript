@@ -1,11 +1,11 @@
-import fs from 'fs';
+import {existsSync} from 'fs';
 import path from 'path';
 import env from 'dotenv';
 import expand from 'dotenv-expand';
 import {findMonorepoRoot, isMonorepo} from './project';
 import {WorkMode} from './interface';
 
-export const prepareEnvironment = (cwd: string, mode: WorkMode) => {
+export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
     const files = [
         path.join(cwd, '.env'),
         path.join(cwd, `.env.${mode}`),
@@ -13,8 +13,9 @@ export const prepareEnvironment = (cwd: string, mode: WorkMode) => {
         path.join(cwd, `.env.${mode}.local`),
     ];
 
-    if (isMonorepo(cwd)) {
-        const root = findMonorepoRoot(cwd);
+    const isWorkspace = await isMonorepo(cwd);
+    if (isWorkspace) {
+        const root = await findMonorepoRoot(cwd);
         files.unshift(
             path.join(root, '.env'),
             path.join(root, `.env.${mode}`),
@@ -24,7 +25,7 @@ export const prepareEnvironment = (cwd: string, mode: WorkMode) => {
     }
 
     for (const file of files) {
-        if (fs.existsSync(file)) {
+        if (existsSync(file)) {
             expand(env.config({path: file}));
         }
     }

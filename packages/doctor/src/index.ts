@@ -6,7 +6,7 @@ import check from './check';
     const cwd = process.cwd();
 
     if (isMonorepoRoot(cwd)) {
-        const packageDirectories = resolveMonorepoPackageDirectories(cwd);
+        const packageDirectories = await resolveMonorepoPackageDirectories(cwd);
         for (const directory of packageDirectories) {
             await check(directory);
         }

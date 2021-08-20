@@ -2,8 +2,8 @@ import {readProjectSettings} from '@reskript/settings';
 import {BuildContext} from '../interface';
 import {createWebpackConfig} from '../index';
 
-test('returns configuration', () => {
-    const projectSettings = readProjectSettings({cwd: __dirname}, 'build');
+test('returns configuration', async () => {
+    const projectSettings = await readProjectSettings({cwd: __dirname}, 'build');
     const context: BuildContext = {
         cwd: __dirname,
         mode: 'development',
@@ -18,7 +18,7 @@ test('returns configuration', () => {
         entries: [],
         projectSettings,
     };
-    const config = createWebpackConfig(context);
+    const config = await createWebpackConfig(context);
     expect(config).toBeTruthy();
     expect(config.output).toBeTruthy();
     expect(config.module).toBeTruthy();
@@ -26,7 +26,7 @@ test('returns configuration', () => {
     expect(config.resolve).toBeTruthy();
 });
 
-test('can specify a custom webpack entry descriptor', () => {
+test('can specify a custom webpack entry descriptor', async () => {
     const context: BuildContext = {
         cwd: __dirname,
         mode: 'development',
@@ -38,7 +38,7 @@ test('can specify a custom webpack entry descriptor', () => {
         features: {},
         buildTarget: 'stable',
         isDefaultTarget: false,
-        projectSettings: readProjectSettings({cwd: __dirname}, 'build'),
+        projectSettings: await readProjectSettings({cwd: __dirname}, 'build'),
         entries: [
             {
                 name: 'service-worker',
@@ -52,6 +52,6 @@ test('can specify a custom webpack entry descriptor', () => {
             },
         ],
     };
-    const config = createWebpackConfig(context);
+    const config = await createWebpackConfig(context);
     expect((config.entry as Record<string, any>)['service-worker'].filename).toBe('service-worker.js');
 });

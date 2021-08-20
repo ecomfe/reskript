@@ -45,7 +45,7 @@ export const resolveLintFiles = async (
 
     if (staged || changed) {
         // 当前目录可能不在git根目录下，所有的路径要相应做一次修复
-        const gitRoot = findGitRoot() || process.cwd();
+        const gitRoot = await findGitRoot() || process.cwd();
         const cwdRelative = path.relative(gitRoot, process.cwd());
         const paths = extensions.map(extension => `${cwdRelative ? cwdRelative + '/' : ''}*${extension}`);
         const files = await findChangedFiles(paths);

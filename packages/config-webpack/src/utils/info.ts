@@ -1,12 +1,16 @@
 import path from 'path';
-import fs from 'fs';
-import {execSync} from 'child_process';
+import {existsSync} from 'fs';
+import childProcess from 'child_process';
+import {promisify} from 'util';
 import {logger} from '@reskript/core';
 import {BuildContext} from '../interface';
 
-export const revision = (): string => {
+const exec = promisify(childProcess.exec);
+
+export const revision = async (): Promise<string> => {
     try {
-        return execSync('git rev-parse --short HEAD', {stdio: 'pipe'}).toString().trim();
+        const output = await exec('git rev-parse --short HEAD');
+        return output.stdout.toString().trim();
     }
     catch (ex) {
         logger.log('Not a git repository, fallback to default revision');
@@ -16,5 +20,5 @@ export const revision = (): string => {
 
 export const hasServiceWorker = (context: BuildContext) => {
     const serviceWorkerSource = path.join(context.cwd, context.srcDirectory, 'service-worker.js');
-    return fs.existsSync(serviceWorkerSource);
+    return existsSync(serviceWorkerSource);
 };

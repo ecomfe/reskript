@@ -31,4 +31,4 @@ export interface BuildContext extends RuntimeBuildEnv {
 
 export type LoaderFactory = (entry: BuildEntry) => RuleSetUseItem | null;
 
-export type ConfigurationFactory = (entry: BuildContext) => Configuration;
+export type ConfigurationFactory = (entry: BuildContext) => Configuration | Promise<Configuration>;

@@ -41,8 +41,8 @@ const markdown = dedent`
     \`\`\`
 `;
 
-test('parse to cases', () => {
-    const cases = parseMarkdownToCases(markdown);
+test('parse to cases', async () => {
+    const cases = await parseMarkdownToCases(markdown);
     expect(cases.length).toBe(2);
     expect(cases[0].name).toBe('包括头部');
     expect(cases[0].createAt).toBe('2021-01-01 00:00:00');

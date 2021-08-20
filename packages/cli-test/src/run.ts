@@ -50,7 +50,7 @@ export default async (files: string[], cmd: TestCommandLineArgs): Promise<void> 
         argv.push('--maxWorkers', maxWorkers);
     }
 
-    const {featureMatrix: {dev: features}} = readProjectSettings(cmd, 'test');
+    const {featureMatrix: {dev: features}} = await readProjectSettings(cmd, 'test');
     // featureMatrix 目前以dev为默认目标，以后可以传入--test-target？
     const jestConfigOptions: JestConfigOptions = {cwd, src, target, features};
     const config = await resolveJestConfig(jestConfigOptions);

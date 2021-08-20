@@ -10,11 +10,11 @@ interface CompileResult {
     assets?: StatsAsset[];
 }
 
-export default (entry: string, projectSettings?: PartialProjectSettings) => {
+export default async (entry: string, projectSettings?: PartialProjectSettings) => {
     const context: BuildContext = {
         cwd: path.resolve(__dirname, 'fixtures'),
         mode: 'development',
-        cache: false,
+        cache: 'off',
         usage: 'build',
         srcDirectory: 'src',
         hostPackageName: 'test-fixture',
@@ -27,7 +27,7 @@ export default (entry: string, projectSettings?: PartialProjectSettings) => {
         projectSettings: fillProjectSettings(projectSettings),
     };
     Object.assign(context.projectSettings.build, {reportLintErrors: false});
-    const config = createWebpackConfig(context);
+    const config = await createWebpackConfig(context);
     config.entry = path.join(__dirname, 'fixtures', entry);
     config.output = {
         path: path.join(__dirname, 'output'),

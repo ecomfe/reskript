@@ -1,6 +1,7 @@
 import path from 'path';
-import fs from 'fs';
-import {get, isEqual} from 'lodash';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
+import {isEqual} from 'lodash';
 import {logger, findGitRoot} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';
 
@@ -36,14 +37,16 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
     }
 };
 
-export const checkPreCommitHookWhenLintDisabled = (cwd: string): void => {
-    if (fs.existsSync(path.join(findGitRoot(cwd) ?? cwd, '.husky', 'pre-commit'))) {
+export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
+    const gitRoot = await findGitRoot(cwd) ?? cwd;
+    if (existsSync(path.join(gitRoot, '.husky', 'pre-commit'))) {
         return;
     }
 
-    const packageConfig = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8'));
+    const packageContent = await fs.readFile(path.join(cwd, 'package.json'), 'utf-8');
+    const packageConfig = JSON.parse(packageContent);
 
-    if (!get(packageConfig, ['husky', 'hooks', 'pre-commit'])) {
+    if (packageConfig?.husky?.hooks?.['pre-commit']) {
         const warning = `
             This project has reportLintErrors option disabled in reskript.config.js,
             and there is no pre-commit hook to lint your files,

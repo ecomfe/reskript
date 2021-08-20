@@ -63,7 +63,7 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<LintRe
         files: lintingFiles,
         // 当前stylelint的cache有问题，如果一个文件有语法错误，则第一次会被检查出来，第二次错误就消失了
         cache: false,
-        cacheLocation: resolveCacheLocation('stylelint'),
+        cacheLocation: await resolveCacheLocation('stylelint'),
     };
     const report = await lint(lintConfig);
     return report.results.map(adaptStyleResultToScriptResult);

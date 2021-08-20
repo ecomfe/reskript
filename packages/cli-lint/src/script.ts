@@ -20,7 +20,7 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<LintRe
         baseConfig: getScriptLintConfig(),
         cache: true,
         fix: cmd.fix,
-        cacheLocation: resolveCacheLocation('eslint'),
+        cacheLocation: await resolveCacheLocation('eslint'),
     };
     const cli = new ESLint(cliConfig);
     const lintingFiles = await pFilter(resolvedFiles, file => cli.isPathIgnored(file).then(ignored => !ignored));

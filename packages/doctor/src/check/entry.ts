@@ -1,8 +1,18 @@
 import path from 'path';
-import fs from 'fs';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
 import {DoctorResult, Rule} from '../interface';
 
-const rule: Rule = ({cwd}) => {
+const isEntryDirectoryValid = async (entryDirectory: string) => {
+    if (!existsSync(entryDirectory)) {
+        return false;
+    }
+
+    const stat = await fs.stat(entryDirectory);
+    return stat.isDirectory();
+};
+
+const rule: Rule = async ({cwd}) => {
     const result: DoctorResult = {
         rule: 'project structure',
         warnings: [],
@@ -10,7 +20,7 @@ const rule: Rule = ({cwd}) => {
     };
 
     const entryDirectory = path.join(cwd, 'src', 'entries');
-    const validEntryDirectory = fs.existsSync(entryDirectory) && fs.statSync(entryDirectory).isDirectory();
+    const validEntryDirectory = await isEntryDirectoryValid(entryDirectory);
     if (!validEntryDirectory) {
         result.errors.push('Missing src/entries directory, this directory should contain app entry.');
     }

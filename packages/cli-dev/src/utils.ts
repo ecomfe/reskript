@@ -47,16 +47,18 @@ export const startServer = (server: WebpackDevServer, port: number): Promise<voi
     return new Promise(execute);
 };
 
-export const createBuildContext = (cmd: DevCommandLineArgs): BuildContext => {
-    const projectSettings = readProjectSettings(cmd, 'dev');
-    const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
+export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
+    const [
+        projectSettings,
+        {name: hostPackageName},
+    ] = await Promise.all([readProjectSettings(cmd, 'dev'), readHostPackageConfig(cmd.cwd)]);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
         srcDirectory: cmd.srcDir,
         entryDirectory: cmd.entriesDir,
         only: [cmd.entry],
     };
-    const entries = collectEntries(entryLocation);
+    const entries = await collectEntries(entryLocation);
 
     if (!entries.length) {
         logger.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
@@ -78,7 +80,7 @@ export const createBuildContext = (cmd: DevCommandLineArgs): BuildContext => {
             },
         },
     };
-    const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
+    const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
     return {
         ...runtimeBuildEnv,
         entries,

@@ -1,6 +1,6 @@
+import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration} from 'webpack-dev-server';
-import {sync as resolve} from 'resolve';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
@@ -9,8 +9,8 @@ import {createWebpackConfig} from './webpack';
 import {PlayCommandLineArgs} from './interface';
 import setupServer from './server';
 
-const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
-    const userProjectSettings = readProjectSettings(cmd, 'dev');
+const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
+    const userProjectSettings = await readProjectSettings(cmd, 'dev');
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {
@@ -24,7 +24,7 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
             hot: 'all',
         },
     };
-    const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
+    const {name: hostPackageName} = await readHostPackageConfig(cmd.cwd);
     const buildEnv: BuildEnv = {
         hostPackageName,
         projectSettings,
@@ -32,9 +32,10 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
         mode: 'development',
         cwd: cmd.cwd,
         srcDirectory: 'src',
-        cache: false,
+        // TODO: 考虑改成`transient`后测下效果
+        cache: 'off',
     };
-    const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
+    const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
     const enableConcurrentMode = cmd.concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
@@ -44,13 +45,13 @@ const collectBuildContext = (cmd: PlayCommandLineArgs): BuildContext => {
                 config: {
                     html: {
                         title: 'PlayGround',
-                        favicon: resolve('./assets/favicon.ico'),
+                        favicon: path.join(__dirname, 'assets', 'favicon.ico'),
                     },
                 },
-                template: resolve('./assets/playground-entry.ejs'),
+                template: path.join(__dirname, 'assets', 'playground-entry.ejs'),
                 file: enableConcurrentMode
-                    ? resolve('./assets/playground-entry-cm.js.tpl')
-                    : resolve('./assets/playground-entry.js.tpl'),
+                    ? path.join(__dirname, 'assets', 'playground-entry-cm.js.tpl')
+                    : path.join(__dirname, 'assets', 'playground-entry.js.tpl'),
             },
         ],
         features: projectSettings.featureMatrix[cmd.buildTarget],
@@ -88,9 +89,9 @@ export default async (target: string, cmd: PlayCommandLineArgs): Promise<void> =
     process.env.NODE_ENV = 'development';
     prepareEnvironment(cmd.cwd, 'development');
 
-    const buildContext = collectBuildContext(cmd);
+    const buildContext = await collectBuildContext(cmd);
     const config = await createWebpackConfig(target, cmd, buildContext);
-    const devServerConfig = createWebpackDevServerConfig(
+    const devServerConfig = await createWebpackDevServerConfig(
         buildContext,
         'index',
         undefined,

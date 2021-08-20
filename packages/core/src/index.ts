@@ -5,3 +5,4 @@ export {default as logger} from './logger';
 export * from './env';
 export * from './flag';
 export * from './deprecate';
+export * from './async';

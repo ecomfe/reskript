@@ -28,9 +28,10 @@ const aggregateResult = (results: DoctorResult[]) => {
 };
 
 export default async (packageDirectory: string) => {
+    const projectSettings = await readProjectSettings({cwd: packageDirectory}, 'build');
     const context: DoctorContext = {
         cwd: packageDirectory,
-        projectSettings: readProjectSettings({cwd: packageDirectory}, 'build'),
+        projectSettings: projectSettings,
         packageInfo: JSON.parse(fs.readFileSync(path.join(packageDirectory, 'package.json'), 'utf-8')),
     };
 

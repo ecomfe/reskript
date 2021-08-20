@@ -15,27 +15,29 @@ const getDevServerMessages = (host: string, port: number, openPage: string = '')
     `Your application is running here: http://${host}:${port}/${openPage}`,
 ];
 
-export const createWebpackDevServerPartial = (context: BuildContext, host = 'localhost'): Configuration => {
+export const createWebpackDevServerPartial = async (context: BuildContext, host = 'localhost') => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage}}} = context;
     const webpackBarOptions = {
         name: '@reskript/dev',
     };
     const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
+    const messageOptions = {
+        compilationSuccessInfo: {
+            messages: getDevServerMessages(host, port, openPage),
+            notes: [],
+        },
+    };
     const plugins = [
         ...htmlPlugins,
         new WebpackBar(webpackBarOptions),
         // TODO: https://github.com/webpack/webpack/pull/11698
-        new FriendlyErrorsWebpackPlugin({
-            compilationSuccessInfo: {
-                messages: getDevServerMessages(host, port, openPage),
-                notes: [],
-            },
-        }) as any,
+        new FriendlyErrorsWebpackPlugin(messageOptions) as any,
         hot === 'none' ? null : new HotModuleReplacementPlugin(),
         hot === 'all' ? new ReactRefreshWebpackPlugin({overlay: false, forceEnable: true}) : null,
     ];
+    const selfPackageDirectory = await pkgDir(__dirname) ?? __dirname;
 
-    return {
+    const configuration: Configuration = {
         output: {
             path: path.join(cwd, 'dist'),
             // 不要让构建时的`publicPath`影响调试，调试永远走本地，
@@ -50,11 +52,12 @@ export const createWebpackDevServerPartial = (context: BuildContext, host = 'loc
             // 因此把`reskript/node_modules`也加到查找的路径里去
             modules: [
                 'node_modules',
-                path.join(pkgDir.sync(__dirname) ?? __dirname, 'node_modules'),
+                path.join(selfPackageDirectory, 'node_modules'),
             ],
         },
         plugins: compact(plugins),
     };
+    return configuration;
 };
 
 const createAgent = (possibleProxyURL?: string) => {
@@ -64,12 +67,13 @@ const createAgent = (possibleProxyURL?: string) => {
     return undefined;
 };
 
-export const createWebpackDevServerConfig = (
+// 这个函数的实现暂时没有异步的逻辑，但对外暴露为异步接口给未来调整留空间
+export const createWebpackDevServerConfig = async (
     buildEntry: BuildEntry,
     targetEntry: string,
     proxyDomain: string | undefined,
     addition: DevServerConfiguration = {}
-): DevServerConfiguration => {
+): Promise<DevServerConfiguration> => {
     const {
         apiPrefixes = [],
         defaultProxyDomain = '',

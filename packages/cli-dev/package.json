@@ -32,7 +32,6 @@
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.21",
     "proxy-agent": "^5.0.0",
-    "resolve": "^1.20.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0"
   },

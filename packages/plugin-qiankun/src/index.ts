@@ -34,8 +34,8 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             after?.(app, server, conpiler);
             app.get(
                 '/__qiankun__.html',
-                (req, res) => {
-                    const html = htmlEntry(appName, options);
+                async (req, res) => {
+                    const html = await htmlEntry(appName, options);
                     res.type('html').end(html);
                 }
             );

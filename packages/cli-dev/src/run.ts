@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
 import {watchProjectSettings, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
-import {createWebpackConfig} from '@reskript/config-webpack';
+import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
 import {logger, prepareEnvironment} from '@reskript/core';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {DevCommandLineArgs} from './interface';
@@ -11,13 +11,25 @@ import {createBuildContext, resolveHost, resolvePublicPath, startServer} from '.
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
+interface ServerStartContext {
+    buildContext: BuildContext;
+    host: DevCommandLineArgs['host'];
+    extra: webpack.Configuration;
+    publicPath: string | undefined;
+}
+
+const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStartContext> => {
+    const [buildContext, host] = await Promise.all([createBuildContext(cmd), resolveHost(cmd.host)]);
+    const buildingPartial = createWebpackDevServerPartial(buildContext, host);
+    const resolvingPublicPath = resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
+    const [extra, publicPath] = await Promise.all([buildingPartial, resolvingPublicPath]);
+    return {buildContext, host, extra, publicPath};
+};
+
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
-    const buildContext = createBuildContext(cmd);
-    const host = await resolveHost(cmd.host);
-    const extra = createWebpackDevServerPartial(buildContext, host);
-    const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
-    const config = createWebpackConfig(buildContext, [extra, {output: {publicPath}}]);
-    const devServerConfig = createWebpackDevServerConfig(
+    const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
+    const config = await createWebpackConfig(buildContext, [extra, {output: {publicPath}}]);
+    const devServerConfig = await createWebpackDevServerConfig(
         buildContext,
         cmd.entry,
         cmd.proxyDomain,
@@ -57,6 +69,6 @@ export default async (cmd: DevCommandLineArgs): Promise<void> => {
         const server = await startingServer;
         server.close(nextStart || noop);
     };
-    const listen = watchProjectSettings(cmd, 'dev');
+    const listen = await watchProjectSettings(cmd, 'dev');
     listen(restart);
 };

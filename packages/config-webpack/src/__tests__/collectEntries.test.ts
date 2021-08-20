@@ -1,13 +1,13 @@
 import path from 'path';
 import {collectEntries} from '../index';
 
-test('collect all', () => {
+test('collect all', async () => {
     const entryLocation = {
         cwd: path.join(__dirname, 'fixtures'),
         srcDirectory: 'src',
         entryDirectory: 'pages',
     };
-    const entries = collectEntries(entryLocation);
+    const entries = await collectEntries(entryLocation);
     const alice = entries.find(e => e.name === 'alice');
     expect(alice).toBeTruthy();
     expect(alice?.file.includes('src/pages/alice/index.jsx')).toBe(true);

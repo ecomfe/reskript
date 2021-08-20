@@ -1,4 +1,3 @@
-import {readHostPackageConfig} from '@reskript/core';
 import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings} from './interface';
 
 type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style'> & {
@@ -6,13 +5,13 @@ type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style'> & {
     style?: Partial<BuildSettings['style']>;
 };
 
-const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = process.cwd()): BuildSettings => {
+const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
     return {
         uses: ['antd', 'lodash'],
         thirdParty: false,
         reportLintErrors: true,
         largeAssetSize: 8 * 1024,
-        appTitle: settings?.appTitle ?? readHostPackageConfig(cwd).name ?? 'Reskript App',
+        appTitle: settings?.appTitle ?? 'Reskript App',
         excludeFeatures: ['dev'],
         finalize: config => config,
         ...settings,

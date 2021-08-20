@@ -4,14 +4,14 @@ import {createWebpackConfig} from '../index';
 import {BuildContext} from '../interface';
 
 describe('finalize', () => {
-    test('can receive a fully resolved webpack config and modify it', () => {
+    test('can receive a fully resolved webpack config and modify it', async () => {
         const finalize = jest.fn(
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (config: Configuration, entry: BuildEntry) => {
                 return {...config, mode: 'production' as const};
             }
         );
-        const projectSettings = readProjectSettings({cwd: __dirname}, 'build');
+        const projectSettings = await readProjectSettings({cwd: __dirname}, 'build');
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -33,7 +33,7 @@ describe('finalize', () => {
             entries: [],
             projectSettings: withFinalize,
         };
-        const config = createWebpackConfig(context);
+        const config = await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
         expect(typeof finalize.mock.calls[0][0].module).toBe('object');
@@ -41,12 +41,12 @@ describe('finalize', () => {
         expect(config.mode).toBe('production');
     });
 
-    test('can modify babel config', () => {
+    test('can modify babel config', async () => {
         const finalize = jest.fn(
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             (config, buildEntry) => ({...config, comments: false})
         );
-        const projectSettings = readProjectSettings({cwd: __dirname}, 'build');
+        const projectSettings = await readProjectSettings({cwd: __dirname}, 'build');
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -71,7 +71,7 @@ describe('finalize', () => {
             entries: [],
             projectSettings: withFinalize,
         };
-        createWebpackConfig(context);
+        await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
         expect(typeof finalize.mock.calls[0][0].presets).toBe('object');

@@ -1,7 +1,6 @@
 import path from 'path';
 import {promises as fs} from 'fs';
 import globby from 'globby';
-import rimraf from 'rimraf';
 import pLimit from 'p-limit';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
@@ -79,7 +78,7 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
 
     if (outDirectory) {
         if (cmd.clean) {
-            rimraf.sync(outDirectory);
+            await fs.rm(outDirectory, {recursive: true, force: true});
         }
 
         await fs.mkdir(outDirectory, {recursive: true});

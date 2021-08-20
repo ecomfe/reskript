@@ -1,20 +1,21 @@
 import path from 'path';
 import {Configuration} from 'webpack';
 import {omitBy} from 'lodash';
-import {sync as findUp} from 'find-up';
+import findUp from 'find-up';
 import {ConfigurationFactory} from '../interface';
 
-const factory: ConfigurationFactory = entry => {
+const factory: ConfigurationFactory = async entry => {
     const {cwd} = entry;
-    const nodeModule = (...segments: string[]): string => {
+    const nodeModule = async (...segments: string[]): Promise<string> => {
         const name = path.join('node_modules', ...segments);
-        return findUp(name, {cwd}) ?? '';
+        const module = await findUp(name, {cwd}) ?? '';
+        return module;
     };
     const alias = {
-        react$: nodeModule('react', 'umd', 'react.production.min.js'),
-        'react-dom$': nodeModule('react-dom', 'umd', 'react-dom.production.min.js'),
-        'react-redux$': nodeModule('react-redux', 'dist', 'react-redux.min.js'),
-        redux$: nodeModule('redux', 'dist', 'redux.min.js'),
+        react$: await nodeModule('react', 'umd', 'react.production.min.js'),
+        'react-dom$': await nodeModule('react-dom', 'umd', 'react-dom.production.min.js'),
+        'react-redux$': await nodeModule('react-redux', 'dist', 'react-redux.min.js'),
+        redux$: await nodeModule('redux', 'dist', 'redux.min.js'),
     };
 
     const config: Configuration = {

@@ -1,3 +1,4 @@
+import pReduce from 'p-reduce';
 import {ProjectSettings, ClientProjectSettings} from './interface';
 
 type Plugins = ClientProjectSettings['plugins'];
@@ -7,10 +8,12 @@ export interface PluginOptions {
     command: string;
 }
 
-export const applyPlugins = (settings: ProjectSettings, plugins: Plugins, options: PluginOptions) => {
+export const applyPlugins = async (settings: ProjectSettings, plugins: Plugins, options: PluginOptions) => {
     const pluginsToApply = typeof plugins === 'function' ? plugins(options.command) : plugins;
-    return pluginsToApply.reduce(
+    const applied = await pReduce(
+        pluginsToApply,
         (baseSettings, apply) => apply(baseSettings, options),
         settings
     );
+    return applied;
 };

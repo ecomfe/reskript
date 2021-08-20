@@ -158,7 +158,10 @@ export interface PlaySettings {
     readonly defaultGlobalSetup?: string;
 }
 
-export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;
+export type SettingsPlugin = (
+    current: ProjectSettings,
+    cmd: ProjectAware
+) => ProjectSettings | Promise<ProjectSettings>;
 
 export interface ProjectSettings extends ProjectAware {
     readonly featureMatrix: FeatureMatrix;
@@ -181,7 +184,7 @@ export interface BuildEnv extends WorkModeAware {
     // `reskript.config.js`中定义的配置
     readonly projectSettings: ProjectSettings;
     // 是否启用缓存
-    readonly cache?: boolean;
+    readonly cache?: 'persist' | 'transient' | 'off';
     // 缓存的目录，默认为`node_modules/.cache`
     readonly cacheDirectory?: string;
 }

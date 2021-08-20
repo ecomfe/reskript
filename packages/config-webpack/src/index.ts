@@ -1,5 +1,7 @@
 import path from 'path';
-import fs from 'fs';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
+import pMap from 'p-map';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
 import {
@@ -18,39 +20,42 @@ import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './ut
 import {createHTMLPluginInstances} from './utils/html';
 import {resolveEntry} from './utils/entry';
 import {introduceLoader, introduceLoaders} from './utils/loader';
-import {AppEntry, BuildContext, EntryLocation} from './interface';
+import {AppEntry, BuildContext, ConfigurationFactory, EntryLocation} from './interface';
 
 export {loaders, rules, createHTMLPluginInstances};
 export * from './interface';
 
-export const collectEntries = (location: EntryLocation): AppEntry[] => {
+export const collectEntries = async (location: EntryLocation): Promise<AppEntry[]> => {
     const {cwd, srcDirectory, entryDirectory, only} = location;
     const directory = path.join(cwd, srcDirectory, entryDirectory);
 
-    if (!fs.existsSync(directory)) {
+    if (!existsSync(directory)) {
         logger.error(`No ${srcDirectory}/${entryDirectory} directory found`);
         process.exit(24);
     }
 
-    const files = fs.readdirSync(directory);
+    const files = await fs.readdir(directory);
     const shouldInclude = (name: string) => (only ? only.includes(name) : true);
-    return compact(files.map(f => resolveEntry(path.resolve(directory, f), shouldInclude)));
+    const mayBeEntries = await pMap(files, f => resolveEntry(path.resolve(directory, f), shouldInclude));
+    return compact(mayBeEntries);
 };
 
-export const createRuntimeBuildEnv = (env: BuildEnv): RuntimeBuildEnv => {
+export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuildEnv> => {
     const now = new Date();
+    const buildVersion = await revision();
 
     return {
         ...env,
-        buildVersion: revision(),
+        buildVersion,
         buildTime: now.toISOString(),
     };
 };
 
-const importPartialWith = (context: BuildContext) => (name: string) => {
+const importPartialWith = (context: BuildContext) => async (name: string) => {
     try {
-        // eslint-disable-next-line global-require
-        return require(`./partials/${name}`).default(context);
+        const {default: factory} = await import(`./partials/${name}`) as {default: ConfigurationFactory};
+        const partial = await factory(context);
+        return partial;
     }
     catch (ex) {
         logger.error(`Unable to load configuration partial ${name}`);
@@ -58,14 +63,14 @@ const importPartialWith = (context: BuildContext) => (name: string) => {
     }
 };
 
-export const createWebpackConfig = (context: BuildContext, extras: Configuration[] = []): Configuration => {
+export const createWebpackConfig = async (context: BuildContext, extras: Configuration[] = []) => {
     const partials = [
         'base',
         context.mode,
         context.usage === 'build' && hasServiceWorker(context) && 'serviceWorker',
         context.projectSettings.build.thirdParty && 'external',
     ];
-    const configurations = compact(partials).map(importPartialWith(context));
+    const configurations = await pMap(compact(partials), importPartialWith(context));
     const internalCreated = mergeBuiltin([...configurations, ...extras]);
     const internals: BuildInternals = {
         rules,

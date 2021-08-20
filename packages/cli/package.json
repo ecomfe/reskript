@@ -14,7 +14,7 @@
     "skr": "./bin/skr.mjs"
   },
   "engines": {
-    "node": ">=14.13.1"
+    "node": ">=14.14.0"
   },
   "scripts": {
     "clean": "rm -rf dist",

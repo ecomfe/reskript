@@ -22,7 +22,6 @@ const assetModuleConfig = (entry: BuildEntry) => {
 };
 
 // 在第三方代码与项目代码的处理上，使用的策略是“非`cwd`下的全部算第三方代码”，而不是“包含`node_modules`的算第三方”。
-//
 // 这一逻辑取决于在使用monorepo时的形式，当前monorepo下我们要求被引用的包是构建后的。
 
 export const script = (entry: BuildEntry): RuleSetRule => {

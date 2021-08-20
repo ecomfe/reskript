@@ -4,14 +4,16 @@ import {SettingsPlugin} from '@reskript/settings';
 import {Options, PackageInfo} from './interface';
 import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias, checkDependencyGraph} from './utils';
 
-export default (options: Options = {}): SettingsPlugin => (settings, {cwd}) => {
-    if (!isMonorepo(cwd)) {
+export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}) => {
+    const isWorkspace = await isMonorepo(cwd);
+
+    if (!isWorkspace) {
         logger.error('Current project is not a monorepo workspace');
         process.exit(24);
     }
 
     const self = buildPackageInfo(cwd);
-    const siblings = findSiblingPackages(cwd, self);
+    const siblings = await findSiblingPackages(cwd, self);
     const isDependencyOfSelf = ({name}: PackageInfo) => !!(self.dependencies[name] ?? self.devDependencies[name]);
     const includedSiblings = resolveParticipant(siblings.filter(isDependencyOfSelf), options);
 

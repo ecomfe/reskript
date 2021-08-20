@@ -1,8 +1,8 @@
 import path from 'path';
-import rimraf from 'rimraf';
+import fs from 'fs/promises';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
+import {logger, pMap, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -52,7 +52,7 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
     return new Promise(executor);
 };
 
-const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: ProjectSettings): Configuration[] => {
+const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: ProjectSettings) => {
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
@@ -68,17 +68,17 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     checkProjectSettings(projectSettings);
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
-    const {name: hostPackageName} = readHostPackageConfig(cmd.cwd);
+    const {name: hostPackageName} = await readHostPackageConfig(cmd.cwd);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
         srcDirectory: cmd.srcDir,
         entryDirectory: cmd.entriesDir,
         only: cmd.entriesOnly,
     };
-    const entries = collectEntries(entryLocation);
+    const entries = await collectEntries(entryLocation);
 
     const featureNamesToUse = cmd.featureOnly ? [cmd.featureOnly] : featureNames;
-    const toConfiguration = (featureName: string): Configuration => {
+    const toConfiguration = async (featureName: string): Promise<Configuration> => {
         const buildEnv: BuildEnv = {
             hostPackageName,
             projectSettings,
@@ -88,7 +88,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
             srcDirectory: cmd.srcDir,
             cacheDirectory: cmd.cacheDir,
         };
-        const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
+        const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
         const buildContext: BuildContext = {
             ...runtimeBuildEnv,
             entries,
@@ -104,7 +104,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
         return createWebpackConfig(buildContext, compact(extras));
     };
 
-    return featureNamesToUse.map(toConfiguration);
+    return pMap(featureNamesToUse, toConfiguration);
 };
 
 export default async (cmd: BuildCommandLineArgs): Promise<void> => {
@@ -112,11 +112,11 @@ export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     prepareEnvironment(cmd.cwd, cmd.mode);
 
     if (cmd.clean) {
-        rimraf.sync(path.join(cmd.cwd, 'dist'));
+        await fs.rm(path.join(cmd.cwd, 'dist'), {recursive: true, force: true});
     }
 
-    const projectSettings = readProjectSettings(cmd, 'build');
-    const [initial, ...configurations] = createConfigurations(cmd, projectSettings);
+    const projectSettings = await readProjectSettings(cmd, 'build');
+    const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 
     if (!initial) {
         const error = 'No build configuration created, you are possibly providing a feature matrix with dev only';

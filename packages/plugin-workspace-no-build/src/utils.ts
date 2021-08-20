@@ -28,9 +28,9 @@ export const buildPackageInfo = (directory: string): PackageInfo => {
     };
 };
 
-export const findSiblingPackages = (cwd: string, self: PackageInfo) => {
-    const root = findMonorepoRoot(cwd);
-    const packageDirectories = resolveMonorepoPackageDirectories(root);
+export const findSiblingPackages = async (cwd: string, self: PackageInfo) => {
+    const root = await findMonorepoRoot(cwd);
+    const packageDirectories = await resolveMonorepoPackageDirectories(root);
     const packages = packageDirectories.map(buildPackageInfo);
     const siblings = packages.filter(v => v.name !== self.name);
     return siblings;
