@@ -14,6 +14,8 @@ interface DevServerSettings {
     readonly port: number;
     // 代理给后端的API请求的URL前缀
     readonly apiPrefixes: string[];
+    // 重写部分请求URL，优先于apiPrefixes
+    readonly proxyRewrite: Record<string, string>;
     // 默认的代理后端路径，可以被`--proxy-domain`命令行参数覆盖
     readonly defaultProxyDomain: string;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
@@ -99,6 +101,30 @@ exports.devServer = {
 ```shell
 skr dev --proxy-domain=my-local-app.dev:8988
 ```
+
+### 多后端代理配置
+
+对于更复杂的应用，有可能后端在开发环境中使用多服务且没有一个统一的入口，所以不同的接口路径需要代理到不同的后端上。
+
+对于此类情况，你可以使用`proxyRewrite`配置，例如以下的配置：
+
+```js
+exports.devServer = {
+    defaultProxyDomain: 'my-app.dev:8788',
+    proxyRewrite: {
+        '/api/user': 'user-app.dev:8786',
+        '/api/inventory': 'inventory-app.dev:8787',
+    },
+};
+```
+
+是述配置表达了如下的转发规则：
+
+- 当请求的URL前缀为`/api/user`时，请求将代理到`user-app.dev:8786`下。
+- 当请求的URL前缀为`/api/inventory`时，请求将代理到`user-app.dev:8786`下。
+- 其它请求都代理到`my-app.dev:8788`下。
+
+比如请求的路径为`/api/user/list?page=1`，则目标的URL为`user-app.dev:8786/list?page=1`。**需要注意的是，在`proxyRewrite`中配置的前缀不会变成代理后URL的一部分**。
 
 ## 关于热更新
 

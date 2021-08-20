@@ -148,6 +148,7 @@ export interface DevServerSettings {
     // 重写部分请求URL，优先于apiPrefixes
     readonly proxyRewrite: Record<string, string>;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
+    // TODO: 在2.0中改成`boolean`
     readonly hot: 'none' | 'simple' | 'all';
     // 服务启动后打开的页面
     readonly openPage: string;
