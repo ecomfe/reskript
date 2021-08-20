@@ -49,9 +49,9 @@ export const buildPeerAlias = (cwd: string, siblings: PackageInfo[]): Record<str
     return alias;
 };
 
-export const isVersionCompatible = (current: string, required: string) => {
+export const isVersionCompatible = (current: string, required: string): boolean => {
     const minInstalledVersion = minVersion(current);
-    return minInstalledVersion && satisfies(minInstalledVersion, required);
+    return !!minInstalledVersion && satisfies(minInstalledVersion, required, {includePrerelease: true});
 };
 
 export const checkDependencyGraph = (siblings: PackageInfo[], self: PackageInfo): boolean => {
