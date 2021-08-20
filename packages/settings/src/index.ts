@@ -5,12 +5,12 @@ import chokidar from 'chokidar';
 import {logger, ProjectAware} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
-import {fillProjectSettings} from './defaults';
+import {fillProjectSettings, PartialProjectSettings} from './defaults';
 import {applyPlugins} from './plugins';
 import {warnDeprecatedInProjectSettings} from './warn';
 
 export * from './interface';
-export {fillProjectSettings};
+export {fillProjectSettings, PartialProjectSettings};
 
 const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
     const location = path.join(cmd.cwd, 'reskript.config.js');

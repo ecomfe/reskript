@@ -31,8 +31,8 @@ const resolveDisplayName = (filename: string) => {
     return pascalCase(base);
 };
 
-interface Options {
-    displayName?: string;
+export interface Options {
+    displayName?: boolean;
 }
 
 export default async function lessSafeLoader(this: LoaderContext<Options>, source: string) {

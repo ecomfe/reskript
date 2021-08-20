@@ -11,12 +11,14 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest",
-    "lint": "eslint src"
+    "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.15",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",
     "resolve": "^1.20.0",

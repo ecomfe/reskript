@@ -9,14 +9,14 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "pnpm run -r --parallel lint",
-    "test": "pnpm run -r --stream test",
-    "build": "pnpm run -r build",
-    "build-clean": "pnpm run -r --parallel clean && npm run build",
+    "lint": "lerna run --parallel lint",
+    "test": "lerna run --concurrency=1 test",
+    "build": "lerna run build",
+    "build-clean": "lerna run --parallel clean && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
-    "ci": "pnpm install && pnpm run build-clean && pnpm run lint && pnpm run test",
-    "preversion": "pnpm run ci",
-    "prepack": "pnpm install && pnpm run build-clean && sh scripts/build-check.sh",
+    "ci": "pnpm install && npm run build-clean && npm run lint && npm run test",
+    "preversion": "npm run ci",
+    "prepack": "pnpm install && npm run build-clean && sh scripts/build-check.sh",
     "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
     "prepare": "husky install"

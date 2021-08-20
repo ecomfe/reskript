@@ -10,8 +10,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
-    "lint": "eslint src",
+    "clean": "rm -rf dist",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
+    "lint": "eslint --max-warnings=0 src",
     "test": "jest"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "@types/jest": "^27.0.1",
     "@types/marked": "^2.0.4",
     "@types/mdast": "^3.0.7",
+    "@types/node": "^16.7.1",
     "@types/webpack-dev-server": "3.11.2",
     "cpy-cli": "^3.1.1",
     "eslint": "^7.32.0",

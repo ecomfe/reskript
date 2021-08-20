@@ -11,12 +11,14 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc",
-    "lint": "eslint src",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
     "test": "jest"
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
     "@types/xml2js": "^0.4.9",
     "eslint": "^7.32.0",
     "jest": "^27.0.6",

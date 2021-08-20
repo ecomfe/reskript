@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2018",
+        "allowJs": false,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "strict": true,
+        "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "baseUrl": "."
+    }
+}

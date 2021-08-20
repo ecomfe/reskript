@@ -16,11 +16,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist config && tsc && node scripts/post-build.js",
-    "lint": "eslint src scripts",
+    "clean": "rm -rf dist",
+    "build": "rm -rf dist config && tsc -p tsconfig.build.json && node scripts/post-build.js",
+    "lint": "eslint --max-warnings=0 src scripts",
     "test": "echo 'No test in @reskript/config-lint'"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
+    "eslint": "^7.32.0",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5"
   },

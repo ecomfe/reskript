@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "echo 'No build in @reskript/eslint-config'",
-    "lint": "eslint rules index.js",
+    "lint": "eslint --max-warnings=0 rules index.js",
     "test": "jest"
   },
   "dependencies": {

@@ -1,9 +1,9 @@
 import {readHostPackageConfig} from '@reskript/core';
 import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings} from './interface';
 
-type PartialBuildSettings = BuildSettings & {
-    script: Partial<BuildSettings['script']>;
-    style: Partial<BuildSettings['style']>;
+type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style'> & {
+    script?: Partial<BuildSettings['script']>;
+    style?: Partial<BuildSettings['style']>;
 };
 
 const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = process.cwd()): BuildSettings => {
@@ -68,7 +68,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     };
 };
 
-interface PartialProjectSettings {
+export interface PartialProjectSettings {
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;

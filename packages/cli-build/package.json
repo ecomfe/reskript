@@ -11,12 +11,14 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc",
-    "lint": "eslint src",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
     "test": "echo 'No test in @reskript/cli-build'"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.172",
+    "@types/node": "^16.7.1",
     "@types/rimraf": "^3.0.2",
     "typescript": "^4.3.5",
     "webpack": "^5.51.0"
