@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 放宽一些对版本范围的检查 ([#129](https://github.com/ecomfe/reskript/issues/129)) ([0384184](https://github.com/ecomfe/reskript/commit/0384184a648a0e31d59af2d3a6480e8b46bb1089))
+
+
+
+
+
 # [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
 
 
