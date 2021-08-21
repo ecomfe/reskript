@@ -6,7 +6,7 @@ import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
 import {readProjectSettings} from '@reskript/settings';
 import {TestCommandLineArgs} from './interface';
 
-const resolveJestConfig = (jestConfigOptions: JestConfigOptions): string => {
+const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<string> => {
     const {cwd} = jestConfigOptions;
     // find out jest.config
     const jestConfigFile = path.resolve(cwd, 'jest.config.js');
@@ -16,8 +16,7 @@ const resolveJestConfig = (jestConfigOptions: JestConfigOptions): string => {
         return JSON.stringify(getJestConfig(jestConfigOptions));
     }
 
-    // eslint-disable-next-line global-require
-    const jestConfig = require(jestConfigFile);
+    const jestConfig = await import(jestConfigFile);
 
     if ('preset' in jestConfig) {
         // if jest config has preset, return jest config
@@ -54,7 +53,7 @@ export default async (files: string[], cmd: TestCommandLineArgs): Promise<void> 
     const {featureMatrix: {dev: features}} = readProjectSettings(cmd, 'test');
     // featureMatrix 目前以dev为默认目标，以后可以传入--test-target？
     const jestConfigOptions: JestConfigOptions = {cwd, src, target, features};
-    const config = resolveJestConfig(jestConfigOptions);
+    const config = await resolveJestConfig(jestConfigOptions);
     argv.push('--config', config);
     run(argv);
 };

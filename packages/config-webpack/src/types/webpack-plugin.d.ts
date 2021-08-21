@@ -1,47 +1,46 @@
-/* eslint-disable */
 declare module 'webpack-bundle-analyzer' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export class BundleAnalyzerPlugin extends webpack.Plugin {
+    export class BundleAnalyzerPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }
 
 declare module 'unused-files-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export class UnusedFilesWebpackPlugin extends webpack.Plugin {
+    export class UnusedFilesWebpackPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }
 
 declare module 'friendly-errors-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export default class FriendlyErrorsWebpackPlugin extends webpack.Plugin {
+    export default class FriendlyErrorsWebpackPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }
 
 declare module 'case-sensitive-paths-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export default class CaseSensitivePathsPlugin extends webpack.Plugin {
+    export default class CaseSensitivePathsPlugin extends WebpackPluginFunction {
     }
 }
 
 declare module 'monaco-editor-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export default class MonacoEditorWebpackPlugin extends webpack.Plugin {
+    export default class MonacoEditorWebpackPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }
 
 declare module '@pmmmwh/react-refresh-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export default class ReactRefreshWebpackPlugin extends webpack.Plugin {
+    export default class ReactRefreshWebpackPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }

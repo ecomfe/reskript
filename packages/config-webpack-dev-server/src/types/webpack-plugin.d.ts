@@ -1,8 +1,7 @@
-/* eslint-disable */
 declare module 'friendly-errors-webpack-plugin' {
-    import webpack = require('webpack');
+    import {WebpackPluginFunction} from 'webpack';
 
-    export default class FriendlyErrorsWebpackPlugin extends webpack.Plugin {
+    export default class FriendlyErrorsWebpackPlugin extends WebpackPluginFunction {
         constructor(options: any);
     }
 }
