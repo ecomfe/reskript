@@ -28,7 +28,6 @@ const options: BabelConfigOptions = {
     hot: 'all',
     hostType: 'application',
     polyfill: true,
-    defaultImportOptimization: true,
 };
 
 describe('base config', () => {
@@ -54,21 +53,22 @@ describe('base config', () => {
     });
 });
 
-describe('defaultImportOptimization', () => {
-    test('enabled', () => {
-        const config = getBabelConfig({...options});
+describe('third party use', () => {
+    test('antd', () => {
+        const config = getTransformBabelConfig({...options, uses: ['antd']});
         expect(findPluginByKeyword(config.plugins, 'babel-plugin-import')).toBe(true);
+    });
+
+    test('lodash', () => {
+        const config = getTransformBabelConfig({...options, uses: ['lodash']});
         expect(findPluginByKeyword(config.plugins, 'babel-plugin-lodash')).toBe(true);
     });
 
-    test('disabled', () => {
-        const config = getBabelConfig({...options, defaultImportOptimization: false});
-        expect(findPluginByKeyword(config.plugins, 'babel-plugin-import')).toBe(false);
-        expect(findPluginByKeyword(config.plugins, 'babel-plugin-lodash')).toBe(false);
+    test('emotion', () => {
+        const config = getTransformBabelConfig({...options, uses: ['emotion']});
+        expect(findPluginByKeyword(config.plugins, '@emotion/babel-plugin')).toBe(true);
     });
-});
 
-describe('third party use', () => {
     test('reflect-metadata', () => {
         const config = getTransformBabelConfig({...options, uses: ['reflect-metadata']});
         expect(findPluginByKeyword(config.plugins, 'babel-plugin-transform-typescript-metadata')).toBe(true);

@@ -4,9 +4,9 @@ import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
 import {watchProjectSettings, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {createWebpackConfig} from '@reskript/config-webpack';
-import {deprecatedWarn, logger, prepareEnvironment} from '@reskript/core';
+import {logger, prepareEnvironment} from '@reskript/core';
 import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
-import {DevCommandLineArgs, LegacyDevCommandLineArgs} from './interface';
+import {DevCommandLineArgs} from './interface';
 import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
@@ -38,28 +38,7 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
     return server;
 };
 
-const fixArgs = (cmd: LegacyDevCommandLineArgs): DevCommandLineArgs => {
-    const output = {...cmd};
-    // DEPRECATED: 2.0废弃
-    if (cmd.src) {
-        deprecatedWarn('--src arg is deprecated, use --src-dir instead');
-        output.srcDir = cmd.srcDir === 'src' ? cmd.src : cmd.srcDir;
-    }
-    // DEPRECATED: 2.0废弃
-    if (cmd.open) {
-        deprecatedWarn('--open arg is deprecated, use --host instead');
-        const openToHostMapping = {
-            local: 'localhost',
-            remote: 'ip',
-        };
-        output.host = openToHostMapping[cmd.open] || undefined;
-    }
-
-    return output;
-};
-
-export default async (rawCmd: LegacyDevCommandLineArgs): Promise<void> => {
-    const cmd = fixArgs(rawCmd);
+export default async (cmd: DevCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = cmd.mode;
     prepareEnvironment(cmd.cwd, cmd.mode);
 

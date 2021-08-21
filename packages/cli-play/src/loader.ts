@@ -34,8 +34,8 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
         this.cacheable();
     }
 
+    // TODO: 搞成异步的
     const options = this.getOptions();
-    const extraImports = options.injectResources.map(e => `import '${e}';`).join('\n');
     const configurationFilePathRelative = path.relative(
         options.cwd,
         resolveLocalConfigurationPath(options.componentModulePath)
@@ -47,8 +47,6 @@ const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, cont
         [/%CONFIGURATION_FILE_PATH%/g, configurationFilePathRelative],
         [/%CONFIGURATION_SOURCE%/g, readAsSourceString(configurationFilePathRelative)],
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
-        [/%EXTRA_IMPORTS%/g, extraImports],
-        [/%WRAPPER_RETURN%/g, options.wrapper],
         [
             /%CONFIGURATION_INITIALIZE_BLOCK%/g,
             fs.readFileSync(path.join(__dirname, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),

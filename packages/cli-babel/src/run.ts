@@ -70,17 +70,19 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
         return;
     }
 
-    if (!path.extname(file) && !cmd.out) {
+    const outDirectory = cmd.outDir;
+
+    if (!path.extname(file) && !outDirectory) {
         logger.error('Cannot output to terminal with directory input, please specify a single file or use --out.');
         process.exit(21);
     }
 
-    if (cmd.out) {
+    if (outDirectory) {
         if (cmd.clean) {
-            rimraf.sync(cmd.out);
+            rimraf.sync(outDirectory);
         }
 
-        await fs.mkdir(cmd.out, {recursive: true});
+        await fs.mkdir(outDirectory, {recursive: true});
     }
 
     const babelConfigOptions: BabelConfigOptions = {
@@ -89,15 +91,14 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
         hostType: 'application',
         polyfill: !cmd.noPolyfill,
         modules: false,
-        defaultImportOptimization: true,
     };
     const babelConfig: TransformOptions = {
         ...getTransformBabelConfig(babelConfigOptions),
-        sourceMaps: !!cmd.out,
+        sourceMaps: !!outDirectory,
     };
     if (path.extname(file)) {
-        if (cmd.out) {
-            await transformFile(file, path.dirname(file), cmd.out, babelConfig);
+        if (outDirectory) {
+            await transformFile(file, path.dirname(file), outDirectory, babelConfig);
         }
         else {
             const result = await transformFileAsync(file, babelConfig);
@@ -105,12 +106,12 @@ export default async (file: string, cmd: BabelCommandLineArgs): Promise<void> =>
         }
     }
     else {
-        await transformDirectory(file, cmd.out, babelConfig);
+        await transformDirectory(file, outDirectory, babelConfig);
 
         if (cmd.copy) {
             const limit = pLimit(10);
             const files = await globby([`${file}/**`, `!${file}/**/*.{ts,js,tsx,jsx}`]);
-            await Promise.all(files.map(f => limit(copyFile, f, file, cmd.out)));
+            await Promise.all(files.map(f => limit(copyFile, f, file, outDirectory)));
         }
     }
 };

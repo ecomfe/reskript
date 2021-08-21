@@ -127,24 +127,16 @@ export const svg = (entry: BuildEntry): RuleSetRule => {
         test: /\.svg$/,
         oneOf: [
             {
-                // 没有任何信息的就变成混合内容，未来要干掉
-                resourceQuery: {
-                    and: [
-                        {not: /^\?asset$/},
-                        {not: /^\?react$/},
-                    ],
-                },
-                use: use('svg', mode === 'production' && 'svgo'),
-            },
-            {
-                // 如果挂了`?asset`的，直接交给webpack处理
-                resourceQuery: /^\?asset$/,
-                ...assetModuleConfig(entry),
-            },
-            {
                 // 如果挂了`?react`的，就直接转成组件返回
                 resourceQuery: /^\?react$/,
                 use: use('svgToComponent', mode === 'production' && 'svgo'),
+            },
+            {
+                resourceQuery: {
+                    not: /^\?react$/,
+                },
+                use: use(mode === 'production' && 'svgo'),
+                ...assetModuleConfig(entry),
             },
         ],
     };

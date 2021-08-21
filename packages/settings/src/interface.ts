@@ -32,9 +32,6 @@ export interface BuildScriptSettings {
     readonly polyfill: boolean;
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
-    // 是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
-    // DEPRECATED: 待废弃
-    readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
@@ -89,13 +86,11 @@ export type LoaderType =
     | 'postCSSModules'
     | 'less'
     | 'lessSafe'
-    | 'url'
     | 'img'
     | 'worker'
     | 'styleResources'
     | 'classNames'
     | 'cssExtract'
-    | 'svg'
     | 'svgo'
     | 'svgToComponent';
 
@@ -157,8 +152,6 @@ export interface DevServerSettings {
 }
 
 export interface PlaySettings {
-    readonly injectResources: string[];
-    readonly wrapper: string;
     // 默认启用React的并发模式
     readonly defaultEnableConcurrentMode: boolean;
     // 指定全局配置模块路径

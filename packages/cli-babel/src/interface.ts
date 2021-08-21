@@ -4,6 +4,6 @@ export interface BabelCommandLineArgs {
     mode: WorkMode;
     noPolyfill: boolean;
     clean: boolean;
-    out: string;
+    outDir: string;
     copy: boolean;
 }

@@ -37,7 +37,6 @@
     "@reskript/core": "1.15.2",
     "@reskript/less-safe-loader": "1.15.2",
     "@reskript/settings": "1.15.2",
-    "@reskript/svg-mixed-loader": "1.15.2",
     "@reskript/svg-to-component-loader": "1.15.2",
     "@reskript/webpack-plugin-extra-script": "1.15.2",
     "@reskript/webpack-plugin-interpolate-html": "1.15.2",

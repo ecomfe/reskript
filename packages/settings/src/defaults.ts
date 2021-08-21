@@ -20,7 +20,6 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
             babel: true,
             polyfill: true,
             displayName: true,
-            defaultImportOptimization: true,
             finalize: config => config,
             ...settings?.script,
         },
@@ -61,8 +60,6 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
 
 const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     return {
-        injectResources: [],
-        wrapper: 'children',
         defaultEnableConcurrentMode: false,
         ...settings,
     };

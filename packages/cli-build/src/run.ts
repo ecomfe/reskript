@@ -2,7 +2,7 @@ import path from 'path';
 import rimraf from 'rimraf';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {logger, prepareEnvironment, readHostPackageConfig, deprecatedWarn} from '@reskript/core';
+import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -13,7 +13,7 @@ import {
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
 import * as partials from './partial';
-import {BuildCommandLineArgs, LegacyBuildCommandLineArgs} from './interface';
+import {BuildCommandLineArgs} from './interface';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
 import inspect from './inspect';
 
@@ -107,21 +107,7 @@ const createConfigurations = (cmd: BuildCommandLineArgs, projectSettings: Projec
     return featureNamesToUse.map(toConfiguration);
 };
 
-const fixArgs = (cmd: LegacyBuildCommandLineArgs): BuildCommandLineArgs => {
-    // DEPRECATED: 2.0废弃
-    if (cmd.src) {
-        deprecatedWarn('--src arg is deprecated, use --src-dir instead');
-        return {
-            ...cmd,
-            srcDir: cmd.srcDir === 'src' ? cmd.src : cmd.srcDir,
-        };
-    }
-
-    return cmd;
-};
-
-export default async (rawCmd: BuildCommandLineArgs): Promise<void> => {
-    const cmd = fixArgs(rawCmd);
+export default async (cmd: BuildCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = cmd.mode;
     prepareEnvironment(cmd.cwd, cmd.mode);
 

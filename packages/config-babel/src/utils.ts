@@ -8,7 +8,6 @@ const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
     hostType: 'application',
     polyfill: false,
     modules: false,
-    defaultImportOptimization: true,
     displayName: 'auto',
     cwd: process.cwd(),
     srcDirectory: 'src',

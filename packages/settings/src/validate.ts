@@ -123,9 +123,6 @@ const schema: any = {
                         displayName: {
                             type: 'boolean',
                         },
-                        defaultImportOptimization: {
-                            type: 'boolean',
-                        },
                         finalize: {
                             instanceof: 'Function',
                         },
@@ -219,15 +216,6 @@ const schema: any = {
         },
         play: {
             properties: {
-                injectResources: {
-                    items: {
-                        type: 'string',
-                    },
-                    type: 'array',
-                },
-                wrapper: {
-                    type: 'string',
-                },
                 defaultEnableConcurrentMode: {
                     type: 'boolean',
                 },

@@ -600,7 +600,6 @@ importers:
       '@reskript/core': 1.15.2
       '@reskript/less-safe-loader': 1.15.2
       '@reskript/settings': 1.15.2
-      '@reskript/svg-mixed-loader': 1.15.2
       '@reskript/svg-to-component-loader': 1.15.2
       '@reskript/webpack-plugin-extra-script': 1.15.2
       '@reskript/webpack-plugin-interpolate-html': 1.15.2
@@ -657,7 +656,6 @@ importers:
       '@reskript/core': link:../core
       '@reskript/less-safe-loader': link:../less-safe-loader
       '@reskript/settings': link:../settings
-      '@reskript/svg-mixed-loader': link:../svg-mixed-loader
       '@reskript/svg-to-component-loader': link:../svg-to-component-loader
       '@reskript/webpack-plugin-extra-script': link:../webpack-plugin-extra-script
       '@reskript/webpack-plugin-interpolate-html': link:../webpack-plugin-interpolate-html
@@ -963,35 +961,6 @@ importers:
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
       '@types/node': 16.7.1
-      eslint: 7.32.0
-      jest: 27.0.6
-      ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
-      typescript: 4.3.5
-      webpack: 5.51.1
-
-  packages/svg-mixed-loader:
-    specifiers:
-      '@types/dedent': ^0.7.0
-      '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
-      '@types/xml2js': ^0.4.9
-      change-case: ^4.1.2
-      dedent: ^0.7.0
-      eslint: ^7.32.0
-      jest: ^27.0.6
-      ts-jest: ^27.0.5
-      typescript: ^4.3.5
-      webpack: ^5.51.0
-      xml2js: ^0.4.23
-    dependencies:
-      change-case: 4.1.2
-      dedent: 0.7.0
-      xml2js: 0.4.23
-    devDependencies:
-      '@types/dedent': 0.7.0
-      '@types/jest': 27.0.1
-      '@types/node': 16.7.1
-      '@types/xml2js': 0.4.9
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
