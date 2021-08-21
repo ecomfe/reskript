@@ -1,16 +1,17 @@
 {
   "name": "@reskript/cli",
   "version": "1.15.1",
-  "main": "dist/index.js",
   "license": "MIT",
+  "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "skr": "./dist/index.js"
+    "skr": "./bin/skr.mjs"
   },
   "engines": {
     "node": ">=14.13.1"

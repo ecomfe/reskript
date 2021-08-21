@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 import {program} from 'commander';
 import semver from 'semver';
 import {logger, CommandConfig} from '@reskript/core';
@@ -10,7 +9,7 @@ const buildCommand = async ({command, description, args, run}: CommandConfig<any
     commandConfig.action(run);
 };
 
-const main = async (): Promise<void> => {
+export const run = async (): Promise<void> => {
     if (semver.lt(process.version, '8.9.0')) {
         logger.error('Require node >= v8.9.0 to be installed');
         process.exit(10);
@@ -48,5 +47,3 @@ const main = async (): Promise<void> => {
         process.exit(11);
     }
 };
-
-main();
