@@ -6,7 +6,8 @@
   "author": "otakustay <otakustay@gmail.com>",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "showcase/*"
   ],
   "scripts": {
     "lint": "lerna run --parallel lint",

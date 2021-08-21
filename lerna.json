@@ -1,10 +1,10 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "showcase/*"
   ],
   "version": "1.15.1",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "npmClient": "npm",
   "exact": true,
   "command": {
     "version": {
