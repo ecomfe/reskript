@@ -22,7 +22,14 @@ const parseSVG = async (source: string) => {
     const startTag = source.slice(startOfStartTag, endOfStartTag + 1);
     const endTag = source.slice(startOfEndTag);
     const body = source.slice(endOfStartTag + 1, startOfEndTag);
-    const parsedWrapper = await parseStringPromise(startTag + endTag);
+    const parsedWrapper = await parseStringPromise(
+        startTag + endTag,
+        {
+            attrNameProcessors: [
+                name => name.replace(/(?:-|_)([a-z])/g, (match, letter) => letter.toUpperCase()),
+            ],
+        }
+    );
     return [removeNamespaceAttributes(parsedWrapper.svg.$), body] as const;
 };
 

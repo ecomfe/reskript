@@ -9,3 +9,8 @@ test('display name', async () => {
     const code = await compiler({displayName: true});
     expect(code.includes('SVGToComponent.displayName = "IconTest";')).toBe(true);
 });
+
+test('attribute name camel case', async () => {
+    const code = await compiler();
+    expect(code.includes('"strokeWidth"')).toBe(true);
+});
