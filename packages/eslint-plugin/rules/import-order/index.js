@@ -1,6 +1,6 @@
 const builtins = require('builtins');
 
-const BUILTIN_MODULES = new Set(builtins());
+const BUILTIN_MODULES = builtins();
 
 const BASE_PRIORITY = {
     node: 0,
@@ -25,7 +25,7 @@ const isLocalPackage = (declaredPackageNames, currentPackageName) => {
 };
 
 const importSourceType = (name, {localPackageNames}) => {
-    if (BUILTIN_MODULES.has(name)) {
+    if (BUILTIN_MODULES.some(v => v === name || name.startsWith(v + '/'))) {
         return 'native';
     }
     if (name.startsWith('node:')) {

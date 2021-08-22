@@ -54,6 +54,7 @@ tester.run(
             ),
             testCase('node-invalid', ['Import of node:fs should be placed before path']),
             testCase('local-package', ['Import of lodash should be placed before @i/util']),
+            testCase('native-children-invalid', ['Import of fs/promises should be placed before lodash']),
         ],
     }
 );
