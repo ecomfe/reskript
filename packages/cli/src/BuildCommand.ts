@@ -45,6 +45,12 @@ export default class BuildCommand extends DynamicImportCommand<BuildCommandLineA
         {description: 'specify one or more entries to build, excludes other entries from build'}
     );
 
+    strict = Option.Boolean(
+        '--strict',
+        false,
+        {description: 'enable strict build mode to get more source code and dependency checks'}
+    );
+
     analyze = Option.Boolean('--analyze', false, {description: 'enable bundle analytics'});
 
     profile = Option.Boolean('--profile', false, {description: 'enable react profiling mode'});
@@ -64,6 +70,7 @@ export default class BuildCommand extends DynamicImportCommand<BuildCommandLineA
             buildTarget: this.buildTarget,
             featureOnly: this.featureOnly,
             entriesOnly: this.entriesOnly,
+            strict: this.strict,
             analyze: this.analyze,
             profile: this.profile,
             sourceMaps: this.sourceMaps,

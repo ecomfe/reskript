@@ -6,6 +6,7 @@ export interface BuildCommandLineArgs extends WorkModeAware {
     readonly buildTarget?: string;
     readonly featureOnly?: string;
     readonly entriesOnly?: string[];
+    readonly strict: boolean;
     readonly analyze: boolean;
     readonly clean: boolean;
     readonly profile: boolean;

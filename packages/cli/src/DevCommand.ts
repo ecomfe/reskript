@@ -50,6 +50,12 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
 
     entry = Option.String('--entry', 'index', {description: 'specify an entry as the default page'});
 
+    strict = Option.Boolean(
+        '--strict',
+        false,
+        {description: 'enable strict build mode to get more source code and dependency checks'}
+    );
+
     buildCommandLineArgs() {
         return {
             cwd: this.cwd,
@@ -60,6 +66,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
             proxyDomain: this.proxyDomain,
             host: this.host,
             entry: this.entry,
+            strict: this.strict,
         };
     }
 }

@@ -103,7 +103,16 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
             cmd.profile && partials.profile(),
             !cmd.sourceMaps && partials.noSourceMaps(),
         ];
-        return createWebpackConfig(buildContext, compact(extras));
+        return createWebpackConfig(
+            buildContext,
+            {
+                strict: {
+                    disableRequireExtension: cmd.strict,
+                    caseSensitiveModuleSource: cmd.strict,
+                },
+                extras: compact(extras),
+            }
+        );
     };
 
     return pMap(featureNamesToUse, toConfiguration);

@@ -8,4 +8,5 @@ export interface DevCommandLineArgs extends WorkModeAware {
     // eslint-disable-next-line @typescript-eslint/ban-types
     readonly host?: 'localhost' | 'loopback' | 'ip' | {} & string;
     readonly entry: string;
+    readonly strict: boolean;
 }

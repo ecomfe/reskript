@@ -7,7 +7,6 @@ import {compact, mapValues} from 'lodash';
 import {paramCase} from 'change-case';
 import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import {findGitRoot, pMap} from '@reskript/core';
@@ -143,7 +142,6 @@ const factory: ConfigurationFactory = async entry => {
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
         // TODO: https://github.com/webpack/webpack/pull/11698
-        new CaseSensitivePathsPlugin() as any,
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         new InterpolateHTMLPlugin(process.env),

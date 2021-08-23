@@ -30,7 +30,16 @@ const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStar
 
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
-    const config = await createWebpackConfig(buildContext, [extra, {output: {publicPath}}]);
+    const config = await createWebpackConfig(
+        buildContext,
+        {
+            strict: {
+                disableRequireExtension: cmd.strict,
+                caseSensitiveModuleSource: cmd.strict,
+            },
+            extras: [extra, {output: {publicPath}}],
+        }
+    );
     const devServerConfig = await createWebpackDevServerConfig(
         buildContext,
         cmd.entry,

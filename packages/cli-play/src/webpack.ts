@@ -10,7 +10,7 @@ import {resolveHost} from './utils/host';
 export const createWebpackConfig = async (target: string, cmd: PlayCommandLineArgs, buildContext: BuildContext) => {
     const hostType = await resolveHost(cmd.host);
     const extra = await createWebpackDevServerPartial(buildContext, hostType);
-    const baseConfig = await createBaseWebpackConfig(buildContext, [extra]);
+    const baseConfig = await createBaseWebpackConfig(buildContext, {extras: [extra]});
     const enableConcurrentMode = cmd.concurrentMode ?? buildContext.projectSettings.play.defaultEnableConcurrentMode;
     const playEntryPath = enableConcurrentMode
         ? path.join(__dirname, 'assets', 'playground-entry-cm.js.tpl')

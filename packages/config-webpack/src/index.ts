@@ -20,7 +20,8 @@ import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './ut
 import {createHTMLPluginInstances} from './utils/html';
 import {resolveEntry} from './utils/entry';
 import {introduceLoader, introduceLoaders} from './utils/loader';
-import {AppEntry, BuildContext, ConfigurationFactory, EntryLocation} from './interface';
+import {AppEntry, BuildContext, ConfigurationFactory, EntryLocation, StrictOptions} from './interface';
+import strictPartial from './partials/strict';
 
 export {loaders, rules, createHTMLPluginInstances};
 export * from './interface';
@@ -63,7 +64,13 @@ const importPartialWith = (context: BuildContext) => async (name: string) => {
     }
 };
 
-export const createWebpackConfig = async (context: BuildContext, extras: Configuration[] = []) => {
+interface Options {
+    strict?: StrictOptions;
+    extras?: Configuration[];
+}
+
+export const createWebpackConfig = async (context: BuildContext, options: Options = {}) => {
+    const {strict, extras = []} = options;
     const partials = [
         'base',
         context.mode,
@@ -71,7 +78,7 @@ export const createWebpackConfig = async (context: BuildContext, extras: Configu
         context.projectSettings.build.thirdParty && 'external',
     ];
     const configurations = await pMap(compact(partials), importPartialWith(context));
-    const internalCreated = mergeBuiltin([...configurations, ...extras]);
+    const internalCreated = mergeBuiltin([...configurations, strictPartial(strict), ...extras]);
     const internals: BuildInternals = {
         rules,
         loader: introduceLoader,

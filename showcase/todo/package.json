@@ -4,7 +4,7 @@
   "version": "1.15.2",
   "description": "待办列表示例",
   "scripts": {
-    "build": "skr build",
+    "build": "skr build --clean",
     "start": "skr dev",
     "lint": "eslint src",
     "test": "skr test --target=react"

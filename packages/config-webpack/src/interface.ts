@@ -32,3 +32,10 @@ export interface BuildContext extends RuntimeBuildEnv {
 export type LoaderFactory = (entry: BuildEntry) => RuleSetUseItem | null;
 
 export type ConfigurationFactory = (entry: BuildContext) => Configuration | Promise<Configuration>;
+
+export interface StrictOptions {
+    // 禁止使用`require.ensure`、`require.include`、`require.context`
+    disableRequireExtension?: boolean;
+    // 所有的模块路径都是大小写敏感的
+    caseSensitiveModuleSource?: boolean;
+}
