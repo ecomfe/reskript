@@ -11,11 +11,18 @@ const factory: ConfigurationFactory = async entry => {
         const module = await findUp(name, {cwd}) ?? '';
         return module;
     };
+    const resolvingModules = [
+        nodeModule('react', 'umd', 'react.production.min.js'),
+        nodeModule('react-dom', 'umd', 'react-dom.production.min.js'),
+        nodeModule('react-redux', 'dist', 'react-redux.min.js'),
+        nodeModule('redux', 'dist', 'redux.min.js'),
+    ] as const;
+    const [react, reactDOM, reactRedux, redux] = await Promise.all(resolvingModules);
     const alias = {
-        react$: await nodeModule('react', 'umd', 'react.production.min.js'),
-        'react-dom$': await nodeModule('react-dom', 'umd', 'react-dom.production.min.js'),
-        'react-redux$': await nodeModule('react-redux', 'dist', 'react-redux.min.js'),
-        redux$: await nodeModule('redux', 'dist', 'redux.min.js'),
+        react$: react,
+        'react-dom$': reactDOM,
+        'react-redux$': reactRedux,
+        redux$: redux,
     };
 
     const config: Configuration = {

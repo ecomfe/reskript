@@ -56,8 +56,8 @@ const createService = (componentModulePath: string) => {
                 return;
             }
 
-            const content = await fs.readFile(casePath, 'utf-8');
-            const nextContent = await replaceLastRun(content, name, formatTime(new Date()), await currentUserName());
+            const [content, currentUser] = await Promise.all([fs.readFile(casePath, 'utf-8'), currentUserName()]);
+            const nextContent = await replaceLastRun(content, name, formatTime(new Date()), currentUser);
             writeContent(nextContent);
         },
     };
