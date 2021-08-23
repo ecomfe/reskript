@@ -37,7 +37,7 @@ export const getBabelConfig = (input?: BabelConfigOptions): TransformOptions => 
         ],
         ...transform.plugins || [],
         requireReactOptimization && resolve('babel-plugin-transform-react-remove-prop-types'),
-        hot === 'all' && [resolve('react-refresh/babel'), {skipEnvCheck: true}],
+        hot && [resolve('react-refresh/babel'), {skipEnvCheck: true}],
     ];
 
     return {presets: transform.presets, plugins: compact(plugins)};

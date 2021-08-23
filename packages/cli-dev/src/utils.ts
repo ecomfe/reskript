@@ -33,18 +33,15 @@ export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], po
     return `http://${host}:${port}/assets/`;
 };
 
-export const startServer = (server: WebpackDevServer, port: number): Promise<void> => {
-    const execute = (resolve: () => void) => {
-        const httpServer = server.listen(port, '0.0.0.0', resolve);
-        httpServer.on(
-            'error',
-            (ex: Error) => {
-                logger.error(ex.message);
-                process.exit(22);
-            }
-        );
-    };
-    return new Promise(execute);
+export const startServer = async (server: WebpackDevServer): Promise<void> => {
+    try {
+        // @ts-expect-error
+        await server.start();
+    }
+    catch (ex) {
+        logger.error(ex.message);
+        process.exit(22);
+    }
 };
 
 export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
@@ -77,7 +74,7 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
             ...projectSettings,
             devServer: {
                 ...projectSettings.devServer,
-                hot: cmd.mode === 'production' ? 'none' : projectSettings.devServer.hot,
+                hot: cmd.mode === 'production' ? false : projectSettings.devServer.hot,
             },
         },
     };

@@ -9,7 +9,7 @@ const getBabelJestTransformer = () => {
     const babelConfigOptions: BabelConfigOptions = {
         mode: 'development',
         polyfill: true,
-        hot: 'none',
+        hot: false,
         hostType: 'library',
         modules: 'commonjs',
     };

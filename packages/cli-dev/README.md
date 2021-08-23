@@ -38,7 +38,7 @@ interface DevServerSettings {
     // 默认的代理后端路径，可以被`--proxy-domain`命令行参数覆盖
     readonly defaultProxyDomain: string;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
-    readonly hot: 'none' | 'simple' | 'all';
+    readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改

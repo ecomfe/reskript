@@ -180,12 +180,16 @@ const factory: ConfigurationFactory = async entry => {
         },
         cache: cache === 'off'
             ? false
-            : {
-                type: cache === 'persist' ? 'filesystem' : 'memory',
-                version: cacheKey,
-                cacheDirectory: cacheDirectory ? path.join(cwd, cacheDirectory) : undefined,
-                name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
-            },
+            : (
+                cache === 'persist'
+                    ? {
+                        type: 'filesystem',
+                        version: cacheKey,
+                        cacheDirectory: cacheDirectory ? path.join(cwd, cacheDirectory) : undefined,
+                        name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
+                    }
+                    : {type: 'memory'}
+            ),
         snapshot: {
             module: {
                 timestamp: usage !== 'build',

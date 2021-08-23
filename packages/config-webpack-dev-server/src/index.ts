@@ -1,15 +1,15 @@
 import path from 'path';
 import {compact} from 'lodash';
-import {HotModuleReplacementPlugin, Configuration} from 'webpack';
+import {Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import WebpackBar from 'webpackbar';
 import ProxyAgent from 'proxy-agent';
 import {merge} from 'webpack-merge';
-import pkgDir from 'pkg-dir';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import ProgressBarPlugin from './ProgressBarPlugin';
+import {addHotModuleToEntry} from './utils';
 
 const getDevServerMessages = (host: string, port: number, openPage: string = ''): string[] => [
     `Your application is running here: http://${host}:${port}/${openPage}`,
@@ -17,9 +17,6 @@ const getDevServerMessages = (host: string, port: number, openPage: string = '')
 
 export const createWebpackDevServerPartial = async (context: BuildContext, host = 'localhost') => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage}}} = context;
-    const webpackBarOptions = {
-        name: '@reskript/dev',
-    };
     const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
     const messageOptions = {
         compilationSuccessInfo: {
@@ -29,13 +26,11 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
     };
     const plugins = [
         ...htmlPlugins,
-        new WebpackBar(webpackBarOptions),
         // TODO: https://github.com/webpack/webpack/pull/11698
         new FriendlyErrorsWebpackPlugin(messageOptions) as any,
-        hot === 'none' ? null : new HotModuleReplacementPlugin(),
-        hot === 'all' ? new ReactRefreshWebpackPlugin({overlay: false, forceEnable: true}) : null,
+        hot && new ReactRefreshWebpackPlugin({overlay: false, forceEnable: true}),
+        new ProgressBarPlugin(),
     ];
-    const selfPackageDirectory = await pkgDir(__dirname) ?? __dirname;
 
     const configuration: Configuration = {
         output: {
@@ -43,17 +38,8 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
             // 不要让构建时的`publicPath`影响调试，调试永远走本地，
             // 使用本地的地址用于兼容微前端环境：https://github.com/ecomfe/reskript/issues/62
             publicPath: '/assets/',
-            // 在使用`HotModuleReplacementPlugin`时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
+            // 在使用热更新时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
             filename: '[name].[contenthash].js',
-        },
-        resolve: {
-            // `webpack-dev-server`需要在构建时注入自己的客户端，而客户端放在`reskript`下面，
-            // 从项目的根目录去找客户端需要的依赖（如`ansi-html`就是一个依赖）是找不到的，
-            // 因此把`reskript/node_modules`也加到查找的路径里去
-            modules: [
-                'node_modules',
-                path.join(selfPackageDirectory, 'node_modules'),
-            ],
         },
         plugins: compact(plugins),
     };
@@ -67,21 +53,22 @@ const createAgent = (possibleProxyURL?: string) => {
     return undefined;
 };
 
+interface Options {
+    targetEntry: string;
+    proxyDomain?: string;
+    extra?: DevServerConfiguration;
+}
+
 // 这个函数的实现暂时没有异步的逻辑，但对外暴露为异步接口给未来调整留空间
-export const createWebpackDevServerConfig = async (
-    buildEntry: BuildEntry,
-    targetEntry: string,
-    proxyDomain: string | undefined,
-    addition: DevServerConfiguration = {}
-): Promise<DevServerConfiguration> => {
+export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, options: Options) => {
+    const {targetEntry, proxyDomain, extra = {}} = options;
     const {
-        apiPrefixes = [],
-        defaultProxyDomain = '',
+        apiPrefixes,
+        defaultProxyDomain,
         proxyRewrite,
         https,
         port,
-        hot = 'none',
-        openPage = '',
+        hot,
     } = buildEntry.projectSettings.devServer;
     const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
     const proxyRules = [
@@ -107,24 +94,25 @@ export const createWebpackDevServerConfig = async (
     const baseConfig: DevServerConfiguration = {
         port,
         proxy,
-        openPage,
-        disableHostCheck: true,
+        // @ts-expect-error
+        allowedHosts: 'all',
         host: '0.0.0.0',
-        quiet: true,
-        compress: true,
-        inline: true,
-        hot: hot === 'simple',
-        hotOnly: hot === 'all',
-        publicPath: '/assets/',
-        stats: 'normal',
+        // @ts-expect-error
+        hot: hot ? 'only' : false,
+        devMiddleware: {
+            publicPath: '/assets/',
+            stats: 'none',
+        },
         // 微前端跨域用
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Authorization',
         },
-        watchOptions: {
-            ignored: /node_modules/,
+        static: {
+            watch: {
+                ignored: /node_modules/,
+            },
         },
         historyApiFallback: {
             index: `/assets/${targetEntry}.html`,
@@ -133,9 +121,40 @@ export const createWebpackDevServerConfig = async (
     };
     const mergedConfig = merge(
         {devServer: baseConfig},
-        {devServer: addition}
+        {devServer: extra}
     );
     const finalized = buildEntry.projectSettings.devServer.finalize(mergedConfig.devServer, buildEntry);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'devServer');
     return finalized;
+};
+
+interface InjectOptions {
+    config: Configuration;
+    devServerConfig: DevServerConfiguration;
+    entry: string;
+    resolveBase: string;
+    hot: boolean;
+}
+
+export const injectDevElements = async (options: InjectOptions) => {
+    const {config, devServerConfig, entry, resolveBase, hot} = options;
+    const devServerInjected: Configuration = {
+        ...config,
+        devServer: devServerConfig,
+        // 禁用日志输出，让控制台干净点
+        infrastructureLogging: {
+            level: 'none',
+        },
+        stats: 'errors-warnings',
+    };
+    // 这里我们的`entry`应该肯定是一个类似`{index: 'path/to/entries/index.ts'}`这样的东西
+    const entryInjected: Configuration = hot && typeof config.entry === 'object' && !Array.isArray(config.entry)
+        ? {
+            ...devServerInjected,
+            entry: {
+                [entry]: await addHotModuleToEntry(config.entry[entry], resolveBase),
+            },
+        }
+        : devServerInjected;
+    return entryInjected;
 };

@@ -7,7 +7,8 @@
     "build": "skr build --clean",
     "start": "skr dev",
     "lint": "eslint src",
-    "test": "skr test --target=react"
+    "test": "skr test --target=react",
+    "play": "skr play src/components/Create/index.tsx"
   },
   "keywords": [],
   "author": "",

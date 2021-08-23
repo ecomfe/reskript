@@ -195,8 +195,7 @@ const schema: any = {
                     type: 'object',
                 },
                 hot: {
-                    enum: ['all', 'none', 'simple'],
-                    type: 'string',
+                    type: 'boolean',
                 },
                 https: {
                     type: 'boolean',

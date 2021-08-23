@@ -57,8 +57,8 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
             build: {
                 ...settings.build,
                 finalize: (config, env, internals) => {
-                    const before = settings.build.finalize(config, env, internals);
-                    return finalizeBuild(before, env, internals);
+                    const previous = settings.build.finalize(config, env, internals);
+                    return finalizeBuild(previous, env, internals);
                 },
             },
         };

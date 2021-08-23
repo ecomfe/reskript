@@ -50,7 +50,7 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
         apiPrefixes: [],
         defaultProxyDomain: '',
         proxyRewrite: {},
-        hot: 'all',
+        hot: true,
         openPage: '',
         finalize: config => config,
         ...settings,

@@ -84,7 +84,7 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
     const babelConfigOptions: BabelConfigOptions = {
         mode,
         polyfill,
-        hot: 'none',
+        hot: false,
         hostType: 'application',
         modules: false,
     };

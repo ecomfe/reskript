@@ -120,7 +120,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
 
 export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = cmd.mode;
-    prepareEnvironment(cmd.cwd, cmd.mode);
+    await prepareEnvironment(cmd.cwd, cmd.mode);
 
     if (cmd.clean) {
         await fs.rm(path.join(cmd.cwd, 'dist'), {recursive: true, force: true});

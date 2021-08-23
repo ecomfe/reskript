@@ -25,7 +25,7 @@ const findPluginByKeyword = (plugins: PluginItem[] | null | undefined, keyword: 
 const options: BabelConfigOptions = {
     cwd: __dirname,
     mode: 'production',
-    hot: 'all',
+    hot: true,
     hostType: 'application',
     polyfill: true,
 };

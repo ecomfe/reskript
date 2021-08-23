@@ -199,7 +199,6 @@ npm start
  DONE  Compiled successfully in 1608ms
 
  I  Your application is running here: http://localhost:8081/
- I                                or: http://192.168.1.10:8081/
 ```
 
 这说明一个最简单的应用已经成功了，我们可以在完全不接触`webpack`之类工具的前提下快速地实现一个React应用。

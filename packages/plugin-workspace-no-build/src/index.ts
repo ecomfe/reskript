@@ -47,19 +47,19 @@ export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}
                 },
             },
             finalize: (config, env, internals) => {
-                const before = settings.build.finalize(config, env, internals);
+                const previous = settings.build.finalize(config, env, internals);
                 // 因为`peerDependencies`里也会包含本地的包，所以要先处理这些东西，再用下面的`for`循环把本地包的规则覆盖上去就对了
                 Object.assign(
-                    before.resolve?.alias,
+                    previous.resolve?.alias,
                     buildPeerAlias(cwd, includedSiblings)
                 );
                 for (const {name, directory} of includedSiblings) {
                     Object.assign(
-                        before.resolve?.alias,
+                        previous.resolve?.alias,
                         {[`${name}`]: path.join(directory, 'src')}
                     );
                 }
-                return before;
+                return previous;
             },
         },
     };

@@ -15,7 +15,7 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
         uses,
         displayName,
         // 对于需要构建产物用的场合，默认不给热更新
-        hot: usage === 'devServer' ? hot : 'none',
+        hot: usage === 'devServer' ? hot : false,
         hostType: 'application',
     };
     const internalCreatedBabelConfig = getBabelConfig(babelConfigOptions);

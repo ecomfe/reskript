@@ -9,13 +9,11 @@ const RESTRICTED_DEPENDENCIES = [
     ['p-limit', '3.x'],
     ['p-reduce', '2.x'],
     ['log-symbols', '4.x'],
-    ['@types/webpack-dev-server', '3.11.2'],
     ['globby', '11.x'],
     ['unified', '9.x'],
     ['remark-gfm', '1.x'],
     ['remark-parse', '9.x'],
     ['remark-stringify', '9.x'],
-    ['webpack-dev-server', '3.x'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {

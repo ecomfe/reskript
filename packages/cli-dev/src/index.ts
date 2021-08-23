@@ -1,11 +1,14 @@
-import {noop} from 'lodash';
-import webpack from 'webpack';
+import webpack, {Configuration as WebpackConfiguration} from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
-import {watchProjectSettings, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import {watchProjectSettings} from '@reskript/settings';
 import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
 import {logger, prepareEnvironment} from '@reskript/core';
-import {createWebpackDevServerPartial, createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
+import {
+    createWebpackDevServerPartial,
+    createWebpackDevServerConfig,
+    injectDevElements,
+} from '@reskript/config-webpack-dev-server';
 import {DevCommandLineArgs} from './interface';
 import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
 
@@ -16,7 +19,7 @@ process.env.OPEN_MATCH_HOST_ONLY = 'true';
 interface ServerStartContext {
     buildContext: BuildContext;
     host: DevCommandLineArgs['host'];
-    extra: webpack.Configuration;
+    extra: WebpackConfiguration;
     publicPath: string | undefined;
 }
 
@@ -30,6 +33,7 @@ const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStar
 
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
+    const hot = buildContext.projectSettings.devServer.hot;
     const config = await createWebpackConfig(
         buildContext,
         {
@@ -42,19 +46,22 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
     );
     const devServerConfig = await createWebpackDevServerConfig(
         buildContext,
-        cmd.entry,
-        cmd.proxyDomain,
-        config.devServer
+        {targetEntry: cmd.entry, proxyDomain: cmd.proxyDomain}
     );
-    const finalizedDevServerConfig = buildContext.projectSettings.devServer.finalize(devServerConfig, buildContext);
-    warnAndExitOnInvalidFinalizeReturn(finalizedDevServerConfig, 'devServer');
+    const injectOptions = {
+        config,
+        devServerConfig,
+        hot,
+        entry: cmd.entry,
+        resolveBase: __dirname,
+    };
+    const devInjected = await injectDevElements(injectOptions);
+    const compiler = webpack(devInjected);
+    // @ts-expect-error
+    const server = new WebpackDevServer(devServerConfig, compiler);
+    await startServer(server);
 
-    WebpackDevServer.addDevServerEntrypoints(config, finalizedDevServerConfig);
-    const compiler = webpack(config);
-    const server = new WebpackDevServer(compiler, finalizedDevServerConfig);
-    const port = finalizedDevServerConfig.port ?? 8080;
-    await startServer(server, port);
-
+    const port = devServerConfig.port!;
     const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
     open(openURL);
 
@@ -63,12 +70,13 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 
 export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = cmd.mode;
-    prepareEnvironment(cmd.cwd, cmd.mode);
+    await prepareEnvironment(cmd.cwd, cmd.mode);
 
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;
     const restart = async () => {
         logger.log('Detected reskript.config.js change, restarting dev server...');
+
         if (nextStart) {
             return;
         }
@@ -78,7 +86,11 @@ export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
             nextStart = null;
         };
         const server = await startingServer;
-        server.close(nextStart || noop);
+        // @ts-expect-error
+        await server.stop();
+        if (nextStart) {
+            nextStart();
+        }
     };
     const listen = await watchProjectSettings(cmd, 'dev');
     listen(restart);
