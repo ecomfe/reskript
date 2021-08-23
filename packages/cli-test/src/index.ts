@@ -32,30 +32,12 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
     }
 };
 
-export const run = async (cmd: TestCommandLineArgs, files: string[]): Promise<void> => {
-    const {coverage, watch, cwd, target, changedSince, collectCoverageFrom, maxWorkers} = cmd;
-    const argv: string[] = [...files];
-
-    if (coverage) {
-        argv.push('--coverage');
-    }
-    if (watch) {
-        argv.push('--watch');
-    }
-    if (changedSince) {
-        argv.push('--changedSince', changedSince);
-    }
-    if (collectCoverageFrom) {
-        argv.push('--collectCoverageFrom', collectCoverageFrom);
-    }
-    if (maxWorkers) {
-        argv.push('--maxWorkers', maxWorkers);
-    }
-
+export const run = async (cmd: TestCommandLineArgs): Promise<void> => {
+    const {cwd, target, jestArgs} = cmd;
     const {featureMatrix: {dev: features}} = await readProjectSettings(cmd, 'test');
     // featureMatrix 目前以dev为默认目标，以后可以传入--test-target？
     const jestConfigOptions: JestConfigOptions = {cwd, target, features};
     const config = await resolveJestConfig(jestConfigOptions);
-    argv.push('--config', config);
+    const argv = ['--config', config, ...jestArgs];
     runJest(argv);
 };
