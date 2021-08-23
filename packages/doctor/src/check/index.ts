@@ -1,8 +1,7 @@
 import path from 'path';
-import fs from 'fs';
 import ora from 'ora';
 import logSymbols from 'log-symbols';
-import {logger} from '@reskript/core';
+import {logger, readPackageConfig} from '@reskript/core';
 import {readProjectSettings} from '@reskript/settings';
 import {DoctorContext, DoctorResult} from '../interface';
 import entry from './entry';
@@ -29,10 +28,11 @@ const aggregateResult = (results: DoctorResult[]) => {
 
 export default async (packageDirectory: string) => {
     const projectSettings = await readProjectSettings({cwd: packageDirectory}, 'build');
+    const packageInfo = await readPackageConfig(packageDirectory);
     const context: DoctorContext = {
+        projectSettings,
+        packageInfo,
         cwd: packageDirectory,
-        projectSettings: projectSettings,
-        packageInfo: JSON.parse(fs.readFileSync(path.join(packageDirectory, 'package.json'), 'utf-8')),
     };
 
     const directoryText = formatDirectory(packageDirectory);

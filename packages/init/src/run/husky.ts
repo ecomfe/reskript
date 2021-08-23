@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
+import {readPackageConfig} from '@reskript/core';
 import {UserOptions} from '../interface';
 
 const exec = (cwd: string, command: string) => {
@@ -13,14 +14,17 @@ const exec = (cwd: string, command: string) => {
     );
 };
 
-const gerritCompatible = (cwd: string) => {
-    const packageInfo = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf-8'));
-    packageInfo.husky = {
-        hooks: {
-            'pre-commit': 'skr lint --staged',
+const gerritCompatible = async (cwd: string) => {
+    const packageInfo = await readPackageConfig(cwd);
+    const hooksInstalled = {
+        ...packageInfo,
+        husky: {
+            hooks: {
+                'pre-commit': 'skr lint --staged',
+            },
         },
     };
-    fs.writeFileSync(path.join(cwd, 'package.json'), JSON.stringify(packageInfo, null, '  ') + '\n');
+    fs.writeFileSync(path.join(cwd, 'package.json'), JSON.stringify(hooksInstalled, null, '  ') + '\n');
 };
 
 const noGerrit = (cwd: string) => {
@@ -38,7 +42,7 @@ const noGerrit = (cwd: string) => {
 
 export default async (cwd: string, options: UserOptions) => {
     if (options.gerrit) {
-        gerritCompatible(cwd);
+        await gerritCompatible(cwd);
     }
     else {
         noGerrit(cwd);

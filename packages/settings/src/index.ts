@@ -2,7 +2,7 @@ import path from 'path';
 import {existsSync} from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import {logger, PackageJSON, ProjectAware, readHostPackageConfig} from '@reskript/core';
+import {logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
 import {fillProjectSettings, PartialProjectSettings} from './defaults';
@@ -112,13 +112,13 @@ export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): v
     }
 };
 
-const hasDependency = (packageInfo: PackageJSON, name: string) => {
+const hasDependency = (packageInfo: PackageInfo, name: string) => {
     const {dependencies, devDependencies} = packageInfo;
-    return !!(dependencies[name] || devDependencies[name]);
+    return !!(dependencies?.[name] || devDependencies?.[name]);
 };
 
 export const strictCheckRequiredDependency = async (projectSettings: ProjectSettings, cwd: string) => {
-    const hostPackageInfo = await readHostPackageConfig(cwd);
+    const hostPackageInfo = await readPackageConfig(cwd);
     if (projectSettings.build.script.polyfill && !hasDependency(hostPackageInfo, 'core-js')) {
         logger.error('You require polyfill on build but don\'t have core-js installed.');
         process.exit(13);

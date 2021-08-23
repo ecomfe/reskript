@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import {compact, difference, uniq} from 'lodash';
 import webpack, {Configuration, Stats} from 'webpack';
-import {logger, pMap, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
+import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';
 import {
     createWebpackConfig,
     collectEntries,
@@ -70,7 +70,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
     checkProjectSettings(projectSettings);
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
-    const {name: hostPackageName} = await readHostPackageConfig(cmd.cwd);
+    const {name: hostPackageName} = await readPackageConfig(cmd.cwd);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
         srcDirectory: cmd.srcDirectory,

@@ -1,4 +1,4 @@
-import {useCallback, KeyboardEvent} from 'react';
+import {useCallback, useState, ChangeEvent, KeyboardEvent} from 'react';
 import styled from 'styled-components';
 import {Input} from 'antd';
 import {TodoItemDraft} from '@/api/todo';
@@ -13,23 +13,32 @@ interface Props {
 }
 
 export default function Create({onSubmit}: Props) {
+    const [value, setValue] = useState('');
+    const updateValue = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
+        []
+    );
     const submit = useCallback(
         (e: KeyboardEvent<HTMLInputElement>) => {
-            const target = e.target as HTMLInputElement;
-            const value = target.value.trim();
+            const description = value.trim();
 
-            if (value && e.key === 'Enter') {
+            if (description && e.key === 'Enter') {
                 e.preventDefault();
-                target.value = '';
-                onSubmit({description: value});
+                onSubmit({description});
+                setValue('');
             }
         },
-        [onSubmit]
+        [onSubmit, value]
     );
 
     return (
         <div>
-            <DescriptionInput placeholder="What needs to be done?" onKeyDown={submit} />
+            <DescriptionInput
+                placeholder="What needs to be done?"
+                value={value}
+                onChange={updateValue}
+                onKeyDown={submit}
+            />
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import path from 'path';
 import {logger, isMonorepo, normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin} from '@reskript/settings';
-import {Options, PackageInfo} from './interface';
+import {Options, LocalPackageInfo} from './interface';
 import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias, checkDependencyGraph} from './utils';
 
 export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}) => {
@@ -12,9 +12,9 @@ export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}
         process.exit(24);
     }
 
-    const self = buildPackageInfo(cwd);
+    const self = await buildPackageInfo(cwd);
     const siblings = await findSiblingPackages(cwd, self);
-    const isDependencyOfSelf = ({name}: PackageInfo) => !!(self.dependencies[name] ?? self.devDependencies[name]);
+    const isDependencyOfSelf = ({name}: LocalPackageInfo) => !!(self.dependencies[name] ?? self.devDependencies[name]);
     const includedSiblings = resolveParticipant(siblings.filter(isDependencyOfSelf), options);
 
     const dependencyGraphChecked = checkDependencyGraph(includedSiblings, self);

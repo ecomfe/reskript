@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import globby from 'globby';
 import packageDirectory from 'pkg-dir';
 import findUp from 'find-up';
-import {PackageJSON} from './interface';
+import {PackageInfo} from './interface';
 
 export const resolveCacheLocation = async (name: string): Promise<string> => {
     const root = await packageDirectory();
@@ -16,7 +16,7 @@ export const resolveCacheLocation = async (name: string): Promise<string> => {
     return path.join(root, 'node_modules', '.cache', name);
 };
 
-export const readHostPackageConfig = async (cwd: string): Promise<PackageJSON> => {
+export const readPackageConfig = async (cwd: string): Promise<PackageInfo> => {
     const content = await fs.readFile(path.join(cwd, 'package.json'), 'utf-8');
     const packageConfig = JSON.parse(content);
     return packageConfig;
@@ -37,7 +37,7 @@ export const isMonorepo = async (cwd: string): Promise<boolean> => {
 };
 
 export const resolveMonorepoPackageDirectories = async (cwd: string): Promise<string[]> => {
-    const packageInfo = await readHostPackageConfig(cwd);
+    const packageInfo = await readPackageConfig(cwd);
     const packages = packageInfo.workspaces
         ? (Array.isArray(packageInfo.workspaces) ? packageInfo.workspaces : packageInfo.workspaces.packages)
         : ['packages/*'];

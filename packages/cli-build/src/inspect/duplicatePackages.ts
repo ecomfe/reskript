@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path from 'path';
 import {StatsCompilation} from 'webpack';
 import {compact, flatMap, uniq} from 'lodash';
 import matcher from 'matcher';
+import {readPackageConfig} from '@reskript/core';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
 import {RuleProcessor} from './utils';
 
@@ -51,8 +50,7 @@ const isIncluded = (name: string, includes?: string[], excludes?: string[]): boo
 
 const versionOfPackage = async (location: string): Promise<string> => {
     try {
-        const packageConfigContent = await fs.promises.readFile(path.join(location, 'package.json'), 'utf-8');
-        const packageConfig = JSON.parse(packageConfigContent);
+        const packageConfig = await readPackageConfig(location);
         return packageConfig.version;
     }
     catch {

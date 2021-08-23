@@ -1,8 +1,7 @@
 import path from 'path';
 import {existsSync} from 'fs';
-import fs from 'fs/promises';
 import {isEqual} from 'lodash';
-import {logger, findGitRoot} from '@reskript/core';
+import {logger, findGitRoot, readPackageConfig} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';
 
 const toStringTag = Object.prototype.toString;
@@ -43,8 +42,7 @@ export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
         return;
     }
 
-    const packageContent = await fs.readFile(path.join(cwd, 'package.json'), 'utf-8');
-    const packageConfig = JSON.parse(packageContent);
+    const packageConfig = await readPackageConfig(cwd);
 
     if (packageConfig?.husky?.hooks?.['pre-commit']) {
         const warning = `

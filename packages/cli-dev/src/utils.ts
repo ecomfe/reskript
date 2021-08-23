@@ -2,7 +2,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import internalIp from 'internal-ip';
 import {readProjectSettings, BuildEnv, strictCheckRequiredDependency} from '@reskript/settings';
 import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
-import {logger, readHostPackageConfig} from '@reskript/core';
+import {logger, readPackageConfig} from '@reskript/core';
 import {DevCommandLineArgs} from './interface';
 
 export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
@@ -51,7 +51,7 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
     const [
         projectSettings,
         {name: hostPackageName},
-    ] = await Promise.all([readProjectSettings(cmd, 'dev'), readHostPackageConfig(cmd.cwd)]);
+    ] = await Promise.all([readProjectSettings(cmd, 'dev'), readPackageConfig(cmd.cwd)]);
     await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,

@@ -1,10 +1,9 @@
 import path from 'path';
-import fs from 'fs';
-import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger} from '@reskript/core';
+import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger, readPackageConfig, pMap} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
-import {Options, PackageInfo} from './interface';
+import {Options, LocalPackageInfo} from './interface';
 
-export const resolveParticipant = (defaults: PackageInfo[], {includes, excludes}: Options) => {
+export const resolveParticipant = (defaults: LocalPackageInfo[], {includes, excludes}: Options) => {
     // 如果2个都没有，就用默认的
     if (!includes && !excludes) {
         return defaults;
@@ -17,26 +16,27 @@ export const resolveParticipant = (defaults: PackageInfo[], {includes, excludes}
     return base.filter(v => !excludeSet.has(v.name));
 };
 
-export const buildPackageInfo = (directory: string): PackageInfo => {
-    const packageInfo = JSON.parse(fs.readFileSync(path.join(directory, 'package.json'), 'utf-8'));
+export const buildPackageInfo = async (directory: string): Promise<LocalPackageInfo> => {
+    const packageInfo = await readPackageConfig(directory);
     return {
         directory,
         name: packageInfo.name,
+        version: packageInfo.version,
         dependencies: packageInfo.dependencies ?? {},
         peerDependencies: packageInfo.peerDependencies ?? {},
         devDependencies: packageInfo.devDependencies ?? {},
     };
 };
 
-export const findSiblingPackages = async (cwd: string, self: PackageInfo) => {
+export const findSiblingPackages = async (cwd: string, self: LocalPackageInfo) => {
     const root = await findMonorepoRoot(cwd);
     const packageDirectories = await resolveMonorepoPackageDirectories(root);
-    const packages = packageDirectories.map(buildPackageInfo);
+    const packages = await pMap(packageDirectories, buildPackageInfo);
     const siblings = packages.filter(v => v.name !== self.name);
     return siblings;
 };
 
-export const buildPeerAlias = (cwd: string, siblings: PackageInfo[]): Record<string, string> => {
+export const buildPeerAlias = (cwd: string, siblings: LocalPackageInfo[]): Record<string, string> => {
     const alias = siblings.reduce(
         (alias, {peerDependencies}) => {
             for (const dependency of Object.keys(peerDependencies)) {
@@ -54,7 +54,7 @@ export const isVersionCompatible = (current: string, required: string): boolean 
     return !!minInstalledVersion && satisfies(minInstalledVersion, required, {includePrerelease: true});
 };
 
-export const checkDependencyGraph = (siblings: PackageInfo[], self: PackageInfo): boolean => {
+export const checkDependencyGraph = (siblings: LocalPackageInfo[], self: LocalPackageInfo): boolean => {
     const selfDependencies = {...self.devDependencies, ...self.dependencies};
     const errors: string[] = [];
     for (const {name, peerDependencies} of siblings) {

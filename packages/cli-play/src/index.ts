@@ -4,7 +4,7 @@ import WebpackDevServer, {Configuration as DevServerConfiguration} from 'webpack
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
-import {logger, prepareEnvironment, readHostPackageConfig} from '@reskript/core';
+import {logger, prepareEnvironment, readPackageConfig} from '@reskript/core';
 import {createWebpackConfig} from './webpack';
 import {PlayCommandLineArgs} from './interface';
 import setupServer from './server';
@@ -26,7 +26,7 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
             hot: 'all',
         },
     };
-    const {name: hostPackageName} = await readHostPackageConfig(cmd.cwd);
+    const {name: hostPackageName} = await readPackageConfig(cmd.cwd);
     const buildEnv: BuildEnv = {
         hostPackageName,
         projectSettings,

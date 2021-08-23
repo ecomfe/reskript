@@ -12,10 +12,14 @@ export interface WorkModeAware extends ProjectAware {
     readonly mode: WorkMode;
 }
 
-export interface PackageJSON {
+export interface PackageInfo {
+    [key: string]: unknown;
     readonly name: string;
     readonly version: string;
-    readonly dependencies: Record<string, string>;
-    readonly devDependencies: Record<string, string>;
+    readonly scripts?: Record<string, string>;
+    readonly dependencies?: Record<string, string>;
+    readonly devDependencies?: Record<string, string>;
+    readonly peerDependencies?: Record<string, string>;
     readonly workspaces?: string[] | {packages: string[]};
+    readonly husky?: Record<string, Record<string, string>>;
 }
