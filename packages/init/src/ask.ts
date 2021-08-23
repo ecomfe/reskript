@@ -6,7 +6,7 @@ const questions: QuestionCollection<UserOptions> = [
         name: 'packageManager',
         message: 'Choose your package manager',
         type: 'list',
-        choices: ['npm', 'yarn'],
+        choices: ['npm', 'yarn', 'pnpm'],
     },
     {
         name: 'packageName',

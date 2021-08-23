@@ -6,7 +6,7 @@ import {UserOptions} from '../interface';
 
 
 export default async (cwd: string, options: UserOptions) => {
-    const spinner = ora('Copying and initialization files');
+    const spinner = ora('Copying initial files');
     spinner.start();
 
     const templateDirectory = path.join(__dirname, '..', '..', 'templates', 'normal-app');
