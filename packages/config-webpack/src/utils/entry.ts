@@ -4,22 +4,10 @@ import fs from 'fs/promises';
 import {EntryObject} from 'webpack';
 import {AppEntry, EntryConfig} from '../interface';
 
-const EMPTY_ENTRY_CONFIG: Required<EntryConfig> = {
-    entry: {},
-    html: {},
-};
-
-const ENTRY_CONFIG_KEYS = Object.keys(EMPTY_ENTRY_CONFIG);
-
-const isLegacyConfig = (config: any): config is Record<string, any> => {
-    return ENTRY_CONFIG_KEYS.every(k => config[k] === undefined);
-};
-
 const readEntryConfig = async (file: string): Promise<EntryConfig> => {
     try {
-        const config: Record<string, any> = await import(path.join(file));
-        // DEPRECATED: 2.0只支持新版
-        return isLegacyConfig(config) ? {html: config} : config;
+        const config: EntryConfig = await import(path.join(file));
+        return config;
     }
     catch (ex) {
         return {};
