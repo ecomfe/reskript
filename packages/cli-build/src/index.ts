@@ -11,7 +11,7 @@ import {
     BuildContext,
     EntryLocation,
 } from '@reskript/config-webpack';
-import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
+import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
 import * as partials from './partial';
 import {BuildCommandLineArgs} from './interface';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
@@ -118,6 +118,7 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     }
 
     const projectSettings = await readProjectSettings(cmd, 'build');
+    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 
     if (!initial) {

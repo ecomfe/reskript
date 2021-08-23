@@ -13,6 +13,7 @@ export default async (cwd: string, options: UserOptions) => {
     spinner.start();
 
     const dependencies = [
+        'core-js',
         'react',
         'react-dom',
     ];

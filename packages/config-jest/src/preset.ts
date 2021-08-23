@@ -1,4 +1,3 @@
-import path from 'path';
 import {merge} from 'lodash';
 import {sync as resolve} from 'resolve';
 import unixify from 'unixify';
@@ -16,7 +15,6 @@ const reactJestConfig = (configBasePath: string, jestConfigOptions?: JestConfigO
             '\\.(css|less)$': resolve('identity-obj-proxy'),
             [`\\.(${STATIC_EXTENSIONS.join('|')})$`]: `${unixify(configBasePath)}/mock`,
             '@/(.*)$': '<rootDir>/src/$1',
-            '\\$internal/core-js/(.*)$': path.dirname(resolve('core-js')) + '/$1',
         },
         testEnvironment: 'jsdom',
         setupFiles: [`${unixify(configBasePath)}/setUp`],
@@ -44,9 +42,6 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
     const baseConfig = {
         moduleDirectories: ['src', 'node_modules'],
         moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx', 'd.ts'],
-        moduleNameMapper: {
-            '\\$internal/core-js/(.*)$': path.dirname(resolve('core-js')) + '/$1',
-        },
         transform: {
             'node_modules/.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/thirdPartyTransformer`,
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,

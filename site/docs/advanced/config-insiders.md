@@ -10,9 +10,7 @@ title: 配置解密
 
 ### core-js
 
-默认使用`useBuiltins: 'usage'`来引入`core-js`，默认`core-js`使用`3.x`版本。
-
-`core-js`的引用会被转换成一个内部的路径，最终通过`alias`导到`@reskript/config-webpack`依赖的`core-js@3`上去。这样可以在你不主动安装`core-js`的前提下，解决`core-js@2`被放到顶层`node_modules`里产生的引用问题。
+默认使用`useBuiltins: 'usage'`来引入`core-js`，你需要自行安装`core-js`的`3.x`版本。
 
 ### 组件名称
 

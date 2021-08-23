@@ -177,9 +177,6 @@ const factory: ConfigurationFactory = async entry => {
             alias: {
                 '@': path.join(cwd, srcDirectory),
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
-                // 要对babel转的里面的`$internal/core-js`固定到自带的`core-js@3`，这里不能强行把所有的`core-js`固定，
-                // 第三方代码比如`antd`里面有用于`babel-runtime`进一步引用`core-js@2`，所以全固定到`3.x`会死
-                '$internal/core-js': path.dirname(resolve('core-js')),
                 'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
             },
         },

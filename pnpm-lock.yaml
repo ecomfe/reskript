@@ -76,33 +76,6 @@ importers:
       ts-jest: 27.0.5_0eb5aad88f3244b96fba5a1e53fd0360
       typescript: 4.3.5
 
-  packages/babel-plugin-resolve-core-js:
-    specifiers:
-      '@babel/core': ^7.15.0
-      '@babel/traverse': ^7.15.0
-      '@types/babel__core': ^7.1.15
-      '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
-      eslint: ^7.32.0
-      jest: ^27.0.6
-      lodash: ^4.17.21
-      resolve: ^1.20.0
-      ts-jest: ^27.0.5
-      typescript: ^4.3.5
-    dependencies:
-      '@babel/core': 7.15.0
-      '@babel/traverse': 7.15.0
-      lodash: 4.17.21
-    devDependencies:
-      '@types/babel__core': 7.1.15
-      '@types/jest': 27.0.1
-      '@types/node': 16.7.1
-      eslint: 7.32.0
-      jest: 27.0.6
-      resolve: 1.20.0
-      ts-jest: 27.0.5_0eb5aad88f3244b96fba5a1e53fd0360
-      typescript: 4.3.5
-
   packages/babel-utils:
     specifiers:
       '@babel/core': ^7.15.0
@@ -411,7 +384,6 @@ importers:
       '@emotion/babel-plugin': ^11.3.0
       '@reskript/babel-plugin-add-react-display-name': 1.15.2
       '@reskript/babel-plugin-debug-react-component-file-name': 1.15.2
-      '@reskript/babel-plugin-resolve-core-js': 1.15.2
       '@reskript/core': 1.15.2
       '@reskript/settings': 1.15.2
       '@types/babel__core': ^7.1.15
@@ -452,7 +424,6 @@ importers:
       '@emotion/babel-plugin': 11.3.0_@babel+core@7.15.0
       '@reskript/babel-plugin-add-react-display-name': link:../babel-plugin-add-react-display-name
       '@reskript/babel-plugin-debug-react-component-file-name': link:../babel-plugin-debug-react-component-file-name
-      '@reskript/babel-plugin-resolve-core-js': link:../babel-plugin-resolve-core-js
       '@reskript/settings': link:../settings
       babel-plugin-import: 1.13.3
       babel-plugin-lodash: 3.3.4
@@ -515,7 +486,6 @@ importers:
       '@types/jest': ^27.0.1
       '@types/node': ^16.7.1
       babel-jest: ^27.0.6
-      core-js: ^3.16.2
       enzyme: ^3.11.0
       enzyme-adapter-react-16: ^1.15.6
       enzyme-to-json: ^3.6.2
@@ -534,7 +504,6 @@ importers:
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       babel-jest: 27.0.6_@babel+core@7.15.0
-      core-js: 3.16.2
       enzyme: 3.11.0
       enzyme-adapter-react-16: 1.15.6_enzyme@3.11.0
       enzyme-to-json: 3.6.2_enzyme@3.11.0
@@ -621,7 +590,6 @@ importers:
       case-sensitive-paths-webpack-plugin: ^2.4.0
       change-case: ^4.1.2
       classnames: ^2.3.1
-      core-js: ^3.16.2
       css-loader: ^6.2.0
       cssnano: ^5.0.8
       eslint-webpack-plugin: ^3.0.1
@@ -671,7 +639,6 @@ importers:
       case-sensitive-paths-webpack-plugin: 2.4.0
       change-case: 4.1.2
       classnames: 2.3.1
-      core-js: 3.16.2
       css-loader: 6.2.0_webpack@5.51.1
       cssnano: 5.0.8_postcss@8.3.6
       eslint-webpack-plugin: 3.0.1_webpack@5.51.1
@@ -927,6 +894,7 @@ importers:
       '@reskript/settings': 1.15.2
       '@types/jest': ^27.0.1
       '@types/node': ^16.7.1
+      '@types/semver': ^7.3.8
       eslint: ^7.32.0
       semver: ^7.3.5
       typescript: ^4.3.5
@@ -938,6 +906,7 @@ importers:
     devDependencies:
       '@types/jest': 27.0.1
       '@types/node': 16.7.1
+      '@types/semver': 7.3.8
       eslint: 7.32.0
       typescript: 4.3.5
       webpack: 5.51.1
@@ -1061,6 +1030,7 @@ importers:
       '@types/react-dom': ^17.0.9
       '@types/styled-components': ^5.1.12
       antd: ^4.16.12
+      core-js: ^3.16.2
       eslint: ^7.32.0
       localforage: ^1.10.0
       nanoid: ^3.1.25
@@ -1073,6 +1043,7 @@ importers:
       webpack: ^5.51.0
     dependencies:
       antd: 4.16.12_react-dom@17.0.2+react@17.0.2
+      core-js: 3.16.2
       localforage: 1.10.0
       nanoid: 3.1.25
       ramda: 0.27.1
@@ -4374,6 +4345,10 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
+
+  /@types/semver/7.3.8:
+    resolution: {integrity: sha512-D/2EJvAlCEtYFEYmmlGwbGXuK886HzyCc3nZX/tkFTQdEU8jZDAgiv08P162yB17y4ZXZoq7yFAnW4GDBb9Now==}
     dev: true
 
   /@types/serve-static/1.13.10:

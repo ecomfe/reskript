@@ -10,7 +10,8 @@ interface CompileResult {
     assets?: StatsAsset[];
 }
 
-export default async (entry: string, projectSettings?: PartialProjectSettings) => {
+export default async (entry: string, partialProjectSettings?: PartialProjectSettings) => {
+    const projectSettings = fillProjectSettings(partialProjectSettings);
     const context: BuildContext = {
         cwd: path.resolve(__dirname, 'fixtures'),
         mode: 'development',
@@ -24,7 +25,16 @@ export default async (entry: string, projectSettings?: PartialProjectSettings) =
         buildTarget: 'stable',
         isDefaultTarget: false,
         entries: [],
-        projectSettings: fillProjectSettings(projectSettings),
+        projectSettings: {
+            ...projectSettings,
+            build: {
+                ...projectSettings.build,
+                script: {
+                    ...projectSettings.build.script,
+                    polyfill: false,
+                },
+            },
+        },
     };
     Object.assign(context.projectSettings.build, {reportLintErrors: false});
     const config = await createWebpackConfig(context);

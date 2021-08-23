@@ -29,7 +29,7 @@ npm install --save-dev eslint stylelint typescript webpack @reskript/cli @reskri
 当然需要使用`react`进行开发，必要的框架也是不可少的：
 
 ```shell
-npm install react react-dom
+npm install core-js react react-dom
 npm install --save-dev @types/react @types/react-dom
 ```
 
