@@ -1,20 +1,28 @@
-import {program} from 'commander';
-import semver from 'semver';
-import {logger, CommandConfig} from '@reskript/core';
+import path from 'path';
+import fs from 'fs';
+import {Cli, Builtins} from 'clipanion';
+import {logger} from '@reskript/core';
+import BabelCommand from './BabelCommand';
+import BuildCommand from './BuildCommand';
+import DevCommand from './DevCommand';
+import LintCommand from './LintCommand';
+import PlayCommand from './PlayCommand';
+import TestCommand from './TestCommand';
 
-const buildCommand = async ({command, description, args, run}: CommandConfig<any>): Promise<void> => {
-    const commandConfig = program.command(command);
-    commandConfig.description(description);
-    args.forEach(option => commandConfig.option(option[0], option[1], option[2]));
-    commandConfig.action(run);
-};
+const {version} = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf-8'));
 
-export const run = async (): Promise<void> => {
-    if (semver.lt(process.version, '8.9.0')) {
-        logger.error('Require node >= v8.9.0 to be installed');
-        process.exit(10);
-    }
+const cli = new Cli({binaryLabel: 'reSKRipt', binaryName: 'skr', binaryVersion: version});
 
+cli.register(BabelCommand);
+cli.register(BuildCommand);
+cli.register(DevCommand);
+cli.register(LintCommand);
+cli.register(PlayCommand);
+cli.register(TestCommand);
+cli.register(Builtins.HelpCommand);
+cli.register(Builtins.VersionCommand);
+
+export const run = async () => {
     process.on(
         'unhandledRejection',
         (e: any) => {
@@ -23,27 +31,10 @@ export const run = async (): Promise<void> => {
         }
     );
 
-    const route = process.argv[2];
-
-    if (!route) {
-        logger.error('No command is given, you can install any @reskript/cli-* package to install a command');
-        process.exit(12);
-    }
-
     try {
-        const entry = process.env.DEV === 'true' ? `../../cli-${route}/dist` : `@reskript/cli-${route}`;
-        const {default: command} = await import(entry);
-
-        if (!command) {
-            logger.error(`@reskript/cli-${route} is not a CLI package`);
-            process.exit(11);
-        }
-
-        buildCommand(command);
-        program.parse(process.argv);
+        await cli.runExit(process.argv.slice(2), Cli.defaultContext);
     }
-    catch {
-        logger.error(`${route} command not available, you may install @reskript/cli-${route}`);
-        process.exit(11);
+    catch (ex) {
+        console.error(ex);
     }
 };

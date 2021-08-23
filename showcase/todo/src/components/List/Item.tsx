@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import {TodoItem} from '@/api/todo';
 import TodoIcon from './todo.svg?react';
 import DoneIcon from './done.svg?react';

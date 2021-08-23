@@ -5,6 +5,5 @@ export type TestTarget = 'react' | 'node';
 
 export interface JestConfigOptions extends ProjectAware {
     readonly target: TestTarget;
-    readonly src?: string;
     readonly features?: FeatureMatrix;
 }

@@ -1,8 +1,8 @@
 import {WorkModeAware} from '@reskript/core';
 
 export interface BuildCommandLineArgs extends WorkModeAware {
-    readonly srcDir: string;
-    readonly entriesDir: string;
+    readonly srcDirectory: string;
+    readonly entriesDirectory: string;
     readonly buildTarget?: string;
     readonly featureOnly?: string;
     readonly entriesOnly?: string[];
@@ -10,7 +10,7 @@ export interface BuildCommandLineArgs extends WorkModeAware {
     readonly clean: boolean;
     readonly profile: boolean;
     readonly sourceMaps: boolean;
-    readonly cacheDir?: string;
+    readonly cacheDirectory?: string;
 }
 
 export interface WebpackCompileAsset {

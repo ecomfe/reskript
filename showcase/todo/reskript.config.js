@@ -17,7 +17,7 @@ exports.build = {
     appTitle: 'TodoMVC - reSKRipt',
     appContainerId: 'app',
     favicon: path.join(__dirname, 'favicon.ico'),
-    uses: ['antd', 'emotion'],
+    uses: ['antd', 'styled-components'],
     inspect: {
         duplicatePackages: ['warn', {excludes: ['tslib', 'immer', 'color-name', 'is-lite', 'tree-changes']}],
     },

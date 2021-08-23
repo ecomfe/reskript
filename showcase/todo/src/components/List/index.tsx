@@ -1,5 +1,5 @@
 import {sort} from 'ramda';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import {TodoItem} from '@/api/todo';
 import Item from './Item';
 

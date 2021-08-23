@@ -1,6 +1,6 @@
 import {useState, useCallback, useEffect} from 'react';
 import {Button} from 'antd';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
 import Create from '../Create';
 import List from '../List';

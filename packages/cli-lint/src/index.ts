@@ -1,18 +1,50 @@
-import {CommandConfig} from '@reskript/core';
+import {stubTrue} from 'lodash';
+import eslintPrettyFormatter from 'eslint-formatter-pretty';
+import {Linter, ESLint} from 'eslint';
+import {logger} from '@reskript/core';
 import {LintCommandLineArgs} from './interface';
-import run from './run';
+import lintScripts from './script';
+import lintStyles from './style';
 
-const command: CommandConfig<LintCommandLineArgs> = {
-    run,
-    command: 'lint [files...]',
-    description: 'Lint files, by default .js(x) files under src and webpack are linted',
-    args: [
-        ['--changed', 'lint only changed files in git workspace'],
-        ['--staged', 'lint only staged (both partially and fully) files in git workspace'],
-        ['--allow-unsafe-react-method', 'allow UNSAFE_* methods in react component'],
-        ['--strict', 'in strict mode, warnings make lint fail with a none-zero exit code'],
-        ['--fix', 'fix possible lint errors'],
-    ],
+export {LintCommandLineArgs};
+
+type LintResult = ESLint.LintResult;
+type LintMessage = Linter.LintMessage;
+
+const filterUnwantedReports = (report: LintResult[], cmd: LintCommandLineArgs): LintResult[] => {
+    const omitReactUnsafe = cmd.allowUnsafeReactMethod
+        ? ({ruleId, message}: LintMessage) => ruleId !== 'camelcase' || !message.startsWith('Identifier \'UNSAFE')
+        : stubTrue;
+
+    const filterMessage = (report: LintResult): LintResult => {
+        const messages = report.messages.filter(omitReactUnsafe);
+        return {...report, messages};
+    };
+
+    return report.map(filterMessage);
 };
 
-export default command;
+export const run = async (cmd: LintCommandLineArgs, files: string[]): Promise<void> => {
+    const [scriptResults, styleResults] = await Promise.all([lintScripts(files, cmd), lintStyles(files, cmd)]);
+    const lintResults = filterUnwantedReports([...scriptResults, ...styleResults], cmd);
+
+    const hasError = lintResults.some(v => v.errorCount > 0);
+    const hasWarn = lintResults.some(v => v.warningCount > 0);
+    const isLintFailed = cmd.strict ? hasError || hasWarn : hasError;
+
+    if (hasError || hasWarn) {
+        const output = eslintPrettyFormatter(lintResults);
+        logger.log(output);
+    }
+
+    if (isLintFailed) {
+        process.exit(25);
+    }
+
+    if (hasWarn) {
+        logger.log.yellow('(；′⌒`) Nice work, still looking forward to see all warnings fixed!');
+    }
+    else {
+        logger.log.green('(๑ơ ₃ ơ)♥ Great! This is a clean lint over hundreds of rules!');
+    }
+};

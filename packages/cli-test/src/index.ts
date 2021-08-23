@@ -1,20 +1,61 @@
-import {CommandConfig} from '@reskript/core';
+import path from 'path';
+import fs from 'fs';
+import {merge} from 'lodash';
+import {run as runJest} from 'jest-cli';
+import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
+import {readProjectSettings} from '@reskript/settings';
 import {TestCommandLineArgs} from './interface';
-import run from './run';
 
-const command: CommandConfig<TestCommandLineArgs> = {
-    run,
-    command: 'test [files...]',
-    description: 'Test with jest',
-    args: [
-        ['--cwd [value]', 'override current working directory', process.cwd()],
-        ['--coverage', 'indicates test coverage information', false],
-        ['--watch', 'watch files for changes and rerun tests related to changed files', false],
-        ['--target [value]', 'specify test environment of the project is "react" or "node"', 'node'],
-        ['--changedSince [value]', 'runs tests related to the changes since the provided branch.', ''],
-        ['--collect-coverage-from [glob]', 'only collect coverage from given glob.', ''],
-        ['--maxWorkers [value]', 'Max used worker count.'],
-    ],
+export {TestCommandLineArgs};
+
+const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<string> => {
+    const {cwd} = jestConfigOptions;
+    // find out jest.config
+    const jestConfigFile = path.resolve(cwd, 'jest.config.js');
+
+    // if no jest config ,return getJestConfig
+    if (!fs.existsSync(jestConfigFile)) {
+        return JSON.stringify(getJestConfig(jestConfigOptions));
+    }
+
+    const jestConfig = await import(jestConfigFile);
+
+    if ('preset' in jestConfig) {
+        // if jest config has preset, return jest config
+        return JSON.stringify(jestConfig);
+    }
+    else {
+        // if jest config has no preset, return merged
+        const skrConfig = getJestConfig(jestConfigOptions);
+        // 用户的覆盖skr的
+        return JSON.stringify(merge(skrConfig, jestConfig));
+    }
 };
 
-export default command;
+export const run = async (cmd: TestCommandLineArgs, files: string[]): Promise<void> => {
+    const {coverage, watch, cwd, target, changedSince, collectCoverageFrom, maxWorkers} = cmd;
+    const argv: string[] = [...files];
+
+    if (coverage) {
+        argv.push('--coverage');
+    }
+    if (watch) {
+        argv.push('--watch');
+    }
+    if (changedSince) {
+        argv.push('--changedSince', changedSince);
+    }
+    if (collectCoverageFrom) {
+        argv.push('--collectCoverageFrom', collectCoverageFrom);
+    }
+    if (maxWorkers) {
+        argv.push('--maxWorkers', maxWorkers);
+    }
+
+    const {featureMatrix: {dev: features}} = await readProjectSettings(cmd, 'test');
+    // featureMatrix 目前以dev为默认目标，以后可以传入--test-target？
+    const jestConfigOptions: JestConfigOptions = {cwd, target, features};
+    const config = await resolveJestConfig(jestConfigOptions);
+    argv.push('--config', config);
+    runJest(argv);
+};

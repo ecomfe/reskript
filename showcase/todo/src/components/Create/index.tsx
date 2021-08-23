@@ -1,5 +1,5 @@
 import {useCallback, KeyboardEvent} from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import {Input} from 'antd';
 import {TodoItemDraft} from '@/api/todo';
 

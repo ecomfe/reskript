@@ -54,8 +54,8 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
     ] = await Promise.all([readProjectSettings(cmd, 'dev'), readHostPackageConfig(cmd.cwd)]);
     const entryLocation: EntryLocation = {
         cwd: cmd.cwd,
-        srcDirectory: cmd.srcDir,
-        entryDirectory: cmd.entriesDir,
+        srcDirectory: cmd.srcDirectory,
+        entryDirectory: cmd.entriesDirectory,
         only: [cmd.entry],
     };
     const entries = await collectEntries(entryLocation);
@@ -70,7 +70,7 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
         usage: 'devServer',
         mode: cmd.mode ?? 'development',
         cwd: cmd.cwd,
-        srcDirectory: cmd.srcDir,
+        srcDirectory: cmd.srcDirectory,
         // `react-refresh`无法在`production`模式下工作，所以在该模式下直接禁用掉热更新
         projectSettings: {
             ...projectSettings,

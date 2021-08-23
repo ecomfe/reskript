@@ -1,14 +1,5 @@
-export type CommandArgs = Array<[string, string] | [string, string, any]>;
-
-type CommandRun<A> = ((args: string[], cmd: A) => Promise<void>)
-    | ((arg: string, cmd: A) => Promise<void>)
-    | ((cmd: A) => Promise<void>);
-
-export interface CommandConfig<A> {
-    command: string;
-    description: string;
-    args: CommandArgs;
-    run: CommandRun<A>;
+export interface CommandDefinition<A> {
+    run(args: A, rest?: string[] | string): Promise<void>;
 }
 
 export type WorkMode = 'production' | 'development';

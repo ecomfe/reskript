@@ -6,7 +6,7 @@ export type HostType = 'localhost' | 'loopback' | 'ip' | {} & string;
 
 export interface PlayCommandLineArgs extends ProjectAware {
     readonly buildTarget: string;
-    readonly port: string;
+    readonly port: number;
     readonly host: HostType;
     readonly concurrentMode?: boolean;
     readonly setup?: string;
