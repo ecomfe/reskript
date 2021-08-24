@@ -5,9 +5,6 @@ import semver from 'semver';
 const RESTRICTED_DEPENDENCIES = [
     ['imagemin', '7.x'],
     ['img-loader', '3.x'],
-    ['p-filter', '2.x'],
-    ['p-limit', '3.x'],
-    ['p-reduce', '2.x'],
     ['log-symbols', '4.x'],
     ['globby', '11.x'],
     ['unified', '9.x'],

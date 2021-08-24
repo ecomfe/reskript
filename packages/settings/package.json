@@ -30,7 +30,6 @@
     "chokidar": "^3.5.2",
     "hasha": "^5.2.0",
     "lodash": "^4.17.21",
-    "p-reduce": "^2.1.0",
     "schema-utils": "^3.1.1"
   }
 }

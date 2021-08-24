@@ -1,6 +1,5 @@
 import chalk from 'chalk';
-import pReduce from 'p-reduce';
-import {logger} from '@reskript/core';
+import {logger, pReduce} from '@reskript/core';
 import {RuleConfig, OptionalRuleConfig, Severity} from '@reskript/settings';
 
 const SEVERITY_PREFIX: Record<Severity, string> = {

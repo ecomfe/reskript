@@ -146,7 +146,7 @@ importers:
       cli-highlight: ^2.1.11
       eslint: ^7.32.0
       globby: ^11.0.4
-      p-limit: ^3.1.0
+      throat: ^6.0.1
       typescript: ^4.3.5
     dependencies:
       '@babel/core': 7.15.0
@@ -154,7 +154,7 @@ importers:
       '@reskript/core': link:../core
       cli-highlight: 2.1.11
       globby: 11.0.4
-      p-limit: 3.1.0
+      throat: 6.0.1
     devDependencies:
       '@types/jest': 27.0.1
       '@types/node': 16.7.1
@@ -173,7 +173,6 @@ importers:
       eslint: ^7.32.0
       lodash: ^4.17.21
       matcher: ^4.0.0
-      p-reduce: ^2.1.0
       pretty-bytes: ^5.6.0
       tty-table: ^4.1.3
       typescript: ^4.3.5
@@ -187,7 +186,6 @@ importers:
       eslint: 7.32.0
       lodash: 4.17.21
       matcher: 4.0.0
-      p-reduce: 2.1.0
       pretty-bytes: 5.6.0
       tty-table: 4.1.3
       webpack-bundle-analyzer: 4.4.2
@@ -248,7 +246,6 @@ importers:
       g-status: ^2.0.2
       globby: ^11.0.4
       lodash: ^4.17.21
-      p-filter: ^2.1.0
       stylelint: ^13.13.1
       typescript: ^4.3.5
     dependencies:
@@ -259,7 +256,6 @@ importers:
       g-status: 2.0.2
       globby: 11.0.4
       lodash: 4.17.21
-      p-filter: 2.1.0
       stylelint: 13.13.1
     devDependencies:
       '@types/eslint': 7.28.0
@@ -608,7 +604,6 @@ importers:
       less-plugin-npm-import: ^2.1.0
       lodash: ^4.17.21
       mini-css-extract-plugin: ^2.2.0
-      p-map: ^4.0.0
       postcss: ^8.3.6
       postcss-loader: ^6.1.1
       regenerator-runtime: ^0.13.9
@@ -656,7 +651,6 @@ importers:
       less-plugin-npm-import: 2.1.0
       lodash: 4.17.21
       mini-css-extract-plugin: 2.2.0_webpack@5.51.1
-      p-map: 4.0.0
       postcss: 8.3.6
       postcss-loader: 6.1.1_postcss@8.3.6+webpack@5.51.1
       regenerator-runtime: 0.13.9
@@ -930,7 +924,6 @@ importers:
       hasha: ^5.2.0
       jest: ^27.0.6
       lodash: ^4.17.21
-      p-reduce: ^2.1.0
       schema-utils: ^3.1.1
       ts-jest: ^27.0.5
       typescript: ^4.3.5
@@ -940,7 +933,6 @@ importers:
       chokidar: 3.5.2
       hasha: 5.2.2
       lodash: 4.17.21
-      p-reduce: 2.1.0
       schema-utils: 3.1.1
     devDependencies:
       '@types/babel__core': 7.1.15
@@ -12077,6 +12069,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       p-map: 2.1.0
+    dev: true
 
   /p-finally/1.0.0:
     resolution: {integrity: sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=}
@@ -12147,6 +12140,7 @@ packages:
   /p-map/2.1.0:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
     engines: {node: '>=6'}
+    dev: true
 
   /p-map/3.0.0:
     resolution: {integrity: sha512-d3qXVTF/s+W+CdJ5A29wywV2n8CQQYahlgz2bFiA+4eVNJbHJodPZ+/gXwPGh0bOqA+j8S+6+ckmvLGPk1QpxQ==}
@@ -12181,6 +12175,7 @@ packages:
   /p-reduce/2.1.0:
     resolution: {integrity: sha512-2USApvnsutq8uoxZBGbbWM0JIYLiEMJ9RlaN7fAzVNb9OZN0SHjjTTfIcb667XynS5Y1VhwDJVDa72TnPzAYWw==}
     engines: {node: '>=8'}
+    dev: true
 
   /p-retry/4.6.1:
     resolution: {integrity: sha512-e2xXGNhZOZ0lfgR9kL34iGlU8N/KO0xZnQxVEwdeOvpqNDQfdnxIYizvWtK8RglUa3bGqI8g0R/BdfzLMxRkiA==}

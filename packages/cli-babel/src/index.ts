@@ -1,7 +1,7 @@
 import path from 'path';
 import {promises as fs} from 'fs';
 import globby from 'globby';
-import pLimit from 'p-limit';
+import throat from 'throat';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
 import {logger} from '@reskript/core';
@@ -110,9 +110,8 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         await transformDirectory(file, outDirectory, babelConfig);
 
         if (copy) {
-            const limit = pLimit(10);
             const files = await globby([`${file}/**`, `!${file}/**/*.{ts,js,tsx,jsx}`]);
-            await Promise.all(files.map(f => limit(copyFile, f, file, outDirectory)));
+            await Promise.all(files.map(throat(2, f => copyFile(f, file, outDirectory))));
         }
     }
 };

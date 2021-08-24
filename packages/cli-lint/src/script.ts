@@ -1,7 +1,6 @@
 import {ESLint} from 'eslint';
-import {resolveCacheLocation} from '@reskript/core';
+import {resolveCacheLocation, pFilter} from '@reskript/core';
 import {getScriptLintConfig} from '@reskript/config-lint';
-import pFilter from 'p-filter';
 import {resolveLintFiles} from './utils';
 import {LintCommandLineArgs} from './interface';
 

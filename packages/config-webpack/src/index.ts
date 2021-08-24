@@ -1,7 +1,7 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
-import pMap from 'p-map';
+import {pMap, logger} from '@reskript/core';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
 import {
@@ -11,7 +11,6 @@ import {
     warnAndExitOnInvalidFinalizeReturn,
     BuildInternals,
 } from '@reskript/settings';
-import {logger} from '@reskript/core';
 import * as loaders from './loaders';
 import * as rules from './rules';
 import {revision, hasServiceWorker} from './utils/info';
