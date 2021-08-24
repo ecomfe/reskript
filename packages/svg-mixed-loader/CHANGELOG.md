@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **build:** 处理SVG文件时把属性转成camelCase ([#136](https://github.com/ecomfe/reskript/issues/136)) ([4bf68e1](https://github.com/ecomfe/reskript/commit/4bf68e17f6fce4cd7974c5a134cb105906fc5167))
+
+
+
+
+
 ## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
 
 **Note:** Version bump only for package @reskript/svg-mixed-loader

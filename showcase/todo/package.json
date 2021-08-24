@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@reskript/showcase-todo",
-  "version": "1.0.0",
+  "version": "1.15.2",
   "description": "待办列表示例",
   "scripts": {
     "build": "skr build",
@@ -13,12 +13,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@reskript/cli": "1.15.1",
-    "@reskript/cli-build": "1.15.1",
-    "@reskript/cli-dev": "1.15.1",
-    "@reskript/cli-lint": "1.15.1",
-    "@reskript/cli-test": "1.15.1",
-    "@reskript/config-lint": "1.15.1",
+    "@reskript/cli": "1.15.2",
+    "@reskript/cli-build": "1.15.2",
+    "@reskript/cli-dev": "1.15.2",
+    "@reskript/cli-lint": "1.15.2",
+    "@reskript/cli-test": "1.15.2",
+    "@reskript/config-lint": "1.15.2",
     "@testing-library/react": "^12.0.0",
     "@types/ramda": "^0.27.44",
     "@types/react": "^17.0.19",

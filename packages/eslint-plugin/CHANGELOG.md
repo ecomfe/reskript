@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **eslint-plugin:** 支持原生模块的子模块的优先级判断 ([#135](https://github.com/ecomfe/reskript/issues/135)) ([b7dd304](https://github.com/ecomfe/reskript/commit/b7dd304d6f5f48f259f9b07d2d3a5cca78b5149a))
+
+
+
+
+
 ## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
 
 **Note:** Version bump only for package @reskript/eslint-plugin

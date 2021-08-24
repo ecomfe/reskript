@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **play:** 删除源码中多出来的dist文件 ([31d7375](https://github.com/ecomfe/reskript/commit/31d7375258e2faa87fbce97b7af26d418ac7003c))
+
+
+
+
+
 ## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
 
 **Note:** Version bump only for package @reskript/cli-play

@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-workspace-no-build",
-  "version": "1.15.1",
+  "version": "1.15.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -23,8 +23,8 @@
     "webpack": "^5.51.0"
   },
   "dependencies": {
-    "@reskript/core": "1.15.1",
-    "@reskript/settings": "1.15.1",
+    "@reskript/core": "1.15.2",
+    "@reskript/settings": "1.15.2",
     "semver": "^7.3.5"
   },
   "peerDependencies": {

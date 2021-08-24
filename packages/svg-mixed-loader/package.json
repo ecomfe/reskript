@@ -1,6 +1,6 @@
 {
   "name": "@reskript/svg-mixed-loader",
-  "version": "1.15.1",
+  "version": "1.15.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [

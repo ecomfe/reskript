@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **build:** 处理SVG文件时把属性转成camelCase ([#136](https://github.com/ecomfe/reskript/issues/136)) ([4bf68e1](https://github.com/ecomfe/reskript/commit/4bf68e17f6fce4cd7974c5a134cb105906fc5167))
+* **eslint-plugin:** 支持原生模块的子模块的优先级判断 ([#135](https://github.com/ecomfe/reskript/issues/135)) ([b7dd304](https://github.com/ecomfe/reskript/commit/b7dd304d6f5f48f259f9b07d2d3a5cca78b5149a))
+* **play:** 删除源码中多出来的dist文件 ([31d7375](https://github.com/ecomfe/reskript/commit/31d7375258e2faa87fbce97b7af26d418ac7003c))
+
+
+
+
+
 ## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
 
 
