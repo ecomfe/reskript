@@ -16,7 +16,7 @@ exports.build = {
     reportLintErrors: false,
     appTitle: 'TodoMVC - reSKRipt',
     favicon: path.join(__dirname, 'favicon.ico'),
-    uses: ['antd', 'styled-components'],
+    uses: ['antd', 'styled-components', 'tailwind'],
     script: {
         polyfill: false,
     },

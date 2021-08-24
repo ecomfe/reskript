@@ -8,7 +8,7 @@ title: 构建配置
 
 ```ts
 // 以下是工具内置了优化的相关第三方库
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata';
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
@@ -162,6 +162,7 @@ exports.build = {
 - `styled-components`：对`styled-components`的使用进行构建期的优化，可以参考[babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components)的相关说明。
 - `emotion`：对`emotion`样式解决方案进行处理，这个插件是[`emotion`部分功能的必须依赖](https://emotion.sh/docs/@emotion/babel-plugin#features)。**使用`emotion`要求你的`react`版本在`16.14.0`以上。**
 - `reflect-metadata`：在构建TypeScript文件中的装饰器语法时，会额外增加对`Reflect.metadata`相关的代码，主要用于NestJS、或InversifyJS等库。
+- `tailwind`：在样式处理上引入[tailwind](https://tailwindcss.com/)的处理。这个声明仅仅让样式处理支持`tailwind`，但你需要自己安装`tailwindcss`、生成`tailwind.config.js`并自行在CSS中通过`@tailwind`引入相关的样式。
 
 `reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
 

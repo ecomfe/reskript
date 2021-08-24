@@ -18,6 +18,10 @@ title: FAQ
 
 如果希望一个与`reSKRipt`的`less`处理一致的方案，请使用[@reskript/plugin-sass](plugins/sass)插件，具体的`.less`文件处理逻辑请参考[编写样式](app/style)章节的说明。
 
+> 我想使用`tailwind`来写样式。
+
+参考[settings/build#特殊第三方库的优化]章节，在`reskript.config.js`中的`exports.build.uses`配置中加上`"tailwind"`，并根据[官网文档](https://docs.tailwindchina.com/docs/installation#-1)初始化配置、引入样式即可。
+
 > 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
 
 参考[仅构建指定入口](cli/build#仅构建指定入口)使用`skr build --entries-only`参数。

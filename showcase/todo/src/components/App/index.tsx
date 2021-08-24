@@ -13,9 +13,6 @@ const Title = styled.h1`
 `;
 
 const Meta = styled.aside`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     color: #a6a6a6;
 `;
 
@@ -68,7 +65,7 @@ export default function App() {
         <Layout>
             <Title>todos</Title>
             <Create onSubmit={createNew} />
-            <Meta>
+            <Meta className="flex items-center justify-between">
                 {todos.length} things waiting
                 {$features.batch && <Button type="link" onClick={markAllDone}>all done</Button>}
             </Meta>
