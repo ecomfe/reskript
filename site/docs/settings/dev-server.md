@@ -82,13 +82,13 @@ unset https_proxy
 exports.devServer = {
     finalize: devServerConfig => {
         // 监听所有文件，当然你也可以写得更精确一些
-        devServerConfig.watchOptions.ignored = undefined;
+        devServerConfig.static.watch.ignored = undefined;
         return devServerConfig;
     },
 };
 ```
 
-具体参考[webpack的说明](https://webpack.js.org/configuration/watch/#watchoptionsignored)来实现。
+具体参考[webpack的说明](https://webpack.js.org/configuration/dev-server/#watch)来实现。
 
 关于`finalize`详细配置在下文中单独说明。
 

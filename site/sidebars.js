@@ -64,6 +64,13 @@ module.exports = {
                 'plugins/workspace-no-build',
             ],
         },
+        {
+            type: 'category',
+            label: '版本升级手册',
+            items: [
+                'migration/v2',
+            ],
+        },
         'faq',
     ],
 };
