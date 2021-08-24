@@ -1,4 +1,5 @@
 const path = require('node:path');
+const {default: qiankun} = require('@reskript/plugin-qiankun');
 
 exports.featureMatrix = {
     stable: {
@@ -28,3 +29,7 @@ exports.build = {
 exports.devServer = {
     port: 8989,
 };
+
+exports.plugins = [
+    qiankun('TodoMVC'),
+];
