@@ -6,6 +6,7 @@ const RESTRICTED_DEPENDENCIES = [
     ['imagemin', '7.x'],
     ['img-loader', '3.x'],
     ['log-symbols', '4.x'],
+    ['ora', '5.x'],
     ['globby', '11.x'],
     ['unified', '9.x'],
     ['remark-gfm', '1.x'],

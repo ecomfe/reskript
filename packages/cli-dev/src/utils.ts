@@ -35,7 +35,6 @@ export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], po
 
 export const startServer = async (server: WebpackDevServer): Promise<void> => {
     try {
-        // @ts-expect-error
         await server.start();
     }
     catch (ex) {

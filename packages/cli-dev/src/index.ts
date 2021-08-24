@@ -57,7 +57,6 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);
-    // @ts-expect-error
     const server = new WebpackDevServer(devServerConfig, compiler);
     await startServer(server);
 
@@ -86,7 +85,6 @@ export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
             nextStart = null;
         };
         const server = await startingServer;
-        // @ts-expect-error
         await server.stop();
         if (nextStart) {
             nextStart();

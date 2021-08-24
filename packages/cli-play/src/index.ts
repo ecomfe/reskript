@@ -63,7 +63,6 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
 };
 
 const registerSersvice = (config: DevServerConfiguration | undefined, target: string): DevServerConfiguration => {
-    // @ts-expect-error
     const prevBefore = config?.onBeforeSetupMiddleware;
 
     if (Array.isArray(config?.proxy)) {
@@ -73,7 +72,6 @@ const registerSersvice = (config: DevServerConfiguration | undefined, target: st
 
     return {
         ...config,
-        // @ts-expect-error
         onBeforeSetupMiddleware: devServer => {
             prevBefore?.(devServer);
             setupServer(devServer.app, target);
@@ -107,8 +105,6 @@ export const run = async (cmd: PlayCommandLineArgs, target: string): Promise<voi
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);
-    // @ts-expect-error
     const server = new WebpackDevServer(devServerConfig, compiler);
-    // @ts-expect-error
     await server.start();
 };

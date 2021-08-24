@@ -94,10 +94,8 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
     const baseConfig: DevServerConfiguration = {
         port,
         proxy,
-        // @ts-expect-error
         allowedHosts: 'all',
         host: '0.0.0.0',
-        // @ts-expect-error
         hot: hot ? 'only' : false,
         devMiddleware: {
             publicPath: '/assets/',

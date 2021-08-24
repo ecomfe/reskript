@@ -30,5 +30,10 @@
     "lerna": "^4.0.0",
     "semver": "^7.3.5",
     "yargs": "^17.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/webpack": "npm:webpack@5"
+    }
   }
 }

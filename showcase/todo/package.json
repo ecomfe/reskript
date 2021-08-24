@@ -36,12 +36,12 @@
     "webpack": "^5.51.0"
   },
   "dependencies": {
-    "antd": "^4.16.12",
+    "antd": "^4.16.13",
     "core-js": "^3.16.2",
     "localforage": "^1.10.0",
     "nanoid": "^3.1.25",
     "ramda": "^0.27.1",
-    "styled-components": "^5.3.0",
+    "styled-components": "^5.3.1",
     "tailwindcss": "^2.2.7"
   }
 }

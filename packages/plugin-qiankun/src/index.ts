@@ -15,14 +15,11 @@ export default (appName: string, options?: Options): SettingsPlugin => {
     };
 
     const finalizeDevServer: DevServerSettings['finalize'] = config => {
-        // @ts-expect-error
         const {onBeforeSetupMiddleware, onAfterSetupMiddleware} = config;
-        // @ts-expect-error
         config.onBeforeSetupMiddleware = devServer => {
             onBeforeSetupMiddleware?.(devServer);
             devServer.app.get(
                 '/__qiankun_entry__.js',
-                // @ts-expect-error
                 async (req, res) => {
                     res.setHeader('Access-Control-Allow-Origin', '*');
                     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
@@ -33,12 +30,10 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             );
         };
         // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须用`onAfterSetupMiddleware`钩子
-        // @ts-expect-error
         config.onAfterSetupMiddleware = devServer => {
             onAfterSetupMiddleware?.(devServer);
             devServer.app.get(
                 '/__qiankun__.html',
-                // @ts-expect-error
                 async (req, res) => {
                     const html = await htmlEntry(appName, options);
                     res.type('html').end(html);

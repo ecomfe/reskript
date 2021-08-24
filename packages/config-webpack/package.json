@@ -40,7 +40,7 @@
     "@reskript/svg-to-component-loader": "1.15.2",
     "@reskript/webpack-plugin-extra-script": "1.15.2",
     "@reskript/webpack-plugin-interpolate-html": "1.15.2",
-    "autoprefixer": "^10.3.1",
+    "autoprefixer": "^10.3.2",
     "babel-loader": "^8.2.2",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "change-case": "^4.1.2",
