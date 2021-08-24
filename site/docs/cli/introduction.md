@@ -16,9 +16,19 @@ title: 命令行介绍
 
 ## 按需安装
 
-所有的`skr`命令行均以`@reskript/cli-`为包前缀，其后跟随命令名称。当你需要某一个命令时，必须在本地安装相应的包。如你需要使用`skr build`，则应当安装`@reskript/cli-build`包。
+所有的`skr`命令行均以`@reskript/cli-`为包前缀，其后跟随命令名称。当一个命令需要执行的时候，如果本地安装由这个`@reskript/cli-xxx`包，则会直接调用它，如果没有，`skr`会尝试自动安装。
 
-在相应的包安装前，`skr`并无法找到相应的子命令，即此时甚至无法出现`--help`的参数提示。
+自动安装一个缺失的命令包需要你的项目满足以下要求：
+
+1. 你在安装`@reskript/*`包时，使用了精确的版本号，即在`npm install`、`yarn add`、`pnpm add`时使用`--save-exact`（或`-E`）参数，在你的`package.json`中，版本不是`^x.y.z`的形式，而是一个`x.y.z`的精确版本号。
+2. 你的项目必须启用了git版本管理，即在根目录下有`.git`文件夹。
+3. 你的项目在根目录（`.git`文件夹所在目录）下有一个包管理器的版本锁文件，可以是`package-lock.json`、`yarn.lock`或`pnpm-lock.yaml`。
+
+在满足这些条件的前提下，命令行会提示你自动安装：
+
+> We're going to install @reskript/cli-dev for you, continue? (y/N)
+
+此时按下回车即会自动安装后继续执行命令，如果选择`N`则自动退出，你可以手动安装相应的包来继续使用。
 
 ## 全局控制标记
 
