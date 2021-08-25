@@ -10,6 +10,16 @@
 
 </div>
 
+此分支为V1版本，最新版本新[参考`master`分支](https://github.com/ecomfe/reskript/)。
+
+如需V1版本的文档，可以切换到此分支后运行以下命令：
+
+```shell
+cd site
+npm install
+npm start
+```
+
 
 **[reSKRipt](https://ecomfe.github.io/reskript)** 是基于 [React](https://github.com/facebook/react) 与 [Ant Design](https://github.com/ant-design/ant-design) 开发的一套命令行工具套件，整合了代码检查、单元测试、构建、代码转义和本地调试等一系列功能，意图做到在开发业务时无需关心工具选型。
 

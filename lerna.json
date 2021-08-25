@@ -8,7 +8,7 @@
   "exact": true,
   "command": {
     "version": {
-      "allowBranch": "master",
+      "allowBranch": "v1-preserved-heart",
       "ignoreChanges": [
         "**/*.md",
         "**/example/**",
