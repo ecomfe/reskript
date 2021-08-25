@@ -157,9 +157,14 @@ export interface PlaySettings {
     readonly defaultGlobalSetup?: string;
 }
 
-export type SettingsPlugin = (
+export interface PluginOptions {
+    cwd: string;
+    command: string;
+}
+
+export type SettingsPlugin<C extends PluginOptions = PluginOptions> = (
     current: ProjectSettings,
-    cmd: ProjectAware
+    cmd: C
 ) => ProjectSettings | Promise<ProjectSettings>;
 
 export interface ProjectSettings extends ProjectAware {

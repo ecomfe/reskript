@@ -1,7 +1,7 @@
 import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
 import {ScriptDescriptor, ScriptFactoryContext, ScriptFactory, Options, InlineScriptDescriptor} from './interface';
 
-export type {ScriptFactoryContext, ScriptDescriptor, Options};
+export type {ScriptFactory, ScriptFactoryContext, ScriptDescriptor, Options};
 
 const findHtmlWebpackPlugin = (compilation: Compilation) => {
     const isResolved = (plugin: WebpackPluginInstance) => {
