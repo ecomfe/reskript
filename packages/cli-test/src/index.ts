@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import {merge} from 'lodash';
 import {run as runJest} from 'jest-cli';
+import {logger} from '@reskript/core';
 import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
 import {readProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
 import {TestCommandLineArgs} from './interface';
@@ -18,17 +19,24 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
         return JSON.stringify(getJestConfig(jestConfigOptions));
     }
 
-    const jestConfig = await import(jestConfigFile);
+    // 用`import`拿一个CommonJS的模块，拿到的东西要是里面的`default`
+    try {
+        const {default: jestConfig} = await import(jestConfigFile);
 
-    if ('preset' in jestConfig) {
-        // if jest config has preset, return jest config
-        return JSON.stringify(jestConfig);
+        if ('preset' in jestConfig) {
+            // 如果用户的配置里有`preset`，那它应该已经声明了基于`@reskript/config-jest`来配置，直接返回就行
+            return JSON.stringify(jestConfig);
+        }
+        else {
+            // 如果没有`preset`，那我们认为用户自己声明的是一个“扩展”的配置，需要我们把默认配置合并进去
+            const skrConfig = getJestConfig(jestConfigOptions);
+            // 用户的覆盖skr的
+            return JSON.stringify(merge(skrConfig, jestConfig));
+        }
     }
-    else {
-        // if jest config has no preset, return merged
-        const skrConfig = getJestConfig(jestConfigOptions);
-        // 用户的覆盖skr的
-        return JSON.stringify(merge(skrConfig, jestConfig));
+    catch {
+        logger.warn('Failed to parse your custom jest.config.js, fallback to default configuration');
+        return JSON.stringify(getJestConfig(jestConfigOptions));
     }
 };
 
