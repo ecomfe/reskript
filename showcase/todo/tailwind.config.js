@@ -1,5 +1,5 @@
 module.exports = {
-    purge: [],
+    purge: false,
     darkMode: false,
     theme: {
         extend: {},

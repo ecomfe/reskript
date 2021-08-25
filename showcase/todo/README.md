@@ -10,3 +10,4 @@
 2. `npm run play`可用，有热更新。
 3. `npm run test`可通过测试。
 4. `npm run lint`可用。
+5. `npm run build`可用，且产出的文件里有一个`todo-index.[hash].js`的文件。

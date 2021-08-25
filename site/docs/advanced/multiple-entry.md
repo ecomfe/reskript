@@ -169,7 +169,11 @@ exports.entry = {
 
 随后运行`skr build`，并查看`dist/assets`目录，可以看到`hello.dist.js`文件，并且该文件没有默认的哈希部分。
 
-你同样可以参考此方法配置诸如`dependOn`、`library`等属性，请注意你无法配置`import`属性，该属性强制为`src/entries/hello.js`。
+你同样可以参考此方法配置诸如`dependOn`、`library`等属性。
+
+:::caution
+请注意你无法配置`import`属性，该属性强制为`src/entries/hello.js`。
+:::
 
 ## 入口查找规则
 

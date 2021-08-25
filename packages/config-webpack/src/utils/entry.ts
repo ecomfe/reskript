@@ -2,15 +2,21 @@ import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
 import {EntryObject} from 'webpack';
+import {logger} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface';
 
 const readEntryConfig = async (file: string): Promise<EntryConfig> => {
     try {
-        const config: EntryConfig = await import(path.join(file));
+        const {default: config}: {default: EntryConfig} = await import(path.join(file));
         return config;
     }
     catch (ex) {
-        return {};
+        if (ex.code === 'MODULE_NOT_FOUND') {
+            return {};
+        }
+
+        logger.error(`Unable to read entry configuration from ${file}: ${ex.message}`);
+        process.exit(22);
     }
 };
 

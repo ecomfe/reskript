@@ -1,3 +1,3 @@
-export const entry = {
-    import: 'core-js',
+exports.entry = {
+    filename: 'todo-index.[contenthash].js',
 };
