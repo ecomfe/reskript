@@ -1,9 +1,14 @@
 import {ProgressPlugin, Compiler} from 'webpack';
-import {SingleBar} from 'cli-progress';
+import {SingleBar, Options} from 'cli-progress';
 import chalk from 'chalk';
 
-const PROGRESS_BAR_OPTIONS = {
-    format: `${chalk.greenBright('● @reskript/dev')} {bar} building ({percentage}%)`,
+const PROGRESS_BAR_OPTIONS: Options = {
+    format: (options, params, payload) => {
+        const bar = options.formatBar!(params.progress, options);
+        const percentage = Math.round((params.progress * 100));
+        const detail = percentage >= 99 ? '' : chalk.white(`- ${payload.message}`);
+        return `${chalk.greenBright('● @reskript/dev')} ${bar} building (${percentage}%) ${detail}`;
+    },
     formatBar: (progress: number) => {
         const total = 40;
         const active = Math.round(total * progress);
@@ -17,10 +22,13 @@ export default class ProgressBarPlugin extends ProgressPlugin {
 
     private working = false;
 
+    private lastPercentage = 0;
+
     apply(compiler: Compiler) {
-        this.handler = (percent: number) => {
+        this.handler = (percentage: number, stage, message) => {
+            this.lastPercentage = percentage;
             if (this.working) {
-                this.progressBar.update(percent);
+                this.progressBar.update(Math.max(percentage, this.lastPercentage), {stage, message});
             }
         };
         compiler.hooks.beforeCompile.tap(
