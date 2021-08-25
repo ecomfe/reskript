@@ -3,7 +3,7 @@ import fs from 'fs';
 import {merge} from 'lodash';
 import {run as runJest} from 'jest-cli';
 import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
-import {readProjectSettings} from '@reskript/settings';
+import {readProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
 import {TestCommandLineArgs} from './interface';
 
 export {TestCommandLineArgs};
@@ -34,9 +34,10 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 
 export const run = async (cmd: TestCommandLineArgs): Promise<void> => {
     const {cwd, target, jestArgs} = cmd;
-    const {featureMatrix: {dev: features}} = await readProjectSettings(cmd, 'test');
+    const projectSettings = await readProjectSettings(cmd, 'test');
+    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     // featureMatrix 目前以dev为默认目标，以后可以传入--test-target？
-    const jestConfigOptions: JestConfigOptions = {cwd, target, features};
+    const jestConfigOptions: JestConfigOptions = {cwd, target, features: projectSettings.featureMatrix.dev};
     const config = await resolveJestConfig(jestConfigOptions);
     const argv = ['--config', config, ...jestArgs];
     runJest(argv);
