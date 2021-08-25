@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **dev:** 美化一下进度条 ([#148](https://github.com/ecomfe/reskript/issues/148)) ([7c064bb](https://github.com/ecomfe/reskript/commit/7c064bb6a8370d6804519be90640f3d1a75975f7))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
 
 **Note:** Version bump only for package @reskript/config-webpack-dev-server

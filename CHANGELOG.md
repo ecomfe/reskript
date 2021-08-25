@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **build:** 修复读取入口配置时的逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([0ce0026](https://github.com/ecomfe/reskript/commit/0ce00269216bb5c419467ad7b91ff2f40e295f39))
+* **dev:** 美化一下进度条 ([#148](https://github.com/ecomfe/reskript/issues/148)) ([7c064bb](https://github.com/ecomfe/reskript/commit/7c064bb6a8370d6804519be90640f3d1a75975f7))
+* **play:** 不应该让cli-play直接依赖react ([#152](https://github.com/ecomfe/reskript/issues/152)) ([0fa7bcf](https://github.com/ecomfe/reskript/commit/0fa7bcf78053544c3aecc2b3921a9d94ca5faf63))
+* **test:** 修复读取用户的jest.config.js逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([15c029c](https://github.com/ecomfe/reskript/commit/15c029c1161fe03884225181d92390b33d2ded3e))
+
+
+### Features
+
+* **build:** 读取入口配置文件时增加校验 ([#150](https://github.com/ecomfe/reskript/issues/150)) ([fb24371](https://github.com/ecomfe/reskript/commit/fb2437133027b5750c60b313f2216f0cf7e4ab6b))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
 
 

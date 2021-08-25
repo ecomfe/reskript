@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **test:** 修复读取用户的jest.config.js逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([15c029c](https://github.com/ecomfe/reskript/commit/15c029c1161fe03884225181d92390b33d2ded3e))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
 
 
