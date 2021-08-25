@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* **dev:** 只在编译错误时显示客户端的浮层提示 ([#140](https://github.com/ecomfe/reskript/issues/140)) ([bee529a](https://github.com/ecomfe/reskript/commit/bee529a46803bc83a23897ae631768df6e82090d))
+
+
+
+
+
 # [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+
+### Features
+
+* **build:** 增加一些供插件开发者使用的类型 ([#142](https://github.com/ecomfe/reskript/issues/142)) ([1efd6a0](https://github.com/ecomfe/reskript/commit/1efd6a0899ceb594b15cf5462f33dac89b5220b1))
+
+
+
+
+
 # [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
 
 
