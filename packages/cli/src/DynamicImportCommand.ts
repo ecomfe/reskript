@@ -54,7 +54,12 @@ export default abstract class DynamicImportCommand<A> extends Command {
             const run = await dynamicImport();
             return run;
         }
-        catch {
+        catch (ex) {
+            if (ex.code !== 'MODULE_NOT_FOUND') {
+                logger.error(`Failed to run command: ${ex.message}`);
+                process.exit(99);
+            }
+
             const canAutoInstall = await this.canAutoInstall();
 
             if (!canAutoInstall) {
