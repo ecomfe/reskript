@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration} from 'webpack-dev-server';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
-import {readProjectSettings, BuildEnv, ProjectSettings} from '@reskript/settings';
+import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
 import {logger, prepareEnvironment, readPackageConfig} from '@reskript/core';
 import {createWebpackConfig} from './webpack';
 import {PlayCommandLineArgs} from './interface';
@@ -26,6 +26,7 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
             hot: true,
         },
     };
+    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     const {name: hostPackageName} = await readPackageConfig(cmd.cwd);
     const buildEnv: BuildEnv = {
         hostPackageName,
