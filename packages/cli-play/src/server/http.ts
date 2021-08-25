@@ -69,18 +69,18 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     // HTTP接口
     app.get(
         '/play/cases',
-        (req, res) => {
-            const cases = service.listCases();
+        async (req, res) => {
+            const cases = await service.listCases();
             res.json(cases);
         }
     );
     app.post(
         '/play/cases',
         json(),
-        (req, res) => {
+        async (req, res) => {
             const caseToSave = req.body as PlayCase;
             try {
-                service.saveCase(caseToSave);
+                await service.saveCase(caseToSave);
                 res.status(204).end();
             }
             catch {
@@ -91,10 +91,10 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     app.put(
         '/play/cases/:name',
         json(),
-        (req, res) => {
+        async (req, res) => {
             const caseToSave = req.body as CasePatch;
             try {
-                service.updateCase(req.params.name, caseToSave);
+                await service.updateCase(req.params.name, caseToSave);
                 res.status(204).end();
             }
             catch {
@@ -104,9 +104,9 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     );
     app.put(
         '/play/cases/:name/TOUCH',
-        (req, res) => {
+        async (req, res) => {
             try {
-                service.touchCase(req.params.name);
+                await service.touchCase(req.params.name);
                 res.status(204).end();
             }
             catch {

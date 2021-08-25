@@ -23,8 +23,8 @@ const createWatcher = (componentModulePath: string) => {
 };
 
 const setupSocket = (socket: Socket, watch: ReturnType<typeof createWatcher>) => {
-    const pushNewCases = (content: string) => {
-        const cases = parseMarkdownToCases(content);
+    const pushNewCases = async (content: string) => {
+        const cases = await parseMarkdownToCases(content);
         socket.emit('cases', cases);
     };
     const unwatch = watch(pushNewCases);
