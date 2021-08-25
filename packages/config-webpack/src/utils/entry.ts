@@ -5,9 +5,21 @@ import {EntryObject} from 'webpack';
 import {logger} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface';
 
+const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
+
+const validateEntryConfig = (config: EntryConfig, file: string) => {
+    const keys = Object.keys(config);
+
+    if (keys.some(v => !ALLOWED_ENTRY_KEYS.has(v))) {
+        logger.error(`Entry configuration ${file} has invalid keys, only "entry" and "html" are allowed.`);
+        process.exit(21);
+    }
+};
+
 const readEntryConfig = async (file: string): Promise<EntryConfig> => {
     try {
         const {default: config}: {default: EntryConfig} = await import(path.join(file));
+        validateEntryConfig(config, file);
         return config;
     }
     catch (ex) {
