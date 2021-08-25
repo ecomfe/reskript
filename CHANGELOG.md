@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **cli:** 只在对应的CLI包不存在时才自动安装，其它错误情况报错退出 ([#146](https://github.com/ecomfe/reskript/issues/146)) ([fdfd44a](https://github.com/ecomfe/reskript/commit/fdfd44a76047de4512d091d80c371e73e4712db3))
+* **play:** 修复一些接口没有异步调用的问题 ([#145](https://github.com/ecomfe/reskript/issues/145)) ([5fd503a](https://github.com/ecomfe/reskript/commit/5fd503a414bc19d6e1a704e8da74731a0b9138e2))
+* **play:** 在play命令启动时增加是否安装core-js的检测 ([#144](https://github.com/ecomfe/reskript/issues/144)) ([7ad0678](https://github.com/ecomfe/reskript/commit/7ad067804041c459ad6caeedc52ba47fda5214e5))
+* **test:** 在test命令启动时增加是否安装core-js的检测 ([#144](https://github.com/ecomfe/reskript/issues/144)) ([4528b60](https://github.com/ecomfe/reskript/commit/4528b6009fec19ff45841d4b868dc13e9c0568f5))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
 
 

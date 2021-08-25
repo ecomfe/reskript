@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **cli:** 只在对应的CLI包不存在时才自动安装，其它错误情况报错退出 ([#146](https://github.com/ecomfe/reskript/issues/146)) ([fdfd44a](https://github.com/ecomfe/reskript/commit/fdfd44a76047de4512d091d80c371e73e4712db3))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
 
 **Note:** Version bump only for package @reskript/cli

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **test:** 在test命令启动时增加是否安装core-js的检测 ([#144](https://github.com/ecomfe/reskript/issues/144)) ([4528b60](https://github.com/ecomfe/reskript/commit/4528b6009fec19ff45841d4b868dc13e9c0568f5))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
 
 **Note:** Version bump only for package @reskript/cli-test
