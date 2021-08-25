@@ -97,6 +97,12 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         allowedHosts: 'all',
         host: '0.0.0.0',
         hot: hot ? 'only' : false,
+        client: {
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+        },
         devMiddleware: {
             publicPath: '/assets/',
             stats: 'none',
