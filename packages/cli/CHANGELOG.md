@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+* feat(test)!: 支持透传参数到jest (#127) ([b4c4820](https://github.com/ecomfe/reskript/commit/b4c4820622c1a90d724f4e2b8e2142b69bda4ca8)), closes [#127](https://github.com/ecomfe/reskript/issues/127)
+* feat!: 对外暴露的API转为异步 (#130) ([f423d55](https://github.com/ecomfe/reskript/commit/f423d55efc890abd54e8958d4005c0285c91252d)), closes [#130](https://github.com/ecomfe/reskript/issues/130)
+
+
+### Features
+
+* **build:** 增加严格模式开关 ([#54](https://github.com/ecomfe/reskript/issues/54)) ([3e00afc](https://github.com/ecomfe/reskript/commit/3e00afc503371412a30260c5a836935b47b7eb60))
+* 支持自动安装缺失的命令行包 ([#139](https://github.com/ecomfe/reskript/issues/139)) ([1c54433](https://github.com/ecomfe/reskript/commit/1c54433830bf3af371c35c4ad087ceb7aa90ee0d))
+
+
+### BREAKING CHANGES
+
+* 所有jest的参数必须在`skr test --`之后传递
+* `settings`、`core`、`config-webpack`和`config-webpack-dev-server`的接口均变为异步函数
+* `BuildContext`的`cache`属性由`boolean`变为`persist` | `transient` | `off`
+* NodeJS最低版本要求为14.14.0
+
+
+
+
+
 ## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
 
 **Note:** Version bump only for package @reskript/cli

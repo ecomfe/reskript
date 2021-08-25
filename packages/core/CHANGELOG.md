@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+* feat!: 对外暴露的API转为异步 (#130) ([f423d55](https://github.com/ecomfe/reskript/commit/f423d55efc890abd54e8958d4005c0285c91252d)), closes [#130](https://github.com/ecomfe/reskript/issues/130)
+
+
+### BREAKING CHANGES
+
+* `settings`、`core`、`config-webpack`和`config-webpack-dev-server`的接口均变为异步函数
+* `BuildContext`的`cache`属性由`boolean`变为`persist` | `transient` | `off`
+* NodeJS最低版本要求为14.14.0
+
+
+
+
+
 ## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
 
 **Note:** Version bump only for package @reskript/core

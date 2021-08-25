@@ -3,7 +3,7 @@
     "packages/*",
     "showcase/*"
   ],
-  "version": "1.15.2",
+  "version": "2.0.0-beta.1",
   "npmClient": "npm",
   "exact": true,
   "command": {

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* 推荐用户使用固定版本安装，并保持版本一致 ([#138](https://github.com/ecomfe/reskript/issues/138)) ([61f8ec6](https://github.com/ecomfe/reskript/commit/61f8ec635e5f22f9efd6dcfca5beb6a15e6567b1))
+
+
+* fix(build)!: 由用户自行安装core-js (#137) ([9af1569](https://github.com/ecomfe/reskript/commit/9af1569255ae166771be8a0ccaef4e133b5bc7d9)), closes [#137](https://github.com/ecomfe/reskript/issues/137)
+
+
+### BREAKING CHANGES
+
+* 不再处理`core-js`的引入，用户必须在项目中自行安装`core-js@3`
+
+
+
+
+
 ## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
 
 **Note:** Version bump only for package @reskript/init
