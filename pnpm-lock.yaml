@@ -701,7 +701,6 @@ importers:
       lodash: ^4.17.21
       proxy-agent: ^5.0.0
       react-refresh: ^0.10.0
-      resolve: ^1.20.0
       typescript: ^4.3.5
       webpack: ^5.51.0
       webpack-dev-server: ^4.0.0
@@ -718,7 +717,6 @@ importers:
       lodash: 4.17.21
       proxy-agent: 5.0.0
       react-refresh: 0.10.0
-      resolve: 1.20.0
       webpack-merge: 5.8.0
     devDependencies:
       '@types/cli-progress': 3.9.2
@@ -744,6 +742,7 @@ importers:
       find-up: ^5.0.0
       globby: ^11.0.4
       pkg-dir: ^5.0.0
+      resolve: ^1.20.0
       typescript: ^4.3.5
     dependencies:
       chalk: 4.1.2
@@ -753,6 +752,7 @@ importers:
       find-up: 5.0.0
       globby: 11.0.4
       pkg-dir: 5.0.0
+      resolve: 1.20.0
     devDependencies:
       '@types/dedent': 0.7.0
       '@types/jest': 27.0.1

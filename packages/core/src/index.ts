@@ -6,3 +6,4 @@ export * from './env';
 export * from './flag';
 export * from './deprecate';
 export * from './async';
+export * from './resolve';

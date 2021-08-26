@@ -5,7 +5,9 @@ import {promisify} from 'util';
 import {prompt} from 'enquirer';
 import pkgDir from 'pkg-dir';
 import {Command} from 'clipanion';
-import {CommandDefinition, findGitRoot, logger, readPackageConfig} from '@reskript/core';
+import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
+
+const resolve = resolveFrom(process.cwd());
 
 const exec = promisify(childProcess.exec);
 
@@ -46,7 +48,9 @@ export default abstract class DynamicImportCommand<A> extends Command {
 
     private async importCommandPackage() {
         const dynamicImport = async () => {
-            const {run} = await import(this.packageName) as CommandDefinition<A>;
+            // 这个不能放到外面去，`resolve`本身就是找不到模块会报错的，所以自动安装后要重找一下
+            const packageEntry = await resolve(this.packageName);
+            const {run} = await import(packageEntry) as CommandDefinition<A>;
             return run;
         };
 
