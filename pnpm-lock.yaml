@@ -10,7 +10,7 @@ importers:
       '@commitlint/cli': ^13.1.0
       '@commitlint/config-conventional': ^13.1.0
       cpy: ^8.1.2
-      husky: ^7.0.1
+      husky: ^7.0.2
       lerna: ^4.0.0
       semver: ^7.3.5
       yargs: ^17.1.1
@@ -18,7 +18,7 @@ importers:
       '@commitlint/cli': 13.1.0
       '@commitlint/config-conventional': 13.1.0
       cpy: 8.1.2
-      husky: 7.0.1
+      husky: 7.0.2
       lerna: 4.0.0
       semver: 7.3.5
       yargs: 17.1.1
@@ -31,7 +31,7 @@ importers:
       '@reskript/babel-utils': 2.0.0-beta.5
       '@types/babel__core': ^7.1.15
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       jest: ^27.0.6
       ts-jest: ^27.0.5
@@ -44,7 +44,7 @@ importers:
       '@babel/preset-react': 7.14.5_@babel+core@7.15.0
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_0eb5aad88f3244b96fba5a1e53fd0360
@@ -58,7 +58,7 @@ importers:
       '@reskript/babel-utils': 2.0.0-beta.5
       '@types/babel__core': ^7.1.15
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       jest: ^27.0.6
       react: ^17.0.2
@@ -72,7 +72,7 @@ importers:
       '@babel/preset-react': 7.14.5_@babel+core@7.15.0
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       react: 17.0.2
@@ -85,7 +85,7 @@ importers:
       '@babel/traverse': ^7.15.0
       '@types/babel__core': ^7.1.15
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       glob: ^7.1.7
       jest: ^27.0.6
@@ -98,7 +98,7 @@ importers:
       '@babel/traverse': 7.15.0
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_0eb5aad88f3244b96fba5a1e53fd0360
@@ -114,7 +114,7 @@ importers:
       '@reskript/cli-test': 2.0.0-beta.5
       '@reskript/core': 2.0.0-beta.5
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       clipanion: ^3.0.1
       enquirer: ^2.3.6
       eslint: ^7.32.0
@@ -135,7 +135,7 @@ importers:
       '@reskript/cli-play': link:../cli-play
       '@reskript/cli-test': link:../cli-test
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
@@ -145,7 +145,7 @@ importers:
       '@reskript/config-babel': 2.0.0-beta.5
       '@reskript/core': 2.0.0-beta.5
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       cli-highlight: ^2.1.11
       eslint: ^7.32.0
       globby: ^11.0.4
@@ -160,7 +160,7 @@ importers:
       throat: 6.0.1
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
@@ -171,7 +171,7 @@ importers:
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
       '@types/lodash': ^4.14.172
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       chalk: ^4.1.2
       eslint: ^7.32.0
       lodash: ^4.17.21
@@ -195,7 +195,7 @@ importers:
     devDependencies:
       '@types/jest': 27.0.1
       '@types/lodash': 4.14.172
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       typescript: 4.3.5
       webpack: 5.51.1
 
@@ -207,8 +207,8 @@ importers:
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
       '@types/lodash': ^4.14.172
-      '@types/node': ^16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': ^16.7.2
+      '@types/webpack-dev-server': 4.0.1
       better-opn: ^3.0.0
       internal-ip: ^6.2.0
       lodash: ^4.17.21
@@ -231,8 +231,8 @@ importers:
     devDependencies:
       '@types/jest': 27.0.1
       '@types/lodash': 4.14.172
-      '@types/node': 16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': 16.7.2
+      '@types/webpack-dev-server': 4.0.1
       typescript: 4.3.5
       webpack: 5.51.1
 
@@ -243,7 +243,7 @@ importers:
       '@types/eslint': ^7.28.0
       '@types/jest': ^27.0.1
       '@types/lodash': ^4.14.172
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       eslint-formatter-pretty: ^4.1.0
       g-status: ^2.0.2
@@ -264,7 +264,7 @@ importers:
       '@types/eslint': 7.28.0
       '@types/jest': 27.0.1
       '@types/lodash': 4.14.172
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       typescript: 4.3.5
 
   packages/cli-play:
@@ -278,8 +278,8 @@ importers:
       '@types/jest': ^27.0.1
       '@types/marked': ^3.0.0
       '@types/mdast': ^3.0.10
-      '@types/node': ^16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': ^16.7.2
+      '@types/webpack-dev-server': 4.0.1
       body-parser: ^1.19.0
       chokidar: ^3.5.2
       cpy-cli: ^3.1.1
@@ -290,7 +290,7 @@ importers:
       jest: ^27.0.6
       localforage: ^1.10.0
       lodash: ^4.17.21
-      marked: ^3.0.1
+      marked: ^3.0.2
       react: ^17.0.2
       react-dom: ^17.0.2
       remark-gfm: ^1.0.0
@@ -315,7 +315,7 @@ importers:
       internal-ip: 6.2.0
       localforage: 1.10.0
       lodash: 4.17.21
-      marked: 3.0.1
+      marked: 3.0.2
       remark-gfm: 1.0.0
       remark-parse: 9.0.0
       remark-stringify: 9.0.1
@@ -328,8 +328,8 @@ importers:
       '@types/jest': 27.0.1
       '@types/marked': 3.0.0
       '@types/mdast': 3.0.10
-      '@types/node': 16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': 16.7.2
+      '@types/webpack-dev-server': 4.0.1
       cpy-cli: 3.1.1
       dedent: 0.7.0
       eslint: 7.32.0
@@ -347,7 +347,7 @@ importers:
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
       '@types/lodash': ^4.14.172
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       jest-cli: ^27.0.6
       lodash: ^4.17.21
@@ -361,7 +361,7 @@ importers:
     devDependencies:
       '@types/jest': 27.0.1
       '@types/lodash': 4.14.172
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
@@ -391,7 +391,7 @@ importers:
       '@reskript/settings': 2.0.0-beta.5
       '@types/babel__core': ^7.1.15
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       '@types/resolve': ^1.20.1
       babel-plugin-import: ^1.13.3
       babel-plugin-lodash: ^3.3.4
@@ -441,7 +441,7 @@ importers:
       '@reskript/core': link:../core
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       '@types/resolve': 1.20.1
       eslint: 7.32.0
       jest: 27.0.6
@@ -454,7 +454,7 @@ importers:
       '@types/imagemin-mozjpeg': ^8.0.1
       '@types/imagemin-optipng': ^5.2.1
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       imagemin: ^7.0.1
       imagemin-gifsicle: ^7.0.0
       imagemin-mozjpeg: ^9.0.0
@@ -474,7 +474,7 @@ importers:
       '@types/imagemin-mozjpeg': 8.0.1
       '@types/imagemin-optipng': 5.2.1
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       typescript: 4.3.5
 
   packages/config-jest:
@@ -487,7 +487,7 @@ importers:
       '@types/enzyme': ^3.10.9
       '@types/enzyme-adapter-react-16': ^1.0.6
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       babel-jest: ^27.0.6
       enzyme: ^3.11.0
       enzyme-adapter-react-16: ^1.15.6
@@ -519,7 +519,7 @@ importers:
       '@types/enzyme': 3.10.9
       '@types/enzyme-adapter-react-16': 1.0.6
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       prettier: 2.3.2
       typescript: 4.3.5
@@ -534,7 +534,7 @@ importers:
       '@reskript/eslint-plugin': 2.0.0-beta.5
       '@rushstack/eslint-patch': ^1.0.6
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       '@typescript-eslint/eslint-plugin': ^4.29.3
       '@typescript-eslint/parser': ^4.29.3
       eslint: ^7.32.0
@@ -564,7 +564,7 @@ importers:
       resolve: 1.20.0
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       prettier: 2.3.2
       typescript: 4.3.5
@@ -585,8 +585,8 @@ importers:
       '@types/less': ^3.0.3
       '@types/lodash': ^4.14.172
       '@types/mini-css-extract-plugin': ^2.2.0
-      '@types/node': ^16.7.1
-      '@types/stylelint': ^13.13.1
+      '@types/node': ^16.7.2
+      '@types/stylelint': ^13.13.2
       '@types/workbox-webpack-plugin': ^5.1.8
       autoprefixer: ^10.3.2
       babel-loader: ^8.2.2
@@ -675,8 +675,8 @@ importers:
       '@types/less': 3.0.3
       '@types/lodash': 4.14.172
       '@types/mini-css-extract-plugin': 2.2.0
-      '@types/node': 16.7.1
-      '@types/stylelint': 13.13.1
+      '@types/node': 16.7.2
+      '@types/stylelint': 13.13.2
       '@types/workbox-webpack-plugin': 5.1.8
       jest: 27.0.6
       semver: 7.3.5
@@ -693,8 +693,8 @@ importers:
       '@types/cli-progress': ^3.9.2
       '@types/jest': ^27.0.1
       '@types/lodash': ^4.14.172
-      '@types/node': ^16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': ^16.7.2
+      '@types/webpack-dev-server': 4.0.1
       chalk: ^4.1.2
       cli-progress: ^3.9.0
       eslint: ^7.32.0
@@ -724,8 +724,8 @@ importers:
       '@types/cli-progress': 3.9.2
       '@types/jest': 27.0.1
       '@types/lodash': 4.14.172
-      '@types/node': 16.7.1
-      '@types/webpack-dev-server': 4.0.0
+      '@types/node': 16.7.2
+      '@types/webpack-dev-server': 4.0.1
       eslint: 7.32.0
       typescript: 4.3.5
       webpack: 5.51.1
@@ -735,7 +735,7 @@ importers:
     specifiers:
       '@types/dedent': ^0.7.0
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       chalk: ^4.1.2
       dedent: ^0.7.0
       dotenv: ^10.0.0
@@ -758,7 +758,7 @@ importers:
     devDependencies:
       '@types/dedent': 0.7.0
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
@@ -767,7 +767,7 @@ importers:
       '@reskript/core': 2.0.0-beta.5
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       globby: ^11.0.4
       log-symbols: ^4.1.0
@@ -783,7 +783,7 @@ importers:
       semver: 7.3.5
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
@@ -809,7 +809,7 @@ importers:
       '@reskript/core': 2.0.0-beta.5
       '@types/inquirer': ^7.3.3
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       globby: ^11.0.4
       inquirer: ^8.1.2
@@ -825,21 +825,21 @@ importers:
     devDependencies:
       '@types/inquirer': 7.3.3
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       typescript: 4.3.5
 
   packages/less-safe-loader:
     specifiers:
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       jest: ^27.0.6
       ts-jest: ^27.0.5
       typescript: ^4.3.5
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
@@ -850,9 +850,9 @@ importers:
       '@reskript/settings': 2.0.0-beta.5
       '@types/dedent': ^0.7.0
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       dedent: ^0.7.0
-      esbuild: ^0.12.21
+      esbuild: ^0.12.23
       eslint: ^7.32.0
       jest: ^27.0.6
       qiankun: ^2.4.8
@@ -861,12 +861,12 @@ importers:
     dependencies:
       '@reskript/settings': link:../settings
       dedent: 0.7.0
-      esbuild: 0.12.22
+      esbuild: 0.12.23
       qiankun: 2.4.9
     devDependencies:
       '@types/dedent': 0.7.0
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
@@ -877,7 +877,7 @@ importers:
       '@reskript/core': 2.0.0-beta.5
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       '@types/sass': ^1.16.1
       eslint: ^7.32.0
       resolve: ^1.20.0
@@ -893,7 +893,7 @@ importers:
       sass-loader: 12.1.0_sass@1.38.1+webpack@5.51.1
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       '@types/sass': 1.16.1
       eslint: 7.32.0
       typescript: 4.3.5
@@ -904,7 +904,7 @@ importers:
       '@reskript/core': 2.0.0-beta.5
       '@reskript/settings': 2.0.0-beta.5
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       '@types/semver': ^7.3.8
       eslint: ^7.32.0
       semver: ^7.3.5
@@ -916,7 +916,7 @@ importers:
       semver: 7.3.5
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       '@types/semver': 7.3.8
       eslint: 7.32.0
       typescript: 4.3.5
@@ -927,7 +927,7 @@ importers:
       '@reskript/core': 2.0.0-beta.5
       '@types/babel__core': ^7.1.15
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       chokidar: ^3.5.2
       eslint: ^7.32.0
       hasha: ^5.2.0
@@ -946,7 +946,7 @@ importers:
     devDependencies:
       '@types/babel__core': 7.1.15
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       jest: 27.0.6
       ts-jest: 27.0.5_92306e36c1a4cf876b1cd4839a977b9c
@@ -957,7 +957,7 @@ importers:
     specifiers:
       '@types/dedent': ^0.7.0
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       '@types/xml2js': ^0.4.9
       change-case: ^4.1.2
       eslint: ^7.32.0
@@ -972,7 +972,7 @@ importers:
     devDependencies:
       '@types/dedent': 0.7.0
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       '@types/xml2js': 0.4.9
       eslint: 7.32.0
       jest: 27.0.6
@@ -983,7 +983,7 @@ importers:
   packages/webpack-plugin-extra-script:
     specifiers:
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       html-webpack-plugin: ^5.3.2
       jest: ^27.0.6
@@ -992,7 +992,7 @@ importers:
       webpack: ^5.51.0
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       html-webpack-plugin: 5.3.2_webpack@5.51.1
       jest: 27.0.6
@@ -1003,7 +1003,7 @@ importers:
   packages/webpack-plugin-interpolate-html:
     specifiers:
       '@types/jest': ^27.0.1
-      '@types/node': ^16.7.1
+      '@types/node': ^16.7.2
       eslint: ^7.32.0
       html-webpack-plugin: ^5.3.2
       jest: ^27.0.6
@@ -1015,7 +1015,7 @@ importers:
       lodash: 4.17.21
     devDependencies:
       '@types/jest': 27.0.1
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       eslint: 7.32.0
       html-webpack-plugin: 5.3.2_webpack@5.51.1
       jest: 27.0.6
@@ -1038,9 +1038,9 @@ importers:
       '@types/ramda': ^0.27.44
       '@types/react': ^17.0.19
       '@types/react-dom': ^17.0.9
-      '@types/styled-components': ^5.1.12
+      '@types/styled-components': ^5.1.13
       antd: ^4.16.13
-      core-js: ^3.16.2
+      core-js: ^3.16.3
       eslint: ^7.32.0
       localforage: ^1.10.0
       nanoid: ^3.1.25
@@ -1054,7 +1054,7 @@ importers:
       webpack: ^5.51.0
     dependencies:
       antd: 4.16.13_react-dom@17.0.2+react@17.0.2
-      core-js: 3.16.2
+      core-js: 3.16.3
       localforage: 1.10.0
       nanoid: 3.1.25
       ramda: 0.27.1
@@ -1074,7 +1074,7 @@ importers:
       '@types/ramda': 0.27.44
       '@types/react': 17.0.19
       '@types/react-dom': 17.0.9
-      '@types/styled-components': 5.1.12
+      '@types/styled-components': 5.1.13
       eslint: 7.32.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -1206,7 +1206,7 @@ packages:
       '@babel/eslint-parser': '>=7.11.0'
       eslint: '>=7.5.0'
     dependencies:
-      '@babel/eslint-parser': 7.15.0_@babel+core@7.15.0+eslint@7.32.0
+      '@babel/eslint-parser': 7.15.0_eslint@7.32.0
       eslint: 7.32.0
       eslint-rule-composer: 0.3.0
 
@@ -4087,13 +4087,13 @@ packages:
     resolution: {integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
     dev: true
 
   /@types/bonjour/3.5.9:
     resolution: {integrity: sha512-VkZUiYevvtPyFu5XtpYw9a8moCSzxgjs5PAFF4yXjA7eYHvzBlXe+eJdqBBNWWVzI1r7Ki0KxMYvaQuhm+6f5A==}
     dependencies:
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
     dev: true
 
   /@types/cheerio/0.22.30:
@@ -4115,13 +4115,13 @@ packages:
     resolution: {integrity: sha512-h8QJa8xSb1WD4fpKBDcATDNGXghFj6/3GRWG6dhmRcu0RX1Ubasur2Uvx5aeEwlf0MwblEC2bMzzMQntxnw/Cw==}
     dependencies:
       '@types/express-serve-static-core': 4.17.24
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
     dev: true
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
     dev: true
 
   /@types/cookie/0.4.1:
@@ -4176,7 +4176,7 @@ packages:
   /@types/express-serve-static-core/4.17.24:
     resolution: {integrity: sha512-3UJuW+Qxhzwjq3xhwXm2onQcFHn76frIYVbTu+kn24LFxI+dEhdfISDFovPB8VpEgW8oQCTpRuCe+0zJxB7NEA==}
     dependencies:
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: true
@@ -4310,6 +4310,10 @@ packages:
   /@types/node/16.7.1:
     resolution: {integrity: sha512-ncRdc45SoYJ2H4eWU9ReDfp3vtFqDYhjOsKlFFUDEn8V1Bgr2RjYal8YT5byfadWIRluhPFU6JiDOl0H6Sl87A==}
 
+  /@types/node/16.7.2:
+    resolution: {integrity: sha512-TbG4TOx9hng8FKxaVrCisdaxKxqEwJ3zwHoCWXZ0Jw6mnvTInpaB99/2Cy4+XxpXtjNv9/TgfGSvZFyfV/t8Fw==}
+    dev: true
+
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
 
@@ -4388,14 +4392,14 @@ packages:
     resolution: {integrity: sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 16.7.1
+      '@types/node': 16.7.2
     dev: true
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
 
-  /@types/styled-components/5.1.12:
-    resolution: {integrity: sha512-sTjc0+gMl08JvOHchQKgEGbbiSexSvWg5khUNSH4kosb7Tl4782AtfWMkAhQmeXMg2vIn6PthGVHFW+U/Dpihg==}
+  /@types/styled-components/5.1.13:
+    resolution: {integrity: sha512-nIIsiQ+Ag/4xnYf9mhzO3zIZ/zOmKN6HImEZifKh2TLibYz8OudzJbvzDu1uvMfX/+bs0B0RDPB2OIcbrrptVQ==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 17.0.19
@@ -4407,6 +4411,14 @@ packages:
     dependencies:
       globby: 11.0.4
       postcss: 7.0.36
+    dev: false
+
+  /@types/stylelint/13.13.2:
+    resolution: {integrity: sha512-5Yt1LQenR7uk+efCydQmN7ubOtO2qJ8Z9K/qqnlW87X1zkIQ8RkMCZbaOgZj/aBrR/h5Q738mJU6CYhXOj9sEg==}
+    dependencies:
+      globby: 11.0.4
+      postcss: 7.0.36
+    dev: true
 
   /@types/through/0.0.30:
     resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
@@ -4431,8 +4443,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@types/webpack-dev-server/4.0.0:
-    resolution: {integrity: sha512-N4deHpkNcWjqrbiqQDjt8TrkaMjgJabJj0Fjfs3B5ql1rhPyJPIEptWuQHx6M73mVc8o4kTR4u3kg65ddZMiQg==}
+  /@types/webpack-dev-server/4.0.1:
+    resolution: {integrity: sha512-KbCNHmBWjMWrMUqf5OeJYu9grCBq2mx9IMdhb33ibOBuYKum4HSOxJpooLg0KsJSLKteeurzTBSa5fkQUvbbYw==}
     dependencies:
       '@types/bonjour': 3.5.9
       '@types/connect-history-api-fallback': 1.3.5
@@ -6394,8 +6406,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /core-js/3.16.2:
-    resolution: {integrity: sha512-P0KPukO6OjMpjBtHSceAZEWlDD1M2Cpzpg6dBbrjFqFhBHe/BwhxaP820xKOjRn/lZRQirrCusIpLS/n2sgXLQ==}
+  /core-js/3.16.3:
+    resolution: {integrity: sha512-lM3GftxzHNtPNUJg0v4pC2RC6puwMd6VZA7vXUczi+SKmCWSf4JwO89VJGMqbzmB7jlK7B5hr3S64PqwFL49cA==}
     requiresBuild: true
     dev: false
 
@@ -7433,8 +7445,8 @@ packages:
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
-  /esbuild/0.12.22:
-    resolution: {integrity: sha512-yWCr9RoFehpqoe/+MwZXJpYOEIt7KOEvNnjIeMZpMSyQt+KCBASM3y7yViiN5dJRphf1wGdUz1+M4rTtWd/ulA==}
+  /esbuild/0.12.23:
+    resolution: {integrity: sha512-qvS4aKnmKikoWGscd5lVAzgobMovlH/JhaWitRiQ8xJx0x1Fym0pqVjMFs43Nvff8WpibeWm+fWoLK88T1U0Xw==}
     hasBin: true
     requiresBuild: true
     dev: false
@@ -9075,8 +9087,8 @@ packages:
       ms: 2.1.3
     dev: true
 
-  /husky/7.0.1:
-    resolution: {integrity: sha512-gceRaITVZ+cJH9sNHqx5tFwbzlLCVxtVZcusME8JYQ8Edy5mpGDOqD8QBCdMhpyo9a+JXddnujQ4rpY2Ff9SJA==}
+  /husky/7.0.2:
+    resolution: {integrity: sha512-8yKEWNX4z2YsofXAMT7KvA1g8p+GxtB1ffV8XtpAEGuXNAbCV5wdNKH+qTpw8SM9fh4aMPDR+yQuKfgnreyZlg==}
     engines: {node: '>=12'}
     hasBin: true
     dev: true
@@ -10977,8 +10989,8 @@ packages:
       repeat-string: 1.6.1
     dev: false
 
-  /marked/3.0.1:
-    resolution: {integrity: sha512-GQtec2MkSCp+ZecV2jBe7+J2fiDXeBFKUBr4981srZDjCaXg0WrtTo9eY2CVc2ZC5YQXkkc0Q8sTZ6c1DB1o2Q==}
+  /marked/3.0.2:
+    resolution: {integrity: sha512-TMJQQ79Z0e3rJYazY0tIoMsFzteUGw9fB3FD+gzuIT3zLuG9L9ckIvUfF51apdJkcqc208jJN2KbtPbOvXtbjA==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: false
