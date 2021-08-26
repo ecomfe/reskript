@@ -35,9 +35,15 @@
     "webpack-bundle-analyzer": "^4.4.2"
   },
   "peerDependencies": {
+    "core-js": "3.x",
     "eslint": "7.x",
     "stylelint": "13.x",
     "typescript": "4.x",
     "webpack": "5.x"
+  },
+  "peerDependenciesMeta": {
+    "core-js": {
+      "optional": true
+    }
   }
 }

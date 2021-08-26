@@ -28,5 +28,13 @@
     "@reskript/settings": "2.0.0-beta.4",
     "jest-cli": "^27.0.6",
     "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "core-js": "3.x"
+  },
+  "peerDependenciesMeta": {
+    "core-js": {
+      "optional": true
+    }
   }
 }
