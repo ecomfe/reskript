@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-lint",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
@@ -33,8 +33,8 @@
     "@babel/eslint-plugin": "^7.13.16",
     "@ecomfe/eslint-config": "^7.2.1",
     "@ecomfe/stylelint-config": "^1.1.2",
-    "@reskript/config-babel": "2.0.0-beta.4",
-    "@reskript/eslint-plugin": "2.0.0-beta.4",
+    "@reskript/config-babel": "2.0.0-beta.5",
+    "@reskript/eslint-plugin": "2.0.0-beta.5",
     "@rushstack/eslint-patch": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",

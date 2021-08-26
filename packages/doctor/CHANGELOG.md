@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+
+### Features
+
+* **doctor:** 增加V2版本迁移的自动化检测 ([#151](https://github.com/ecomfe/reskript/issues/151)) ([650e343](https://github.com/ecomfe/reskript/commit/650e343f1c03f227b0ae439b11f347fdecd3c3e6))
+
+
+
+
+
 # [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
 
 **Note:** Version bump only for package @reskript/doctor
