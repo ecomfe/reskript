@@ -25,7 +25,9 @@
   "dependencies": {
     "@reskript/core": "2.0.0-beta.4",
     "@reskript/settings": "2.0.0-beta.4",
+    "globby": "^11.0.4",
     "log-symbols": "^4.1.0",
-    "ora": "^5.4.0"
+    "ora": "^5.4.0",
+    "semver": "^7.3.5"
   }
 }

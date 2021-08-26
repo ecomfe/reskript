@@ -767,14 +767,18 @@ importers:
       '@types/jest': ^27.0.1
       '@types/node': ^16.7.1
       eslint: ^7.32.0
+      globby: ^11.0.4
       log-symbols: ^4.1.0
       ora: ^5.4.0
+      semver: ^7.3.5
       typescript: ^4.3.5
     dependencies:
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
+      globby: 11.0.4
       log-symbols: 4.1.0
       ora: 5.4.1
+      semver: 7.3.5
     devDependencies:
       '@types/jest': 27.0.1
       '@types/node': 16.7.1
