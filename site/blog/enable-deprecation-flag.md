@@ -1,5 +1,6 @@
 ---
 title: 用全局环境变量做好升级2.0的准备
+date: 2021-08-19
 author: otakustay
 author_url: https://github.com/otakustay
 author_image_url: https://www.gravatar.com/avatar/d7479a703555cc76b277040e5be9b8ca

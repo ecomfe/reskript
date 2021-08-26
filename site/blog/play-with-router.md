@@ -1,5 +1,6 @@
 ---
 title: 用skr play调试需要路由的组件
+date: 2021-08-03
 author: otakustay
 author_url: https://github.com/otakustay
 author_image_url: https://www.gravatar.com/avatar/d7479a703555cc76b277040e5be9b8ca
