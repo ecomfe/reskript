@@ -109,6 +109,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
                 strict: {
                     disableRequireExtension: cmd.strict,
                     caseSensitiveModuleSource: cmd.strict,
+                    typeCheck: cmd.strict,
                 },
                 extras: compact(extras),
             }

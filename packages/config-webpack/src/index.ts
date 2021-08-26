@@ -77,7 +77,7 @@ export const createWebpackConfig = async (context: BuildContext, options: Option
         context.projectSettings.build.thirdParty && 'external',
     ];
     const configurations = await pMap(compact(partials), importPartialWith(context));
-    const internalCreated = mergeBuiltin([...configurations, strictPartial(strict), ...extras]);
+    const internalCreated = mergeBuiltin([...configurations, strictPartial(strict, context.cwd), ...extras]);
     const internals: BuildInternals = {
         rules,
         loader: introduceLoader,

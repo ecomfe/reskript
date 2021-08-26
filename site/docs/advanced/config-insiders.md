@@ -106,6 +106,7 @@ interface BuildInfo {
 
 1. 会检查`import`中路径大小写是否正确，即便你是大小写不敏感的操作系统（比如Windows和macOS），也会检查出来。
 2. 全局禁用`require.ensure`、`require.context`、`require.include`方法，即不再支持CommonJS的动态依赖。
+3. 如果你的当前目录有`tsconfig.json`文件，则会进行类型检查。**这一功能仅在`skr build`时生效，`skr dev`默认关闭**。
 
 ### 其它优化
 

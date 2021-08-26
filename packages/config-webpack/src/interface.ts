@@ -38,4 +38,6 @@ export interface StrictOptions {
     disableRequireExtension?: boolean;
     // 所有的模块路径都是大小写敏感的
     caseSensitiveModuleSource?: boolean;
+    // 开启类型检查
+    typeCheck?: boolean;
 }

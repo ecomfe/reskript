@@ -40,6 +40,7 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
             strict: {
                 disableRequireExtension: cmd.strict,
                 caseSensitiveModuleSource: cmd.strict,
+                typeCheck: false,
             },
             extras: [extra, {output: {publicPath}}],
         }
