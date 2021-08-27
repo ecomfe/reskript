@@ -10,7 +10,7 @@ const isEntryBroken = async (file: string) => {
 };
 
 export default async (cwd: string) => {
-    const entryFiles = await globby('src/entries/**/*.config.js', {cwd});
+    const entryFiles = await globby('src/entries/**/*.config.js', {cwd, absolute: true});
     const brokenEntries = await pFilter(entryFiles, isEntryBroken);
     if (brokenEntries.length) {
         warn(
