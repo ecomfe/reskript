@@ -2,14 +2,13 @@ import path from 'path';
 import {compact} from 'lodash';
 import {Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import ProxyAgent from 'proxy-agent';
+import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin';
 import {merge} from 'webpack-merge';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import ProgressBarPlugin from './ProgressBarPlugin';
-import {addHotModuleToEntry} from './utils';
+import {addHotModuleToEntry, constructProxyConfiguration} from './utils';
 
 const getDevServerMessages = (host: string, port: number, openPage: string = ''): string[] => [
     `Your application is running here: http://${host}:${port}/${openPage}`,
@@ -46,13 +45,6 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
     return configuration;
 };
 
-const createAgent = (possibleProxyURL?: string) => {
-    if (possibleProxyURL) {
-        return new ProxyAgent(possibleProxyURL);
-    }
-    return undefined;
-};
-
 interface Options {
     targetEntry: string;
     proxyDomain?: string;
@@ -70,30 +62,15 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         port,
         hot,
     } = buildEntry.projectSettings.devServer;
-    const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
-    const proxyRules = [
-        ...Object.entries(proxyRewrite),
-        ...apiPrefixes.map(path => [path, `${proxyDomain || defaultProxyDomain}/${path}`]),
-    ];
-    const proxy = proxyRules.reduce(
-        (proxy, [prefix, target]) => {
-            const parsedURL = new URL(`${https ? 'https' : 'http'}://${target}`);
-            proxy[prefix] = {
-                agent,
-                target: `${parsedURL.protocol}//${parsedURL.hostname}${parsedURL.port ? ':' + parsedURL.port : ''}`,
-                pathRewrite: {
-                    [`^${prefix}`]: parsedURL.pathname.replace(/^\//, ''),
-                },
-                changeOrigin: true,
-            };
-            return proxy;
-        },
-        {} as Record<string, any>
-    );
-
+    const proxyOptions = {
+        https,
+        prefixes: apiPrefixes,
+        rewrite: proxyRewrite,
+        targetDomain: proxyDomain || defaultProxyDomain,
+    };
     const baseConfig: DevServerConfiguration = {
         port,
-        proxy,
+        proxy: constructProxyConfiguration(proxyOptions),
         allowedHosts: 'all',
         host: '0.0.0.0',
         hot: hot ? 'only' : false,

@@ -13,7 +13,7 @@
     "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint --max-warnings=0 src",
-    "test": "echo 'No test in @reskript/config-webpack-dev-server'"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.9.2",
@@ -22,6 +22,8 @@
     "@types/node": "^16.7.2",
     "@types/webpack-dev-server": "4.0.1",
     "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.5",
     "webpack": "^5.51.0",
     "webpack-dev-server": "^4.0.0"
@@ -33,11 +35,12 @@
     "@reskript/settings": "2.0.0",
     "chalk": "^4.1.2",
     "cli-progress": "^3.9.0",
-    "friendly-errors-webpack-plugin": "^1.7.0",
+    "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.21",
     "proxy-agent": "^5.0.0",
     "react-refresh": "^0.10.0",
+    "webpack": "^5.51.0",
     "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {
