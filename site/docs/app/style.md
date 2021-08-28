@@ -142,9 +142,9 @@ import '@/styles';
 .root {
     position: fixed;
     top: 0;
-    left: 0
+    left: 0;
     right: 0;
-    height: @haeder-height;
+    height: @header-height;
     display: flex;
     align-items: center;
     padding: 0 20px;
