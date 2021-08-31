@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* **doctor:** 加载入口配置时未转换成绝对路径 ([#157](https://github.com/ecomfe/reskript/issues/157)) ([fc689fa](https://github.com/ecomfe/reskript/commit/fc689fa0f11f0457486c8ace00143e064ff5e22c))
+
+
+
+
+
 # [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
 
 **Note:** Version bump only for package @reskript/doctor

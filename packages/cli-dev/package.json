@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-dev",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,10 +24,10 @@
     "webpack": "^5.51.1"
   },
   "dependencies": {
-    "@reskript/config-webpack": "2.0.0",
-    "@reskript/config-webpack-dev-server": "2.0.0",
-    "@reskript/core": "2.0.0",
-    "@reskript/settings": "2.0.0",
+    "@reskript/config-webpack": "2.1.0",
+    "@reskript/config-webpack-dev-server": "2.1.0",
+    "@reskript/core": "2.1.0",
+    "@reskript/settings": "2.1.0",
     "better-opn": "^3.0.0",
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.21",

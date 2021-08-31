@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-jest",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -28,9 +28,9 @@
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@babel/plugin-transform-modules-commonjs": "^7.15.0",
-    "@reskript/config-babel": "2.0.0",
-    "@reskript/core": "2.0.0",
-    "@reskript/settings": "2.0.0",
+    "@reskript/config-babel": "2.1.0",
+    "@reskript/core": "2.1.0",
+    "@reskript/settings": "2.1.0",
     "babel-jest": "^27.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",

@@ -1,6 +1,6 @@
 {
   "name": "@reskript/babel-plugin-add-react-display-name",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -28,6 +28,6 @@
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@babel/traverse": "^7.15.0",
-    "@reskript/babel-utils": "2.0.0"
+    "@reskript/babel-utils": "2.1.0"
   }
 }
