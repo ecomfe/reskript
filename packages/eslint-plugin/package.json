@@ -24,7 +24,7 @@
     "@babel/eslint-parser": "^7.15.0",
     "@babel/eslint-plugin": "^7.13.16",
     "eslint": "^7.32.0",
-    "jest": "^27.0.6"
+    "jest": "^27.1.0"
   },
   "peerDependencies": {
     "@babel/core": ">=7.11.0"

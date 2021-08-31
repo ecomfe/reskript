@@ -5,6 +5,10 @@ import {EntryObject} from 'webpack';
 import {logger} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface';
 
+const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
+    return 'message' in error && 'code' in error;
+};
+
 const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
 
 const validateEntryConfig = (config: EntryConfig, file: string) => {
@@ -23,11 +27,11 @@ const readEntryConfig = async (file: string): Promise<EntryConfig> => {
         return config;
     }
     catch (ex) {
-        if (ex.code === 'MODULE_NOT_FOUND') {
+        if (isErrorWithCode(ex) && ex.code === 'MODULE_NOT_FOUND') {
             return {};
         }
 
-        logger.error(`Unable to read entry configuration from ${file}: ${ex.message}`);
+        logger.error(`Unable to read entry configuration from ${file}: ${ex instanceof Error ? ex.message : ex}`);
         process.exit(22);
     }
 };

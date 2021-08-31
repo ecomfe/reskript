@@ -1,7 +1,7 @@
 import babelJest from 'babel-jest';
 import {BabelConfigOptions, getTransformBabelConfig} from '@reskript/config-babel';
 
-const getBabelJestTransformer = () => {
+const getBabelJestTransformer = (): unknown => {
     if (!babelJest.createTransformer) {
         throw new Error('Invalid babel jest without createTransformer function');
     }

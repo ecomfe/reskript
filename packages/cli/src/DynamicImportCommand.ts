@@ -7,6 +7,10 @@ import pkgDir from 'pkg-dir';
 import {Command} from 'clipanion';
 import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
 
+const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
+    return 'message' in error && 'code' in error;
+};
+
 const resolve = resolveFrom(process.cwd());
 
 const exec = promisify(childProcess.exec);
@@ -59,8 +63,8 @@ export default abstract class DynamicImportCommand<A> extends Command {
             return run;
         }
         catch (ex) {
-            if (ex.code !== 'MODULE_NOT_FOUND') {
-                logger.error(`Failed to run command: ${ex.message}`);
+            if (!isErrorWithCode(ex) || ex.code !== 'MODULE_NOT_FOUND') {
+                logger.error(`Failed to run command: ${ex instanceof Error ? ex.message : ex}`);
                 process.exit(99);
             }
 

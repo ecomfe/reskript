@@ -38,7 +38,7 @@ export const startServer = async (server: WebpackDevServer): Promise<void> => {
         await server.start();
     }
     catch (ex) {
-        logger.error(ex.message);
+        logger.error(ex instanceof Error ? ex.message : `${ex}`);
         process.exit(22);
     }
 };
