@@ -2,7 +2,7 @@ import compiler from './compiler';
 
 test('default', async () => {
     const code = await compiler();
-    expect(code.includes('export default function SVGToComponent(props)')).toBe(true);
+    expect(code.includes('export default SVGToComponent')).toBe(true);
 });
 
 test('display name', async () => {

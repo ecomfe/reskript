@@ -55,11 +55,15 @@ export default async function lessSafeLoader(this: LoaderContext<Options>, sourc
             },
         };
         const lines = [
-            'import {createElement} from \'react\';',
-            'export default function SVGToComponent(props) {',
-            `    return createElement('svg', {${JSON.stringify(componentProps).slice(1, -1)}, ...props});`,
-            '}',
+            'import {createElement, forwardRef} from \'react\';',
+            'const SVGToComponent = forwardRef(',
+            '    (props, ref) => createElement(',
+            '        \'svg\',',
+            `        {${JSON.stringify(componentProps).slice(1, -1)}, ...props, ref}`,
+            '    )',
+            ');',
             displayName && `SVGToComponent.displayName = ${JSON.stringify(resolveDisplayName(this.resourcePath))};`,
+            'export default SVGToComponent;',
         ];
         callback(null, lines.filter(v => !!v).join('\n'));
     }
