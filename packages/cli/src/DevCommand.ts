@@ -56,6 +56,12 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         {description: 'enable strict build mode to get more source code and dependency checks'}
     );
 
+    open = Option.Boolean(
+        '--open',
+        true,
+        {description: 'auto open page in browser, use --no-open to disable'}
+    );
+
     buildCommandLineArgs() {
         return {
             cwd: this.cwd,
@@ -67,6 +73,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
             host: this.host,
             entry: this.entry,
             strict: this.strict,
+            open: this.open,
         };
     }
 }

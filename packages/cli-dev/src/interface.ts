@@ -9,4 +9,5 @@ export interface DevCommandLineArgs extends WorkModeAware {
     readonly host?: 'localhost' | 'loopback' | 'ip' | {} & string;
     readonly entry: string;
     readonly strict: boolean;
+    readonly open: boolean;
 }

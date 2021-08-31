@@ -17,6 +17,7 @@ title: 本地调试
 --host [value]           设置默认的本地服务器域，可以用localhost、loopback（对应127.0.0.1）、ip（对应本机的局域网IP），也可以指定一个自定义的域名或IP
 --entry [value]          指定用来调试的入口，即在src/entries下的文件名（不包含后缀名），默认为index
 --strict                 打开严格模式，会稍微影响编译速度，增加更多对源码和依赖的检测
+--open                   默认会打开浏览器，使用--no-open可以禁用自动打开功能
 -h, --help               显示帮助信息
 ```
 

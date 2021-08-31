@@ -61,9 +61,11 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
     const server = new WebpackDevServer(devServerConfig, compiler);
     await startServer(server);
 
-    const port = devServerConfig.port!;
-    const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
-    open(openURL);
+    if (cmd.open) {
+        const port = devServerConfig.port!;
+        const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
+        open(openURL);
+    }
 
     return server;
 };
