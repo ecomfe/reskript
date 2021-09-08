@@ -22,9 +22,9 @@ export default (options: StrictOptions = {}, cwd: string): Configuration => {
         module: {
             parser: {
                 javascript: {
-                    requireContext: disableRequireExtension,
-                    requireEnsure: disableRequireExtension,
-                    requireInclude: disableRequireExtension,
+                    requireContext: !disableRequireExtension,
+                    requireEnsure: !disableRequireExtension,
+                    requireInclude: !disableRequireExtension,
                 },
             },
         },
