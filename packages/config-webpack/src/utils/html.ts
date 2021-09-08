@@ -41,7 +41,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry, env: BuildEntry): HTML
             conservativeCollapse: true,
             minifyCSS: true,
             minifyJS: true,
-            removeAttributeQuotes: true,
+            removeAttributeQuotes: false,
             removeEmptyAttributes: true,
             removeOptionalTags: true,
             removeRedundantAttributes: true,
