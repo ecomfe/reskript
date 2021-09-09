@@ -39,6 +39,12 @@ export default {
     log: createLogWith('log'),
     warn: createLogWith('warn', 'yellow'),
     error: createLogWith('error', 'red'),
+    debug: (message: any) => {
+        if (process.env.SKR_LOGGING === 'debug') {
+            // eslint-disable-next-line no-console
+            console.log(message);
+        }
+    },
     // eslint-disable-next-line no-console
     lineBreak: () => console.log(''),
 };

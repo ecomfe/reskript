@@ -21,7 +21,15 @@ const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<
     // NOTE: 如果要改成原生ESM的话，这里得想个别的办法
     delete require.cache[location];
     const {default: requiredSettings} = await import(location) as {default: ClientProjectSettings};
-    validate(requiredSettings);
+
+    try {
+        validate(requiredSettings);
+    }
+    catch (ex) {
+        logger.error(ex instanceof Error ? ex.message : `${ex}`);
+        process.exit(21);
+    }
+
     const {plugins = [], ...clientSettings} = requiredSettings;
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};

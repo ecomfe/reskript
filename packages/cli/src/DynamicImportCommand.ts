@@ -40,8 +40,9 @@ export default abstract class DynamicImportCommand<A> extends Command {
             const rest = this.resolveRestArgs();
             await run(args, rest);
         }
-        catch {
+        catch (ex) {
             logger.error('Command failed, you may submit a issue to https://github.com/ecomfe/reskript/issues/new');
+            logger.debug(ex as any);
             process.exit(99);
         }
     }
