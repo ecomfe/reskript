@@ -1,5 +1,6 @@
 import {sync as resolve} from 'resolve';
 import {compact} from 'lodash';
+import postCSS from 'postcss';
 import {LoaderFactory} from '../interface';
 
 const factory: LoaderFactory = ({mode, projectSettings}) => {
@@ -17,6 +18,7 @@ const factory: LoaderFactory = ({mode, projectSettings}) => {
         loader: resolve('postcss-loader'),
         options: {
             sourceMap: extract,
+            implementation: postCSS,
             postcssOptions: {
                 plugins: compact(plugins),
             },
