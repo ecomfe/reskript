@@ -62,6 +62,7 @@ export interface BuildInspectInitialResource {
 export interface BuildInspectSettings {
     readonly initialResources: BuildInspectInitialResource;
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
+    readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
 export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;

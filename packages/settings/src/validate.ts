@@ -170,6 +170,7 @@ const schema: any = {
                             additionalProperties: false,
                         },
                         duplicatePackages: optionalRuleConfig(sourceFilterSchema),
+                        htmlImportable: optionalRuleConfig(sourceFilterSchema),
                     },
                     additionalProperties: false,
                 },

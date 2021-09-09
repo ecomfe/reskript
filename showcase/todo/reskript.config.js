@@ -1,5 +1,8 @@
 const path = require('node:path');
+const {default: ExtraScriptPlugin} = require('@reskript/webpack-plugin-extra-script');
 const {default: qiankun} = require('@reskript/plugin-qiankun');
+
+const EXTERNAL_NONE = 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js';
 
 exports.featureMatrix = {
     stable: {
@@ -21,8 +24,22 @@ exports.build = {
     script: {
         polyfill: false,
     },
+    finalize: webpackConfig => {
+        webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
+        webpackConfig.optimization.splitChunks = {
+            cacheGroups: {
+                vendors: {
+                    chunks: 'all',
+                    enforce: true,
+                    test: /node_modules/,
+                },
+            },
+        };
+        return webpackConfig;
+    },
     inspect: {
         duplicatePackages: ['warn', {excludes: ['tslib', 'immer', 'color-name', 'is-lite', 'tree-changes']}],
+        htmlImportable: 'error',
     },
 };
 

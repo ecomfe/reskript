@@ -59,6 +59,7 @@ interface BuildInspectInitialResource {
 interface BuildInspectSettings {
     readonly initialResources: BuildInspectInitialResource;
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
+    readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
 type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
@@ -583,3 +584,36 @@ exports.build = {
 ```
 
 每一条报警信息都会告诉你被重复引入的包名，以及被引入的各个版本所在的绝对路径。
+
+#### 检查微前端兼容性
+
+当下有不少前端系统使用[qiankun](https://qiankun.umijs.org/zh/guide)作为微前端框架进行开发，不过qiankun对你的产出会有一些要求，也有不少的开发者没有及时注意这些限制，直到调试时才在运行时发现应用跑不起来。
+
+其中最为典型的一个问题是，qiankun要求你的入口脚本是HTML中的最后一个`<script>`标签，如果你“不幸”在作为入口的`.js`后又插入了一些其它的脚本，那么系统就会无法接入微前端基座了。
+
+为此，我们增加了一个`htmlImportable`的检查，你可以使用如下配置：
+
+```js
+exports.build = {
+    inspect: {
+        htmlImportable: 'error',
+    },
+};
+```
+
+如果最终产出的HTML不符合要求，会出现类似的错误并异常退出：
+
+```
+E  The last script in index-stable.html doesn't reference to an entry script, this can break micro-frontend frameworks like qiankun.
+```
+
+如果有一部分产出的HTML是由你自己控制，且不与微前端框架整合，你可以使用`includes`或`excludes`来控制被检查的HTML文件：
+
+```js
+exports.build = {
+    inspect: {
+        // 干掉自己生成的
+        htmlImportable: ['error', {excludes: ['copyright.html', 'about-*.html]}],
+    },
+};
+```

@@ -142,5 +142,5 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
     logger.lineBreak();
-    inspect(initialStats, projectSettings.build.inspect, {exitOnError: !cmd.analyze});
+    await inspect(initialStats, projectSettings.build.inspect, {cwd: cmd.cwd, exitOnError: !cmd.analyze});
 };

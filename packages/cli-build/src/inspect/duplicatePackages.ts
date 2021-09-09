@@ -1,9 +1,8 @@
 import {StatsCompilation} from 'webpack';
 import {compact, flatMap, uniq} from 'lodash';
-import matcher from 'matcher';
 import {readPackageConfig} from '@reskript/core';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
-import {RuleProcessor} from './utils';
+import {RuleProcessor, isIncluded} from './utils';
 
 const extractUniqueModules = (compilations: StatsCompilation[]): string[] => {
     const modules = flatMap(compilations, c => c.modules);
@@ -30,22 +29,6 @@ const parseName = (name: string): LibraryInfo | null => {
         name: packageName,
         path: pathPrefix + packageName,
     };
-};
-const hasMatchInArray = (value: string, array: string[]) => {
-    return array.some(pattern => matcher.isMatch(value, pattern));
-};
-
-// 以`includes`为优先
-const isIncluded = (name: string, includes?: string[], excludes?: string[]): boolean => {
-    if (includes) {
-        return hasMatchInArray(name, includes);
-    }
-
-    if (excludes && hasMatchInArray(name, excludes)) {
-        return false;
-    }
-
-    return true;
 };
 
 const versionOfPackage = async (location: string): Promise<string> => {

@@ -31,6 +31,7 @@ const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
         },
         inspect: {
             duplicatePackages: 'off',
+            htmlImportable: 'off',
             ...settings?.inspect,
             initialResources: {
                 count: 'print',

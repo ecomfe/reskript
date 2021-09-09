@@ -4,7 +4,8 @@
   "version": "2.1.0",
   "description": "待办列表示例",
   "scripts": {
-    "build": "skr build --clean",
+    "build": "skr build --clean --strict",
+    "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
     "lint": "eslint src",
     "test": "skr test --target=react",
@@ -23,6 +24,7 @@
     "@reskript/cli-test": "2.1.0",
     "@reskript/config-lint": "2.1.0",
     "@reskript/plugin-qiankun": "2.1.0",
+    "@reskript/webpack-plugin-extra-script": "2.1.0",
     "@testing-library/react": "^12.0.0",
     "@types/ramda": "^0.27.44",
     "@types/react": "^17.0.19",
