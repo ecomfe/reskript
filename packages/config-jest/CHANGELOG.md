@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 对node环境的测试也加上第三方ESM模块的处理 ([#168](https://github.com/ecomfe/reskript/issues/168)) ([50ada53](https://github.com/ecomfe/reskript/commit/50ada532c0a74c1c09f283585eca8803fdda9f1c))
+
+
+
+
+
 ## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
 
 
