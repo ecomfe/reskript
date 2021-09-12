@@ -29,7 +29,8 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
     const baseConfig = {
         moduleNameMapper: {
             '\\.(css|less)$': resolve('identity-obj-proxy'),
-            [`\\.(${STATIC_EXTENSIONS.join('|')})$`]: `${unixify(configBasePath)}/mock`,
+            [`\\.(${STATIC_EXTENSIONS.join('|')})$`]: `${unixify(configBasePath)}/mockStatic`,
+            '\\.svg\\?react$': `${unixify(configBasePath)}/mockComponent`,
             '@/(.*)$': '<rootDir>/src/$1',
         },
         globals: {
