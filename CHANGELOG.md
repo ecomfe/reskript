@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 让jest可以mock从svg导入的组件 ([#167](https://github.com/ecomfe/reskript/issues/167)) ([1772ac1](https://github.com/ecomfe/reskript/commit/1772ac1cd843bb2e424869c71d770a28cf96fb63))
+
+
+
+
+
 # [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
 
 
