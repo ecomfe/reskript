@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -30,9 +30,9 @@
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@reskript/config-webpack": "2.1.0",
-    "@reskript/core": "2.1.0",
-    "@reskript/settings": "2.1.0",
+    "@reskript/config-webpack": "2.2.0",
+    "@reskript/core": "2.2.0",
+    "@reskript/settings": "2.2.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "chalk": "^4.1.2",
     "cli-progress": "^3.9.0",
