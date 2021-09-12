@@ -16,8 +16,6 @@ const reactJestConfig = (configBasePath: string) => {
         snapshotSerializers: [
             resolve('enzyme-to-json/serializer'),
         ],
-        // 默认会忽略`node_modules`，所以这里要设置
-        transformIgnorePatterns: [],
     };
 };
 
@@ -47,6 +45,8 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,
             '^.+\\.(md|mdx|txt|tpl)$': resolve('jest-raw-loader'),
         },
+        // 默认会忽略`node_modules`，所以这里要设置
+        transformIgnorePatterns: [],
         coverageReporters: ['json-summary', 'lcov', 'text', 'clover'],
         testMatch: ['**/__tests__/**/*.test.{js,jsx,ts,tsx}'],
         collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx,ts,tsx}'],
