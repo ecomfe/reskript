@@ -16,14 +16,14 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.15",
+    "@types/babel__core": "^7.1.16",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.8",
+    "@types/node": "^16.9.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2",
-    "webpack": "^5.51.1"
+    "typescript": "^4.4.3",
+    "webpack": "^5.52.1"
   },
   "dependencies": {
     "@reskript/core": "2.1.0",

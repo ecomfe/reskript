@@ -18,16 +18,16 @@
   "devDependencies": {
     "@types/dedent": "^0.7.0",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.8",
+    "@types/node": "^16.9.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   },
   "dependencies": {
     "@reskript/settings": "2.1.0",
     "dedent": "^0.7.0",
-    "esbuild": "^0.12.24",
+    "esbuild": "^0.12.26",
     "qiankun": "^2.4.10"
   }
 }

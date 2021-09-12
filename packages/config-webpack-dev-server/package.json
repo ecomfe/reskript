@@ -19,14 +19,14 @@
     "@types/cli-progress": "^3.9.2",
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.172",
-    "@types/node": "^16.7.8",
-    "@types/webpack-dev-server": "4.0.3",
+    "@types/node": "^16.9.1",
+    "@types/webpack-dev-server": "4.1.0",
     "eslint": "^7.32.0",
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2",
+    "typescript": "^4.4.3",
     "webpack": "^5.51.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack-dev-server": "^4.2.0"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
@@ -40,7 +40,7 @@
     "lodash": "^4.17.21",
     "proxy-agent": "^5.0.0",
     "react-refresh": "^0.10.0",
-    "webpack": "^5.51.1",
+    "webpack": "^5.52.1",
     "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {

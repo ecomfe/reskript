@@ -17,18 +17,18 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
-    "@types/babel__core": "^7.1.15",
+    "@types/babel__core": "^7.1.16",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.8",
+    "@types/node": "^16.9.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "react": "^17.0.2",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/traverse": "^7.15.0",
+    "@babel/core": "^7.15.5",
+    "@babel/traverse": "^7.15.4",
     "@reskript/babel-utils": "2.1.0"
   },
   "peerDependencies": {
