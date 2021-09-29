@@ -9,7 +9,7 @@ const Title = styled.h1`
     font-size: 100px;
     margin: 0;
     text-align: center;
-    color: rgba(175, 47, 47, 0.15);
+    color: rgba(175, 47, 47, .15);
 `;
 
 const Meta = styled.aside`

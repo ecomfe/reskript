@@ -7,10 +7,10 @@ import {WorkMode} from './interface';
 
 export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
     const files = [
-        path.join(cwd, '.env'),
+        path.join(cwd, `.env.${mode}.local`),
         path.join(cwd, `.env.${mode}`),
         path.join(cwd, '.env.local'),
-        path.join(cwd, `.env.${mode}.local`),
+        path.join(cwd, '.env'),
     ];
 
     const isWorkspace = await isMonorepo(cwd);

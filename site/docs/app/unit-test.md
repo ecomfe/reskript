@@ -68,7 +68,7 @@ Ran all test suites.
 ```json
 {
   "scripts": {
-    "test": "skr test --target=react --coverage"
+    "test": "skr test --target=react -- --coverage"
   }
 }
 ```
