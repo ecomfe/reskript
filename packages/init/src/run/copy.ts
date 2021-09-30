@@ -1,5 +1,6 @@
 import path from 'path';
-import {promises as fs, existsSync} from 'fs';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
 import ora from 'ora';
 import globby from 'globby';
 import {UserOptions} from '../interface';
@@ -22,19 +23,19 @@ export default async (cwd: string, options: UserOptions) => {
         );
     };
     await Promise.all(files.map(copyFile));
+
     const gitignoreExists = existsSync(path.join(cwd, '.gitignore'));
     if (gitignoreExists) {
-        // Append if there's already a `.gitignore` file there
         const data = await fs.readFile(path.join(cwd, 'gitignore'));
         await fs.appendFile(path.join(cwd, '.gitignore'), data);
         await fs.unlink(path.join(cwd, 'gitignore'));
-    } else {
-        // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
-        // See: https://github.com/npm/npm/issues/1862
+    }
+    else {
         await fs.rename(
             path.join(cwd, 'gitignore'),
             path.join(cwd, '.gitignore')
         );
     }
+
     spinner.succeed();
 };
