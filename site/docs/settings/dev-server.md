@@ -151,13 +151,13 @@ exports.devServer = {
         // 记得调用之前已经有的配置，不要太暴力覆盖
         const {onBeforeSetupMiddleware} = devServerConfig;
         devServerConfig.onBeforeSetupMiddleware = devServer => {
-            onBeforeSetupMiddleware?.(devServer)
+            onBeforeSetupMiddleware?.(devServer);
             devServer.app.get(
                 '/version',
                 (req, res) => {
                     res.status(200).type('html').end(`${packageInfo.name}@${packageInfo.version}`);
-                },
-            ),
+                }
+            );
         };
         return devServerConfig;
     },
