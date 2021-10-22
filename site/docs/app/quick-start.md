@@ -178,7 +178,7 @@ render(
     "start": "skr dev",
     "build": "skr build --clean",
     "lint": "skr lint",
-    "lint-staged": "skr lint --staged"
+    "lint-staged": "skr lint --staged --fix --auto-stage"
   }
 }
 ```

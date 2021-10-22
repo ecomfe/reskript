@@ -49,7 +49,7 @@ npm install --save-dev husky
 {
   "husky": {
     "hooks": {
-      "pre-commit": "skr lint --staged"
+      "pre-commit": "skr lint --staged --fix --auto-stage"
     }
   }
 }

@@ -37,6 +37,12 @@ export default class LintCommand extends DynamicImportCommand<LintCommandLineArg
         {description: 'fix possible lint errors'}
     );
 
+    autoStage = Option.Boolean(
+        '--auto-stage',
+        false,
+        {description: 'auto git add files that staged and not modified'}
+    );
+
     files = Option.Rest();
 
     buildCommandLineArgs() {
@@ -46,6 +52,7 @@ export default class LintCommand extends DynamicImportCommand<LintCommandLineArg
             allowUnsafeReactMethod: this.allowUnsafeReactMethod,
             fix: this.fix,
             strict: this.strict,
+            autoStage: this.autoStage,
         };
     }
 

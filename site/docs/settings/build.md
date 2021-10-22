@@ -348,7 +348,7 @@ npm install --save-dev husky
 
 ```shell
 npx --no-install husky install \
-  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
+  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged --fix --auto-stage"
 ```
 
 这样的配置会告诉`reSKRipt`你已经承诺在每次代码提交时做好检查，此后`reportLintErrors: false`才会生效。

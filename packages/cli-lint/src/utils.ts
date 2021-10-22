@@ -1,9 +1,8 @@
 import path from 'path';
 import globby from 'globby';
-import status, {GitStatusItem} from 'g-status';
-import {isEmpty, flatMap, flatten} from 'lodash';
+import {flatMap, flatten} from 'lodash';
 import {findGitRoot} from '@reskript/core';
-import {LintCommandLineArgs} from './interface';
+import {ResolveOptions} from './interface';
 
 type LintType = 'script' | 'style';
 
@@ -12,34 +11,10 @@ const TYPE_TO_EXTENSIONS = {
     style: ['.css', '.less'],
 };
 
-const isStaged = ({index}: GitStatusItem) => index !== '?' && index !== ' ';
-
-const findChangedFiles = async (paths: string[]): Promise<GitStatusItem[]> => {
-    const files = await status({path: paths});
-
-    const extractTargetFile = (item: GitStatusItem): GitStatusItem | GitStatusItem[] => {
-        const {path, index, workingTree} = item;
-        const status = index === ' ' ? workingTree : index;
-        switch (status) {
-            case 'R':
-                return {
-                    ...item,
-                    path: path.split('->')[1].trim(),
-                };
-            case 'D':
-                return [];
-            default:
-                return item;
-        }
-    };
-
-    return flatMap(files, extractTargetFile);
-};
-
 export const resolveLintFiles = async (
     type: LintType,
     files: string[],
-    {staged, changed}: LintCommandLineArgs
+    {staged, changed, gitStatus}: ResolveOptions
 ): Promise<string[]> => {
     const extensions = TYPE_TO_EXTENSIONS[type];
 
@@ -47,11 +22,10 @@ export const resolveLintFiles = async (
         // 当前目录可能不在git根目录下，所有的路径要相应做一次修复
         const gitRoot = await findGitRoot() || process.cwd();
         const cwdRelative = path.relative(gitRoot, process.cwd());
-        const paths = extensions.map(extension => `${cwdRelative ? cwdRelative + '/' : ''}*${extension}`);
-        const files = await findChangedFiles(paths);
+        const files = staged ? gitStatus.staged : gitStatus.modified;
         return files
-            .filter(staged ? isStaged : () => true)
-            .map(entry => path.relative(cwdRelative, entry.path))
+            .filter(v => extensions.includes(path.extname(v)))
+            .map(v => path.relative(cwdRelative, v))
             .filter(v => !v.startsWith('..'));
     }
 
@@ -67,11 +41,8 @@ export const resolveLintFiles = async (
 
         return extensions.map(extension => `${file}/**/*${extension}`);
     };
-
-    const fileOrFolders = isEmpty(files) ? ['.', 'src'] : files;
+    const fileOrFolders = files.length ? files : ['.', 'src'];
     const globs = flatMap(fileOrFolders, pathToGlob);
     const matchedFiles = await Promise.all(globs.map(pattern => globby(pattern)));
-    return flatten(matchedFiles)
-        .filter(filename => !filename.includes('__tests__/'))
-        .filter(filename => extensions.includes(path.extname(filename)));
+    return flatten(matchedFiles).filter(v => extensions.includes(path.extname(v)));
 };

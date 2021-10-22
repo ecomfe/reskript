@@ -246,7 +246,7 @@ importers:
       '@types/node': ^16.9.1
       eslint: ^7.32.0
       eslint-formatter-pretty: ^4.1.0
-      g-status: ^2.0.2
+      execa: ^5.1.1
       globby: ^11.0.4
       lodash: ^4.17.21
       stylelint: ^13.13.1
@@ -256,7 +256,7 @@ importers:
       '@reskript/core': link:../core
       eslint: 7.32.0
       eslint-formatter-pretty: 4.1.0
-      g-status: 2.0.2
+      execa: 5.1.1
       globby: 11.0.4
       lodash: 4.17.21
       stylelint: 13.13.1
@@ -746,9 +746,12 @@ importers:
       dotenv-expand: ^5.1.0
       eslint: ^7.32.0
       find-up: ^5.0.0
+      g-status: ^2.0.2
       globby: ^11.0.4
+      jest: ^27.1.1
       pkg-dir: ^5.0.0
       resolve: ^1.20.0
+      ts-jest: ^27.0.5
       typescript: ^4.4.3
     dependencies:
       chalk: 4.1.2
@@ -756,6 +759,7 @@ importers:
       dotenv: 10.0.0
       dotenv-expand: 5.1.0
       find-up: 5.0.0
+      g-status: 2.0.2
       globby: 11.0.4
       pkg-dir: 5.0.0
       resolve: 1.20.0
@@ -764,6 +768,8 @@ importers:
       '@types/jest': 27.0.1
       '@types/node': 16.9.1
       eslint: 7.32.0
+      jest: 27.1.1
+      ts-jest: 27.0.5_04e1385bcb7e61957a9335c26551e89f
       typescript: 4.4.3
 
   packages/doctor:

@@ -58,7 +58,7 @@ export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
 
             And create hook in your project root:
 
-            npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
+            npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged --fix --auto-stage"
         `;
         logger.warn(warning);
         process.exit(21);

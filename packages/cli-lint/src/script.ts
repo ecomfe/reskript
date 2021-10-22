@@ -2,12 +2,12 @@ import {ESLint} from 'eslint';
 import {resolveCacheLocation, pFilter} from '@reskript/core';
 import {getScriptLintConfig} from '@reskript/config-lint';
 import {resolveLintFiles} from './utils';
-import {LintCommandLineArgs} from './interface';
+import {ResolveOptions} from './interface';
 
 type LintResult = ESLint.LintResult;
 type LintOptions = ESLint.Options;
 
-export default async (files: string[], cmd: LintCommandLineArgs): Promise<LintResult[]> => {
+export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[]> => {
     const resolvedFiles = await resolveLintFiles('script', files, cmd);
 
     // 因为`ESLint`的创建和调用非常消耗时间（500ms+），所以这里做一个快速短路，在没有文件的时候就跳过了

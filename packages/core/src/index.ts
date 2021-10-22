@@ -7,3 +7,4 @@ export * from './flag';
 export * from './deprecate';
 export * from './async';
 export * from './resolve';
+export * from './git';

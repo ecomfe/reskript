@@ -13,6 +13,7 @@ title: 检查代码规范
 --staged                     仅检查在git中有变更且已经通过git add的文件
 --allow-unsafe-react-method  允许React组件中有UNSAFE_*的方法，用于版本过渡
 --fix                        自动修复可以修复的编码问题
+--auto-stage                 在修复问题后自动add已经git add且没有其它修改的文件
 -h, --help                   显示帮助信息
 ```
 
@@ -85,7 +86,7 @@ npm install --save-dev husky
 
 ```shell
 npx --no-install husky install \
-  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged"
+  && npx --no-install husky add .husky/pre-commit "npx --no-install skr lint --staged --fix --auto-stage"
 ```
 
 当然你也可以使用[lint-staged](https://www.npmjs.com/package/lint-staged)来实现类似的能力，此时`package.json`中的配置大致是：

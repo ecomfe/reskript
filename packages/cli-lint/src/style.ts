@@ -4,7 +4,7 @@ import {isEmpty, flatten} from 'lodash';
 import {ESLint, Linter} from 'eslint';
 import {resolveCacheLocation} from '@reskript/core';
 import {getStyleLintConfig} from '@reskript/config-lint';
-import {LintCommandLineArgs} from './interface';
+import {ResolveOptions} from './interface';
 import {resolveLintFiles} from './utils';
 
 type LintResult = ESLint.LintResult;
@@ -50,7 +50,7 @@ const allowCustomConfig = (baseConfig: Record<string, any>) => (
         : baseConfig
 );
 
-export default async (files: string[], cmd: LintCommandLineArgs): Promise<LintResult[]> => {
+export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[]> => {
     const lintingFiles = await resolveLintFiles('style', files, cmd);
 
     if (isEmpty(lintingFiles)) {

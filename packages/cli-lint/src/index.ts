@@ -1,8 +1,9 @@
 import {stubTrue} from 'lodash';
+import execa from 'execa';
 import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
-import {logger} from '@reskript/core';
-import {LintCommandLineArgs} from './interface';
+import {logger, gitStatus, findGitRoot} from '@reskript/core';
+import {LintCommandLineArgs, ResolveOptions} from './interface';
 import lintScripts from './script';
 import lintStyles from './style';
 
@@ -25,12 +26,25 @@ const filterUnwantedReports = (report: LintResult[], cmd: LintCommandLineArgs): 
 };
 
 export const run = async (cmd: LintCommandLineArgs, files: string[]): Promise<void> => {
-    const [scriptResults, styleResults] = await Promise.all([lintScripts(files, cmd), lintStyles(files, cmd)]);
+    const gitRoot = await findGitRoot() || process.cwd();
+    const status = await gitStatus(process.cwd());
+    const options: ResolveOptions = {...cmd, gitRoot, gitStatus: status};
+    const [scriptResults, styleResults] = await Promise.all([lintScripts(files, options), lintStyles(files, options)]);
     const lintResults = filterUnwantedReports([...scriptResults, ...styleResults], cmd);
 
     const hasError = lintResults.some(v => v.errorCount > 0);
     const hasWarn = lintResults.some(v => v.warningCount > 0);
     const isLintFailed = cmd.strict ? hasError || hasWarn : hasError;
+
+    if (cmd.autoStage) {
+        // 把之前已经加入索引的部分加回去
+        logger.debug(`stage ${status.stagedOnly.length} files`);
+        await execa(
+            'git',
+            ['add', ...status.stagedOnly],
+            {cwd: gitRoot}
+        );
+    }
 
     if (hasError || hasWarn) {
         const output = eslintPrettyFormatter(lintResults);
