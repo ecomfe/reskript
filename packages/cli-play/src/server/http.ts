@@ -67,6 +67,7 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     const service = createService(componentModulePath);
 
     // HTTP接口
+    app.get('/play/ok', (req, res) => res.end('OK'));
     app.get(
         '/play/cases',
         async (req, res) => {

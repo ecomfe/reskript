@@ -1,5 +1,6 @@
 import {useState, CSSProperties, ReactNode, useCallback} from 'react';
 import dedent from 'dedent';
+import Guard from './Guard';
 import Sidebar from './Sidebar';
 import Render from './Render';
 import Editor from './Editor';
@@ -37,7 +38,7 @@ interface Props extends DynamicContext {
     renderPreview: (content: ReactNode) => ReactNode;
 }
 
-export default function Playground(props: Props) {
+function MainContent(props: Props) {
     const {
         componentName,
         componentType,
@@ -106,5 +107,13 @@ export default function Playground(props: Props) {
                 onUpdateCase={updateCase}
             />
         </div>
+    );
+}
+
+export default function PlayGround(props: Props) {
+    return (
+        <Guard>
+            <MainContent {...props} />
+        </Guard>
     );
 }
