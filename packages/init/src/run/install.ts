@@ -39,7 +39,7 @@ export default async (cwd: string, options: UserOptions) => {
         'Installing development dependencies',
         ['-D'],
         [
-            'eslint',
+            'eslint@7.x', // NOTE: `eslint 8.x`需要更新的Node版本，需要下个大版本更新
             'stylelint',
             'typescript',
             'webpack',
