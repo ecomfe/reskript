@@ -1,41 +1,52 @@
 import path from 'path';
-import fs from 'fs';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
 import {EntryObject} from 'webpack';
+import {logger} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface';
 
-const EMPTY_ENTRY_CONFIG: Required<EntryConfig> = {
-    entry: {},
-    html: {},
+const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
+    return 'message' in error && 'code' in error;
 };
 
-const ENTRY_CONFIG_KEYS = Object.keys(EMPTY_ENTRY_CONFIG);
+const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
 
-const isLegacyConfig = (config: any): config is Record<string, any> => {
-    return ENTRY_CONFIG_KEYS.every(k => config[k] === undefined);
+const validateEntryConfig = (config: EntryConfig, file: string) => {
+    const keys = Object.keys(config);
+
+    if (keys.some(v => !ALLOWED_ENTRY_KEYS.has(v))) {
+        logger.error(`Entry configuration ${file} has invalid keys, only "entry" and "html" are allowed.`);
+        process.exit(21);
+    }
 };
 
-const readEntryConfig = (file: string): EntryConfig => {
+const readEntryConfig = async (file: string): Promise<EntryConfig> => {
     try {
-        // eslint-disable-next-line global-require
-        const config = require(path.join(file)) as Record<string, any>;
-        return isLegacyConfig(config) ? {html: config} : config;
+        const {default: config}: {default: EntryConfig} = await import(path.join(file));
+        validateEntryConfig(config, file);
+        return config;
     }
     catch (ex) {
-        return {};
+        if (isErrorWithCode(ex) && ex.code === 'MODULE_NOT_FOUND') {
+            return {};
+        }
+
+        logger.error(`Unable to read entry configuration from ${file}: ${ex instanceof Error ? ex.message : ex}`);
+        process.exit(22);
     }
 };
 
 const DEFAULT_HTML_TEMPLATE = path.resolve(__dirname, '..', 'assets', 'default-html.ejs');
 
 const resolveEntryTemplate = (file: string): string => {
-    return fs.existsSync(file) ? file : DEFAULT_HTML_TEMPLATE;
+    return existsSync(file) ? file : DEFAULT_HTML_TEMPLATE;
 };
 
 const POSSIBLE_ENTRY_EXTENSION_REGEX = /\.[jt]sx?$/;
 
 const ALLOWED_ENTRY_EXTENSIONS = ['.js', '.jsx', '.ts', '.tsx'];
 
-const resolveDirectoryEntry = (dir: string, shouldInclude: (name: string) => boolean): AppEntry | null => {
+const resolveDirectoryEntry = async (dir: string, shouldInclude: (name: string) => boolean) => {
     const name = path.basename(dir);
 
     if (!shouldInclude(name)) {
@@ -43,20 +54,22 @@ const resolveDirectoryEntry = (dir: string, shouldInclude: (name: string) => boo
     }
 
     const possibleEntryFiles = ALLOWED_ENTRY_EXTENSIONS.map(e => path.join(dir, 'index' + e));
-    const entry = possibleEntryFiles.find(fs.existsSync);
+    const entry = possibleEntryFiles.find(existsSync);
     if (entry) {
-        return {
+        const config = await readEntryConfig(path.join(dir, 'index.config.js'));
+        const appEntry: AppEntry = {
             name,
+            config,
             file: entry,
             template: resolveEntryTemplate(path.join(dir, 'index.ejs')),
-            config: readEntryConfig(path.join(dir, 'index.config.js')),
         };
+        return appEntry;
     }
 
     return null;
 };
 
-const resolveFileEntry = (file: string, shouldInclude: (name: string) => boolean): AppEntry | null => {
+const resolveFileEntry = async (file: string, shouldInclude: (name: string) => boolean) => {
     const extension = path.extname(file);
 
     if (!ALLOWED_ENTRY_EXTENSIONS.includes(extension) || file.includes('.config.')) {
@@ -70,17 +83,19 @@ const resolveFileEntry = (file: string, shouldInclude: (name: string) => boolean
     }
 
     const base = file.replace(POSSIBLE_ENTRY_EXTENSION_REGEX, '');
-    return {
+    const config = await readEntryConfig(`${base}.config.js`);
+    const appEntry: AppEntry = {
         file,
+        config,
         name: path.basename(file, extension),
         template: resolveEntryTemplate(`${base}.ejs`),
-        config: readEntryConfig(`${base}.config.js`),
     };
+    return appEntry;
 };
 
 // `targetBase`可以是`src/entries/index.js`这样的具体文件，也可以是`src/entries/index`这样的目录
-export const resolveEntry = (targetBase: string, shouldInclude: (name: string) => boolean): AppEntry | null => {
-    const stat = fs.statSync(targetBase);
+export const resolveEntry = async (targetBase: string, shouldInclude: (name: string) => boolean) => {
+    const stat = await fs.stat(targetBase);
 
     return stat.isDirectory()
         ? resolveDirectoryEntry(targetBase, shouldInclude)

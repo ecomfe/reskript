@@ -10,9 +10,7 @@ title: 配置解密
 
 ### core-js
 
-默认使用`useBuiltins: 'usage'`来引入`core-js`，默认`core-js`使用`3.x`版本。
-
-`core-js`的引用会被转换成一个内部的路径，最终通过`alias`导到`@reskript/config-webpack`依赖的`core-js@3`上去。这样可以在你不主动安装`core-js`的前提下，解决`core-js@2`被放到顶层`node_modules`里产生的引用问题。
+默认使用`useBuiltins: 'usage'`来引入`core-js`，你需要自行安装`core-js`的`3.x`版本。
 
 ### 组件名称
 
@@ -102,9 +100,15 @@ interface BuildInfo {
 
 **你不能直接用`$build`对象哦，必须用`$build.version`这样的常量才会被替换**。
 
-### 其它优化
+### 严格模式
 
-会检查`import`中路径大小写是否正确，即便你是大小写不敏感的操作系统（比如Windows和macOS），也会检查出来。
+在`skr build`和`skr dev`中使用`--strict`参数后，会进入严格模式，严格模式下将额外增加以下检测：
+
+1. 会检查`import`中路径大小写是否正确，即便你是大小写不敏感的操作系统（比如Windows和macOS），也会检查出来。
+2. 全局禁用`require.ensure`、`require.context`、`require.include`方法，即不再支持CommonJS的动态依赖。
+3. 如果你的当前目录有`tsconfig.json`文件，则会进行类型检查。**这一功能仅在`skr build`时生效，`skr dev`默认关闭**。
+
+### 其它优化
 
 对于`moment`的本地化语言包有特殊处理，会只引入`en`和`zh-CN`两个，所以你要支持其它语言就比较折腾了，可以提个issue来问。
 

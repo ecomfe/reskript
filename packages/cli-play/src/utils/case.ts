@@ -4,7 +4,7 @@ import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
 import unified from 'unified';
 import {Content, Root, Text, Code, List} from 'mdast';
-import {currentUserName} from '@reskript/core';
+import {currentUserName, pMap} from '@reskript/core';
 import {PlayCase, PlayCaseMeta} from '../interface';
 import {formatTime} from './time';
 
@@ -62,12 +62,12 @@ const parseMeta = (metaNode: List): PlayCaseMeta => {
     return meta;
 };
 
-const extractMeta = (metaNode: Content): PlayCaseMeta => {
+const extractMeta = async (metaNode: Content): Promise<PlayCaseMeta> => {
     const parsedMeta: PlayCaseMeta = metaNode.type === 'list'
         ? parseMeta(metaNode)
         : {createAt: '', createBy: '', lastRunAt: '', lastRunBy: ''};
     const now = new Date();
-    const user = currentUserName();
+    const user = await currentUserName();
     if (!parsedMeta.createAt) {
         parsedMeta.createAt = formatTime(now);
         parsedMeta.createBy = user;
@@ -79,7 +79,7 @@ const extractMeta = (metaNode: Content): PlayCaseMeta => {
     return parsedMeta;
 };
 
-const parseToCase = ([heading, meta, ...nodes]: Content[]): PlayCase | null => {
+const parseToCase = async ([heading, meta, ...nodes]: Content[]): Promise<PlayCase | null> => {
     if (heading.type !== 'heading' || heading.depth !== 2) {
         return null;
     }
@@ -91,11 +91,12 @@ const parseToCase = ([heading, meta, ...nodes]: Content[]): PlayCase | null => {
     }
 
     const description = stringifyNodesToMarkdown(nodes.filter(v => v !== replCodeBlock));
+    const metaInfo = await extractMeta(meta);
     return {
         name: (heading.children[0] as Text).value,
         description: description.trim(),
         code: (replCodeBlock as Code).value,
-        ...extractMeta(meta),
+        ...metaInfo,
     };
 };
 
@@ -123,13 +124,14 @@ export const splitToCaseNodes = (markdown: string): Content[][] => {
     return [...saved, workingInProgress];
 };
 
-export const parseMarkdownToCases = (markdown: string): PlayCase[] => {
+export const parseMarkdownToCases = async (markdown: string): Promise<PlayCase[]> => {
     if (!markdown) {
         return [];
     }
 
     const nodes = splitToCaseNodes(markdown);
-    return compact(nodes.map(parseToCase));
+    const cases = await pMap(nodes, parseToCase);
+    return compact(cases);
 };
 
 export const serializeCaseToMarkdown = (caseToSerialize: PlayCase): string => {
@@ -152,10 +154,10 @@ const isMatchCaseName = (nodes: Content[], name: string): boolean => {
     return heading.type === 'heading' && heading.depth === 2 && (heading.children[0] as Text).value === name;
 };
 
-export const replaceLastRun = (markdown: string, caseName: string, time: string, user: string) => {
+export const replaceLastRun = async (markdown: string, caseName: string, time: string, user: string) => {
     const nodes = splitToCaseNodes(markdown);
     const nodesToUpdate = nodes.find(v => isMatchCaseName(v, caseName));
-    const caseToUpdate = nodesToUpdate ? parseToCase(nodesToUpdate) : null;
+    const caseToUpdate = nodesToUpdate ? await parseToCase(nodesToUpdate) : null;
 
     if (!caseToUpdate || !nodesToUpdate) {
         throw new Error(`Cannot find a case named ${caseName}`);

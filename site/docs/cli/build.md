@@ -15,6 +15,7 @@ title: 构建应用
 --build-target [value]      指定构建的目标特性名称，如果有这个参数，最后会生成一个index.html包含该特性集
 --feature-only [value]      只构建指定的特性名称，其它的特性名称不参与构建
 --entries-only [entries...] 只构建指定的入口文件，可以指定多个入口
+--strict                    打开严格模式，会稍微影响编译速度，增加更多对源码和依赖的检测
 --analyze                   启用对构建产物的分析功能
 --profile                   在构建产出中加入性能追踪的能力
 --no-source-maps            构建时不产出source map
@@ -62,6 +63,10 @@ skr build --entries-only=foo --entries-only=bar
 ```
 
 通过`--entries-only`参数，指定一个或多个入口进行构建。这在一个大型项目通过入口分割成多个可单独发布的小项目时能提升构建速度。但通常来说我们更推荐使用monorepo的形式组织多个子模块构成的大型项目，而不是通过`--entries-only`参数来处理。
+
+## 严格模式
+
+当使用`--strict`参数后，构建会进入严格模式，请参考[配置解密 - 严格模式](../advanced/config-insiders#严格模式)了解这个开关的作用。
 
 ## 产出分析
 

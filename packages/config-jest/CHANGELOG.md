@@ -3,6 +3,250 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 对node环境的测试也加上第三方ESM模块的处理 ([#168](https://github.com/ecomfe/reskript/issues/168)) ([50ada53](https://github.com/ecomfe/reskript/commit/50ada532c0a74c1c09f283585eca8803fdda9f1c))
+
+
+
+
+
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 让jest可以mock从svg导入的组件 ([#167](https://github.com/ecomfe/reskript/issues/167)) ([1772ac1](https://github.com/ecomfe/reskript/commit/1772ac1cd843bb2e424869c71d770a28cf96fb63))
+
+
+
+
+
+# [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 非react测试也共享路径别名等配置 ([#162](https://github.com/ecomfe/reskript/issues/162)) ([8e893ec](https://github.com/ecomfe/reskript/commit/8e893ecfbc009b41f23f563ecddbdf712016fc9c))
+
+
+
+
+
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+* feat(dev)!: 支持webpack-dev-server 4版本 (#123) ([40f0478](https://github.com/ecomfe/reskript/commit/40f047851e36c37e1f572e4945d9872e1bc11edf)), closes [#123](https://github.com/ecomfe/reskript/issues/123)
+* fix(build)!: 由用户自行安装core-js (#137) ([9af1569](https://github.com/ecomfe/reskript/commit/9af1569255ae166771be8a0ccaef4e133b5bc7d9)), closes [#137](https://github.com/ecomfe/reskript/issues/137)
+
+
+### BREAKING CHANGES
+
+* `webpack-dev-server`更新至`4.x`版本，具体参考[官方迁移指南](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md)
+* `devServer.hot`的类型修改为`boolean`
+* `config-babel`的`hot`配置类型修改为`boolean`
+* 不再处理`core-js`的引入，用户必须在项目中自行安装`core-js@3`
+
+
+
+
+
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Features
+
+* **play:** 让play支持React 18和并发模式 ([#122](https://github.com/ecomfe/reskript/issues/122)) ([31ec53e](https://github.com/ecomfe/reskript/commit/31ec53e502f3c85357ade52d78cc493d66145cd9))
+
+
+
+
+
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **test:** 处理第三方包的ESM在jest中无法解析的问题 ([#115](https://github.com/ecomfe/reskript/issues/115)) ([75d6470](https://github.com/ecomfe/reskript/commit/75d64708799b5bfcf932e88944eaa7f1d5425e85))
+
+
+
+
+
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [1.13.0](https://github.com/ecomfe/reskript/compare/v1.12.2...v1.13.0) (2021-08-05)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.12.2](https://github.com/ecomfe/reskript/compare/v1.12.1...v1.12.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* **config-jest:** 修复生成的配置对jest-raw-loader引用路径错误 ([7e163cb](https://github.com/ecomfe/reskript/commit/7e163cb147bfa30263a65ebadf2f266d8bea5563))
+
+
+
+
+
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.11.2](https://github.com/ecomfe/reskript/compare/v1.11.1...v1.11.2) (2021-07-28)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.11.1](https://github.com/ecomfe/reskript/compare/v1.11.0...v1.11.1) (2021-07-25)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+**Note:** Version bump only for package @reskript/config-jest
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 

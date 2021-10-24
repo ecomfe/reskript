@@ -1,25 +1,98 @@
-import {CommandConfig} from '@reskript/core';
+import webpack, {Configuration as WebpackConfiguration} from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import open from 'better-opn';
+import {watchProjectSettings} from '@reskript/settings';
+import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
+import {logger, prepareEnvironment} from '@reskript/core';
+import {
+    createWebpackDevServerPartial,
+    createWebpackDevServerConfig,
+    injectDevElements,
+} from '@reskript/config-webpack-dev-server';
 import {DevCommandLineArgs} from './interface';
-import run from './run';
+import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
 
-const command: CommandConfig<DevCommandLineArgs> = {
-    run,
-    command: 'dev',
-    description: 'Start dev server for debugging',
-    args: [
-        ['--cwd [value]', 'override current working directory', process.cwd()],
-        ['--mode [value]', 'set build mode, default to "development"', 'development'],
-        // DEPRECATED: 2.0废弃
-        ['--src [value]', '[DEPRECATED] use --src-dir instead'],
-        ['--src-dir [value]', 'specify the directory containing source files relative to cwd', 'src'],
-        ['--entries-dir [value]', 'specify the directory containing entry files', 'entries'],
-        ['--build-target [value]', 'set build target, default to "dev"', 'dev'],
-        ['--proxy-domain [domain]', 'set api proxy domain, only domain part (www.example.com) is required'],
-        // DEPRECATED: 2.0废弃
-        ['--open [value]', '[DEPRECATED] use --host instead'],
-        ['--host [value]', 'default server host, "localhost" or "loopback" or "ip" or custom host string'],
-        ['--entry [value]', 'specify an entry as the default page', 'index'],
-    ],
+export {DevCommandLineArgs};
+
+process.env.OPEN_MATCH_HOST_ONLY = 'true';
+
+interface ServerStartContext {
+    buildContext: BuildContext;
+    host: DevCommandLineArgs['host'];
+    extra: WebpackConfiguration;
+    publicPath: string | undefined;
+}
+
+const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStartContext> => {
+    const [buildContext, host] = await Promise.all([createBuildContext(cmd), resolveHost(cmd.host)]);
+    const buildingPartial = createWebpackDevServerPartial(buildContext, host);
+    const resolvingPublicPath = resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
+    const [extra, publicPath] = await Promise.all([buildingPartial, resolvingPublicPath]);
+    return {buildContext, host, extra, publicPath};
 };
 
-export default command;
+const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
+    const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
+    const hot = buildContext.projectSettings.devServer.hot;
+    const config = await createWebpackConfig(
+        buildContext,
+        {
+            strict: {
+                disableRequireExtension: cmd.strict,
+                caseSensitiveModuleSource: cmd.strict,
+                typeCheck: false,
+            },
+            extras: [extra, {output: {publicPath}}],
+        }
+    );
+    const devServerConfig = await createWebpackDevServerConfig(
+        buildContext,
+        {targetEntry: cmd.entry, proxyDomain: cmd.proxyDomain}
+    );
+    const injectOptions = {
+        config,
+        devServerConfig,
+        hot,
+        entry: cmd.entry,
+        resolveBase: __dirname,
+    };
+    const devInjected = await injectDevElements(injectOptions);
+    const compiler = webpack(devInjected);
+    const server = new WebpackDevServer(devServerConfig, compiler);
+    await startServer(server);
+
+    if (cmd.open) {
+        const port = devServerConfig.port!;
+        const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
+        open(openURL);
+    }
+
+    return server;
+};
+
+export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
+    process.env.NODE_ENV = cmd.mode;
+    await prepareEnvironment(cmd.cwd, cmd.mode);
+
+    let startingServer = startDevServer(cmd);
+    let nextStart: (() => void) | null = null;
+    const restart = async () => {
+        logger.log('Detected reskript.config.js change, restarting dev server...');
+
+        if (nextStart) {
+            return;
+        }
+
+        nextStart = () => {
+            startingServer = startDevServer(cmd);
+            nextStart = null;
+        };
+        const server = await startingServer;
+        await server.stop();
+        if (nextStart) {
+            nextStart();
+        }
+    };
+    const listen = await watchProjectSettings(cmd, 'dev');
+    listen(restart);
+};

@@ -18,6 +18,10 @@ title: FAQ
 
 如果希望一个与`reSKRipt`的`less`处理一致的方案，请使用[@reskript/plugin-sass](plugins/sass)插件，具体的`.less`文件处理逻辑请参考[编写样式](app/style)章节的说明。
 
+> 我想使用`tailwind`来写样式。
+
+参考[settings/build#特殊第三方库的优化]章节，在`reskript.config.js`中的`exports.build.uses`配置中加上`"tailwind"`，并根据[官网文档](https://docs.tailwindchina.com/docs/installation#-1)初始化配置、引入样式即可。
+
 > 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
 
 参考[仅构建指定入口](cli/build#仅构建指定入口)使用`skr build --entries-only`参数。
@@ -47,6 +51,12 @@ title: FAQ
 > 我想在CI环境中保留缓存，多次构建利用缓存提速。
 
 参考[skr build命令参数](cli/build#参数)中的`--cache-dir`指定一个目录存放缓存，并在CI配置中将该目录设定为持久化。
+
+## 本地调试相关
+
+> 我在远程IDE上开发，启动服务后打开的页面是`localhost`，本机无法访问。
+
+参考[dev命令](cli/dev)与[play命令](cli/play)的文档，其中`--host`参数可以指定绑定的主机名，使用`--host=ip`可显示为远程机器的IP地址。
 
 ## 代码检查相关
 

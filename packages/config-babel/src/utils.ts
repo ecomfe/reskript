@@ -4,11 +4,10 @@ import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface';
 const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
     uses: ['antd', 'lodash'],
     mode: 'development',
-    hot: 'none',
+    hot: false,
     hostType: 'application',
     polyfill: false,
     modules: false,
-    defaultImportOptimization: true,
     displayName: 'auto',
     cwd: process.cwd(),
     srcDirectory: 'src',

@@ -1,7 +1,6 @@
 import {ESLint} from 'eslint';
-import {resolveCacheLocation} from '@reskript/core';
+import {resolveCacheLocation, pFilter} from '@reskript/core';
 import {getScriptLintConfig} from '@reskript/config-lint';
-import pFilter from 'p-filter';
 import {resolveLintFiles} from './utils';
 import {LintCommandLineArgs} from './interface';
 
@@ -20,7 +19,7 @@ export default async (files: string[], cmd: LintCommandLineArgs): Promise<LintRe
         baseConfig: getScriptLintConfig(),
         cache: true,
         fix: cmd.fix,
-        cacheLocation: resolveCacheLocation('eslint'),
+        cacheLocation: await resolveCacheLocation('eslint'),
     };
     const cli = new ESLint(cliConfig);
     const lintingFiles = await pFilter(resolvedFiles, file => cli.isPathIgnored(file).then(ignored => !ignored));

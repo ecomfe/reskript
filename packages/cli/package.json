@@ -1,33 +1,44 @@
 {
   "name": "@reskript/cli",
-  "version": "1.10.0",
-  "main": "dist/index.js",
+  "version": "2.2.2",
   "license": "MIT",
+  "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "skr": "./dist/index.js"
+    "skr": "./bin/skr.mjs"
   },
   "engines": {
-    "node": ">=14.13.1"
+    "node": ">=14.14.0"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "lint": "eslint src",
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
     "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
-    "@types/semver": "^7.3.7",
-    "eslint": "^7.30.0",
-    "typescript": "^4.3.5"
+    "@reskript/cli-babel": "2.2.2",
+    "@reskript/cli-build": "2.2.2",
+    "@reskript/cli-dev": "2.2.2",
+    "@reskript/cli-lint": "2.2.2",
+    "@reskript/cli-play": "2.2.2",
+    "@reskript/cli-test": "2.2.2",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.1",
+    "eslint": "^7.32.0",
+    "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@reskript/core": "1.10.0",
-    "commander": "^8.0.0",
-    "semver": "^7.3.5"
+    "@reskript/core": "2.2.2",
+    "clipanion": "^3.0.1",
+    "enquirer": "^2.3.6",
+    "pkg-dir": "^5.0.0",
+    "typanion": "^3.3.2"
   }
 }

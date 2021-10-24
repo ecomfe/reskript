@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import dedent from 'dedent';
 import {Options, TemplateConfig, PlaceholderConfig} from './interface';
 
@@ -86,17 +86,18 @@ const injectEntryScript = (html: string) => {
         0,
         leadingWhiteSpaces + '<script src="/__qiankun_entry__.js"></script>'
     );
+    return lines.join('\n');
 };
 
-const customTemplate = (appName: string, template: string) => {
+const customTemplate = async (appName: string, template: string) => {
     if (template.startsWith('/')) {
-        const templateContent = fs.readFileSync(template, 'utf-8');
+        const templateContent = await fs.readFile(template, 'utf-8');
         const appNameInjected = templateContent.replace(/\{appName\}/g, appName);
         return injectEntryScript(appNameInjected);
     }
     return injectEntryScript(template);
 };
 
-export default (appName: string, {template}: Options = {}) => {
+export default async (appName: string, {template}: Options = {}) => {
     return typeof template === 'string' ? customTemplate(appName, template) : defaultTemplate(appName, template);
 };

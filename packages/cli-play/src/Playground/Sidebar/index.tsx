@@ -1,8 +1,8 @@
 import {createElement, ComponentType, SVGAttributes, useCallback} from 'react';
 import {PanelType} from '../interface';
-import {ReactComponent as IconEdit} from './icons/edit.svg';
-import {ReactComponent as IconInfo} from './icons/info.svg';
-import {ReactComponent as IconHelp} from './icons/help.svg';
+import IconEdit from './icons/edit.svg?react';
+import IconInfo from './icons/info.svg?react';
+import IconHelp from './icons/help.svg?react';
 import './index.css';
 
 interface NavItemProps {

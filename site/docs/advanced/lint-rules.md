@@ -92,3 +92,29 @@ const names = useMemo(
 ```
 
 **注：本规则与`prettier`格式化的结果可能不相符，但本规则配合`indent`规则后加`--fix`可以修复代码规范，因此如果需要，推荐在`prettier`后再跑`skr lint --fix`。**
+
+## 项目配置
+
+你可以在ESLint配置中的`settings`字段中增加一个`localPackageNames`字段：
+
+```js
+module.exports = {
+    extends: require.resolve('@reskript/config-lint/config/eslint'),
+    settings: {
+        localPackageNames: [
+            '@i/*',
+        ],
+    },
+};
+```
+
+这个字段用来声明哪些包属于你本地的包。
+
+在一个monorepo项目中，有一些包虽然并不是用相对路径引用的，但它们依然是存放在本地，而不是从NPM镜像上安装的。从顺序上来说，这些包的`import`位置应该在第三方包之后、本地别名（即`@/*`）之前。
+
+`localPackageNames`配置支持一系列的字符串，每一个字符串可以是以下2种情况：
+
+- 一个完整的包名，比如`@i/util`，则所有`@i/util`和`@i/util/*`都被认为是本地包。
+- 在最后放置`*`符号，则表示别名匹配，如`@i/*`则表示所有`@i/`开头的引用路径都被视为本地包。
+
+当你使用monorepo时，我们建议本地包都用一个作用域，推荐用`@i`作为前缀，则配置值为`@i/*`即可。

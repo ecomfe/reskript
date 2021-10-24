@@ -1,4 +1,3 @@
-// no component
-function foo() {
+function Foo() {
     return 'foo';
 }

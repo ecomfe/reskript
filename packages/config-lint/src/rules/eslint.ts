@@ -58,6 +58,15 @@ const config: Record<string, any> = {
     ignorePatterns: [
         '*.d.ts',
     ],
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx'],
+            rules: {
+                // 严格一点
+                '@typescript-eslint/no-misused-promises': ['warn', {checksVoidReturn: false}],
+            },
+        },
+    ],
 };
 
 export default config;

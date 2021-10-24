@@ -1,18 +1,17 @@
-import {readHostPackageConfig} from '@reskript/core';
 import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings} from './interface';
 
-type PartialBuildSettings = BuildSettings & {
-    script: Partial<BuildSettings['script']>;
-    style: Partial<BuildSettings['style']>;
+type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style'> & {
+    script?: Partial<BuildSettings['script']>;
+    style?: Partial<BuildSettings['style']>;
 };
 
-const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = process.cwd()): BuildSettings => {
+const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
     return {
         uses: ['antd', 'lodash'],
         thirdParty: false,
         reportLintErrors: true,
         largeAssetSize: 8 * 1024,
-        appTitle: settings?.appTitle ?? readHostPackageConfig(cwd).name ?? 'Reskript App',
+        appTitle: settings?.appTitle ?? 'Reskript App',
         excludeFeatures: ['dev'],
         finalize: config => config,
         ...settings,
@@ -20,7 +19,6 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
             babel: true,
             polyfill: true,
             displayName: true,
-            defaultImportOptimization: true,
             finalize: config => config,
             ...settings?.script,
         },
@@ -33,6 +31,7 @@ const fillBuildSettings = (settings?: PartialBuildSettings, cwd: string = proces
         },
         inspect: {
             duplicatePackages: 'off',
+            htmlImportable: 'off',
             ...settings?.inspect,
             initialResources: {
                 count: 'print',
@@ -52,7 +51,7 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
         apiPrefixes: [],
         defaultProxyDomain: '',
         proxyRewrite: {},
-        hot: 'all',
+        hot: true,
         openPage: '',
         finalize: config => config,
         ...settings,
@@ -61,13 +60,12 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
 
 const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     return {
-        injectResources: [],
-        wrapper: 'children',
+        defaultEnableConcurrentMode: false,
         ...settings,
     };
 };
 
-interface PartialProjectSettings {
+export interface PartialProjectSettings {
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;

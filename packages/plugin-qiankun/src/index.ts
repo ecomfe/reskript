@@ -15,10 +15,10 @@ export default (appName: string, options?: Options): SettingsPlugin => {
     };
 
     const finalizeDevServer: DevServerSettings['finalize'] = config => {
-        const {before, after} = config;
-        config.before = (app, server, compiler) => {
-            before?.(app, server, compiler);
-            app.get(
+        const {onBeforeSetupMiddleware, onAfterSetupMiddleware} = config;
+        config.onBeforeSetupMiddleware = devServer => {
+            onBeforeSetupMiddleware?.(devServer);
+            devServer.app.get(
                 '/__qiankun_entry__.js',
                 async (req, res) => {
                     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,13 +29,13 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                 }
             );
         };
-        // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须用`after`钩子
-        config.after = (app, server, conpiler) => {
-            after?.(app, server, conpiler);
-            app.get(
+        // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须用`onAfterSetupMiddleware`钩子
+        config.onAfterSetupMiddleware = devServer => {
+            onAfterSetupMiddleware?.(devServer);
+            devServer.app.get(
                 '/__qiankun__.html',
-                (req, res) => {
-                    const html = htmlEntry(appName, options);
+                async (req, res) => {
+                    const html = await htmlEntry(appName, options);
                     res.type('html').end(html);
                 }
             );
@@ -53,17 +53,19 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             build: {
                 ...settings.build,
                 finalize: (config, env, internals) => {
-                    const before = settings.build.finalize?.(config, env, internals);
-                    return finalizeBuild(before, env, internals);
+                    const previous = settings.build.finalize?.(config, env, internals);
+                    return finalizeBuild(previous, env, internals);
                 },
             },
-            devServer: {
-                ...settings.devServer,
-                finalize: (config, env) => {
-                    const before = settings.devServer.finalize(config, env);
-                    return finalizeDevServer(before, env);
+            devServer: options?.setupDevServer === false
+                ? settings.devServer
+                : {
+                    ...settings.devServer,
+                    finalize: (config, env) => {
+                        const previous = settings.devServer.finalize(config, env);
+                        return finalizeDevServer(previous, env);
+                    },
                 },
-            },
         };
     };
 };

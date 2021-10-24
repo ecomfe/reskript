@@ -1,5 +1,5 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs/promises';
 import {InjectManifest, InjectManifestOptions} from 'workbox-webpack-plugin';
 import ExtraScriptPlugin, {ScriptFactoryContext} from '@reskript/webpack-plugin-extra-script';
 import {BuildContext, ConfigurationFactory} from '../interface';
@@ -19,12 +19,12 @@ const generateRegisterScript = (buildContext: BuildContext, scriptContext: Scrip
     `;
 };
 
-const requireManifestInjection = (source: string) => {
-    const content = fs.readFileSync(source, 'utf-8');
+const requireManifestInjection = async (source: string) => {
+    const content = await fs.readFile(source, 'utf-8');
     return content.includes('self.__WB_MANIFEST');
 };
 
-const factory: ConfigurationFactory = entry => {
+const factory: ConfigurationFactory = async entry => {
     const {mode, cwd, srcDirectory, buildTarget} = entry;
     const serviceWorkerSource = path.join(cwd, srcDirectory, 'service-worker.js');
     const injectServieWorkerRegistrationPlugin = new ExtraScriptPlugin(
@@ -32,7 +32,8 @@ const factory: ConfigurationFactory = entry => {
         {prepend: true}
     );
 
-    if (requireManifestInjection(serviceWorkerSource)) {
+    const shouldInjectManifest = await requireManifestInjection(serviceWorkerSource);
+    if (shouldInjectManifest) {
         const options: InjectManifestOptions = {
             mode,
             swSrc: serviceWorkerSource,

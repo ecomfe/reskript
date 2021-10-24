@@ -3,7 +3,7 @@ import {types, PluginObj, PluginPass} from '@babel/core';
 import {NodePath} from '@babel/traverse';
 import {isComponentDeclaration, findImportStatement, findParentProgram} from '@reskript/babel-utils';
 
-const HOOK_MODULE = '@reskript/babel-plugin-debug-react-component-file-name/useComponentFile';
+const HOOK_MODULE = path.resolve(__dirname, 'useComponentFile');
 
 const insertImportHook = (program: NodePath<types.Program>) => {
     const expression = types.importDeclaration(
@@ -46,14 +46,17 @@ export default function debugReactComponentFileName(): PluginObj<PluginState> {
                     return;
                 }
 
-                if (isComponentDeclaration(declaration)) {
+                // 这个插件会插一段不在React里根本跑不了的危险代码，所以要用严格的检查
+                if (isComponentDeclaration(declaration, true)) {
                     const relative = path.relative(srcDirectory, filename);
                     if (!relative.startsWith('..') && prepareHookImport(declaration)) {
                         declaration.get('body').unshiftContainer(
                             'body',
-                            types.callExpression(
-                                types.identifier('useComponentFile'),
-                                [types.stringLiteral(relative)]
+                            types.expressionStatement(
+                                types.callExpression(
+                                    types.identifier('useComponentFile'),
+                                    [types.stringLiteral(relative)]
+                                )
                             )
                         );
                     }

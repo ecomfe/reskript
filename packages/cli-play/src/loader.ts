@@ -1,65 +1,73 @@
-import fs from 'fs';
+import {existsSync} from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import {LoaderContext} from 'webpack';
 import {PlaySettings} from '@reskript/settings';
-import {resolveConfigurationPath} from './utils/path';
+import {resolveLocalConfigurationPath} from './utils/path';
 
-const readAsSourceString = (filename: string) => {
-    const content = (fs.existsSync(filename) ? fs.readFileSync(filename, 'utf-8') : '');
+const readAsSourceString = async (filename: string): Promise<string> => {
+    const content = (existsSync(filename) ? await fs.readFile(filename, 'utf-8') : '');
     // 把前后的引号去掉
     return content ? JSON.stringify(content).slice(1, -1).replace(/'/g, '\\\'') : '';
 };
 
-const generateConfigurationBlockCode = (componentModulePath: string): string => {
-    const configurationPath = resolveConfigurationPath(componentModulePath);
-
-    if (fs.existsSync(configurationPath)) {
-        const content = fs.readFileSync(
-            path.join(__dirname, 'assets', 'has-configuration-block.js.tpl'),
+const configurationBlockCode = async (name: string, modulePath: string | undefined): Promise<string> => {
+    if (modulePath && existsSync(modulePath)) {
+        const content = await fs.readFile(
+            path.join(__dirname, 'assets', 'configuration-block.js.tpl'),
             'utf-8'
         );
-        return content.replace('%CONFIGURATION_PATH%', configurationPath);
+        return content.replace(/%MODULE_NAME%/g, name).replace('%CONFIGURATION_PATH%', modulePath);
     }
 
-    return fs.readFileSync(
-        path.join(__dirname, 'assets', 'no-configuration-block.js.tpl'),
-        'utf-8'
-    );
+    return '';
 };
 
 interface LoaderOptions extends PlaySettings {
     componentTypeName: string;
     componentModulePath: string;
+    globalSetupModulePath: string | undefined;
     cwd: string;
 }
 
-const loader = function playEntryLoader(this: LoaderContext<LoaderOptions>, content: any) {
+export default async function playEntryLoader(this: LoaderContext<LoaderOptions>, content: any) {
     if (this.cacheable) {
         this.cacheable();
     }
 
+    const callback = this.async();
+
     const options = this.getOptions();
-    const extraImports = options.injectResources.map(e => `import '${e}';`).join('\n');
     const configurationFilePathRelative = path.relative(
         options.cwd,
-        resolveConfigurationPath(options.componentModulePath)
+        resolveLocalConfigurationPath(options.componentModulePath)
     );
+    const readingSources = [
+        readAsSourceString(configurationFilePathRelative),
+        fs.readFile(path.join(__dirname, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
+        configurationBlockCode('globalConfiguration', options.globalSetupModulePath),
+        configurationBlockCode('localConfiguration', resolveLocalConfigurationPath(options.componentModulePath)),
+    ] as const;
+    const [
+        configurationSource,
+        configurationInitializeCode,
+        globalConfigurationBlock,
+        localConfigurationBlock,
+    ] = await Promise.all(readingSources);
     const replacements: Array<[RegExp, string]> = [
         [/%PLAYGROUND_PATH%/g, path.resolve(__dirname, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
         [/%CONFIGURATION_FILE_PATH%/g, configurationFilePathRelative],
-        [/%CONFIGURATION_SOURCE%/g, readAsSourceString(configurationFilePathRelative)],
+        [/%CONFIGURATION_SOURCE%/g, configurationSource],
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
-        [/%EXTRA_IMPORTS%/g, extraImports],
-        [/%WRAPPER_RETURN%/g, options.wrapper],
-        [/%CONFIGURATION_BLOCK%/g, generateConfigurationBlockCode(options.componentModulePath)],
+        [/%CONFIGURATION_INITIALIZE_BLOCK%/g, configurationInitializeCode],
+        [/%GLOBAL_CONFIGURATION_BLOCK%/g, globalConfigurationBlock],
+        [/%LOCAL_CONFIGURATION_BLOCK%/g, localConfigurationBlock],
     ];
     const source = replacements.reduce(
         (source, [from, to]) => source.replace(from, to),
         content.toString()
     );
-    this.callback(null, source);
-};
-
-export default loader;
+    callback(null, source);
+}

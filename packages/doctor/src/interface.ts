@@ -1,12 +1,5 @@
 import {ProjectSettings} from '@reskript/settings';
-
-export interface PackageInfo {
-    name: string;
-    scripts: Record<string, string>;
-    dependencies: Record<string, string>;
-    devDependencies: Record<string, string>;
-    peerDependencies: Record<string, string>;
-}
+import {PackageInfo} from '@reskript/core';
 
 export interface DoctorContext {
     cwd: string;

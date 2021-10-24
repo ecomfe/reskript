@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import MonacoEditor, {loader} from '@monaco-editor/react';
 import {debounce} from 'debounce';
 
-loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.21.2/min/vs'}});
+loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.26.1/min/vs'}});
 
 const editorOptions = {
     minimap: {enabled: false},

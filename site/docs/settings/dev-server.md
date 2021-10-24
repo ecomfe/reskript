@@ -14,10 +14,12 @@ interface DevServerSettings {
     readonly port: number;
     // 代理给后端的API请求的URL前缀
     readonly apiPrefixes: string[];
+    // 重写部分请求URL，优先于apiPrefixes
+    readonly proxyRewrite: Record<string, string>;
     // 默认的代理后端路径，可以被`--proxy-domain`命令行参数覆盖
     readonly defaultProxyDomain: string;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
-    readonly hot: 'none' | 'simple' | 'all';
+    readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
@@ -80,13 +82,13 @@ unset https_proxy
 exports.devServer = {
     finalize: devServerConfig => {
         // 监听所有文件，当然你也可以写得更精确一些
-        devServerConfig.watchOptions.ignored = undefined;
+        devServerConfig.static.watch.ignored = undefined;
         return devServerConfig;
     },
 };
 ```
 
-具体参考[webpack的说明](https://webpack.js.org/configuration/watch/#watchoptionsignored)来实现。
+具体参考[webpack的说明](https://webpack.js.org/configuration/dev-server/#watch)来实现。
 
 关于`finalize`详细配置在下文中单独说明。
 
@@ -100,15 +102,40 @@ exports.devServer = {
 skr dev --proxy-domain=my-local-app.dev:8988
 ```
 
+### 多后端代理配置
+
+对于更复杂的应用，有可能后端在开发环境中使用多服务且没有一个统一的入口，所以不同的接口路径需要代理到不同的后端上。
+
+对于此类情况，你可以使用`proxyRewrite`配置，例如以下的配置：
+
+```js
+exports.devServer = {
+    defaultProxyDomain: 'my-app.dev:8788',
+    proxyRewrite: {
+        '/api/user': 'user-app.dev:8786',
+        '/api/inventory': 'inventory-app.dev:8787',
+    },
+};
+```
+
+是述配置表达了如下的转发规则：
+
+- 当请求的URL前缀为`/api/user`时，请求将代理到`user-app.dev:8786`下。
+- 当请求的URL前缀为`/api/inventory`时，请求将代理到`user-app.dev:8786`下。
+- 其它请求都代理到`my-app.dev:8788`下。
+
+比如请求的路径为`/api/user/list?page=1`，则目标的URL为`user-app.dev:8786/list?page=1`。**需要注意的是，在`proxyRewrite`中配置的前缀不会变成代理后URL的一部分**。
+
 ## 关于热更新
 
-热更新在实际的开发调试中有着非常强的效率提升效果，而`webpack-dev-server`的热更新由`hot`和`hotOnly`两个配置控制。为了简化它们之间的关系，`reSKRipt`对应的`exports.devServer.hot`被设计为一个枚举值：
+热更新在实际的开发调试中有着非常强的效率提升效果，`reSKRipt`内置集成了热更新相关的逻辑，简化了它的对外配置，`exports.devServer.hot`被设计为一个`boolean`类型：
 
-- `hot: 'none'`：完全关闭热更新，所有的修改都要手动刷新页面才可看到效果。
-- `hot: 'simple'`：针对样式资源会进行更新，但动态的脚本逻辑不会热更新。
-- `hot: 'all'`：尽可能地启用不同类型资源的热更新。
+- `hot: true`：尽可能地启用不同类型资源的热更新，包括使用`react-refresh`进行组件热更新。
+- `hot: false`：完全关闭热更新。
 
-当`hot: 'all'`时，我们会尽可能地把热更新应用上，这包括使用`react-refresh`来对组件进行热更新。但热更新的机制本身就依赖对代码的约束，所以我们并不保证所有的修改都能正常更新。如果你遇到特殊情况，欢迎提交相关需求。
+:::note
+当你使用`--mode=production`启动调试服务器时，会始终关闭热更新以保持与生产环境尽可能的一致。
+:::
 
 ## 扩展配置
 
@@ -122,19 +149,19 @@ const pacakgeInfo = require('./package.json');
 exports.devServer = {
     finalize: devServerConfig => {
         // 记得调用之前已经有的配置，不要太暴力覆盖
-        const {before} = devServerConfig;
-        devServerConfig.before = (app, server, compiler) => {
-            before && before(app, server, compiler);
-            app.get(
+        const {onBeforeSetupMiddleware} = devServerConfig;
+        devServerConfig.onBeforeSetupMiddleware = devServer => {
+            onBeforeSetupMiddleware?.(devServer);
+            devServer.app.get(
                 '/version',
                 (req, res) => {
                     res.status(200).type('html').end(`${packageInfo.name}@${packageInfo.version}`);
-                },
-            ),
+                }
+            );
         };
         return devServerConfig;
     },
 };
 ```
 
-关于`devServer.before`可以参考[官方文档](https://webpack.js.org/configuration/dev-server/#devserverbefore)。
+关于`devServer.onBeforeSetupMiddleware`可以参考[官方文档](https://webpack.js.org/configuration/dev-server/#devserverbefore)。

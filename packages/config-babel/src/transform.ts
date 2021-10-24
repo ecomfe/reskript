@@ -5,14 +5,9 @@ import {shouldEnable} from './utils';
 import getParseOnlyBabelConfigFilled from './parseOnly';
 import {BabelConfigOptionsFilled} from './interface';
 
-const requireAntdOptimization = (options: BabelConfigOptionsFilled) => {
-    const {uses, defaultImportOptimization} = options;
-    return defaultImportOptimization && shouldEnable('antd', uses);
-};
-
 const requireLodashOptimization = (options: BabelConfigOptionsFilled) => {
-    const {uses, mode, defaultImportOptimization} = options;
-    return defaultImportOptimization && shouldEnable('lodash', uses) && mode === 'production';
+    const {uses, mode} = options;
+    return shouldEnable('lodash', uses) && mode === 'production';
 };
 
 const requireDisplayName = (options: BabelConfigOptionsFilled) => {
@@ -40,8 +35,9 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 autoLabel: mode === 'production' ? 'never' : 'always',
             },
         ],
+        shouldEnable('reflect-metadata', uses) && resolve('babel-plugin-transform-typescript-metadata'),
         ...minimal.plugins || [],
-        requireAntdOptimization(options) && [
+        shouldEnable('antd', uses) && [
             resolve('babel-plugin-import'),
             {
                 libraryName: 'antd',

@@ -3,6 +3,414 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 对node环境的测试也加上第三方ESM模块的处理 ([#168](https://github.com/ecomfe/reskript/issues/168)) ([50ada53](https://github.com/ecomfe/reskript/commit/50ada532c0a74c1c09f283585eca8803fdda9f1c))
+
+
+
+
+
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+
+### Bug Fixes
+
+* **test:** 让jest可以mock从svg导入的组件 ([#167](https://github.com/ecomfe/reskript/issues/167)) ([1772ac1](https://github.com/ecomfe/reskript/commit/1772ac1cd843bb2e424869c71d770a28cf96fb63))
+
+
+
+
+
+# [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
+
+
+### Bug Fixes
+
+* **build:** 为postcss指定具体实现 ([#165](https://github.com/ecomfe/reskript/issues/165)) ([8c06339](https://github.com/ecomfe/reskript/commit/8c063393d1b247a2575a05d1470ac07a35646392))
+* **build:** 使生成的HTML方便被各种编辑器格式化后排查问题 ([#164](https://github.com/ecomfe/reskript/issues/164)) ([41f90e1](https://github.com/ecomfe/reskript/commit/41f90e1dcbef2d18f5cd491e2896d3a8c3983ce1))
+* **build:** 修复strict模式设置require相关配置相反的问题 ([#161](https://github.com/ecomfe/reskript/issues/161)) ([92dab1b](https://github.com/ecomfe/reskript/commit/92dab1b521e661dbf1ea289842ddd63f574b3e6e))
+* **test:** 非react测试也共享路径别名等配置 ([#162](https://github.com/ecomfe/reskript/issues/162)) ([8e893ec](https://github.com/ecomfe/reskript/commit/8e893ecfbc009b41f23f563ecddbdf712016fc9c))
+
+
+### Features
+
+* **build:** 增加一个产出检查项，确保产出的HTML适用于微前端 ([#163](https://github.com/ecomfe/reskript/issues/163)) ([5f6b252](https://github.com/ecomfe/reskript/commit/5f6b2524d89f8787c7a45ae4765928bc41535ef4))
+* **cli:** 增加调试输出 ([#166](https://github.com/ecomfe/reskript/issues/166)) ([ca78e43](https://github.com/ecomfe/reskript/commit/ca78e438e6f667c76cd2fa63194a93c4ccac167d))
+
+
+
+
+
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* **build:** 把SVG转为组件时保留ref ([#159](https://github.com/ecomfe/reskript/issues/159)) ([863f582](https://github.com/ecomfe/reskript/commit/863f58254eb8bc3ee1e04eb04187b5381f570b5f))
+* **doctor:** 加载入口配置时未转换成绝对路径 ([#157](https://github.com/ecomfe/reskript/issues/157)) ([fc689fa](https://github.com/ecomfe/reskript/commit/fc689fa0f11f0457486c8ace00143e064ff5e22c))
+
+
+### Features
+
+* **dev:** 增加--no-open参数禁用打开浏览器功能 ([#160](https://github.com/ecomfe/reskript/issues/160)) ([525f69a](https://github.com/ecomfe/reskript/commit/525f69ab3408c739a3ff67590ae9867489e169db))
+
+
+
+
+
+# [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
+
+
+### Features
+
+* **build:** 在严格模式下增加类型检查 ([#147](https://github.com/ecomfe/reskript/issues/147)) ([a2d293f](https://github.com/ecomfe/reskript/commit/a2d293f69a60aaf7e672de66f88014fc13b6748d))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+
+### Bug Fixes
+
+* **cli:** 找CLI包的时候要从项目的目录开始找 ([#155](https://github.com/ecomfe/reskript/issues/155)) ([6697418](https://github.com/ecomfe/reskript/commit/66974182ab6838a8f6c01a0a9ec148345bda1dc1))
+* **deps:** 几个CLI包增加对core-js的peer依赖 ([#154](https://github.com/ecomfe/reskript/issues/154)) ([fc6f8a1](https://github.com/ecomfe/reskript/commit/fc6f8a172954574a83792cd7d7fce7a3261a3240))
+
+
+### Features
+
+* **doctor:** 增加V2版本迁移的自动化检测 ([#151](https://github.com/ecomfe/reskript/issues/151)) ([650e343](https://github.com/ecomfe/reskript/commit/650e343f1c03f227b0ae439b11f347fdecd3c3e6))
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **build:** 修复读取入口配置时的逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([0ce0026](https://github.com/ecomfe/reskript/commit/0ce00269216bb5c419467ad7b91ff2f40e295f39))
+* **dev:** 美化一下进度条 ([#148](https://github.com/ecomfe/reskript/issues/148)) ([7c064bb](https://github.com/ecomfe/reskript/commit/7c064bb6a8370d6804519be90640f3d1a75975f7))
+* **play:** 不应该让cli-play直接依赖react ([#152](https://github.com/ecomfe/reskript/issues/152)) ([0fa7bcf](https://github.com/ecomfe/reskript/commit/0fa7bcf78053544c3aecc2b3921a9d94ca5faf63))
+* **test:** 修复读取用户的jest.config.js逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([15c029c](https://github.com/ecomfe/reskript/commit/15c029c1161fe03884225181d92390b33d2ded3e))
+
+
+### Features
+
+* **build:** 读取入口配置文件时增加校验 ([#150](https://github.com/ecomfe/reskript/issues/150)) ([fb24371](https://github.com/ecomfe/reskript/commit/fb2437133027b5750c60b313f2216f0cf7e4ab6b))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **cli:** 只在对应的CLI包不存在时才自动安装，其它错误情况报错退出 ([#146](https://github.com/ecomfe/reskript/issues/146)) ([fdfd44a](https://github.com/ecomfe/reskript/commit/fdfd44a76047de4512d091d80c371e73e4712db3))
+* **play:** 修复一些接口没有异步调用的问题 ([#145](https://github.com/ecomfe/reskript/issues/145)) ([5fd503a](https://github.com/ecomfe/reskript/commit/5fd503a414bc19d6e1a704e8da74731a0b9138e2))
+* **play:** 在play命令启动时增加是否安装core-js的检测 ([#144](https://github.com/ecomfe/reskript/issues/144)) ([7ad0678](https://github.com/ecomfe/reskript/commit/7ad067804041c459ad6caeedc52ba47fda5214e5))
+* **test:** 在test命令启动时增加是否安装core-js的检测 ([#144](https://github.com/ecomfe/reskript/issues/144)) ([4528b60](https://github.com/ecomfe/reskript/commit/4528b6009fec19ff45841d4b868dc13e9c0568f5))
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* **build:** 修复对husky钩子检测的逻辑错误 ([#141](https://github.com/ecomfe/reskript/issues/141)) ([8b67c48](https://github.com/ecomfe/reskript/commit/8b67c4842e27bf5e54fb50cfebc9e2d5591a6d40))
+* **dev:** 只在编译错误时显示客户端的浮层提示 ([#140](https://github.com/ecomfe/reskript/issues/140)) ([bee529a](https://github.com/ecomfe/reskript/commit/bee529a46803bc83a23897ae631768df6e82090d))
+
+
+### Features
+
+* **build:** 增加一些供插件开发者使用的类型 ([#142](https://github.com/ecomfe/reskript/issues/142)) ([1efd6a0](https://github.com/ecomfe/reskript/commit/1efd6a0899ceb594b15cf5462f33dac89b5220b1))
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* 推荐用户使用固定版本安装，并保持版本一致 ([#138](https://github.com/ecomfe/reskript/issues/138)) ([61f8ec6](https://github.com/ecomfe/reskript/commit/61f8ec635e5f22f9efd6dcfca5beb6a15e6567b1))
+
+
+* feat(dev)!: 支持webpack-dev-server 4版本 (#123) ([40f0478](https://github.com/ecomfe/reskript/commit/40f047851e36c37e1f572e4945d9872e1bc11edf)), closes [#123](https://github.com/ecomfe/reskript/issues/123)
+* feat(build)!: 废弃旧版本的入口配置文件格式 (#80) ([41ac823](https://github.com/ecomfe/reskript/commit/41ac823fa6ae482fea339c2f5e000e4a2fb83be3)), closes [#80](https://github.com/ecomfe/reskript/issues/80)
+* fix(build)!: 由用户自行安装core-js (#137) ([9af1569](https://github.com/ecomfe/reskript/commit/9af1569255ae166771be8a0ccaef4e133b5bc7d9)), closes [#137](https://github.com/ecomfe/reskript/issues/137)
+* feat(test)!: 支持透传参数到jest (#127) ([b4c4820](https://github.com/ecomfe/reskript/commit/b4c4820622c1a90d724f4e2b8e2142b69bda4ca8)), closes [#127](https://github.com/ecomfe/reskript/issues/127)
+* feat!: 对外暴露的API转为异步 (#130) ([f423d55](https://github.com/ecomfe/reskript/commit/f423d55efc890abd54e8958d4005c0285c91252d)), closes [#130](https://github.com/ecomfe/reskript/issues/130)
+* feat!: 移除已经废弃的功能相关实现 (#80) ([ee923f9](https://github.com/ecomfe/reskript/commit/ee923f9794840a512afbba74f3113c8016a0e5cc)), closes [#80](https://github.com/ecomfe/reskript/issues/80)
+
+
+### Features
+
+* **build:** 增加严格模式开关 ([#54](https://github.com/ecomfe/reskript/issues/54)) ([3e00afc](https://github.com/ecomfe/reskript/commit/3e00afc503371412a30260c5a836935b47b7eb60))
+* 支持tailwind ([#119](https://github.com/ecomfe/reskript/issues/119)) ([d636c80](https://github.com/ecomfe/reskript/commit/d636c804ddfbaae00674682a86cec5ec32ff9265))
+* 支持自动安装缺失的命令行包 ([#139](https://github.com/ecomfe/reskript/issues/139)) ([1c54433](https://github.com/ecomfe/reskript/commit/1c54433830bf3af371c35c4ad087ceb7aa90ee0d))
+
+
+### BREAKING CHANGES
+
+* `webpack-dev-server`更新至`4.x`版本，具体参考[官方迁移指南](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md)
+* `devServer.hot`的类型修改为`boolean`
+* `config-babel`的`hot`配置类型修改为`boolean`
+* 入口配置`entries/xxx.config.js`必须符合新格式，仅支持`entry`和`html`两个导出，原有配置均放进`html`中
+* 不再处理`core-js`的引入，用户必须在项目中自行安装`core-js@3`
+* 所有jest的参数必须在`skr test --`之后传递
+* `settings`、`core`、`config-webpack`和`config-webpack-dev-server`的接口均变为异步函数
+* `BuildContext`的`cache`属性由`boolean`变为`persist` | `transient` | `off`
+* NodeJS最低版本要求为14.14.0
+* 配置中的`build.defaultImportOptimization`选项已经移除，用`uses: ['antd', 'lodash']`代替
+* `config-babel`中的`defaultImportOptimization`参数，用`uses: ['antd', 'lodash']`代替
+* `skr build`的`--src`参数已经移除，用`--src-dir`参数代替
+* `skr dev`的`--src`参数已经移除，用`--src-dir`参数代替
+* `skr dev`的`--open`参数已经移除，用`--host`参数代替
+* `est-compat`的功能已经移除，LESS的编译不再包含任何内置的mixin
+* 配置中的`play.wrapper`选项已经移除，使用`defaultGlobalSetup`选项代替
+* 配置中的`play.injectResources`选项已经移除，使用`defaultGlobalSetup`选项代替
+* `svg-mixed-loader`包已废弃，用`xxx.svg?react`的方式导入SVG为React组件
+* `config-webpack/loaders`中的`svg`和`url`已经移除
+* `cli-babel`的`--out`参数已经移除，用`--out-dir`参数代替
+
+
+
+
+
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+
+### Bug Fixes
+
+* **build:** 处理SVG文件时把属性转成camelCase ([#136](https://github.com/ecomfe/reskript/issues/136)) ([4bf68e1](https://github.com/ecomfe/reskript/commit/4bf68e17f6fce4cd7974c5a134cb105906fc5167))
+* **eslint-plugin:** 支持原生模块的子模块的优先级判断 ([#135](https://github.com/ecomfe/reskript/issues/135)) ([b7dd304](https://github.com/ecomfe/reskript/commit/b7dd304d6f5f48f259f9b07d2d3a5cca78b5149a))
+* **play:** 删除源码中多出来的dist文件 ([31d7375](https://github.com/ecomfe/reskript/commit/31d7375258e2faa87fbce97b7af26d418ac7003c))
+
+
+
+
+
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 放宽一些对版本范围的检查 ([#129](https://github.com/ecomfe/reskript/issues/129)) ([0384184](https://github.com/ecomfe/reskript/commit/0384184a648a0e31d59af2d3a6480e8b46bb1089))
+
+
+
+
+
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 提示入口包安装的依赖版本不兼容子包的要求 ([#121](https://github.com/ecomfe/reskript/issues/121)) ([9b232e8](https://github.com/ecomfe/reskript/commit/9b232e85230d989927f0160d73189394f3072f0e))
+* **plugin-workspace-no-build:** 添加邻居包依赖只处理被主包声明的那部分 ([#125](https://github.com/ecomfe/reskript/issues/125)) ([f145679](https://github.com/ecomfe/reskript/commit/f14567951aeb54ed910bc62ab64b2a591f98200d))
+
+
+### Features
+
+* **flags:** 支持SKR_FLAGS设置遇到废弃配置直接退出 ([#124](https://github.com/ecomfe/reskript/issues/124)) ([7f2658a](https://github.com/ecomfe/reskript/commit/7f2658a890a1f714d1a003aeff44dcd446d447b1))
+* **play:** 支持全局的组件调试配置 ([#120](https://github.com/ecomfe/reskript/issues/120)) ([4c4f068](https://github.com/ecomfe/reskript/commit/4c4f068ef6e58744d889823c379e10ced02e22a8))
+* **play:** 让play支持React 18和并发模式 ([#122](https://github.com/ecomfe/reskript/issues/122)) ([31ec53e](https://github.com/ecomfe/reskript/commit/31ec53e502f3c85357ade52d78cc493d66145cd9))
+* **test:** 支持--maxWorkers参数 ([#126](https://github.com/ecomfe/reskript/issues/126)) ([da406f4](https://github.com/ecomfe/reskript/commit/da406f44242a5c5ac1a59748b7325648a00c8157))
+
+
+
+
+
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** 修复svg-mixed-loader在Windows系统下的路径问题 ([#114](https://github.com/ecomfe/reskript/issues/114)) ([05cc19c](https://github.com/ecomfe/reskript/commit/05cc19c358972cab8bc80afb4f7de70b98cbc130))
+* **init:** 导入SVG组件的类型声明优化 ([#117](https://github.com/ecomfe/reskript/issues/117)) ([cbd5981](https://github.com/ecomfe/reskript/commit/cbd598169260ecbeb6ac827b2f2efe91eb7edb20))
+* **init:** 异步执行命令的顺序错误 ([#116](https://github.com/ecomfe/reskript/issues/116)) ([d509352](https://github.com/ecomfe/reskript/commit/d509352053d5a9d47cc8c37a8838f57ce9408c62))
+* **plugin-workspace-no-build:** 自动处理业务模块的peer依赖 ([#118](https://github.com/ecomfe/reskript/issues/118)) ([875c9c9](https://github.com/ecomfe/reskript/commit/875c9c97995a0cb57857b4f526a555b37c2de992))
+* **test:** 处理第三方包的ESM在jest中无法解析的问题 ([#115](https://github.com/ecomfe/reskript/issues/115)) ([75d6470](https://github.com/ecomfe/reskript/commit/75d64708799b5bfcf932e88944eaa7f1d5425e85))
+
+
+
+
+
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **build:** 在SVG转成组件时要接受props ([#113](https://github.com/ecomfe/reskript/issues/113)) ([dd594be](https://github.com/ecomfe/reskript/commit/dd594be07c9bc6a3e4549c9f4839318b5e4cd6c1))
+
+
+
+
+
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+
+### Bug Fixes
+
+* **build:** 解析svg时处理XML编码信息部分 ([#112](https://github.com/ecomfe/reskript/issues/112)) ([70ceef2](https://github.com/ecomfe/reskript/commit/70ceef2e71bde4cf5040c063131f98bd6d052110))
+* **play:** 升级monaco-editor兼容play的版本 ([#111](https://github.com/ecomfe/reskript/issues/111)) ([77fd26e](https://github.com/ecomfe/reskript/commit/77fd26ee787f3c4bcfacf1ccb26b6c595f93d073))
+
+
+### Features
+
+* **lint:** import-order规则支持检查本地的包名 ([#110](https://github.com/ecomfe/reskript/issues/110)) ([050084d](https://github.com/ecomfe/reskript/commit/050084da970b475fcc5450c3b57c5f5aa76f29ee))
+
+
+
+
+
+## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
+
+
+### Bug Fixes
+
+* **play:** 在PlayGround使用新的方式引入SVG图标 ([#108](https://github.com/ecomfe/reskript/issues/108)) ([28d10bc](https://github.com/ecomfe/reskript/commit/28d10bcd88504091905b276781fbf9c0ab74ab3c))
+* **play:** 在play中开启StrictMode ([#109](https://github.com/ecomfe/reskript/issues/109)) ([28c8464](https://github.com/ecomfe/reskript/commit/28c8464bd6dcb33c7e13e6bdf33a812458354704))
+
+
+
+
+
+# [1.13.0](https://github.com/ecomfe/reskript/compare/v1.12.2...v1.13.0) (2021-08-05)
+
+
+### Features
+
+* **babel:** 增加对reflect-metadata的支持 ([#106](https://github.com/ecomfe/reskript/issues/106)) ([8d0f36b](https://github.com/ecomfe/reskript/commit/8d0f36b7957a0a7efd9ded92b4b6a259ddeb984d))
+* **build:** 调整对svg文件的导入规则 ([#105](https://github.com/ecomfe/reskript/issues/105)) ([be7accc](https://github.com/ecomfe/reskript/commit/be7accc50f0a1fdb6698622ad110fd0cacb515cc))
+
+
+
+
+
+## [1.12.2](https://github.com/ecomfe/reskript/compare/v1.12.1...v1.12.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* **config-jest:** 修复生成的配置对jest-raw-loader引用路径错误 ([7e163cb](https://github.com/ecomfe/reskript/commit/7e163cb147bfa30263a65ebadf2f266d8bea5563))
+
+
+
+
+
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* **babel:** babel-utils少了个依赖 ([477a159](https://github.com/ecomfe/reskript/commit/477a159f763261533d91c0acc813d42f012289ac))
+* **lint:** 修复在monorepo下检查已更改文件的逻辑 ([#104](https://github.com/ecomfe/reskript/issues/104)) ([ee035c7](https://github.com/ecomfe/reskript/commit/ee035c76ca299548c966344c7a84e1b56dc02c24))
+
+
+
+
+
+# [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
+
+
+### Features
+
+* **plugin-qiankun:** 支持只处理build，不拦截调试服务器 ([#102](https://github.com/ecomfe/reskript/issues/102)) ([18c54e3](https://github.com/ecomfe/reskript/commit/18c54e3b4562ab84ef55e59ed2cd5702c79905b5))
+* **plugin-workspace-no-build:** 一个能在monorepo下直接依赖其它子包的源码的插件 ([#103](https://github.com/ecomfe/reskript/issues/103)) ([81ab9e1](https://github.com/ecomfe/reskript/commit/81ab9e12c49661907362587f92b5fdf7f780d9f5))
+
+
+
+
+
+## [1.11.2](https://github.com/ecomfe/reskript/compare/v1.11.1...v1.11.2) (2021-07-28)
+
+
+### Bug Fixes
+
+* **build:** 用asset module代替url-loader ([#101](https://github.com/ecomfe/reskript/issues/101)) ([e40aeb7](https://github.com/ecomfe/reskript/commit/e40aeb74ab6127bdfe4a0bcabb0f692514c2bc60))
+
+
+
+
+
+## [1.11.1](https://github.com/ecomfe/reskript/compare/v1.11.0...v1.11.1) (2021-07-25)
+
+
+### Bug Fixes
+
+* **play:** 格式化时间逻辑错误 ([73e4893](https://github.com/ecomfe/reskript/commit/73e4893773fd6bc3cab71dcda65babb545823db7))
+
+
+
+
+
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+
+### Features
+
+* **build:** 管理和读取各类.env文件 ([#74](https://github.com/ecomfe/reskript/issues/74)) ([83c9699](https://github.com/ecomfe/reskript/commit/83c96994c4cb5eb98978345f109c03f3901cefd2))
+* **play:** 支持--host参数指定打开页面的主机名 ([#100](https://github.com/ecomfe/reskript/issues/100)) ([86b9b82](https://github.com/ecomfe/reskript/commit/86b9b82ffd3d333388d34d31e2af5ab1bb7c6630))
+* **play:** 支持自定义端口 ([#99](https://github.com/ecomfe/reskript/issues/99)) ([ba1def2](https://github.com/ecomfe/reskript/commit/ba1def2ed35fe04b74c1fc6c8697e1ff3fcd37ff))
+
+
+### Performance Improvements
+
+* **babel:** 优化对import语句的处理的性能 ([bc8e0dc](https://github.com/ecomfe/reskript/commit/bc8e0dc3c7fcee555a664b5168cc30683e421f19))
+
+
+
+
+
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+
+### Bug Fixes
+
+* **babel:** 对组件函数的检测使用更严格的模式 ([#97](https://github.com/ecomfe/reskript/issues/97)) ([61fc2df](https://github.com/ecomfe/reskript/commit/61fc2df685eb3ad628592cbc0c0e1252def4de7d))
+* **babel:** 插入useComponentFile时需要是一个完整的语句 ([#97](https://github.com/ecomfe/reskript/issues/97)) ([0ab65e1](https://github.com/ecomfe/reskript/commit/0ab65e1b1a5354c0d70ef4483f92ff792fd82a6b))
+
+
+
+
+
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* **babel:** 调整babel插件的顺序避免代码转换出错 ([#97](https://github.com/ecomfe/reskript/issues/97)) ([f9d6f97](https://github.com/ecomfe/reskript/commit/f9d6f979da88fe75f0029b519e416b090cb85f73))
+* **lint:** 支持自定义的stylelint配置 ([#96](https://github.com/ecomfe/reskript/issues/96)) ([c7f6726](https://github.com/ecomfe/reskript/commit/c7f67264224dadb69da745c8a4eca44c5f089007))
+
+
+
+
+
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* **babel:** useComponentFile的引用路径错误 ([890a13a](https://github.com/ecomfe/reskript/commit/890a13a3beb140d4691de85079a69f84fc43bd4c))
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 

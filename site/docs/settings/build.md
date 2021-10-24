@@ -8,7 +8,7 @@ title: 构建配置
 
 ```ts
 // 以下是工具内置了优化的相关第三方库
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
@@ -28,8 +28,6 @@ interface BuildScriptSettings {
     readonly polyfill: boolean;
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
-    // 已废弃，使用uses配置代替它。是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
-    readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
@@ -61,6 +59,7 @@ interface BuildInspectInitialResource {
 interface BuildInspectSettings {
     readonly initialResources: BuildInspectInitialResource;
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
+    readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
 type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
@@ -163,6 +162,8 @@ exports.build = {
 - `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
 - `styled-components`：对`styled-components`的使用进行构建期的优化，可以参考[babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components)的相关说明。
 - `emotion`：对`emotion`样式解决方案进行处理，这个插件是[`emotion`部分功能的必须依赖](https://emotion.sh/docs/@emotion/babel-plugin#features)。**使用`emotion`要求你的`react`版本在`16.14.0`以上。**
+- `reflect-metadata`：在构建TypeScript文件中的装饰器语法时，会额外增加对`Reflect.metadata`相关的代码，主要用于NestJS、或InversifyJS等库。
+- `tailwind`：在样式处理上引入[tailwind](https://tailwindcss.com/)的处理。这个声明仅仅让样式处理支持`tailwind`，但你需要自己安装`tailwindcss`、生成`tailwind.config.js`并自行在CSS中通过`@tailwind`引入相关的样式。
 
 `reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
 
@@ -460,7 +461,8 @@ type LoaderType =
     | 'classNames'
     | 'cssExtract'
     | 'svg'
-    | 'svgo';
+    | 'svgo'
+    | 'svgToComponent';
 
 
 function loader(name: LoaderType, buildEntry: BuildEntry): RuleSetUseItem | null;
@@ -582,3 +584,36 @@ exports.build = {
 ```
 
 每一条报警信息都会告诉你被重复引入的包名，以及被引入的各个版本所在的绝对路径。
+
+#### 检查微前端兼容性
+
+当下有不少前端系统使用[qiankun](https://qiankun.umijs.org/zh/guide)作为微前端框架进行开发，不过qiankun对你的产出会有一些要求，也有不少的开发者没有及时注意这些限制，直到调试时才在运行时发现应用跑不起来。
+
+其中最为典型的一个问题是，qiankun要求你的入口脚本是HTML中的最后一个`<script>`标签，如果你“不幸”在作为入口的`.js`后又插入了一些其它的脚本，那么系统就会无法接入微前端基座了。
+
+为此，我们增加了一个`htmlImportable`的检查，你可以使用如下配置：
+
+```js
+exports.build = {
+    inspect: {
+        htmlImportable: 'error',
+    },
+};
+```
+
+如果最终产出的HTML不符合要求，会出现类似的错误并异常退出：
+
+```
+E  The last script in index-stable.html doesn't reference to an entry script, this can break micro-frontend frameworks like qiankun.
+```
+
+如果有一部分产出的HTML是由你自己控制，且不与微前端框架整合，你可以使用`includes`或`excludes`来控制被检查的HTML文件：
+
+```js
+exports.build = {
+    inspect: {
+        // 干掉自己生成的
+        htmlImportable: ['error', {excludes: ['copyright.html', 'about-*.html]}],
+    },
+};
+```

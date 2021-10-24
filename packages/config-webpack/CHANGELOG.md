@@ -3,6 +3,290 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
+
+
+### Bug Fixes
+
+* **build:** 为postcss指定具体实现 ([#165](https://github.com/ecomfe/reskript/issues/165)) ([8c06339](https://github.com/ecomfe/reskript/commit/8c063393d1b247a2575a05d1470ac07a35646392))
+* **build:** 使生成的HTML方便被各种编辑器格式化后排查问题 ([#164](https://github.com/ecomfe/reskript/issues/164)) ([41f90e1](https://github.com/ecomfe/reskript/commit/41f90e1dcbef2d18f5cd491e2896d3a8c3983ce1))
+* **build:** 修复strict模式设置require相关配置相反的问题 ([#161](https://github.com/ecomfe/reskript/issues/161)) ([92dab1b](https://github.com/ecomfe/reskript/commit/92dab1b521e661dbf1ea289842ddd63f574b3e6e))
+
+
+
+
+
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
+
+
+### Features
+
+* **build:** 在严格模式下增加类型检查 ([#147](https://github.com/ecomfe/reskript/issues/147)) ([a2d293f](https://github.com/ecomfe/reskript/commit/a2d293f69a60aaf7e672de66f88014fc13b6748d))
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **build:** 修复读取入口配置时的逻辑错误 ([#149](https://github.com/ecomfe/reskript/issues/149)) ([0ce0026](https://github.com/ecomfe/reskript/commit/0ce00269216bb5c419467ad7b91ff2f40e295f39))
+
+
+### Features
+
+* **build:** 读取入口配置文件时增加校验 ([#150](https://github.com/ecomfe/reskript/issues/150)) ([fb24371](https://github.com/ecomfe/reskript/commit/fb2437133027b5750c60b313f2216f0cf7e4ab6b))
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* **build:** 修复对husky钩子检测的逻辑错误 ([#141](https://github.com/ecomfe/reskript/issues/141)) ([8b67c48](https://github.com/ecomfe/reskript/commit/8b67c4842e27bf5e54fb50cfebc9e2d5591a6d40))
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+* feat(dev)!: 支持webpack-dev-server 4版本 (#123) ([40f0478](https://github.com/ecomfe/reskript/commit/40f047851e36c37e1f572e4945d9872e1bc11edf)), closes [#123](https://github.com/ecomfe/reskript/issues/123)
+* feat(build)!: 废弃旧版本的入口配置文件格式 (#80) ([41ac823](https://github.com/ecomfe/reskript/commit/41ac823fa6ae482fea339c2f5e000e4a2fb83be3)), closes [#80](https://github.com/ecomfe/reskript/issues/80)
+* fix(build)!: 由用户自行安装core-js (#137) ([9af1569](https://github.com/ecomfe/reskript/commit/9af1569255ae166771be8a0ccaef4e133b5bc7d9)), closes [#137](https://github.com/ecomfe/reskript/issues/137)
+* feat!: 对外暴露的API转为异步 (#130) ([f423d55](https://github.com/ecomfe/reskript/commit/f423d55efc890abd54e8958d4005c0285c91252d)), closes [#130](https://github.com/ecomfe/reskript/issues/130)
+* feat!: 移除已经废弃的功能相关实现 (#80) ([ee923f9](https://github.com/ecomfe/reskript/commit/ee923f9794840a512afbba74f3113c8016a0e5cc)), closes [#80](https://github.com/ecomfe/reskript/issues/80)
+
+
+### Features
+
+* **build:** 增加严格模式开关 ([#54](https://github.com/ecomfe/reskript/issues/54)) ([3e00afc](https://github.com/ecomfe/reskript/commit/3e00afc503371412a30260c5a836935b47b7eb60))
+* 支持tailwind ([#119](https://github.com/ecomfe/reskript/issues/119)) ([d636c80](https://github.com/ecomfe/reskript/commit/d636c804ddfbaae00674682a86cec5ec32ff9265))
+
+
+### BREAKING CHANGES
+
+* `webpack-dev-server`更新至`4.x`版本，具体参考[官方迁移指南](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md)
+* `devServer.hot`的类型修改为`boolean`
+* `config-babel`的`hot`配置类型修改为`boolean`
+* 入口配置`entries/xxx.config.js`必须符合新格式，仅支持`entry`和`html`两个导出，原有配置均放进`html`中
+* 不再处理`core-js`的引入，用户必须在项目中自行安装`core-js@3`
+* `settings`、`core`、`config-webpack`和`config-webpack-dev-server`的接口均变为异步函数
+* `BuildContext`的`cache`属性由`boolean`变为`persist` | `transient` | `off`
+* NodeJS最低版本要求为14.14.0
+* 配置中的`build.defaultImportOptimization`选项已经移除，用`uses: ['antd', 'lodash']`代替
+* `config-babel`中的`defaultImportOptimization`参数，用`uses: ['antd', 'lodash']`代替
+* `skr build`的`--src`参数已经移除，用`--src-dir`参数代替
+* `skr dev`的`--src`参数已经移除，用`--src-dir`参数代替
+* `skr dev`的`--open`参数已经移除，用`--host`参数代替
+* `est-compat`的功能已经移除，LESS的编译不再包含任何内置的mixin
+* 配置中的`play.wrapper`选项已经移除，使用`defaultGlobalSetup`选项代替
+* 配置中的`play.injectResources`选项已经移除，使用`defaultGlobalSetup`选项代替
+* `svg-mixed-loader`包已废弃，用`xxx.svg?react`的方式导入SVG为React组件
+* `config-webpack/loaders`中的`svg`和`url`已经移除
+* `cli-babel`的`--out`参数已经移除，用`--out-dir`参数代替
+
+
+
+
+
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Features
+
+* **flags:** 支持SKR_FLAGS设置遇到废弃配置直接退出 ([#124](https://github.com/ecomfe/reskript/issues/124)) ([7f2658a](https://github.com/ecomfe/reskript/commit/7f2658a890a1f714d1a003aeff44dcd446d447b1))
+
+
+
+
+
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [1.13.0](https://github.com/ecomfe/reskript/compare/v1.12.2...v1.13.0) (2021-08-05)
+
+
+### Features
+
+* **build:** 调整对svg文件的导入规则 ([#105](https://github.com/ecomfe/reskript/issues/105)) ([be7accc](https://github.com/ecomfe/reskript/commit/be7accc50f0a1fdb6698622ad110fd0cacb515cc))
+
+
+
+
+
+## [1.12.2](https://github.com/ecomfe/reskript/compare/v1.12.1...v1.12.2) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
+
+
+### Features
+
+* **plugin-workspace-no-build:** 一个能在monorepo下直接依赖其它子包的源码的插件 ([#103](https://github.com/ecomfe/reskript/issues/103)) ([81ab9e1](https://github.com/ecomfe/reskript/commit/81ab9e12c49661907362587f92b5fdf7f780d9f5))
+
+
+
+
+
+## [1.11.2](https://github.com/ecomfe/reskript/compare/v1.11.1...v1.11.2) (2021-07-28)
+
+
+### Bug Fixes
+
+* **build:** 用asset module代替url-loader ([#101](https://github.com/ecomfe/reskript/issues/101)) ([e40aeb7](https://github.com/ecomfe/reskript/commit/e40aeb74ab6127bdfe4a0bcabb0f692514c2bc60))
+
+
+
+
+
+## [1.11.1](https://github.com/ecomfe/reskript/compare/v1.11.0...v1.11.1) (2021-07-25)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+
+### Features
+
+* **build:** 管理和读取各类.env文件 ([#74](https://github.com/ecomfe/reskript/issues/74)) ([83c9699](https://github.com/ecomfe/reskript/commit/83c96994c4cb5eb98978345f109c03f3901cefd2))
+
+
+
+
+
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+**Note:** Version bump only for package @reskript/config-webpack
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 

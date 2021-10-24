@@ -3,6 +3,243 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* **build:** 把SVG转为组件时保留ref ([#159](https://github.com/ecomfe/reskript/issues/159)) ([863f582](https://github.com/ecomfe/reskript/commit/863f58254eb8bc3ee1e04eb04187b5381f570b5f))
+
+
+
+
+
+# [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* 推荐用户使用固定版本安装，并保持版本一致 ([#138](https://github.com/ecomfe/reskript/issues/138)) ([61f8ec6](https://github.com/ecomfe/reskript/commit/61f8ec635e5f22f9efd6dcfca5beb6a15e6567b1))
+
+
+* fix(build)!: 由用户自行安装core-js (#137) ([9af1569](https://github.com/ecomfe/reskript/commit/9af1569255ae166771be8a0ccaef4e133b5bc7d9)), closes [#137](https://github.com/ecomfe/reskript/issues/137)
+
+
+### BREAKING CHANGES
+
+* 不再处理`core-js`的引入，用户必须在项目中自行安装`core-js@3`
+
+
+
+
+
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **init:** 导入SVG组件的类型声明优化 ([#117](https://github.com/ecomfe/reskript/issues/117)) ([cbd5981](https://github.com/ecomfe/reskript/commit/cbd598169260ecbeb6ac827b2f2efe91eb7edb20))
+* **init:** 异步执行命令的顺序错误 ([#116](https://github.com/ecomfe/reskript/issues/116)) ([d509352](https://github.com/ecomfe/reskript/commit/d509352053d5a9d47cc8c37a8838f57ce9408c62))
+
+
+
+
+
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [1.13.0](https://github.com/ecomfe/reskript/compare/v1.12.2...v1.13.0) (2021-08-05)
+
+
+### Features
+
+* **build:** 调整对svg文件的导入规则 ([#105](https://github.com/ecomfe/reskript/issues/105)) ([be7accc](https://github.com/ecomfe/reskript/commit/be7accc50f0a1fdb6698622ad110fd0cacb515cc))
+
+
+
+
+
+## [1.12.2](https://github.com/ecomfe/reskript/compare/v1.12.1...v1.12.2) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.11.2](https://github.com/ecomfe/reskript/compare/v1.11.1...v1.11.2) (2021-07-28)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.11.1](https://github.com/ecomfe/reskript/compare/v1.11.0...v1.11.1) (2021-07-25)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 

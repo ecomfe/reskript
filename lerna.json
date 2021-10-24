@@ -1,14 +1,17 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "showcase/*"
   ],
-  "version": "1.10.0",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "version": "2.2.2",
+  "npmClient": "npm",
   "exact": true,
   "command": {
     "version": {
-      "allowBranch": "master",
+      "allowBranch": [
+        "master",
+        "v2"
+      ],
       "ignoreChanges": [
         "**/*.md",
         "**/example/**",

@@ -1,5 +1,6 @@
-import fs from 'fs';
+import {existsSync} from 'fs';
 import http from 'http';
+import fs from 'fs/promises';
 import chokidar from 'chokidar';
 import {Server, Socket} from 'socket.io';
 import {resolveCasePath} from '../utils/path';
@@ -11,7 +12,7 @@ const createWatcher = (componentModulePath: string) => {
 
     return (callback: (content: string) => void) => {
         const notify = async (): Promise<void> => {
-            const content = fs.existsSync(casePath) ? fs.readFileSync(casePath, 'utf-8') : '';
+            const content = existsSync(casePath) ? await fs.readFile(casePath, 'utf-8') : '';
             callback(content);
         };
         watcher.on('all', notify);
@@ -22,8 +23,8 @@ const createWatcher = (componentModulePath: string) => {
 };
 
 const setupSocket = (socket: Socket, watch: ReturnType<typeof createWatcher>) => {
-    const pushNewCases = (content: string) => {
-        const cases = parseMarkdownToCases(content);
+    const pushNewCases = async (content: string) => {
+        const cases = await parseMarkdownToCases(content);
         socket.emit('cases', cases);
     };
     const unwatch = watch(pushNewCases);

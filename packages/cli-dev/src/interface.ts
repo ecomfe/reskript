@@ -1,15 +1,13 @@
 import {WorkModeAware} from '@reskript/core';
 
-export interface LegacyDevCommandLineArgs extends WorkModeAware {
-    readonly src?: string;
-    readonly srcDir: string;
-    readonly entriesDir: string;
+export interface DevCommandLineArgs extends WorkModeAware {
+    readonly srcDirectory: string;
+    readonly entriesDirectory: string;
     readonly buildTarget: string;
     readonly proxyDomain?: string;
-    readonly open?: 'remote' | 'local';
     // eslint-disable-next-line @typescript-eslint/ban-types
     readonly host?: 'localhost' | 'loopback' | 'ip' | {} & string;
     readonly entry: string;
+    readonly strict: boolean;
+    readonly open: boolean;
 }
-
-export type DevCommandLineArgs = Omit<LegacyDevCommandLineArgs, 'src' | 'open'>;

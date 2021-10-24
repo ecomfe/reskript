@@ -47,10 +47,15 @@ declare module '*.png' {
 }
 
 declare module '*.svg' {
-    import {ComponentType, SVGProps} from 'react';
-    export const ReactComponent: ComponentType<SVGProps<SVGSVGElement>>;
-    const url: string;
+    declare const url: string;
     export default url;
+}
+
+declare module '*.svg?react' {
+    import {SVGAttributes, ComponentType, RefAttributes} from 'react';
+
+    const Component: ComponentType<SVGAttributes<SVGElement> & RefAttributes<SVGElement>>;
+    export default Component;
 }
 ```
 
@@ -135,9 +140,9 @@ import '@/styles';
 .root {
     position: fixed;
     top: 0;
-    left: 0
+    left: 0;
     right: 0;
-    height: @haeder-height;
+    height: @header-height;
     display: flex;
     align-items: center;
     padding: 0 20px;

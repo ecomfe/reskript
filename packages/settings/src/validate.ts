@@ -73,7 +73,7 @@ const schema: any = {
             properties: {
                 uses: {
                     items: {
-                        enum: ['antd', 'lodash', 'styled-components', 'emotion'],
+                        enum: ['antd', 'lodash', 'styled-components', 'emotion', 'reflect-metadata', 'tailwind'],
                         type: 'string',
                     },
                     type: 'array',
@@ -123,9 +123,6 @@ const schema: any = {
                         displayName: {
                             type: 'boolean',
                         },
-                        defaultImportOptimization: {
-                            type: 'boolean',
-                        },
                         finalize: {
                             instanceof: 'Function',
                         },
@@ -173,6 +170,7 @@ const schema: any = {
                             additionalProperties: false,
                         },
                         duplicatePackages: optionalRuleConfig(sourceFilterSchema),
+                        htmlImportable: optionalRuleConfig(sourceFilterSchema),
                     },
                     additionalProperties: false,
                 },
@@ -198,8 +196,7 @@ const schema: any = {
                     type: 'object',
                 },
                 hot: {
-                    enum: ['all', 'none', 'simple'],
-                    type: 'string',
+                    type: 'boolean',
                 },
                 https: {
                     type: 'boolean',
@@ -219,13 +216,10 @@ const schema: any = {
         },
         play: {
             properties: {
-                injectResources: {
-                    items: {
-                        type: 'string',
-                    },
-                    type: 'array',
+                defaultEnableConcurrentMode: {
+                    type: 'boolean',
                 },
-                wrapper: {
+                defaultGlobalSetup: {
                     type: 'string',
                 },
             },

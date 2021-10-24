@@ -1,8 +1,15 @@
 import {ComponentType, ReactNode} from 'react';
 import {ProjectAware} from '@reskript/core';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type HostType = 'localhost' | 'loopback' | 'ip' | {} & string;
+
 export interface PlayCommandLineArgs extends ProjectAware {
     readonly buildTarget: string;
+    readonly port: number;
+    readonly host: HostType;
+    readonly concurrentMode?: boolean;
+    readonly setup?: string;
 }
 
 export interface PlayCaseMeta {

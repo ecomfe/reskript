@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 node scripts/check-deps.mjs
-pnpm run -r --parallel --filter "...{packages}[HEAD]" lint
+lerna run --exclude-dependents --since HEAD lint

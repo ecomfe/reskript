@@ -21,16 +21,21 @@ npm init -y
 作为一个简单的应用，我们假设需要使用构建、本地调试、代码检查这几项功能，参考[快速上手](../getting-started)将相关的依赖安装上：
 
 ```shell
-npm install --save-dev eslint stylelint typescript webpack @reskript/cli @reskript/cli-build @reskript/cli-dev @reskript/cli-lint @reskript/config-lint
+npm install -D eslint stylelint typescript webpack
+npm install -D -E @reskript/cli @reskript/cli-build @reskript/cli-dev @reskript/cli-lint @reskript/config-lint
 ```
 
-**另请注意：`NodeJS 15.x`和`NPM 7.x`现在还不能完全兼容地安装这些依赖，你可能需要切换到`NodeJS 14.x`，可以考虑使用[nvm](https://github.com/nvm-sh/nvm)来管理你的NodeJS版本。**
+:::note
+你可能注意到了，我们安装`@reskript/*`包的时候使用了`-E`参数，这能保证我们对`reSKRipt`的依赖被锁定在固定的版本上。请注意在将来升级版本时，保持它们的版本是完全一致的。
+:::
+
+**另请注意：`NodeJS 16.x`和`NPM 7.x`现在还不能完全兼容地安装这些依赖，你可能需要切换到`NodeJS 14.x`，可以考虑使用[nvm](https://github.com/nvm-sh/nvm)来管理你的NodeJS版本。**
 
 当然需要使用`react`进行开发，必要的框架也是不可少的：
 
 ```shell
-npm install react react-dom
-npm install --save-dev @types/react @types/react-dom
+npm install core-js react react-dom
+npm install -D @types/react @types/react-dom
 ```
 
 ## 准备一些配置文件
@@ -194,7 +199,6 @@ npm start
  DONE  Compiled successfully in 1608ms
 
  I  Your application is running here: http://localhost:8081/
- I                                or: http://192.168.1.10:8081/
 ```
 
 这说明一个最简单的应用已经成功了，我们可以在完全不接触`webpack`之类工具的前提下快速地实现一个React应用。

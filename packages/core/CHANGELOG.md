@@ -3,6 +3,245 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [2.2.1](https://github.com/ecomfe/reskript/compare/v2.2.0...v2.2.1) (2021-09-12)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.2.0](https://github.com/ecomfe/reskript/compare/v2.1.0...v2.2.0) (2021-09-12)
+
+
+### Features
+
+* **cli:** 增加调试输出 ([#166](https://github.com/ecomfe/reskript/issues/166)) ([ca78e43](https://github.com/ecomfe/reskript/commit/ca78e438e6f667c76cd2fa63194a93c4ccac167d))
+
+
+
+
+
+# [2.1.0](https://github.com/ecomfe/reskript/compare/v2.0.0...v2.1.0) (2021-08-31)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.0.0](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.5...v2.0.0) (2021-08-26)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.0.0-beta.5](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2021-08-26)
+
+
+### Bug Fixes
+
+* **cli:** 找CLI包的时候要从项目的目录开始找 ([#155](https://github.com/ecomfe/reskript/issues/155)) ([6697418](https://github.com/ecomfe/reskript/commit/66974182ab6838a8f6c01a0a9ec148345bda1dc1))
+
+
+
+
+
+# [2.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2021-08-25)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [2.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v1.15.2...v2.0.0-beta.1) (2021-08-25)
+
+
+* feat!: 对外暴露的API转为异步 (#130) ([f423d55](https://github.com/ecomfe/reskript/commit/f423d55efc890abd54e8958d4005c0285c91252d)), closes [#130](https://github.com/ecomfe/reskript/issues/130)
+
+
+### BREAKING CHANGES
+
+* `settings`、`core`、`config-webpack`和`config-webpack-dev-server`的接口均变为异步函数
+* `BuildContext`的`cache`属性由`boolean`变为`persist` | `transient` | `off`
+* NodeJS最低版本要求为14.14.0
+
+
+
+
+
+## [1.15.2](https://github.com/ecomfe/reskript/compare/v1.15.1...v1.15.2) (2021-08-24)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.15.1](https://github.com/ecomfe/reskript/compare/v1.15.0...v1.15.1) (2021-08-20)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [1.15.0](https://github.com/ecomfe/reskript/compare/v1.14.2...v1.15.0) (2021-08-19)
+
+
+### Features
+
+* **flags:** 支持SKR_FLAGS设置遇到废弃配置直接退出 ([#124](https://github.com/ecomfe/reskript/issues/124)) ([7f2658a](https://github.com/ecomfe/reskript/commit/7f2658a890a1f714d1a003aeff44dcd446d447b1))
+
+
+
+
+
+## [1.14.2](https://github.com/ecomfe/reskript/compare/v1.14.1...v1.14.2) (2021-08-17)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.14.1](https://github.com/ecomfe/reskript/compare/v1.14.0...v1.14.1) (2021-08-13)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [1.14.0](https://github.com/ecomfe/reskript/compare/v1.13.1...v1.14.0) (2021-08-12)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.13.1](https://github.com/ecomfe/reskript/compare/v1.13.0...v1.13.1) (2021-08-07)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [1.13.0](https://github.com/ecomfe/reskript/compare/v1.12.2...v1.13.0) (2021-08-05)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.12.2](https://github.com/ecomfe/reskript/compare/v1.12.1...v1.12.2) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.12.1](https://github.com/ecomfe/reskript/compare/v1.12.0...v1.12.1) (2021-08-02)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [1.12.0](https://github.com/ecomfe/reskript/compare/v1.11.2...v1.12.0) (2021-07-29)
+
+
+### Features
+
+* **plugin-workspace-no-build:** 一个能在monorepo下直接依赖其它子包的源码的插件 ([#103](https://github.com/ecomfe/reskript/issues/103)) ([81ab9e1](https://github.com/ecomfe/reskript/commit/81ab9e12c49661907362587f92b5fdf7f780d9f5))
+
+
+
+
+
+## [1.11.2](https://github.com/ecomfe/reskript/compare/v1.11.1...v1.11.2) (2021-07-28)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.11.1](https://github.com/ecomfe/reskript/compare/v1.11.0...v1.11.1) (2021-07-25)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+# [1.11.0](https://github.com/ecomfe/reskript/compare/v1.10.3...v1.11.0) (2021-07-23)
+
+
+### Features
+
+* **build:** 管理和读取各类.env文件 ([#74](https://github.com/ecomfe/reskript/issues/74)) ([83c9699](https://github.com/ecomfe/reskript/commit/83c96994c4cb5eb98978345f109c03f3901cefd2))
+
+
+
+
+
+## [1.10.3](https://github.com/ecomfe/reskript/compare/v1.10.2...v1.10.3) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.10.2](https://github.com/ecomfe/reskript/compare/v1.10.1...v1.10.2) (2021-07-22)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
+## [1.10.1](https://github.com/ecomfe/reskript/compare/v1.10.0...v1.10.1) (2021-07-20)
+
+**Note:** Version bump only for package @reskript/core
+
+
+
+
+
 # [1.10.0](https://github.com/ecomfe/reskript/compare/v1.9.0...v1.10.0) (2021-07-20)
 
 

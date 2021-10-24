@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-babel",
-  "version": "1.10.0",
+  "version": "2.2.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -10,21 +10,31 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "lint": "eslint src",
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
     "test": "echo 'No test in @reskript/cli-babel'"
   },
   "devDependencies": {
-    "eslint": "^7.30.0",
-    "typescript": "^4.3.5"
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.9.1",
+    "eslint": "^7.32.0",
+    "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@babel/core": "^7.14.6",
-    "@reskript/config-babel": "1.10.0",
-    "@reskript/core": "1.10.0",
+    "@babel/core": "^7.15.5",
+    "@reskript/config-babel": "2.2.2",
+    "@reskript/core": "2.2.2",
     "cli-highlight": "^2.1.11",
     "globby": "^11.0.4",
-    "p-limit": "^3.1.0",
-    "rimraf": "^3.0.2"
+    "throat": "^6.0.1"
+  },
+  "peerDependencies": {
+    "core-js": "3.x"
+  },
+  "peerDependenciesMeta": {
+    "core-js": {
+      "optional": true
+    }
   }
 }

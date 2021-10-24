@@ -1,20 +1,18 @@
 import {WorkModeAware} from '@reskript/core';
 
-export interface LegacyBuildCommandLineArgs extends WorkModeAware {
-    readonly src?: string;
-    readonly srcDir: string;
-    readonly entriesDir: string;
+export interface BuildCommandLineArgs extends WorkModeAware {
+    readonly srcDirectory: string;
+    readonly entriesDirectory: string;
     readonly buildTarget?: string;
     readonly featureOnly?: string;
     readonly entriesOnly?: string[];
+    readonly strict: boolean;
     readonly analyze: boolean;
     readonly clean: boolean;
     readonly profile: boolean;
     readonly sourceMaps: boolean;
-    readonly cacheDir?: string;
+    readonly cacheDirectory?: string;
 }
-
-export type BuildCommandLineArgs = Omit<LegacyBuildCommandLineArgs, 'src'>;
 
 export interface WebpackCompileAsset {
     readonly name: string;

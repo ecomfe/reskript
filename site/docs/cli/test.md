@@ -9,18 +9,25 @@ title: 执行单元测试
 ## 参数
 
 ```
---cwd [value]                  指定当前工作目录，默认为当前目录
---coverage                     输出覆盖率数据
---watch                        启用监听模式，文件变更后会自动运行单元测试
---target [value]               指定单测的运行时环境，可以为react或node，默认是node
---changed-since [value]        只检查指定的提交后有变更的部分，可以是一个分支名或一个git提交的id
---collect-coverage-from [glob] 在指定的文件范围内收集覆盖率信息
--h, --help              显示帮助信息
+--cwd [value]     指定当前工作目录，默认为当前目录
+--target [value]  指定单测的运行时环境，可以为react或node，默认是node
+-h, --help        显示帮助信息
 ```
 
-在`skr test`可以输入一系列的路径指定测试范围，如`skr test src/utils`表示仅运行`src/utils`下的单元测试。即便指定了测试范围，依然会全局收集覆盖率信息，如果希望覆盖率也仅从指定范围中统计，你需要同时使用`--collect-coverage-from`参数。
+在`skr test`可以输入一系列的路径指定测试范围，如`skr test src/utils`表示仅运行`src/utils`下的单元测试。
 
-现在`skr test`的功能还不够成熟，仅支持最基本的功能，并封装了组件测试的能力。
+在实现上，`skr test`使用了`jest`作为测试框架，你可以传递任何`jest`可接受的参数，这些参数必须放置在`--`之后，如：
+
+```shell
+skr test --target=react src/components -- --coverage --maxWorkers=3 --maxConcurrency 2
+```
+
+注意一定要把传给`jest`的参数放在`--`后面。如果你使用`npm run test`来启动`skr test`，则需要再多写一个`--`，像这样子：
+
+```shell
+# 注意有连续的2个"--"
+npm run test --target=react src/components -- -- --coverage --maxWorkers=3 --maxConcurrency 2
+```
 
 ## 测试组件
 

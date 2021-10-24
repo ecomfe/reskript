@@ -2,8 +2,8 @@ import {WorkMode} from '@reskript/core';
 
 export interface BabelCommandLineArgs {
     mode: WorkMode;
-    noPolyfill: boolean;
+    polyfill: boolean;
     clean: boolean;
-    out: string;
+    outDirectory?: string;
     copy: boolean;
 }

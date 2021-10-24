@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import pReduce from 'p-reduce';
-import {logger} from '@reskript/core';
+import matcher from 'matcher';
+import {logger, pReduce} from '@reskript/core';
 import {RuleConfig, OptionalRuleConfig, Severity} from '@reskript/settings';
 
 const SEVERITY_PREFIX: Record<Severity, string> = {
@@ -29,16 +29,17 @@ export interface CheckHelper {
     report: (message: string) => void;
 }
 
-export type Check<T> = (configValue: T, helpers: CheckHelper) => Promise<boolean>;
+export interface InspectOptions {
+    cwd: string;
+    exitOnError: boolean;
+}
+
+export type Check<T> = (configValue: T, helpers: CheckHelper, options: InspectOptions) => Promise<boolean>;
 
 export interface RuleProcessor<T> {
     config: UniversalRuleConfig<T>;
     defaultConfigValue: T;
     check: Check<T>;
-}
-
-export interface InspectOptions {
-    exitOnError: boolean;
 }
 
 export const run = async (processors: Array<RuleProcessor<any>>, options: InspectOptions): Promise<void> => {
@@ -55,7 +56,7 @@ export const run = async (processors: Array<RuleProcessor<any>>, options: Inspec
                 report: createPrint(severity),
                 notice: createPrint('print'),
             };
-            const result = await processor.check(configValue, helpers);
+            const result = await processor.check(configValue, helpers, options);
 
             if (!result) {
                 results.add(severity);
@@ -69,4 +70,22 @@ export const run = async (processors: Array<RuleProcessor<any>>, options: Inspec
     if (results.has('error') && options.exitOnError) {
         process.exit(23);
     }
+};
+
+
+const hasMatchInArray = (value: string, array: string[]) => {
+    return array.some(pattern => matcher.isMatch(value, pattern));
+};
+
+// 以`includes`为优先
+export const isIncluded = (name: string, includes?: string[], excludes?: string[]): boolean => {
+    if (includes) {
+        return hasMatchInArray(name, includes);
+    }
+
+    if (excludes && hasMatchInArray(name, excludes)) {
+        return false;
+    }
+
+    return true;
 };

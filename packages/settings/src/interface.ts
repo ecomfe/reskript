@@ -12,7 +12,7 @@ export interface FeatureMatrix {
     [name: string]: FeatureSet;
 }
 
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion';
+export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 export interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
@@ -32,9 +32,6 @@ export interface BuildScriptSettings {
     readonly polyfill: boolean;
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
-    // 是否启用默认的import优化，主要是对`antd`和`lodash`进行优化。如果要从CDN走这些包，关掉这个配置自己折腾
-    // DEPRECATED: 待废弃
-    readonly defaultImportOptimization: boolean;
     // 最终手动处理babel配置
     readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
 }
@@ -65,6 +62,7 @@ export interface BuildInspectInitialResource {
 export interface BuildInspectSettings {
     readonly initialResources: BuildInspectInitialResource;
     readonly duplicatePackages: OptionalRuleConfig<SourceFilter>;
+    readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
 export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
@@ -89,14 +87,13 @@ export type LoaderType =
     | 'postCSSModules'
     | 'less'
     | 'lessSafe'
-    | 'url'
     | 'img'
     | 'worker'
     | 'styleResources'
     | 'classNames'
     | 'cssExtract'
-    | 'svg'
-    | 'svgo';
+    | 'svgo'
+    | 'svgToComponent';
 
 export interface BuildInternals {
     readonly rules: InternalRules;
@@ -147,7 +144,7 @@ export interface DevServerSettings {
     // 重写部分请求URL，优先于apiPrefixes
     readonly proxyRewrite: Record<string, string>;
     // 是否启用热更新，其中`simple`只启用样式的更新，`all`则会加入组件的热更新
-    readonly hot: 'none' | 'simple' | 'all';
+    readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
@@ -155,11 +152,21 @@ export interface DevServerSettings {
 }
 
 export interface PlaySettings {
-    readonly injectResources: string[];
-    readonly wrapper: string;
+    // 默认启用React的并发模式
+    readonly defaultEnableConcurrentMode: boolean;
+    // 指定全局配置模块路径
+    readonly defaultGlobalSetup?: string;
 }
 
-export type SettingsPlugin = (current: ProjectSettings, cmd: ProjectAware) => ProjectSettings;
+export interface PluginOptions {
+    cwd: string;
+    command: string;
+}
+
+export type SettingsPlugin<C extends PluginOptions = PluginOptions> = (
+    current: ProjectSettings,
+    cmd: C
+) => ProjectSettings | Promise<ProjectSettings>;
 
 export interface ProjectSettings extends ProjectAware {
     readonly featureMatrix: FeatureMatrix;
@@ -182,7 +189,7 @@ export interface BuildEnv extends WorkModeAware {
     // `reskript.config.js`中定义的配置
     readonly projectSettings: ProjectSettings;
     // 是否启用缓存
-    readonly cache?: boolean;
+    readonly cache?: 'persist' | 'transient' | 'off';
     // 缓存的目录，默认为`node_modules/.cache`
     readonly cacheDirectory?: string;
 }

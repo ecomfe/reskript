@@ -1,8 +1,7 @@
-// multiple components
 function Foo() {
-    return 'foo';
+    return <div />;
 }
 
 function Bar() {
-    return 'bar';
+    return <div />;
 }

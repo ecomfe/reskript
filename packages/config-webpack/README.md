@@ -37,17 +37,17 @@ import {
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv} from '@reskript/settings';
 
-const createBuildConfiguration = () => {
+const createBuildConfiguration = async () => {
     const cwd = process.cwd();
     // 给定当前的项目目录`cwd`，读取`reskript.config.js`
-    const projectSettings = readProjectSettings({cwd}, 'build');
+    const projectSettings = await readProjectSettings({cwd}, 'build');
     const entryLocation = {
         cwd,,
         srcDirectory: 'src',
         entryDirectory: projectSettings.build.entries,
     };
     // 自动读取`src/entries/*.js`来生成应用入口
-    const entries = collectEntries(entryLocation);
+    const entries = await collectEntries(entryLocation);
     // 创建一个`BuildEnv`对象，这个对象是`BuildContext`的一小部分
     const buildEnv: BuildEnv = {
         projectSettings,
@@ -58,7 +58,7 @@ const createBuildConfiguration = () => {
         srcDirectory: 'src', // 源码放在哪个目录下，默认是`src`
     };
     // 生成一个`RuntimeBuildEnv`对象，相比`BuildEnv`多了构建版本等信息
-    const runtimeBuildEnv = createRuntimeBuildEnv(buildEnv);
+    const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
     // 通过`RuntimeBuildEnv`去生成`BuildContext`
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
@@ -93,7 +93,6 @@ loaders: {
     style,
     styleResources,
     classNames,
-    url,
 }
 ```
 
@@ -131,6 +130,7 @@ rules: {
     css,
     image,
     file,
+    svg,
 }
 ```
 

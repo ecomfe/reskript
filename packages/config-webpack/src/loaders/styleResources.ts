@@ -9,8 +9,6 @@ const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
     const patterns = [
         ...resources,
         unixify(path.resolve(cwd, srcDirectory, 'styles/*.var.less')),
-        // DEPRECATED: 2.0废弃
-        unixify(path.resolve(__dirname, '../assets/est-compat.less')),
     ];
 
     return {

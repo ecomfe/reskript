@@ -47,6 +47,7 @@ const getExtensionConfig = (extension: string): {order: number, color: typeof Fo
         case '.html':
             return {order: 0, color: 'green'};
         case '.js':
+        case '.jsx':
         case '.es':
         case '.mjs':
             return {order: 1, color: 'green'};

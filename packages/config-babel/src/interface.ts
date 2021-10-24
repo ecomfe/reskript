@@ -4,11 +4,10 @@ import {ThirdPartyUse} from '@reskript/settings';
 export interface BabelConfigOptions {
     readonly uses?: ThirdPartyUse[];
     readonly mode?: WorkMode;
-    readonly hot?: 'none' | 'simple' | 'all';
+    readonly hot?: boolean;
     readonly hostType?: 'application' | 'library';
     readonly polyfill?: boolean;
     readonly modules?: false | 'commonjs';
-    readonly defaultImportOptimization?: boolean;
     readonly displayName?: boolean | 'auto';
     readonly cwd?: string;
     readonly srcDirectory?: string;

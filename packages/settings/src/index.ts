@@ -1,44 +1,50 @@
 import path from 'path';
-import fs from 'fs';
+import {existsSync} from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import {logger, ProjectAware} from '@reskript/core';
+import {logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
-import {fillProjectSettings} from './defaults';
+import {fillProjectSettings, PartialProjectSettings} from './defaults';
 import {applyPlugins} from './plugins';
-import {warnDeprecatedInProjectSettings} from './warn';
 
 export * from './interface';
-export {fillProjectSettings};
+export {fillProjectSettings, PartialProjectSettings};
 
-const requireSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
+const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
     const location = path.join(cmd.cwd, 'reskript.config.js');
 
-    if (!fs.existsSync(location)) {
+    if (!existsSync(location)) {
         return fillProjectSettings({});
     }
 
+    // NOTE: 如果要改成原生ESM的话，这里得想个别的办法
     delete require.cache[location];
-    // eslint-disable-next-line global-require
-    const requiredSettings = require(location) as ClientProjectSettings;
-    validate(requiredSettings);
+    const {default: requiredSettings} = await import(location) as {default: ClientProjectSettings};
+
+    try {
+        validate(requiredSettings);
+    }
+    catch (ex) {
+        logger.error(ex instanceof Error ? ex.message : `${ex}`);
+        process.exit(21);
+    }
+
     const {plugins = [], ...clientSettings} = requiredSettings;
-    warnDeprecatedInProjectSettings(clientSettings);
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);
 };
 
-const computeSettingsHash = (cwd: string): string => {
+const computeSettingsHash = async (cwd: string): Promise<string> => {
     const location = path.join(cwd, 'reskript.config.js');
 
-    if (!fs.existsSync(location)) {
+    if (!existsSync(location)) {
         return '';
     }
 
 
-    return hasha.fromFileSync(location);
+    return hasha.fromFile(location);
 };
 
 interface CacheContainer {
@@ -55,12 +61,12 @@ const cache: CacheContainer = {
     listen: null,
 };
 
-export const readProjectSettings = (cmd: ProjectAware, commandName: string): ProjectSettings => {
+export const readProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
     if (cache.initialized) {
         return cache.settings;
     }
 
-    const settings = requireSettings(cmd, commandName);
+    const settings = await requireSettings(cmd, commandName);
 
     cache.initialized = true;
     cache.settings = settings;
@@ -68,7 +74,7 @@ export const readProjectSettings = (cmd: ProjectAware, commandName: string): Pro
     return settings;
 };
 
-export const watchProjectSettings = (cmd: ProjectAware, commandName: string): Observe => {
+export const watchProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<Observe> => {
     if (cache.listen) {
         return cache.listen;
     }
@@ -78,22 +84,23 @@ export const watchProjectSettings = (cmd: ProjectAware, commandName: string): Ob
     const watcher = chokidar.watch(settingsLocation);
     const notify = async (): Promise<void> => {
         // `fs.watch`是不稳定的，一次修改会触发多次，因此用hash做一下比对
-        const newSettingsHash = computeSettingsHash(cmd.cwd);
+        const newSettingsHash = await computeSettingsHash(cmd.cwd);
 
         if (newSettingsHash === cache.hash) {
             return;
         }
 
-        const newSettings = requireSettings(cmd, commandName);
+        const newSettings = await requireSettings(cmd, commandName);
 
         cache.hash = newSettingsHash;
         cache.settings = newSettings;
 
         listeners.forEach(f => f(newSettings));
     };
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     watcher.on('all', notify);
 
-    cache.hash = computeSettingsHash(cmd.cwd);
+    cache.hash = await computeSettingsHash(cmd.cwd);
     cache.listen = (listener: Listener) => {
         listeners.add(listener);
         return () => listeners.delete(listener);
@@ -110,5 +117,18 @@ export const warnAndExitOnInvalidFinalizeReturn = (value: any, scope: string): v
         `;
         logger.error(message);
         process.exit(21);
+    }
+};
+
+const hasDependency = (packageInfo: PackageInfo, name: string) => {
+    const {dependencies, devDependencies} = packageInfo;
+    return !!(dependencies?.[name] || devDependencies?.[name]);
+};
+
+export const strictCheckRequiredDependency = async (projectSettings: ProjectSettings, cwd: string) => {
+    const hostPackageInfo = await readPackageConfig(cwd);
+    if (projectSettings.build.script.polyfill && !hasDependency(hostPackageInfo, 'core-js')) {
+        logger.error('You require polyfill on build but don\'t have core-js installed.');
+        process.exit(13);
     }
 };

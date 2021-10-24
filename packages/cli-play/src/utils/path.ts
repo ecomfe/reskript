@@ -22,7 +22,7 @@ export const resolveCasePath = (componentModulePath: string): string => {
     return caseFileName;
 };
 
-export const resolveConfigurationPath = (componentModulePath: string): string => {
+export const resolveLocalConfigurationPath = (componentModulePath: string): string => {
     const directory = path.dirname(componentModulePath);
     const filename = resolveComponentFileName(componentModulePath);
     return path.join(directory, '__repl__', `${filename}.play.js`);

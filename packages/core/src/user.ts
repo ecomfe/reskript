@@ -1,9 +1,13 @@
 import childProcess from 'child_process';
 import os from 'os';
+import {promisify} from 'util';
 
-export const currentUserName = (cwd?: string) => {
+const exec = promisify(childProcess.exec);
+
+export const currentUserName = async (cwd?: string): Promise<string> => {
     try {
-        const gitUserName = childProcess.execSync('git config --get user.name', {cwd, encoding: 'utf-8'}).trim();
+        const output = await exec('git config --get user.name', {cwd, encoding: 'utf-8'});
+        const gitUserName = output.stdout.trim();
         return gitUserName || os.userInfo().username;
     }
     catch {

@@ -30,6 +30,7 @@ module.exports = {
             type: 'category',
             label: '命令行',
             items: [
+                'cli/introduction',
                 'cli/build',
                 'cli/dev',
                 'cli/lint',
@@ -37,7 +38,6 @@ module.exports = {
                 'cli/play',
                 'cli/babel',
                 'cli/doctor',
-                'cli/exit-code',
                 'cli/init',
             ],
         },
@@ -45,6 +45,7 @@ module.exports = {
             type: 'category',
             label: '高阶应用',
             items: [
+                'advanced/custom-env',
                 'advanced/lint-rules',
                 'advanced/service-worker',
                 'advanced/config-insiders',
@@ -60,6 +61,14 @@ module.exports = {
             items: [
                 'plugins/sass',
                 'plugins/qiankun',
+                'plugins/workspace-no-build',
+            ],
+        },
+        {
+            type: 'category',
+            label: '版本升级手册',
+            items: [
+                'migration/v2',
             ],
         },
         'faq',

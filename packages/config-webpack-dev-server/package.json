@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "1.10.0",
+  "version": "2.2.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -10,31 +10,38 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "lint": "eslint src",
-    "test": "echo 'No test in @reskript/config-webpack-dev-server'"
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
+    "test": "jest"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.171",
-    "@types/webpack-dev-server": "3.11.2",
-    "eslint": "^7.30.0",
-    "typescript": "^4.3.5",
-    "webpack": "^5.44.0",
-    "webpack-dev-server": "^3.11.2"
+    "@types/cli-progress": "^3.9.2",
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.172",
+    "@types/node": "^16.9.1",
+    "@types/webpack-dev-server": "4.1.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.1.1",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3",
+    "webpack": "^5.51.0",
+    "webpack-dev-server": "^4.2.0"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@reskript/config-webpack": "1.10.0",
-    "@reskript/core": "1.10.0",
-    "@reskript/settings": "1.10.0",
-    "friendly-errors-webpack-plugin": "^1.7.0",
+    "@reskript/config-webpack": "2.2.2",
+    "@reskript/core": "2.2.2",
+    "@reskript/settings": "2.2.2",
+    "@soda/friendly-errors-webpack-plugin": "^1.8.0",
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.9.0",
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.21",
-    "pkg-dir": "^5.0.0",
-    "proxy-agent": "^4.0.1",
+    "proxy-agent": "^5.0.0",
     "react-refresh": "^0.10.0",
-    "webpack-merge": "^5.8.0",
-    "webpackbar": "^5.0.0-3"
+    "webpack": "^5.52.1",
+    "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {
     "webpack": "5.x"
