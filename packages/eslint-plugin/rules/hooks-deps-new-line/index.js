@@ -32,8 +32,10 @@ const ruleCallback = context => {
         for (let i = 0; i < length; i++) {
             const currentNode = nodeList[i];
             const nextNode = nodeList[i + 1];
-            if (currentNode.loc.start.line === nextNode.loc.end.line) {
-                // because the last node is the callee function , use previous node`s end index
+            if (
+                currentNode.loc.start.line === nextNode.loc.start.line
+                || currentNode.loc.end.line === nextNode.loc.end.line
+            ) {
                 errorIndexes.push(
                     i === length - 1 ? currentNode.range[1] : nextNode.range[0]
                 );
@@ -44,7 +46,7 @@ const ruleCallback = context => {
             context.report({
                 loc: node.loc,
                 node,
-                messageId: 'hookArgumentsBreakLine',
+                messageId: 'hooksDepsNewLine',
                 data: {
                     name: node.callee.name,
                 },
@@ -64,7 +66,7 @@ module.exports = {
         },
         fixable: 'whitespace', // or "code" or "whitespace"
         messages: {
-            hookArgumentsBreakLine: 'Hook {{name}}\'s deps argument should be placed on a new line',
+            hooksDepsNewLine: 'Hook {{name}}\'s deps argument should be placed on a new line',
         },
     },
     create(context) {
