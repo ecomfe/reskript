@@ -63,3 +63,7 @@ exports.createFunctionLinter = (context, {enter, leave, check}) => {
         CallExpression: checkCallExpression,
     };
 };
+
+exports.capitalizeFirstLetter = word => {
+    return `${word[0].toUpperCase()}${word.slice(1)}`;
+};
