@@ -57,5 +57,13 @@
     "lodash": "^4.17.21",
     "react-refresh": "^0.10.0",
     "resolve": "^1.20.0"
+  },
+  "peerDependencies": {
+    "styled-components": "*"
+  },
+  "peerDependenciesMeta": {
+    "styled-components": {
+      "optional": true
+    }
   }
 }

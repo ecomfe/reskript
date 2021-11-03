@@ -526,6 +526,7 @@ importers:
 
   packages/config-lint:
     specifiers:
+      '@babel/core': ^7.15.5
       '@babel/eslint-parser': ^7.15.4
       '@babel/eslint-plugin': ^7.13.16
       '@ecomfe/eslint-config': ^7.3.0
@@ -547,9 +548,10 @@ importers:
       resolve: ^1.20.0
       typescript: ^4.4.3
     dependencies:
-      '@babel/eslint-parser': 7.15.4_eslint@7.32.0
+      '@babel/core': 7.15.5
+      '@babel/eslint-parser': 7.15.4_@babel+core@7.15.5+eslint@7.32.0
       '@babel/eslint-plugin': 7.14.5_7a10a81557016a2e2d8e8110fec13462
-      '@ecomfe/eslint-config': 7.3.0_a788c3c84b522ecbab7148b9b9a7bd40
+      '@ecomfe/eslint-config': 7.3.0_2ca8c00be440d7d7282955412242fba7
       '@ecomfe/stylelint-config': 1.1.2
       '@reskript/config-babel': link:../config-babel
       '@reskript/eslint-plugin': link:../eslint-plugin
@@ -1200,20 +1202,6 @@ packages:
       eslint-scope: 5.1.1
       eslint-visitor-keys: 2.1.0
       semver: 6.3.0
-    dev: true
-
-  /@babel/eslint-parser/7.15.4_eslint@7.32.0:
-    resolution: {integrity: sha512-hPMIAmGNbmQzXJIo2P43Zj9UhRmGev5f9nqdBFOWNGDGh6XKmjby79woBvg6y0Jur6yRfQBneDbUQ8ZVc1krFw==}
-    engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
-    peerDependencies:
-      '@babel/core': '>=7.11.0'
-      eslint: '>=7.5.0'
-    dependencies:
-      eslint: 7.32.0
-      eslint-scope: 5.1.1
-      eslint-visitor-keys: 2.1.0
-      semver: 6.3.0
-    dev: false
 
   /@babel/eslint-plugin/7.14.5_7a10a81557016a2e2d8e8110fec13462:
     resolution: {integrity: sha512-nzt/YMnOOIRikvSn2hk9+W2omgJBy6U8TN0R+WTTmqapA+HnZTuviZaketdTE9W7/k/+E/DfZlt1ey1NSE39pg==}
@@ -2666,7 +2654,7 @@ packages:
       webpack: 5.52.1
     dev: false
 
-  /@ecomfe/eslint-config/7.3.0_a788c3c84b522ecbab7148b9b9a7bd40:
+  /@ecomfe/eslint-config/7.3.0_2ca8c00be440d7d7282955412242fba7:
     resolution: {integrity: sha512-srHEADiEWJ+dLTsY2S2hcpfDvvohwOsJT3XivpfnDn6Iat8EfJld0Si2T3eMx34r84wU1DXkFERfEHtJHVfZ3Q==}
     peerDependencies:
       '@babel/core': ^7.12.10
@@ -2696,7 +2684,8 @@ packages:
       eslint-plugin-vue:
         optional: true
     dependencies:
-      '@babel/eslint-parser': 7.15.4_eslint@7.32.0
+      '@babel/core': 7.15.5
+      '@babel/eslint-parser': 7.15.4_@babel+core@7.15.5+eslint@7.32.0
       '@babel/eslint-plugin': 7.14.5_7a10a81557016a2e2d8e8110fec13462
       '@typescript-eslint/eslint-plugin': 4.31.0_d9c1bc16c4e2aea4e8e177a5961dd3bf
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.3

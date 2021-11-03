@@ -31,5 +31,8 @@
     "globby": "^11.0.4",
     "lodash": "^4.17.21",
     "stylelint": "^13.13.1"
+  },
+  "peerDependencies": {
+    "typescript": "4.x"
   }
 }

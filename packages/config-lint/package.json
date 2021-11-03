@@ -29,6 +29,7 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
+    "@babel/core": "^7.15.5",
     "@babel/eslint-parser": "^7.15.4",
     "@babel/eslint-plugin": "^7.13.16",
     "@ecomfe/eslint-config": "^7.3.0",
