@@ -52,7 +52,7 @@ export default async (cwd: string, options: UserOptions) => {
         ['-D'],
         [
             'eslint@7.x', // NOTE: `eslint 8.x`需要更新的Node版本，需要下个大版本更新
-            'stylelint',
+            'stylelint@13.x', // NOTE: `stylelint 14.x`是破坏性更新，需要下个大版本
             'typescript',
             'webpack',
             options.gerrit ? 'husky@4.x' : 'husky',
