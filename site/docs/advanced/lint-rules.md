@@ -93,6 +93,28 @@ const names = useMemo(
 
 **注：本规则与`prettier`格式化的结果可能不相符，但本规则配合`indent`规则后加`--fix`可以修复代码规范，因此如果需要，推荐在`prettier`后再跑`skr lint --fix`。**
 
+## spell-check
+
+这条规则用来检查一个变量名称是否存在[常见的单词拼写错误](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/For_machines)。
+
+以下是**错误**的示例：
+
+```ts
+// name 拼写错误
+const userNmae = user.name;
+
+// original 拼写错误
+const originallName = user.name;
+```
+
+以下是**正确**的示例：
+
+```ts
+const userName = user.name;
+
+const originalName = user.name;
+```
+
 ## 项目配置
 
 你可以在ESLint配置中的`settings`字段中增加一个`localPackageNames`字段：

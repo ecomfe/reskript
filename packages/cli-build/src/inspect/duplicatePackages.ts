@@ -52,25 +52,25 @@ export default (compilations: StatsCompilation[], settings: BuildInspectSettings
         defaultConfigValue: {},
         check: async ({includes, excludes}, {report}) => {
             const names = extractUniqueModules(compilations);
-            const occurences = names.reduce(
-                (occurences, current) => {
+            const occurrences = names.reduce(
+                (occurrences, current) => {
                     const info = parseName(current);
 
                     if (!info) {
-                        return occurences;
+                        return occurrences;
                     }
 
-                    if (occurences.has(info.name)) {
-                        occurences.get(info.name)!.add(info.path);
+                    if (occurrences.has(info.name)) {
+                        occurrences.get(info.name)!.add(info.path);
                     }
                     else {
-                        occurences.set(info.name, new Set([info.path]));
+                        occurrences.set(info.name, new Set([info.path]));
                     }
-                    return occurences;
+                    return occurrences;
                 },
                 new Map<string, Set<string>>()
             );
-            for (const [name, paths] of occurences.entries()) {
+            for (const [name, paths] of occurrences.entries()) {
                 if (paths.size > 1 && isIncluded(name, includes, excludes)) {
                     const locations = await Promise.all([...paths].map(toPackageImportDescription));
                     report(`Found duplicate package ${name}\n${locations.join('\n')}`);
