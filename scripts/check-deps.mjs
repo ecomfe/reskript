@@ -13,6 +13,7 @@ const RESTRICTED_DEPENDENCIES = [
     ['remark-parse', '9.x'],
     ['remark-stringify', '9.x'],
     ['find-up', '5.x'],
+    ['pad-stream', '2.x'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {

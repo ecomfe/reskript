@@ -26,9 +26,11 @@
   },
   "dependencies": {
     "@reskript/core": "2.2.2",
+    "execa": "^5.1.1",
     "globby": "^11.0.4",
     "inquirer": "^8.1.2",
     "lodash": "^4.17.21",
-    "ora": "^5.4.0"
+    "ora": "^5.4.0",
+    "pad-stream": "^2.0.0"
   }
 }

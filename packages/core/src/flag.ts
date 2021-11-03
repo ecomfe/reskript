@@ -20,3 +20,5 @@ const flags: Array<Flag | 'all'> = (() => {
 })();
 
 export const isFlagEnabled = (name: Flag) => flags.includes('all') || flags.includes(name);
+
+export const isInDebugMode = () => process.env.SKR_LOGGING === 'debug';

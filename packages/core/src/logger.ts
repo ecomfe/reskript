@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import dedentString from 'dedent';
+import {isInDebugMode} from './flag';
 
 type LogLevel = 'log' | 'warn' | 'error';
 
@@ -40,7 +41,7 @@ export default {
     warn: createLogWith('warn', 'yellow'),
     error: createLogWith('error', 'red'),
     debug: (message: any) => {
-        if (process.env.SKR_LOGGING === 'debug') {
+        if (isInDebugMode()) {
             // eslint-disable-next-line no-console
             console.log(message);
         }
