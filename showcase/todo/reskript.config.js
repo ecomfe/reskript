@@ -1,4 +1,4 @@
-const path = require('node:path');
+const path = require('path');
 const {default: ExtraScriptPlugin} = require('@reskript/webpack-plugin-extra-script');
 const {default: qiankun} = require('@reskript/plugin-qiankun');
 
