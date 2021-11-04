@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **build:** 读取.env顺序修复 ([#174](https://github.com/ecomfe/reskript/issues/174)) ([132f01f](https://github.com/ecomfe/reskript/commit/132f01f9166f96e2046b935ee08132e15444ee51))
+
+
+### Features
+
+* **init:** 支持启用调试模式看到依赖安装过程 ([#189](https://github.com/ecomfe/reskript/issues/189)) ([afedc99](https://github.com/ecomfe/reskript/commit/afedc99718c01c6dc959c40fb1250b79b0a7ad7e))
+* 支持在修复代码风格后自动add文件 ([#177](https://github.com/ecomfe/reskript/issues/177)) ([27b423f](https://github.com/ecomfe/reskript/commit/27b423f4becff5391a3a1f5054317049f3c34bc5))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 **Note:** Version bump only for package @reskript/core

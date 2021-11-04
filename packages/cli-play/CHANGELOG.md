@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** 解决各种peer依赖的问题 ([#190](https://github.com/ecomfe/reskript/issues/190)) ([6821454](https://github.com/ecomfe/reskript/commit/6821454217d9888c02b6f7b65f9d5e9666688244))
+
+
+### Features
+
+* **play:** 前置增加用例管理服务状态检测 ([#178](https://github.com/ecomfe/reskript/issues/178)) ([25f6256](https://github.com/ecomfe/reskript/commit/25f625675d8727de9a0c3a62d8fe2449aee96acd))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 **Note:** Version bump only for package @reskript/cli-play

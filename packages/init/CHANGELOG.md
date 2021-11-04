@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **init:** apply .gitignore to initialized package ([#170](https://github.com/ecomfe/reskript/issues/170)) ([40aefcd](https://github.com/ecomfe/reskript/commit/40aefcd4d3c11fbbf318b4b331d615b23c70b2f1))
+* **init:** 初始化时限制eslint版本为7.x ([#182](https://github.com/ecomfe/reskript/issues/182)) ([c697b8b](https://github.com/ecomfe/reskript/commit/c697b8bd8bc889f4382b07a1d5f9852817669427))
+* **init:** 把styelint版本固定在13.x ([#186](https://github.com/ecomfe/reskript/issues/186)) ([3a63a92](https://github.com/ecomfe/reskript/commit/3a63a9254deba1a3eaa3a641f6c7449f4e9f473a))
+
+
+### Features
+
+* **init:** 支持启用调试模式看到依赖安装过程 ([#189](https://github.com/ecomfe/reskript/issues/189)) ([afedc99](https://github.com/ecomfe/reskript/commit/afedc99718c01c6dc959c40fb1250b79b0a7ad7e))
+* 支持在修复代码风格后自动add文件 ([#177](https://github.com/ecomfe/reskript/issues/177)) ([27b423f](https://github.com/ecomfe/reskript/commit/27b423f4becff5391a3a1f5054317049f3c34bc5))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 **Note:** Version bump only for package @reskript/init

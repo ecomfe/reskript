@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
@@ -23,19 +23,19 @@
     "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
-    "@reskript/cli-babel": "2.2.2",
-    "@reskript/cli-build": "2.2.2",
-    "@reskript/cli-dev": "2.2.2",
-    "@reskript/cli-lint": "2.2.2",
-    "@reskript/cli-play": "2.2.2",
-    "@reskript/cli-test": "2.2.2",
+    "@reskript/cli-babel": "2.3.0",
+    "@reskript/cli-build": "2.3.0",
+    "@reskript/cli-dev": "2.3.0",
+    "@reskript/cli-lint": "2.3.0",
+    "@reskript/cli-play": "2.3.0",
+    "@reskript/cli-test": "2.3.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
     "eslint": "^7.32.0",
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@reskript/core": "2.2.2",
+    "@reskript/core": "2.3.0",
     "clipanion": "^3.2.0-rc.3",
     "enquirer": "^2.3.6",
     "pkg-dir": "^5.0.0",
