@@ -16,17 +16,17 @@
     "test": "echo 'No test in @reskript/cli-test'"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.172",
-    "@types/node": "^16.9.1",
+    "@types/jest": "^27.0.2",
+    "@types/lodash": "^4.14.176",
+    "@types/node": "^16.11.6",
     "eslint": "^7.32.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "@reskript/config-jest": "2.2.2",
     "@reskript/core": "2.2.2",
     "@reskript/settings": "2.2.2",
-    "jest-cli": "^27.1.1",
+    "jest-cli": "^27.3.1",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {

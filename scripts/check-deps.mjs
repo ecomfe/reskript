@@ -14,6 +14,12 @@ const RESTRICTED_DEPENDENCIES = [
     ['remark-stringify', '9.x'],
     ['find-up', '5.x'],
     ['pad-stream', '2.x'],
+    ['@typescript-eslint/eslint-plugin', '4.x'],
+    ['@typescript-eslint/parser', '4.x'],
+    ['eslint', '7.x'],
+    ['internal-ip', '6.x'],
+    ['matcher', '4.x'],
+    ['pkg-dir', '5.x'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {

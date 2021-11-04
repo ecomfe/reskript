@@ -16,12 +16,12 @@
     "test": "echo 'No test in @reskript/plugin-workspace-no-build'"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
-    "@types/semver": "^7.3.8",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@types/semver": "^7.3.9",
     "eslint": "^7.32.0",
-    "typescript": "^4.4.3",
-    "webpack": "^5.52.1"
+    "typescript": "^4.4.4",
+    "webpack": "^5.61.0"
   },
   "dependencies": {
     "@reskript/core": "2.2.2",
