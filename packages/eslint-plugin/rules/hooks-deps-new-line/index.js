@@ -59,7 +59,6 @@ module.exports = {
         type: 'suggestion',
         docs: {
             description: 'except react hooks\'s arguments in different line',
-            category: 'reskript',
             recommended: false,
         },
         fixable: 'whitespace', // or "code" or "whitespace"

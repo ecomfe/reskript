@@ -95,7 +95,6 @@ module.exports = {
         fixable: 'whitespace',
         docs: {
             description: 'Enforce a convention in the order of statements',
-            category: 'reskript',
             recommended: false,
             url: 'https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md',
         },
