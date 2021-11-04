@@ -1,3 +1,9 @@
+/*
+ * @Author: dongmin03
+ * @LastEditors: dongmin03
+ * @Date: 2021-11-04 14:46:23
+ * @LastEditTime: 2021-11-04 14:52:41
+ */
 import {sync as resolve} from 'resolve';
 import {getParseOnlyBabelConfig} from '@reskript/config-babel';
 
@@ -48,6 +54,7 @@ const config: Record<string, any> = {
         '@reskript/hooks-deps-new-line': 'warn',
         '@reskript/no-excessive-hook': 'warn',
         '@reskript/spell-check': 'warn',
+        '@reskript/useless-memoized-hooks': 'warn',
         // 这条规则太复杂，暂时配不出来，基本检查由`camelcase`规则负责
         '@typescript-eslint/naming-convention': 'off',
         // 这条规则与实际业务有冲突

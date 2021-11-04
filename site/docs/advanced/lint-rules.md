@@ -140,3 +140,23 @@ module.exports = {
 - 在最后放置`*`符号，则表示别名匹配，如`@i/*`则表示所有`@i/`开头的引用路径都被视为本地包。
 
 当你使用monorepo时，我们建议本地包都用一个作用域，推荐用`@i`作为前缀，则配置值为`@i/*`即可。
+
+
+## useless-memoized-hooks
+
+检查过度包装的 `hooks`。
+
+规则内容：
+```js
+// good code
+const handleCancel = useCallback(() => {
+    hideModal();
+    close();
+}, [hideModal, close]);
+
+// bad code
+const handleCancel = useCallback(() => hideModal(), [hideModal]);
+
+// fixed
+const handleCancel = () => hideModal();
+```
