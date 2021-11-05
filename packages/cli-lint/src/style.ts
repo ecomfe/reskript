@@ -36,6 +36,7 @@ const adaptStyleResultToScriptResult = (result: StyleLintResult): LintResult => 
         warningCount: 0,
         fixableErrorCount: 0,
         fixableWarningCount: 0,
+        fatalErrorCount: 0,
         usedDeprecatedRules: [],
     };
 };

@@ -1,6 +1,6 @@
 {
   "name": "@reskript/core",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,12 +17,14 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@types/ramda": "^0.27.46",
+    "@types/resolve": "^1.20.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3"
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -33,6 +35,7 @@
     "g-status": "^2.0.2",
     "globby": "^11.0.4",
     "pkg-dir": "^5.0.0",
+    "ramda": "^0.27.1",
     "resolve": "^1.20.0"
   }
 }

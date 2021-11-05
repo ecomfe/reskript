@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **test:** 测试时提供.target常量 ([#188](https://github.com/ecomfe/reskript/issues/188)) ([2d037ab](https://github.com/ecomfe/reskript/commit/2d037abb3dde4fe81fe78c59edf3d68169a24e53))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 

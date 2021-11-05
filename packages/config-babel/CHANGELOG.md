@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **build:** 修复emotion插件在production环境下丢失样式的问题 ([#187](https://github.com/ecomfe/reskript/issues/187)) ([1635511](https://github.com/ecomfe/reskript/commit/1635511937df849b8acb7538c58990b52b90c1a8))
+* **deps:** 解决各种peer依赖的问题 ([#190](https://github.com/ecomfe/reskript/issues/190)) ([6821454](https://github.com/ecomfe/reskript/commit/6821454217d9888c02b6f7b65f9d5e9666688244))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 **Note:** Version bump only for package @reskript/config-babel

@@ -34,6 +34,8 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
         globals: {
             $build: {
                 mode: 'production',
+                // TODO: 现在是写死的，后续看`--test-target`参数
+                target: 'dev',
             },
             // 如果自己有`jest.config.js`，需要自己写`global.$features`才行
             $features: options?.features ?? {},

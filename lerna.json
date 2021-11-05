@@ -3,8 +3,8 @@
     "packages/*",
     "showcase/*"
   ],
-  "version": "2.2.2",
-  "npmClient": "npm",
+  "version": "2.3.0",
+  "npmClient": "yarn",
   "exact": true,
   "command": {
     "version": {
@@ -16,7 +16,7 @@
         "**/*.md",
         "**/example/**",
         "**/__tests__/**",
-        "**/.eslintrc.js",
+        "**/.eslintrc.cjs",
         "**/jest.config.js",
         "**/tsconfig.json"
       ]

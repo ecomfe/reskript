@@ -5,7 +5,6 @@ module.exports = {
         type: 'problem',
         docs: {
             description: 'Detect a hook doesn\'t use any other hooks',
-            category: 'reskript',
             recommended: true,
             url: 'https://github.com/facebook/react/blob/master/packages/eslint-plugin-react-hooks/README.md',
         },

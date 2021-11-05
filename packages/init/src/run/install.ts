@@ -1,25 +1,37 @@
-import childProcess from 'child_process';
-import {promisify} from 'util';
 import {compact} from 'lodash';
 import ora from 'ora';
+import execa from 'execa';
+import padStream from 'pad-stream';
+import {isInDebugMode} from '@reskript/core';
 import {UserOptions} from '../interface';
 
-const execAsync = promisify(childProcess.exec);
-
-const PACKAGE_MANAGER_INSTALL_COMMAND: Record<string, string> = {
-    npm: 'npm install',
-    yarn: 'yarn add',
-    pnpm: 'pnpm add',
+const PACKAGE_MANAGER_INSTALL_COMMAND: Record<string, [string, string]> = {
+    npm: ['npm', 'install'],
+    yarn: ['yarn', 'add'],
+    pnpm: ['pnpm', 'add'],
 };
 
 const installWith = (cwd: string, packageManager: string) => {
-    const command = PACKAGE_MANAGER_INSTALL_COMMAND[packageManager];
+    const [command, route] = PACKAGE_MANAGER_INSTALL_COMMAND[packageManager];
 
     return async (description: string, flags: string[], dependencies: Array<string | false>) => {
         const spinner = ora(description);
-        spinner.start();
-        await execAsync(`${command} ${flags.join(' ')} ${compact(dependencies).join(' ')}`, {cwd});
-        spinner.succeed();
+        const cmd = execa(command, [route, ...flags, ...compact(dependencies)]);
+
+        if (isInDebugMode()) {
+            spinner.stopAndPersist();
+            cmd.stdout?.pipe(padStream(2, '   ')).pipe(process.stdout);
+            cmd.stderr?.pipe(padStream(2, '   ')).pipe(process.stderr);
+        }
+        else {
+            spinner.start();
+        }
+
+        await cmd;
+
+        if (!isInDebugMode()) {
+            spinner.succeed();
+        }
     };
 };
 
@@ -40,7 +52,7 @@ export default async (cwd: string, options: UserOptions) => {
         ['-D'],
         [
             'eslint@7.x', // NOTE: `eslint 8.x`需要更新的Node版本，需要下个大版本更新
-            'stylelint',
+            'stylelint@13.x', // NOTE: `stylelint 14.x`是破坏性更新，需要下个大版本
             'typescript',
             'webpack',
             options.gerrit ? 'husky@4.x' : 'husky',

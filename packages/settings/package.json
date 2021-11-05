@@ -1,6 +1,6 @@
 {
   "name": "@reskript/settings",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,16 +17,17 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.16",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@types/webpack-dev-server": "^4.3.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3",
-    "webpack": "^5.52.1"
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4",
+    "webpack": "^5.61.0"
   },
   "dependencies": {
-    "@reskript/core": "2.2.2",
+    "@reskript/core": "2.3.0",
     "chokidar": "^3.5.2",
     "hasha": "^5.2.0",
     "lodash": "^4.17.21",

@@ -52,7 +52,6 @@ module.exports = {
         type: 'suggestion',
         docs: {
             description: 'Prevent common typos',
-            category: 'reskript',
             recommended: true,
         },
         fixable: 'code',

@@ -1,6 +1,6 @@
 {
   "name": "@reskript/doctor",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,14 +17,15 @@
     "test": "echo 'No test in @reskript/doctor'"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@types/semver": "^7.3.9",
     "eslint": "^7.32.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@reskript/core": "2.2.2",
-    "@reskript/settings": "2.2.2",
+    "@reskript/core": "2.3.0",
+    "@reskript/settings": "2.3.0",
     "globby": "^11.0.4",
     "log-symbols": "^4.1.0",
     "ora": "^5.4.0",

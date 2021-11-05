@@ -32,7 +32,9 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
             resolve('@emotion/babel-plugin'),
             {
                 sourceMap: mode === 'development',
-                autoLabel: mode === 'production' ? 'never' : 'always',
+                // TODO: https://github.com/emotion-js/emotion/issues/2305
+                // autoLabel: mode === 'production' ? 'never' : 'always',
+                autoLabel: 'always',
             },
         ],
         shouldEnable('reflect-metadata', uses) && resolve('babel-plugin-transform-typescript-metadata'),

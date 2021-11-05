@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,33 +17,36 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.9.2",
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.172",
-    "@types/node": "^16.9.1",
-    "@types/webpack-dev-server": "4.1.0",
+    "@types/jest": "^27.0.2",
+    "@types/lodash": "^4.14.176",
+    "@types/node": "^16.11.6",
+    "@types/webpack-dev-server": "4.3.1",
     "eslint": "^7.32.0",
-    "jest": "^27.1.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4",
     "webpack": "^5.51.0",
-    "webpack-dev-server": "^4.2.0"
+    "webpack-dev-server": "^4.4.0"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@reskript/config-webpack": "2.2.2",
-    "@reskript/core": "2.2.2",
-    "@reskript/settings": "2.2.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
+    "@reskript/config-webpack": "2.3.0",
+    "@reskript/core": "2.3.0",
+    "@reskript/settings": "2.3.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.0",
     "chalk": "^4.1.2",
-    "cli-progress": "^3.9.0",
+    "cli-progress": "^3.9.1",
     "internal-ip": "^6.2.0",
     "lodash": "^4.17.21",
     "proxy-agent": "^5.0.0",
     "react-refresh": "^0.10.0",
-    "webpack": "^5.52.1",
+    "webpack": "^5.61.0",
     "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {
+    "eslint": "7.x",
+    "stylelint": "13.x",
+    "typescript": "4.x",
     "webpack": "5.x"
   }
 }

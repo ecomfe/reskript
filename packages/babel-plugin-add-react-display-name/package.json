@@ -1,6 +1,6 @@
 {
   "name": "@reskript/babel-plugin-add-react-display-name",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -16,18 +16,19 @@
     "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-react": "^7.16.0",
     "@types/babel__core": "^7.1.16",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/babel__traverse": "^7.14.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
     "eslint": "^7.32.0",
-    "jest": "^27.1.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3"
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/traverse": "^7.15.4",
-    "@reskript/babel-utils": "2.2.2"
+    "@babel/core": "^7.16.0",
+    "@babel/traverse": "^7.16.0",
+    "@reskript/babel-utils": "2.3.0"
   }
 }

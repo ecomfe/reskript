@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-qiankun",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,17 +17,17 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
     "eslint": "^7.32.0",
-    "jest": "^27.1.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3"
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@reskript/settings": "2.2.2",
+    "@reskript/settings": "2.3.0",
     "dedent": "^0.7.0",
-    "esbuild": "^0.12.26",
-    "qiankun": "^2.4.10"
+    "esbuild": "^0.13.12",
+    "qiankun": "^2.5.1"
   }
 }

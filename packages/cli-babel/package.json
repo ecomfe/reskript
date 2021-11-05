@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-babel",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -16,15 +16,16 @@
     "test": "echo 'No test in @reskript/cli-babel'"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
+    "@types/babel__core": "^7.1.16",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
     "eslint": "^7.32.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@babel/core": "^7.15.5",
-    "@reskript/config-babel": "2.2.2",
-    "@reskript/core": "2.2.2",
+    "@babel/core": "^7.16.0",
+    "@reskript/config-babel": "2.3.0",
+    "@reskript/core": "2.3.0",
     "cli-highlight": "^2.1.11",
     "globby": "^11.0.4",
     "throat": "^6.0.1"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
+
+
+### Features
+
+* **lint:** 添加spell-check检查规则 ([#181](https://github.com/ecomfe/reskript/issues/181)) ([efb3458](https://github.com/ecomfe/reskript/commit/efb345823afa46dcab1c6054567bb26db464e1b2))
+
+
+
+
+
 ## [2.2.2](https://github.com/ecomfe/reskript/compare/v2.2.1...v2.2.2) (2021-09-12)
 
 **Note:** Version bump only for package @reskript/eslint-plugin
