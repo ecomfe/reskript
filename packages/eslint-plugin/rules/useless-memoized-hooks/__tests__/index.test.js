@@ -26,17 +26,13 @@ const testCase = (file, errors = []) => {
 const ruleTester = new RuleTester();
 ruleTester.run('useless-memoized-hooks', rule, {
     valid: [
-        testCase('valid'),
+        testCase('has-arguments-valid'),
         testCase('more-than-one-valid'),
         testCase('dep-more-valid'),
     ],
     invalid: [
         testCase(
-            'arrow-function-invalid',
-            ['uselessMemoizedHooks']
-        ),
-        testCase(
-            'block-statement-invalid',
+            'only-depend-on-callee-invalid',
             ['uselessMemoizedHooks']
         ),
     ],

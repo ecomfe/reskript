@@ -24,7 +24,12 @@ const isOnlyOneCallExpressionWithHookDeps = (expressionNode, depNode) => {
         case 'ArrowFunctionExpression':
         case 'FunctionExpression': {
             const expression = findCallExpression(expressionNode);
-            if (expression && depNode.elements[0] && expression.callee.name === depNode.elements[0].name) {
+            if (
+                /* The expression contains only its own dependencies */
+                expression && depNode.elements[0] && expression.callee.name === depNode.elements[0].name
+                /* expression has no parameters */
+                && expression.arguments.length === 0
+            ) {
                 return true;
             }
         }
@@ -32,7 +37,7 @@ const isOnlyOneCallExpressionWithHookDeps = (expressionNode, depNode) => {
     return false;
 };
 
-const transferArrowFunction = (node, context) => {
+const transform = node => {
     const target = node.arguments[0];
 
     switch (target.type) {
@@ -42,17 +47,15 @@ const transferArrowFunction = (node, context) => {
                 target.body = findCallExpression(target);
             }
             const expression = target.body;
-            const sourceCode = context.getSourceCode();
-            const expressionString = sourceCode.getText(expression);
-            return `() => ${expressionString}`;
+            return expression.callee.name;
         }
     }
 };
 
-const autoFix = (node, context) => fixer => {
+const autoFix = node => fixer => {
     return fixer.replaceText(
         node,
-        transferArrowFunction(node, context)
+        transform(node)
     );
 };
 
@@ -71,7 +74,7 @@ const ruleCallback = context => node => {
             data: {
                 name: node.callee.name,
             },
-            fix: autoFix(node, context),
+            fix: autoFix(node),
         });
     }
 };

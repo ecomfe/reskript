@@ -1,3 +1,3 @@
 const handleOpen = useCallback(() => {
-    hideModal(true)
+    hideModal(true);
 }, [hideModal]);

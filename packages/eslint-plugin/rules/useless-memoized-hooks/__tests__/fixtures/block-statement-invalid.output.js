@@ -1,1 +1,0 @@
-const handleOpen = () => hideModal(true);
