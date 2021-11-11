@@ -6,7 +6,7 @@ title: 配置文件
 
 - `exports.featureMatrix`：参考[特性矩阵](feature-matrix)。
 - `exports.build`：参考[构建](build)。
-- `exports.devServer`：参考[调试服务器]](dev-server)。
+- `exports.devServer`：参考[调试服务器](dev-server)。
 - `exports.plugins`：参考[插件](plugins)。
 
 一个经典的`reskript.config.js`类似如下：
