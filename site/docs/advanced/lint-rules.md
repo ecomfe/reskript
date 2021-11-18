@@ -144,7 +144,10 @@ module.exports = {
 
 ## useless-memoized-hooks
 
-检查过度包装的 `hooks`。识别仅有一个 `dependency` 且是调用函数时，进行优化。目的是减少构建 `memoized function` 的开销。
+检查`useCallback`，如果遇到符合下列全部情况时，告警。
+
+1. `useCallback`函数体仅有一个调用函数，且`dependency`仅有一个是调用函数；
+2. 调用函数无参数。
 
 规则内容：
 ```js
@@ -157,7 +160,4 @@ const handleAdd = useCallback(() => addCount(1), [addCount]);
 
 // bad code
 const handleCancel = useCallback(() => hideModal(), [hideModal]);
-
-// fixed
-const handleCancel = hideModal;
 ```

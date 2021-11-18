@@ -1,4 +1,4 @@
-const {isHookName} = require('../../utils');
+const isUseCallbackHook = name => name === 'useCallback';
 
 const isArrayExpression = node => node.type === 'ArrayExpression';
 
@@ -37,30 +37,8 @@ const isOnlyOneCallExpressionWithHookDeps = (expressionNode, depNode) => {
     return false;
 };
 
-const transform = node => {
-    const target = node.arguments[0];
-
-    switch (target.type) {
-        case 'ArrowFunctionExpression':
-        case 'FunctionExpression': {
-            if (target.body.type === 'BlockStatement') {
-                target.body = findCallExpression(target);
-            }
-            const expression = target.body;
-            return expression.callee.name;
-        }
-    }
-};
-
-const autoFix = node => fixer => {
-    return fixer.replaceText(
-        node,
-        transform(node)
-    );
-};
-
 const ruleCallback = context => node => {
-    if (!isHookName(node.callee.name)) {
+    if (!isUseCallbackHook(node.callee.name)) {
         return;
     }
     if (
@@ -74,7 +52,6 @@ const ruleCallback = context => node => {
             data: {
                 name: node.callee.name,
             },
-            fix: autoFix(node),
         });
     }
 };
@@ -84,7 +61,7 @@ module.exports = {
         type: 'suggestion',
         fixable: 'whitespace',
         docs: {
-            description: 'Detect memoized hook is used in only one call expression',
+            description: 'Call to useCallback is useless',
             category: 'reskript',
             recommended: true,
         },
