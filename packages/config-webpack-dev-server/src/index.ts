@@ -4,6 +4,7 @@ import {Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin';
 import {merge} from 'webpack-merge';
+import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
@@ -98,6 +99,9 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         historyApiFallback: {
             index: `/assets/${targetEntry}.html`,
             disableDotRule: true,
+        },
+        onBeforeSetupMiddleware: server => {
+            server.app.use('/__open_in_editor__', launchInEditor());
         },
     };
     const mergedConfig = merge(

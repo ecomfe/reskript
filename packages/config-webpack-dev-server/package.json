@@ -37,6 +37,7 @@
     "chalk": "^4.1.2",
     "cli-progress": "^3.9.1",
     "internal-ip": "^6.2.0",
+    "launch-editor-middleware": "^2.2.1",
     "lodash": "^4.17.21",
     "proxy-agent": "^5.0.0",
     "react-refresh": "^0.10.0",

@@ -11,6 +11,7 @@ const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
     displayName: 'auto',
     cwd: process.cwd(),
     srcDirectory: 'src',
+    openInEditorPrefix: '',
 };
 
 export const fillBabelConfigOptions = (options?: BabelConfigOptions): BabelConfigOptionsFilled => {
