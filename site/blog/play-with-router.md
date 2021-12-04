@@ -7,7 +7,7 @@ author_image_url: https://www.gravatar.com/avatar/d7479a703555cc76b277040e5be9b8
 tags: [play, debug, router]
 ---
 
-在使用`reSKRipt`的时候，我们非常推荐使用[skr play命令](https://ecomfe.github.io/reskript/docs/advanced/debug-component)来调试单个组件，它会为你提供一个可实时编程的界面，实时看到对应组件的可交互界面。
+在使用`reSKRipt`的时候，我们非常推荐使用[skr play命令](https://reskript.vercel.app/docs/advanced/debug-component)来调试单个组件，它会为你提供一个可实时编程的界面，实时看到对应组件的可交互界面。
 
 但并不是每一个组件都纯粹到可以没有外部依赖就跑起来的，其中很典型的一种情况就是**组件依赖了路由**，例如我们需要用`useParams()`来获取URL中的参数，或使用`useLocation()`拿到具体的路径信息。由于`skr play`默认的调试环节是不具备路由等环境的，因此需要我们做一些额外的配置工作。
 

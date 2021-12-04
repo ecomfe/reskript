@@ -15,7 +15,7 @@ export default function Help({componentFilePath, configurationFilePath, configur
                 可以通过<code>{configurationFilePath}</code>文件进行调试台的配置，具体请参考
                 <a
                     target="_blank"
-                    href="https://ecomfe.github.io/reskript/docs/advanced/debug-component#组件调试配置"
+                    href="https://reskript.vercel.app/docs/advanced/debug-component#组件调试配置"
                     rel="noopener noreferrer"
                 >
                     组件调试配置文档

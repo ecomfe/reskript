@@ -1,15 +1,15 @@
-// https://ecomfe.github.io/reskript/docs/settings/feature-matrix
+// https://reskript.vercel.app/docs/settings/feature-matrix
 exports.featureMatrix = {
     stable: {},
     dev: {},
 };
 
-// https://ecomfe.github.io/reskript/docs/settings/build
+// https://reskript.vercel.app/docs/settings/build
 exports.build = {
     appTitle: '{{appTitle}}',
 };
 
-// https://ecomfe.github.io/reskript/docs/settings/dev-server
+// https://reskript.vercel.app/docs/settings/dev-server
 exports.devServer = {
     port: {{devServerPort}},
     // TODO: 修改后端API代理的配置
