@@ -12,3 +12,4 @@
 4. `npm run lint`可用。
 5. `npm run build`可用，且产出的文件里有一个`todo-index.[hash].js`的文件。
 6. 把`reskript.config.js`中的`{prepend: true}`去掉，构建应该会失败。
+7. `App`对应的HTML元素的`inset`样式被正确处理为`top`、`right`、`bottom`、`right`。

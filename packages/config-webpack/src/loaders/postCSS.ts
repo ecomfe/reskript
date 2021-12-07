@@ -9,7 +9,7 @@ const factory: LoaderFactory = ({mode, projectSettings}) => {
     const plugins = [
         /* eslint-disable global-require */
         uses.includes('tailwind') && require('tailwindcss'),
-        require('autoprefixer')(),
+        require('postcss-preset-env')(),
         mode === 'production' ? require('cssnano')() : null,
         /* eslint-enable global-require */
     ];
