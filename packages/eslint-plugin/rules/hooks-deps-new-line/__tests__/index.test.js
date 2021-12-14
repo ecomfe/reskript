@@ -38,6 +38,10 @@ ruleTester.run('deps-break-line', rule, {
             'useMemo(\n()=>{},\n[\nargument2\n]\n);'
         ),
         testCase(
+            'useMemo(\n()=>{\n},[\nargument2\n]);',
+            'useMemo(\n()=>{\n},\n[\nargument2\n]\n);'
+        ),
+        testCase(
             'const value = useMemo(()=>{},[argument2]);',
             'const value = useMemo(\n()=>{},\n[argument2]\n);'
         ),
@@ -48,6 +52,10 @@ ruleTester.run('deps-break-line', rule, {
         testCase(
             'const value = useMemo(()=>{},[\nargument2\n]);',
             'const value = useMemo(\n()=>{},\n[\nargument2\n]\n);'
+        ),
+        testCase(
+            'const value = useMemo(\n()=>{\n},[\nargument2\n]);',
+            'const value = useMemo(\n()=>{\n},\n[\nargument2\n]\n);'
         ),
     ],
 });
