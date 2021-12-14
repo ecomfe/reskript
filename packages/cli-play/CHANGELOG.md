@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **play:** 文件名超长时的样式问题 ([#194](https://github.com/ecomfe/reskript/issues/194)) ([992b9e5](https://github.com/ecomfe/reskript/commit/992b9e57698cb982341565b7fdb652a15f38824e))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 

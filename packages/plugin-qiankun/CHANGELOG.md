@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **plugin-qiankun:** qiankun 模式侧边栏添加最小高度 & 子应用页面内容过宽撑开父容器 ([9042a22](https://github.com/ecomfe/reskript/commit/9042a22899fb19bcf33cdc926411e7443c58748f))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 **Note:** Version bump only for package @reskript/plugin-qiankun

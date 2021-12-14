@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **build:** 对less的calc处理采用更严格的规则 ([#208](https://github.com/ecomfe/reskript/issues/208)) ([67fbbe9](https://github.com/ecomfe/reskript/commit/67fbbe96d85a10fd590d91bbd8e6141e36305ed2))
+* **init:** 指定dir时，安装在运行目录而不是dir ([fa56e01](https://github.com/ecomfe/reskript/commit/fa56e017598615343668c00c168e746972091fb9))
+* **lint:** 有自定义eslint配置时禁用内部配置 ([#203](https://github.com/ecomfe/reskript/issues/203)) ([9558d03](https://github.com/ecomfe/reskript/commit/9558d03afa3b190b9787667063a27371243c148c))
+* **play:** 文件名超长时的样式问题 ([#194](https://github.com/ecomfe/reskript/issues/194)) ([992b9e5](https://github.com/ecomfe/reskript/commit/992b9e57698cb982341565b7fdb652a15f38824e))
+* **plugin-qiankun:** qiankun 模式侧边栏添加最小高度 & 子应用页面内容过宽撑开父容器 ([9042a22](https://github.com/ecomfe/reskript/commit/9042a22899fb19bcf33cdc926411e7443c58748f))
+
+
+### Features
+
+* **build:** 引入psotcss-preset-env ([#204](https://github.com/ecomfe/reskript/issues/204)) ([f910249](https://github.com/ecomfe/reskript/commit/f9102496978c2fbaf2049c18cc0a5250b03daba1))
+* **dev:** 支持组件源码文件调用编辑器打开 ([#201](https://github.com/ecomfe/reskript/issues/201)) ([bd743a6](https://github.com/ecomfe/reskript/commit/bd743a690990f20bd0f8b0edb5da949b82a92adc))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 

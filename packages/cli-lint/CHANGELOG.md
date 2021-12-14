@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **lint:** 有自定义eslint配置时禁用内部配置 ([#203](https://github.com/ecomfe/reskript/issues/203)) ([9558d03](https://github.com/ecomfe/reskript/commit/9558d03afa3b190b9787667063a27371243c148c))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 
