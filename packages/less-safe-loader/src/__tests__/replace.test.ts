@@ -30,4 +30,29 @@ describe('replace', () => {
         const input = 'width: calc(~"100vh - @{top}")';
         expect(replace(input)).toBe('width: ~\'calc(100vh - @{top})\'');
     });
+
+    test('whitespace stripped', () => {
+        const input = 'width:calc(~"100vh - @{top}")';
+        expect(replace(input)).toBe('width:~\'calc(100vh - @{top})\'');
+    });
+
+    test('on new line', () => {
+        const input = 'width:\ncalc(~"100vh - @{top}")';
+        expect(replace(input)).toBe('width:\n~\'calc(100vh - @{top})\'');
+    });
+
+    test('calc as a part of word', () => {
+        const input = '.vcalc(30px)';
+        expect(replace(input)).toBe(input);
+    });
+
+    test('calc as identifier', () => {
+        const input = '.calc(30px)';
+        expect(replace(input)).toBe(input);
+    });
+
+    test('calc as a part of identifier', () => {
+        const input = '.rem-calc(30px)';
+        expect(replace(input)).toBe(input);
+    });
 });
