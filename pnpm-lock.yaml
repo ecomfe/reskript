@@ -743,6 +743,7 @@ importers:
       eslint: ^7.32.0
       internal-ip: ^6.2.0
       jest: ^27.3.1
+      launch-editor-middleware: ^2.2.1
       lodash: ^4.17.21
       proxy-agent: ^5.0.0
       react-refresh: ^0.10.0
@@ -760,6 +761,7 @@ importers:
       chalk: 4.1.2
       cli-progress: 3.9.1
       internal-ip: 6.2.0
+      launch-editor-middleware: 2.2.1
       lodash: 4.17.21
       proxy-agent: 5.0.0
       react-refresh: 0.10.0
@@ -10671,6 +10673,19 @@ packages:
   /known-css-properties/0.21.0:
     resolution: {integrity: sha512-sZLUnTqimCkvkgRS+kbPlYW5o8q5w1cu+uIisKpEWkj31I8mx8kNG162DwRav8Zirkva6N5uoFsm9kzK4mUXjw==}
 
+  /launch-editor-middleware/2.2.1:
+    resolution: {integrity: sha512-s0UO2/gEGiCgei3/2UN3SMuUj1phjQN8lcpnvgLSz26fAzNWPQ6Nf/kF5IFClnfU2ehp6LrmKdMU/beveO+2jg==}
+    dependencies:
+      launch-editor: 2.2.1
+    dev: false
+
+  /launch-editor/2.2.1:
+    resolution: {integrity: sha512-On+V7K2uZK6wK7x691ycSUbLD/FyKKelArkbaAMSSJU8JmqmhwN2+mnJDNINuJWSrh2L0kDk+ZQtbC/gOWUwLw==}
+    dependencies:
+      chalk: 2.4.2
+      shell-quote: 1.7.3
+    dev: false
+
   /lerna/4.0.0:
     resolution: {integrity: sha512-DD/i1znurfOmNJb0OBw66NmNqiM8kF6uIrzrJ0wGE3VNdzeOhz9ziWLYiRaZDGGwgbcjOo6eIfcx9O5Qynz+kg==}
     engines: {node: '>= 10.18.0'}
@@ -14668,6 +14683,10 @@ packages:
   /shebang-regex/3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  /shell-quote/1.7.3:
+    resolution: {integrity: sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==}
+    dev: false
 
   /side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}

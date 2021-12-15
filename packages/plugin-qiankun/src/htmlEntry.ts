@@ -52,9 +52,11 @@ const defaultTemplate = (appName: string, config?: TemplateConfig) => {
             #sidebar-left {
                 width: ${sidebarLeft.size}px;
                 background-color: ${sidebarLeft.backgroundColor};
+                min-height: calc(100vh - ${header.size}px);
             }
             #apps {
                 flex: 1;
+                overflow: hidden;
             }
             #footer {
                 height: ${footer.size}px;

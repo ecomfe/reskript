@@ -21,21 +21,21 @@ export default async (cwd: string) => {
     if (!dependencies['core-js']) {
         warn(
             'can\'t find core-js installed, please install it',
-            'see: https://ecomfe.github.io/reskript/docs/migration/v2#安装core-js'
+            'see: https://reskript.vercel.app/docs/migration/v2#安装core-js'
         );
     }
 
     if (!/^\d+\.\d+\.\d+(-.+)*$/.test(dependencies['@reskript/cli'])) {
         tip(
             '@reskript/* is installed with a version range, better to install a fixed version',
-            'see: https://ecomfe.github.io/reskript/docs/migration/v2#推荐固定版本'
+            'see: https://reskript.vercel.app/docs/migration/v2#推荐固定版本'
         );
     }
 
     if (!satisfies(process.versions.node, '>=14.14.0')) {
         warn(
             'node version does\'t satisfy the least requirement, install a node >= 14.14.0',
-            'see: https://ecomfe.github.io/reskript/docs/migration/v2#NodeJS版本'
+            'see: https://reskript.vercel.app/docs/migration/v2#NodeJS版本'
         );
     }
 };

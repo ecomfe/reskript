@@ -33,6 +33,7 @@ export const getBabelConfig = (input?: BabelConfigOptions): TransformOptions => 
             resolve('@reskript/babel-plugin-debug-react-component-file-name'),
             {
                 srcDirectory: path.resolve(cwd, srcDirectory),
+                fullPathPrefix: options.openInEditorPrefix,
             },
         ],
         ...transform.plugins || [],

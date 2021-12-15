@@ -42,7 +42,7 @@ export interface Options {
     displayName?: boolean;
 }
 
-export default async function lessSafeLoader(this: LoaderContext<Options>, source: string) {
+export default async function svgToComponentLoader(this: LoaderContext<Options>, source: string) {
     this.cacheable();
     const callback = this.async();
     const {displayName = false} = this.getOptions();

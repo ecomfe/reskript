@@ -16,7 +16,7 @@ const installWith = (cwd: string, packageManager: string) => {
 
     return async (description: string, flags: string[], dependencies: Array<string | false>) => {
         const spinner = ora(description);
-        const cmd = execa(command, [route, ...flags, ...compact(dependencies)]);
+        const cmd = execa(command, [route, ...flags, ...compact(dependencies)], {cwd});
 
         if (isInDebugMode()) {
             spinner.stopAndPersist();

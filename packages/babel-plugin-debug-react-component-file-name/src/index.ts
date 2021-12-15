@@ -33,6 +33,7 @@ const prepareHookImport = (current: NodePath): boolean => {
 interface PluginState extends PluginPass {
     readonly opts: {
         srcDirectory: string;
+        fullPathPrefix?: string;
     };
 }
 
@@ -40,7 +41,7 @@ export default function debugReactComponentFileName(): PluginObj<PluginState> {
     return {
         visitor: {
             FunctionDeclaration(declaration, state) {
-                const {opts: {srcDirectory}, filename} = state;
+                const {opts: {srcDirectory, fullPathPrefix}, filename} = state;
 
                 if (!filename) {
                     return;
@@ -50,12 +51,16 @@ export default function debugReactComponentFileName(): PluginObj<PluginState> {
                 if (isComponentDeclaration(declaration, true)) {
                     const relative = path.relative(srcDirectory, filename);
                     if (!relative.startsWith('..') && prepareHookImport(declaration)) {
+                        const line = declaration.node.loc?.start.line;
                         declaration.get('body').unshiftContainer(
                             'body',
                             types.expressionStatement(
                                 types.callExpression(
                                     types.identifier('useComponentFile'),
-                                    [types.stringLiteral(relative)]
+                                    [
+                                        types.stringLiteral(relative),
+                                        types.stringLiteral(`${fullPathPrefix}${filename}${line ? `:${line}` : ''}`),
+                                    ]
                                 )
                             )
                         );
