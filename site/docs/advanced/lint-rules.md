@@ -142,7 +142,7 @@ module.exports = {
 当你使用monorepo时，我们建议本地包都用一个作用域，推荐用`@i`作为前缀，则配置值为`@i/*`即可。
 
 
-## useless-memoized-hooks
+## no-useless-memo-hooks
 
 检查`useCallback`，如果遇到符合下列全部情况时，告警。
 

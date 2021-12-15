@@ -24,7 +24,7 @@ const testCase = (file, errors = []) => {
 };
 
 const ruleTester = new RuleTester();
-ruleTester.run('useless-memoized-hooks', rule, {
+ruleTester.run('no-useless-memo-hooks', rule, {
     valid: [
         testCase('has-arguments-valid'),
         testCase('more-than-one-valid'),
@@ -33,7 +33,7 @@ ruleTester.run('useless-memoized-hooks', rule, {
     invalid: [
         testCase(
             'only-depend-on-callee-invalid',
-            ['uselessMemoizedHooks']
+            ['noUselessMemoHooks']
         ),
     ],
 });

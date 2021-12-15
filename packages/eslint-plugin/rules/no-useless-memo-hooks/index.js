@@ -48,7 +48,7 @@ const ruleCallback = context => node => {
         context.report({
             node,
             loc: node.loc,
-            messageId: 'uselessMemoizedHooks',
+            messageId: 'noUselessMemoHooks',
             data: {
                 name: node.callee.name,
             },
@@ -66,7 +66,7 @@ module.exports = {
             recommended: true,
         },
         messages: {
-            uselessMemoizedHooks: 'Hook {{name}}\'s should be removed',
+            noUselessMemoHooks: 'Hook {{name}}\'s should be removed',
         },
     },
     create(context) {
