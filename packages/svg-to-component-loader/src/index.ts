@@ -26,7 +26,14 @@ const parseSVG = async (source: string) => {
         startTag + endTag,
         {
             attrNameProcessors: [
-                name => name.replace(/(?:-|_)([a-z])/g, (match, letter) => letter.toUpperCase()),
+                name => {
+                    // React有一些属性要换名字，不过应该只有`class`会用在`<svg>`元素上，其它的不处理了
+                    if (name === 'class') {
+                        return 'className';
+                    }
+
+                    return name.replace(/(?:-|_)([a-z])/g, (match, letter) => letter.toUpperCase());
+                },
             ],
         }
     );

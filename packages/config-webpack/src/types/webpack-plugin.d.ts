@@ -6,14 +6,6 @@ declare module 'webpack-bundle-analyzer' {
     }
 }
 
-declare module 'unused-files-webpack-plugin' {
-    import {WebpackPluginFunction} from 'webpack';
-
-    export class UnusedFilesWebpackPlugin extends WebpackPluginFunction {
-        constructor(options: any);
-    }
-}
-
 declare module 'friendly-errors-webpack-plugin' {
     import {WebpackPluginFunction} from 'webpack';
 
