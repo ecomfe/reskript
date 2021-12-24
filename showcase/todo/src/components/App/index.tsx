@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
 import Create from '../Create';
 import List from '../List';
+import './lintIgnore';
 import c from './index.less';
+import './lintIgnore.global.css';
 
 const Title = styled.h1`
     font-size: 100px;

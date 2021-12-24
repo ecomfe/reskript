@@ -1,21 +1,11 @@
-import fs from 'fs';
 import {ESLint} from 'eslint';
 import {resolveCacheLocation, pFilter} from '@reskript/core';
-import {getScriptLintConfig} from '@reskript/config-lint';
+import {getScriptLintBaseConfig} from '@reskript/config-lint';
 import {resolveLintFiles} from './utils';
 import {ResolveOptions} from './interface';
 
 type LintResult = ESLint.LintResult;
 type LintOptions = ESLint.Options;
-
-const CUSTOM_LINT_CONFIG_FILES = [
-    './.eslintrc.js',
-    './.eslintrc.cjs',
-    './.eslintrc.mjs',
-    './.eslintrc.json',
-];
-
-const hasCustomLintConfig = () => CUSTOM_LINT_CONFIG_FILES.some(fs.existsSync);
 
 export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[]> => {
     const resolvedFiles = await resolveLintFiles('script', files, cmd);
@@ -26,7 +16,7 @@ export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[
     }
 
     const cliConfig: LintOptions = {
-        baseConfig: hasCustomLintConfig() ? undefined : getScriptLintConfig(),
+        baseConfig: getScriptLintBaseConfig({cwd: process.cwd()}),
         cache: true,
         fix: cmd.fix,
         cacheLocation: await resolveCacheLocation('eslint'),

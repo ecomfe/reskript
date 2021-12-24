@@ -1,9 +1,8 @@
-import fs from 'fs';
 import {lint, LintResult as StyleLintResult, LintMessage as StyleLintMessage} from 'stylelint';
-import {isEmpty, flatten} from 'lodash';
+import {isEmpty} from 'lodash';
 import {ESLint, Linter} from 'eslint';
 import {resolveCacheLocation} from '@reskript/core';
-import {getStyleLintConfig} from '@reskript/config-lint';
+import {getStyleLintBaseConfig} from '@reskript/config-lint';
 import {ResolveOptions} from './interface';
 import {resolveLintFiles} from './utils';
 
@@ -41,16 +40,6 @@ const adaptStyleResultToScriptResult = (result: StyleLintResult): LintResult => 
     };
 };
 
-const CUSTOM_STYLE_LINT_CONFIG_FILE = './stylelint.config.js';
-
-const hasCustomStyleLintConfig = () => fs.existsSync(CUSTOM_STYLE_LINT_CONFIG_FILE);
-
-const allowCustomConfig = (baseConfig: Record<string, any>) => (
-    hasCustomStyleLintConfig()
-        ? {...baseConfig, extends: flatten([baseConfig.extends || [], CUSTOM_STYLE_LINT_CONFIG_FILE])}
-        : baseConfig
-);
-
 export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[]> => {
     const lintingFiles = await resolveLintFiles('style', files, cmd);
 
@@ -58,9 +47,8 @@ export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[
         return [];
     }
 
-    const baseConfig = getStyleLintConfig();
     const lintConfig = {
-        config: allowCustomConfig(baseConfig),
+        config: getStyleLintBaseConfig({cwd: process.cwd()}),
         files: lintingFiles,
         // 当前stylelint的cache有问题，如果一个文件有语法错误，则第一次会被检查出来，第二次错误就消失了
         cache: false,
