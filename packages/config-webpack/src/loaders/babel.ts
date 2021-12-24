@@ -26,7 +26,10 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
     return {
         loader: resolve('babel-loader'),
         // webpack的缓存够强了，所有其它的缓存都可以不开
-        options: finalizedBabelConfig,
+        options: {
+            ...finalizedBabelConfig,
+            babelrc: false,
+        },
     };
 };
 
