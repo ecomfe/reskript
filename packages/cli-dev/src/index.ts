@@ -33,7 +33,7 @@ const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStar
 
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
-    const hot = buildContext.projectSettings.devServer.hot;
+    const {hot, https} = buildContext.projectSettings.devServer;
     const config = await createWebpackConfig(
         buildContext,
         {
@@ -63,7 +63,8 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 
     if (cmd.open) {
         const port = devServerConfig.port!;
-        const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
+        const protocol = (typeof https === 'object' && https.client) ? 'https' : 'http';
+        const openURL = `${protocol}://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
         open(openURL);
     }
 

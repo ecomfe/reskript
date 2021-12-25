@@ -7,9 +7,11 @@ title: 调试服务器配置
 `reskript.config.js`中的`exports.devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
 
 ```ts
+export type DevServerHttps = {proxy: boolean} & ({} | {client: true, serverOptions?: ServerOptions});
+
 interface DevServerSettings {
-    // 是否以HTTPS协议代理请求
-    readonly https: boolean;
+    // 是否以HTTPS协议代理请求及启动调试服务器
+    readonly https: boolean | DevServerHttps;
     // 监听的端口
     readonly port: number;
     // 代理给后端的API请求的URL前缀
@@ -22,6 +24,8 @@ interface DevServerSettings {
     readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
+    // 开辟Node服务器的参数
+    readonly serverOptions: ServerOptions;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
     readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration;
 }
@@ -49,15 +53,37 @@ exports.devServer = {
 
 ### 启用HTTPS
 
-如果后端的API需要以`HTTPS`协议来调用，那么可以将`https`属性配置为`true`：
+`https`属性用于配置代理后端接口以及响应前端请求时是否使用HTTPS协议，它的取值如下：
+
+- 当值为`true`时，仅在代理后端接口时启用HTTPS协议，响应前端请求保持HTTP协议。**这是一个兼容历史情况的值，不建议使用**。
+- 当`proxy`属性为`true`时，代理后端接口启用HTTPS协议。
+- 当`client`属性为`true`时，响应前端请求使用HTTPS协议，你需要通过`serverOptions`属性提供`https.createServer`需要的选项。
+
+如果仅需要代理后端的API时使用HTTPS协议：
 
 ```js
 exports.devServer = {
-    https: true,
+    https: {
+        proxy: true,
+    },
 };
 ```
 
-如果你的测试环境同时支持`HTTP`和`HTTPS`，我们的建议是**不用**打开`https`配置。
+如果需要响应前端请求时使用HTTPS协议：
+
+```js
+exports.devServer = {
+    https: {
+        client: true,
+        serverOptions: {
+            key: './path/to/server.key',
+            cert: './path/to/server.crt',
+        },
+    },
+};
+```
+
+如果你已经有系统级的证书可用于`localhost`，则可以不传递`serverOptions`参数。
 
 ### 本地网络代理
 

@@ -2,6 +2,17 @@
 
 简单的测试`reSKRipt`各功能。
 
+## 启动方式
+
+用[mkcert](https://github.com/FiloSottile/mkcert)生成一下证书：
+
+```shell
+mkcert -install # 如果以前执行过，就不用了
+mkcert localhost
+```
+
+随后确认有`localhost-key.pem`和`localhost.pem`两个文件。
+
 ## 基准测试
 
 1. `npm start`可以跑起来，界面可见，正常使用。

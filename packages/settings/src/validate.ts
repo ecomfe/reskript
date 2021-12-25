@@ -199,7 +199,26 @@ const schema: any = {
                     type: 'boolean',
                 },
                 https: {
-                    type: 'boolean',
+                    anyOf: [
+                        {
+                            properties: {
+                                proxy: {
+                                    type: 'boolean',
+                                },
+                                client: {
+                                    type: 'boolean',
+                                },
+                                serverOptions: {
+                                    type: 'object',
+                                },
+                            },
+                            additionalProperties: false,
+                            type: 'object',
+                        },
+                        {
+                            type: 'boolean',
+                        },
+                    ],
                 },
                 openPage: {
                     type: 'string',

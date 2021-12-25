@@ -44,6 +44,13 @@ exports.build = {
 
 exports.devServer = {
     port: 8989,
+    https: {
+        client: true,
+        serverOptions: {
+            key: './localhost-key.pem',
+            cert: './localhost.pem',
+        },
+    },
 };
 
 exports.plugins = [
