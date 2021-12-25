@@ -20,12 +20,12 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.1.0",
-    "@commitlint/config-conventional": "^14.1.0",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "cpy": "^8.1.2",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "semver": "^7.3.5",
-    "yargs": "^17.2.1"
+    "yargs": "^17.3.1"
   }
 }

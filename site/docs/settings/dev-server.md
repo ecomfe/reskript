@@ -149,19 +149,20 @@ const pacakgeInfo = require('./package.json');
 exports.devServer = {
     finalize: devServerConfig => {
         // 记得调用之前已经有的配置，不要太暴力覆盖
-        const {onBeforeSetupMiddleware} = devServerConfig;
-        devServerConfig.onBeforeSetupMiddleware = devServer => {
-            onBeforeSetupMiddleware?.(devServer);
+        const {setupMiddlewares} = devServerConfig;
+        devServerConfig.setupMiddlewares = (middlewares, devServer) => {
+            const returnValue = setupMiddlewares?.(devServer) ?? middlewares;
             devServer.app.get(
                 '/version',
                 (req, res) => {
                     res.status(200).type('html').end(`${packageInfo.name}@${packageInfo.version}`);
                 }
             );
+            return returnValue;
         };
         return devServerConfig;
     },
 };
 ```
 
-关于`devServer.onBeforeSetupMiddleware`可以参考[官方文档](https://webpack.js.org/configuration/dev-server/#devserverbefore)。
+关于`devServer.setupMiddlewares`可以参考[官方文档](https://webpack.js.org/configuration/dev-server/#devserversetupmiddlewares)。

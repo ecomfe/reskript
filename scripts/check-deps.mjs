@@ -20,6 +20,10 @@ const RESTRICTED_DEPENDENCIES = [
     ['internal-ip', '6.x'],
     ['matcher', '4.x'],
     ['pkg-dir', '5.x'],
+    ['chalk', '4.x'],
+    ['execa', '5.x'],
+    ['matcher', '4.x'],
+    ['tailwindcss', '2.x'],
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {

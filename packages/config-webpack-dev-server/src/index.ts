@@ -100,8 +100,9 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
             index: `/assets/${targetEntry}.html`,
             disableDotRule: true,
         },
-        onBeforeSetupMiddleware: server => {
-            server.app.use('/__open_in_editor__', launchInEditor());
+        setupMiddlewares: middlewares => {
+            middlewares.push({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
+            return middlewares;
         },
     };
     const mergedConfig = merge(
