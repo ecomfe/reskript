@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+
+### Bug Fixes
+
+* **build:** babel-loader不读取项目中的babel配置 ([#212](https://github.com/ecomfe/reskript/issues/212)) ([b9ea9a3](https://github.com/ecomfe/reskript/commit/b9ea9a3dd1f3b40b26ff40963b1b7e97a2a7617a))
+* **build:** 在build时也同样读用户自定义的lint配置 ([#211](https://github.com/ecomfe/reskript/issues/211)) ([e580bce](https://github.com/ecomfe/reskript/commit/e580bce69a0d1a7f2714409d9611a50688020291))
+* **build:** 处理SVG时转换class到className ([#216](https://github.com/ecomfe/reskript/issues/216)) ([37e7a4b](https://github.com/ecomfe/reskript/commit/37e7a4baadb54320b826423ac33354a10220f488))
+
+
+
+
+
 # [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
 
 

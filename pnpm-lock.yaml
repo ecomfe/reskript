@@ -25,7 +25,7 @@ importers:
       '@babel/core': ^7.16.5
       '@babel/preset-react': ^7.16.5
       '@babel/traverse': ^7.16.5
-      '@reskript/babel-utils': 2.4.0
+      '@reskript/babel-utils': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/babel__traverse': ^7.14.2
       '@types/jest': ^27.0.3
@@ -54,7 +54,7 @@ importers:
       '@babel/core': ^7.16.5
       '@babel/preset-react': ^7.16.5
       '@babel/traverse': ^7.16.5
-      '@reskript/babel-utils': 2.4.0
+      '@reskript/babel-utils': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/babel__traverse': ^7.14.2
       '@types/jest': ^27.0.3
@@ -113,13 +113,13 @@ importers:
 
   packages/cli:
     specifiers:
-      '@reskript/cli-babel': 2.4.0
-      '@reskript/cli-build': 2.4.0
-      '@reskript/cli-dev': 2.4.0
-      '@reskript/cli-lint': 2.4.0
-      '@reskript/cli-play': 2.4.0
-      '@reskript/cli-test': 2.4.0
-      '@reskript/core': 2.4.0
+      '@reskript/cli-babel': 2.5.0
+      '@reskript/cli-build': 2.5.0
+      '@reskript/cli-dev': 2.5.0
+      '@reskript/cli-lint': 2.5.0
+      '@reskript/cli-play': 2.5.0
+      '@reskript/cli-test': 2.5.0
+      '@reskript/core': 2.5.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
       clipanion: ^3.2.0-rc.4
@@ -149,8 +149,8 @@ importers:
   packages/cli-babel:
     specifiers:
       '@babel/core': ^7.16.5
-      '@reskript/config-babel': 2.4.0
-      '@reskript/core': 2.4.0
+      '@reskript/config-babel': 2.5.0
+      '@reskript/core': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
@@ -175,9 +175,9 @@ importers:
 
   packages/cli-build:
     specifiers:
-      '@reskript/config-webpack': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-webpack': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
       '@types/node': ^17.0.4
@@ -210,10 +210,10 @@ importers:
 
   packages/cli-dev:
     specifiers:
-      '@reskript/config-webpack': 2.4.0
-      '@reskript/config-webpack-dev-server': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-webpack': 2.5.0
+      '@reskript/config-webpack-dev-server': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
       '@types/node': ^17.0.4
@@ -247,8 +247,8 @@ importers:
 
   packages/cli-lint:
     specifiers:
-      '@reskript/config-lint': 2.4.0
-      '@reskript/core': 2.4.0
+      '@reskript/config-lint': 2.5.0
+      '@reskript/core': 2.5.0
       '@types/eslint': ^7.29.0
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
@@ -279,10 +279,10 @@ importers:
   packages/cli-play:
     specifiers:
       '@monaco-editor/react': ^4.3.1
-      '@reskript/config-webpack': 2.4.0
-      '@reskript/config-webpack-dev-server': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-webpack': 2.5.0
+      '@reskript/config-webpack-dev-server': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/body-parser': ^1.19.2
       '@types/debounce': ^1.2.1
       '@types/dedent': ^0.7.0
@@ -357,9 +357,9 @@ importers:
 
   packages/cli-test:
     specifiers:
-      '@reskript/config-jest': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-jest': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
       '@types/node': ^17.0.4
@@ -400,10 +400,10 @@ importers:
       '@babel/preset-typescript': ^7.16.5
       '@babel/traverse': ^7.16.5
       '@emotion/babel-plugin': ^11.7.2
-      '@reskript/babel-plugin-add-react-display-name': 2.4.0
-      '@reskript/babel-plugin-debug-react-component-file-name': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/babel-plugin-add-react-display-name': 2.5.0
+      '@reskript/babel-plugin-debug-react-component-file-name': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
@@ -502,9 +502,9 @@ importers:
     specifiers:
       '@babel/core': ^7.16.5
       '@babel/plugin-transform-modules-commonjs': ^7.16.5
-      '@reskript/config-babel': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-babel': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/enzyme': ^3.10.10
       '@types/enzyme-adapter-react-16': ^1.0.6
@@ -558,8 +558,8 @@ importers:
       '@babel/eslint-plugin': ^7.16.5
       '@ecomfe/eslint-config': ^7.3.0
       '@ecomfe/stylelint-config': ^1.1.2
-      '@reskript/config-babel': 2.4.0
-      '@reskript/eslint-plugin': 2.4.0
+      '@reskript/config-babel': 2.5.0
+      '@reskript/eslint-plugin': 2.5.0
       '@rushstack/eslint-patch': ^1.1.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
@@ -604,14 +604,14 @@ importers:
     specifiers:
       '@babel/core': ^7.16.5
       '@ecomfe/class-names-loader': ^2.0.0
-      '@reskript/config-babel': 2.4.0
-      '@reskript/config-lint': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/less-safe-loader': 2.4.0
-      '@reskript/settings': 2.4.0
-      '@reskript/svg-to-component-loader': 2.4.0
-      '@reskript/webpack-plugin-extra-script': 2.4.0
-      '@reskript/webpack-plugin-interpolate-html': 2.4.0
+      '@reskript/config-babel': 2.5.0
+      '@reskript/config-lint': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/less-safe-loader': 2.5.0
+      '@reskript/settings': 2.5.0
+      '@reskript/svg-to-component-loader': 2.5.0
+      '@reskript/webpack-plugin-extra-script': 2.5.0
+      '@reskript/webpack-plugin-interpolate-html': 2.5.0
       '@types/jest': ^27.0.3
       '@types/less': ^3.0.3
       '@types/lodash': ^4.14.178
@@ -722,9 +722,9 @@ importers:
   packages/config-webpack-dev-server:
     specifiers:
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.4
-      '@reskript/config-webpack': 2.4.0
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/config-webpack': 2.5.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@soda/friendly-errors-webpack-plugin': ^1.8.1
       '@types/cli-progress': ^3.9.2
       '@types/jest': ^27.0.3
@@ -815,8 +815,8 @@ importers:
 
   packages/doctor:
     specifiers:
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
       '@types/semver': ^7.3.9
@@ -859,7 +859,7 @@ importers:
 
   packages/init:
     specifiers:
-      '@reskript/core': 2.4.0
+      '@reskript/core': 2.5.0
       '@types/inquirer': ^8.1.3
       '@types/jest': ^27.0.3
       '@types/lodash': ^4.14.178
@@ -906,7 +906,7 @@ importers:
 
   packages/plugin-qiankun:
     specifiers:
-      '@reskript/settings': 2.4.0
+      '@reskript/settings': 2.5.0
       '@types/dedent': ^0.7.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
@@ -935,8 +935,8 @@ importers:
 
   packages/plugin-sass:
     specifiers:
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
       '@types/resolve': ^1.20.1
@@ -964,8 +964,8 @@ importers:
 
   packages/plugin-workspace-no-build:
     specifiers:
-      '@reskript/core': 2.4.0
-      '@reskript/settings': 2.4.0
+      '@reskript/core': 2.5.0
+      '@reskript/settings': 2.5.0
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
       '@types/semver': ^7.3.9
@@ -987,7 +987,7 @@ importers:
 
   packages/settings:
     specifiers:
-      '@reskript/core': 2.4.0
+      '@reskript/core': 2.5.0
       '@types/babel__core': ^7.1.17
       '@types/jest': ^27.0.3
       '@types/node': ^17.0.4
@@ -1092,16 +1092,16 @@ importers:
 
   showcase/todo:
     specifiers:
-      '@reskript/cli': 2.4.0
-      '@reskript/cli-babel': 2.4.0
-      '@reskript/cli-build': 2.4.0
-      '@reskript/cli-dev': 2.4.0
-      '@reskript/cli-lint': 2.4.0
-      '@reskript/cli-play': 2.4.0
-      '@reskript/cli-test': 2.4.0
-      '@reskript/config-lint': 2.4.0
-      '@reskript/plugin-qiankun': 2.4.0
-      '@reskript/webpack-plugin-extra-script': 2.4.0
+      '@reskript/cli': 2.5.0
+      '@reskript/cli-babel': 2.5.0
+      '@reskript/cli-build': 2.5.0
+      '@reskript/cli-dev': 2.5.0
+      '@reskript/cli-lint': 2.5.0
+      '@reskript/cli-play': 2.5.0
+      '@reskript/cli-test': 2.5.0
+      '@reskript/config-lint': 2.5.0
+      '@reskript/plugin-qiankun': 2.5.0
+      '@reskript/webpack-plugin-extra-script': 2.5.0
       '@testing-library/react': ^12.1.2
       '@types/ramda': ^0.27.62
       '@types/react': ^17.0.38

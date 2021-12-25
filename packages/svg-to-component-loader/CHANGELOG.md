@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+
+### Bug Fixes
+
+* **build:** 处理SVG时转换class到className ([#216](https://github.com/ecomfe/reskript/issues/216)) ([37e7a4b](https://github.com/ecomfe/reskript/commit/37e7a4baadb54320b826423ac33354a10220f488))
+
+
+
+
+
 # [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
 
 
