@@ -2,6 +2,9 @@
   "name": "@reskript/site",
   "private": true,
   "version": "1.0.0",
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "license": "MIT",
   "scripts": {
     "start": "docusaurus start",

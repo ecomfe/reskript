@@ -1,8 +1,7 @@
 import path from 'path';
 import fs from 'fs/promises';
-import globby from 'globby';
 import {pFilter} from '@reskript/core';
-import {tip, warn} from '../logger';
+import {tip, warn} from '../logger.js';
 
 const containsLegacySvgImport = async (file: string) => {
     const content = await fs.readFile(file, 'utf-8');
@@ -10,6 +9,7 @@ const containsLegacySvgImport = async (file: string) => {
 };
 
 const checkScriptImport = async (cwd: string) => {
+    const {globby} = await import('globby');
     const files = await globby('src/**/*.{js,jsx,tsx}', {cwd});
     const warnings = await pFilter(files, containsLegacySvgImport);
     if (warnings.length) {
@@ -26,6 +26,7 @@ const containsLegacySvgUrl = async (file: string) => {
 };
 
 const checkCssUrl = async (cwd: string) => {
+    const {globby} = await import('globby');
     const files = await globby('src/**/*.{css,less}', {cwd});
     const warnings = await pFilter(files, containsLegacySvgUrl);
     if (warnings.length) {

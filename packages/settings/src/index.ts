@@ -16,10 +16,11 @@ interface UserProjectSettings extends PartialProjectSettings {
 }
 
 const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
-    const {default: userSettings} = await importUserModule<{default: UserProjectSettings}>(
+    const imported = await importUserModule<UserProjectSettings | {default: UserProjectSettings}>(
         path.join(cmd.cwd, 'reskript.config'),
         {default: {}}
     );
+    const userSettings = 'default' in imported ? imported.default : imported;
 
     try {
         validate(userSettings);

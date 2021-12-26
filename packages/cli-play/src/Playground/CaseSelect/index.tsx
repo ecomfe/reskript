@@ -1,5 +1,5 @@
 import {useCallback, ChangeEvent} from 'react';
-import {PlayCase} from '../../interface';
+import {PlayCase} from '../../interface.js';
 import './index.css';
 
 interface Props {

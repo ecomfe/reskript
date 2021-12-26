@@ -1,9 +1,11 @@
 import path from 'path';
 import fs from 'fs';
-import * as babel from '@babel/core';
+import babel from '@babel/core';
+import {expect, test} from 'vitest';
+import {dirFromImportMeta} from '@reskript/core';
 import plugin from '../index';
 
-const HOOK_MODULE = path.join(__dirname, '..', 'useComponentFile.js');
+const HOOK_MODULE = path.join(dirFromImportMeta(import.meta.url), '..', 'useComponentFile.js');
 
 const BABEL_OPTIONS = {
     presets: ['@babel/preset-react'],
@@ -11,7 +13,7 @@ const BABEL_OPTIONS = {
         [
             plugin,
             {
-                srcDirectory: path.join(__dirname, 'fixtures', 'src'),
+                srcDirectory: path.join(dirFromImportMeta(import.meta.url), 'fixtures', 'src'),
             },
         ],
         '@babel/plugin-proposal-class-properties',
@@ -20,7 +22,7 @@ const BABEL_OPTIONS = {
 };
 
 const testFixture = (name: string, shouldInject: boolean) => {
-    const filename = path.join(__dirname, 'fixtures', name);
+    const filename = path.join(dirFromImportMeta(import.meta.url), 'fixtures', name);
     const content = fs.readFileSync(filename, 'utf-8');
     const result = babel.transformSync(content, {...BABEL_OPTIONS, filename});
     expect((result?.code ?? '').includes('useComponentFile("')).toBe(shouldInject);

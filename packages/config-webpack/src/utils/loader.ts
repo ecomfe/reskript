@@ -1,7 +1,7 @@
-import {compact} from 'lodash';
+import {compact} from '@reskript/core';
 import {RuleSetUseItem} from 'webpack';
 import {BuildEntry, LoaderType} from '@reskript/settings';
-import * as loaders from '../loaders';
+import * as loaders from '../loaders/index.js';
 
 export const introduceLoader = (name: LoaderType, entry: BuildEntry): RuleSetUseItem | null => {
     const factory = loaders[name];

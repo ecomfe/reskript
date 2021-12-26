@@ -1,11 +1,14 @@
 import path from 'path';
 import webpack from 'webpack';
-import {compact} from 'lodash';
+import {reject, isNil} from 'ramda';
+import {dirFromImportMeta} from '@reskript/core';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext, loaders} from '@reskript/config-webpack';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
-import {resolveComponentName} from './utils/path';
-import {PlayCommandLineArgs} from './interface';
-import {resolveHost} from './utils/host';
+import {resolveComponentName} from './utils/path.js';
+import {PlayCommandLineArgs} from './interface.js';
+import {resolveHost} from './utils/host.js';
+
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 export const createWebpackConfig = async (target: string, cmd: PlayCommandLineArgs, buildContext: BuildContext) => {
     const hostType = await resolveHost(cmd.host);
@@ -13,13 +16,13 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
     const baseConfig = await createBaseWebpackConfig(buildContext, {extras: [extra]});
     const enableConcurrentMode = cmd.concurrentMode ?? buildContext.projectSettings.play.defaultEnableConcurrentMode;
     const playEntryPath = enableConcurrentMode
-        ? path.join(__dirname, 'assets', 'playground-entry-cm.js.tpl')
-        : path.join(__dirname, 'assets', 'playground-entry.js.tpl');
+        ? path.join(currentDirectory, 'assets', 'playground-entry-cm.js.tpl')
+        : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl');
     const componentTypeName = resolveComponentName(target);
     const entryLoaders = [
         loaders.babel(buildContext),
         {
-            loader: path.join(__dirname, 'loader'),
+            loader: path.join(currentDirectory, 'loader'),
             options: {
                 ...buildContext.projectSettings.play,
                 componentTypeName,
@@ -40,7 +43,7 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
             rules: [
                 {
                     test: playEntryPath,
-                    use: compact(entryLoaders),
+                    use: reject(isNil, entryLoaders),
                 },
                 ...(baseConfig.module?.rules ?? []),
             ],

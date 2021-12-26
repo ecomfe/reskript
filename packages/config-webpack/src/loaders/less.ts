@@ -1,13 +1,13 @@
-import {sync as resolve} from 'resolve';
+import {resolveSync} from '@reskript/core';
 import NpmImport from 'less-plugin-npm-import';
 import LessPluginFunctions from 'less-plugin-functions';
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = ({projectSettings}) => {
     const {build: {style: {lessVariables, extract}}} = projectSettings;
 
     return {
-        loader: resolve('less-loader'),
+        loader: resolveSync('less-loader'),
         options: {
             sourceMap: extract,
             lessOptions: {

@@ -1,8 +1,6 @@
 import path from 'path';
-import globby from 'globby';
-import {flatMap, flatten} from 'lodash';
 import {findGitRoot} from '@reskript/core';
-import {ResolveOptions} from './interface';
+import {ResolveOptions} from './interface.js';
 
 type LintType = 'script' | 'style';
 
@@ -16,6 +14,7 @@ export const resolveLintFiles = async (
     files: string[],
     {staged, changed, gitStatus}: ResolveOptions
 ): Promise<string[]> => {
+    const {globby} = await import('globby');
     const extensions = TYPE_TO_EXTENSIONS[type];
 
     if (staged || changed) {
@@ -42,7 +41,7 @@ export const resolveLintFiles = async (
         return extensions.map(extension => `${file}/**/*${extension}`);
     };
     const fileOrFolders = files.length ? files : ['.', 'src'];
-    const globs = flatMap(fileOrFolders, pathToGlob);
+    const globs = fileOrFolders.map(pathToGlob);
     const matchedFiles = await Promise.all(globs.map(pattern => globby(pattern)));
-    return flatten(matchedFiles).filter(v => extensions.includes(path.extname(v)));
+    return matchedFiles.flatMap(v => v).filter(v => extensions.includes(path.extname(v)));
 };

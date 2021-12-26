@@ -1,10 +1,55 @@
-export * from './interface';
-export * from './project';
-export * from './user';
-export {default as logger} from './logger';
-export * from './env';
-export * from './flag';
-export * from './deprecate';
-export * from './async';
-export * from './resolve';
-export * from './git';
+import {CommandDefinition, PackageInfo, ProjectAware, WorkMode, WorkModeAware} from './interface.js';
+import {
+    findGitRoot,
+    findMonorepoRoot,
+    isMonorepo,
+    isMonorepoRoot,
+    isProjectSourceIn,
+    normalizeRuleMatch,
+    readPackageConfig,
+    resolveCacheLocation,
+    resolveMonorepoPackageDirectories,
+} from './project.js';
+import {currentUserName} from './user.js';
+import {default as logger} from './logger.js';
+import {prepareEnvironment} from './env.js';
+import {Flag, isFlagEnabled, isInDebugMode} from './flag.js';
+import {deprecatedWarn} from './deprecate.js';
+import {pFilter, pMap, pReduce} from './async.js';
+import {resolveFrom, resolveSync, dirFromImportMeta, importUserModule} from './resolve.js';
+import {GitStatusResult, gitStatus} from './git/index.js';
+import {compact} from './lang';
+
+export {
+    CommandDefinition,
+    PackageInfo,
+    ProjectAware,
+    WorkMode,
+    WorkModeAware,
+    findGitRoot,
+    findMonorepoRoot,
+    isMonorepo,
+    isMonorepoRoot,
+    isProjectSourceIn,
+    normalizeRuleMatch,
+    readPackageConfig,
+    resolveCacheLocation,
+    resolveMonorepoPackageDirectories,
+    currentUserName,
+    logger,
+    prepareEnvironment,
+    Flag,
+    isFlagEnabled,
+    isInDebugMode,
+    deprecatedWarn,
+    pFilter,
+    pMap,
+    pReduce,
+    resolveFrom,
+    importUserModule,
+    GitStatusResult,
+    gitStatus,
+    compact,
+    dirFromImportMeta,
+    resolveSync,
+};

@@ -1,11 +1,12 @@
 import {StatsCompilation} from 'webpack';
-import {flatMap, uniqBy, sumBy, meanBy} from 'lodash';
+import {uniqBy, sum, mean} from 'ramda';
+// @ts-expect-error
 import prettyBytes from 'pretty-bytes';
 import {BuildInspectInitialResource} from '@reskript/settings';
-import {RuleProcessor} from './utils';
+import {RuleProcessor} from './utils.js';
 
 const extractInitialChunks = (compilations: StatsCompilation[]) => {
-    const chunks = uniqBy(flatMap(compilations, child => child.chunks ?? []), chunk => chunk.id);
+    const chunks = uniqBy(chunk => chunk.id, compilations.flatMap(child => child.chunks ?? []));
     const initialChunks = chunks.filter(chunk => chunk.initial);
     return initialChunks;
 };
@@ -26,7 +27,7 @@ const findDisallowedImportsInChunks = (chunks: StatsChunk[], imports: string[]) 
         return matchedChunks.map(toChunkMatch);
     };
 
-    return flatMap(imports, matchImportInChunks);
+    return imports.flatMap(matchImportInChunks);
 };
 
 export default (compilations: StatsCompilation[], settings: BuildInspectInitialResource) => {
@@ -47,7 +48,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
         config: settings.totalSize,
         defaultConfigValue: Infinity,
         check: async (max, {notice, report}) => {
-            const totalSize = sumBy(initialChunks, chunk => chunk.size);
+            const totalSize = sum(initialChunks.map(chunk => chunk.size));
             notice(`Initial resource size: ${prettyBytes(totalSize)} (not gzipped)`);
             if (totalSize > max) {
                 report(`Initial size is too large, max allowed is is ${prettyBytes(max)}`);
@@ -59,7 +60,7 @@ export default (compilations: StatsCompilation[], settings: BuildInspectInitialR
         config: settings.sizeDeviation,
         defaultConfigValue: Infinity,
         check: async (max, {report}) => {
-            const average = meanBy(initialChunks, chunk => chunk.size);
+            const average = mean(initialChunks.map(chunk => chunk.size));
             const abnormalChunks = initialChunks.filter(chunk => (chunk.size - average) / average > max);
             for (const chunk of abnormalChunks) {
                 report(`Resource ${chunk.files?.[0]} has unbalanced size to other resources`);

@@ -2,15 +2,17 @@ import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
 import ora from 'ora';
-import globby from 'globby';
-import {UserOptions} from '../interface';
+import {dirFromImportMeta} from '@reskript/core';
+import {UserOptions} from '../interface.js';
 
 
 export default async (cwd: string, options: UserOptions) => {
+    const {globby} = await import('globby');
+
     const spinner = ora('Copying initial files');
     spinner.start();
 
-    const templateDirectory = path.join(__dirname, '..', '..', 'templates', 'normal-app');
+    const templateDirectory = path.join(dirFromImportMeta(import.meta.url), '..', '..', 'templates', 'normal-app');
     const files = await globby(`${templateDirectory}/**`, {dot: true});
     const copyFile = async (file: string) => {
         const relative = path.relative(templateDirectory, file);

@@ -3,7 +3,7 @@ import {existsSync} from 'fs';
 import childProcess from 'child_process';
 import {promisify} from 'util';
 import {logger} from '@reskript/core';
-import {BuildContext} from '../interface';
+import {BuildContext} from '../interface.js';
 
 const exec = promisify(childProcess.exec);
 

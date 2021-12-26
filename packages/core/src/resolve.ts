@@ -1,5 +1,8 @@
+import path from 'path';
 import fs from 'fs';
+import {fileURLToPath} from 'url';
 import resolveCore from 'resolve';
+import caller from 'caller';
 
 export const resolveFrom = (base: string) => (id: string) => {
     const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
@@ -17,6 +20,12 @@ export const resolveFrom = (base: string) => (id: string) => {
         }
     );
     return new Promise(execute);
+};
+
+export const resolveSync = (id: string) => {
+    const callerUrl = caller();
+    const callerPath = callerUrl.startsWith('file://') ? fileURLToPath(callerUrl) : callerUrl;
+    return resolveCore.sync(id, {basedir: callerPath});
 };
 
 const USER_MODULES_EXTENSIONS = ['.js', '.cjs'];
@@ -37,3 +46,5 @@ export const importUserModule = async <T>(moduleName: string, defaultValue?: T):
 
     throw new Error(`Unable to find module ${moduleName}`);
 };
+
+export const dirFromImportMeta = (importMetaUrl: string) => path.dirname(fileURLToPath(importMetaUrl));

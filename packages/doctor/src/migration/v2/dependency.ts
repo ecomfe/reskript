@@ -1,5 +1,5 @@
-import {tip, warn} from '../logger';
-import {checkInstalledReskriptVersion, nodeVersionSatisfies, readAllDependencies} from '../utils';
+import {tip, warn} from '../logger.js';
+import {checkInstalledReskriptVersion, nodeVersionSatisfies, readAllDependencies} from '../utils.js';
 
 export default async (cwd: string) => {
     const dependencies = await readAllDependencies(cwd);

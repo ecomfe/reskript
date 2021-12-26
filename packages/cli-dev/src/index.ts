@@ -3,14 +3,14 @@ import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
 import {watchProjectSettings} from '@reskript/settings';
 import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
-import {logger, prepareEnvironment} from '@reskript/core';
+import {logger, prepareEnvironment, dirFromImportMeta} from '@reskript/core';
 import {
     createWebpackDevServerPartial,
     createWebpackDevServerConfig,
     injectDevElements,
 } from '@reskript/config-webpack-dev-server';
-import {DevCommandLineArgs} from './interface';
-import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
+import {DevCommandLineArgs} from './interface.js';
+import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils.js';
 
 export {DevCommandLineArgs};
 
@@ -54,7 +54,7 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
         devServerConfig,
         hot,
         entry: cmd.entry,
-        resolveBase: __dirname,
+        resolveBase: dirFromImportMeta(import.meta.url),
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);

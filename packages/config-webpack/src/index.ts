@@ -1,8 +1,7 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
-import {pMap, logger} from '@reskript/core';
-import {compact} from 'lodash';
+import {pMap, logger, compact} from '@reskript/core';
 import {Configuration} from 'webpack';
 import {
     BuildEnv,
@@ -11,19 +10,19 @@ import {
     warnAndExitOnInvalidFinalizeReturn,
     BuildInternals,
 } from '@reskript/settings';
-import * as loaders from './loaders';
-import * as rules from './rules';
-import {revision, hasServiceWorker} from './utils/info';
-import {mergeBuiltin} from './utils/merge';
-import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate';
-import {createHTMLPluginInstances} from './utils/html';
-import {resolveEntry} from './utils/entry';
-import {introduceLoader, introduceLoaders} from './utils/loader';
-import {AppEntry, BuildContext, ConfigurationFactory, EntryLocation, StrictOptions} from './interface';
-import strictPartial from './partials/strict';
+import * as loaders from './loaders/index.js';
+import * as rules from './rules/index.js';
+import {revision, hasServiceWorker} from './utils/info.js';
+import {mergeBuiltin} from './utils/merge.js';
+import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate.js';
+import {createHTMLPluginInstances} from './utils/html.js';
+import {resolveEntry} from './utils/entry.js';
+import {introduceLoader, introduceLoaders} from './utils/loader.js';
+import {AppEntry, BuildContext, EntryLocation, StrictOptions} from './interface.js';
+import {partials, strict as strictPartial} from './partials/index.js';
 
 export {loaders, rules, createHTMLPluginInstances};
-export * from './interface';
+export * from './interface.js';
 
 export const collectEntries = async (location: EntryLocation): Promise<AppEntry[]> => {
     const {cwd, srcDirectory, entryDirectory, only} = location;
@@ -51,9 +50,9 @@ export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuild
     };
 };
 
-const importPartialWith = (context: BuildContext) => async (name: string) => {
+const createPartialWith = (context: BuildContext) => async (name: keyof typeof partials) => {
     try {
-        const {default: factory} = await import(`./partials/${name}`) as {default: ConfigurationFactory};
+        const factory = partials[name];
         const partial = await factory(context);
         return partial;
     }
@@ -63,6 +62,8 @@ const importPartialWith = (context: BuildContext) => async (name: string) => {
     }
 };
 
+const excludeFalse = <T>(value: T): value is Exclude<T, false> => !!value;
+
 interface Options {
     strict?: StrictOptions;
     extras?: Configuration[];
@@ -70,13 +71,13 @@ interface Options {
 
 export const createWebpackConfig = async (context: BuildContext, options: Options = {}) => {
     const {strict, extras = []} = options;
-    const partials = [
+    const partialNames: Array<keyof typeof partials | false> = [
         'base',
         context.mode,
         context.usage === 'build' && hasServiceWorker(context) && 'serviceWorker',
         context.projectSettings.build.thirdParty && 'external',
     ];
-    const configurations = await pMap(compact(partials), importPartialWith(context));
+    const configurations = await pMap(partialNames.filter(excludeFalse), createPartialWith(context));
     const internalCreated = mergeBuiltin([...configurations, strictPartial(strict, context.cwd), ...extras]);
     const internals: BuildInternals = {
         rules,

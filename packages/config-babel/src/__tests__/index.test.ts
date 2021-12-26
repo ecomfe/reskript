@@ -1,29 +1,14 @@
-import {PluginItem} from '@babel/core';
+import {describe, test, expect} from 'vitest';
+import {TransformOptions} from '@babel/core';
+import {dirFromImportMeta} from '@reskript/core';
 import {getParseOnlyBabelConfig, getTransformBabelConfig, getBabelConfig, BabelConfigOptions} from '../index';
 
-const findPluginByKeyword = (plugins: PluginItem[] | null | undefined, keyword: string) => {
-    if (!plugins) {
-        return false;
-    }
-
-    const isMatch = (item: PluginItem) => {
-        if (typeof item === 'string') {
-            return item.includes(keyword);
-        }
-
-        if (Array.isArray(item)) {
-            const name = item[0];
-            return typeof name === 'string' && name.includes(keyword);
-        }
-
-        // 不处理其它情况了，测试里不会发生
-        return false;
-    };
-    return plugins.some(isMatch);
+const pluginLengthDifference = (from: TransformOptions, to: TransformOptions) => {
+    return (to.plugins?.length ?? 0) - (from.plugins?.length ?? 0);
 };
 
 const options: BabelConfigOptions = {
-    cwd: __dirname,
+    cwd: dirFromImportMeta(import.meta.url),
     mode: 'production',
     hot: true,
     hostType: 'application',
@@ -55,22 +40,26 @@ describe('base config', () => {
 
 describe('third party use', () => {
     test('antd', () => {
+        const base = getTransformBabelConfig({...options, uses: []});
         const config = getTransformBabelConfig({...options, uses: ['antd']});
-        expect(findPluginByKeyword(config.plugins, 'babel-plugin-import')).toBe(true);
+        expect(pluginLengthDifference(base, config)).toBe(1);
     });
 
     test('lodash', () => {
+        const base = getTransformBabelConfig({...options, uses: []});
         const config = getTransformBabelConfig({...options, uses: ['lodash']});
-        expect(findPluginByKeyword(config.plugins, 'babel-plugin-lodash')).toBe(true);
+        expect(pluginLengthDifference(base, config)).toBe(1);
     });
 
     test('emotion', () => {
+        const base = getTransformBabelConfig({...options, uses: []});
         const config = getTransformBabelConfig({...options, uses: ['emotion']});
-        expect(findPluginByKeyword(config.plugins, '@emotion/babel-plugin')).toBe(true);
+        expect(pluginLengthDifference(base, config)).toBe(1);
     });
 
     test('reflect-metadata', () => {
+        const base = getTransformBabelConfig({...options, uses: []});
         const config = getTransformBabelConfig({...options, uses: ['reflect-metadata']});
-        expect(findPluginByKeyword(config.plugins, 'babel-plugin-transform-typescript-metadata')).toBe(true);
+        expect(pluginLengthDifference(base, config)).toBe(1);
     });
 });

@@ -1,15 +1,15 @@
 import path from 'path';
-import {compact} from 'lodash';
 import {Configuration} from 'webpack';
 import {Configuration as DevServerConfiguration} from 'webpack-dev-server';
 import FriendlyErrorsWebpackPlugin from '@soda/friendly-errors-webpack-plugin';
 import {merge} from 'webpack-merge';
 import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import {compact} from '@reskript/core';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
-import ProgressBarPlugin from './ProgressBarPlugin';
-import {addHotModuleToEntry, constructProxyConfiguration} from './utils';
+import ProgressBarPlugin from './ProgressBarPlugin.js';
+import {addHotModuleToEntry, constructProxyConfiguration} from './utils.js';
 
 const getDevServerMessages = (host: string, port: number, https: boolean, openPage: string = ''): string[] => [
     `Your application is running here: ${https ? 'https' : 'http'}://${host}:${port}/${openPage}`,

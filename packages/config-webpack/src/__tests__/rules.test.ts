@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import compiler from './compiler';
 
 test('project source babel', async () => {

@@ -1,3 +1,4 @@
+import {expect, test} from 'vitest';
 import dedent from 'dedent';
 import {parseMarkdownToCases, replaceCodeBlockForCase} from '../case';
 

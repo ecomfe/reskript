@@ -1,4 +1,4 @@
-import {ScriptFactoryContext} from '../interface';
+import {test, expect, vi} from 'vitest';
 import compiler from './compiler';
 
 test('remote script', async () => {
@@ -19,10 +19,11 @@ test('array of scripts', async () => {
 
 test('factory', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const factory = jest.fn((context: ScriptFactoryContext) => ({src: '/extra.js'}));
+    const factory = vi.fn(() => ({src: '/extra.js'}));
     const html = await compiler(factory);
     expect(html.includes('src="/extra.js"')).toBe(true);
     expect(factory).toHaveBeenCalled();
+    // @ts-expect-error
     expect(typeof factory.mock.calls[0][0]).toBe('object');
 });
 

@@ -9,7 +9,8 @@
     "start": "skr dev",
     "lint": "eslint src",
     "test": "skr test --target=react",
-    "play": "skr play src/components/Create/index.tsx"
+    "play": "skr play src/components/Create/index.tsx",
+    "babel": "skr babel src/api/todo.ts"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +35,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "stylelint": "^14.2.0",
-    "typescript": "^4.5.4",
+    "typescript": "4.6.0-dev.20220105",
     "webpack": "^5.65.0"
   },
   "dependencies": {

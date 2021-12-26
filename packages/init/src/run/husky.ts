@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import childProcess from 'child_process';
 import {readPackageConfig} from '@reskript/core';
-import {UserOptions} from '../interface';
+import {UserOptions} from '../interface.js';
 
 const exec = (cwd: string, command: string) => {
     childProcess.execSync(

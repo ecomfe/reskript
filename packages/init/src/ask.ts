@@ -1,5 +1,5 @@
 import {prompt, QuestionCollection} from 'inquirer';
-import {UserOptions} from './interface';
+import {UserOptions} from './interface.js';
 
 const questions: QuestionCollection<UserOptions> = [
     {
@@ -44,4 +44,4 @@ const questions: QuestionCollection<UserOptions> = [
     },
 ];
 
-export default () => prompt(questions);
+export default () => prompt<UserOptions>(questions);

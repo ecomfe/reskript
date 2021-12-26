@@ -1,15 +1,20 @@
 import path from 'path';
 import fs from 'fs';
+// @ts-expect-error
 import {Cli, Builtins} from 'clipanion';
-import {logger} from '@reskript/core';
-import BabelCommand from './BabelCommand';
-import BuildCommand from './BuildCommand';
-import DevCommand from './DevCommand';
-import LintCommand from './LintCommand';
-import PlayCommand from './PlayCommand';
-import TestCommand from './TestCommand';
+import {logger, dirFromImportMeta} from '@reskript/core';
+import BabelCommand from './BabelCommand.js';
+import BuildCommand from './BuildCommand.js';
+import DevCommand from './DevCommand.js';
+import LintCommand from './LintCommand.js';
+import PlayCommand from './PlayCommand.js';
+import TestCommand from './TestCommand.js';
 
-const {version} = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf-8'));
+const packageJsonContent = fs.readFileSync(
+    path.join(dirFromImportMeta(import.meta.url), '..', 'package.json'),
+    'utf-8'
+);
+const {version} = JSON.parse(packageJsonContent);
 
 const cli = new Cli({binaryLabel: 'reSKRipt', binaryName: 'skr', binaryVersion: version});
 

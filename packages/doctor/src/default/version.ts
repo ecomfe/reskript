@@ -1,4 +1,4 @@
-import {DoctorResult, Rule} from '../interface';
+import {DoctorResult, Rule} from '../interface.js';
 
 const rule: Rule = ({packageInfo}) => {
     const result: DoctorResult = {

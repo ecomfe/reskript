@@ -1,9 +1,9 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolveSync} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = () => {
     return {
-        loader: resolve('worker-loader'),
+        loader: resolveSync('worker-loader'),
         options: {
             filename: '[name].[contenthash].js',
             inline: 'no-fallback',

@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs/promises';
-import {compact, difference, uniq} from 'lodash';
+import {reject, isNil, difference} from 'ramda';
 import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';
 import {
@@ -12,10 +12,10 @@ import {
     EntryLocation,
 } from '@reskript/config-webpack';
 import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import * as partials from './partial';
-import {BuildCommandLineArgs} from './interface';
-import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
-import inspect from './inspect';
+import * as partials from './partial.js';
+import {BuildCommandLineArgs} from './interface.js';
+import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report.js';
+import inspect from './inspect/index.js';
 
 export {BuildCommandLineArgs};
 
@@ -36,10 +36,10 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
             const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};
             // webpack的`toJson`的定义是错的
             const {errors, warnings} = stats.toJson(toJsonOptions);
-            for (const error of uniq(errors)) {
+            for (const error of reject(isNil, errors ?? [])) {
                 printWebpackResult('error', error as unknown as WebpackResult);
             }
-            for (const warning of uniq(warnings)) {
+            for (const warning of reject(isNil, warnings ?? [])) {
                 printWebpackResult('warn', warning as unknown as WebpackResult);
             }
 
@@ -111,7 +111,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
                     caseSensitiveModuleSource: cmd.strict,
                     typeCheck: cmd.strict,
                 },
-                extras: compact(extras),
+                extras: reject((v: false | Configuration): v is false => !v, extras),
             }
         );
     };

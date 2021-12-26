@@ -1,13 +1,13 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
-import {json} from 'body-parser';
+import bodyParser from 'body-parser';
 import {currentUserName} from '@reskript/core';
-import {PlayCase, CasePatch, PlayCaseInfo} from '../interface';
-import {parseMarkdownToCases, serializeCaseToMarkdown, replaceCodeBlockForCase, replaceLastRun} from '../utils/case';
-import {resolveComponentName, resolveCasePath} from '../utils/path';
-import {formatTime} from '../utils/time';
-import {ExpressApp} from './interface';
+import {PlayCase, CasePatch, PlayCaseInfo} from '../interface.js';
+import {parseMarkdownToCases, serializeCaseToMarkdown, replaceCodeBlockForCase, replaceLastRun} from '../utils/case.js';
+import {resolveComponentName, resolveCasePath} from '../utils/path.js';
+import {formatTime} from '../utils/time.js';
+import {ExpressApp} from './interface.js';
 
 const createService = (componentModulePath: string) => {
     const componentName = resolveComponentName(componentModulePath);
@@ -77,7 +77,7 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     );
     app.post(
         '/play/cases',
-        json(),
+        bodyParser.json(),
         async (req, res) => {
             const caseToSave = req.body as PlayCase;
             try {
@@ -91,7 +91,7 @@ export default (app: ExpressApp, componentModulePath: string): void => {
     );
     app.put(
         '/play/cases/:name',
-        json(),
+        bodyParser.json(),
         async (req, res) => {
             const caseToSave = req.body as CasePatch;
             try {

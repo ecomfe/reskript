@@ -1,18 +1,18 @@
 import path from 'path';
 import fs from 'fs/promises';
-import {uniq, compact, flatMap, last} from 'lodash';
+import {uniq, last, reject, isNil} from 'ramda';
 import {StatsCompilation} from 'webpack';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
-import {RuleProcessor, isIncluded} from './utils';
+import {RuleProcessor, isIncluded} from './utils.js';
 
 const extractScriptEntries = (compilations: StatsCompilation[]): string[] => {
-    const entries = flatMap(compilations, c => Object.values(c.entrypoints ?? {}));
+    const entries = compilations.flatMap(c => Object.values(c.entrypoints ?? {}));
     // 这里的`assets`是有顺序的（大概），被别人依赖的在前面（大概），真正的入口是最后一个（大概）
-    return uniq(compact(entries.map(v => last(v.assets)?.name)));
+    return uniq(reject(isNil, entries.map(v => last(v.assets ?? [])?.name)));
 };
 
 const extractHTMLEntries = (compilations: StatsCompilation[]): string[] => {
-    const assets = flatMap(compilations, c => c.assets ?? []);
+    const assets = compilations.flatMap(c => c.assets ?? []);
     const files = assets.filter(v => /^\.\.\/.+\.html$/.test(v.name)).map(v => v.name);
     return files;
 };

@@ -1,5 +1,5 @@
 import {Configuration} from 'webpack';
-import {ConfigurationFactory} from '../interface';
+import {ConfigurationFactory} from '../interface.js';
 
 const factory: ConfigurationFactory = () => {
     const config: Configuration = {

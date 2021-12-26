@@ -4,16 +4,18 @@
   "version": "0.0.1",
   "repository": "https://github.com/ecomfe/reskript",
   "author": "otakustay <otakustay@gmail.com>",
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "license": "MIT",
   "scripts": {
     "lint": "lerna run --parallel lint",
     "test": "lerna run --concurrency=1 test",
     "build": "lerna run build",
     "build-clean": "lerna run --parallel clean && npm run build",
-    "build-showcase": "cd showcase/todo && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
     "release-beta": "npm run release -- --conventional-prerelease --preid=beta",
-    "ci": "pnpm install && npm run build-clean && npm run lint && npm run test && npm run build-showcase",
+    "ci": "pnpm install && npm run build-clean && npm run lint && npm run test",
     "preversion": "npm run ci",
     "prepack": "pnpm install && npm run build-clean && sh scripts/build-check.sh",
     "version": "pnpm install && git add pnpm-lock.yaml",

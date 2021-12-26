@@ -1,4 +1,4 @@
-import {sync as resolve} from 'resolve';
+import resolve from 'resolve';
 import gif from 'imagemin-gifsicle';
 import jpeg from 'imagemin-mozjpeg';
 import png from 'imagemin-optipng';
@@ -25,7 +25,7 @@ export default () => {
     ];
 
     return {
-        loader: resolve('img-loader'),
+        loader: resolve.sync('img-loader'),
         options: {plugins},
     };
 };

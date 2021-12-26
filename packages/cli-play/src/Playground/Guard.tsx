@@ -1,6 +1,7 @@
 import {ReactNode, useEffect, useState} from 'react';
+// @ts-expect-error
 import dedent from 'dedent';
-import Notice from './Notice';
+import Notice from './Notice/index.js';
 
 const EXAMPLE_CODE = dedent`
     exports.devServer = {

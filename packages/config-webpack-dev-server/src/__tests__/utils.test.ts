@@ -1,3 +1,4 @@
+import {describe, test, expect} from 'vitest';
 import {EntryObject} from 'webpack';
 import {addHotModuleToEntry, constructProxyConfiguration} from '../utils';
 

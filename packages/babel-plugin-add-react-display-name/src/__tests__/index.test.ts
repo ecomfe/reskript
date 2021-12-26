@@ -1,8 +1,10 @@
+import {test, expect} from 'vitest';
+import {dirFromImportMeta} from '@reskript/core';
 import {createTestRunner} from '@reskript/babel-utils';
 import plugin from '../index';
 
 const runSuite = createTestRunner(
-    __dirname,
+    dirFromImportMeta(import.meta.url),
     {test, expect},
     {
         presets: [

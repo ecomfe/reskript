@@ -1,9 +1,9 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolveSync} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = () => {
     return {
-        loader: resolve('style-loader'),
+        loader: resolveSync('style-loader'),
     };
 };
 

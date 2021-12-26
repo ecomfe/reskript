@@ -1,12 +1,12 @@
-import {findLast, compact} from 'lodash';
+import {findLast, reject, isNil} from 'ramda';
 import parse from 'remark-parse';
 import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
 import unified from 'unified';
 import {Content, Root, Text, Code, List} from 'mdast';
 import {currentUserName, pMap} from '@reskript/core';
-import {PlayCase, PlayCaseMeta} from '../interface';
-import {formatTime} from './time';
+import {PlayCase, PlayCaseMeta} from '../interface.js';
+import {formatTime} from './time.js';
 
 const parser = unified().use(parse).use(gfm);
 const serializer = unified().use(stringify);
@@ -19,7 +19,7 @@ const stringifyNodesToMarkdown = (nodes: Content[]): string => {
     return serializer.stringify(root);
 };
 
-const findReplCodeBlock = (nodes: Content[]) => findLast(nodes, v => v.type === 'code' && v.lang === 'jsx');
+const findReplCodeBlock = (nodes: Content[]) => findLast(v => v.type === 'code' && v.lang === 'jsx', nodes);
 
 const isListItem = (node: Content) => node.type === 'listItem';
 
@@ -131,7 +131,7 @@ export const parseMarkdownToCases = async (markdown: string): Promise<PlayCase[]
 
     const nodes = splitToCaseNodes(markdown);
     const cases = await pMap(nodes, parseToCase);
-    return compact(cases);
+    return reject(isNil, cases);
 };
 
 export const serializeCaseToMarkdown = (caseToSerialize: PlayCase): string => {

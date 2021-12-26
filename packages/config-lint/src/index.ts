@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
-import eslint from './rules/eslint';
-import stylelint from './rules/stylelint';
+import eslint from './rules/eslint.js';
+import stylelint from './rules/stylelint.js';
 
 export const getScriptLintConfig = (): Record<string, any> => ({...eslint});
 

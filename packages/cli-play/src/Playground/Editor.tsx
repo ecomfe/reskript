@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import MonacoEditor, {loader} from '@monaco-editor/react';
+import {default as MonacoEditor, loader} from '@monaco-editor/react'; // 不写`default as`会引用到`namespace`
 import {debounce} from 'debounce';
 
 loader.config({paths: {vs: 'https://code.bdstatic.com/npm/monaco-editor@0.26.1/min/vs'}});

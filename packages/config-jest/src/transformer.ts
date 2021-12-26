@@ -1,5 +1,5 @@
 import babelJest from 'babel-jest';
-import {BabelConfigOptions, getTransformBabelConfig} from '@reskript/config-babel';
+import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel/willBreakingInternalUseOnly';
 
 const getBabelJestTransformer = (): unknown => {
     if (!babelJest.createTransformer) {

@@ -2,21 +2,25 @@ import path from 'path';
 import {existsSync} from 'fs';
 import * as crypto from 'crypto';
 import fs from 'fs/promises';
-import {sync as resolve} from 'resolve';
-import {compact, mapValues} from 'lodash';
+import {map} from 'ramda';
+import {compact, dirFromImportMeta, resolveSync, findGitRoot, pMap} from '@reskript/core';
 import {paramCase} from 'change-case';
-import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
-import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
+import webpack, {EntryObject} from 'webpack';
+// @ts-expect-error
+import resolveTypeScriptPluginExports from 'resolve-typescript-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
-import {findGitRoot, pMap} from '@reskript/core';
 import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
 import {getScriptLintBaseConfig, getStyleLintBaseConfig} from '@reskript/config-lint';
-import {ConfigurationFactory, BuildContext} from '../interface';
-import {createHTMLPluginInstances} from '../utils/html';
-import {convertToWebpackEntry} from '../utils/entry';
-import * as rules from '../rules';
+import {ConfigurationFactory, BuildContext} from '../interface.js';
+import {createHTMLPluginInstances} from '../utils/html.js';
+import {convertToWebpackEntry} from '../utils/entry.js';
+import * as rules from '../rules/index.js';
+
+const {default: ResolveTypeScriptPlugin} = resolveTypeScriptPluginExports;
+
+const {DefinePlugin, ContextReplacementPlugin} = webpack;
 
 const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
     const entries = Object.entries(context);
@@ -47,7 +51,7 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
     hash.update(entry.hostPackageName);
     hash.update(entry.cwd);
     // `reSKRipt`自己的版本信息等
-    await updateHashFromFile(hash, path.join(__dirname, '..', '..', 'package.json'));
+    await updateHashFromFile(hash, path.join(dirFromImportMeta(import.meta.url), '..', '..', 'package.json'));
 
     const settingsLocation = path.join(entry.cwd, 'reskript.config.js');
     if (existsSync(settingsLocation)) {
@@ -82,7 +86,7 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
 
 const toDynamicDefines = (context: Record<string, any>, prefix: string): Record<string, any> => {
     const staticDefines = toDefines(context, prefix);
-    return mapValues(staticDefines, v => DefinePlugin.runtimeValue(() => v, true));
+    return map(v => DefinePlugin.runtimeValue(() => v, true), staticDefines);
 };
 
 // eslint-disable-next-line complexity
@@ -123,7 +127,7 @@ const factory: ConfigurationFactory = async entry => {
         ...toDynamicDefines(buildInfo, '$build'),
     };
     const eslintOptions = {
-        eslintPath: resolve('eslint'),
+        eslintPath: resolveSync('eslint'),
         baseConfig: getScriptLintBaseConfig({cwd}),
         exclude: ['node_modules', 'externals'],
         extensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -145,7 +149,9 @@ const factory: ConfigurationFactory = async entry => {
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         new InterpolateHTMLPlugin(process.env),
+        // @ts-expect-error
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),
+        // @ts-expect-error
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
     const cacheKey = await computeCacheKey(entry);
@@ -175,7 +181,7 @@ const factory: ConfigurationFactory = async entry => {
             alias: {
                 '@': path.join(cwd, srcDirectory),
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
-                'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
+                'regenerator-runtime': path.dirname(resolveSync('regenerator-runtime')),
             },
             plugins: [
                 new ResolveTypeScriptPlugin(),

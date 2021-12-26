@@ -1,6 +1,6 @@
 import {readPackageConfig} from '@reskript/core';
-import {warn} from '../logger';
-import {checkInstalledReskriptVersion, isInstalledVersionSatisfies, nodeVersionSatisfies} from '../utils';
+import {warn} from '../logger.js';
+import {checkInstalledReskriptVersion, isInstalledVersionSatisfies, nodeVersionSatisfies} from '../utils.js';
 
 export default async (cwd: string) => {
     const packageInfo = await readPackageConfig(cwd);

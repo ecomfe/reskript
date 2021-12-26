@@ -1,17 +1,17 @@
+import {describe, test, expect, vi} from 'vitest';
+import {TransformOptions} from '@babel/core';
 import {Configuration} from 'webpack';
-import {BuildEntry, readProjectSettings} from '@reskript/settings';
+import {dirFromImportMeta} from '@reskript/core';
+import {readProjectSettings} from '@reskript/settings';
 import {createWebpackConfig} from '../index';
 import {BuildContext} from '../interface';
 
+const currentDirectory = dirFromImportMeta(import.meta.url);
+
 describe('finalize', () => {
     test('can receive a fully resolved webpack config and modify it', async () => {
-        const finalize = jest.fn(
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            (config: Configuration, entry: BuildEntry) => {
-                return {...config, mode: 'production' as const};
-            }
-        );
-        const projectSettings = await readProjectSettings({cwd: __dirname}, 'build');
+        const finalize = vi.fn((config: Configuration) => ({...config, mode: 'production' as const}));
+        const projectSettings = await readProjectSettings({cwd: currentDirectory}, 'build');
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -20,7 +20,7 @@ describe('finalize', () => {
             },
         };
         const context: BuildContext = {
-            cwd: __dirname,
+            cwd: currentDirectory,
             mode: 'development',
             usage: 'build',
             srcDirectory: 'src',
@@ -35,18 +35,18 @@ describe('finalize', () => {
         };
         const config = await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0].module).toBe('object');
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][1]).toBe('object');
         expect(config.mode).toBe('production');
     });
 
     test('can modify babel config', async () => {
-        const finalize = jest.fn(
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            (config, buildEntry) => ({...config, comments: false})
-        );
-        const projectSettings = await readProjectSettings({cwd: __dirname}, 'build');
+        const finalize = vi.fn((config: TransformOptions) => ({...config, comments: false}));
+        const projectSettings = await readProjectSettings({cwd: currentDirectory}, 'build');
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -58,7 +58,7 @@ describe('finalize', () => {
             },
         };
         const context: BuildContext = {
-            cwd: __dirname,
+            cwd: currentDirectory,
             mode: 'development',
             usage: 'build',
             srcDirectory: 'src',
@@ -73,8 +73,11 @@ describe('finalize', () => {
         };
         await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0].presets).toBe('object');
+        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][1]).toBe('object');
     });
 });

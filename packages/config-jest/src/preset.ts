@@ -1,5 +1,5 @@
 import {merge} from 'lodash';
-import {sync as resolve} from 'resolve';
+import resolve from 'resolve';
 import unixify from 'unixify';
 import {JestConfigOptions} from './interface';
 
@@ -14,7 +14,7 @@ const reactJestConfig = (configBasePath: string) => {
         testEnvironment: 'jsdom',
         setupFiles: [`${unixify(configBasePath)}/setUp`],
         snapshotSerializers: [
-            resolve('enzyme-to-json/serializer'),
+            resolve.sync('enzyme-to-json/serializer'),
         ],
     };
 };
@@ -26,7 +26,7 @@ const nodeJestConfig = {
 export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: string, options?: JestConfigOptions) => {
     const baseConfig = {
         moduleNameMapper: {
-            '\\.(css|less)$': resolve('identity-obj-proxy'),
+            '\\.(css|less)$': resolve.sync('identity-obj-proxy'),
             [`\\.(${STATIC_EXTENSIONS.join('|')})$`]: `${unixify(configBasePath)}/mockStatic`,
             '\\.svg\\?react$': `${unixify(configBasePath)}/mockComponent`,
             '@/(.*)$': '<rootDir>/src/$1',
@@ -45,7 +45,7 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
         transform: {
             'node_modules/.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/thirdPartyTransformer`,
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,
-            '^.+\\.(md|mdx|txt|tpl)$': resolve('jest-raw-loader'),
+            '^.+\\.(md|mdx|txt|tpl)$': resolve.sync('jest-raw-loader'),
         },
         // 默认会忽略`node_modules`，所以这里要设置
         transformIgnorePatterns: [],

@@ -2,16 +2,14 @@ import path from 'path';
 import {existsSync} from 'fs';
 import childProcess from 'child_process';
 import {promisify} from 'util';
-import {prompt} from 'enquirer';
-import pkgDir from 'pkg-dir';
+import enquirer from 'enquirer';
+// @ts-expect-error
 import {Command} from 'clipanion';
-import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
+import type {CommandDefinition} from '@reskript/core';
 
 const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
     return 'message' in error && 'code' in error;
 };
-
-const resolve = resolveFrom(process.cwd());
 
 const exec = promisify(childProcess.exec);
 
@@ -29,6 +27,8 @@ export default abstract class DynamicImportCommand<A> extends Command {
     protected readonly packageName: string = '';
 
     async execute() {
+        const {logger} = await import('@reskript/core');
+
         if (!this.packageName) {
             logger.error('No command package defined');
             process.exit(11);
@@ -52,6 +52,9 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async importCommandPackage() {
+        const {logger, resolveFrom} = await import('@reskript/core');
+        const resolve = resolveFrom(process.cwd());
+
         const dynamicImport = async () => {
             // 这个不能放到外面去，`resolve`本身就是找不到模块会报错的，所以自动安装后要重找一下
             const packageEntry = await resolve(this.packageName);
@@ -108,18 +111,25 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async canAutoInstall() {
-        const packageDirectory = await pkgDir();
+        const {readPackageConfig} = await import('@reskript/core');
+        const {packageDirectory} = await import('pkg-dir');
 
-        if (!packageDirectory) {
+        const packageRoot = await packageDirectory();
+
+        if (!packageRoot) {
             return false;
         }
 
-        const packageConfig = await readPackageConfig(packageDirectory);
+        const packageConfig = await readPackageConfig(packageRoot);
         const dependencies = {...packageConfig.dependencies, ...packageConfig.devDependencies};
+
+        // @ts-expect-error
         return dependencies['@reskript/cli'] === this.cli.binaryVersion;
     }
 
     private async detectPackageManager(): Promise<PackageManager | null> {
+        const {findGitRoot} = await import('@reskript/core');
+
         const gitRoot = await findGitRoot();
 
         if (!gitRoot) {
@@ -140,12 +150,14 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async installCommandPackage(): Promise<InstallReuslt> {
+        const {logger} = await import('@reskript/core');
+
         const question = {
             type: 'confirm',
             name: 'ok',
             message: `We're going to install ${this.packageName} for you, continue?`,
         };
-        const answer = await prompt<{ok: boolean}>(question);
+        const answer = await enquirer.prompt<{ok: boolean}>(question);
 
         if (!answer.ok) {
             return 'canceled';
@@ -160,6 +172,7 @@ export default abstract class DynamicImportCommand<A> extends Command {
         logger.log(`Installing ${this.packageName} using ${packageManager}`);
 
         try {
+            // @ts-expect-error
             await exec(`${INSTALL_COMMAND_BY_MAANGER[packageManager]} ${this.packageName}@${this.cli.binaryVersion}`);
             return 'installed';
         }

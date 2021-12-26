@@ -1,7 +1,9 @@
-import {types, PluginObj} from '@babel/core';
+import babel from '@babel/core';
 import {isComponentDeclaration} from '@reskript/babel-utils';
 
-export default function addReactDisplayName(): PluginObj {
+const {types} = babel;
+
+export default function addReactDisplayName(): babel.PluginObj {
     return {
         visitor: {
             FunctionDeclaration(declaration) {

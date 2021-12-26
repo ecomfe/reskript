@@ -4,12 +4,14 @@ import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMa
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import {logger, prepareEnvironment, readPackageConfig} from '@reskript/core';
-import {createWebpackConfig} from './webpack';
-import {PlayCommandLineArgs} from './interface';
-import setupServer from './server';
+import {logger, prepareEnvironment, readPackageConfig, dirFromImportMeta} from '@reskript/core';
+import {createWebpackConfig} from './webpack.js';
+import {PlayCommandLineArgs, HostType} from './interface.js';
+import setupServer from './server/index.js';
 
-export {PlayCommandLineArgs};
+export {PlayCommandLineArgs, HostType};
+
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
     const userProjectSettings = await readProjectSettings(cmd, 'dev');
@@ -47,13 +49,13 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
                 config: {
                     html: {
                         title: 'PlayGround',
-                        favicon: path.join(__dirname, 'assets', 'favicon.ico'),
+                        favicon: path.join(currentDirectory, 'assets', 'favicon.ico'),
                     },
                 },
-                template: path.join(__dirname, 'assets', 'playground-entry.ejs'),
+                template: path.join(currentDirectory, 'assets', 'playground-entry.ejs'),
                 file: enableConcurrentMode
-                    ? path.join(__dirname, 'assets', 'playground-entry-cm.js.tpl')
-                    : path.join(__dirname, 'assets', 'playground-entry.js.tpl'),
+                    ? path.join(currentDirectory, 'assets', 'playground-entry-cm.js.tpl')
+                    : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl'),
             },
         ],
         features: projectSettings.featureMatrix[cmd.buildTarget],
@@ -108,7 +110,7 @@ export const run = async (cmd: PlayCommandLineArgs, target: string): Promise<voi
         devServerConfig,
         hot: true,
         entry: 'index',
-        resolveBase: __dirname,
+        resolveBase: currentDirectory,
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);

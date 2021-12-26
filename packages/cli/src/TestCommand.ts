@@ -1,7 +1,9 @@
-import {isEnum} from 'typanion';
+// @ts-expect-error
 import {Option} from 'clipanion';
+// @ts-expect-error
+import {isEnum} from 'typanion';
 import {TestCommandLineArgs} from '@reskript/cli-test';
-import DynamicImportCommand from './DynamicImportCommand';
+import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class LintCommand extends DynamicImportCommand<TestCommandLineArgs> {
     static paths = [['test']];

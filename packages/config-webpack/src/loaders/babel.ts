@@ -1,7 +1,7 @@
-import {sync as resolve} from 'resolve';
+import {resolveSync} from '@reskript/core';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = (entry: BuildEntry) => {
     const {usage, mode, cwd, srcDirectory, projectSettings: {build, devServer}} = entry;
@@ -24,7 +24,7 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
     warnAndExitOnInvalidFinalizeReturn(finalizedBabelConfig, 'build.script');
 
     return {
-        loader: resolve('babel-loader'),
+        loader: resolveSync('babel-loader'),
         // webpack的缓存够强了，所有其它的缓存都可以不开
         options: {
             ...finalizedBabelConfig,

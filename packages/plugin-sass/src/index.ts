@@ -1,4 +1,4 @@
-import {sync as resolve} from 'resolve';
+import resolve from 'resolve';
 import sass from 'sass';
 import {normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin, BuildSettings, LoaderType} from '@reskript/settings';
@@ -9,7 +9,7 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
         const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
         const final: LoaderType = (usage === 'build' && extract) ? 'cssExtract' : 'style';
         const sassUse = {
-            loader: resolve('sass-loader'),
+            loader: resolve.sync('sass-loader'),
             options: {
                 implementation: options.implementation ?? sass,
                 sassOptions: options.sassOptions,
