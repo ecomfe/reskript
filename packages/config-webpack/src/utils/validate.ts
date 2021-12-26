@@ -1,6 +1,6 @@
 import path from 'path';
 import {existsSync} from 'fs';
-import {isEqual} from 'lodash';
+import {equals} from 'ramda';
 import {logger, findGitRoot, readPackageConfig} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';
 
@@ -21,7 +21,7 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
         (errors, [key, value]) => {
             const currentSchema = getSchema(value);
 
-            if (!isEqual(baseSchema, currentSchema)) {
+            if (!equals(baseSchema, currentSchema)) {
                 return [...errors, key];
             }
 

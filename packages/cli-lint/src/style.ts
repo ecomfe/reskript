@@ -1,10 +1,10 @@
-import {lint, LintResult as StyleLintResult, Warning, WarningOptions} from 'stylelint';
-import {isEmpty} from 'lodash';
+import styleLint, {LintResult as StyleLintResult, Warning, WarningOptions} from 'stylelint';
+import {isEmpty} from 'ramda';
 import {ESLint, Linter} from 'eslint';
 import {resolveCacheLocation} from '@reskript/core';
 import {getStyleLintBaseConfig} from '@reskript/config-lint';
-import {ResolveOptions} from './interface';
-import {resolveLintFiles} from './utils';
+import {ResolveOptions} from './interface.js';
+import {resolveLintFiles} from './utils.js';
 
 type LintResult = ESLint.LintResult;
 type LintMessage = Linter.LintMessage;
@@ -69,6 +69,6 @@ export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[
         cacheLocation: await resolveCacheLocation('stylelint'),
         fix: cmd.fix,
     };
-    const report = await lint(lintConfig);
+    const report = await styleLint.lint(lintConfig);
     return report.results.map(adaptStyleResultToScriptResult);
 };

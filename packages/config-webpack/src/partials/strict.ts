@@ -1,10 +1,10 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import {Configuration} from 'webpack';
-import {compact} from 'lodash';
+import {compact} from '@reskript/core';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import {StrictOptions} from '../interface';
+import {StrictOptions} from '../interface.js';
 
 export default (options: StrictOptions = {}, cwd: string): Configuration => {
     const {

@@ -3,7 +3,8 @@
     "compilerOptions": {
         "rootDir": "src",
         "outDir": "dist",
-        "jsx": "react-jsx"
+        // TODO: 这里要改回`react-jsx`
+        "jsx": "preserve"
     },
     "include": ["src"],
     "exclude": ["**/__tests__"]

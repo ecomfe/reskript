@@ -1,13 +1,13 @@
-import {sync as resolve} from 'resolve';
-import {getParseOnlyBabelConfig} from '@reskript/config-babel';
+import {resolveSync} from '@reskript/core';
+import {getParseOnlyBabelConfig} from '@reskript/config-babel/willBreakingInternalUseOnly';
 
 // 为了支持 IDE 和代码编辑工具使用 eslint 的配置，在 build 阶段会生成一份 .eslintrc 文件。参阅 scripts/post-build.js
 
 const config: Record<string, any> = {
     extends: [
-        resolve('@ecomfe/eslint-config/strict'),
-        resolve('@ecomfe/eslint-config/react/strict'),
-        resolve('@ecomfe/eslint-config/typescript'),
+        resolveSync('@ecomfe/eslint-config/strict'),
+        resolveSync('@ecomfe/eslint-config/react/strict'),
+        resolveSync('@ecomfe/eslint-config/typescript'),
     ],
     parserOptions: {
         babelOptions: getParseOnlyBabelConfig({mode: 'development'}),

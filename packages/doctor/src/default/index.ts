@@ -3,10 +3,10 @@ import ora from 'ora';
 import logSymbols from 'log-symbols';
 import {logger, readPackageConfig} from '@reskript/core';
 import {readProjectSettings} from '@reskript/settings';
-import {DoctorContext, DoctorResult} from '../interface';
-import entry from './entry';
-import version from './version';
-import peerDependencies from './peerDependency';
+import {DoctorContext, DoctorResult} from '../interface.js';
+import entry from './entry.js';
+import version from './version.js';
+import peerDependencies from './peerDependency.js';
 
 const rules = [entry, version, peerDependencies];
 

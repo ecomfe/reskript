@@ -1,11 +1,12 @@
 import WebpackDevServer from 'webpack-dev-server';
-import internalIp from 'internal-ip';
 import {readProjectSettings, BuildEnv, strictCheckRequiredDependency} from '@reskript/settings';
 import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
 import {logger, readPackageConfig} from '@reskript/core';
-import {DevCommandLineArgs} from './interface';
+import {DevCommandLineArgs} from './interface.js';
 
 export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
+    const {internalIpV4} = await import('internal-ip');
+
     if (!hostType) {
         return 'localhost';
     }
@@ -16,7 +17,7 @@ export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
         case 'loopback':
             return '127.0.0.1';
         case 'ip': {
-            const ip = await internalIp.v4();
+            const ip = await internalIpV4();
             return ip ?? 'localhost';
         }
         default:

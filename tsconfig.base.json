@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "nodenext",
         "target": "ES2018",
         "allowJs": false,
         "esModuleInterop": true,
-        "moduleResolution": "node",
+        "moduleResolution": "nodenext",
         "strict": true,
         "noFallthroughCasesInSwitch": true,
         "skipLibCheck": true,

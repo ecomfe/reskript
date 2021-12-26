@@ -1,5 +1,5 @@
 import path from 'path';
-import * as babel from '@babel/core';
+import babel from '@babel/core';
 import {NodePath, Visitor} from '@babel/traverse';
 
 type FunctionDeclaration = babel.types.FunctionDeclaration;

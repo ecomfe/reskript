@@ -1,7 +1,7 @@
 import path from 'path';
-import globby from 'globby';
+import {globby} from 'globby';
 import {pFilter} from '@reskript/core';
-import {warn} from '../logger';
+import {warn} from '../logger.js';
 
 const isEntryBroken = async (file: string) => {
     const {default: config} = await import(file);

@@ -1,8 +1,8 @@
 import {logger} from '@reskript/core';
 import * as semver from 'semver';
-import {run as v2} from './v2';
-import {run as v3} from './v3';
-import {readAllDependencies} from './utils';
+import {run as v2} from './v2/index.js';
+import {run as v3} from './v3/index.js';
+import {readAllDependencies} from './utils.js';
 
 const resolveCurrentVersion = async (cwd: string) => {
     const dependencies = await readAllDependencies(cwd);

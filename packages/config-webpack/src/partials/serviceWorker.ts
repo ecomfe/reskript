@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import {InjectManifest, InjectManifestOptions} from 'workbox-webpack-plugin';
 import ExtraScriptPlugin, {ScriptFactoryContext} from '@reskript/webpack-plugin-extra-script';
-import {BuildContext, ConfigurationFactory} from '../interface';
+import {BuildContext, ConfigurationFactory} from '../interface.js';
 
 const generateRegisterScript = (buildContext: BuildContext, scriptContext: ScriptFactoryContext) => {
     const publicPath = scriptContext.publicPath === 'auto' ? '/' : scriptContext.publicPath;

@@ -1,13 +1,16 @@
 {
   "name": "@reskript/config-lint",
   "version": "3.0.6",
-  "main": "dist/index.js",
+  "license": "MIT",
+  "type": "module",
   "exports": {
     ".": "./dist/index.js",
-    "./patch": "./dist/patch.js",
-    "./config/*": "./config/*.js"
+    "./patch": "./config/patch.cjs",
+    "./config/*": "./config/*.cjs"
   },
-  "license": "MIT",
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "files": [
     "dist",
     "config"
@@ -31,7 +34,7 @@
     "eslint": "^8.6.0",
     "prettier": "^2.5.1",
     "rollup": "^2.62.0",
-    "typescript": "^4.5.4"
+    "typescript": "4.6.0-dev.20220105"
   },
   "dependencies": {
     "@babel/core": "^7.16.5",
@@ -40,6 +43,7 @@
     "@ecomfe/eslint-config": "^7.4.0",
     "@ecomfe/stylelint-config": "^1.1.2",
     "@reskript/config-babel": "3.0.6",
+    "@reskript/core": "3.0.6",
     "@reskript/eslint-plugin": "3.0.6",
     "@rushstack/eslint-patch": "^1.1.0",
     "@typescript-eslint/eslint-plugin": "^5.8.1",

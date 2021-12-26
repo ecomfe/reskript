@@ -1,5 +1,5 @@
-import {warn, tip} from '../logger';
-import {importClientSettings} from '../utils';
+import {warn, tip} from '../logger.js';
+import {importClientSettings} from '../utils.js';
 
 export default async (cwd: string) => {
     const settings = await importClientSettings(cwd);

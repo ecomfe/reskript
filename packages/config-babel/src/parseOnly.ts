@@ -1,14 +1,29 @@
-import {compact} from 'lodash';
-import {sync as resolve} from 'resolve';
 import {PluginItem, TransformOptions} from '@babel/core';
-import {BabelConfigOptionsFilled} from './interface';
-import {shouldEnable} from './utils';
+import presetEnv from '@babel/preset-env';
+import presetTypeScript from '@babel/preset-typescript';
+import presetReact from '@babel/preset-react';
+import pluginDecorators from '@babel/plugin-proposal-decorators';
+import pluginClassProperties from '@babel/plugin-proposal-class-properties';
+import pluginDoExpressions from '@babel/plugin-proposal-do-expressions';
+import pluginExportDefaultFrom from '@babel/plugin-proposal-export-default-from';
+import pluginExportNamespaceFrom from '@babel/plugin-proposal-export-namespace-from';
+import pluginNullishCoalescingOperator from '@babel/plugin-proposal-nullish-coalescing-operator';
+import pluginNumericSeparator from '@babel/plugin-proposal-numeric-separator';
+import pluginOptionalChaining from '@babel/plugin-proposal-optional-chaining';
+import pluginThrowExpressions from '@babel/plugin-proposal-throw-expressions';
+import pluginDynamicImport from '@babel/plugin-syntax-dynamic-import';
+import pluginImportMeta from '@babel/plugin-syntax-import-meta';
+import {BabelConfigOptionsFilled} from './interface.js';
+import {shouldEnable} from './utils.js';
+
+// 因为要转CJS，不能依赖`@reskript/core`提供的`compact`
+const hasValue = (value: PluginItem | false): value is PluginItem => !!value;
 
 export default (options: BabelConfigOptionsFilled): TransformOptions => {
     const {polyfill, modules, uses} = options;
     const presets: Array<PluginItem | false> = [
         [
-            resolve('@babel/preset-env'),
+            presetEnv,
             {
                 modules,
                 bugfixes: true,
@@ -17,9 +32,9 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 corejs: polyfill ? {version: 3, proposals: true} : undefined,
             },
         ],
-        resolve('@babel/preset-typescript'),
+        presetTypeScript,
         [
-            resolve('@babel/preset-react'),
+            presetReact,
             {
                 runtime: 'automatic',
                 importSource: shouldEnable('emotion', uses) ? '@emotion/react' : 'react',
@@ -27,29 +42,27 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
         ],
     ];
     const plugins: PluginItem[] = [
-        [resolve('@babel/plugin-proposal-decorators'), {legacy: true}],
-        resolve('@babel/plugin-proposal-class-properties'),
-        resolve('@babel/plugin-proposal-do-expressions'),
+        [pluginDecorators, {legacy: true}],
+        pluginClassProperties,
+        pluginDoExpressions,
         // export Foo from './Foo';
-        resolve('@babel/plugin-proposal-export-default-from'),
+        pluginExportDefaultFrom,
         // export {Foo} from './Foo';
-        resolve('@babel/plugin-proposal-export-namespace-from'),
+        pluginExportNamespaceFrom,
         // const foo = obejct.foo ?? 'default';
-        resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
+        pluginNullishCoalescingOperator,
         // 1_234_567
-        resolve('@babel/plugin-proposal-numeric-separator'),
+        pluginNumericSeparator,
         // object?.foo?.bar
-        resolve('@babel/plugin-proposal-optional-chaining'),
-        // const result = array |> unique |> compact |> flatten
-        [resolve('@babel/plugin-proposal-pipeline-operator'), {proposal: 'minimal'}],
+        pluginOptionalChaining,
         // const valid = input.isValid() || throw new Error('Invalid')
-        resolve('@babel/plugin-proposal-throw-expressions'),
-        resolve('@babel/plugin-syntax-dynamic-import'),
-        resolve('@babel/plugin-syntax-import-meta'),
+        pluginThrowExpressions,
+        pluginDynamicImport,
+        pluginImportMeta,
     ];
 
     return {
         plugins,
-        presets: compact(presets),
+        presets: presets.filter(hasValue),
     };
 };

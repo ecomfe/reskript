@@ -1,13 +1,16 @@
-const path = require('path');
-const {rollup} = require('rollup');
-const {babel} = require('@rollup/plugin-babel');
+import path from 'path';
+import {fileURLToPath} from 'url';
+import {rollup} from 'rollup';
+import {babel} from '@rollup/plugin-babel';
 
 (async () => {
-    const src = path.join(__dirname, '..', 'src', 'rules');
+    const project = path.join(fileURLToPath(import.meta.url), '..', '..');
+    const src = path.join(project, 'src');
     const config = {
         input: {
-            eslint: path.join(src, 'eslint.ts'),
-            stylelint: path.join(src, 'stylelint.ts'),
+            eslint: path.join(src, 'rules', 'eslint.ts'),
+            stylelint: path.join(src, 'rules', 'stylelint.ts'),
+            patch: path.join(src, 'patch.ts'),
         },
         external: () => true,
         plugins: [
@@ -17,9 +20,10 @@ const {babel} = require('@rollup/plugin-babel');
     const bundle = await rollup(config);
 
     const outuput = {
-        dir: path.join(__dirname, '..', 'config'),
+        dir: path.join(project, 'config'),
         format: 'cjs',
         exports: 'default',
+        entryFileNames: '[name].cjs',
     };
     await bundle.write(outuput);
 })();

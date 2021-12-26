@@ -1,5 +1,5 @@
 import path from 'path';
-import globby from 'globby';
+import {globby} from 'globby';
 import {logger} from '@reskript/core';
 
 const ALLOWED_EXISTING_FILES = new Set([

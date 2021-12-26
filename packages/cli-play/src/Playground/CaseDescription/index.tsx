@@ -1,5 +1,5 @@
 import marked from 'marked';
-import {PlayCase} from '../../interface';
+import {PlayCase} from '../../interface.js';
 import './index.css';
 
 interface Props {

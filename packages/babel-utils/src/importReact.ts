@@ -1,6 +1,6 @@
-import * as babel from '@babel/core';
+import babel from '@babel/core';
 import {NodePath} from '@babel/traverse';
-import {findImportStatement} from './import';
+import {findImportStatement} from './import.js';
 
 type ImportDeclaration = babel.types.ImportDeclaration;
 type MemberExpression = babel.types.MemberExpression;

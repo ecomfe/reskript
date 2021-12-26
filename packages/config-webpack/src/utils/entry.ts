@@ -2,8 +2,8 @@ import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
 import {EntryObject} from 'webpack';
-import {logger, importUserModule} from '@reskript/core';
-import {AppEntry, EntryConfig} from '../interface';
+import {logger, importUserModule, dirFromImportMeta} from '@reskript/core';
+import {AppEntry, EntryConfig} from '../interface.js';
 
 const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
 
@@ -29,7 +29,7 @@ const readEntryConfig = async (fileBaseName: string): Promise<EntryConfig> => {
     }
 };
 
-const DEFAULT_HTML_TEMPLATE = path.resolve(__dirname, '..', 'assets', 'default-html.ejs');
+const DEFAULT_HTML_TEMPLATE = path.resolve(dirFromImportMeta(import.meta.url), '..', 'assets', 'default-html.ejs');
 
 const resolveEntryTemplate = (file: string): string => {
     return existsSync(file) ? file : DEFAULT_HTML_TEMPLATE;

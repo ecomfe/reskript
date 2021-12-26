@@ -1,8 +1,12 @@
 {
   "name": "@reskript/eslint-plugin",
   "version": "3.0.6",
-  "main": "index.js",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "index.js",
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "files": [
     "rules",
     "index.js",

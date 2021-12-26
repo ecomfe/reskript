@@ -2,8 +2,8 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
-import {ScriptFactory, Options} from '../interface';
-import ExtraScriptPlugin from '../index';
+import {ScriptFactory, Options} from '../interface.js';
+import ExtraScriptPlugin from '../index.js';
 
 export default (scriptOrFactory: ScriptFactory, options?: Options) => {
     const compiler = webpack({

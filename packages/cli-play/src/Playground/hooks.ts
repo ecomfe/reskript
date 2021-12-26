@@ -1,7 +1,7 @@
 import React, {createElement, useState, useEffect, useReducer, useCallback, ComponentType} from 'react';
 import io from 'socket.io-client';
-import {PlayCase, PlayCaseInfo} from '../interface';
-import {formatTime} from '../utils/time';
+import {PlayCase, PlayCaseInfo} from '../interface.js';
+import {formatTime} from '../utils/time.js';
 
 // eslint-disable-next-line init-declarations
 declare const Babel: any;

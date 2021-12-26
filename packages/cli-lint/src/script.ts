@@ -1,8 +1,8 @@
 import {ESLint} from 'eslint';
 import {resolveCacheLocation, pFilter} from '@reskript/core';
 import {getScriptLintBaseConfig} from '@reskript/config-lint';
-import {resolveLintFiles} from './utils';
-import {ResolveOptions} from './interface';
+import {resolveLintFiles} from './utils.js';
+import {ResolveOptions} from './interface.js';
 
 type LintResult = ESLint.LintResult;
 type LintOptions = ESLint.Options;

@@ -1,11 +1,14 @@
 import path from 'path';
-import {types, PluginObj, PluginPass} from '@babel/core';
+import babel from '@babel/core';
 import {NodePath} from '@babel/traverse';
+import {dirFromImportMeta} from '@reskript/core';
 import {isComponentDeclaration, findImportStatement, findParentProgram} from '@reskript/babel-utils';
 
-const HOOK_MODULE = path.resolve(__dirname, 'useComponentFile.js');
+const {types} = babel;
 
-const insertImportHook = (program: NodePath<types.Program>) => {
+const HOOK_MODULE = path.resolve(dirFromImportMeta(import.meta.url), 'useComponentFile.js');
+
+const insertImportHook = (program: NodePath<babel.types.Program>) => {
     const expression = types.importDeclaration(
         [types.importDefaultSpecifier(types.identifier('useComponentFile'))],
         types.stringLiteral(HOOK_MODULE)
@@ -30,7 +33,7 @@ const prepareHookImport = (current: NodePath): boolean => {
     return true;
 };
 
-interface PluginState extends PluginPass {
+interface PluginState extends babel.PluginPass {
     readonly opts: {
         srcDirectory: string;
         fullPathPrefix?: string;
@@ -38,7 +41,7 @@ interface PluginState extends PluginPass {
     declaredClassNames?: Set<string>;
 }
 
-export default function debugReactComponentFileName(): PluginObj<PluginState> {
+export default function debugReactComponentFileName(): babel.PluginObj<PluginState> {
     return {
         visitor: {
             ClassDeclaration(declaration, state) {

@@ -1,8 +1,10 @@
+// @ts-expect-error
 import {Option} from 'clipanion';
+// @ts-expect-error
 import {isEnum} from 'typanion';
 import {WorkMode} from '@reskript/core';
 import {DevCommandLineArgs} from '@reskript/cli-dev';
-import DynamicImportCommand from './DynamicImportCommand';
+import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs> {
     static paths = [['dev']];

@@ -1,8 +1,12 @@
 {
   "name": "@reskript/plugin-workspace-no-build",
   "version": "3.0.6",
-  "main": "dist/index.js",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "files": [
     "dist"
   ],
@@ -20,7 +24,7 @@
     "@types/node": "^17.0.4",
     "@types/semver": "^7.3.9",
     "eslint": "^8.6.0",
-    "typescript": "^4.5.4",
+    "typescript": "4.6.0-dev.20220105",
     "webpack": "^5.65.0"
   },
   "dependencies": {

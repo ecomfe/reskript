@@ -1,8 +1,10 @@
+// @ts-expect-error
 import {Option} from 'clipanion';
+// @ts-expect-error
 import {isEnum} from 'typanion';
 import {WorkMode} from '@reskript/core';
 import {BuildCommandLineArgs} from '@reskript/cli-build';
-import DynamicImportCommand from './DynamicImportCommand';
+import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class BuildCommand extends DynamicImportCommand<BuildCommandLineArgs> {
     static paths = [['build']];

@@ -1,15 +1,16 @@
 import path from 'path';
 import ConsoleTable, {Column} from 'tty-table';
-import chalk, {ForegroundColor} from 'chalk';
+// @ts-expect-error
+import * as kolorist from 'kolorist';
 import {Stats} from 'webpack';
-import {isEmpty, difference, flatMap, uniqBy, sortBy, max} from 'lodash';
+import {isEmpty, difference, uniqBy, sortWith, ascend} from 'ramda';
 import {logger} from '@reskript/core';
 import {ProjectSettings} from '@reskript/settings';
-import {WebpackCompileAsset} from './interface';
+import {WebpackCompileAsset} from './interface.js';
 
 const printableValue = (value: any): string => {
     if (typeof value === 'boolean') {
-        return value ? chalk.green('✓') : chalk.red('✕');
+        return value ? kolorist.green('✓') : kolorist.red('✕');
     }
 
     return value.toString();
@@ -39,9 +40,10 @@ export const drawFeatureMatrix = (projectSettings: ProjectSettings, only?: strin
     logger.log(table.render());
 };
 
+type Color = 'green' | 'gray' | 'white';
 
 // eslint-disable-next-line complexity
-const getExtensionConfig = (extension: string): {order: number, color: typeof ForegroundColor} => {
+const getExtensionConfig = (extension: string): {order: number, color: Color} => {
     switch (extension) {
         case '.htm':
         case '.html':
@@ -60,16 +62,16 @@ const getExtensionConfig = (extension: string): {order: number, color: typeof Fo
 
 const extractBuildInfo = (stats: Stats) => {
     const {children = []} = stats.toJson('normal');
-    const entrypoints = flatMap(children, child => Object.values(child?.entrypoints ?? {}));
-    const initialChunks = flatMap(entrypoints, entry => entry.chunks);
-    const assets = flatMap(children.map(child => child.assets ?? [])) as WebpackCompileAsset[];
+    const entrypoints = children.flatMap(child => Object.values(child?.entrypoints ?? {}));
+    const initialChunks = entrypoints.flatMap(entry => entry.chunks);
+    const assets = children.map(child => child.assets ?? []).flatMap(v => v) as WebpackCompileAsset[];
     return {initialChunks, assets};
 };
 
 export const drawBuildReport = (stats: Stats[]): void => {
-    const info = flatMap(stats, extractBuildInfo);
-    const initialChunks = new Set(flatMap(info, info => info.initialChunks));
-    const assets = uniqBy(flatMap(info, info => info.assets), a => a.name);
+    const info = stats.flatMap(extractBuildInfo);
+    const initialChunks = new Set(info.flatMap(v => v.initialChunks));
+    const assets = uniqBy(a => a.name, info.flatMap(v => v.assets));
     const toTemplateData = (asset: WebpackCompileAsset) => {
         const config = getExtensionConfig(path.extname(asset.name));
         return {
@@ -81,18 +83,18 @@ export const drawBuildReport = (stats: Stats[]): void => {
             indicator: asset.chunks.some(chunk => initialChunks.has(chunk)) ? 'initial' : '',
         };
     };
-    const templateSegments = sortBy(
-        assets.map(toTemplateData),
+    const templateSegments = sortWith(
         [
-            data => data.typeOrder,
-            data => (data.indicator === 'initial' ? 0 : 1),
-            asset => asset.name,
-        ]
+            ascend(data => data.typeOrder),
+            ascend(data => (data.indicator === 'initial' ? 0 : 1)),
+            ascend(asset => asset.name),
+        ],
+        assets.map(toTemplateData)
     );
-    const maxNameLength = max(templateSegments.map(segment => segment.name.length)) ?? 0;
-    const maxSizeLength = max(templateSegments.map(segment => segment.size.length)) ?? 0;
+    const maxNameLength = templateSegments.map(segment => segment.name.length).reduce((x, y) => Math.max(x, y), 0);
+    const maxSizeLength = templateSegments.map(segment => segment.size.length).reduce((x, y) => Math.max(x, y), 0);
     for (const {color, name, size, indicator} of templateSegments) {
-        logger.log(chalk[color](`${name.padStart(maxNameLength)} ${size.padEnd(maxSizeLength)} ${indicator}`));
+        logger.log(kolorist[color](`${name.padStart(maxNameLength)} ${size.padEnd(maxSizeLength)} ${indicator}`));
     }
 };
 

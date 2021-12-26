@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
-import InteroplateHTMLPlugin from '../index';
+import InteroplateHTMLPlugin from '../index.js';
 
 export default (replacements: Record<string, string>) => {
     const compiler = webpack({

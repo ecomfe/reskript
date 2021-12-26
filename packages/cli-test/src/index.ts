@@ -1,11 +1,11 @@
 import path from 'path';
 import fs from 'fs';
-import {merge} from 'lodash';
+import {mergeDeepRight} from 'ramda';
 import {run as runJest} from 'jest-cli';
 import {logger} from '@reskript/core';
 import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
 import {readProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import {TestCommandLineArgs} from './interface';
+import {TestCommandLineArgs} from './interface.js';
 
 export {TestCommandLineArgs};
 
@@ -32,7 +32,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
             // 如果没有`preset`，那我们认为用户自己声明的是一个“扩展”的配置，需要我们把默认配置合并进去
             const skrConfig = getJestConfig(jestConfigOptions);
             // 用户的覆盖skr的
-            return JSON.stringify(merge(skrConfig, jestConfig));
+            return JSON.stringify(mergeDeepRight(skrConfig, jestConfig));
         }
     }
     catch {

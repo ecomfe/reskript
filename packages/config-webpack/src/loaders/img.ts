@@ -1,4 +1,4 @@
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = ({mode}) => {
     if (mode !== 'production') {
@@ -6,6 +6,7 @@ const factory: LoaderFactory = ({mode}) => {
     }
 
     try {
+        // TODO: 这玩意在ESM下没法玩
         // eslint-disable-next-line global-require
         const {default: loader} = require('@reskript/config-img-loader');
         return loader;

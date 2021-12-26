@@ -1,8 +1,8 @@
 import {RuleSetRule} from 'webpack';
 import {isProjectSourceIn, normalizeRuleMatch} from '@reskript/core';
 import {BuildEntry} from '@reskript/settings';
-import * as loaders from '../loaders';
-import {introduceLoaders} from '../utils/loader';
+import * as loaders from '../loaders/index.js';
+import {introduceLoaders} from '../utils/loader.js';
 
 type LoaderType = keyof typeof loaders;
 

@@ -1,11 +1,9 @@
-import {stubTrue} from 'lodash';
-import execa from 'execa';
 import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
 import {logger, gitStatus, findGitRoot} from '@reskript/core';
-import {LintCommandLineArgs, ResolveOptions} from './interface';
-import lintScripts from './script';
-import lintStyles from './style';
+import {LintCommandLineArgs, ResolveOptions} from './interface.js';
+import lintScripts from './script.js';
+import lintStyles from './style.js';
 
 export {LintCommandLineArgs};
 
@@ -15,7 +13,7 @@ type LintMessage = Linter.LintMessage;
 const filterUnwantedReports = (report: LintResult[], cmd: LintCommandLineArgs): LintResult[] => {
     const omitReactUnsafe = cmd.allowUnsafeReactMethod
         ? ({ruleId, message}: LintMessage) => ruleId !== 'camelcase' || !message.startsWith('Identifier \'UNSAFE')
-        : stubTrue;
+        : () => true;
 
     const filterMessage = (report: LintResult): LintResult => {
         const messages = report.messages.filter(omitReactUnsafe);
@@ -26,6 +24,7 @@ const filterUnwantedReports = (report: LintResult[], cmd: LintCommandLineArgs): 
 };
 
 export const run = async (cmd: LintCommandLineArgs, files: string[]): Promise<void> => {
+    const {execa} = await import('execa');
     const gitRoot = await findGitRoot() || process.cwd();
     const status = await gitStatus(process.cwd());
     const options: ResolveOptions = {...cmd, gitRoot, gitStatus: status};

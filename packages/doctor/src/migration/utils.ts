@@ -2,7 +2,7 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {readPackageConfig} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
-import {warn} from './logger';
+import {warn} from './logger.js';
 
 export const readAllDependencies = async (cwd: string) => {
     const {dependencies, devDependencies} = await readPackageConfig(cwd);

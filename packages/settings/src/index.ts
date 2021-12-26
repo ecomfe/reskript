@@ -10,16 +10,23 @@ import {applyPlugins} from './plugins';
 
 export * from './interface';
 export {fillProjectSettings, PartialProjectSettings};
+const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
 
 interface UserProjectSettings extends PartialProjectSettings {
     plugins?: ClientProjectSettings['plugins'];
 }
 
-const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
-    const {default: userSettings} = await importUserModule<{default: UserProjectSettings}>(
+const locateSettings = (cwd: string): string | null => {
+    const file = SETTINGS_EXTENSIONS.map(v => path.join(cwd, 'reskript.config' + v)).find(existsSync);
+    return file ?? null;
+};
+
+const importSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
+    const imported = await importUserModule<UserProjectSettings | {default: UserProjectSettings}>(
         path.join(cmd.cwd, 'reskript.config'),
         {default: {}}
     );
+    const userSettings = 'default' in imported ? imported.default : imported;
 
     try {
         validate(userSettings);
@@ -33,17 +40,6 @@ const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);
-};
-
-const computeSettingsHash = async (cwd: string): Promise<string> => {
-    const location = path.join(cwd, 'reskript.config.js');
-
-    if (!existsSync(location)) {
-        return '';
-    }
-
-
-    return hasha.fromFile(location);
 };
 
 interface CacheContainer {
@@ -65,7 +61,7 @@ export const readProjectSettings = async (cmd: ProjectAware, commandName: string
         return cache.settings;
     }
 
-    const settings = await requireSettings(cmd, commandName);
+    const settings = await importSettings(cmd, commandName);
 
     cache.initialized = true;
     cache.settings = settings;
@@ -78,18 +74,24 @@ export const watchProjectSettings = async (cmd: ProjectAware, commandName: strin
         return cache.listen;
     }
 
-    const settingsLocation = path.join(cmd.cwd, 'reskript.config.js');
+    const settingsLocation = locateSettings(cmd.cwd);
+
+    // 根本没有配置文件，弄个空的回去随便外面怎么折腾
+    if (!settingsLocation) {
+        return () => () => {};
+    }
+
     const listeners = new Set<Listener>();
     const watcher = chokidar.watch(settingsLocation);
     const notify = async (): Promise<void> => {
         // `fs.watch`是不稳定的，一次修改会触发多次，因此用hash做一下比对
-        const newSettingsHash = await computeSettingsHash(cmd.cwd);
+        const newSettingsHash = await hasha.fromFile(settingsLocation);
 
         if (newSettingsHash === cache.hash) {
             return;
         }
 
-        const newSettings = await requireSettings(cmd, commandName);
+        const newSettings = await importSettings(cmd, commandName);
 
         cache.hash = newSettingsHash;
         cache.settings = newSettings;
@@ -99,7 +101,7 @@ export const watchProjectSettings = async (cmd: ProjectAware, commandName: strin
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     watcher.on('all', notify);
 
-    cache.hash = await computeSettingsHash(cmd.cwd);
+    cache.hash = await hasha.fromFile(settingsLocation);
     cache.listen = (listener: Listener) => {
         listeners.add(listener);
         return () => listeners.delete(listener);

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import * as babel from '@babel/core';
+import babel from '@babel/core';
 import glob from 'glob';
 
 type Test = (description: string, execute: () => void) => void;

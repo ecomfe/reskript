@@ -1,8 +1,15 @@
 {
   "name": "@reskript/config-babel",
   "version": "3.0.6",
-  "main": "dist/index.js",
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./willBreakingInternalUseOnly": "./dist/internal.cjs"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "files": [
     "dist"
   ],
@@ -11,21 +18,22 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc -p tsconfig.build.json",
-    "test": "jest",
+    "build": "tsc -p tsconfig.build.json && node scripts/post-build.js && cp dist/internal.d.ts dist/internal.d.cts",
+    "test": "vitest run",
     "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
+    "@babel/plugin-transform-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
     "@reskript/core": "3.0.6",
     "@types/babel__core": "^7.1.17",
-    "@types/jest": "^27.0.3",
-    "@types/lodash": "^4.14.178",
     "@types/node": "^17.0.4",
-    "@types/resolve": "^1.20.1",
+    "c8": "^7.10.0",
     "eslint": "^8.6.0",
-    "jest": "^27.4.5",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.5.4"
+    "rollup": "^2.62.0",
+    "typescript": "4.6.0-dev.20220105",
+    "vite": "^2.7.7",
+    "vitest": "^0.0.115"
   },
   "dependencies": {
     "@babel/core": "^7.16.5",
@@ -37,7 +45,6 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.5",
     "@babel/plugin-proposal-numeric-separator": "^7.16.5",
     "@babel/plugin-proposal-optional-chaining": "^7.16.5",
-    "@babel/plugin-proposal-pipeline-operator": "^7.16.5",
     "@babel/plugin-proposal-throw-expressions": "^7.16.5",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
@@ -51,13 +58,10 @@
     "@reskript/settings": "3.0.6",
     "babel-plugin-import": "^1.13.3",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^2.0.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
-    "lodash": "^4.17.21",
-    "react-refresh": "^0.11.0",
-    "resolve": "^1.20.0"
+    "react-refresh": "^0.11.0"
   },
   "peerDependencies": {
     "styled-components": "*"

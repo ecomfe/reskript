@@ -3,8 +3,8 @@ import http from 'http';
 import fs from 'fs/promises';
 import chokidar from 'chokidar';
 import {Server, Socket} from 'socket.io';
-import {resolveCasePath} from '../utils/path';
-import {parseMarkdownToCases} from '../utils/case';
+import {resolveCasePath} from '../utils/path.js';
+import {parseMarkdownToCases} from '../utils/case.js';
 
 const createWatcher = (componentModulePath: string) => {
     const casePath = resolveCasePath(componentModulePath);

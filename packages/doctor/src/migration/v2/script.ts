@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs/promises';
-import {warn} from '../logger';
+import {warn} from '../logger.js';
 
 const extractCommandCallScript = (lines: string[], command: string): string | false => {
     const line = lines.find(v => v.includes(`skr ${command}`));

@@ -1,8 +1,15 @@
 {
   "name": "@reskript/cli-play",
   "version": "3.0.6",
-  "main": "dist/index.js",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=14.18.0"
+  },
   "files": [
     "dist"
   ],
@@ -13,26 +20,26 @@
     "clean": "rm -rf dist",
     "build": "rm -rf dist && tsc -p tsconfig.build.json && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
     "lint": "eslint --max-warnings=0 src",
-    "test": "jest"
+    "test": "vitest run"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
     "@types/debounce": "^1.2.1",
     "@types/dedent": "^0.7.0",
-    "@types/jest": "^27.0.3",
-    "@types/lodash": "^4.14.178",
     "@types/marked": "^3.0.3",
     "@types/mdast": "^3.0.10",
     "@types/node": "^17.0.4",
+    "@types/ramda": "^0.27.62",
     "@types/react": "^17.0.38",
+    "c8": "^7.10.0",
     "cpy-cli": "^3.1.1",
     "dedent": "^0.7.0",
     "eslint": "^8.6.0",
-    "jest": "^27.4.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "ts-jest": "^27.1.2",
-    "typescript": "^4.5.4",
+    "typescript": "4.6.0-dev.20220105",
+    "vite": "^2.7.7",
+    "vitest": "^0.0.115",
     "webpack": "^5.65.0"
   },
   "dependencies": {
@@ -44,10 +51,10 @@
     "body-parser": "^1.19.1",
     "chokidar": "^3.5.2",
     "debounce": "^1.2.1",
-    "internal-ip": "^6.2.0",
+    "internal-ip": "^7.0.0",
     "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
     "marked": "^3.0.8",
+    "ramda": "^0.27.1",
     "remark-gfm": "^1.0.0",
     "remark-parse": "^9.0.0",
     "remark-stringify": "^9.0.1",

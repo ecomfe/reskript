@@ -1,14 +1,15 @@
 import {useState, CSSProperties, ReactNode, useCallback} from 'react';
+// @ts-expect-error
 import dedent from 'dedent';
-import Guard from './Guard';
-import Sidebar from './Sidebar';
-import Render from './Render';
-import Editor from './Editor';
-import Footer from './Footer';
-import CaseDescription from './CaseDescription';
-import Help from './Help';
-import {useDynamicComponent, DynamicContext, useCases} from './hooks';
-import {PanelType} from './interface';
+import Guard from './Guard.js';
+import Sidebar from './Sidebar/index.js';
+import Render from './Render.js';
+import Editor from './Editor.js';
+import Footer from './Footer.js';
+import CaseDescription from './CaseDescription/index.js';
+import Help from './Help/index.js';
+import {useDynamicComponent, DynamicContext, useCases} from './hooks.js';
+import {PanelType} from './interface.js';
 
 const defaultCode = (componentName: string) => dedent`
     export default function Repl() {

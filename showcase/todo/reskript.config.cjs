@@ -1,5 +1,5 @@
 const path = require('path');
-const {default: ExtraScriptPlugin} = require('@reskript/webpack-plugin-extra-script');
+// const {default: ExtraScriptPlugin} = require('@reskript/webpack-plugin-extra-script');
 const {default: qiankun} = require('@reskript/plugin-qiankun');
 
 const EXTERNAL_NONE = 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js';
@@ -24,7 +24,7 @@ exports.build = {
         polyfill: false,
     },
     finalize: webpackConfig => {
-        webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
+        // webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
         webpackConfig.optimization.splitChunks = {
             cacheGroups: {
                 vendors: {

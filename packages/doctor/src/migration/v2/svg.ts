@@ -1,8 +1,8 @@
 import path from 'path';
 import fs from 'fs/promises';
-import globby from 'globby';
+import {globby} from 'globby';
 import {pFilter} from '@reskript/core';
-import {tip, warn} from '../logger';
+import {tip, warn} from '../logger.js';
 
 const containsLegacySvgImport = async (file: string) => {
     const content = await fs.readFile(file, 'utf-8');

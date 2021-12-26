@@ -1,9 +1,9 @@
 import path from 'path';
 import fs from 'fs/promises';
-import {uniq, flatten} from 'lodash';
-import globby from 'globby';
+import {uniq} from 'ramda';
+import {globby} from 'globby';
 import {findGitRoot} from '@reskript/core';
-import {ResolveOptions} from './interface';
+import {ResolveOptions} from './interface.js';
 
 type LintType = 'script' | 'style';
 
@@ -51,5 +51,5 @@ export const resolveLintFiles = async (
     };
     const fileOrFolders = files.length ? files : ['.', 'src'];
     const matchedFiles = await Promise.all(fileOrFolders.map(matchFiles));
-    return uniq(flatten(matchedFiles).filter(isLintable));
+    return uniq(matchedFiles.flatMap(v => v).filter(isLintable));
 };

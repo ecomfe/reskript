@@ -1,9 +1,12 @@
+import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
-import path from 'path';
 import {LoaderContext} from 'webpack';
+import {dirFromImportMeta} from '@reskript/core';
 import {PlaySettings} from '@reskript/settings';
-import {resolveLocalConfigurationPath} from './utils/path';
+import {resolveLocalConfigurationPath} from './utils/path.js';
+
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const readAsSourceString = async (filename: string): Promise<string> => {
     const content = (existsSync(filename) ? await fs.readFile(filename, 'utf-8') : '');
@@ -14,7 +17,7 @@ const readAsSourceString = async (filename: string): Promise<string> => {
 const configurationBlockCode = async (name: string, modulePath: string | undefined): Promise<string> => {
     if (modulePath && existsSync(modulePath)) {
         const content = await fs.readFile(
-            path.join(__dirname, 'assets', 'configuration-block.js.tpl'),
+            path.join(currentDirectory, 'assets', 'configuration-block.js.tpl'),
             'utf-8'
         );
         return content.replace(/%MODULE_NAME%/g, name).replace('%CONFIGURATION_PATH%', modulePath);
@@ -44,7 +47,7 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
     );
     const readingSources = [
         readAsSourceString(configurationFilePathRelative),
-        fs.readFile(path.join(__dirname, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
+        fs.readFile(path.join(currentDirectory, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
         configurationBlockCode('globalConfiguration', options.globalSetupModulePath),
         configurationBlockCode('localConfiguration', resolveLocalConfigurationPath(options.componentModulePath)),
     ] as const;
@@ -55,7 +58,7 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
         localConfigurationBlock,
     ] = await Promise.all(readingSources);
     const replacements: Array<[RegExp, string]> = [
-        [/%PLAYGROUND_PATH%/g, path.resolve(__dirname, 'Playground')],
+        [/%PLAYGROUND_PATH%/g, path.resolve(currentDirectory, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
         [/%CONFIGURATION_FILE_PATH%/g, configurationFilePathRelative],
