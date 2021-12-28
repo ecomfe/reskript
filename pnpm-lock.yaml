@@ -645,6 +645,7 @@ importers:
       postcss-preset-env: ^7.1.0
       regenerator-runtime: ^0.13.9
       resolve: ^1.20.0
+      resolve-typescript-plugin: ^1.1.1
       semver: ^7.3.5
       style-loader: ^3.3.1
       style-resources-loader: ^1.5.0
@@ -693,6 +694,7 @@ importers:
       postcss-preset-env: 7.1.0_postcss@8.4.5
       regenerator-runtime: 0.13.9
       resolve: 1.20.0
+      resolve-typescript-plugin: 1.1.1_webpack@5.65.0
       style-loader: 3.3.1_webpack@5.65.0
       style-resources-loader: 1.5.0_webpack@5.65.0
       stylelint-webpack-plugin: 3.1.0_webpack@5.65.0
@@ -15076,6 +15078,16 @@ packages:
     dependencies:
       global-dirs: 0.1.1
     dev: true
+
+  /resolve-typescript-plugin/1.1.1_webpack@5.65.0:
+    resolution: {integrity: sha512-Uc5S/W/Kn8mBDdwHIbx4fBvcGnVbraYIMInAyALLBoxIbglvMhYuIttdClTRN0YqmmvbjFakHXO9RPlF3gl2sQ==}
+    engines: {node: ^12 || ^14 || >=16}
+    peerDependencies:
+      webpack: ^5.0.0
+    dependencies:
+      tslib: 2.3.1
+      webpack: 5.65.0
+    dev: false
 
   /resolve-url/0.2.1:
     resolution: {integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=}

@@ -6,6 +6,7 @@ import {sync as resolve} from 'resolve';
 import {compact, mapValues} from 'lodash';
 import {paramCase} from 'change-case';
 import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
+import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
@@ -177,6 +178,9 @@ const factory: ConfigurationFactory = async entry => {
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
                 'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
             },
+            plugins: [
+                new ResolveTypeScriptPlugin(),
+            ],
         },
         cache: cache === 'off'
             ? false
