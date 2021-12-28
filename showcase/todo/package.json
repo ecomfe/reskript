@@ -3,6 +3,7 @@
   "name": "@reskript/showcase-todo",
   "version": "2.5.0",
   "description": "待办列表示例",
+  "type": "module",
   "scripts": {
     "build": "skr build --clean --strict",
     "analyze": "skr build --clean --strict --analyze --build-target=stable",

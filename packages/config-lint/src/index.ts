@@ -13,7 +13,6 @@ interface BaseConfigOptions {
 const CUSTOM_SCRIPT_LINT_CONFIG_FILES = [
     '.eslintrc.js',
     '.eslintrc.cjs',
-    '.eslintrc.mjs',
     '.eslintrc.json',
 ];
 
@@ -26,9 +25,15 @@ export const getScriptLintBaseConfig = ({cwd}: BaseConfigOptions): Record<string
     return hasCustomScriptLintConfig(cwd) ? undefined : getScriptLintConfig();
 };
 
-const CUSTOM_STYLE_LINT_CONFIG_FILE = 'stylelint.config.js';
+const CUSTOM_STYLE_LINT_CONFIG_FILES = [
+    'stylelint.config.js',
+    'stylelint.config.cjs',
+];
 
-const hasCustomStyleLintConfig = (cwd: string) => fs.existsSync(path.join(cwd, CUSTOM_STYLE_LINT_CONFIG_FILE));
+const hasCustomStyleLintConfig = (cwd: string) => {
+    const exists = (file: string) => fs.existsSync(path.join(cwd, file));
+    return CUSTOM_STYLE_LINT_CONFIG_FILES.some(exists);
+};
 
 interface BaseConfigOptions {
     cwd: string;
