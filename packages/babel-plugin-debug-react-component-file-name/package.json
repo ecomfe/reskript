@@ -16,6 +16,8 @@
     "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.16.5",
+    "@babel/plugin-transform-classes": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@types/babel__core": "^7.1.17",
     "@types/babel__traverse": "^7.14.2",
