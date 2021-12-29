@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-img-loader",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
