@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.3](https://github.com/ecomfe/reskript/compare/v2.5.2...v2.5.3) (2021-12-31)
+
+
+### Bug Fixes
+
+* **babel:** cli-babel禁用客户端的babel配置 ([#224](https://github.com/ecomfe/reskript/issues/224)) ([3c2265b](https://github.com/ecomfe/reskript/commit/3c2265bed7c2c8df6dd41fa2d8b1709c0dd829d2))
+
+
+
+
+
 ## [2.5.2](https://github.com/ecomfe/reskript/compare/v2.5.1...v2.5.2) (2021-12-29)
 
 
