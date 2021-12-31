@@ -91,6 +91,7 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
     const babelConfig: TransformOptions = {
         ...getTransformBabelConfig(babelConfigOptions),
         sourceMaps: !!outDirectory,
+        babelrc: false,
     };
     if (path.extname(file)) {
         if (outDirectory) {
