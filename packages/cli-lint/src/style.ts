@@ -1,4 +1,4 @@
-import {lint, LintResult as StyleLintResult, LintMessage as StyleLintMessage} from 'stylelint';
+import {lint, LintResult as StyleLintResult, Warning, WarningOptions} from 'stylelint';
 import {isEmpty} from 'lodash';
 import {ESLint, Linter} from 'eslint';
 import {resolveCacheLocation} from '@reskript/core';
@@ -9,16 +9,30 @@ import {resolveLintFiles} from './utils';
 type LintResult = ESLint.LintResult;
 type LintMessage = Linter.LintMessage;
 
-const adaptStyleErrorToScriptError = (message: StyleLintMessage): LintMessage => {
-    const {line, column, rule, severity, text} = message;
-    const severityInNumber = severity === 'error' ? 2 : 1;
+const isLintWarning = (value: Warning | WarningOptions): value is Warning => 'text' in value;
+
+const adaptStyleErrorToScriptError = (warning: Warning | WarningOptions): LintMessage => {
+
+    if (isLintWarning(warning)) {
+        const {line, column, rule, severity, text} = warning;
+        const severityInNumber = severity === 'error' ? 2 : 1;
+        return {
+            line,
+            column,
+            ruleId: rule,
+            severity: severityInNumber,
+            message: text,
+            nodeType: '',
+            source: null,
+        };
+    }
 
     return {
-        line,
-        column,
-        ruleId: rule,
-        severity: severityInNumber,
-        message: text,
+        line: warning.start?.line ?? 0,
+        column: warning.start?.line ?? 0,
+        ruleId: 'parse-error',
+        severity: 2,
+        message: warning.word ?? 'Parse error',
         nodeType: '',
         source: null,
     };
@@ -30,7 +44,7 @@ const adaptStyleResultToScriptResult = (result: StyleLintResult): LintResult => 
 
     return {
         errorCount,
-        filePath: source,
+        filePath: source ?? '',
         messages: [...parseErrors, ...warnings].map(adaptStyleErrorToScriptError),
         warningCount: 0,
         fixableErrorCount: 0,
