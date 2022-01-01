@@ -24,7 +24,7 @@
     "@types/resolve": "^1.20.1",
     "@types/stylelint": "^13.13.3",
     "@types/workbox-webpack-plugin": "^5.1.8",
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "jest": "^27.4.5",
     "semver": "^7.3.5",
     "ts-jest": "^27.1.2",
@@ -78,7 +78,7 @@
     "worker-loader": "^3.0.8"
   },
   "peerDependencies": {
-    "eslint": "7.x",
+    "eslint": "8.x",
     "stylelint": "14.x",
     "typescript": "4.x",
     "webpack": "5.x"
