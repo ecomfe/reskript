@@ -69,6 +69,7 @@ module.exports = {
             label: '版本升级手册',
             items: [
                 'migration/v2',
+                'migration/v3',
             ],
         },
         'faq',
