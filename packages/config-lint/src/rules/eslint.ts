@@ -24,8 +24,6 @@ const config: Record<string, any> = {
     globals: {
         $features: true,
         $build: true,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Sentry: true,
     },
     rules: {
         'operator-linebreak': [
