@@ -142,7 +142,6 @@ const factory: ConfigurationFactory = async entry => {
     const plugins = [
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
-        // TODO: https://github.com/webpack/webpack/pull/11698
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         new InterpolateHTMLPlugin(process.env),
