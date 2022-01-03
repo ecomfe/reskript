@@ -49,7 +49,7 @@ export const run = async (packageDirectory: string) => {
         spinner.warn(`Please take care of some warnings in ${directoryText}`);
     }
     else {
-        spinner.succeed(`Everything goes find in ${directoryText}`);
+        spinner.succeed(`Everything goes fine in ${directoryText}`);
     }
 
     for (const error of errors) {

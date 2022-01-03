@@ -11,21 +11,21 @@ export default async (cwd: string) => {
     if (!isInstalledVersionSatisfies(dependencies, 'eslint', '8.x')) {
         warn(
             'ESLint 8.x is required, please upgrade it',
-            'TODO: XXX'
+            'see: https://reskript.vercel.app/docs/migration/v3#更新ESLint'
         );
     }
 
     if (!isInstalledVersionSatisfies(dependencies, 'stylelint', '14.x')) {
         warn(
             'StyleLint 14.x is required, please upgrade it',
-            'TODO: XXX'
+            'see: https://reskript.vercel.app/docs/migration/v3#更新StyleLint'
         );
     }
 
     if (!nodeVersionSatisfies('>=14.18.0')) {
         warn(
             'node version does\'t satisfy the least requirement, install a node >= 14.18.0',
-            'see: https://reskript.vercel.app/docs/migration/v2#NodeJS版本'
+            'see: https://reskript.vercel.app/docs/migration/v3#NodeJS版本'
         );
     }
 };
