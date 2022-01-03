@@ -137,7 +137,7 @@ export type DevServerHttps = {proxy?: boolean} & ({client?: false} | {client: tr
 
 export interface DevServerSettings {
     // 是否以HTTPS协议代理请求及启动调试服务器
-    readonly https: boolean | DevServerHttps;
+    readonly https?: DevServerHttps;
     // 监听的端口
     readonly port: number;
     // 代理给后端的API请求的URL前缀

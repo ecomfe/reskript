@@ -7,7 +7,7 @@ import {merge} from 'webpack-merge';
 import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
-import {BuildEntry, DevServerHttps, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import ProgressBarPlugin from './ProgressBarPlugin';
 import {addHotModuleToEntry, constructProxyConfiguration} from './utils';
 
@@ -20,7 +20,7 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
     const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
     const messageOptions = {
         compilationSuccessInfo: {
-            messages: getDevServerMessages(host, port, typeof https === 'object' && !!https.client, openPage),
+            messages: getDevServerMessages(host, port, !!https?.client, openPage),
             notes: [],
         },
     };
@@ -63,9 +63,8 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         port,
         hot,
     } = buildEntry.projectSettings.devServer;
-    const httpsOptions: DevServerHttps = typeof https === 'boolean' ? {proxy: https} : https;
     const proxyOptions = {
-        https: httpsOptions.proxy ?? false,
+        https: https?.proxy ?? false,
         prefixes: apiPrefixes,
         rewrite: proxyRewrite,
         targetDomain: proxyDomain || defaultProxyDomain,
@@ -102,8 +101,8 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
             disableDotRule: true,
         },
         server: {
-            type: httpsOptions.client ? 'https' : 'http',
-            options: httpsOptions.client ? httpsOptions.serverOptions : undefined,
+            type: https?.client ? 'https' : 'http',
+            options: https?.client ? https.serverOptions : undefined,
         },
         setupMiddlewares: middlewares => {
             middlewares.push({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});

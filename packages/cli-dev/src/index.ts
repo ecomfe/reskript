@@ -63,7 +63,7 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 
     if (cmd.open) {
         const port = devServerConfig.port!;
-        const protocol = (typeof https === 'object' && https.client) ? 'https' : 'http';
+        const protocol = https?.client ? 'https' : 'http';
         const openURL = `${protocol}://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
         open(openURL);
     }
