@@ -4,10 +4,10 @@ import {importClientSettings} from '../utils';
 export default async (cwd: string) => {
     const settings = await importClientSettings(cwd);
 
-    if (settings.build?.hasOwnProperty('defaultImportOptimization')) {
+    if (typeof settings.devServer?.https === 'boolean') {
         warn(
-            'build.defaultImportOptimization in reskript.config.js is deprecated',
-            'see: https://reskript.vercel.app/docs/migration/v2#build相关'
+            'devServer.https in reskript.config.js is no longer of type boolean',
+            'see: https://reskript.vercel.app/docs/migration/v3#devServer相关'
         );
     }
 

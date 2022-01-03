@@ -10,7 +10,7 @@
     "version": {
       "allowBranch": [
         "master",
-        "v2"
+        "v3"
       ],
       "ignoreChanges": [
         "**/*.md",

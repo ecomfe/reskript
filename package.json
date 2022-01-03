@@ -12,11 +12,13 @@
     "build-clean": "lerna run --parallel clean && npm run build",
     "build-showcase": "cd showcase/todo && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
+    "release-beta": "npm run release -- --conventional-prerelease --preid=beta",
     "ci": "pnpm install && npm run build-clean && npm run lint && npm run test && npm run build-showcase",
     "preversion": "npm run ci",
     "prepack": "pnpm install && npm run build-clean && sh scripts/build-check.sh",
     "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
+    "deploy-next": "npm run deploy -- --dist-tag=next --pre-dist-tag=next",
     "prepare": "husky install"
   },
   "devDependencies": {
