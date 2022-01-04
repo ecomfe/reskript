@@ -1,34 +1,49 @@
-const isUseCallbackHook = name => name === 'useCallback';
+const isOriginalMemoHook = name => name === 'useCallback' || name === 'useMemo';
 
 const isArrayExpression = node => node.type === 'ArrayExpression';
 
 const isHookCallExpressionArgs = node => node.arguments.length === 2 && isArrayExpression(node.arguments[1]);
 
-const findCallExpression = node => {
+const hasMoreDepNode = depNode => depNode.elements.length !== 1;
+
+const findOnlyStatement = node => {
     switch (node.body.type) {
         case 'CallExpression':
+        case 'Identifier':
             return node.body;
-        case 'BlockStatement':
-            if (node.body.body.length !== 1) {
+        case 'BlockStatement': {
+            const blockBody = node.body.body;
+            if (blockBody.length !== 1) {
                 return;
             }
-            return node.body.body[0].expression;
+            const onlyStatement = blockBody[0];
+            if (onlyStatement.type === 'ReturnStatement') {
+                return onlyStatement.argument;
+            }
+            if (onlyStatement.type === 'ExpressionStatement') {
+                return onlyStatement.expression;
+            }
+        }
     }
 };
 
-const isOnlyOneCallExpressionWithHookDeps = (expressionNode, depNode) => {
-    if (depNode.elements.length !== 1) {
-        return;
-    }
+const isCallExpression = node => node.type === 'CallExpression';
+const isIdentifier = node => node.type === 'Identifier';
+
+const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
     switch (expressionNode.type) {
         case 'ArrowFunctionExpression':
         case 'FunctionExpression': {
-            const expression = findCallExpression(expressionNode);
+            const node = findOnlyStatement(expressionNode);
+            const firstDepNode = depNode.elements[0];
             if (
-                /* The expression contains only its own dependencies */
-                expression && depNode.elements[0] && expression.callee.name === depNode.elements[0].name
-                /* expression has no parameters */
-                && expression.arguments.length === 0
+                node && firstDepNode
+                && (
+                    /* The expression contains only its own dependencies without arguments */
+                    (isCallExpression(node) && node.callee.name === firstDepNode.name && node.arguments.length === 0)
+                    /* The memoized value return without any change */
+                    || (isIdentifier(node) && node.name === firstDepNode.name)
+                )
             ) {
                 return true;
             }
@@ -38,12 +53,15 @@ const isOnlyOneCallExpressionWithHookDeps = (expressionNode, depNode) => {
 };
 
 const ruleCallback = context => node => {
-    if (!isUseCallbackHook(node.callee.name)) {
+    if (!isOriginalMemoHook(node.callee.name)) {
+        return;
+    }
+    if (hasMoreDepNode(node.arguments[1])) {
         return;
     }
     if (
         isHookCallExpressionArgs(node)
-        && isOnlyOneCallExpressionWithHookDeps(node.arguments[0], node.arguments[1])
+        && isOnlyReturnMemoizedWithHookDeps(node.arguments[0], node.arguments[1])
     ) {
         context.report({
             node,

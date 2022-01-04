@@ -29,10 +29,19 @@ ruleTester.run('no-useless-memo-hooks', rule, {
         testCase('has-arguments-valid'),
         testCase('more-than-one-valid'),
         testCase('dep-more-valid'),
+        testCase('custom-memo-hook-valid'),
     ],
     invalid: [
         testCase(
             'only-depend-on-callee-invalid',
+            ['noUselessMemoHooks']
+        ),
+        testCase(
+            'memorize-depend-value-invalid',
+            ['noUselessMemoHooks']
+        ),
+        testCase(
+            'arrow-return-invalid',
             ['noUselessMemoHooks']
         ),
     ],
