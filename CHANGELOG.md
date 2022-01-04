@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* **doctor:** 迁移V3的检查包含对配置文件的检查 ([#226](https://github.com/ecomfe/reskript/issues/226)) ([0d97d20](https://github.com/ecomfe/reskript/commit/0d97d207723b90cf45df84daff23a5a31eb3614d))
+
+
+
+
+
 # [3.0.0](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.1...v3.0.0) (2022-01-03)
 
 **Note:** Version bump only for package reskript
