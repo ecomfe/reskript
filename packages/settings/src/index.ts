@@ -2,7 +2,7 @@ import path from 'path';
 import {existsSync} from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import {logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
+import {importUserModule, logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
 import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
 import validate from './validate';
 import {fillProjectSettings, PartialProjectSettings} from './defaults';
@@ -11,26 +11,25 @@ import {applyPlugins} from './plugins';
 export * from './interface';
 export {fillProjectSettings, PartialProjectSettings};
 
+interface UserProjectSettings extends PartialProjectSettings {
+    plugins?: ClientProjectSettings['plugins'];
+}
+
 const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
-    const location = path.join(cmd.cwd, 'reskript.config.js');
-
-    if (!existsSync(location)) {
-        return fillProjectSettings({});
-    }
-
-    // NOTE: 如果要改成原生ESM的话，这里得想个别的办法
-    delete require.cache[location];
-    const {default: requiredSettings} = await import(location) as {default: ClientProjectSettings};
+    const {default: userSettings} = await importUserModule<{default: UserProjectSettings}>(
+        path.join(cmd.cwd, 'reskript.config'),
+        {default: {}}
+    );
 
     try {
-        validate(requiredSettings);
+        validate(userSettings);
     }
     catch (ex) {
         logger.error(ex instanceof Error ? ex.message : `${ex}`);
         process.exit(21);
     }
 
-    const {plugins = [], ...clientSettings} = requiredSettings;
+    const {plugins = [], ...clientSettings} = userSettings;
     const rawSettings = fillProjectSettings(clientSettings);
     const pluginOptions = {...cmd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);

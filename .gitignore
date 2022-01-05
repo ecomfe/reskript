@@ -22,3 +22,5 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+localhost-key.pem
+localhost.pem

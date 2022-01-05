@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-jest",
-  "version": "2.3.0",
+  "version": "3.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -17,24 +17,24 @@
     "test": "echo 'No test in @reskript/config-jest'"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.16",
+    "@types/babel__core": "^7.1.17",
     "@types/enzyme": "^3.10.10",
     "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.176",
-    "@types/node": "^16.11.6",
+    "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.4",
     "@types/resolve": "^1.20.1",
-    "eslint": "^7.32.0",
-    "prettier": "^2.4.1",
-    "typescript": "^4.4.4"
+    "eslint": "^8.6.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
-    "@reskript/config-babel": "2.3.0",
-    "@reskript/core": "2.3.0",
-    "@reskript/settings": "2.3.0",
-    "babel-jest": "^27.3.1",
+    "@babel/core": "^7.16.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.5",
+    "@reskript/config-babel": "3.0.1",
+    "@reskript/core": "3.0.1",
+    "@reskript/settings": "3.0.1",
+    "babel-jest": "^27.4.5",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",

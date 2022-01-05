@@ -11,16 +11,16 @@ import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings
 import ProgressBarPlugin from './ProgressBarPlugin';
 import {addHotModuleToEntry, constructProxyConfiguration} from './utils';
 
-const getDevServerMessages = (host: string, port: number, openPage: string = ''): string[] => [
-    `Your application is running here: http://${host}:${port}/${openPage}`,
+const getDevServerMessages = (host: string, port: number, https: boolean, openPage: string = ''): string[] => [
+    `Your application is running here: ${https ? 'https' : 'http'}://${host}:${port}/${openPage}`,
 ];
 
 export const createWebpackDevServerPartial = async (context: BuildContext, host = 'localhost') => {
-    const {cwd, projectSettings: {devServer: {hot, port, openPage}}} = context;
+    const {cwd, projectSettings: {devServer: {hot, port, openPage, https}}} = context;
     const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
     const messageOptions = {
         compilationSuccessInfo: {
-            messages: getDevServerMessages(host, port, openPage),
+            messages: getDevServerMessages(host, port, !!https?.client, openPage),
             notes: [],
         },
     };
@@ -64,7 +64,7 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         hot,
     } = buildEntry.projectSettings.devServer;
     const proxyOptions = {
-        https,
+        https: https?.proxy ?? false,
         prefixes: apiPrefixes,
         rewrite: proxyRewrite,
         targetDomain: proxyDomain || defaultProxyDomain,
@@ -100,8 +100,13 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
             index: `/assets/${targetEntry}.html`,
             disableDotRule: true,
         },
-        onBeforeSetupMiddleware: server => {
-            server.app.use('/__open_in_editor__', launchInEditor());
+        server: {
+            type: https?.client ? 'https' : 'http',
+            options: https?.client ? https.serverOptions : undefined,
+        },
+        setupMiddlewares: middlewares => {
+            middlewares.push({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
+            return middlewares;
         },
     };
     const mergedConfig = merge(

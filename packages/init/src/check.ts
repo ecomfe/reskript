@@ -9,6 +9,8 @@ const ALLOWED_EXISTING_FILES = new Set([
     '.gitignore',
     '.npmrc',
     '.yarnrc',
+    '.yarnrc.yml',
+    '.yarn',
     '.git',
 ]);
 

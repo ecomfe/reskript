@@ -1,15 +1,8 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import {warn, tip} from './logger';
+import {warn, tip} from '../logger';
+import {importClientSettings} from '../utils';
 
 export default async (cwd: string) => {
-    const settingsLocation = path.join(cwd, 'reskript.config.js');
-
-    if (!existsSync(settingsLocation)) {
-        return;
-    }
-
-    const {default: settings} = await import(settingsLocation);
+    const settings = await importClientSettings(cwd);
 
     if (settings.build?.hasOwnProperty('defaultImportOptimization')) {
         warn(

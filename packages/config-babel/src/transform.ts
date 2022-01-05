@@ -26,6 +26,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
             {
                 displayName: requireDisplayName(options),
                 minify: mode === 'production',
+                meaninglessFileNames: ['index'],
             },
         ],
         shouldEnable('emotion', uses) && [

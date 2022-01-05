@@ -6,12 +6,13 @@ import {sync as resolve} from 'resolve';
 import {compact, mapValues} from 'lodash';
 import {paramCase} from 'change-case';
 import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
+import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import {findGitRoot, pMap} from '@reskript/core';
 import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
-import {getScriptLintConfig, getStyleLintConfig} from '@reskript/config-lint';
+import {getScriptLintBaseConfig, getStyleLintBaseConfig} from '@reskript/config-lint';
 import {ConfigurationFactory, BuildContext} from '../interface';
 import {createHTMLPluginInstances} from '../utils/html';
 import {convertToWebpackEntry} from '../utils/entry';
@@ -123,14 +124,14 @@ const factory: ConfigurationFactory = async entry => {
     };
     const eslintOptions = {
         eslintPath: resolve('eslint'),
-        baseConfig: getScriptLintConfig(),
+        baseConfig: getScriptLintBaseConfig({cwd}),
         exclude: ['node_modules', 'externals'],
         extensions: ['js', 'jsx', 'ts', 'tsx'],
         emitError: true,
         emitWarning: usage === 'devServer',
     };
     const styleLintOptions = {
-        config: getStyleLintConfig(),
+        config: getStyleLintBaseConfig({cwd}),
         emitErrors: true,
         allowEmptyInput: true,
         failOnError: mode === 'production',
@@ -141,7 +142,6 @@ const factory: ConfigurationFactory = async entry => {
     const plugins = [
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
-        // TODO: https://github.com/webpack/webpack/pull/11698
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         new InterpolateHTMLPlugin(process.env),
@@ -177,6 +177,9 @@ const factory: ConfigurationFactory = async entry => {
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
                 'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
             },
+            plugins: [
+                new ResolveTypeScriptPlugin(),
+            ],
         },
         cache: cache === 'off'
             ? false

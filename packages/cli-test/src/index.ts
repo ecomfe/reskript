@@ -21,6 +21,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 
     // 用`import`拿一个CommonJS的模块，拿到的东西要是里面的`default`
     try {
+        // NOTE: 这里没用`importUserModule`是因为反正Jest就不支持ESM，真干了也没用
         const {default: jestConfig} = await import(jestConfigFile);
 
         if ('preset' in jestConfig) {

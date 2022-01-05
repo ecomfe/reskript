@@ -10,27 +10,24 @@
     "test": "lerna run --concurrency=1 test",
     "build": "lerna run build",
     "build-clean": "lerna run --parallel clean && npm run build",
+    "build-showcase": "cd showcase/todo && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
-    "ci": "pnpm install && npm run build-clean && npm run lint && npm run test",
+    "release-beta": "npm run release -- --conventional-prerelease --preid=beta",
+    "ci": "pnpm install && npm run build-clean && npm run lint && npm run test && npm run build-showcase",
     "preversion": "npm run ci",
     "prepack": "pnpm install && npm run build-clean && sh scripts/build-check.sh",
     "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
+    "deploy-next": "npm run deploy -- --dist-tag=next --pre-dist-tag=next",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.1.0",
-    "@commitlint/config-conventional": "^14.1.0",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "cpy": "^8.1.2",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "semver": "^7.3.5",
-    "yargs": "^17.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/webpack": "npm:webpack@5"
-    }
-  },
-  "packageManager": "yarn@3.1.0"
+    "yargs": "^17.3.1"
+  }
 }

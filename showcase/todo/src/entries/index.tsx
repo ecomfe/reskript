@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import {render, unmountComponentAtNode} from 'react-dom';
-import '@/styles';
-import App from '@/components/App';
+import '@/styles/index.js';
+import App from '@/components/App/index.js';
 
 export const bootstrap = async () => {
     console.log('App TodoMVC bootstraped');

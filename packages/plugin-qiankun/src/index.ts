@@ -1,4 +1,5 @@
 import {SettingsPlugin, BuildSettings, DevServerSettings} from '@reskript/settings';
+import {Request, Response} from 'webpack-dev-server';
 import {Options} from './interface';
 import htmlEntry from './htmlEntry';
 import runtimeEntry from './runtimeEntry';
@@ -15,10 +16,9 @@ export default (appName: string, options?: Options): SettingsPlugin => {
     };
 
     const finalizeDevServer: DevServerSettings['finalize'] = config => {
-        const {onBeforeSetupMiddleware, onAfterSetupMiddleware} = config;
-        config.onBeforeSetupMiddleware = devServer => {
-            onBeforeSetupMiddleware?.(devServer);
-            devServer.app.get(
+        const {setupMiddlewares} = config;
+        config.setupMiddlewares = (middlewares, devServer) => {
+            devServer.app?.get(
                 '/__qiankun_entry__.js',
                 async (req, res) => {
                     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,17 +28,18 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                     res.type('js').end(script);
                 }
             );
-        };
-        // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须用`onAfterSetupMiddleware`钩子
-        config.onAfterSetupMiddleware = devServer => {
-            onAfterSetupMiddleware?.(devServer);
-            devServer.app.get(
-                '/__qiankun__.html',
-                async (req, res) => {
-                    const html = await htmlEntry(appName, options);
-                    res.type('html').end(html);
-                }
-            );
+            // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须放在其它的中间件后面
+            return [
+                ...setupMiddlewares?.(middlewares, devServer) ?? middlewares,
+                {
+                    name: 'qiankun-entry-html',
+                    path: '/__qiankun__.html',
+                    middleware: async (req: Request, res: Response) => {
+                        const html = await htmlEntry(appName, options);
+                        res.type('html').end(html);
+                    },
+                },
+            ];
         };
         config.historyApiFallback = {
             index: '/__qiankun__.html',

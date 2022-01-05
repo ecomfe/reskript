@@ -40,8 +40,8 @@ const replaceCalcExpressions = (source: string, start: number = 0): string => {
     const expressionBodyStartIndex = expressionStartIndex + CALC_EXPRESSION_START.length;
     const leadingCharacter = source[expressionStartIndex - 1];
 
-    // 针对`~'calc(xxx)'`这样的形态，就不用替换了
-    if (leadingCharacter === '\'' || leadingCharacter === '"') {
+    // 我们要求前面是一个空白字符（空格、换行等）或者冒号，这个`calc`才是真正的函数调用要被替换的，其它情况就不替换直接进下一轮查找
+    if (!/[\s:]/.test(leadingCharacter)) {
         return replaceCalcExpressions(source, expressionBodyStartIndex);
     }
 

@@ -14,3 +14,8 @@ test('attribute name camel case', async () => {
     const code = await compiler();
     expect(code.includes('"strokeWidth"')).toBe(true);
 });
+
+test('class attribute', async () => {
+    const code = await compiler();
+    expect(code.includes('"className":"test-class"')).toBe(true);
+});

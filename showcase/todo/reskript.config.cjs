@@ -17,7 +17,6 @@ exports.featureMatrix = {
 };
 
 exports.build = {
-    reportLintErrors: false,
     appTitle: 'TodoMVC - reSKRipt',
     favicon: path.join(__dirname, 'favicon.ico'),
     uses: ['antd', 'styled-components', 'tailwind'],
@@ -45,6 +44,13 @@ exports.build = {
 
 exports.devServer = {
     port: 8989,
+    https: {
+        client: true,
+        serverOptions: {
+            key: './localhost-key.pem',
+            cert: './localhost.pem',
+        },
+    },
 };
 
 exports.plugins = [

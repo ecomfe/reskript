@@ -1,6 +1,6 @@
 import {ESLint} from 'eslint';
 import {resolveCacheLocation, pFilter} from '@reskript/core';
-import {getScriptLintConfig} from '@reskript/config-lint';
+import {getScriptLintBaseConfig} from '@reskript/config-lint';
 import {resolveLintFiles} from './utils';
 import {ResolveOptions} from './interface';
 
@@ -16,7 +16,7 @@ export default async (files: string[], cmd: ResolveOptions): Promise<LintResult[
     }
 
     const cliConfig: LintOptions = {
-        baseConfig: getScriptLintConfig(),
+        baseConfig: getScriptLintBaseConfig({cwd: process.cwd()}),
         cache: true,
         fix: cmd.fix,
         cacheLocation: await resolveCacheLocation('eslint'),

@@ -46,7 +46,6 @@ const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
 
 const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServerSettings => {
     return {
-        https: false,
         port: 8788,
         apiPrefixes: [],
         defaultProxyDomain: '',

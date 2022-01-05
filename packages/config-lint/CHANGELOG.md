@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
+# [3.0.0](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.1...v3.0.0) (2022-01-03)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
+# [3.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.0...v3.0.0-beta.1) (2022-01-03)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
+# [3.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v2.5.3...v3.0.0-beta.0) (2022-01-03)
+
+
+### Bug Fixes
+
+* **lint:** 移除Sentry全局变量 ([b30dcb0](https://github.com/ecomfe/reskript/commit/b30dcb082e16de49aff513e5965df1014e161dd0))
+
+
+### Features
+
+* 支持eslint 8 ([#176](https://github.com/ecomfe/reskript/issues/176)) ([76acae3](https://github.com/ecomfe/reskript/commit/76acae373762da03b2208088908d7a0022bb0536))
+* 支持stylelint 14 ([#186](https://github.com/ecomfe/reskript/issues/186)) ([05e24c0](https://github.com/ecomfe/reskript/commit/05e24c0e8f004e7c342c138e00d1b73724545aa3))
+
+
+### BREAKING CHANGES
+
+* **lint:** `lint`不再默认配置`Sentry`全局变量，需要用户自行配置
+* 需要`eslint`升级至`8.x`
+* 需要`stylelint`升级至`14.x`
+
+
+
+
+
+## [2.5.3](https://github.com/ecomfe/reskript/compare/v2.5.2...v2.5.3) (2021-12-31)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
+## [2.5.2](https://github.com/ecomfe/reskript/compare/v2.5.1...v2.5.2) (2021-12-29)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
+## [2.5.1](https://github.com/ecomfe/reskript/compare/v2.5.0...v2.5.1) (2021-12-28)
+
+
+### Bug Fixes
+
+* **build:** 支持项目使用纯ESM格式，配置文件使用cjs ([#218](https://github.com/ecomfe/reskript/issues/218)) ([2646bac](https://github.com/ecomfe/reskript/commit/2646bac2f50e1ff52a0a7a4b088a7b282d6cf614))
+
+
+
+
+
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+
+### Bug Fixes
+
+* **build:** 在build时也同样读用户自定义的lint配置 ([#211](https://github.com/ecomfe/reskript/issues/211)) ([e580bce](https://github.com/ecomfe/reskript/commit/e580bce69a0d1a7f2714409d9611a50688020291))
+
+
+
+
+
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+**Note:** Version bump only for package @reskript/config-lint
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 

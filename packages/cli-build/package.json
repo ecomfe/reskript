@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-build",
-  "version": "2.3.0",
+  "version": "3.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -16,18 +16,18 @@
     "test": "echo 'No test in @reskript/cli-build'"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.176",
-    "@types/node": "^16.11.6",
-    "typescript": "^4.4.4",
-    "webpack": "^5.61.0"
+    "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.4",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0"
   },
   "dependencies": {
-    "@reskript/config-webpack": "2.3.0",
-    "@reskript/core": "2.3.0",
-    "@reskript/settings": "2.3.0",
+    "@reskript/config-webpack": "3.0.1",
+    "@reskript/core": "3.0.1",
+    "@reskript/settings": "3.0.1",
     "chalk": "^4.1.2",
-    "eslint": "^7.32.0",
+    "eslint": "^8.6.0",
     "lodash": "^4.17.21",
     "matcher": "^4.0.0",
     "pretty-bytes": "^5.6.0",
@@ -36,8 +36,8 @@
   },
   "peerDependencies": {
     "core-js": "3.x",
-    "eslint": "7.x",
-    "stylelint": "13.x",
+    "eslint": "8.x",
+    "stylelint": "14.x",
     "typescript": "4.x",
     "webpack": "5.x"
   },

@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+import {ServerOptions} from 'https';
 import {ProjectAware, WorkModeAware} from '@reskript/core';
 import {Configuration as WebpackConfiguration, RuleSetRule, RuleSetUseItem} from 'webpack';
 import {Configuration as WebpackDevServerConfiguration} from 'webpack-dev-server';
@@ -132,9 +133,11 @@ export interface BuildSettings {
     readonly inspect: BuildInspectSettings;
 }
 
+export type DevServerHttps = {proxy?: boolean} & ({client?: false} | {client: true, serverOptions?: ServerOptions});
+
 export interface DevServerSettings {
-    // 是否以HTTPS协议代理请求
-    readonly https: boolean;
+    // 是否以HTTPS协议代理请求及启动调试服务器
+    readonly https?: DevServerHttps;
     // 监听的端口
     readonly port: number;
     // 代理给后端的API请求的URL前缀

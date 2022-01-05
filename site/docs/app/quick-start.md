@@ -135,7 +135,7 @@ exports.devServer = {
 };
 ```
 
-你可以通过[配置文件](../settings/settings)来了解更多的配置信息。
+你可以通过[配置文件](../settings)来了解更多的配置信息。
 
 ## 编写入口代码
 

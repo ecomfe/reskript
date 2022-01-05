@@ -1,22 +1,10 @@
-import {satisfies, minVersion} from 'semver';
-import {readPackageConfig} from '@reskript/core';
-import {tip, warn} from './logger';
-
-const checkInstalledVersion = (dependencies: Record<string, string>) => {
-    const entries = Object.entries(dependencies);
-    for (const [name, range] of entries.filter(([name]) => name.startsWith('@reskript/'))) {
-        const minInstalledVersion = minVersion(range);
-        if (!minInstalledVersion || !satisfies(minInstalledVersion, '2.x', {includePrerelease: true})) {
-            warn(`${name}@1.x still installed, upgrade it to a fixed version of latest 2.x release`);
-        }
-    }
-};
+import {tip, warn} from '../logger';
+import {checkInstalledReskriptVersion, nodeVersionSatisfies, readAllDependencies} from '../utils';
 
 export default async (cwd: string) => {
-    const packageInfo = await readPackageConfig(cwd);
-    const dependencies = {...packageInfo.dependencies, ...packageInfo.devDependencies};
+    const dependencies = await readAllDependencies(cwd);
 
-    checkInstalledVersion(dependencies);
+    checkInstalledReskriptVersion(dependencies, 2);
 
     if (!dependencies['core-js']) {
         warn(
@@ -32,7 +20,7 @@ export default async (cwd: string) => {
         );
     }
 
-    if (!satisfies(process.versions.node, '>=14.14.0')) {
+    if (!nodeVersionSatisfies('>=14.14.0')) {
         warn(
             'node version does\'t satisfy the least requirement, install a node >= 14.14.0',
             'see: https://reskript.vercel.app/docs/migration/v2#NodeJS版本'

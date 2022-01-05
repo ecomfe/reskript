@@ -1,6 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
-import WebpackDevServer, {Configuration as DevServerConfiguration} from 'webpack-dev-server';
+import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMap} from 'webpack-dev-server';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
 import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
@@ -63,19 +63,25 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
     return buildContext;
 };
 
-const registerSersvice = (config: DevServerConfiguration | undefined, target: string): DevServerConfiguration => {
-    const prevBefore = config?.onBeforeSetupMiddleware;
+const isProxyMap = (proxy: DevServerConfiguration['proxy']): proxy is ProxyConfigMap | undefined => {
+    return !proxy || !Array.isArray(proxy);
+};
 
-    if (Array.isArray(config?.proxy)) {
+const registerSersvice = (config: DevServerConfiguration | undefined, target: string): DevServerConfiguration => {
+    const previousSetup = config?.setupMiddlewares;
+
+    if (!isProxyMap(config?.proxy)) {
         logger.error('Sorry we don\'t allow devServer.proxy to be an array');
         process.exit(21);
     }
 
     return {
         ...config,
-        onBeforeSetupMiddleware: devServer => {
-            prevBefore?.(devServer);
-            setupServer(devServer.app, target);
+        setupMiddlewares: (middlewares, devServer) => {
+            if (devServer.app) {
+                setupServer(devServer.app, target);
+            }
+            return previousSetup?.(middlewares, devServer) ?? middlewares;
         },
         proxy: {
             ...config?.proxy,

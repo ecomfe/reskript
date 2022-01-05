@@ -1,3 +1,3 @@
-import {Configuration} from 'webpack-dev-server';
+import WebpackDevServer from 'webpack-dev-server';
 
-export type ExpressApp = Parameters<Exclude<Configuration['onBeforeSetupMiddleware'], undefined>>[0]['app'];
+export type ExpressApp = Exclude<WebpackDevServer['app'], undefined>;

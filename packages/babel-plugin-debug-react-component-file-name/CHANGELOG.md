@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+# [3.0.0](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.1...v3.0.0) (2022-01-03)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+# [3.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.0...v3.0.0-beta.1) (2022-01-03)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+# [3.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v2.5.3...v3.0.0-beta.0) (2022-01-03)
+
+
+### Features
+
+* 支持eslint 8 ([#176](https://github.com/ecomfe/reskript/issues/176)) ([76acae3](https://github.com/ecomfe/reskript/commit/76acae373762da03b2208088908d7a0022bb0536))
+
+
+### BREAKING CHANGES
+
+* 需要`eslint`升级至`8.x`
+
+
+
+
+
+## [2.5.3](https://github.com/ecomfe/reskript/compare/v2.5.2...v2.5.3) (2021-12-31)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+## [2.5.2](https://github.com/ecomfe/reskript/compare/v2.5.1...v2.5.2) (2021-12-29)
+
+
+### Bug Fixes
+
+* **babel:** 处理useComponentFileName对class的边界情况 ([#221](https://github.com/ecomfe/reskript/issues/221)) ([1ed84cb](https://github.com/ecomfe/reskript/commit/1ed84cb88d24d0f85b5cb404c5bf3d56227335bb))
+
+
+
+
+
+## [2.5.1](https://github.com/ecomfe/reskript/compare/v2.5.0...v2.5.1) (2021-12-28)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+**Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name
+
+
+
+
+
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Features
+
+* **dev:** 支持组件源码文件调用编辑器打开 ([#201](https://github.com/ecomfe/reskript/issues/201)) ([bd743a6](https://github.com/ecomfe/reskript/commit/bd743a690990f20bd0f8b0edb5da949b82a92adc))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 **Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name

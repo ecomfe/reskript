@@ -2,12 +2,8 @@ import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
 import {EntryObject} from 'webpack';
-import {logger} from '@reskript/core';
+import {logger, importUserModule} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface';
-
-const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
-    return 'message' in error && 'code' in error;
-};
 
 const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
 
@@ -20,18 +16,15 @@ const validateEntryConfig = (config: EntryConfig, file: string) => {
     }
 };
 
-const readEntryConfig = async (file: string): Promise<EntryConfig> => {
+const readEntryConfig = async (fileBaseName: string): Promise<EntryConfig> => {
     try {
-        const {default: config}: {default: EntryConfig} = await import(path.join(file));
-        validateEntryConfig(config, file);
+        const {default: config} = await importUserModule<{default: EntryConfig}>(fileBaseName, {default: {}});
+        validateEntryConfig(config, fileBaseName);
         return config;
     }
     catch (ex) {
-        if (isErrorWithCode(ex) && ex.code === 'MODULE_NOT_FOUND') {
-            return {};
-        }
-
-        logger.error(`Unable to read entry configuration from ${file}: ${ex instanceof Error ? ex.message : ex}`);
+        const message = ex instanceof Error ? ex.message : `${ex}`;
+        logger.error(`Unable to read entry configuration from ${fileBaseName}: ${message}`);
         process.exit(22);
     }
 };
@@ -56,7 +49,7 @@ const resolveDirectoryEntry = async (dir: string, shouldInclude: (name: string) 
     const possibleEntryFiles = ALLOWED_ENTRY_EXTENSIONS.map(e => path.join(dir, 'index' + e));
     const entry = possibleEntryFiles.find(existsSync);
     if (entry) {
-        const config = await readEntryConfig(path.join(dir, 'index.config.js'));
+        const config = await readEntryConfig(path.join(dir, 'index.config'));
         const appEntry: AppEntry = {
             name,
             config,
@@ -83,7 +76,7 @@ const resolveFileEntry = async (file: string, shouldInclude: (name: string) => b
     }
 
     const base = file.replace(POSSIBLE_ENTRY_EXTENSION_REGEX, '');
-    const config = await readEntryConfig(`${base}.config.js`);
+    const config = await readEntryConfig(`${base}.config`);
     const appEntry: AppEntry = {
         file,
         config,
