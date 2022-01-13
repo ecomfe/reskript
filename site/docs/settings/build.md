@@ -4,7 +4,7 @@ title: 构建配置
 
 ## 配置结构
 
-`reskript.config.js`中的`exports.build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
+`reskript.config.{mjs|ts}`中的`build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
 
 ```ts
 // 以下是工具内置了优化的相关第三方库
@@ -115,22 +115,28 @@ interface BuildSettings {
 
 默认情况下，仅应用的源码，即`src`下的文件会经过`babel`的编译，其它文件将直接由`webpack`处理。有时某些第三方的包会发布语法比较新的内容，而应用又恰好需要支持比较老旧的浏览器，此时可能需要让`babel`去处理额外的文件。
 
-我们可以通过`exports.build.script.babel`配置来指定处理的文件范围，它可以是一个`(resource: string) => boolean`的函数，接收当前文件的绝对路径，返回`true`则表示要通过`babel`处理该文件。
+我们可以通过`build.script.babel`配置来指定处理的文件范围，它可以是一个`(resource: string) => boolean`的函数，接收当前文件的绝对路径，返回`true`则表示要通过`babel`处理该文件。
 
 **注意：当将这个配置指定为函数时，原有的`src`下文件经过`babel`处理的默认逻辑会失败，因此你需要在函数中再额外加上这个判断。**
 
 例如，我们知道`some-lib`这个包需要经过`babel`处理，再考虑到`src`下的源码，就可以这样来编写配置：
 
-```js
-const path = require('path');
+```ts
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
-const src = path.join(__dirname, 'src');
+const src = path.join(path.dirname(fileURLToPath(import.meta.url)), 'src');
 
-exports.build = {
-    script: {
-        babel: resource => resource.includes(src) || resource.includes(`node_modules/some-lib/`),
-    },
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            script: {
+                babel: resource => resource.includes(src) || resource.includes(`node_modules/some-lib/`),
+            },
+        },
+    }
+);
 ```
 
 ### 控制polyfill生成
@@ -144,19 +150,24 @@ exports.build = {
 
 因此，有些产品会选择使用自定义的polyfill来匹配业务，或全量引入`core-js`来追求哈希的稳定和长效缓存的可用性。在这种情况下，只需要进行简单地配置就可以关闭`babel`的相关功能：
 
-```js
-exports.build = {
-    script: {
-        polyfill: false,
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            script: {
+                polyfill: false,
+            },
+        },
+    }
+);
 ```
 
 ### 特殊第三方库的优化
 
 社区上有许多的库需要构建期工具的支持才能取得更好的使用效果。`reSKRipt`在长远的计划上会精选支持高质量、持续维护、对生产效率有足够帮助的库。但默认打开所有相关的优化必定会拖慢构建速度，因此提供了选项由使用者指定你所用的库。
 
-通过`reskript.config.js`中的`exports.build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
+通过`reskript.config.{mjs|ts}`中的`build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
 
 - `antd`：对`antd`的导入进行优化，可以参考[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)的相关说明。
 - `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
@@ -167,7 +178,7 @@ exports.build = {
 
 `reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
 
-```js
+```ts
 // 最终lodash中其它函数都会消失
 import {filter, map} from 'lodash';
 // 会引入Button组件的源码和样式，其它组件的内容会消失
@@ -176,56 +187,76 @@ import {Button} from 'antd';
 
 如果你自定义这个配置，那么默认的`antd`和`lodash`优化会被取消，你需要自己补充这两个值。假设你在使用着`antd`和`lodash`的同时，又希望使用`styled-components`，则可以这么写：
 
-```js
-exports.build = {
-    uses: ['antd', 'lodash', 'styled-components'],
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            uses: ['antd', 'lodash', 'styled-components'],
+        },
+    }
+);
 ```
 
 而假设你使用`ramda`代替了`lodash`，又不希望额外的优化影响构建速度，你也可以自定义这个配置来移除对`lodash`的处理：
 
-```js
-exports.build = {
-    uses: ['antd'],
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            uses: ['antd'],
+        },
+    }
+);
 ```
 
 **另外，`antd`和`lodash`的优化还会与CDN的使用产生冲突，如果你已经决定通过CDN全量引入`antd`和`lodash`，则需要将这个优化关闭。**
 
 ### 扩展`babel`配置
 
-最后，`reSKRipt`也允许你在自动生成的`babel`配置的基础上增加自己的插件，你可以使用`exports.build.script.finalize`这一函数来扩展。这个函数的第一个参数是最终生成的`babel`配置，通过修改这一配置就能实现扩展。
+最后，`reSKRipt`也允许你在自动生成的`babel`配置的基础上增加自己的插件，你可以使用`build.script.finalize`这一函数来扩展。这个函数的第一个参数是最终生成的`babel`配置，通过修改这一配置就能实现扩展。
 
 如果你需要增加一个插件，比如`babel-plugin-macros`，那么在安装这个插件后，你可以简单地在`plugins`中进行追加：
 
-```js
-exports.build = {
-    script: {
-        finalize: babelConfig => {
-            babelConfig.plugins.push('babel-plugin-macros');
-            return babelConfig;
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            script: {
+                finalize: babelConfig => {
+                    babelConfig.plugins.push('babel-plugin-macros');
+                    return babelConfig;
+                },
+            },
         },
-    },
-};
+    }
+);
 ```
 
 如果你需要修改一个已经存在的配置，那么就显得比较麻烦，**我们非常不建议你这么做**，因为它会使你依赖某个特定版本的`reSKRipt`的内部轮回。如果你没有其它选择，那么通过遍历`plugins`或`presets`找到相关内容再进行修改也是可行的，比如你必须打开`loose`这个选项：
 
-```js
-exports.build = {
-    script: {
-        finalize: babelConfig => {
-            for (const item of babelConfig.presets) {
-                // 找到preset-env，需要注意在配置中是绝对路径，所以你不能用`===`来判断，必须用`.includes`
-                if (Array.isArray(item) && item[0].includes('@babel/preset-env')) {
-                    const options = item[1];
-                    options.loose = true;
-                }
-            }
-            return babelConfig;
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            script: {
+                finalize: babelConfig => {
+                    for (const item of babelConfig.presets) {
+                        // 找到preset-env，需要注意在配置中是绝对路径，所以你不能用`===`来判断，必须用`.includes`
+                        if (Array.isArray(item) && item[0].includes('@babel/preset-env')) {
+                            const options = item[1];
+                            options.loose = true;
+                        }
+                    }
+                    return babelConfig;
+                },
+            },
         },
-    },
-};
+    }
+);
 ```
 
 **再次提醒，不到万不得已的情况，我们强烈不建议你去修改已有的配置内容。**
@@ -234,14 +265,19 @@ exports.build = {
 
 ### 提取样式
 
-使用`exports.build.style.extract`可以将样式提取到独立的`.css`文件中：
+使用`build.style.extract`可以将样式提取到独立的`.css`文件中：
 
-```js
-exports.build = {
-    style: {
-        extract: true,
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            style: {
+                extract: true,
+            }
+        },
     }
-};
+);
 ```
 
 但我们发现这一做法比较容易导致样式的顺序错乱，进一步导致样式优先级不合预期，引起界面错误。考虑到这种顺序的错乱不易在开发过程中发现，所以我们不是很推荐将样式独立出来。
@@ -252,19 +288,24 @@ exports.build = {
 
 默认情况下，你的项目中`src/styles/*.var.less`文件都会被自动注入，**这些文件不需要你自定义配置**，我们推荐你将全局用到的变量和mixin放到以上规则的文件中，尽量避免做自定义的注入。
 
-你可以使用`exports.build.style.resources`字符串数组来声明你需要注入的样式文件的路径，每一个路径都必须是**绝对路径**：
+你可以使用`build.style.resources`字符串数组来声明你需要注入的样式文件的路径，每一个路径都必须是**绝对路径**：
 
-```js
-const path = require('path');
+```ts
+import path from 'node:path';
 
-exports.build = {
-    style: {
-        resources: [
-            path.join('src', 'styles', 'variables.less'),
-            path.join('src', 'styles', 'mixins.less'),
-        ],
-    },
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            style: {
+                resources: [
+                    path.join('src', 'styles', 'variables.less'),
+                    path.join('src', 'styles', 'mixins.less'),
+                ],
+            },
+        },
+    }
+);
 ```
 
 同时值得注意的是，靠`reSKRipt`来注入一些依赖意味着你的`.less`文件没有自己声明自己的依赖，它们将无法被单独地通过`less`来编译，当然这在大多数情况下并不是问题。
@@ -292,36 +333,47 @@ exports.build = {
 
 ### 自定义`less`变量
 
-你还可以通过`exports.build.style.lessVariables`来自定义全局的`less`变量，往往在定制`antd`主题时用到，你可以参考[antd的文档](https://ant.design/docs/react/customize-theme-cn)来了解哪些变量可用。比如我们可以简单地替换全局主色来“绿了”`antd`：
+你还可以通过`build.style.lessVariables`来自定义全局的`less`变量，往往在定制`antd`主题时用到，你可以参考[antd的文档](https://ant.design/docs/react/customize-theme-cn)来了解哪些变量可用。比如我们可以简单地替换全局主色来“绿了”`antd`：
 
-```js
-exports.build = {
-    style: {
-        lessVariables: {
-            'primary-color': '#0aa779',
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            style: {
+                lessVariables: {
+                    'primary-color': '#0aa779',
+                },
+            },
         },
-    },
-};
+    }
+);
 ```
 
 ### 控制CSS Modules范围
 
 默认情况下，所有在`src`目录下的`.less`和`.css`文件都经过[CSS Modules](https://github.com/css-modules/css-modules)，即最终的CSS类会变成一段带有哈希的全局唯一的名称。
 
-我们建议你保持默认行为，做好样式的隔离有助于你的系统的可维护性。对于少量且可控的情况，你可以使用`.global.less`和`.global.css`来避开CSS Modules的处理。当文件名不可控且必须放在`src`下又要脱离CSS Modules时，你可以使用`exports.build.style.modules`配置来控制范围。
+我们建议你保持默认行为，做好样式的隔离有助于你的系统的可维护性。对于少量且可控的情况，你可以使用`.global.less`和`.global.css`来避开CSS Modules的处理。当文件名不可控且必须放在`src`下又要脱离CSS Modules时，你可以使用`build.style.modules`配置来控制范围。
 
 当然与`babel`配置相同，当你启用了这个配置时，默认的`src`下全局CSS Modules的逻辑也会消失，你需要精确控制某一个文件。例如你（虽然不知道出于啥原因）在`src`下引入了`bootstrap.css`文件，要额外排除它，那么可以考虑这样编写配置：
 
-```js
-const path = require('path');
+```ts
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
-const src = path.join(__dirname, 'src');
+const src = path.join(path.dirname(fileURLToPath(import.meta.url)), 'src');
 
-exports.build = {
-    style: {
-        modules: resource => resource.includes(src) && !resource.endsWith('/bootstrap.css'),
-    },
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            style: {
+                modules: resource => resource.includes(src) && !resource.endsWith('/bootstrap.css'),
+            },
+        },
+    }
+);
 ```
 
 ## 关闭代码检查
@@ -330,10 +382,15 @@ exports.build = {
 
 如果你对自己的代码十分有信心，并且实在无法接受在构建时代码检查的时间消耗，那么你可以通过以下配置来关闭检查：
 
-```js
-exports.build = {
-    reportLintErrors: false,
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            reportLintErrors: false,
+        },
+    }
+);
 ```
 
 这将同时关闭对脚本和样式的检查。但我们依然不允许你完全地规避到对代码质量的要求，因此你必须在本地设置一个提交代码的钩子，确保本地的代码质量。
@@ -365,34 +422,44 @@ npx --no-install husky install \
 
 ## 自定义调整`webpack`配置
 
-如果你对`reSKRipt`生成的`webpack`并不满意，想要自己做一些调整，可以使用`exports.build.finalize`来实现。这个配置项是一个函数，第一个参数为最终生成的`webpack`配置对象，第二个参数为一个`BuildEntry`对象。
+如果你对`reSKRipt`生成的`webpack`并不满意，想要自己做一些调整，可以使用`build.finalize`来实现。这个配置项是一个函数，第一个参数为最终生成的`webpack`配置对象，第二个参数为一个`BuildEntry`对象。
 
 例如，你希望复制一些文件到最终生成的代码中，可以通过`copy-webpack-plugin`来实现：
 
-```js
-const CopyPlugin = require('copy-webpack-plugin');
+```ts
+import CopyPlugin from 'copy-webpack-plugin';
 
-exports.build = {
-    finalize: webpackConfig => {
-        webpackConfig.plugins.push(new CopyPlugin({/* 相关配置 */}));
-        return webpackConfig;
-    },
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            finalize: webpackConfig => {
+                webpackConfig.plugins.push(new CopyPlugin({/* 相关配置 */}));
+                return webpackConfig;
+            },
+        },
+    }
+);
 ```
 
 或者你想额外处理`wasm`文件：
 
-```js
-exports.build = {
-    finalize: webpackConfig => {
-        const wasmRule = {
-            test: /\.wasm$/,
-            use: 'wasm-loader',
-        };
-        webpackConfig.module.rules.push(wasmRule);
-        return webpackConfig;
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            finalize: webpackConfig => {
+                const wasmRule = {
+                    test: /\.wasm$/,
+                    use: 'wasm-loader',
+                };
+                webpackConfig.module.rules.push(wasmRule);
+                return webpackConfig;
+            },
+        },
+    }
+);
 ```
 
 `reSKRipt`会保证以下的属性是有值的，不会出现`undefined`的情况：
@@ -406,7 +473,7 @@ exports.build = {
 
 ### 调整已有`webpack`规则
 
-虽然通过`exports.build.finalize`可以灵活地调整`webpack`配置，但你几乎不可能直接去修改已有的loader规则，比如你想让所有的图片不再使用默认的`url-loader`，而是用`responsive-loader`代替，但你是没办法在`webpackConfig.module.rules`中找到处理图片的那条规则的。
+虽然通过`build.finalize`可以灵活地调整`webpack`配置，但你几乎不可能直接去修改已有的loader规则，比如你想让所有的图片不再使用默认的`url-loader`，而是用`responsive-loader`代替，但你是没办法在`webpackConfig.module.rules`中找到处理图片的那条规则的。
 
 在这种时候，你只能完全重写整个`module.rules`配置，我们在`build.finalize`函数的第三个参数`internals`中提供了了`rules`对象来让你进一步复用某些规则，`rules`中有以下的规则：
 
@@ -417,27 +484,32 @@ exports.build = {
 - `svg`：处理`.svg`文件。
 - `file`：处理其它二进制文件。
 
-每一个规则都是一个`(entry: BuildEntry) => RuleSetRule`的函数，因此`exports.build.finalize`中的第二个参数就起到了作用：
+每一个规则都是一个`(entry: BuildEntry) => RuleSetRule`的函数，因此`build.finalize`中的第二个参数就起到了作用：
 
-```js
-exports.build = {
-    finalize: (webpackConfig, buildEntry, internals) => {
-        // 需要把整个rules都重写
-        webpackConfig.module.rules = [
-            internals.rules.script(buildEntry),
-            internals.rules.less(buildEntry),
-            internals.rules.css(buildEntry),
-            internals.rules.svg(buildEntry),
-            internals.rules.file(buildEntry),
-            // 在上面没有引用rules.image，自定义图片的处理规则
-            {
-                test: /\.(jpe?g|png|webp)$/i,
-                use: 'responsive-loader',
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            finalize: (webpackConfig, buildEntry, internals) => {
+                // 需要把整个rules都重写
+                webpackConfig.module.rules = [
+                    internals.rules.script(buildEntry),
+                    internals.rules.less(buildEntry),
+                    internals.rules.css(buildEntry),
+                    internals.rules.svg(buildEntry),
+                    internals.rules.file(buildEntry),
+                    // 在上面没有引用rules.image，自定义图片的处理规则
+                    {
+                        test: /\.(jpe?g|png|webp)$/i,
+                        use: 'responsive-loader',
+                    },
+                ];
+                return webpackConfig;
             },
-        ];
-        return webpackConfig;
-    },
-};
+        },
+    }
+);
 ```
 
 ### 复用现有的`loader`
@@ -473,7 +545,7 @@ function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): Rule
 
 其中`loader`函数可以生成一个`loader`声明，例如`loader('css', buildEntry)`就可能返回类似这样的结构：
 
-```js
+```ts
 {
     loader: resolve('css-loader'),
     options: {
@@ -493,20 +565,25 @@ function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): Rule
 
 一个典型的场景是你需要处理`.sass`文件，且希望它们都具备`reSKRipt`原本的CSS Modules等样式处理能力以及[神奇的样式函数功能](../app/style/#了解样式函数)，那么你就需要借用`loaders`函数引入类似`postcss-loader`、`css-loader`、`style-loader`等：
 
-```js
-exports.build = {
-    finalize: (webpackConfig, buildEntry, internals) => {
-        const sassRule = {
-            test: /\.s[ac]ss$/,
-            use: [
-                ...internals.loaders(['classNames', 'style', 'cssModules', 'postCSSModules'], buildEntry),
-                'sass-loader',
-            ],
-        };
-        webpackConfig.module.rules.push(sassRule);
-        return webpackConfig;
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            finalize: (webpackConfig, buildEntry, internals) => {
+                const sassRule = {
+                    test: /\.s[ac]ss$/,
+                    use: [
+                        ...internals.loaders(['classNames', 'style', 'cssModules', 'postCSSModules'], buildEntry),
+                        'sass-loader',
+                    ],
+                };
+                webpackConfig.module.rules.push(sassRule);
+                return webpackConfig;
+            },
+        },
+    }
+);
 ```
 
 :::note
@@ -517,7 +594,7 @@ exports.build = {
 
 在要求比较严格的项目中，有需要对最终产物的组成进行检查，并应用一些自动化的规则，确保如资源数量、大小等符合预期。
 
-你可以使用`reskript.config.js`中的`exports.build.inspect`来配置构建产物的检查规则，具体的配置结构参考上文。
+你可以使用`reskript.config.{mjs|ts}`中的`build.inspect`来配置构建产物的检查规则，具体的配置结构参考上文。
 
 ### 规则配置
 
@@ -541,17 +618,22 @@ exports.build = {
 
 为了严格控制产品性能，你要求一但违反上面的规则，构建应当失败，开发者需要修复相关问题。则配置如下所示：
 
-```js
-exports.build = {
-    inspect: {
-        initialResources: {
-            count: ['error', 6],
-            totalSize: ['error', 2 * 1024 * 1024],
-            sizeDeviation: ['error', 0.2],
-            disallowImports: ['error', ['echarts', 'monaco-editor', 'codemirror']],
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            inspect: {
+                initialResources: {
+                    count: ['error', 6],
+                    totalSize: ['error', 2 * 1024 * 1024],
+                    sizeDeviation: ['error', 0.2],
+                    disallowImports: ['error', ['echarts', 'monaco-editor', 'codemirror']],
+                },
+            },
         },
-    },
-};
+    }
+);
 ```
 
 #### 检查重复引入的第三方库
@@ -564,12 +646,17 @@ exports.build = {
 
 你可以使用如下的配置：
 
-```js
-exports.build = {
-    inspect: {
-        duplicatePackages: ['warn', {excludes: ['tslib', 'eslint-*']}],
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            inspect: {
+                duplicatePackages: ['warn', {excludes: ['tslib', 'eslint-*']}],
+            },
+        },
+    }
+);
 ```
 
 最后你可能得到类似这样的报告产出：
@@ -593,12 +680,17 @@ exports.build = {
 
 为此，我们增加了一个`htmlImportable`的检查，你可以使用如下配置：
 
-```js
-exports.build = {
-    inspect: {
-        htmlImportable: 'error',
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            inspect: {
+                htmlImportable: 'error',
+            },
+        },
+    }
+);
 ```
 
 如果最终产出的HTML不符合要求，会出现类似的错误并异常退出：
@@ -609,11 +701,16 @@ E  The last script in index-stable.html doesn't reference to an entry script, th
 
 如果有一部分产出的HTML是由你自己控制，且不与微前端框架整合，你可以使用`includes`或`excludes`来控制被检查的HTML文件：
 
-```js
-exports.build = {
-    inspect: {
-        // 干掉自己生成的
-        htmlImportable: ['error', {excludes: ['copyright.html', 'about-*.html]}],
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            inspect: {
+                // 干掉自己生成的
+                htmlImportable: ['error', {excludes: ['copyright.html', 'about-*.html']}],
+            },
+        },
+    }
+);
 ```

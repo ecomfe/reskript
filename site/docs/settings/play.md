@@ -4,7 +4,7 @@ title: 单组件调试配置
 
 ## 配置结构
 
-`reskript.config.js`中的`exports.play`用来配置调试单个组件时的相关行为：
+`reskript.config.{mjs|ts}`中的`play`用来配置调试单个组件时的相关行为：
 
 ```ts
 interface PlaySettings {
@@ -21,14 +21,22 @@ interface PlaySettings {
 
 通常一个应用里，会有一些几乎所有组件调试都需要的依赖，比如大家都要`Button`组件，或者大家都需要事先引入全局的样式`src/styles/app.global.css`之类的情况。
 
-`skr play`支持一个全局的配置模块，你可以通过`exports.play.defaultGlobalSetup`来设定：
+`skr play`支持一个全局的配置模块，你可以通过`play.defaultGlobalSetup`来设定：
 
-```js
-const path = require('path');
+```ts
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
-exports.play = {
-    defaultGlobalSetup: path.join(__dirname, 'src', 'config', 'play.js'),
-};
+const src = path.join(path.dirname(fileURLToPath(import.meta.url)), 'src');
+
+export default configure(
+    'webpack',
+    {
+        play: {
+            defaultGlobalSetup: path.join(src, 'config', 'play.js'),
+        },
+    }
+);
 ```
 
 这个属性必须指向一个存在的文件名，**不能省略文件后缀**。
@@ -44,12 +52,17 @@ exports.play = {
 
 ## 启用并发模式
 
-如果你使用了React 18.x，并希望在调试组件时试一试并发模式，那么你可以通过`exports.play.defaultEnableConcurrentMode`配置来打开它：
+如果你使用了React 18.x，并希望在调试组件时试一试并发模式，那么你可以通过`play.defaultEnableConcurrentMode`配置来打开它：
 
-```js
-exports.play = {
-    defaultEnableConcurrentMode: true,
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        play: {
+            defaultEnableConcurrentMode: true,
+        },
+    }
+);
 ```
 
 当打开这个配置时，`skr play`生成的代码会使用`createRoot`代替`render`，以此开启并发模式。

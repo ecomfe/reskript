@@ -18,7 +18,7 @@ title: 多应用入口
         /entrise
             index.tsx
             hello.tsx
-    reskript.config.js
+    reskript.config.ts
 ```
 
 然后使用`skr build`进行编译，可以看到它的编译产出：
@@ -62,10 +62,15 @@ title: 多应用入口
 
 如果你需要应用放置在一个固定的`<div>`元素中，比如常见的`<div id="root">`，可以通过[构建配置](../settings/build)中的`appContainerId`来设置，不需要额外增加自己的自定义模板文件，比如用下面的配置就能默认生成一个`<div id="root"></div>`在HTML中：
 
-```js
-exports.build = {
-    appContainerId: 'root',
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            appContainerId: 'root',
+        },
+    }
+);
 ```
 
 当然很多时候，我们还是希望能够定制HTML的结构，比如加入一些系统加载的动画等。在这种情况下，我们在`src/entries`下放置一个与对应的JavaScript文件同名的`.ejs`文件，例如我们编写一个`src/entries/index.ejs`文件，写入以下内容：
@@ -121,10 +126,10 @@ exports.build = {
 
 众所周知地，基于`webpack`的工具使用[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)生成HTML文件，这个插件有着众多的配置，我们同样可以对它进行自定义。
 
-我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
+我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.{mjs|ts}`文件，如`src/entries/hello.config.{mjs|ts}`文件，并放置以下内容：
 
-```javascript
-exports.html = {
+```ts
+export const html = {
     meta: {
         'X-UA-Compatible': {
             'http-equiv': 'X-UA-Compatible',
@@ -153,16 +158,16 @@ exports.html = {
 
 可以看到一个`X-UA-Compatible`已经加入到了`<head>`中。
 
-总而言之，同名的`.config.js`中的`exports.html`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
+总而言之，同名的`.config.{mjs|ts}`中的`export const html`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
 
 ## 自定义入口配置
 
 在正常逻辑下，`reSKRipt`会根据入口（`src/entries/*`）文件生成对应的带有哈希的文件。如果你熟悉[Webpack的入口配置](https://webpack.js.org/concepts/entry-points/#entrydescription-object)，我们支持你做一些自定义的配置。
 
-假设我们希望一个入口在产出时不要加上哈希，并指定一个固定的产出文件名，我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.js`文件，如`src/entries/hello.config.js`文件，并放置以下内容：
+假设我们希望一个入口在产出时不要加上哈希，并指定一个固定的产出文件名，我们可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.{mjs|ts}`文件，如`src/entries/hello.config.{mjs|ts}`文件，并放置以下内容：
 
 ```javascript
-exports.entry = {
+export const entry = {
     filename: 'hello.dist.js',
 };
 ```
@@ -179,13 +184,13 @@ exports.entry = {
 
 对于一个指定的目录`entriesDirectory`（通常是`src/entries`），`reSKRipt`会使用以下规则收集入口：
 
-- `${entriesDirectory}/*.{js,ts,jsx,tsx}`作为入口文件，此时对应名称的`*.ejs`作为可选的HTML模板，`*.config.js`作为可选的入口配置文件。
-- `${entriesDirectory}/*/index.{js,ts,jsx,tsx}`当`*`为一个目录并且有`index`命名的代码文件时，该文件作为入口，对应的`*/index.ejs`作为可选的HTML模板，`*/index.config.js`作为可选的入口配置文件。
+- `${entriesDirectory}/*.{js,ts,jsx,tsx}`作为入口文件，此时对应名称的`*.ejs`作为可选的HTML模板，`*.config.{mjs,ts}`作为可选的入口配置文件。
+- `${entriesDirectory}/*/index.{js,ts,jsx,tsx}`当`*`为一个目录并且有`index`命名的代码文件时，该文件作为入口，对应的`*/index.ejs`作为可选的HTML模板，`*/index.config.{mjs,ts}`作为可选的入口配置文件。
 
-以`src/entries`作为入口目录为例，以下均是合法的入口：
+以`src/entries`作为入口目录、`.ts`作为配置文件为例，以下均是合法的入口：
 
-- `src/entries/foo.js`、`src/entries/foo.config.js`、`src/entries/foo.ejs`。
-- `src/entries/bar/index.js`、`src/entries/bar/index.config.js`、`src/entries/bar/index.ejs`。
+- `src/entries/foo.js`、`src/entries/foo.config.ts`、`src/entries/foo.ejs`。
+- `src/entries/bar/index.js`、`src/entries/bar/index.config.ts`、`src/entries/bar/index.ejs`。
 
 但**目录结构只限一层**，以下**并不是**合法的入口：
 

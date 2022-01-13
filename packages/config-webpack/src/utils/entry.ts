@@ -18,7 +18,7 @@ const validateEntryConfig = (config: EntryConfig, file: string) => {
 
 const readEntryConfig = async (fileBaseName: string): Promise<EntryConfig> => {
     try {
-        const {default: config} = await importUserModule<{default: EntryConfig}>(fileBaseName, {default: {}});
+        const config = await importUserModule<EntryConfig>(fileBaseName, {});
         validateEntryConfig(config, fileBaseName);
         return config;
     }

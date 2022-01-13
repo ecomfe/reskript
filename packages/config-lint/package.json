@@ -8,6 +8,8 @@
     "./patch": "./config/patch.cjs",
     "./config/*": "./config/*.cjs"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=14.18.0"
   },

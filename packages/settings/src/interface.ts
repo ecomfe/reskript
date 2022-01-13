@@ -171,7 +171,10 @@ export type SettingsPlugin<C extends PluginOptions = PluginOptions> = (
     cmd: C
 ) => ProjectSettings | Promise<ProjectSettings>;
 
+export type ReskriptProvider = 'webpack';
+
 export interface ProjectSettings extends ProjectAware {
+    readonly provider: ReskriptProvider;
     readonly featureMatrix: FeatureMatrix;
     readonly build: BuildSettings;
     readonly devServer: DevServerSettings;

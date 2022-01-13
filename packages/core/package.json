@@ -6,6 +6,8 @@
   "exports": {
     ".": "./dist/index.js"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=14.18.0"
   },
@@ -35,10 +37,12 @@
     "vitest": "^0.0.115"
   },
   "dependencies": {
+    "bundle-require": "^2.2.0",
     "caller": "^1.0.1",
     "dedent": "^0.7.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
+    "esbuild": "^0.14.8",
     "find-up": "^6.2.0",
     "g-status": "^2.0.2",
     "globby": "^12.2.0",

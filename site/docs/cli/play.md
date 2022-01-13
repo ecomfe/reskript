@@ -18,6 +18,6 @@ title: 调试单个组件
 -h, --help              显示帮助信息
 ```
 
-其中`--setup`会覆盖`reskript.config.js`中的`exports.play.defaultGlobalSetup`配置。`--concurrent-mode`会覆盖`exports.play.defaultEnableConcurrentMode`配置。
+其中`--setup`会覆盖`reskript.config.{mjs|ts}`中的`play.defaultGlobalSetup`配置。`--concurrent-mode`会覆盖`play.defaultEnableConcurrentMode`配置。
 
 参考[配置 - 单组件调试配置](../settings/play)了解更多配置内容。更多单组件调试的高级手段可参考[高阶应用 - 调试单个组件](../advanced/debug-component)章节的详细说明。

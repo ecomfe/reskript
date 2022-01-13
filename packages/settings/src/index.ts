@@ -3,17 +3,22 @@ import {existsSync} from 'fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
 import {importUserModule, logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
-import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
+import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptProvider} from './interface';
 import validate from './validate';
 import {fillProjectSettings, PartialProjectSettings} from './defaults';
 import {applyPlugins} from './plugins';
 
 export * from './interface';
 export {fillProjectSettings, PartialProjectSettings};
+
 const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
 
-interface UserProjectSettings extends PartialProjectSettings {
+export interface UserSettings extends Omit<PartialProjectSettings, 'provider'> {
     plugins?: ClientProjectSettings['plugins'];
+}
+
+export interface UserProjectSettings extends UserSettings {
+    provider: ReskriptProvider;
 }
 
 const locateSettings = (cwd: string): string | null => {
@@ -24,7 +29,7 @@ const locateSettings = (cwd: string): string | null => {
 const importSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
     const imported = await importUserModule<UserProjectSettings | {default: UserProjectSettings}>(
         path.join(cmd.cwd, 'reskript.config'),
-        {default: {}}
+        {default: {provider: 'webpack'}}
     );
     const userSettings = 'default' in imported ? imported.default : imported;
 
@@ -52,7 +57,7 @@ interface CacheContainer {
 const cache: CacheContainer = {
     initialized: false,
     hash: '',
-    settings: fillProjectSettings({}),
+    settings: fillProjectSettings({provider: 'webpack'}),
     listen: null,
 };
 
@@ -132,4 +137,8 @@ export const strictCheckRequiredDependency = async (projectSettings: ProjectSett
         logger.error('You require polyfill on build but don\'t have core-js installed.');
         process.exit(13);
     }
+};
+
+export const configure = (provider: 'webpack', settings: UserSettings): UserProjectSettings => {
+    return {...settings, provider};
 };

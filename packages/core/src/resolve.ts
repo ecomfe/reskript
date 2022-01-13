@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import {fileURLToPath} from 'url';
+import {bundleRequire} from 'bundle-require';
 import resolveCore from 'resolve';
 import caller from 'caller';
 
@@ -28,16 +29,14 @@ export const resolveSync = (id: string) => {
     return resolveCore.sync(id, {basedir: callerPath});
 };
 
-const USER_MODULES_EXTENSIONS = ['.js', '.cjs'];
+const USER_MODULES_EXTENSIONS = ['.ts', '.mjs'];
 
 export const importUserModule = async <T>(moduleName: string, defaultValue?: T): Promise<T> => {
     const target = USER_MODULES_EXTENSIONS.map(v => moduleName + v).find(fs.existsSync);
 
     if (target) {
-        // NOTE: 如果要改成原生ESM的话，这里得想个别的办法
-        delete require.cache[target];
-        const value = await import(target);
-        return value;
+        const {mod} = await bundleRequire({filepath: target});
+        return mod;
     }
 
     if (defaultValue) {

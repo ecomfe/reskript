@@ -4,14 +4,14 @@ title: 调试服务器配置
 
 ## 配置结构
 
-`reskript.config.js`中的`exports.devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
+`reskript.config.{mjs|ts}`中的`devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
 
 ```ts
 export type DevServerHttps = {proxy: boolean} & ({} | {client: true, serverOptions?: ServerOptions});
 
 interface DevServerSettings {
     // 是否以HTTPS协议代理请求及启动调试服务器
-    readonly https: boolean | DevServerHttps;
+    readonly https: DevServerHttps;
     // 监听的端口
     readonly port: number;
     // 代理给后端的API请求的URL前缀
@@ -44,11 +44,16 @@ interface DevServerSettings {
 
 比如在产品中，以`/api`和`/rest`为前缀的请求都是后端的API，后端的地址为`my-app.dev`，测试环境暴露在端口`8788`上，使用HTTP协议，那么可以使用如下的配置：
 
-```js
-exports.devServer = {
-    apiPrefixes: ['/api', '/rest'],
-    defaultProxyDomain: 'my-app.dev:8788',
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            apiPrefixes: ['/api', '/rest'],
+            defaultProxyDomain: 'my-app.dev:8788',
+        },
+    }
+);
 ```
 
 ### 启用HTTPS
@@ -61,26 +66,36 @@ exports.devServer = {
 
 如果仅需要代理后端的API时使用HTTPS协议：
 
-```js
-exports.devServer = {
-    https: {
-        proxy: true,
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            https: {
+                proxy: true,
+            },
+        },
+    }
+);
 ```
 
 如果需要响应前端请求时使用HTTPS协议：
 
-```js
-exports.devServer = {
-    https: {
-        client: true,
-        serverOptions: {
-            key: './path/to/server.key',
-            cert: './path/to/server.crt',
+```ts
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            https: {
+                client: true,
+                serverOptions: {
+                    key: './path/to/server.key',
+                    cert: './path/to/server.crt',
+                },
+            },
         },
-    },
-};
+    }
+);
 ```
 
 如果你已经有系统级的证书可用于`localhost`，则可以不传递`serverOptions`参数。
@@ -102,16 +117,21 @@ unset https_proxy
 
 默认情况下，`skr dev`不会监听`node_modules`下的代码的变化。我们有理由相信这些代码并不会频繁变更，而大量的监听会影响调试服务器的性能和内存占用。
 
-如果你正好在调试第三方的包，需要主动去修改包的源码来确认问题，那么你可能不希望每一次修改都要重启服务。此时你可以通过`exports.devServer.finalize`来控制第三方包的监听：
+如果你正好在调试第三方的包，需要主动去修改包的源码来确认问题，那么你可能不希望每一次修改都要重启服务。此时你可以通过`devServer.finalize`来控制第三方包的监听：
 
-```js
-exports.devServer = {
-    finalize: devServerConfig => {
-        // 监听所有文件，当然你也可以写得更精确一些
-        devServerConfig.static.watch.ignored = undefined;
-        return devServerConfig;
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            finalize: devServerConfig => {
+                // 监听所有文件，当然你也可以写得更精确一些
+                devServerConfig.static.watch.ignored = undefined;
+                return devServerConfig;
+            },
+        },
+    }
+);
 ```
 
 具体参考[webpack的说明](https://webpack.js.org/configuration/dev-server/#watch)来实现。
@@ -120,7 +140,7 @@ exports.devServer = {
 
 ### 更换代理目标
 
-在有些团队中，不同的开发人员、版本会需要将后端API请求代理到不同的机器或域名、IP上去。但我们不希望每个人都修改一份自己的`reskript.config.js`并引起合并冲突等问题。
+在有些团队中，不同的开发人员、版本会需要将后端API请求代理到不同的机器或域名、IP上去。但我们不希望每个人都修改一份自己的`reskript.config.{mjs|ts}`并引起合并冲突等问题。
 
 为此，在`skr dev`的命令行上，我们支持`--proxy-domain`参数来覆盖`defaultProxyDomain`这一配置：
 
@@ -134,14 +154,19 @@ skr dev --proxy-domain=my-local-app.dev:8988
 
 对于此类情况，你可以使用`proxyRewrite`配置，例如以下的配置：
 
-```js
-exports.devServer = {
-    defaultProxyDomain: 'my-app.dev:8788',
-    proxyRewrite: {
-        '/api/user': 'user-app.dev:8786',
-        '/api/inventory': 'inventory-app.dev:8787',
-    },
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            defaultProxyDomain: 'my-app.dev:8788',
+            proxyRewrite: {
+                '/api/user': 'user-app.dev:8786',
+                '/api/inventory': 'inventory-app.dev:8787',
+            },
+        },
+    }
+);
 ```
 
 是述配置表达了如下的转发规则：
@@ -154,7 +179,7 @@ exports.devServer = {
 
 ## 关于热更新
 
-热更新在实际的开发调试中有着非常强的效率提升效果，`reSKRipt`内置集成了热更新相关的逻辑，简化了它的对外配置，`exports.devServer.hot`被设计为一个`boolean`类型：
+热更新在实际的开发调试中有着非常强的效率提升效果，`reSKRipt`内置集成了热更新相关的逻辑，简化了它的对外配置，`devServer.hot`被设计为一个`boolean`类型：
 
 - `hot: true`：尽可能地启用不同类型资源的热更新，包括使用`react-refresh`进行组件热更新。
 - `hot: false`：完全关闭热更新。
@@ -165,30 +190,38 @@ exports.devServer = {
 
 ## 扩展配置
 
-如果你需要最终再对`webpack-dev-server`的配置做自己的调整，可以使用`exports.devServer.finalize`配置。这个配置是一个函数，第一个参数是最终生成的`webpack-dev-server`配置对象，第二个参数是`BuildEntry`对象。
+如果你需要最终再对`webpack-dev-server`的配置做自己的调整，可以使用`devServer.finalize`配置。这个配置是一个函数，第一个参数是最终生成的`webpack-dev-server`配置对象，第二个参数是`BuildEntry`对象。
 
 在上文中你已经看到如何利用这一配置实现对第三方代码的变更的监听。再比如你想要给调试服务器增加一个`/version`的路由，访问时返回当前产品的版本号，也是可以通过扩展来实现的：
 
-```js
-const pacakgeInfo = require('./package.json');
+```ts
+import fs from 'node:fs';
+import {configure} from '@reskript/settings';
 
-exports.devServer = {
-    finalize: devServerConfig => {
-        // 记得调用之前已经有的配置，不要太暴力覆盖
-        const {setupMiddlewares} = devServerConfig;
-        devServerConfig.setupMiddlewares = (middlewares, devServer) => {
-            const returnValue = setupMiddlewares?.(devServer) ?? middlewares;
-            devServer.app.get(
-                '/version',
-                (req, res) => {
-                    res.status(200).type('html').end(`${packageInfo.name}@${packageInfo.version}`);
-                }
-            );
-            return returnValue;
-        };
-        return devServerConfig;
-    },
-};
+const pacakgeInfo = JSON.parse(fs.readFileSync('./package.json'), 'utf-8');
+
+export default configure(
+    'webpack',
+    {
+        devServer: {
+            finalize: devServerConfig => {
+                // 记得调用之前已经有的配置，不要太暴力覆盖
+                const {setupMiddlewares} = devServerConfig;
+                devServerConfig.setupMiddlewares = (middlewares, devServer) => {
+                    const returnValue = setupMiddlewares?.(devServer) ?? middlewares;
+                    devServer.app.get(
+                        '/version',
+                        (req, res) => {
+                            res.status(200).type('html').end(`${packageInfo.name}@${packageInfo.version}`);
+                        }
+                    );
+                    return returnValue;
+                };
+                return devServerConfig;
+            },
+        },
+    }
+);
 ```
 
 关于`devServer.setupMiddlewares`可以参考[官方文档](https://webpack.js.org/configuration/dev-server/#devserversetupmiddlewares)。

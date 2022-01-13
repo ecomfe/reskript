@@ -42,7 +42,7 @@ npm install -D @types/react @types/react-dom
 
 ### 代码检查
 
-在项目目录下创建一个`.eslintrc.js`，内容如下：
+在项目目录下创建一个`.eslintrc.cjs`，内容如下：
 
 ```js
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-再增加一个`stylelint.config.js`，内容如下：
+再增加一个`stylelint.config.cjs`，内容如下：
 
 ```js
 module.exports = {
@@ -68,6 +68,7 @@ module.exports = {
 {
     "include": [
         "src",
+        "./*.ts"
     ],
     "compilerOptions": {
         "module": "CommonJS",
@@ -123,16 +124,22 @@ module.exports = {
 
 ### 项目配置
 
-在项目目录下创建一个`reskript.config.js`文件，简单地填空如下内容：
+在项目目录下创建一个`reskript.config.ts`文件，简单地填空如下内容：
 
-```js
-exports.build = {
-    appTitle: '我的第一个应用',
-};
+```ts
+import {configure} from '@reskript/settings';
 
-exports.devServer = {
-    port: 8081,
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            appTitle: '我的第一个应用',
+        },
+        devServer: {
+            port: 8081,
+        },
+    }
+);
 ```
 
 你可以通过[配置文件](../settings)来了解更多的配置信息。
@@ -145,10 +152,10 @@ exports.devServer = {
 /src
     /entries
         index.tsx # 主入口文件
-.eslintrc.js
-.stylelint.config.js
+.eslintrc.cjs
+.stylelint.config.cjs
 webpack.config.js
-reskript.config.js
+reskript.config.ts
 package.json
 package-lock.json
 ```

@@ -2,7 +2,8 @@
   "name": "@reskript/config-jest",
   "version": "3.0.6",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=14.18.0"
   },

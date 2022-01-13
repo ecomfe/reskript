@@ -1,4 +1,4 @@
-exports.html = {
+export const html = {
     meta: {
         title: 'bob',
     },

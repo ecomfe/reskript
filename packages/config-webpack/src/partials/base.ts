@@ -34,11 +34,14 @@ const readFileIfExists = async (filename: string) => {
     return Buffer.from('');
 };
 
-const updateHashFromFile = async (hash: crypto.Hash, filename: string) => {
+const updateHashFromFile = async (hash: crypto.Hash, filename: string): Promise<boolean> => {
     if (existsSync(filename)) {
         const buffer = await fs.readFile(filename);
         hash.update(buffer);
+        return true;
     }
+
+    return false;
 };
 
 const computeCacheKey = async (entry: BuildContext): Promise<string> => {
@@ -50,12 +53,9 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
     // `reSKRipt`自己的版本信息等
     await updateHashFromFile(hash, path.join(dirFromImportMeta(import.meta.url), '..', '..', 'package.json'));
 
-    const settingsLocation = path.join(entry.cwd, 'reskript.config.js');
-    if (existsSync(settingsLocation)) {
-        const buffer = await fs.readFile(settingsLocation);
-        hash.update(buffer);
-    }
-    else {
+    const hasTypeScriptSetting = await updateHashFromFile(hash, path.join(entry.cwd, 'reskript.config.ts'));
+    const hasJavaScriptSetting = await updateHashFromFile(hash, path.join(entry.cwd, 'reskript.config.mjs'));
+    if (!hasTypeScriptSetting && !hasJavaScriptSetting) {
         hash.update(JSON.stringify(entry.projectSettings));
         hash.update(entry.projectSettings.build.script.finalize.toString());
         hash.update(entry.projectSettings.build.finalize.toString());
@@ -127,7 +127,7 @@ const factory: ConfigurationFactory = async entry => {
         eslintPath: resolveSync('eslint'),
         baseConfig: getScriptLintBaseConfig({cwd}),
         exclude: ['node_modules', 'externals'],
-        extensions: ['js', 'jsx', 'ts', 'tsx'],
+        extensions: ['js', 'cjs', 'mjs', 'jsx', 'ts', 'tsx'],
         emitError: true,
         emitWarning: usage === 'devServer',
     };

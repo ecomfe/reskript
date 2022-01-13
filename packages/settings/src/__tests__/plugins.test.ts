@@ -5,7 +5,7 @@ import {ProjectSettings, SettingsPlugin} from '../interface';
 import {applyPlugins} from '../plugins';
 
 test('one plugin', async () => {
-    const settings: ProjectSettings = fillProjectSettings({devServer: {}});
+    const settings: ProjectSettings = fillProjectSettings({provider: 'webpack', devServer: {}});
     const plugin = jest.fn((settings: ProjectSettings, cmd: ProjectAware): ProjectSettings => {
         return {
             ...settings,
@@ -25,7 +25,7 @@ test('one plugin', async () => {
 });
 
 test('multiple plugins', async () => {
-    const settings: ProjectSettings = fillProjectSettings({devServer: {}});
+    const settings: ProjectSettings = fillProjectSettings({provider: 'webpack', devServer: {}});
     const port = (settings: ProjectSettings): ProjectSettings => {
         return {
             ...settings,
@@ -50,7 +50,7 @@ test('multiple plugins', async () => {
 });
 
 test('plugins factory', async () => {
-    const settings: ProjectSettings = fillProjectSettings({devServer: {}});
+    const settings: ProjectSettings = fillProjectSettings({provider: 'webpack', devServer: {}});
     const port: SettingsPlugin = settings => {
         return {
             ...settings,

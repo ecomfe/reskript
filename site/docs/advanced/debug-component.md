@@ -20,7 +20,7 @@ npm install --save-dev @reskript/cli-play`
 skr play src/components/Loading/index.tsx
 ```
 
-你可以参阅[命令行 - 调试单个组件](../cli/play)了解命令行上可用的参数，或参考[配置 - 单组件调试配置](../settings/play)了解在`reskript.config.js`中用作单组件调试的各项配置。
+你可以参阅[命令行 - 调试单个组件](../cli/play)了解命令行上可用的参数，或参考[配置 - 单组件调试配置](../settings/play)了解在`reskript.config.{mjs|ts}`中用作单组件调试的各项配置。
 
 等待一段时间，命令行中会显示出调试服务器的信息：
 
@@ -42,7 +42,7 @@ skr play src/components/Loading/index.tsx
 
 另外，热更新也是默认支持的，你可以修改`src/components/Loading/index.tsx`文件的内容，浏览器中会自动刷新。
 
-如果组件需要发请求，那么`reskript.config.js`中的`exports.devServer`中代理API相关的配置也会地生效，可以正常地把请求代理给后端服务。
+如果组件需要发请求，那么`reskript.config.{mjs|ts}`中的`devServer`中代理API相关的配置也会地生效，可以正常地把请求代理给后端服务。
 
 ## 组件调试配置
 
@@ -59,7 +59,7 @@ skr play src/components/Loading/index.tsx
 
 这个文件将用于组件通过`skr play`调试时的上下文配置。每一个配置文件可以导出`wrapper`和`provides`两个变量，以下是一个示例：
 
-```jsx
+```tsx
 import HeadingRow from '@/components/HeadingRow';
 
 export const provides = {

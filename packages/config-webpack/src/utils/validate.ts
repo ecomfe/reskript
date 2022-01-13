@@ -46,7 +46,7 @@ export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
 
     if (!packageConfig?.husky?.hooks?.['pre-commit']) {
         const warning = `
-            This project has reportLintErrors option disabled in reskript.config.js,
+            This project has reportLintErrors option disabled in reSKRipt config,
             and there is no pre-commit hook to lint your files,
             you should at least install husky to enable pre-commit hook.
 

@@ -63,7 +63,7 @@ module.exports = {
 
 ### 样式代码检查
 
-很遗憾地，因为种种原因，`skr lint`在样式文件的检查上仅支持当前目录（`process.cwd()`）下的`stylelint.config.js`这一个文件作为自定义配置，不支持任何子目录内的配置文件，也**不支持**诸如`.stylelintrc.json`之类的其它文件：
+很遗憾地，因为种种原因，`skr lint`在样式文件的检查上仅支持当前目录（`process.cwd()`）下的`stylelint.config.cjs`这一个文件作为自定义配置，不支持任何子目录内的配置文件，也**不支持**诸如`.stylelintrc.json`之类的其它文件：
 
 ```js
 module.exports = {

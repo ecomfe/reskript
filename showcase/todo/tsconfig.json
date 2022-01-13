@@ -1,6 +1,7 @@
 {
     "include": [
         "src",
+        "./*.ts"
     ],
     "compilerOptions": {
         "module": "ESNext",

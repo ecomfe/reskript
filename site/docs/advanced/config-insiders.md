@@ -61,7 +61,7 @@ function FooBar() {
 无论是`build`还是`dev`，都会把缓存写到文件系统中（这可以让`skr dev`打开无比迅速），以下内容会参与到缓存的key的计算中：
 
 - `package.json`的内容。
-- `reskript.config.json`的内容。
+- `reskript.config.{mjs|ts}`的内容。
 - `package-lock.json`或`node_modules/.yarn-integrity`的内容。
 - `.browserslistrc`的内容。
 - 执行的命令，即`build`或`dev`之类的。
@@ -85,7 +85,7 @@ function FooBar() {
 
 `process.env`中的所有内容都通过`DefinePlugin`注入了，可以直接以`process.env.FOO_BAR`的形式来使用。
 
-在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在`reskript.config.js`里的`exports.featureMatrix`中的东西，都可以用`$features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
+在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在`reskript.config.{mjs|ts}`里的`featureMatrix`中的东西，都可以用`$features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
 
 另外你还能用`$build.`前缀来拿到当前构建的一些元信息，这个元信息的结构大致如下：
 
@@ -122,7 +122,7 @@ interface BuildInfo {
 
 ### 文件监听
 
-当`reskript.config.js`有变化（实际内容有变化）时，服务器会重启。因为这个变化基本肯定也会影响缓存的key，所以这次重启是比较慢的，请耐心等待。
+当`reSKRipt`配置文件有变化（实际内容有变化）时，服务器会重启。因为这个变化基本肯定也会影响缓存的key，所以这次重启是比较慢的，请耐心等待。
 
 `node_modules`下的东西默认不监听变化，有需要的请参考[配置的文档](../settings/dev-server#监听第三方代码变更)来修改配置。记得调试完第三方包后改回去，不然内存爆炸。
 

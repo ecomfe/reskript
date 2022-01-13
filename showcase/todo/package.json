@@ -26,6 +26,7 @@
     "@reskript/cli-test": "3.0.6",
     "@reskript/config-lint": "3.0.6",
     "@reskript/plugin-qiankun": "3.0.6",
+    "@reskript/settings": "3.0.6",
     "@reskript/webpack-plugin-extra-script": "3.0.6",
     "@testing-library/react": "^12.1.2",
     "@types/ramda": "^0.27.62",

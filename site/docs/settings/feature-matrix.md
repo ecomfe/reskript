@@ -8,14 +8,19 @@ title: 特性矩阵配置
 
 ### 定义矩阵
 
-在`reskript.config.js`中增加`exports.featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
+在`reskript.config.{mjs|ts}`中增加`featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
 
-```js
-exports.featureMatrix = {
-    stable: {},
-    insiders: {},
-    dev: {},
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        featureMatrix: {
+            stable: {},
+            insiders: {},
+            dev: {},
+        },
+    }
+);
 ```
 
 这个对象的每一个属性代表一个构建后的入口（`dev`除外），我们称之为“特性名称”，对应的值则称为“特性名”。最终生成的HTML会以`{entryName}-{featureName}.html`命名。例如由`src/entries/index.tsx`构建的`insiders`版本，就会是`index-insiders.html`。
@@ -28,7 +33,7 @@ exports.featureMatrix = {
 
 在项目的源码中，可以使用`$features.someKey`来引用某一个特性。引用特性的代码类似于`process.env.NODE_ENV`，必须是一个完整的串，不可以有任何的动态性，例如下面的写法都是**不可用**的：
 
-```js
+```ts
 const myKey = 'someKey';
 $features[myKey];
 
@@ -69,14 +74,19 @@ Build target foo & bar have incompatible feature schema
 
 ### 从构建中排除其它特性集
 
-如上文所述，默认情况下`dev`这一特性集是被排除在构建之外的，如果你需要同样排除其它的构建集，也可以使用`exports.build.excludeFeatures`配置来解决。在使用这个配置时，原有的排除`dev`的行为会被禁掉，你需要手动把它加回来。
+如上文所述，默认情况下`dev`这一特性集是被排除在构建之外的，如果你需要同样排除其它的构建集，也可以使用`build.excludeFeatures`配置来解决。在使用这个配置时，原有的排除`dev`的行为会被禁掉，你需要手动把它加回来。
 
 例如你想要同时排除`dev`和`local`这两个特性集，那么这样配置：
 
-```js
-exports.build = {
-    excludeFeatures: ['dev', 'local'],
-};
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            excludeFeatures: ['dev', 'local'],
+        },
+    }
+);
 ```
 
 ## 正确使用
@@ -100,7 +110,7 @@ exports.build = {
 
 因此，对于环境我们依然推荐用`process.env`来做区分，例如：
 
-```js
+```ts
 if (process.env.TRACK !== 'off') {
     enableUserTrack();
 }

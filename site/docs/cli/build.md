@@ -24,7 +24,7 @@ title: 构建应用
 -h, --help                  显示帮助信息
 ```
 
-除命令行参数外，`reskript.config.js`中的[`build`](../settings/build)配置也会影响构建的行为。
+除命令行参数外，`reskript.config.{mjs|ts}`中的[`build`](../settings/build)配置也会影响构建的行为。
 
 ## 指定目标特性集
 
