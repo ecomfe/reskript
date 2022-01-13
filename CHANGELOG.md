@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/ecomfe/reskript/compare/v3.0.1...v3.0.2) (2022-01-13)
+
+
+### Bug Fixes
+
+* **dev:** 修复无法在编辑器打开组件文件的问题 ([#229](https://github.com/ecomfe/reskript/issues/229)) ([d875199](https://github.com/ecomfe/reskript/commit/d875199b7c7c806487431d1a7ae5efc5380c430e))
+
+
+
+
+
 ## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
 
 
