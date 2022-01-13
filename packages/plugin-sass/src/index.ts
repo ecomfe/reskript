@@ -2,7 +2,7 @@ import resolve from 'resolve';
 import sass from 'sass';
 import {normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin, BuildSettings, LoaderType} from '@reskript/settings';
-import {SassLoaderOptions} from './interface';
+import {SassLoaderOptions} from './interface.js';
 
 export default (options: SassLoaderOptions = {}): SettingsPlugin => {
     const finalizeBuild: BuildSettings['finalize'] = (config, entry, internals) => {

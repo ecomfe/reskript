@@ -1,7 +1,7 @@
 import path from 'path';
 import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger, readPackageConfig, pMap} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
-import {Options, LocalPackageInfo} from './interface';
+import {Options, LocalPackageInfo} from './interface.js';
 
 export const resolveParticipant = (defaults: LocalPackageInfo[], {includes, excludes}: Options) => {
     // 如果2个都没有，就用默认的

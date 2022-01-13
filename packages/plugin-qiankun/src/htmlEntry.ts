@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
+// @ts-expect-error
 import dedent from 'dedent';
-import {Options, TemplateConfig, PlaceholderConfig} from './interface';
+import {Options, TemplateConfig, PlaceholderConfig} from './interface.js';
 
 const DEFAULT_BACKGROUND_COLOR = '#f5f5f5';
 

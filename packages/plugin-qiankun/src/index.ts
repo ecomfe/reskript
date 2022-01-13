@@ -1,8 +1,8 @@
 import {SettingsPlugin, BuildSettings, DevServerSettings} from '@reskript/settings';
 import {Request, Response} from 'webpack-dev-server';
-import {Options} from './interface';
-import htmlEntry from './htmlEntry';
-import runtimeEntry from './runtimeEntry';
+import {Options} from './interface.js';
+import htmlEntry from './htmlEntry.js';
+import runtimeEntry from './runtimeEntry.js';
 
 export default (appName: string, options?: Options): SettingsPlugin => {
     const finalizeBuild: BuildSettings['finalize'] = config => {

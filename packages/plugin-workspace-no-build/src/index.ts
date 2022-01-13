@@ -1,8 +1,14 @@
 import path from 'path';
 import {logger, isMonorepo, normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin} from '@reskript/settings';
-import {Options, LocalPackageInfo} from './interface';
-import {resolveParticipant, findSiblingPackages, buildPackageInfo, buildPeerAlias, checkDependencyGraph} from './utils';
+import {Options, LocalPackageInfo} from './interface.js';
+import {
+    resolveParticipant,
+    findSiblingPackages,
+    buildPackageInfo,
+    buildPeerAlias,
+    checkDependencyGraph,
+} from './utils.js';
 
 export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}) => {
     const isWorkspace = await isMonorepo(cwd);

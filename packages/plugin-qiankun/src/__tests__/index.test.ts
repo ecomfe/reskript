@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {fillProjectSettings} from '@reskript/settings';
 import plugin from '../index';
 

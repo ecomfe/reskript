@@ -1,9 +1,7 @@
 import path from 'path';
 import {configure} from '@reskript/settings';
 import ExtraScriptPlugin from '@reskript/webpack-plugin-extra-script';
-import qiankunExports from '@reskript/plugin-qiankun';
-
-const {default: qiankun} = qiankunExports as any;
+import qiankun from '@reskript/plugin-qiankun';
 
 const EXTERNAL_NONE = 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js';
 

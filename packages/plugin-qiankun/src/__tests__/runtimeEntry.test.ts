@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import runtimeEntry from '../runtimeEntry';
 
 test('output bundle', async () => {
