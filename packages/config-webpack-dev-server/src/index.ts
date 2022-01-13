@@ -105,7 +105,7 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
             options: https?.client ? https.serverOptions : undefined,
         },
         setupMiddlewares: middlewares => {
-            middlewares.push({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
+            middlewares.unshift({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
             return middlewares;
         },
     };

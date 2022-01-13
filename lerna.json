@@ -9,7 +9,7 @@
   "command": {
     "version": {
       "allowBranch": [
-        "master"
+        "v3-slow-life"
       ],
       "ignoreChanges": [
         "**/*.md",
