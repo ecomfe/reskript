@@ -2,7 +2,7 @@ import {findLast, reject, isNil} from 'ramda';
 import parse from 'remark-parse';
 import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
-import unified from 'unified';
+import {unified} from 'unified';
 import {Content, Root, Text, Code, List} from 'mdast';
 import {currentUserName, pMap} from '@reskript/core';
 import {PlayCase, PlayCaseMeta} from '../interface.js';
@@ -106,7 +106,7 @@ interface ParseContext {
 }
 
 export const splitToCaseNodes = (markdown: string): Content[][] => {
-    const root = parser.parse(markdown) as Root;
+    const root = parser.parse(markdown);
     const {saved, workingInProgress} = root.children.reduce(
         (context, node) => {
             // 每个二级标题是一个用例

@@ -1,8 +1,8 @@
-import resolve from 'resolve';
 import {RuleSetUseItem} from 'webpack';
 import gif from 'imagemin-gifsicle';
 import jpeg from 'imagemin-mozjpeg';
 import png from 'imagemin-optipng';
+import {resolveSync} from '@reskript/core';
 
 const pluginOptions = {
     gifsicle: {
@@ -26,7 +26,7 @@ export default (): RuleSetUseItem => {
     ];
 
     return {
-        loader: resolve.sync('img-loader'),
+        loader: resolveSync('img-loader'),
         options: {plugins},
     };
 };

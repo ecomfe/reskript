@@ -1,7 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const prettier = require('prettier');
-const {getJestPresetConfig} = require('../dist');
+import fs from 'fs';
+import path from 'path';
+import prettier from 'prettier';
+import {dirFromImportMeta} from '@reskript/core';
+import {getJestPresetConfig} from '../dist/index.js';
 
 const dumpAsModule = (json, destination) => {
     // 有几个东西是用了`resolve('xxx')`变成了绝对路径，在这里要换回来再替换成`require.resolve`
@@ -41,7 +42,7 @@ const dumpAsModule = (json, destination) => {
 };
 
 const jestPresetConfig = target => getJestPresetConfig(target, '%RESKRIPT_NODE_MODULE_JEST_PATH%');
-const destination = path.join(__dirname, '..', 'config');
+const destination = path.join(dirFromImportMeta(import.meta.url), '..', 'config');
 fs.mkdirSync(destination, {recursive: true});
 dumpAsModule(jestPresetConfig('react'), path.join(destination, 'jest-react.js'));
 dumpAsModule(jestPresetConfig('node'), path.join(destination, 'jest-node.js'));

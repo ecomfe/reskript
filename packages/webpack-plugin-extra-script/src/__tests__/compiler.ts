@@ -2,17 +2,20 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
+import {dirFromImportMeta} from '@reskript/core';
 import {ScriptFactory, Options} from '../interface.js';
 import ExtraScriptPlugin from '../index.js';
+
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 export default (scriptOrFactory: ScriptFactory, options?: Options) => {
     const compiler = webpack({
         devtool: false,
         mode: 'development',
-        context: __dirname,
+        context: currentDirectory,
         entry: './fixtures/index.js',
         output: {
-            path: path.join(__dirname, 'output'),
+            path: path.join(currentDirectory, 'output'),
             filename: 'bundle.js',
         },
         plugins: [
@@ -39,7 +42,7 @@ export default (scriptOrFactory: ScriptFactory, options?: Options) => {
                 reject(new Error(result?.errors?.[0].message ?? 'Unknown error'));
             }
 
-            const output = fs.readFileSync(path.join(__dirname, 'output', 'index.html'), 'utf-8');
+            const output = fs.readFileSync(path.join(currentDirectory, 'output', 'index.html'), 'utf-8');
             resolve(output);
         });
     });

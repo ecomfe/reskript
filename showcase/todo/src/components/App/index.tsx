@@ -7,12 +7,19 @@ import List from '../List';
 import './lintIgnore';
 import c from './index.less';
 import './lintIgnore.global.css';
+import decoration from './decoration.png';
 
-const Title = styled.h1`
+const Header = styled.h1`
     font-size: 100px;
     margin: 0;
     text-align: center;
     color: rgba(175, 47, 47, .15);
+`;
+
+const Title = styled.span`
+    padding: 0 20px;
+    background: transparent url(${decoration}) no-repeat top 24px right 12px;
+    background-size: 23px 30px;
 `;
 
 const Meta = styled.aside`
@@ -66,7 +73,9 @@ export default function App() {
 
     return (
         <Layout className={c.root}>
-            <Title>todos</Title>
+            <Header>
+                <Title>todos</Title>
+            </Header>
             <Create onSubmit={createNew} />
             <Meta className="flex items-center justify-between">
                 {todos.length} things waiting

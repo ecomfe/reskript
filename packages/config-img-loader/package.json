@@ -28,18 +28,17 @@
     "@types/imagemin-mozjpeg": "^8.0.1",
     "@types/imagemin-optipng": "^5.2.1",
     "@types/node": "^17.0.4",
-    "@types/resolve": "^1.20.1",
-    "eslint": "^8.6.0",
-    "typescript": "4.6.0-dev.20220105",
+    "eslint": "^8.7.0",
+    "typescript": "4.6.0-dev.20220114",
     "webpack": "^5.65.0"
   },
   "dependencies": {
-    "imagemin": "^7.0.1",
+    "@reskript/core": "3.0.6",
+    "imagemin": "^8.0.1",
     "imagemin-gifsicle": "^7.0.0",
-    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
     "imagemin-optipng": "^8.0.0",
-    "img-loader": "^3.0.2",
-    "resolve": "^1.20.0"
+    "img-loader": "^4.0.0"
   },
   "peerDependencies": {
     "webpack": "5.x"

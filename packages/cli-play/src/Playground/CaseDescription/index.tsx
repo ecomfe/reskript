@@ -1,4 +1,4 @@
-import marked from 'marked';
+import {marked} from 'marked';
 import {PlayCase} from '../../interface.js';
 import './index.css';
 

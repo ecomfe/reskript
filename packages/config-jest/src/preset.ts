@@ -1,4 +1,4 @@
-import {merge} from 'ramda';
+import {mergeDeepRight} from 'ramda';
 import resolve from 'resolve';
 import unixify from 'unixify';
 import {JestConfigOptions} from './interface';
@@ -55,5 +55,5 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
         coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/'],
     };
     const targetConfig = target === 'react' ? reactJestConfig(configBasePath) : nodeJestConfig;
-    return merge(baseConfig, targetConfig);
+    return mergeDeepRight(baseConfig, targetConfig);
 };
