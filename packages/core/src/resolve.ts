@@ -3,6 +3,7 @@ import fs from 'fs';
 import {fileURLToPath} from 'url';
 import {bundleRequire} from 'bundle-require';
 import resolveCore from 'resolve';
+// @ts-expect-error
 import caller from 'caller';
 
 export const resolveFrom = (base: string) => (id: string) => {

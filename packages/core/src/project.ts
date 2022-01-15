@@ -1,10 +1,12 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
+import {packageDirectory} from 'pkg-dir';
+import {findUp} from 'find-up';
+import {globby} from 'globby';
 import {PackageInfo} from './interface.js';
 
 export const resolveCacheLocation = async (name: string): Promise<string> => {
-    const {packageDirectory} = await import('pkg-dir');
     const root = await packageDirectory();
 
     if (!root) {
@@ -21,7 +23,6 @@ export const readPackageConfig = async (cwd: string): Promise<PackageInfo> => {
 };
 
 export const findGitRoot = async (cwd?: string): Promise<string | undefined> => {
-    const {findUp} = await import('find-up');
     const gitDirectory = await findUp('.git', {cwd, type: 'directory'});
     return gitDirectory && path.dirname(gitDirectory);
 };
@@ -36,7 +37,6 @@ export const isMonorepo = async (cwd: string): Promise<boolean> => {
 };
 
 export const resolveMonorepoPackageDirectories = async (cwd: string): Promise<string[]> => {
-    const {globby} = await import('globby');
     const packageInfo = await readPackageConfig(cwd);
     const packages = packageInfo.workspaces
         ? (Array.isArray(packageInfo.workspaces) ? packageInfo.workspaces : packageInfo.workspaces.packages)
@@ -46,7 +46,6 @@ export const resolveMonorepoPackageDirectories = async (cwd: string): Promise<st
 };
 
 export const findMonorepoRoot = async (cwd: string): Promise<string> => {
-    const {findUp} = await import('find-up');
     const dir = await findUp('packages', {cwd, type: 'directory'});
 
     if (!dir) {

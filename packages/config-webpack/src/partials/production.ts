@@ -1,10 +1,10 @@
 import path from 'path';
 import {Configuration} from 'webpack';
+import {findUp} from 'find-up';
 import {filter} from 'ramda';
 import {ConfigurationFactory} from '../interface.js';
 
 const factory: ConfigurationFactory = async entry => {
-    const {findUp} = await import('find-up');
     const {cwd} = entry;
     const nodeModule = async (...segments: string[]): Promise<string> => {
         const name = path.join('node_modules', ...segments);

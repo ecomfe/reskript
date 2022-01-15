@@ -2,10 +2,11 @@ import path from 'path';
 import {existsSync} from 'fs';
 import childProcess from 'child_process';
 import {promisify} from 'util';
+import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
 // @ts-expect-error
 import {Command} from 'clipanion';
-import type {CommandDefinition} from '@reskript/core';
+import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
 
 const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
     return 'message' in error && 'code' in error;
@@ -27,8 +28,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
     protected readonly packageName: string = '';
 
     async execute() {
-        const {logger} = await import('@reskript/core');
-
         if (!this.packageName) {
             logger.error('No command package defined');
             process.exit(11);
@@ -52,7 +51,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async importCommandPackage() {
-        const {logger, resolveFrom} = await import('@reskript/core');
         const resolve = resolveFrom(process.cwd());
 
         const dynamicImport = async () => {
@@ -111,9 +109,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async canAutoInstall() {
-        const {readPackageConfig} = await import('@reskript/core');
-        const {packageDirectory} = await import('pkg-dir');
-
         const packageRoot = await packageDirectory();
 
         if (!packageRoot) {
@@ -128,8 +123,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async detectPackageManager(): Promise<PackageManager | null> {
-        const {findGitRoot} = await import('@reskript/core');
-
         const gitRoot = await findGitRoot();
 
         if (!gitRoot) {
@@ -150,8 +143,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
     }
 
     private async installCommandPackage(): Promise<InstallReuslt> {
-        const {logger} = await import('@reskript/core');
-
         const question = {
             type: 'confirm',
             name: 'ok',

@@ -1,4 +1,4 @@
-import {resolveSync} from '@reskript/core';
+import {resolveSync} from '@reskript/core/willBreakingInternalUseOnly';
 import {getParseOnlyBabelConfig} from '@reskript/config-babel/willBreakingInternalUseOnly';
 
 // 为了支持 IDE 和代码编辑工具使用 eslint 的配置，在 build 阶段会生成一份 .eslintrc 文件。参阅 scripts/post-build.js

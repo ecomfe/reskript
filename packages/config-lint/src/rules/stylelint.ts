@@ -1,4 +1,4 @@
-import {resolveSync} from '@reskript/core';
+import {resolveSync} from '@reskript/core/willBreakingInternalUseOnly';
 import lessSyntax from 'postcss-less';
 
 const config: Record<string, any> = {

@@ -1,8 +1,7 @@
+import {internalIpV4} from 'internal-ip';
 import {PlayCommandLineArgs} from '../interface.js';
 
 export const resolveHost = async (hostType: PlayCommandLineArgs['host']) => {
-    const {internalIpV4} = await import('internal-ip');
-
     if (!hostType) {
         return 'localhost';
     }

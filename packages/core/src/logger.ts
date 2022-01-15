@@ -1,5 +1,6 @@
 // @ts-expect-error
 import * as kolorist from 'kolorist';
+// @ts-expect-error
 import dedentString from 'dedent';
 import {isInDebugMode} from './flag.js';
 

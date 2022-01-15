@@ -71,8 +71,8 @@ module.exports = {
         "./*.ts"
     ],
     "compilerOptions": {
-        "module": "CommonJS",
-        "target": "es2018",
+        "module": "esnext",
+        "target": "esnext",
         "outDir": "dist",
         "noEmit": true,
         "jsx": "react-jsx",
