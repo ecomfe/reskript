@@ -1,12 +1,12 @@
+import {test, expect, vi} from 'vitest';
 import {ProjectAware} from '@reskript/core';
-import {ary} from 'lodash';
-import {fillProjectSettings} from '../defaults';
-import {ProjectSettings, SettingsPlugin} from '../interface';
-import {applyPlugins} from '../plugins';
+import {fillProjectSettings} from '../defaults.js';
+import {ProjectSettings, SettingsPlugin} from '../interface.js';
+import {applyPlugins} from '../plugins.js';
 
 test('one plugin', async () => {
     const settings: ProjectSettings = fillProjectSettings({provider: 'webpack', devServer: {}});
-    const plugin = jest.fn((settings: ProjectSettings, cmd: ProjectAware): ProjectSettings => {
+    const plugin = vi.fn((settings: ProjectSettings, cmd: ProjectAware): ProjectSettings => {
         return {
             ...settings,
             devServer: {
@@ -19,7 +19,9 @@ test('one plugin', async () => {
     const options = {cwd: 'cwd', command: 'build'};
     const output = await applyPlugins(settings, [plugin], options);
     expect(plugin).toHaveBeenCalled();
+    // @ts-expect-error
     expect(plugin.mock.calls[0][0]).toBe(settings);
+    // @ts-expect-error
     expect(plugin.mock.calls[0][1]).toBe(options);
     expect(output.devServer.port).toBe(8000);
 });
@@ -69,7 +71,7 @@ test('plugins factory', async () => {
             },
         };
     };
-    const factory = jest.fn(ary(() => [port, domain], 1));
+    const factory = vi.fn(() => [port, domain]);
     const output = await applyPlugins(settings, factory, {cwd: '', command: 'build'});
     expect(factory).toHaveBeenCalled();
     expect(factory.mock.calls[0][0]).toBe('build');

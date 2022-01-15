@@ -1,4 +1,4 @@
-import {merge} from 'lodash';
+import {merge} from 'ramda';
 import resolve from 'resolve';
 import unixify from 'unixify';
 import {JestConfigOptions} from './interface';

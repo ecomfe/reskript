@@ -1,4 +1,4 @@
-import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings, ReskriptProvider} from './interface';
+import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings, ReskriptProvider} from './interface.js';
 
 type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style' | 'inspect'> & {
     script?: Partial<BuildSettings['script']>;

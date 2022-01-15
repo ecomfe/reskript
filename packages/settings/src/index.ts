@@ -1,14 +1,15 @@
 import path from 'path';
 import {existsSync} from 'fs';
+// @ts-expect-error
 import hasha from 'hasha';
 import chokidar from 'chokidar';
 import {importUserModule, logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
-import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptProvider} from './interface';
-import validate from './validate';
-import {fillProjectSettings, PartialProjectSettings} from './defaults';
-import {applyPlugins} from './plugins';
+import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptProvider} from './interface.js';
+import validate from './validate.js';
+import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
+import {applyPlugins} from './plugins.js';
 
-export * from './interface';
+export * from './interface.js';
 export {fillProjectSettings, PartialProjectSettings};
 
 const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
