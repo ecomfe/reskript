@@ -1,7 +1,7 @@
 import {resolveSync} from '@reskript/core';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = entry => {
+const factory: LoaderFactory = async entry => {
     const {mode, projectSettings: {build: {script: {displayName}}}} = entry;
 
     return {

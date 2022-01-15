@@ -5,7 +5,7 @@ import {SettingsPlugin, BuildSettings, LoaderType} from '@reskript/settings';
 import {SassLoaderOptions} from './interface.js';
 
 export default (options: SassLoaderOptions = {}): SettingsPlugin => {
-    const finalizeBuild: BuildSettings['finalize'] = (config, entry, internals) => {
+    const finalizeBuild: BuildSettings['finalize'] = async (config, entry, internals) => {
         const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
         const final: LoaderType = (usage === 'build' && extract) ? 'cssExtract' : 'style';
         const sassUse = {
@@ -17,26 +17,31 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
                 additionalData: options.additionalData,
             },
         };
+        const uses = [
+            internals.loaders([final, 'css', 'postcss'], entry),
+            internals.loaders(['classNames', final, 'cssModules', 'postcss'], entry),
+        ] as const;
+        const [global, modulesEnabled] = await Promise.all(uses);
         const sassRule = {
             test: /\.s[ac]ss$/,
             oneOf: [
                 {
                     test: /\.global\.s[ac]ss$/,
                     use: [
-                        ...internals.loaders([final, 'css', 'postCSS'], entry),
+                        ...global,
                         sassUse,
                     ],
                 },
                 {
                     resource: normalizeRuleMatch(cwd, modules),
                     use: [
-                        ...internals.loaders(['classNames', final, 'cssModules', 'postCSSModules'], entry),
+                        ...modulesEnabled,
                         sassUse,
                     ],
                 },
                 {
                     use: [
-                        ...internals.loaders([final, 'css', 'postCSS'], entry),
+                        ...global,
                         sassUse,
                     ],
                 },
@@ -56,8 +61,8 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
             ...settings,
             build: {
                 ...settings.build,
-                finalize: (config, env, internals) => {
-                    const previous = settings.build.finalize(config, env, internals);
+                finalize: async (config, env, internals) => {
+                    const previous = await settings.build.finalize(config, env, internals);
                     return finalizeBuild(previous, env, internals);
                 },
             },

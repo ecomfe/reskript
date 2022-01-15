@@ -53,8 +53,8 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             ...settings,
             build: {
                 ...settings.build,
-                finalize: (config, env, internals) => {
-                    const previous = settings.build.finalize?.(config, env, internals);
+                finalize: async (config, env, internals) => {
+                    const previous = await settings.build.finalize?.(config, env, internals);
                     return finalizeBuild(previous, env, internals);
                 },
             },
@@ -62,8 +62,8 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                 ? settings.devServer
                 : {
                     ...settings.devServer,
-                    finalize: (config, env) => {
-                        const previous = settings.devServer.finalize(config, env);
+                    finalize: async (config, env) => {
+                        const previous = await settings.devServer.finalize(config, env);
                         return finalizeDevServer(previous, env);
                     },
                 },

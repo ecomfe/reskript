@@ -34,7 +34,7 @@ export interface BuildScriptSettings {
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
     // 最终手动处理babel配置
-    readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
+    readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions | Promise<TransformOptions>;
 }
 
 export type Severity = 'off' | 'print' | 'warn' | 'error';
@@ -66,9 +66,9 @@ export interface BuildInspectSettings {
     readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
-export type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
+export type RuleFactory = (buildEntry: BuildEntry) => Promise<RuleSetRule>;
 
-export type LoaderFactory = (buildEntry: BuildEntry) => RuleSetUseItem | null;
+export type LoaderFactory = (buildEntry: BuildEntry) => Promise<RuleSetUseItem | null>;
 
 export interface InternalRules {
     readonly script: RuleFactory;
@@ -84,8 +84,7 @@ export type LoaderType =
     | 'style'
     | 'css'
     | 'cssModules'
-    | 'postCSS'
-    | 'postCSSModules'
+    | 'postcss'
     | 'less'
     | 'lessSafe'
     | 'img'
@@ -98,8 +97,8 @@ export type LoaderType =
 
 export interface BuildInternals {
     readonly rules: InternalRules;
-    readonly loader: (name: LoaderType, buildEntry: BuildEntry) => RuleSetUseItem | null;
-    readonly loaders: (names: Array<LoaderType | false>, buildEntry: BuildEntry) => RuleSetUseItem[];
+    readonly loader: (name: LoaderType, buildEntry: BuildEntry) => Promise<RuleSetUseItem | null>;
+    readonly loaders: (names: Array<LoaderType | false>, buildEntry: BuildEntry) => Promise<RuleSetUseItem[]>;
 }
 
 export interface BuildSettings {
@@ -128,7 +127,7 @@ export interface BuildSettings {
         webpackConfig: WebpackConfiguration,
         buildEntry: BuildEntry,
         internals: BuildInternals
-    ) => WebpackConfiguration;
+    ) => WebpackConfiguration | Promise<WebpackConfiguration>;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }
@@ -151,7 +150,10 @@ export interface DevServerSettings {
     // 服务启动后打开的页面
     readonly openPage: string;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
-    readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration;
+    readonly finalize: (
+        serverConfig: WebpackDevServerConfiguration,
+        env: BuildEntry
+    ) => WebpackDevServerConfiguration | Promise<WebpackDevServerConfiguration>;
 }
 
 export interface PlaySettings {

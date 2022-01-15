@@ -3,7 +3,7 @@ import NpmImport from 'less-plugin-npm-import';
 import LessPluginFunctions from 'less-plugin-functions';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = ({projectSettings}) => {
+const factory: LoaderFactory = async ({projectSettings}) => {
     const {build: {style: {lessVariables, extract}}} = projectSettings;
 
     return {

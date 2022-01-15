@@ -52,8 +52,8 @@ export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}
                     return shouldProcess || includedSiblingDirectories.some(v => resource.startsWith(v));
                 },
             },
-            finalize: (config, env, internals) => {
-                const previous = settings.build.finalize(config, env, internals);
+            finalize: async (config, env, internals) => {
+                const previous = await settings.build.finalize(config, env, internals);
                 // 因为`peerDependencies`里也会包含本地的包，所以要先处理这些东西，再用下面的`for`循环把本地包的规则覆盖上去就对了
                 Object.assign(
                     previous.resolve?.alias,

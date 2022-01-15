@@ -3,7 +3,7 @@ import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = (entry: BuildEntry) => {
+const factory: LoaderFactory = async (entry: BuildEntry) => {
     const {usage, mode, cwd, srcDirectory, projectSettings: {build, devServer}} = entry;
     const {uses, script: {polyfill, displayName}} = build;
     const {hot} = devServer;
@@ -20,7 +20,7 @@ const factory: LoaderFactory = (entry: BuildEntry) => {
         openInEditorPrefix: ':origin/__open_in_editor__?file=',
     };
     const internalCreatedBabelConfig = getBabelConfig(babelConfigOptions);
-    const finalizedBabelConfig = build.script.finalize(internalCreatedBabelConfig, entry);
+    const finalizedBabelConfig = await build.script.finalize(internalCreatedBabelConfig, entry);
     warnAndExitOnInvalidFinalizeReturn(finalizedBabelConfig, 'build.script');
 
     return {

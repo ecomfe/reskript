@@ -113,7 +113,7 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         {devServer: baseConfig},
         {devServer: extra}
     );
-    const finalized = buildEntry.projectSettings.devServer.finalize(mergedConfig.devServer, buildEntry);
+    const finalized = await buildEntry.projectSettings.devServer.finalize(mergedConfig.devServer, buildEntry);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'devServer');
     return finalized;
 };

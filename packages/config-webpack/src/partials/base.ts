@@ -152,6 +152,7 @@ const factory: ConfigurationFactory = async entry => {
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
     const cacheKey = await computeCacheKey(entry);
+    const moduleRules = await Promise.all(Object.values(rules).map(rule => rule(entry)));
 
     return {
         mode,
@@ -170,7 +171,7 @@ const factory: ConfigurationFactory = async entry => {
             publicPath: publicPath || '/assets/',
         },
         module: {
-            rules: Object.values(rules).map(rule => rule(entry)),
+            rules: moduleRules,
         },
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],

@@ -29,7 +29,7 @@ interface BuildScriptSettings {
     // 是否自动生成组件的displayName，取值为auto时仅在development下生效，关掉后构建的速度会提升一些，产出会小一些，但线上调试会比较麻烦
     readonly displayName: boolean | 'auto';
     // 最终手动处理babel配置
-    readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions;
+    readonly finalize: (babelConfig: TransformOptions, env: BuildEntry) => TransformOptions | Promise<TransformOptions>;
 }
 
 type Severity = 'off' | 'print' | 'warn' | 'error';
@@ -62,7 +62,7 @@ interface BuildInspectSettings {
     readonly htmlImportable: OptionalRuleConfig<SourceFilter>;
 }
 
-type RuleFactory = (buildEntry: BuildEntry) => RuleSetRule;
+type RuleFactory = (buildEntry: BuildEntry) => Promise<RuleSetRule>;
 
 interface InternalRules {
     readonly script: RuleFactory;
@@ -101,7 +101,7 @@ interface BuildSettings {
     // 控制脚本编译的配置
     readonly script: BuildScriptSettings;
     // 最终手动处理webpack配置
-    readonly finalize: (webpackConfig: WebpackConfiguration, buildEntry: BuildEntry, internals: BuildInternals) => WebpackConfiguration;
+    readonly finalize: (webpackConfig: WebpackConfiguration, buildEntry: BuildEntry, internals: BuildInternals) => WebpackConfiguration | Promise<WebpackConfiguration>;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }
@@ -492,13 +492,18 @@ export default configure(
     {
         build: {
             finalize: (webpackConfig, buildEntry, internals) => {
-                // 需要把整个rules都重写
-                webpackConfig.module.rules = [
+                const loadingRules = [
                     internals.rules.script(buildEntry),
                     internals.rules.less(buildEntry),
                     internals.rules.css(buildEntry),
                     internals.rules.svg(buildEntry),
                     internals.rules.file(buildEntry),
+                ] as const;
+                const builtinRules = await Promise.all(rules);
+
+                // 需要把整个rules都重写
+                webpackConfig.module.rules = [
+                    ...builtinRules,
                     // 在上面没有引用rules.image，自定义图片的处理规则
                     {
                         test: /\.(jpe?g|png|webp)$/i,
@@ -522,8 +527,7 @@ type LoaderType =
     | 'style'
     | 'css'
     | 'cssModules'
-    | 'postCSS'
-    | 'postCSSModules'
+    | 'postcss'
     | 'less'
     | 'lessSafe'
     | 'url'
@@ -537,13 +541,13 @@ type LoaderType =
     | 'svgToComponent';
 
 
-function loader(name: LoaderType, buildEntry: BuildEntry): RuleSetUseItem | null;
+function loader(name: LoaderType, buildEntry: BuildEntry): Promise<RuleSetUseItem | null>;
 
-function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): RuleSetUseItem[];
+function loaders(names: Array<LoaderType | false>, buildEntry: BuildEntry): Promise<RuleSetUseItem[]>;
 }
 ```
 
-其中`loader`函数可以生成一个`loader`声明，例如`loader('css', buildEntry)`就可能返回类似这样的结构：
+其中`loader`函数可以生成一个`loader`声明，例如`loader('css', buildEntry)`就可能异步返回类似这样的结构：
 
 ```ts
 {
@@ -574,7 +578,7 @@ export default configure(
                 const sassRule = {
                     test: /\.s[ac]ss$/,
                     use: [
-                        ...internals.loaders(['classNames', 'style', 'cssModules', 'postCSSModules'], buildEntry),
+                        ...await internals.loaders(['classNames', 'style', 'cssModules', 'postcss'], buildEntry),
                         'sass-loader',
                     ],
                 };

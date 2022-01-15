@@ -13,7 +13,7 @@ const generateScopedStyleName = (name: string, filename: string): string => {
 };
 
 
-const factory: LoaderFactory = entry => {
+const factory: LoaderFactory = async entry => {
     return {
         loader: resolveSync('css-loader'),
         options: {

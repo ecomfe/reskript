@@ -6,7 +6,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./loaders": "./dist/loaders/index.js",
+    "./rules": "./dist/rules/index.js"
   },
   "engines": {
     "node": ">=14.18.0"
@@ -24,6 +26,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@reskript/config-img-loader": "3.0.6",
     "@types/cssnano": "^5.0.0",
     "@types/less": "^3.0.3",
     "@types/node": "^17.0.4",

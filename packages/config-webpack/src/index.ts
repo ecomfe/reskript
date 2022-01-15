@@ -10,7 +10,6 @@ import {
     warnAndExitOnInvalidFinalizeReturn,
     BuildInternals,
 } from '@reskript/settings';
-import * as loaders from './loaders/index.js';
 import * as rules from './rules/index.js';
 import {revision, hasServiceWorker} from './utils/info.js';
 import {mergeBuiltin} from './utils/merge.js';
@@ -21,7 +20,7 @@ import {introduceLoader, introduceLoaders} from './utils/loader.js';
 import {AppEntry, BuildContext, EntryLocation, StrictOptions} from './interface.js';
 import {partials, strict as strictPartial} from './partials/index.js';
 
-export {loaders, rules, createHTMLPluginInstances};
+export {createHTMLPluginInstances};
 export * from './interface.js';
 
 export const collectEntries = async (location: EntryLocation): Promise<AppEntry[]> => {
@@ -84,7 +83,7 @@ export const createWebpackConfig = async (context: BuildContext, options: Option
         loader: introduceLoader,
         loaders: introduceLoaders,
     };
-    const finalized = context.projectSettings.build.finalize(internalCreated, context, internals);
+    const finalized = await context.projectSettings.build.finalize(internalCreated, context, internals);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'build');
     return finalized;
 };

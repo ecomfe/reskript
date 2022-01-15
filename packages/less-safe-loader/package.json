@@ -5,6 +5,9 @@
   "type": "commonjs",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "engines": {
     "node": ">=14.18.0"
   },

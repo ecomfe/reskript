@@ -3,11 +3,14 @@ import {RuleSetUseItem} from 'webpack';
 import {BuildEntry, LoaderType} from '@reskript/settings';
 import * as loaders from '../loaders/index.js';
 
-export const introduceLoader = (name: LoaderType, entry: BuildEntry): RuleSetUseItem | null => {
+export const introduceLoader = (name: LoaderType, entry: BuildEntry): Promise<RuleSetUseItem | null> => {
     const factory = loaders[name];
     return factory(entry);
 };
 
-export const introduceLoaders = (names: Array<LoaderType | false>, entry: BuildEntry): RuleSetUseItem[] => {
-    return compact(compact(names).map(v => introduceLoader(v, entry)));
+type MayBeLoaderType = LoaderType | false;
+
+export const introduceLoaders = async (names: MayBeLoaderType[], entry: BuildEntry): Promise<RuleSetUseItem[]> => {
+    const items = await Promise.all(compact(names).map(v => introduceLoader(v, entry)));
+    return compact(items);
 };

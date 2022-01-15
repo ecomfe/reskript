@@ -27,7 +27,7 @@ interface DevServerSettings {
     // 开辟Node服务器的参数
     readonly serverOptions: ServerOptions;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
-    readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration;
+    readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration | Promise<WebpackDevServerConfiguration>;
 }
 ```
 
@@ -60,7 +60,6 @@ export default configure(
 
 `https`属性用于配置代理后端接口以及响应前端请求时是否使用HTTPS协议，它的取值如下：
 
-- 当值为`true`时，仅在代理后端接口时启用HTTPS协议，响应前端请求保持HTTP协议。**这是一个兼容历史情况的值，不建议使用**。
 - 当`proxy`属性为`true`时，代理后端接口启用HTTPS协议。
 - 当`client`属性为`true`时，响应前端请求使用HTTPS协议，你需要通过`serverOptions`属性提供`https.createServer`需要的选项。
 

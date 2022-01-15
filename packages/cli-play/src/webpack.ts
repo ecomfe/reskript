@@ -2,7 +2,8 @@ import path from 'path';
 import webpack from 'webpack';
 import {reject, isNil} from 'ramda';
 import {dirFromImportMeta} from '@reskript/core';
-import {createWebpackConfig as createBaseWebpackConfig, BuildContext, loaders} from '@reskript/config-webpack';
+import {createWebpackConfig as createBaseWebpackConfig, BuildContext} from '@reskript/config-webpack';
+import * as loaders from '@reskript/config-webpack/loaders';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
 import {resolveComponentName} from './utils/path.js';
 import {PlayCommandLineArgs} from './interface.js';
@@ -20,7 +21,7 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
         : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl');
     const componentTypeName = resolveComponentName(target);
     const entryLoaders = [
-        loaders.babel(buildContext),
+        await loaders.babel(buildContext),
         {
             loader: path.join(currentDirectory, 'loader'),
             options: {

@@ -1,7 +1,7 @@
 import {resolveSync} from '@reskript/core';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = entry => {
+const factory: LoaderFactory = async entry => {
     return {
         loader: resolveSync('css-loader'),
         options: {

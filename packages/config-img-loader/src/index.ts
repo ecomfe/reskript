@@ -1,4 +1,5 @@
 import resolve from 'resolve';
+import {RuleSetUseItem} from 'webpack';
 import gif from 'imagemin-gifsicle';
 import jpeg from 'imagemin-mozjpeg';
 import png from 'imagemin-optipng';
@@ -17,7 +18,7 @@ const pluginOptions = {
     },
 };
 
-export default () => {
+export default (): RuleSetUseItem => {
     const plugins = [
         gif(pluginOptions.gifsicle),
         jpeg(pluginOptions.mozjpeg),

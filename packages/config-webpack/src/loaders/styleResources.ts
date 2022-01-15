@@ -3,7 +3,7 @@ import {resolveSync, compact} from '@reskript/core';
 import unixify from 'unixify';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
+const factory: LoaderFactory = async ({cwd, srcDirectory, projectSettings}) => {
     const {build: {style: {resources}}} = projectSettings;
     const patterns = [
         ...resources,

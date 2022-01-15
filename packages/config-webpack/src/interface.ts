@@ -29,7 +29,7 @@ export interface BuildContext extends RuntimeBuildEnv {
     readonly entries: AppEntry[];
 }
 
-export type LoaderFactory = (entry: BuildEntry) => RuleSetUseItem | null;
+export type LoaderFactory = (entry: BuildEntry) => Promise<RuleSetUseItem | null>;
 
 export type ConfigurationFactory = (entry: BuildContext) => Configuration | Promise<Configuration>;
 
