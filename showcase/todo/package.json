@@ -4,7 +4,7 @@
   "version": "3.0.6",
   "description": "待办列表示例",
   "scripts": {
-    "build": "skr build --clean --strict",
+    "build": "rm -rf node_modules/.cache && skr build --clean --strict",
     "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
     "lint": "skr lint --strict",

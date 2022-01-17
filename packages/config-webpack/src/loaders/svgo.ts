@@ -1,9 +1,9 @@
-import {resolveSync} from '@reskript/core';
+import {resolve} from '@reskript/core';
 import {LoaderFactory} from '../interface.js';
 
 const factory: LoaderFactory = async () => {
     return {
-        loader: resolveSync('svgo-loader'),
+        loader: await resolve('svgo-loader'),
         options: {
             // 取了一个相对安全的插件集合
             plugins: [

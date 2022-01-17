@@ -24,6 +24,26 @@ export const resolveFrom = (base: string) => (id: string) => {
     return new Promise(execute);
 };
 
+export const resolve = (id: string) => {
+    const callerUrl = caller();
+    const callerPath = callerUrl.startsWith('file://') ? fileURLToPath(callerUrl) : callerUrl;
+    const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
+        id,
+        {basedir: callerPath},
+        (err, resolved) => {
+            if (err) {
+                return reject(err);
+            }
+            if (!resolved) {
+                return reject(new Error(`ENOENT, unable to resolve ${id}`));
+            }
+
+            resolve(resolved);
+        }
+    );
+    return new Promise(execute);
+};
+
 export const resolveSync = (id: string) => {
     const callerUrl = caller();
     const callerPath = callerUrl.startsWith('file://') ? fileURLToPath(callerUrl) : callerUrl;

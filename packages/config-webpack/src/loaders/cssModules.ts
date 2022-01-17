@@ -1,5 +1,5 @@
 import path from 'path';
-import {resolveSync} from '@reskript/core';
+import {resolve} from '@reskript/core';
 // @ts-expect-error
 import hasha from 'hasha';
 import {paramCase} from 'change-case';
@@ -15,7 +15,7 @@ const generateScopedStyleName = (name: string, filename: string): string => {
 
 const factory: LoaderFactory = async entry => {
     return {
-        loader: resolveSync('css-loader'),
+        loader: await resolve('css-loader'),
         options: {
             sourceMap: entry.projectSettings.build.style.extract,
             importLoaders: true,

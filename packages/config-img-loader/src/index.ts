@@ -2,7 +2,7 @@ import {RuleSetUseItem} from 'webpack';
 import gif from 'imagemin-gifsicle';
 import jpeg from 'imagemin-mozjpeg';
 import png from 'imagemin-optipng';
-import {resolveSync} from '@reskript/core';
+import {resolve} from '@reskript/core';
 
 const pluginOptions = {
     gifsicle: {
@@ -18,7 +18,7 @@ const pluginOptions = {
     },
 };
 
-export default (): RuleSetUseItem => {
+export default async (): Promise<RuleSetUseItem> => {
     const plugins = [
         gif(pluginOptions.gifsicle),
         jpeg(pluginOptions.mozjpeg),
@@ -26,7 +26,7 @@ export default (): RuleSetUseItem => {
     ];
 
     return {
-        loader: resolveSync('img-loader'),
+        loader: await resolve('img-loader'),
         options: {plugins},
     };
 };

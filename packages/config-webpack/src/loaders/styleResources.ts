@@ -1,5 +1,5 @@
 import path from 'path';
-import {resolveSync, compact} from '@reskript/core';
+import {resolve, compact} from '@reskript/core';
 import unixify from 'unixify';
 import {LoaderFactory} from '../interface.js';
 
@@ -11,7 +11,7 @@ const factory: LoaderFactory = async ({cwd, srcDirectory, projectSettings}) => {
     ];
 
     return {
-        loader: resolveSync('style-resources-loader'),
+        loader: await resolve('style-resources-loader'),
         options: {
             patterns: compact(patterns),
             injector: 'append',

@@ -16,7 +16,7 @@ import {prepareEnvironment} from './env.js';
 import {Flag, isFlagEnabled, isInDebugMode} from './flag.js';
 import {deprecatedWarn} from './deprecate.js';
 import {pFilter, pMap, pReduce} from './async.js';
-import {resolveFrom, resolveSync, dirFromImportMeta, importUserModule} from './resolve.js';
+import {resolveFrom, resolve, resolveSync, dirFromImportMeta, importUserModule} from './resolve.js';
 import {GitStatusResult, gitStatus} from './git/index.js';
 import {compact} from './lang.js';
 
@@ -46,10 +46,11 @@ export {
     pMap,
     pReduce,
     resolveFrom,
+    resolve,
+    resolveSync,
     importUserModule,
     GitStatusResult,
     gitStatus,
     compact,
     dirFromImportMeta,
-    resolveSync,
 };
