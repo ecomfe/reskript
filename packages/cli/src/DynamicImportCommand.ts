@@ -1,9 +1,9 @@
 import path from 'path';
 import {existsSync} from 'fs';
-import childProcess from 'child_process';
-import {promisify} from 'util';
 import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
+// @ts-expect-error
+import {installPackage} from '@antfu/install-pkg';
 // @ts-expect-error
 import {Command} from 'clipanion';
 import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
@@ -12,17 +12,9 @@ const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
     return 'message' in error && 'code' in error;
 };
 
-const exec = promisify(childProcess.exec);
-
 type PackageManager = 'npm' | 'yarn' | 'pnpm';
 
 type InstallReuslt = 'installed' | 'canceled' | 'noPackageManager' | 'failed';
-
-const INSTALL_COMMAND_BY_MAANGER: Record<PackageManager, string> = {
-    npm: 'npm install -D -E',
-    yarn: 'yarn add -D -E',
-    pnpm: 'pnpm add -D -E',
-};
 
 export default abstract class DynamicImportCommand<A> extends Command {
     protected readonly packageName: string = '';
@@ -163,8 +155,11 @@ export default abstract class DynamicImportCommand<A> extends Command {
         logger.log(`Installing ${this.packageName} using ${packageManager}`);
 
         try {
-            // @ts-expect-error
-            await exec(`${INSTALL_COMMAND_BY_MAANGER[packageManager]} ${this.packageName}@${this.cli.binaryVersion}`);
+            await installPackage(
+                // @ts-expect-error
+                `${this.packageName}@${this.cli.binaryVersion}`,
+                {silent: true, additionalArgs: ['-E']}
+            );
             return 'installed';
         }
         catch {
