@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.4](https://github.com/ecomfe/reskript/compare/v3.0.3...v3.0.4) (2022-01-20)
+
+
+### Bug Fixes
+
+* **core:** 修复globby的safe参数默认值处理问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([2c12f57](https://github.com/ecomfe/reskript/commit/2c12f573209e8c409fff35a39420da97265f873d))
+
+
+
+
+
 ## [3.0.3](https://github.com/ecomfe/reskript/compare/v3.0.2...v3.0.3) (2022-01-20)
 
 
