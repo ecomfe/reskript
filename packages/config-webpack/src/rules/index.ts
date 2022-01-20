@@ -128,7 +128,7 @@ export const svg = (entry: BuildEntry): RuleSetRule => {
             {
                 // 如果挂了`?react`的，就直接转成组件返回
                 resourceQuery: /^\?react$/,
-                use: use('svgToComponent', mode === 'production' && 'svgo'),
+                use: use('babel', 'svgToComponent', mode === 'production' && 'svgo'),
             },
             {
                 resourceQuery: {
