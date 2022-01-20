@@ -7,9 +7,10 @@
     "build": "skr build --clean --strict",
     "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
-    "lint": "eslint src",
+    "lint": "skr lint",
     "test": "skr test --target=react",
-    "play": "skr play src/components/Create/index.tsx"
+    "play": "skr play src/components/Create/index.tsx",
+    "fix": "echo '' >> src/components/App/index.less && skr lint --fix"
   },
   "keywords": [],
   "author": "",
