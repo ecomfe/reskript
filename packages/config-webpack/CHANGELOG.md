@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.3](https://github.com/ecomfe/reskript/compare/v3.0.2...v3.0.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **build:** 在svg生成组件后经过babel处理 ([#237](https://github.com/ecomfe/reskript/issues/237)) ([5ea17c3](https://github.com/ecomfe/reskript/commit/5ea17c380440e91e73584a9c871bbedb8d430e33))
+
+
+
+
+
 ## [3.0.2](https://github.com/ecomfe/reskript/compare/v3.0.1...v3.0.2) (2022-01-13)
 
 **Note:** Version bump only for package @reskript/config-webpack
