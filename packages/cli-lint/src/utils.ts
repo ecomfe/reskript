@@ -1,7 +1,6 @@
 import path from 'path';
-import globby from 'globby';
 import {flatMap, flatten} from 'lodash';
-import {findGitRoot} from '@reskript/core';
+import {globby, findGitRoot} from '@reskript/core';
 import {ResolveOptions} from './interface';
 
 type LintType = 'script' | 'style';

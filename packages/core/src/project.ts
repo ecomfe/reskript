@@ -1,9 +1,9 @@
 import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
-import globby from 'globby';
 import packageDirectory from 'pkg-dir';
 import findUp from 'find-up';
+import {globby} from './resolve';
 import {PackageInfo} from './interface';
 
 export const resolveCacheLocation = async (name: string): Promise<string> => {

@@ -1,5 +1,7 @@
 import fs from 'fs';
 import resolveCore from 'resolve';
+import globbyCore, {GlobbyOptions as CoreGlobbyOptions} from 'globby';
+import unixify from 'unixify';
 
 export const resolveFrom = (base: string) => (id: string) => {
     const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
@@ -36,4 +38,19 @@ export const importUserModule = async <T>(moduleName: string, defaultValue?: T):
     }
 
     throw new Error(`Unable to find module ${moduleName}`);
+};
+
+interface GlobbyOptions extends CoreGlobbyOptions {
+    safe?: boolean;
+}
+
+export const globby = (patterns: string | string[], options?: GlobbyOptions) => {
+    if (options?.safe === false) {
+        const unixified = typeof patterns === 'string'
+            ? unixify(patterns)
+            : patterns.map(v => unixify(v));
+        return globbyCore(unixified, options);
+    }
+
+    return globbyCore(patterns, options);
 };

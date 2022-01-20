@@ -2,7 +2,7 @@ import path from 'path';
 import {existsSync} from 'fs';
 import fs from 'fs/promises';
 import ora from 'ora';
-import globby from 'globby';
+import {globby} from '@reskript/core';
 import {UserOptions} from '../interface';
 
 

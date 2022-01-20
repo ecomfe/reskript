@@ -1,10 +1,9 @@
 import path from 'path';
 import {promises as fs} from 'fs';
-import globby from 'globby';
 import throat from 'throat';
 import highlight from 'cli-highlight';
 import {transformFileAsync, TransformOptions} from '@babel/core';
-import {logger} from '@reskript/core';
+import {globby, logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
 
