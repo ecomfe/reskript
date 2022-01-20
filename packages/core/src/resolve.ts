@@ -45,12 +45,12 @@ interface GlobbyOptions extends CoreGlobbyOptions {
 }
 
 export const globby = (patterns: string | string[], options?: GlobbyOptions) => {
-    if (options?.safe === false) {
-        const unixified = typeof patterns === 'string'
-            ? unixify(patterns)
-            : patterns.map(v => unixify(v));
-        return globbyCore(unixified, options);
+    if (options?.safe === true) {
+        return globbyCore(patterns, options);
     }
 
-    return globbyCore(patterns, options);
+    const unixified = typeof patterns === 'string'
+        ? unixify(patterns)
+        : patterns.map(v => unixify(v));
+    return globbyCore(unixified, options);
 };
