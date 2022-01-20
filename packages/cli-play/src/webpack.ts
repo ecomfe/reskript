@@ -49,6 +49,15 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
                 ...(baseConfig.module?.rules ?? []),
             ],
         },
+        resolve: {
+            ...baseConfig.resolve,
+            fallback: {
+                ...baseConfig.resolve?.fallback,
+                // React要从`17.0.3`开始才会有`exports`配置，这之前的版本在ESM下是必须加`.js`后续的。
+                // 利用这个`resolve.fallback`，可以在找不到`react/jsx-runtime`时跳到`react/jsx-runtime.js`上去，兼容旧版本。
+                'react/jsx-runtime': 'react/jsx-runtime.js',
+            },
+        },
     };
     return config;
 };

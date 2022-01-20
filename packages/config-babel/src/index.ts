@@ -10,8 +10,6 @@ import getParseOnlyBabelConfigFilled from './parseOnly.js';
 import getTransformBabelConfigFilled from './transform.js';
 import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
 
-// TODO: 看看能不能为jest和eslint定制一个完全不依赖自己的babel plugin的配置出来
-
 export type {BabelConfigOptions};
 
 export const getParseOnlyBabelConfig = (options?: BabelConfigOptions): TransformOptions => {
