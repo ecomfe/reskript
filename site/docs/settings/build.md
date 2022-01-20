@@ -122,7 +122,7 @@ interface BuildSettings {
 例如，我们知道`some-lib`这个包需要经过`babel`处理，再考虑到`src`下的源码，就可以这样来编写配置：
 
 ```js
-const path = requrie('path');
+const path = require('path');
 
 const src = path.join(__dirname, 'src');
 
@@ -313,7 +313,7 @@ exports.build = {
 当然与`babel`配置相同，当你启用了这个配置时，默认的`src`下全局CSS Modules的逻辑也会消失，你需要精确控制某一个文件。例如你（虽然不知道出于啥原因）在`src`下引入了`bootstrap.css`文件，要额外排除它，那么可以考虑这样编写配置：
 
 ```js
-const path = requrie('path');
+const path = require('path');
 
 const src = path.join(__dirname, 'src');
 
