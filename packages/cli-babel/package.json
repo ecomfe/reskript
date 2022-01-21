@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-babel",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "main": "dist/index.js",
   "license": "MIT",
   "files": [
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.16.5",
-    "@reskript/config-babel": "3.0.4",
-    "@reskript/core": "3.0.4",
+    "@reskript/config-babel": "3.0.5",
+    "@reskript/core": "3.0.5",
     "cli-highlight": "^2.1.11",
     "globby": "^11.0.4",
     "throat": "^6.0.1"
