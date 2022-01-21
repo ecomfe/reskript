@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs/promises';
 import {uniq, flatten} from 'lodash';
 import globby from 'globby';
 import {findGitRoot} from '@reskript/core';
@@ -39,7 +40,9 @@ export const resolveLintFiles = async (
             return globby(`*.{${extensions.join(',')}}`);
         }
 
-        if (path.extname(file)) {
+        const stat = await fs.stat(file);
+
+        if (stat.isFile()) {
             return [file];
         }
 

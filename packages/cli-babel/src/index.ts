@@ -93,7 +93,9 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         sourceMaps: !!outDirectory,
         babelrc: false,
     };
-    if (path.extname(file)) {
+    const stat = await fs.stat(file);
+
+    if (stat.isFile()) {
         if (outDirectory) {
             await transformFile(file, path.dirname(file), outDirectory, babelConfig);
         }
