@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/ecomfe/reskript/compare/v3.0.5...v3.0.6) (2022-01-21)
+
+
+### Bug Fixes
+
+* **init:** 解决init时复制文件路径错误的问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([3cfa54e](https://github.com/ecomfe/reskript/commit/3cfa54e521c944dd79c44181f841e5213e57ccb4))
+
+
+
+
+
 ## [3.0.5](https://github.com/ecomfe/reskript/compare/v3.0.4...v3.0.5) (2022-01-21)
 
 
