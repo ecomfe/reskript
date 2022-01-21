@@ -1,5 +1,6 @@
 import path from 'path';
-import {globby, pFilter} from '@reskript/core';
+import globby from 'globby';
+import {pFilter} from '@reskript/core';
 import {warn} from '../logger';
 
 const isEntryBroken = async (file: string) => {
@@ -9,7 +10,7 @@ const isEntryBroken = async (file: string) => {
 };
 
 export default async (cwd: string) => {
-    const entryFiles = await globby('src/entries/**/*.config.js', {cwd, safe: true, absolute: true});
+    const entryFiles = await globby('src/entries/**/*.config.js', {cwd, absolute: true});
     const brokenEntries = await pFilter(entryFiles, isEntryBroken);
     if (brokenEntries.length) {
         warn(

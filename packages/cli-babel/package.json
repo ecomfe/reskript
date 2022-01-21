@@ -27,6 +27,7 @@
     "@reskript/config-babel": "3.0.4",
     "@reskript/core": "3.0.4",
     "cli-highlight": "^2.1.11",
+    "globby": "^11.0.4",
     "throat": "^6.0.1"
   },
   "peerDependencies": {

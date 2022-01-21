@@ -2,8 +2,9 @@ import path from 'path';
 import {promises as fs} from 'fs';
 import throat from 'throat';
 import highlight from 'cli-highlight';
+import globby from 'globby';
 import {transformFileAsync, TransformOptions} from '@babel/core';
-import {globby, logger} from '@reskript/core';
+import {logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from './interface';
 
@@ -44,7 +45,7 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
 };
 
 const transformDirectory = async (dir: string, out: string, options: TransformOptions) => {
-    const files = await globby(`${dir.replace(/\/$/, '')}/**/*.{js,jsx,ts,tsx}`);
+    const files = await globby('**/*.{js,jsx,ts,tsx}', {cwd: dir, absolute: true});
     await Promise.all(files.map(f => transformFile(f, dir, out, options)));
 };
 
@@ -110,7 +111,7 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         await transformDirectory(file, outDirectory, babelConfig);
 
         if (copy) {
-            const files = await globby([`${file}/**`, `!${file}/**/*.{ts,js,tsx,jsx}`]);
+            const files = await globby(['**', '!**/*.{ts,js,tsx,jsx}'], {cwd: file, absolute: true});
             await Promise.all(files.map(throat(2, f => copyFile(f, file, outDirectory))));
         }
     }
