@@ -72,12 +72,12 @@ export default function App() {
     );
 
     return (
-        <Layout className={c.root}>
+        <Layout id="app" className={c.root}>
             <Header>
                 <Title>todos</Title>
             </Header>
             <Create onSubmit={createNew} />
-            <Meta className="flex items-center justify-between">
+            <Meta id="app-meta" className="flex items-center justify-between">
                 {todos.length} things waiting
                 {$features.batch && <Button type="link" onClick={markAllDone}>all done</Button>}
             </Meta>

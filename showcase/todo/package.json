@@ -8,7 +8,7 @@
     "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
     "lint": "skr lint --strict",
-    "test": "skr test --target=react",
+    "test": "npm run fix && npm run build && skr test --target=react && playwright test",
     "play": "skr play src/components/Create/index.tsx",
     "babel": "skr babel src/api/todo.ts",
     "fix": "echo '' >> src/components/App/index.less && skr lint --fix"
@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.18.0",
     "@reskript/cli": "3.0.6",
     "@reskript/cli-babel": "3.0.6",
     "@reskript/cli-build": "3.0.6",
