@@ -1,4 +1,4 @@
-import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings, ReskriptProvider} from './interface.js';
+import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings, ReskriptDriver} from './interface.js';
 
 type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style' | 'inspect'> & {
     script?: Partial<BuildSettings['script']>;
@@ -66,7 +66,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
 };
 
 export interface PartialProjectSettings {
-    provider: ReskriptProvider;
+    provider: ReskriptDriver;
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;

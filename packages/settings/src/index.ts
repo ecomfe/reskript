@@ -3,8 +3,8 @@ import {existsSync} from 'fs';
 // @ts-expect-error
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import {importUserModule, logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
-import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptProvider} from './interface.js';
+import {importUserModule, logger, PackageInfo, readPackageConfig} from '@reskript/core';
+import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptDriver, PluginOptions} from './interface.js';
 import validate from './validate.js';
 import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
 import {applyPlugins} from './plugins.js';
@@ -19,20 +19,33 @@ export interface UserSettings extends Omit<PartialProjectSettings, 'provider'> {
 }
 
 export interface UserProjectSettings extends UserSettings {
-    provider: ReskriptProvider;
+    provider: ReskriptDriver;
 }
+
+const checkSettingsExists = (file?: string) => {
+    if (file && !existsSync(file)) {
+        logger.error(`Unable to find configuration file ${file}`);
+        process.exit(21);
+    }
+};
 
 const locateSettings = (cwd: string): string | null => {
     const file = SETTINGS_EXTENSIONS.map(v => path.join(cwd, 'reskript.config' + v)).find(existsSync);
     return file ?? null;
 };
 
-const importSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
-    const imported = await importUserModule<UserProjectSettings | {default: UserProjectSettings}>(
-        path.join(cmd.cwd, 'reskript.config'),
+interface ResolveProjectSettingsOptions {
+    cwd: string;
+    commandName: string;
+    specifiedFile?: string;
+}
+
+const importSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
+    const {cwd, commandName, specifiedFile} = options;
+    const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserProjectSettings}>(
+        specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cwd, 'reskript.config' + v)),
         {default: {provider: 'webpack'}}
     );
-    const userSettings = 'default' in imported ? imported.default : imported;
 
     try {
         validate(userSettings);
@@ -43,8 +56,8 @@ const importSettings = async (cmd: ProjectAware, commandName: string): Promise<P
     }
 
     const {plugins = [], ...clientSettings} = userSettings;
-    const rawSettings = fillProjectSettings(clientSettings);
-    const pluginOptions = {...cmd, command: commandName};
+    const rawSettings: ProjectSettings = {...fillProjectSettings(clientSettings), from: resolved};
+    const pluginOptions: PluginOptions = {cwd, command: commandName};
     return applyPlugins(rawSettings, plugins, pluginOptions);
 };
 
@@ -62,12 +75,14 @@ const cache: CacheContainer = {
     listen: null,
 };
 
-export const readProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
+export const readProjectSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
+    checkSettingsExists(options.specifiedFile);
+
     if (cache.initialized) {
         return cache.settings;
     }
 
-    const settings = await importSettings(cmd, commandName);
+    const settings = await importSettings(options);
 
     cache.initialized = true;
     cache.settings = settings;
@@ -75,12 +90,14 @@ export const readProjectSettings = async (cmd: ProjectAware, commandName: string
     return settings;
 };
 
-export const watchProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<Observe> => {
+export const watchProjectSettings = async (options: ResolveProjectSettingsOptions): Promise<Observe> => {
+    checkSettingsExists(options.specifiedFile);
+
     if (cache.listen) {
         return cache.listen;
     }
 
-    const settingsLocation = locateSettings(cmd.cwd);
+    const settingsLocation = options.specifiedFile ?? locateSettings(options.cwd);
 
     // 根本没有配置文件，弄个空的回去随便外面怎么折腾
     if (!settingsLocation) {
@@ -97,12 +114,8 @@ export const watchProjectSettings = async (cmd: ProjectAware, commandName: strin
             return;
         }
 
-        const newSettings = await importSettings(cmd, commandName);
-
         cache.hash = newSettingsHash;
-        cache.settings = newSettings;
-
-        listeners.forEach(f => f(newSettings));
+        listeners.forEach(f => f());
     };
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     watcher.on('all', notify);

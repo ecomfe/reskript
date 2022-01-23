@@ -10,6 +10,7 @@ title: 执行单元测试
 
 ```
 --cwd [value]     指定当前工作目录，默认为当前目录
+--config [value]  使用指定的配置文件，默认查找reskript.config.{ts,mjs}
 --target [value]  指定单测的运行时环境，可以为react或node，默认是node
 -h, --help        显示帮助信息
 ```

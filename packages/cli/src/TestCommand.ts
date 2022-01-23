@@ -16,6 +16,11 @@ export default class LintCommand extends DynamicImportCommand<TestCommandLineArg
 
     cwd = Option.String('--cwd', process.cwd(), {description: 'override current working directory'});
 
+    configFile = Option.String<TestCommandLineArgs['configFile']>(
+        '--config',
+        {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
+    );
+
     target = Option.String<TestCommandLineArgs['target']>(
         '--target',
         'node',
@@ -30,6 +35,7 @@ export default class LintCommand extends DynamicImportCommand<TestCommandLineArg
     buildCommandLineArgs() {
         return {
             cwd: this.cwd,
+            configFile: this.configFile,
             target: this.target,
             jestArgs: this.jestArgs,
         };

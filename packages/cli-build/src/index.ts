@@ -120,15 +120,16 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
 };
 
 export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
-    process.env.NODE_ENV = cmd.mode;
-    await prepareEnvironment(cmd.cwd, cmd.mode);
+    const {cwd, mode, clean, configFile, analyze} = cmd;
+    process.env.NODE_ENV = mode;
+    await prepareEnvironment(cwd, mode);
 
-    if (cmd.clean) {
-        await fs.rm(path.join(cmd.cwd, 'dist'), {recursive: true, force: true});
+    if (clean) {
+        await fs.rm(path.join(cwd, 'dist'), {recursive: true, force: true});
     }
 
-    const projectSettings = await readProjectSettings(cmd, 'build');
-    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
+    const projectSettings = await readProjectSettings({cwd, commandName: 'build', specifiedFile: configFile});
+    await strictCheckRequiredDependency(projectSettings, cwd);
     const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 
     if (!initial) {
@@ -142,5 +143,5 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
     logger.lineBreak();
-    await inspect(initialStats, projectSettings.build.inspect, {cwd: cmd.cwd, exitOnError: !cmd.analyze});
+    await inspect(initialStats, projectSettings.build.inspect, {cwd, exitOnError: !analyze});
 };

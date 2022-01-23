@@ -173,10 +173,12 @@ export type SettingsPlugin<C extends PluginOptions = PluginOptions> = (
     cmd: C
 ) => ProjectSettings | Promise<ProjectSettings>;
 
-export type ReskriptProvider = 'webpack';
+export type ReskriptDriver = 'webpack';
 
 export interface ProjectSettings extends ProjectAware {
-    readonly provider: ReskriptProvider;
+    // 从哪里来的配置
+    readonly from?: string;
+    readonly provider: ReskriptDriver;
     readonly featureMatrix: FeatureMatrix;
     readonly build: BuildSettings;
     readonly devServer: DevServerSettings;
@@ -194,7 +196,7 @@ export interface BuildEnv extends WorkModeAware {
     readonly srcDirectory: string;
     // 当前代码库的包名，默认读取`package.json`中的`name`字段
     readonly hostPackageName: string;
-    // `reskript.config.js`中定义的配置
+    // 配置文件中定义的配置
     readonly projectSettings: ProjectSettings;
     // 是否启用缓存
     readonly cache?: 'persist' | 'transient' | 'off';
@@ -216,6 +218,6 @@ export interface BuildEntry extends RuntimeBuildEnv {
     readonly buildTarget: string;
 }
 
-export type Listener = (settings: ProjectSettings) => void;
+export type Listener = () => void;
 
 export type Observe = (listener: Listener) => () => void;

@@ -55,6 +55,14 @@ export default configure(
 
 `configure`对象中的每一项都是可以省略的，省略时会使用默认配置代替。
 
+## 配置文件路径
+
+默认情况下，配置文件是你的项目目录下的`reskript.config.ts`或`reskript.config.mjs`文件。
+
+在`build`、`dev`、`test`和`play`命令中，你可以使用`--config`参数指定一个配置文件。如果你指定配置文件，但这个文件不存在，则命令会异常退出。
+
+如果你没有通过`--config`参数指定配置文件，并且没有任何默认的配置文件，则所有配置项都会使用内置的默认值。
+
 ## 基础类型
 
 在配置`reSKRipt`的时候，你需要了解一些内部常用的类型定义。这些结构中的字段大部分都由工具来获取，不需要你手动来声明。但如果你需要进行一些深入的定制，先了解一下这些结构更好。
@@ -64,7 +72,7 @@ export default configure(
 构建环境是一次构建的最基本上下文，它的定义如下：
 
 ```ts
-type ReskriptProvider = 'webpack';
+type ReskriptDriver = 'webpack';
 
 type WorkMode = 'production' | 'development';
 
@@ -83,7 +91,7 @@ interface BuildEnv extends WorkModeAware {
     readonly srcDirectory: string;
     // 当前代码库的包名，默认读取`package.json`中的`name`字段
     readonly hostPackageName: string;
-    // `reskript.config.{mjs|ts}`中定义的配置
+    // 项目配置文件中定义的配置
     readonly projectSettings: ProjectSettings;
 }
 ```

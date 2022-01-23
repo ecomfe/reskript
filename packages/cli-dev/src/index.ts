@@ -72,8 +72,9 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 };
 
 export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
-    process.env.NODE_ENV = cmd.mode;
-    await prepareEnvironment(cmd.cwd, cmd.mode);
+    const {mode, cwd, configFile} = cmd;
+    process.env.NODE_ENV = mode;
+    await prepareEnvironment(cwd, mode);
 
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;
@@ -94,6 +95,6 @@ export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
             nextStart();
         }
     };
-    const listen = await watchProjectSettings(cmd, 'dev');
+    const listen = await watchProjectSettings({cwd, commandName: 'dev', specifiedFile: configFile});
     listen(restart);
 };

@@ -26,6 +26,11 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         }
     );
 
+    configFile = Option.String<DevCommandLineArgs['configFile']>(
+        '--config',
+        {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
+    );
+
     srcDirectory = Option.String(
         '--src-dir',
         'src',
@@ -68,6 +73,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         return {
             cwd: this.cwd,
             mode: this.mode,
+            configFile: this.configFile,
             srcDirectory: this.srcDirectory,
             entriesDirectory: this.entriesDirectory,
             buildTarget: this.buildTarget,

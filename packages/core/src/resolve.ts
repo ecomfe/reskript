@@ -50,21 +50,24 @@ export const resolveSync = (id: string) => {
     return resolveCore.sync(id, {basedir: callerPath});
 };
 
-const USER_MODULES_EXTENSIONS = ['.ts', '.mjs'];
+export interface UserModuleResult<T> {
+    resolved?: string;
+    value: T;
+}
 
-export const importUserModule = async <T>(moduleName: string, defaultValue?: T): Promise<T> => {
-    const target = USER_MODULES_EXTENSIONS.map(v => moduleName + v).find(fs.existsSync);
+export const importUserModule = async <T>(tries: string[], defaultValue?: T): Promise<UserModuleResult<T>> => {
+    const target = tries.find(fs.existsSync);
 
     if (target) {
         const {mod} = await bundleRequire({filepath: target});
-        return mod;
+        return {resolved: target, value: mod};
     }
 
     if (defaultValue) {
-        return defaultValue;
+        return {value: defaultValue};
     }
 
-    throw new Error(`Unable to find module ${moduleName}`);
+    throw new Error(`Unable to find module ${tries.join(', ')}`);
 };
 
 export const dirFromImportMeta = (importMetaUrl: string) => path.dirname(fileURLToPath(importMetaUrl));

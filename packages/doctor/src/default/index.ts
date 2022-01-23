@@ -27,7 +27,7 @@ const aggregateResult = (results: DoctorResult[]) => {
 };
 
 export const run = async (packageDirectory: string) => {
-    const projectSettings = await readProjectSettings({cwd: packageDirectory}, 'build');
+    const projectSettings = await readProjectSettings({cwd: packageDirectory, commandName: 'build'});
     const packageInfo = await readPackageConfig(packageDirectory);
     const context: DoctorContext = {
         projectSettings,

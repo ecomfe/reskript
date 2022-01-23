@@ -53,9 +53,11 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
     // `reSKRipt`自己的版本信息等
     await updateHashFromFile(hash, path.join(dirFromImportMeta(import.meta.url), '..', '..', 'package.json'));
 
-    const hasTypeScriptSetting = await updateHashFromFile(hash, path.join(entry.cwd, 'reskript.config.ts'));
-    const hasJavaScriptSetting = await updateHashFromFile(hash, path.join(entry.cwd, 'reskript.config.mjs'));
-    if (!hasTypeScriptSetting && !hasJavaScriptSetting) {
+    if (entry.projectSettings.from) {
+        hash.update(entry.projectSettings.from);
+        await updateHashFromFile(hash, entry.projectSettings.from);
+    }
+    else {
         hash.update(JSON.stringify(entry.projectSettings));
         hash.update(entry.projectSettings.build.script.finalize.toString());
         hash.update(entry.projectSettings.build.finalize.toString());
@@ -66,8 +68,8 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
 
     const gitRoot = await findGitRoot(entry.cwd) ?? entry.cwd;
     const hashIncludes = [
-        path.join(gitRoot, 'node_modules', '.yarn-integrity'),
         path.join(gitRoot, 'package-lock.json'),
+        path.join(gitRoot, 'yarn.lock'),
         path.join(gitRoot, 'pnpm-lock.yaml'),
         // `package.json`里可能会有`browsers`之类的配置，所以不能只认lock文件
         path.join(gitRoot, 'package.json'),

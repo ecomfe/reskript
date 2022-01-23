@@ -42,8 +42,8 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 };
 
 export const run = async (cmd: TestCommandLineArgs): Promise<void> => {
-    const {cwd, target, jestArgs} = cmd;
-    const projectSettings = await readProjectSettings(cmd, 'test');
+    const {cwd, target, jestArgs, configFile} = cmd;
+    const projectSettings = await readProjectSettings({cwd, commandName: 'test', specifiedFile: configFile});
     await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     // TODO: `featureMatrix`目前以dev为默认目标，以后可以传入`--test-target`？
     const jestConfigOptions: JestConfigOptions = {cwd, target, features: projectSettings.featureMatrix.dev};

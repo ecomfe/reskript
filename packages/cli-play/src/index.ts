@@ -14,7 +14,8 @@ export {PlayCommandLineArgs, HostType};
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
-    const userProjectSettings = await readProjectSettings(cmd, 'dev');
+    const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
+    const userProjectSettings = await readProjectSettings({cwd, commandName: 'dev', specifiedFile: configFile});
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {
@@ -23,24 +24,24 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
         },
         devServer: {
             ...userProjectSettings.devServer,
-            port: cmd.port,
+            port: port,
             openPage: '',
             hot: true,
         },
     };
-    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
-    const {name: hostPackageName} = await readPackageConfig(cmd.cwd);
+    await strictCheckRequiredDependency(projectSettings, cwd);
+    const {name: hostPackageName} = await readPackageConfig(cwd);
     const buildEnv: BuildEnv = {
         hostPackageName,
         projectSettings,
+        cwd,
         usage: 'devServer',
         mode: 'development',
-        cwd: cmd.cwd,
         srcDirectory: 'src',
         cache: 'transient',
     };
     const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
-    const enableConcurrentMode = cmd.concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
+    const enableConcurrentMode = concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
         entries: [
@@ -58,8 +59,8 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
                     : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl'),
             },
         ],
-        features: projectSettings.featureMatrix[cmd.buildTarget],
-        buildTarget: cmd.buildTarget || 'dev',
+        features: projectSettings.featureMatrix[buildTarget],
+        buildTarget: buildTarget || 'dev',
         isDefaultTarget: true,
     };
     return buildContext;
