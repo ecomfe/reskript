@@ -8,8 +8,12 @@ import {resolveLocalConfigurationPath} from './utils/path.js';
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
-const readAsSourceString = async (filename: string): Promise<string> => {
-    const content = (existsSync(filename) ? await fs.readFile(filename, 'utf-8') : '');
+const readAsSourceString = async (filename: string | undefined): Promise<string> => {
+    if (!filename) {
+        return '';
+    }
+
+    const content = await fs.readFile(filename, 'utf-8');
     // 把前后的引号去掉
     return content ? JSON.stringify(content).slice(1, -1).replace(/'/g, '\\\'') : '';
 };
@@ -41,12 +45,9 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
     const callback = this.async();
 
     const options = this.getOptions();
-    const configurationFilePathRelative = path.relative(
-        options.cwd,
-        resolveLocalConfigurationPath(options.componentModulePath)
-    );
+    const configurationFilePath = resolveLocalConfigurationPath(options.componentModulePath);
     const readingSources = [
-        readAsSourceString(configurationFilePathRelative),
+        readAsSourceString(configurationFilePath),
         fs.readFile(path.join(currentDirectory, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
         configurationBlockCode('globalConfiguration', options.globalSetupModulePath),
         configurationBlockCode('localConfiguration', resolveLocalConfigurationPath(options.componentModulePath)),
@@ -61,7 +62,6 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
         [/%PLAYGROUND_PATH%/g, path.resolve(currentDirectory, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
-        [/%CONFIGURATION_FILE_PATH%/g, configurationFilePathRelative],
         [/%CONFIGURATION_SOURCE%/g, configurationSource],
         [/%COMPONENT_TYPE_NAME%/g, options.componentTypeName],
         [/%CONFIGURATION_INITIALIZE_BLOCK%/g, configurationInitializeCode],

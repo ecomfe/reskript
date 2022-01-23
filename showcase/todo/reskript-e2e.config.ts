@@ -5,5 +5,6 @@ export default {
     devServer: {
         ...config.devServer,
         port: 9876,
+        https: undefined,
     },
 };

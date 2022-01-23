@@ -20,15 +20,15 @@ tags: [play, debug, router]
     /components
         /Foo
             /__repl__
-                index.play.js
+                index.play.tsx
             index.tsx
 ```
 
-其中`src/components/Foo/index.tsx`为组件的实现代码。我们可以看到这个结构中多了一个`src/components/Foo/__repl__/index.play.js`文件，这个被称为`skr play`的配置文件。这个文件的名字与组件文件名同名，如果你的组件文件名是`Bar.tsx`，那么它就是`__repl__/Bar.play.js`。
+其中`src/components/Foo/index.tsx`为组件的实现代码。我们可以看到这个结构中多了一个`src/components/Foo/__repl__/index.play.tsx`文件，这个被称为`skr play`的配置文件。这个文件的名字与组件文件名同名，如果你的组件文件名是`Bar.tsx`，那么它就是`__repl__/Bar.play.tsx`。
 
 ## 注入外部依赖
 
-在`__repl__/index.play.js`中，我们可以编写以下内容：
+在`__repl__/index.play.tsx`中，我们可以编写以下内容：
 
 ```js
 import {MemoryRouter} from 'react-router-dom';
@@ -62,9 +62,9 @@ function Repl() {
 
 ## 总结
 
-我们介绍了通过`__repl__/xxx.play.js`配置文件导出依赖给调试现场的方法，重点在于：
+我们介绍了通过`__repl__/xxx.play.tsx`配置文件导出依赖给调试现场的方法，重点在于：
 
-1. 有一个`__repl__/xxx.play.js`作为`skr play`的配置文件，与组件一一对应。
+1. 有一个`__repl__/xxx.play.tsx`作为`skr play`的配置文件，与组件一一对应。
 2. 使用`export const provides`对象提供依赖。
 3. 在调试现场使用`I.xxx`使用依赖。
 

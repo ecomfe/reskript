@@ -34,7 +34,6 @@ const rootStyle: CSSProperties = {
 
 interface Props extends DynamicContext {
     componentFilePath: string;
-    configurationFilePath: string;
     configurationSourceCode: string;
     renderPreview: (content: ReactNode) => ReactNode;
 }
@@ -45,7 +44,6 @@ function MainContent(props: Props) {
         componentType,
         injects,
         componentFilePath,
-        configurationFilePath,
         configurationSourceCode,
         renderPreview,
     } = props;
@@ -76,13 +74,7 @@ function MainContent(props: Props) {
             case 'source':
                 return <Editor source={source} onSourceChange={updateSource} />;
             case 'help':
-                return (
-                    <Help
-                        componentFilePath={componentFilePath}
-                        configurationFilePath={configurationFilePath}
-                        configurationSourceCode={configurationSourceCode}
-                    />
-                );
+                return <Help componentFilePath={componentFilePath} configurationSourceCode={configurationSourceCode} />;
             case 'description':
                 return <CaseDescription currentCase={cases?.[selectedCaseIndex]} />;
             default:

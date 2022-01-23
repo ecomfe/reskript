@@ -46,14 +46,14 @@ skr play src/components/Loading/index.tsx
 
 ## 组件调试配置
 
-对于任意一个组件，可以在其文件所在的目录下创建一个`__repl__/{file}.play.js`的文件，比如这样的目录结构：
+对于任意一个组件，可以在其文件所在的目录下创建一个`__repl__/{file}.play.{ts,tsx,js,jsx}`的文件，比如这样的目录结构：
 
 ```
 /src
     /components
         /Loading
             /__repl__
-                index.play.js
+                index.play.tsx
             index.tsx
 ```
 

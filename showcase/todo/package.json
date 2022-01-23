@@ -9,7 +9,7 @@
     "start": "skr dev",
     "lint": "skr lint --strict",
     "test": "npm run fix && npm run build && skr test --target=react && playwright test",
-    "play": "skr play src/components/Create/index.tsx",
+    "play": "skr play --config=reskript-e2e.config.ts --port=9875 src/components/Create/index.tsx",
     "babel": "skr babel src/api/todo.ts",
     "fix": "echo '' >> src/components/App/index.less && skr lint --fix"
   },
