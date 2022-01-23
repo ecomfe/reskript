@@ -29,17 +29,16 @@
   "devDependencies": {
     "@babel/plugin-transform-typescript": "^7.16.7",
     "@rollup/plugin-babel": "^5.3.0",
-    "@types/jest": "^27.0.3",
     "@types/node": "^17.0.4",
     "@types/postcss-less": "^4.0.1",
     "@types/resolve": "^1.20.1",
     "eslint": "^8.7.0",
     "prettier": "^2.5.1",
-    "rollup": "^2.64.0",
-    "typescript": "4.6.0-dev.20220114"
+    "rollup": "^2.66.0",
+    "typescript": "^4.6.0-beta"
   },
   "dependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/eslint-plugin": "^7.16.5",
     "@ecomfe/eslint-config": "^7.4.0",
@@ -55,12 +54,18 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-reskript": "^0.1.2",
+    "postcss": "^8.4.5",
     "postcss-less": "^6.0.0",
-    "resolve": "^1.20.0"
+    "resolve": "^1.22.0"
   },
   "peerDependencies": {
     "eslint": "8.x",
     "stylelint": "14.x",
     "typescript": "4.x"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   }
 }

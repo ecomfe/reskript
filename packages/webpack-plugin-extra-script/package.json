@@ -29,10 +29,10 @@
     "c8": "^7.10.0",
     "eslint": "^8.7.0",
     "html-webpack-plugin": "^5.5.0",
-    "typescript": "4.6.0-dev.20220114",
+    "typescript": "^4.6.0-beta",
     "vite": "^2.7.12",
-    "vitest": "^0.1.17",
-    "webpack": "^5.65.0"
+    "vitest": "^0.2.1",
+    "webpack": "^5.67.0"
   },
   "peerDependencies": {
     "webpack": "5.x"

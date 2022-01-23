@@ -23,15 +23,15 @@
     "lint": "eslint --max-warnings=0 rules index.js",
     "test": "jest"
   },
-  "dependencies": {
-    "builtins": "^4.0.0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/eslint-plugin": "^7.16.5",
     "eslint": "^8.7.0",
     "jest": "^27.4.5"
+  },
+  "dependencies": {
+    "builtins": "^4.0.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.14.6"

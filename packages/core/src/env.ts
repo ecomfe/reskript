@@ -1,7 +1,7 @@
 import {existsSync} from 'fs';
 import path from 'path';
 import env from 'dotenv';
-import expand from 'dotenv-expand';
+import {expand} from 'dotenv-expand';
 import {findMonorepoRoot, isMonorepo} from './project.js';
 import {WorkMode} from './interface.js';
 

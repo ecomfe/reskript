@@ -5,12 +5,17 @@ const devServer: {current: ChildProcess | null} = {current: null};
 
 test.beforeAll(async () => {
     const process = childProcess.spawn('npm', ['run', 'play'], {stdio: 'pipe'});
-    const executor = (resolve: (value: void) => void) => {
+    const executor = (resolve: (value: void) => void, reject: (error: Error) => void) => {
+        let output = '';
         process.stdout.on(
             'data',
             data => {
-                if (data.toString().includes('Your application is running')) {
+                output += data.toString();
+                if (output.includes('Your application is running')) {
                     resolve();
+                }
+                else if (output.includes('ERROR')) {
+                    reject(new Error('server failed to start'));
                 }
             }
         );

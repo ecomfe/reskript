@@ -29,6 +29,6 @@
     "eslint": "^8.7.0",
     "jest": "^27.4.5",
     "ts-jest": "^27.1.3",
-    "typescript": "4.6.0-dev.20220114"
+    "typescript": "^4.6.0-beta"
   }
 }
