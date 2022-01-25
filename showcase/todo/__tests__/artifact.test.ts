@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 
 test('entry config', async () => {
     const files = await fs.readdir('dist/assets');

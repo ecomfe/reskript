@@ -1,5 +1,5 @@
-import {existsSync} from 'fs';
-import path from 'path';
+import {existsSync} from 'node:fs';
+import path from 'node:path';
 import env from 'dotenv';
 import {expand} from 'dotenv-expand';
 import {findMonorepoRoot, isMonorepo} from './project.js';

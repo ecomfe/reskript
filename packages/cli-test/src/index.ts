@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 import {mergeDeepRight} from 'ramda';
 import {run as runJest} from 'jest-cli';
 import {logger} from '@reskript/core';

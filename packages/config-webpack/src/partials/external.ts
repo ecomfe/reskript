@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {Configuration} from 'webpack';
 import {ConfigurationFactory} from '../interface.js';
 

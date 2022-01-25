@@ -1,5 +1,5 @@
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 // @ts-expect-error
 import hasha from 'hasha';
 import chokidar from 'chokidar';

@@ -1,5 +1,5 @@
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 import {equals} from 'ramda';
 import {logger, findGitRoot, readPackageConfig} from '@reskript/core';
 import {FeatureMatrix} from '@reskript/settings';

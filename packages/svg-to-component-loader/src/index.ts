@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {pascalCase} from 'change-case';
 import {parseStringPromise} from 'xml2js';
 import {LoaderContext} from 'webpack';

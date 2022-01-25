@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {PluginItem, TransformOptions} from '@babel/core';
 import debugReactComponentFileName from '@reskript/babel-plugin-debug-react-component-file-name';
 import pluginRemovePropTypes from 'babel-plugin-transform-react-remove-prop-types';

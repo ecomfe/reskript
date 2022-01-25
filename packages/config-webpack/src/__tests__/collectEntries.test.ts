@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {test, expect} from 'vitest';
 import {dirFromImportMeta} from '@reskript/core';
 import {collectEntries} from '../index.js';

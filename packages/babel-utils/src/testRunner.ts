@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import babel from '@babel/core';
 import glob from 'glob';
 

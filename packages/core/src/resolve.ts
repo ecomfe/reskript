@@ -1,6 +1,6 @@
-import path from 'path';
-import fs from 'fs';
-import {fileURLToPath} from 'url';
+import path from 'node:path';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
 import {bundleRequire} from 'bundle-require';
 import resolveCore from 'resolve';
 // @ts-expect-error

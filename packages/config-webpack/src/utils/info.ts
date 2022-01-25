@@ -1,7 +1,7 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import childProcess from 'child_process';
-import {promisify} from 'util';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import childProcess from 'node:child_process';
+import {promisify} from 'node:util';
 import {logger} from '@reskript/core';
 import {BuildContext} from '../interface.js';
 

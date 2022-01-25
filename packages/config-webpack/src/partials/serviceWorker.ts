@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs/promises';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import {InjectManifest, InjectManifestOptions} from 'workbox-webpack-plugin';
 import ExtraScriptPlugin, {ScriptFactoryContext} from '@reskript/webpack-plugin-extra-script';
 import {BuildContext, ConfigurationFactory} from '../interface.js';

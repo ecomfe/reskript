@@ -1,5 +1,5 @@
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 import {Configuration} from 'webpack';
 import {compact} from '@reskript/core';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';

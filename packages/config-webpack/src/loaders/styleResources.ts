@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {resolve, compact} from '@reskript/core';
 import unixify from 'unixify';
 import {LoaderFactory} from '../interface.js';

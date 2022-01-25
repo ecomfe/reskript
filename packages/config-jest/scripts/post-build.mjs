@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import prettier from 'prettier';
 import {dirFromImportMeta} from '@reskript/core';
 import {getJestPresetConfig} from '../dist/index.js';

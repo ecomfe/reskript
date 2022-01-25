@@ -1,5 +1,5 @@
-import {existsSync} from 'fs';
-import path from 'path';
+import {existsSync} from 'node:fs';
+import path from 'node:path';
 import {readPackageConfig} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
 import {warn} from './logger.js';

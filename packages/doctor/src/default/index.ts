@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import ora from 'ora';
 import logSymbols from 'log-symbols';
 import {logger, readPackageConfig} from '@reskript/core';

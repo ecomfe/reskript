@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMap} from 'webpack-dev-server';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';

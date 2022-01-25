@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import webpack, {StatsModule, StatsAsset} from 'webpack';
 import {dirFromImportMeta} from '@reskript/core';
 import {fillProjectSettings, PartialProjectSettings} from '@reskript/settings';

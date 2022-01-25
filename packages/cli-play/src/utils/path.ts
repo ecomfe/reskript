@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export const resolveComponentFileName = (componentModulePath: string): string => {
     const file = path.basename(componentModulePath, path.extname(componentModulePath));

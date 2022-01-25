@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 import babel from '@babel/core';
 import {expect, test} from 'vitest';
 import {dirFromImportMeta} from '@reskript/core';

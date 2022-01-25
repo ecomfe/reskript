@@ -1,6 +1,6 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import fs from 'fs/promises';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import fs from 'node:fs/promises';
 import bodyParser from 'body-parser';
 import {currentUserName} from '@reskript/core';
 import {PlayCase, CasePatch, PlayCaseInfo} from '../interface.js';

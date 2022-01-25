@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {resolve} from '@reskript/core';
 // @ts-expect-error
 import hasha from 'hasha';

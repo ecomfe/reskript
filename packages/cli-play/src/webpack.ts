@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import webpack from 'webpack';
 import {reject, isNil} from 'ramda';
 import {dirFromImportMeta} from '@reskript/core';

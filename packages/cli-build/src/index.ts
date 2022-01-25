@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs/promises';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import {reject, isNil, difference} from 'ramda';
 import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';

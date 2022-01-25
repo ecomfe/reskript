@@ -1,5 +1,5 @@
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
 // @ts-expect-error

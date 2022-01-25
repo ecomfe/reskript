@@ -1,7 +1,7 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import * as crypto from 'crypto';
-import fs from 'fs/promises';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
 import {map} from 'ramda';
 import {compact, dirFromImportMeta, resolveSync, findGitRoot, pMap} from '@reskript/core';
 import {paramCase} from 'change-case';

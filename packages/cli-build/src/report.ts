@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import ConsoleTable, {Column} from 'tty-table';
 // @ts-expect-error
 import * as kolorist from 'kolorist';

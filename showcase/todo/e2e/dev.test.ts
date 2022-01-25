@@ -1,4 +1,4 @@
-import childProcess, {ChildProcess} from 'child_process';
+import childProcess, {ChildProcess} from 'node:child_process';
 import {test, expect} from '@playwright/test';
 
 const devServer: {current: ChildProcess | null} = {current: null};

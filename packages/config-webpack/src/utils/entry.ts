@@ -1,6 +1,6 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import fs from 'fs/promises';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import fs from 'node:fs/promises';
 import {EntryObject} from 'webpack';
 import {logger, importUserModule, dirFromImportMeta} from '@reskript/core';
 import {AppEntry, EntryConfig} from '../interface.js';

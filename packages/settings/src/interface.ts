@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import {ServerOptions} from 'https';
+import {ServerOptions} from 'node:https';
 import {ProjectAware, WorkModeAware} from '@reskript/core';
 import {Configuration as WebpackConfiguration, RuleSetRule, RuleSetUseItem} from 'webpack';
 import {Configuration as WebpackDevServerConfiguration} from 'webpack-dev-server';

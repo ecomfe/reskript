@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger, readPackageConfig, pMap} from '@reskript/core';
 import {minVersion, satisfies} from 'semver';
 import {Options, LocalPackageInfo} from './interface.js';

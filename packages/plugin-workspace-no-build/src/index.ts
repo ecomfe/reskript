@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {logger, isMonorepo, normalizeRuleMatch} from '@reskript/core';
 import {SettingsPlugin} from '@reskript/settings';
 import {Options, LocalPackageInfo} from './interface.js';

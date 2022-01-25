@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {configure} from '@reskript/settings';
 import ExtraScriptPlugin from '@reskript/webpack-plugin-extra-script';
 import qiankun from '@reskript/plugin-qiankun';

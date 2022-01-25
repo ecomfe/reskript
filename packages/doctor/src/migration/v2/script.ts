@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs/promises';
+import path from 'node:path';
+import fs from 'node:fs/promises';
 import {warn} from '../logger.js';
 
 const extractCommandCallScript = (lines: string[], command: string): string | false => {

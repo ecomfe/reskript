@@ -1,6 +1,6 @@
-import path from 'path';
-import fs from 'fs';
-import childProcess from 'child_process';
+import path from 'node:path';
+import fs from 'node:fs';
+import childProcess from 'node:child_process';
 import {readPackageConfig} from '@reskript/core';
 import {UserOptions} from '../interface.js';
 
