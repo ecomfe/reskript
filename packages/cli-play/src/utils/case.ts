@@ -171,8 +171,13 @@ export const replaceLastRun = async (markdown: string, caseName: string, time: s
     ];
 
     if (mayBeMetaNode.type === 'list') {
-        const start = mayBeMetaNode?.position?.start.offset;
-        const end = mayBeMetaNode?.position?.end.offset;
+        const start = mayBeMetaNode.position?.start.offset;
+        const end = mayBeMetaNode.position?.end.offset;
+
+        if (typeof start !== 'number' || typeof end !== 'number') {
+            throw new Error(`Cannot find a place to insert meta to case ${caseName}`);
+        }
+
         return markdown.slice(0, start) + newMetaContent.join('\n') + markdown.slice(end);
     }
 

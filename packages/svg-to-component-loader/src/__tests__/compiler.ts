@@ -52,11 +52,11 @@ export default (options: Options = {}) => {
             if (stats.hasErrors()) {
                 const error = output.errors?.[0];
                 reject(new Error(error?.message || String(error)));
+                return;
             }
-            else {
-                const source = output.modules?.[0].source ?? '';
-                resolve(source.toString());
-            }
+
+            const source = output.modules?.[0].source ?? '';
+            resolve(source.toString());
         });
     });
 };

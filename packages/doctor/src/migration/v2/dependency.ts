@@ -13,7 +13,7 @@ export default async (cwd: string) => {
         );
     }
 
-    if (!/^\d+\.\d+\.\d+(-.+)*$/.test(dependencies['@reskript/cli'])) {
+    if (!/^\d+\.\d+\.\d+/.test(dependencies['@reskript/cli'])) {
         tip(
             '@reskript/* is installed with a version range, better to install a fixed version',
             'see: https://reskript.vercel.app/docs/migration/v2#推荐固定版本'

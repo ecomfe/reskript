@@ -62,6 +62,7 @@ export default async (entry: string, partialProjectSettings?: Omit<PartialProjec
 
             if (stats.hasErrors()) {
                 reject(new Error(stats.toJson().errors?.[0].message ?? 'Unkonwn error'));
+                return;
             }
 
             const output = stats.toJson();

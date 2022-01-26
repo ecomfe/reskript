@@ -48,13 +48,13 @@ export default (appName: string, options?: Options): SettingsPlugin => {
         return config;
     };
 
-    return settings => {
+    return async settings => {
         return {
             ...settings,
             build: {
                 ...settings.build,
                 finalize: async (config, env, internals) => {
-                    const previous = await settings.build.finalize?.(config, env, internals);
+                    const previous = await settings.build.finalize(config, env, internals);
                     return finalizeBuild(previous, env, internals);
                 },
             },

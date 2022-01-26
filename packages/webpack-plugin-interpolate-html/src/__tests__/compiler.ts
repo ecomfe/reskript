@@ -39,6 +39,7 @@ export default (replacements: Record<string, string>) => {
 
             if (stats.hasErrors()) {
                 reject(new Error(result?.errors?.[0].message ?? 'Unknown error'));
+                return;
             }
 
             const output = fs.readFileSync(path.join(currentDirectory, 'output', 'index.html'), 'utf-8');
