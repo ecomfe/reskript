@@ -70,6 +70,7 @@ module.exports = {
             items: [
                 'migration/v2',
                 'migration/v3',
+                'migration/v4',
             ],
         },
         'faq',

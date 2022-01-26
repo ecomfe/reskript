@@ -4,6 +4,10 @@ import {importClientSettings} from '../utils.js';
 export default async (cwd: string) => {
     const settings = await importClientSettings(cwd);
 
+    if (!settings) {
+        return;
+    }
+
     if (settings.build?.hasOwnProperty('defaultImportOptimization')) {
         warn(
             'build.defaultImportOptimization in reskript.config.js is deprecated',

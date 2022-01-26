@@ -4,6 +4,10 @@ import {importClientSettings} from '../utils.js';
 export default async (cwd: string) => {
     const settings = await importClientSettings(cwd);
 
+    if (!settings) {
+        return;
+    }
+
     if (typeof settings.devServer?.https === 'boolean') {
         warn(
             'devServer.https in reskript.config.js is no longer of type boolean',

@@ -27,6 +27,7 @@ export const checkInstalledReskriptVersion = (dependencies: Record<string, strin
     }
 };
 
+// 只在V3及以前版本是有用的
 export const importClientSettings = async (cwd: string) => {
     const settingsLocation = path.join(cwd, 'reskript.config.js');
 
