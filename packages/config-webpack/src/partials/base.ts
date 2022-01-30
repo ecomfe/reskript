@@ -3,7 +3,7 @@ import {existsSync} from 'node:fs';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import {map} from 'ramda';
-import {compact, dirFromImportMeta, resolveSync, findGitRoot, pMap} from '@reskript/core';
+import {compact, dirFromImportMeta, resolve, findGitRoot, pMap} from '@reskript/core';
 import {paramCase} from 'change-case';
 import webpack, {EntryObject} from 'webpack';
 import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
@@ -114,6 +114,14 @@ const factory: ConfigurationFactory = async entry => {
             },
         },
     } = entry;
+    const tasks = [
+        computeCacheKey(entry),
+        Promise.all(Object.values(rules).map(rule => rule(entry))),
+        resolve('eslint'),
+        resolve('stylelint'),
+        resolve('regenerator-runtime'),
+    ] as const;
+    const [cacheKey, moduleRules, eslintPath, stylelintPath, regeneratorRuntimePath] = await Promise.all(tasks);
     const buildInfo = {
         mode,
         version: buildVersion,
@@ -126,7 +134,7 @@ const factory: ConfigurationFactory = async entry => {
         ...toDynamicDefines(buildInfo, '$build'),
     };
     const eslintOptions = {
-        eslintPath: resolveSync('eslint'),
+        eslintPath,
         baseConfig: getScriptLintBaseConfig({cwd}),
         exclude: ['node_modules', 'externals'],
         extensions: ['js', 'cjs', 'mjs', 'jsx', 'ts', 'tsx'],
@@ -134,6 +142,7 @@ const factory: ConfigurationFactory = async entry => {
         emitWarning: usage === 'devServer',
     };
     const styleLintOptions = {
+        stylelintPath,
         config: getStyleLintBaseConfig({cwd}),
         emitErrors: true,
         allowEmptyInput: true,
@@ -153,8 +162,6 @@ const factory: ConfigurationFactory = async entry => {
         // @ts-expect-error
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
-    const cacheKey = await computeCacheKey(entry);
-    const moduleRules = await Promise.all(Object.values(rules).map(rule => rule(entry)));
 
     return {
         mode,
@@ -181,7 +188,7 @@ const factory: ConfigurationFactory = async entry => {
             alias: {
                 '@': path.join(cwd, srcDirectory),
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
-                'regenerator-runtime': path.dirname(resolveSync('regenerator-runtime')),
+                'regenerator-runtime': regeneratorRuntimePath,
             },
             plugins: [
                 new ResolveTypeScriptPlugin(),

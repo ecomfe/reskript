@@ -44,12 +44,6 @@ export const resolve = (id: string) => {
     return new Promise(execute);
 };
 
-export const resolveSync = (id: string) => {
-    const callerUrl = caller();
-    const callerPath = callerUrl.startsWith('file://') ? fileURLToPath(callerUrl) : callerUrl;
-    return resolveCore.sync(id, {basedir: callerPath});
-};
-
 export interface UserModuleResult<T> {
     resolved?: string;
     value: T;

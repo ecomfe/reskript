@@ -1,4 +1,5 @@
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {configure} from '@reskript/settings';
 import ExtraScriptPlugin from '@reskript/webpack-plugin-extra-script';
 import qiankun from '@reskript/plugin-qiankun';
@@ -21,7 +22,7 @@ export default configure(
         },
         build: {
             appTitle: 'TodoMVC - reSKRipt',
-            favicon: path.join(__dirname, 'favicon.ico'),
+            favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
             uses: ['antd', 'styled-components', 'tailwind'],
             script: {
                 polyfill: false,

@@ -1,10 +1,13 @@
-import config from './reskript.config';
+import {UserSettings} from '@reskript/settings';
+import baseConfig from './reskript.config';
 
-export default {
-    ...config,
+const config: UserSettings = {
+    ...baseConfig,
     devServer: {
-        ...config.devServer,
+        ...baseConfig.devServer,
         port: 9876,
         https: undefined,
     },
 };
+
+export default config;
