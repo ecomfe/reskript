@@ -3,7 +3,7 @@
     "packages/*",
     "showcase/*"
   ],
-  "version": "3.0.6",
+  "version": "4.0.0-beta.0",
   "npmClient": "yarn",
   "exact": true,
   "command": {

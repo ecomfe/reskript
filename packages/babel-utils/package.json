@@ -1,6 +1,6 @@
 {
   "name": "@reskript/babel-utils",
-  "version": "3.0.6",
+  "version": "4.0.0-beta.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/traverse": "^7.16.5",
-    "@reskript/core": "3.0.6",
+    "@reskript/core": "4.0.0-beta.0",
     "@types/babel__core": "^7.1.17",
     "@types/babel__traverse": "^7.14.2",
     "@types/glob": "^7.2.0",

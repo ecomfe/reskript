@@ -1,6 +1,6 @@
 {
   "name": "@reskript/init",
-  "version": "3.0.6",
+  "version": "4.0.0-beta.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -29,7 +29,7 @@
     "typescript": "^4.6.0-beta"
   },
   "dependencies": {
-    "@reskript/core": "3.0.6",
+    "@reskript/core": "4.0.0-beta.0",
     "execa": "^6.0.0",
     "globby": "^13.1.0",
     "inquirer": "^8.2.0",

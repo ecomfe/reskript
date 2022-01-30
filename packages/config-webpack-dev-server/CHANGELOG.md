@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v3.0.6...v4.0.0-beta.0) (2022-01-30)
+
+
+### Code Refactoring
+
+* 核心部分迁移到纯ESM包格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([f9d06b0](https://github.com/ecomfe/reskript/commit/f9d06b0fd802caa002707686d004ca8683f7002f))
+
+
+### Features
+
+* **build:** 各个插件转为ESM格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([1950ace](https://github.com/ecomfe/reskript/commit/1950ace8c05d317b855a7f01b4680e54a011d61f))
+* **settings:** 支持且仅支持.mjs和.ts类型的项目配置 ([#225](https://github.com/ecomfe/reskript/issues/225)) ([5a9586b](https://github.com/ecomfe/reskript/commit/5a9586b053f16d89a7b87b22dd6a4ca84d96edd2))
+* **settings:** 支持异步的finalize函数 ([#233](https://github.com/ecomfe/reskript/issues/233)) ([ce84916](https://github.com/ecomfe/reskript/commit/ce84916af43c8cfb5e547788bf5dea0a8786a344))
+
+
+### BREAKING CHANGES
+
+* **settings:** 配置中的`build.scripts.finalize`调整为异步函数
+* **settings:** 配置中的`build.finalize`调整为异步函数
+* **settings:** 配置中的`devServer.finalize`调整为异步函数
+* **settings:** 配置中的`build.scripts.finalize`的`internals`参数中的`loaders`和`rules`均调整为异步函数
+* **settings:** `@reskript/config-webpack`不再导出`loaders`和`rules`，对应为`@reskript/config-webpack/loaders`和`@reskript/config-webpack/rules`
+* **settings:** `loaders.postCSS`重命名为`loaders.postcss`
+* **settings:** `loaders.postCSSModules`已经移除，功能与`loaders.postcss`完全一致
+* **settings:** 项目配置必须为`reskript.config.{mjs|ts}`，且格式为ESM
+* **settings:** 应用入口配置必须为`xxx.config.{mjs|ts}`，且格式为ESM
+* 发布的包为纯ESM格式，无法通过CommonJS的`require`引入。参考[sinderesorhus的建议](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+
+
+
+
 ## [3.0.6](https://github.com/ecomfe/reskript/compare/v3.0.5...v3.0.6) (2022-01-21)
 
 **Note:** Version bump only for package @reskript/config-webpack-dev-server

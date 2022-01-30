@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v3.0.6...v4.0.0-beta.0) (2022-01-30)
+
+
+### Code Refactoring
+
+* 核心部分迁移到纯ESM包格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([f9d06b0](https://github.com/ecomfe/reskript/commit/f9d06b0fd802caa002707686d004ca8683f7002f))
+
+
+### Features
+
+* **settings:** 支持异步的finalize函数 ([#233](https://github.com/ecomfe/reskript/issues/233)) ([ce84916](https://github.com/ecomfe/reskript/commit/ce84916af43c8cfb5e547788bf5dea0a8786a344))
+
+
+### BREAKING CHANGES
+
+* **settings:** 配置中的`build.scripts.finalize`调整为异步函数
+* **settings:** 配置中的`build.finalize`调整为异步函数
+* **settings:** 配置中的`devServer.finalize`调整为异步函数
+* **settings:** 配置中的`build.scripts.finalize`的`internals`参数中的`loaders`和`rules`均调整为异步函数
+* **settings:** `@reskript/config-webpack`不再导出`loaders`和`rules`，对应为`@reskript/config-webpack/loaders`和`@reskript/config-webpack/rules`
+* **settings:** `loaders.postCSS`重命名为`loaders.postcss`
+* **settings:** `loaders.postCSSModules`已经移除，功能与`loaders.postcss`完全一致
+* 发布的包为纯ESM格式，无法通过CommonJS的`require`引入。参考[sinderesorhus的建议](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+
+
+
+
 ## [3.0.6](https://github.com/ecomfe/reskript/compare/v3.0.5...v3.0.6) (2022-01-21)
 
 **Note:** Version bump only for package @reskript/eslint-plugin
