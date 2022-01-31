@@ -1,6 +1,6 @@
 import {readPackageConfig} from '@reskript/core';
 import {warn} from '../logger.js';
-import {checkInstalledReskriptVersion, isInstalledVersionSatisfies, nodeVersionSatisfies} from '../utils.js';
+import {checkInstalledReskriptVersion, nodeVersionSatisfies} from '../utils.js';
 
 export default async (cwd: string) => {
     const packageInfo = await readPackageConfig(cwd);
@@ -8,7 +8,7 @@ export default async (cwd: string) => {
 
     checkInstalledReskriptVersion(dependencies, 4);
 
-    if (!isInstalledVersionSatisfies(dependencies, '@reskript/settings', '4.x')) {
+    if (!dependencies['@reskript/settings']) {
         warn(
             '@reskript/settings need to be installed with the same version of other @reskript packages',
             'see: https://reskript.vercel.app/docs/migration/v4#安装settings包'

@@ -6,9 +6,9 @@ import {logger, isMonorepoRoot} from '@reskript/core';
 const resolveChecker = (routeName: string) => {
     switch (routeName) {
         case 'migrate':
-            return './migration';
+            return './migration/index.js';
         default:
-            return './default';
+            return './default/index.js';
     }
 };
 

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import {findMonorepoRoot, resolveMonorepoPackageDirectories, logger, readPackageConfig, pMap} from '@reskript/core';
-import {minVersion, satisfies} from 'semver';
+import semver from 'semver';
 import {Options, LocalPackageInfo} from './interface.js';
 
 export const resolveParticipant = (defaults: LocalPackageInfo[], {includes, excludes}: Options) => {
@@ -50,8 +50,8 @@ export const buildPeerAlias = (cwd: string, siblings: LocalPackageInfo[]): Recor
 };
 
 export const isVersionCompatible = (current: string, required: string): boolean => {
-    const minInstalledVersion = minVersion(current);
-    return !!minInstalledVersion && satisfies(minInstalledVersion, required, {includePrerelease: true});
+    const minInstalledVersion = semver.minVersion(current);
+    return !!minInstalledVersion && semver.satisfies(minInstalledVersion, required, {includePrerelease: true});
 };
 
 export const checkDependencyGraph = (siblings: LocalPackageInfo[], self: LocalPackageInfo): boolean => {

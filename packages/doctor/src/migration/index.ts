@@ -1,5 +1,5 @@
 import {logger} from '@reskript/core';
-import * as semver from 'semver';
+import semver from 'semver';
 import {run as v2} from './v2/index.js';
 import {run as v3} from './v3/index.js';
 import {run as v4} from './v4/index.js';

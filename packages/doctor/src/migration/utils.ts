@@ -1,7 +1,7 @@
 import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {readPackageConfig} from '@reskript/core';
-import {minVersion, satisfies} from 'semver';
+import semver from 'semver';
 import {warn} from './logger.js';
 
 export const readAllDependencies = async (cwd: string) => {
@@ -9,12 +9,12 @@ export const readAllDependencies = async (cwd: string) => {
     return {...dependencies, ...devDependencies};
 };
 
-export const nodeVersionSatisfies = (versionRange: string) => satisfies(process.versions.node, versionRange);
+export const nodeVersionSatisfies = (versionRange: string) => semver.satisfies(process.versions.node, versionRange);
 
 export const isInstalledVersionSatisfies = (dependencies: Record<string, string>, target: string, range: string) => {
     const installedVersionRange = dependencies[target];
-    const minInstalledVersion = minVersion(installedVersionRange);
-    return minInstalledVersion && satisfies(minInstalledVersion, range, {includePrerelease: true});
+    const minInstalledVersion = semver.minVersion(installedVersionRange);
+    return minInstalledVersion && semver.satisfies(minInstalledVersion, range, {includePrerelease: true});
 };
 
 export const checkInstalledReskriptVersion = (dependencies: Record<string, string>, requiredMajor: number) => {
