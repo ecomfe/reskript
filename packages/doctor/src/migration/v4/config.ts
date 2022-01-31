@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import {warn, tip} from '../logger.js';
 import {importClientSettings} from '../utils.js';
 
+// eslint-disable-next-line complexity
 export default async (cwd: string) => {
     const settings = await importClientSettings(cwd);
 
@@ -35,6 +36,27 @@ export default async (cwd: string) => {
         warn(
             '@reskript/config-webpack no longer exports loaders and rules, use child modules instead',
             'see: https://reskript.vercel.app/docs/migration/v4#config-webpack导出变更'
+        );
+    }
+
+    if (settingsContent.includes('require(')) {
+        warn(
+            'found require() call in you reskript.config.js, which is not allowed by ESM',
+            'see: https://reskript.vercel.app/docs/migration/v4#项目配置文件'
+        );
+    }
+
+    if (settingsContent.includes('__dirname' || settingsContent.includes('__filename'))) {
+        warn(
+            'found __dirname or __filename in you reskript.config.js, which is not allowed by ESM',
+            'see: https://reskript.vercel.app/docs/migration/v4#项目配置文件'
+        );
+    }
+
+    if (settingsContent.includes('require.resolve(')) {
+        warn(
+            'found require.resolve() call in you reskript.config.js, which is not allowed by ESM',
+            'see: https://reskript.vercel.app/docs/migration/v4#项目配置文件'
         );
     }
 
