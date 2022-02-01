@@ -1,7 +1,7 @@
 import path from 'node:path';
 import webpack from 'webpack';
 import {reject, isNil} from 'ramda';
-import {dirFromImportMeta} from '@reskript/core';
+import {dirFromImportMeta, resolve} from '@reskript/core';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext} from '@reskript/config-webpack';
 import * as loaders from '@reskript/config-webpack/loaders';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
@@ -23,15 +23,23 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
     const entryLoaders = [
         await loaders.babel(buildContext),
         {
-            loader: path.join(currentDirectory, 'loader'),
+            loader: await resolve('loader-of-loader'),
             options: {
-                ...buildContext.projectSettings.play,
-                componentTypeName,
-                cwd: buildContext.cwd,
-                componentModulePath: path.resolve(buildContext.cwd, target),
-                globalSetupModulePath: cmd.setup
-                    ? path.resolve(cmd.cwd, cmd.setup)
-                    : buildContext.projectSettings.play.defaultGlobalSetup,
+                resolveLoader: async () => {
+                    return {
+                        loader: path.join(currentDirectory, 'loader.js'),
+                        type: 'module',
+                        options: {
+                            ...buildContext.projectSettings.play,
+                            componentTypeName,
+                            cwd: buildContext.cwd,
+                            componentModulePath: path.resolve(buildContext.cwd, target),
+                            globalSetupModulePath: cmd.setup
+                                ? path.resolve(cmd.cwd, cmd.setup)
+                                : buildContext.projectSettings.play.defaultGlobalSetup,
+                        },
+                    };
+                },
             },
         },
     ];

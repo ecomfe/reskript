@@ -5,9 +5,17 @@ const factory: LoaderFactory = async entry => {
     const {mode, projectSettings: {build: {script: {displayName}}}} = entry;
 
     return {
-        loader: await resolve('@reskript/svg-to-component-loader'),
+        loader: await resolve('loader-of-loader'),
         options: {
-            displayName: displayName === 'auto' ? mode === 'development' : displayName,
+            resolveLoader: async () => {
+                return {
+                    loader: await resolve('@reskript/svg-to-component-loader'),
+                    type: 'module',
+                    options: {
+                        displayName: displayName === 'auto' ? mode === 'development' : displayName,
+                    },
+                };
+            },
         },
     };
 };
