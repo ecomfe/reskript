@@ -53,7 +53,7 @@
     "chokidar": "^3.5.2",
     "debounce": "^1.2.1",
     "internal-ip": "^7.0.0",
-    "loader-of-loader": "^1.0.1",
+    "loader-of-loader": "^1.0.3",
     "localforage": "^1.10.0",
     "marked": "^4.0.12",
     "ramda": "^0.28.0",

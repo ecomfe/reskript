@@ -27,6 +27,11 @@ export default configure(
             script: {
                 polyfill: false,
             },
+            style: {
+                resources: [
+                    path.join(path.dirname(fileURLToPath(import.meta.url)), 'src', 'styles', 'inject.less'),
+                ],
+            },
             finalize: webpackConfig => {
                 webpackConfig.plugins!.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
                 webpackConfig.optimization!.splitChunks = {

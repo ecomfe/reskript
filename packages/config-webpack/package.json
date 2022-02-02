@@ -68,7 +68,7 @@
     "less-loader": "^10.2.0",
     "less-plugin-functions": "^1.0.0",
     "less-plugin-npm-import": "^2.1.0",
-    "loader-of-loader": "^1.0.1",
+    "loader-of-loader": "^1.0.3",
     "mini-css-extract-plugin": "^2.5.3",
     "postcss": "^8.4.6",
     "postcss-loader": "^6.2.1",

@@ -297,7 +297,7 @@ importers:
       dedent: ^0.7.0
       eslint: ^8.8.0
       internal-ip: ^7.0.0
-      loader-of-loader: ^1.0.1
+      loader-of-loader: ^1.0.3
       localforage: ^1.10.0
       marked: ^4.0.12
       ramda: ^0.28.0
@@ -324,6 +324,7 @@ importers:
       chokidar: 3.5.3
       debounce: 1.2.1
       internal-ip: 7.0.0
+      loader-of-loader: 1.0.3
       localforage: 1.10.0
       marked: 4.0.12
       ramda: 0.28.0
@@ -347,7 +348,6 @@ importers:
       cpy-cli: 3.1.1
       dedent: 0.7.0
       eslint: 8.8.0
-      loader-of-loader: 1.0.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       typescript: 4.6.0-dev.20220201
@@ -637,7 +637,7 @@ importers:
       less-loader: ^10.2.0
       less-plugin-functions: ^1.0.0
       less-plugin-npm-import: ^2.1.0
-      loader-of-loader: ^1.0.1
+      loader-of-loader: ^1.0.3
       mini-css-extract-plugin: ^2.5.3
       postcss: ^8.4.6
       postcss-loader: ^6.2.1
@@ -688,6 +688,7 @@ importers:
       less-loader: 10.2.0_less@4.1.2+webpack@5.68.0
       less-plugin-functions: 1.0.0
       less-plugin-npm-import: 2.1.0
+      loader-of-loader: 1.0.3
       mini-css-extract-plugin: 2.5.3_webpack@5.68.0
       postcss: 8.4.6
       postcss-loader: 6.2.1_postcss@8.4.6+webpack@5.68.0
@@ -716,7 +717,6 @@ importers:
       '@types/workbox-webpack-plugin': 5.1.8
       c8: 7.11.0
       eslint: 8.8.0
-      loader-of-loader: 1.0.1
       semver: 7.3.5
       typescript: 4.6.0-dev.20220201
       vite: 2.7.13_less@4.1.2
@@ -11405,16 +11405,15 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
-  /loader-of-loader/1.0.1:
-    resolution: {integrity: sha512-1N3/l+5YwTUTlNEn7SAEw5n68FqXPFZ82XCIh9eD2Kj01qdE1nnXWxScGhqzkg13StRtkuTNPIwsHZtLKu3IrA==}
+  /loader-of-loader/1.0.3:
+    resolution: {integrity: sha512-4HpQfJVRRkfV6sMmfQpil5p+AuCgACOjB2e39q8quyr4zwbfa2JgdJHgJILLbq9Go0B1ljWxi3JiMBHzN+dBrQ==}
     dependencies:
       loader-runner: 4.2.0
-    dev: true
+    dev: false
 
   /loader-runner/4.2.0:
     resolution: {integrity: sha512-92+huvxMvYlMzMt0iIOukcwYBFpkYJdpl2xsZ7LrlayO7E8SOv+JJUEK17B/dJIHAOLMfh2dZZ/Y18WgmGtYNw==}
     engines: {node: '>=6.11.5'}
-    dev: true
 
   /loader-utils/1.4.0:
     resolution: {integrity: sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA==}
