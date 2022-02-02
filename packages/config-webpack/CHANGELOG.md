@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-02-02)
+
+
+### Bug Fixes
+
+* **build:** 修复loader-of-loader会无视前置loader的问题 ([400ee50](https://github.com/ecomfe/reskript/commit/400ee50c691d029d4d6a128454436a7a102f69a8))
+* **build:** 把loader-of-loader移到dependencies中 ([02c0a1d](https://github.com/ecomfe/reskript/commit/02c0a1d4faed9c4130840c02b796ea2011cb7f1a))
+
+
+
+
+
 # [4.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2022-02-01)
 
 

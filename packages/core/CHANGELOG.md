@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-02-02)
+
+
+### Bug Fixes
+
+* **core:** 修复resolve对低版本Node的兼容性 ([46334c2](https://github.com/ecomfe/reskript/commit/46334c2df438fb8f5c5d940c05f4de7a279ff82a))
+
+
+
+
+
 # [4.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2022-02-01)
 
 
