@@ -15,7 +15,7 @@ const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
     const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
-    const userProjectSettings = await readProjectSettings({cwd, commandName: 'dev', specifiedFile: configFile});
+    const userProjectSettings = await readProjectSettings({cwd, commandName: 'play', specifiedFile: configFile});
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {

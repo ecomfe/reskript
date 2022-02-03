@@ -1,6 +1,8 @@
 import {WorkModeAware} from '@reskript/core';
 import {ProjectSettings} from './project.js';
 
+export type CommandName = 'build' | 'dev' | 'play' | 'test';
+
 export type ReskriptDriver = 'webpack';
 
 export interface BuildEnv extends WorkModeAware {

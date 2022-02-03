@@ -4,7 +4,7 @@ import {DevServerSettings} from './devServer.js';
 import {FeatureMatrix} from './featureMatrix.js';
 import {PlaySettings} from './play.js';
 import {SettingsPlugin} from './plugin.js';
-import {ReskriptDriver} from './shared.js';
+import {CommandName, ReskriptDriver} from './shared.js';
 
 export interface ProjectSettings extends ProjectAware {
     // 从哪里来的配置
@@ -17,5 +17,5 @@ export interface ProjectSettings extends ProjectAware {
 }
 
 export interface ClientProjectSettings extends ProjectSettings {
-    readonly plugins: SettingsPlugin[] | ((commandName: string) => SettingsPlugin[]);
+    readonly plugins: SettingsPlugin[] | ((commandName: CommandName) => SettingsPlugin[]);
 }

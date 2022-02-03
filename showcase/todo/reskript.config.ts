@@ -60,8 +60,8 @@ export default configure(
                 },
             },
         },
-        plugins: [
-            qiankun('TodoMVC'),
+        plugins: commandName => [
+            commandName !== 'play' && qiankun('TodoMVC'),
         ],
     }
 );

@@ -11,6 +11,7 @@ import {
     ClientProjectSettings,
     ReskriptDriver,
     PluginOptions,
+    CommandName,
 } from './interface/index.js';
 import validate from './validate.js';
 import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
@@ -43,7 +44,7 @@ const locateSettings = (cwd: string): string | null => {
 
 interface ResolveProjectSettingsOptions {
     cwd: string;
-    commandName: string;
+    commandName: CommandName;
     specifiedFile?: string;
 }
 
