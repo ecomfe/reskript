@@ -9,6 +9,7 @@ import {
     ProjectSettings,
     warnAndExitOnInvalidFinalizeReturn,
     BuildInternals,
+    FinalizableWebpackConfiguration,
 } from '@reskript/settings';
 import * as rules from './rules/index.js';
 import {revision, hasServiceWorker} from './utils/info.js';
@@ -77,7 +78,12 @@ export const createWebpackConfig = async (context: BuildContext, options: Option
         context.projectSettings.build.thirdParty && 'external',
     ];
     const configurations = await pMap(partialNames.filter(excludeFalse), createPartialWith(context));
-    const internalCreated = mergeBuiltin([...configurations, strictPartial(strict, context.cwd), ...extras]);
+    const internalPartials: Configuration[] = [
+        ...configurations,
+        strictPartial(strict, context.cwd),
+        ...extras,
+    ];
+    const internalCreated = mergeBuiltin(internalPartials) as FinalizableWebpackConfiguration;
     const internals: BuildInternals = {
         rules,
         loader: introduceLoader,

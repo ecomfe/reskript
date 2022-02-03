@@ -1,4 +1,4 @@
-import {RuntimeBuildEnv, FeatureSet, BuildEntry} from '@reskript/settings';
+import {RuntimeBuildEnv, BuildEntry} from '@reskript/settings';
 import {Configuration, RuleSetUseItem, EntryObject} from 'webpack';
 
 type EntryDescriptor = Exclude<EntryObject[string], string | string[]>;
@@ -23,7 +23,7 @@ export interface AppEntry {
 }
 
 export interface BuildContext extends RuntimeBuildEnv {
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     readonly buildTarget: string;
     readonly isDefaultTarget: boolean;
     readonly entries: AppEntry[];

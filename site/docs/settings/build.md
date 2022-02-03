@@ -100,7 +100,7 @@ interface BuildSettings {
     readonly style: BuildStyleSettings;
     // 控制脚本编译的配置
     readonly script: BuildScriptSettings;
-    // 最终手动处理webpack配置
+    // 最终手动处理webpack配置，第一个参数的类型并不完全对应Webpack配置，具体见下文
     readonly finalize: (webpackConfig: WebpackConfiguration, buildEntry: BuildEntry, internals: BuildInternals) => WebpackConfiguration | Promise<WebpackConfiguration>;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
@@ -234,32 +234,6 @@ export default configure(
     }
 );
 ```
-
-如果你需要修改一个已经存在的配置，那么就显得比较麻烦，**我们非常不建议你这么做**，因为它会使你依赖某个特定版本的`reSKRipt`的内部轮回。如果你没有其它选择，那么通过遍历`plugins`或`presets`找到相关内容再进行修改也是可行的，比如你必须打开`loose`这个选项：
-
-```ts
-export default configure(
-    'webpack',
-    {
-        build: {
-            script: {
-                finalize: babelConfig => {
-                    for (const item of babelConfig.presets) {
-                        // 找到preset-env，需要注意在配置中是绝对路径，所以你不能用`===`来判断，必须用`.includes`
-                        if (Array.isArray(item) && item[0].includes('@babel/preset-env')) {
-                            const options = item[1];
-                            options.loose = true;
-                        }
-                    }
-                    return babelConfig;
-                },
-            },
-        },
-    }
-);
-```
-
-**再次提醒，不到万不得已的情况，我们强烈不建议你去修改已有的配置内容。**
 
 ## 样式相关
 

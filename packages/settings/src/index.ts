@@ -4,12 +4,19 @@ import {existsSync} from 'node:fs';
 import hasha from 'hasha';
 import chokidar from 'chokidar';
 import {importUserModule, logger, PackageInfo, readPackageConfig} from '@reskript/core';
-import {ProjectSettings, Listener, Observe, ClientProjectSettings, ReskriptDriver, PluginOptions} from './interface.js';
+import {
+    ProjectSettings,
+    Listener,
+    Observe,
+    ClientProjectSettings,
+    ReskriptDriver,
+    PluginOptions,
+} from './interface/index.js';
 import validate from './validate.js';
 import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
 import {applyPlugins} from './plugins.js';
 
-export * from './interface.js';
+export * from './interface/index.js';
 export {fillProjectSettings, PartialProjectSettings};
 
 const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];

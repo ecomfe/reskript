@@ -33,8 +33,8 @@ export default configure(
                 ],
             },
             finalize: webpackConfig => {
-                webpackConfig.plugins!.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
-                webpackConfig.optimization!.splitChunks = {
+                webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
+                webpackConfig.optimization.splitChunks = {
                     cacheGroups: {
                         vendors: {
                             chunks: 'all',

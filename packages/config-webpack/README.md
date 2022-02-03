@@ -16,7 +16,7 @@ interface BuildContext {
     readonly srcDirectory: string;
     readonly hostPackageName: string;
     readonly projectSettings: ProjectSettings;
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     readonly buildTarget: string;
     readonly isDefaultTarget: boolean;
     readonly entries: AppEntry[];
@@ -107,7 +107,7 @@ interface BuildEntry extends RuntimeBuildEnv {
     readonly projectSettings: ProjectSettings;
     readonly buildVersion: string;
     readonly buildTime: string;
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     readonly buildTarget: string;
 }
 

@@ -116,7 +116,7 @@ interface RuntimeBuildEnv extends BuildEnv {
 ```ts
 interface BuildEntry extends RuntimeBuildEnv {
     // 构建的特性值
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     // 当前构建的特性矩阵中的目标
     readonly buildTarget: string;
 }

@@ -1,5 +1,5 @@
 import {pReduce} from '@reskript/core';
-import {ProjectSettings, ClientProjectSettings, PluginOptions} from './interface.js';
+import {ProjectSettings, ClientProjectSettings, PluginOptions} from './interface/index.js';
 
 type Plugins = ClientProjectSettings['plugins'];
 
