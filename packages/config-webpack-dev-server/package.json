@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
-    "@reskript/config-webpack": "4.0.0-beta.2",
-    "@reskript/core": "4.0.0-beta.2",
-    "@reskript/settings": "4.0.0-beta.2",
+    "@reskript/config-webpack": "4.0.0",
+    "@reskript/core": "4.0.0",
+    "@reskript/settings": "4.0.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "cli-progress": "^3.9.1",
     "internal-ip": "^7.0.0",
