@@ -4,7 +4,7 @@ node_modules
 yarn-error.log
 /.idea
 *.tgz
-/*/*/dist
+dist
 /*/*/config
 /*/*/coverage
 
