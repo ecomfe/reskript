@@ -2,7 +2,7 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
-import {transform} from '../transform.js';
+import transform from '../transformSvgToComponent.js';
 
 interface TransformOptions {
     displayName?: boolean;

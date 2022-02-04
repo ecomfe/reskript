@@ -64,7 +64,7 @@
     "fork-ts-checker-webpack-plugin": "^7.2.0",
     "hasha": "^5.2.0",
     "html-webpack-plugin": "^5.5.0",
-    "less": "4.1.2",
+    "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "less-plugin-functions": "^1.0.0",
     "less-plugin-npm-import": "^2.1.0",
