@@ -1,5 +1,5 @@
 import {LoaderContext} from 'webpack';
-import {transform} from './transform.js';
+import {transformSvgToComponent} from '@reskript/build-utils';
 
 export interface Options {
     displayName?: boolean;
@@ -10,7 +10,7 @@ export default async function svgToComponentLoader(this: LoaderContext<Options>,
     const callback = this.async();
     const {displayName = false} = this.getOptions();
     try {
-        const code = await transform(source, {displayName, resource: this.resourcePath});
+        const code = await transformSvgToComponent(source, {displayName, resource: this.resourcePath});
         callback(null, code);
     }
     catch (ex) {

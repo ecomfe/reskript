@@ -49,7 +49,7 @@ interface Options {
     displayName: boolean;
 }
 
-export const transform = async (source: string, {resource, displayName}: Options) => {
+export default async (source: string, {resource, displayName}: Options) => {
     const [svgProps, svgBody] = await parseSVG(source);
     const componentProps = {
         ...svgProps,
