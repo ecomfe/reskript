@@ -39,9 +39,9 @@ test('project source babel excluded', async () => {
     expect(entryModule?.identifier?.includes('babel-loader')).toBe(false);
 });
 
-test('project source worker', async () => {
+test('worker query', async () => {
     const {entryModule} = await compiler(
-        'src/busy.worker.js',
+        'src/busy.js?worker',
         {
             build: {
                 script: {
@@ -51,9 +51,4 @@ test('project source worker', async () => {
         }
     );
     expect(entryModule?.identifier?.includes('worker-loader')).toBe(true);
-});
-
-test('external no worker', async () => {
-    const {entryModule} = await compiler('externals/lazy.worker.js');
-    expect(entryModule?.identifier?.includes('worker-loader')).toBe(false);
 });

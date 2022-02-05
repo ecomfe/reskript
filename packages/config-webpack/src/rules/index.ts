@@ -28,13 +28,12 @@ export const script = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const {cwd, projectSettings: {build: {script: {babel}}}} = entry;
     const use = createUseWith(entry);
     const isProjectSource = isProjectSourceIn(cwd);
-    const isWorker = (resource: string) => isProjectSource(resource) && /\.worker\.[jt]sx?$/.test(resource);
     const rulesWithBabelRequirement = async (requireBabel: boolean) => {
         return {
             oneOf: [
-                // 在项目源码内的`.worker.js`，需要`worker-loader`
+                // 在项目源码内的`*?worker`，需要`worker-loader`
                 {
-                    resource: isWorker,
+                    resourceQuery: /worker/,
                     use: await use('worker', requireBabel && 'babel'),
                 },
                 // 项目源码内的其它文件，需要`eslint`检查

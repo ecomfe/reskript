@@ -30,6 +30,6 @@
     "webpack": "^5.68.0"
   },
   "dependencies": {
-    "@reskript/build-utils": "4.2.1"
+    "@reskript/build-utils": "4.3.0"
   }
 }

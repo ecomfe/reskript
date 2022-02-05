@@ -2,6 +2,7 @@ import {useState, useCallback, useEffect} from 'react';
 import {Button} from 'antd';
 import styled from 'styled-components';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
+import WorkerStatus from '@/components/WorkerStatus';
 import Create from '../Create';
 import List from '../List';
 import './lintIgnore';
@@ -78,7 +79,10 @@ export default function App() {
             </Header>
             <Create onSubmit={createNew} />
             <Meta id="app-meta" className="flex items-center justify-between">
-                {todos.length} things waiting
+                <span className="flex items-center gap-1">
+                    <WorkerStatus />
+                    {todos.length} things waiting
+                </span>
                 {$features.batch && <Button type="link" onClick={markAllDone}>all done</Button>}
             </Meta>
             <List dataSource={todos} onToggleItem={toggleItem} />

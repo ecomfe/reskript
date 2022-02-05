@@ -48,7 +48,7 @@ interface Options {
     classNamesModule?: string;
 }
 
-export default function cssBind({classNamesModule = 'classnames/bind'}: Options = {}): Plugin {
+export default function cssBindPlugin({classNamesModule = 'classnames/bind'}: Options = {}): Plugin {
     return {
         name: 'reskript:css-bind',
         enforce: 'post',
