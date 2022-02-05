@@ -73,6 +73,15 @@ declare module '*.otf' {
     export default src;
 }
 
+// Worker
+declare module '*?worker' {
+    // From https://github.com/vitejs/vite/blob/3311686bbcc12481495374c58cd1bc054d2429b8/packages/vite/client.d.ts
+    const worker: {
+        new(): Worker
+    };
+    export default worker;
+}
+
 // SVG组件
 declare module '*.svg?react' {
     import {SVGAttributes, ComponentType, RefAttributes} from 'react';

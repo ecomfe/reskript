@@ -12,7 +12,7 @@ interface Options {
 
 const DEFAULT_ENABLE_MODULES = (id: string) => !id.includes('node_modules');
 
-export default function cssForceModules({enableModules = DEFAULT_ENABLE_MODULES}: Options = {}): Plugin {
+export default function cssForceModulesPlugin({enableModules = DEFAULT_ENABLE_MODULES}: Options = {}): Plugin {
     return {
         name: 'reskript:css-force-modules',
         enforce: 'pre',

@@ -41,3 +41,9 @@ test('safe less works', async ({page}) => {
     expect(styles.height).toBe('64px');
     expect(styles.fontSize).toBe('24px');
 });
+
+test('worker', async ({page}) => {
+    await page.goto('http://localhost:9876');
+    const color = await page.locator('#worker-status').evaluate(element => getComputedStyle(element).backgroundColor);
+    expect(color).toBe('rgb(40, 200, 64)');
+});

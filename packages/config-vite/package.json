@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-vite",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -35,8 +35,8 @@
     "vitest": "^0.2.5"
   },
   "dependencies": {
-    "@reskript/build-utils": "4.2.1",
-    "@reskript/core": "4.2.1",
+    "@reskript/build-utils": "4.3.0",
+    "@reskript/core": "4.3.0",
     "connect-history-api-fallback": "^1.6.0",
     "dedent": "^0.7.0"
   },
