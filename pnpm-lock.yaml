@@ -122,13 +122,8 @@ importers:
   packages/cli:
     specifiers:
       '@antfu/install-pkg': ^0.1.0
-      '@reskript/cli-babel': 4.0.0
-      '@reskript/cli-build': 4.0.0
-      '@reskript/cli-dev': 4.0.0
-      '@reskript/cli-lint': 4.0.0
-      '@reskript/cli-play': 4.0.0
-      '@reskript/cli-test': 4.0.0
       '@reskript/core': 4.0.0
+      '@reskript/settings': 4.0.0
       '@types/node': ^17.0.14
       clipanion: ^3.2.0-rc.6
       enquirer: ^2.3.6
@@ -144,12 +139,7 @@ importers:
       pkg-dir: 6.0.1
       typanion: 3.7.1
     devDependencies:
-      '@reskript/cli-babel': link:../cli-babel
-      '@reskript/cli-build': link:../cli-build
-      '@reskript/cli-dev': link:../cli-dev
-      '@reskript/cli-lint': link:../cli-lint
-      '@reskript/cli-play': link:../cli-play
-      '@reskript/cli-test': link:../cli-test
+      '@reskript/settings': link:../settings
       '@types/node': 17.0.14
       eslint: 8.8.0
       typescript: 4.6.0-dev.20220201
@@ -159,6 +149,7 @@ importers:
       '@babel/core': ^7.16.12
       '@reskript/config-babel': 4.0.0
       '@reskript/core': 4.0.0
+      '@reskript/settings': 4.0.0
       '@types/babel__core': ^7.1.17
       '@types/node': ^17.0.14
       cli-highlight: ^2.1.11
@@ -174,6 +165,7 @@ importers:
       globby: 13.1.0
       p-limit: 4.0.0
     devDependencies:
+      '@reskript/settings': link:../settings
       '@types/babel__core': 7.1.18
       '@types/node': 17.0.14
       eslint: 8.8.0
@@ -249,6 +241,7 @@ importers:
     specifiers:
       '@reskript/config-lint': 4.0.0
       '@reskript/core': 4.0.0
+      '@reskript/settings': 4.0.0
       '@types/eslint': ^8.4.1
       '@types/node': ^17.0.14
       '@types/ramda': ^0.27.64
@@ -267,6 +260,7 @@ importers:
       globby: 13.1.0
       ramda: 0.28.0
     devDependencies:
+      '@reskript/settings': link:../settings
       '@types/eslint': 8.4.1
       '@types/node': 17.0.14
       '@types/ramda': 0.27.64

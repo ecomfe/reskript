@@ -4,7 +4,7 @@ import {
     ClientProjectSettings,
     SettingsPluginItem,
     SettingsPlugin,
-    PluginOptions,
+    CommandInput,
 } from './interface/index.js';
 
 type Plugins = ClientProjectSettings['plugins'];
@@ -19,11 +19,11 @@ const normalize = (plugin: SettingsPlugin): SettingsPluginItem[] => {
     return [plugin];
 };
 
-export const applyPlugins = async (settings: ProjectSettings, plugins: Plugins, options: PluginOptions) => {
-    const pluginsToApply = typeof plugins === 'function' ? plugins(options.command) : plugins;
+export const applyPlugins = async (settings: ProjectSettings, plugins: Plugins, cmd: CommandInput) => {
+    const pluginsToApply = typeof plugins === 'function' ? plugins(cmd.commandName) : plugins;
     const applied = await pReduce(
         pluginsToApply.flatMap(normalize),
-        (baseSettings, apply) => Promise.resolve(apply(baseSettings, options)),
+        (baseSettings, apply) => Promise.resolve(apply(baseSettings, cmd)),
         settings
     );
     return applied;

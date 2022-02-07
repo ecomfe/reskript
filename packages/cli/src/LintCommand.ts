@@ -1,6 +1,6 @@
 // @ts-expect-error
 import {Option} from 'clipanion';
-import {LintCommandLineArgs} from '@reskript/cli-lint';
+import {LintCommandLineArgs} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class LintCommand extends DynamicImportCommand<LintCommandLineArgs> {

@@ -2,7 +2,7 @@ import path from 'node:path';
 import ora from 'ora';
 import logSymbols from 'log-symbols';
 import {logger, readPackageConfig} from '@reskript/core';
-import {readProjectSettings} from '@reskript/settings';
+import {BuildCommandLineArgs, readProjectSettings} from '@reskript/settings';
 import {DoctorContext, DoctorResult} from '../interface.js';
 import entry from './entry.js';
 import version from './version.js';
@@ -27,7 +27,18 @@ const aggregateResult = (results: DoctorResult[]) => {
 };
 
 export const run = async (packageDirectory: string) => {
-    const projectSettings = await readProjectSettings({cwd: packageDirectory, commandName: 'build'});
+    const args: BuildCommandLineArgs = {
+        mode: 'production',
+        cwd: packageDirectory,
+        srcDirectory: 'src',
+        entriesDirectory: 'entries',
+        strict: false,
+        analyze: false,
+        clean: false,
+        profile: false,
+        sourceMaps: true,
+    };
+    const projectSettings = await readProjectSettings({commandName: 'build', ...args});
     const packageInfo = await readPackageConfig(packageDirectory);
     const context: DoctorContext = {
         projectSettings,

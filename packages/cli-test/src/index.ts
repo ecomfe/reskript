@@ -4,10 +4,7 @@ import {mergeDeepRight} from 'ramda';
 import {run as runJest} from 'jest-cli';
 import {logger} from '@reskript/core';
 import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
-import {readProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import {TestCommandLineArgs} from './interface.js';
-
-export {TestCommandLineArgs};
+import {readProjectSettings, strictCheckRequiredDependency, TestCommandLineArgs} from '@reskript/settings';
 
 const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<string> => {
     const {cwd} = jestConfigOptions;
@@ -43,7 +40,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 
 export const run = async (cmd: TestCommandLineArgs): Promise<void> => {
     const {cwd, target, jestArgs, configFile} = cmd;
-    const projectSettings = await readProjectSettings({cwd, commandName: 'test', specifiedFile: configFile});
+    const projectSettings = await readProjectSettings({commandName: 'test', specifiedFile: configFile, ...cmd});
     await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     // TODO: `featureMatrix`目前以dev为默认目标，以后可以传入`--test-target`？
     const jestConfigOptions: JestConfigOptions = {cwd, target, features: projectSettings.featureMatrix.dev};

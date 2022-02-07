@@ -11,13 +11,16 @@ import {
     BuildContext,
     EntryLocation,
 } from '@reskript/config-webpack';
-import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
+import {
+    readProjectSettings,
+    BuildEnv,
+    BuildCommandLineArgs,
+    ProjectSettings,
+    strictCheckRequiredDependency,
+} from '@reskript/settings';
 import * as partials from './partial.js';
-import {BuildCommandLineArgs} from './interface.js';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report.js';
 import inspect from './inspect/index.js';
-
-export {BuildCommandLineArgs};
 
 const build = (configuration: Configuration | Configuration[]): Promise<Stats> => {
     const executor = (resolve: (value: Stats) => void) => webpack(
@@ -128,7 +131,7 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
         await fs.rm(path.join(cwd, 'dist'), {recursive: true, force: true});
     }
 
-    const projectSettings = await readProjectSettings({cwd, commandName: 'build', specifiedFile: configFile});
+    const projectSettings = await readProjectSettings({commandName: 'build', specifiedFile: configFile, ...cmd});
     await strictCheckRequiredDependency(projectSettings, cwd);
     const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 

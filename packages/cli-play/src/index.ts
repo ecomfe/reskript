@@ -3,19 +3,22 @@ import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMap} from 'webpack-dev-server';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
-import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
+import {
+    readProjectSettings,
+    BuildEnv,
+    PlayCommandLineArgs,
+    ProjectSettings,
+    strictCheckRequiredDependency,
+} from '@reskript/settings';
 import {logger, prepareEnvironment, readPackageConfig, dirFromImportMeta} from '@reskript/core';
 import {createWebpackConfig} from './webpack.js';
-import {PlayCommandLineArgs, HostType} from './interface.js';
 import setupServer from './server/index.js';
-
-export {PlayCommandLineArgs, HostType};
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
     const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
-    const userProjectSettings = await readProjectSettings({cwd, commandName: 'play', specifiedFile: configFile});
+    const userProjectSettings = await readProjectSettings({commandName: 'play', specifiedFile: configFile, ...cmd});
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {

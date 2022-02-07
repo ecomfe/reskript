@@ -5,8 +5,8 @@ import {dirFromImportMeta, resolve} from '@reskript/core';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext} from '@reskript/config-webpack';
 import * as loaders from '@reskript/config-webpack/loaders';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
+import {PlayCommandLineArgs} from '@reskript/settings';
 import {resolveComponentName} from './utils/path.js';
-import {PlayCommandLineArgs} from './interface.js';
 import {resolveHost} from './utils/host.js';
 
 const currentDirectory = dirFromImportMeta(import.meta.url);

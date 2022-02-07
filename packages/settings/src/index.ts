@@ -10,8 +10,7 @@ import {
     Observe,
     ClientProjectSettings,
     ReskriptDriver,
-    PluginOptions,
-    CommandName,
+    CommandInput,
 } from './interface/index.js';
 import validate from './validate.js';
 import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
@@ -42,16 +41,12 @@ const locateSettings = (cwd: string): string | null => {
     return file ?? null;
 };
 
-interface ResolveProjectSettingsOptions {
-    cwd: string;
-    commandName: CommandName;
-    specifiedFile?: string;
-}
+type ResolveProjectSettingsOptions = CommandInput & {specifiedFile?: string};
 
 const importSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
-    const {cwd, commandName, specifiedFile} = options;
+    const {specifiedFile, ...cmd} = options;
     const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserProjectSettings}>(
-        specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cwd, 'reskript.config' + v)),
+        specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cmd.cwd, 'reskript.config' + v)),
         {default: {provider: 'webpack'}}
     );
 
@@ -65,8 +60,7 @@ const importSettings = async (options: ResolveProjectSettingsOptions): Promise<P
 
     const {plugins = [], ...clientSettings} = userSettings;
     const rawSettings: ProjectSettings = {...fillProjectSettings(clientSettings), from: resolved};
-    const pluginOptions: PluginOptions = {cwd, command: commandName};
-    return applyPlugins(rawSettings, plugins, pluginOptions);
+    return applyPlugins(rawSettings, plugins, cmd);
 };
 
 interface CacheContainer {

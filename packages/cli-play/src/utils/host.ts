@@ -1,5 +1,5 @@
 import {internalIpV4} from 'internal-ip';
-import {PlayCommandLineArgs} from '../interface.js';
+import {PlayCommandLineArgs} from '@reskript/settings';
 
 export const resolveHost = async (hostType: PlayCommandLineArgs['host']) => {
     if (!hostType) {

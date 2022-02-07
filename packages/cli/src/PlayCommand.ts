@@ -2,7 +2,7 @@
 import {isNumber} from 'typanion';
 // @ts-expect-error
 import {Option} from 'clipanion';
-import {PlayCommandLineArgs} from '@reskript/cli-play';
+import {PlayCommandLineArgs} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class LintCommand extends DynamicImportCommand<PlayCommandLineArgs> {

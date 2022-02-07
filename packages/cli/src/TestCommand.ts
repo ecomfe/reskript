@@ -2,7 +2,7 @@
 import {Option} from 'clipanion';
 // @ts-expect-error
 import {isEnum} from 'typanion';
-import {TestCommandLineArgs} from '@reskript/cli-test';
+import {TestCommandLineArgs} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class LintCommand extends DynamicImportCommand<TestCommandLineArgs> {

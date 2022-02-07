@@ -1,7 +1,7 @@
 import {WorkModeAware} from '@reskript/core';
 import {ProjectSettings} from './project.js';
 
-export type CommandName = 'build' | 'dev' | 'play' | 'test';
+export type CommandName = 'build' | 'dev' | 'play' | 'test' | 'lint' | 'babel';
 
 export type ReskriptDriver = 'webpack';
 

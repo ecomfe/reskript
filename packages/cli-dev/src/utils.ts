@@ -1,9 +1,8 @@
 import WebpackDevServer from 'webpack-dev-server';
 import {internalIpV4} from 'internal-ip';
-import {readProjectSettings, BuildEnv, strictCheckRequiredDependency} from '@reskript/settings';
+import {readProjectSettings, BuildEnv, DevCommandLineArgs, strictCheckRequiredDependency} from '@reskript/settings';
 import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
 import {logger, readPackageConfig} from '@reskript/core';
-import {DevCommandLineArgs} from './interface.js';
 
 export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
 
@@ -47,7 +46,7 @@ export const startServer = async (server: WebpackDevServer): Promise<void> => {
 export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
     const {mode, cwd, srcDirectory, entriesDirectory, entry, buildTarget, configFile} = cmd;
     const reading = [
-        readProjectSettings({cwd, commandName: 'dev', specifiedFile: configFile}),
+        readProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd}),
         readPackageConfig(cwd),
     ] as const;
     const [projectSettings, {name: hostPackageName}] = await Promise.all(reading);

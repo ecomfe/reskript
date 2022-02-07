@@ -1,7 +1,7 @@
 import webpack, {Configuration as WebpackConfiguration} from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
-import {watchProjectSettings} from '@reskript/settings';
+import {watchProjectSettings, DevCommandLineArgs} from '@reskript/settings';
 import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
 import {logger, prepareEnvironment, dirFromImportMeta} from '@reskript/core';
 import {
@@ -9,10 +9,7 @@ import {
     createWebpackDevServerConfig,
     injectDevElements,
 } from '@reskript/config-webpack-dev-server';
-import {DevCommandLineArgs} from './interface.js';
 import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils.js';
-
-export {DevCommandLineArgs};
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
@@ -95,6 +92,6 @@ export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
             nextStart();
         }
     };
-    const listen = await watchProjectSettings({cwd, commandName: 'dev', specifiedFile: configFile});
+    const listen = await watchProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd});
     listen(restart);
 };

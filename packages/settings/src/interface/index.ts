@@ -13,9 +13,20 @@ export {
     SourceFilter,
     ThirdPartyUse,
 } from './build.js';
+export {
+    CommandInput,
+    HostType,
+    TestTarget,
+    BabelCommandLineArgs,
+    BuildCommandLineArgs,
+    DevCommandLineArgs,
+    LintCommandLineArgs,
+    PlayCommandLineArgs,
+    TestCommandLineArgs,
+} from './command.js';
 export {DevServerHttps, DevServerSettings} from './devServer.js';
 export {PlaySettings} from './play.js';
-export {PluginOptions, SettingsPluginItem, SettingsPlugin} from './plugin.js';
+export {SettingsPluginItem, SettingsPlugin} from './plugin.js';
 export {
     BuildInternals,
     FinalizableWebpackConfiguration,

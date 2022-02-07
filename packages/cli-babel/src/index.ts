@@ -6,11 +6,9 @@ import {globby} from 'globby';
 import babel, {TransformOptions} from '@babel/core';
 import {logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
-import {BabelCommandLineArgs} from './interface.js';
+import {BabelCommandLineArgs} from '@reskript/settings';
 
 const {transformFileAsync} = babel;
-
-export {BabelCommandLineArgs};
 
 const changeExtension = (file: string, extension: string) => {
     const normalized = path.normalize(file);

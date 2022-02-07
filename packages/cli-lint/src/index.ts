@@ -2,11 +2,10 @@ import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
 import {execa} from 'execa';
 import {logger, gitStatus, findGitRoot} from '@reskript/core';
-import {LintCommandLineArgs, ResolveOptions} from './interface.js';
+import {LintCommandLineArgs} from '@reskript/settings';
+import {ResolveOptions} from './interface.js';
 import lintScripts from './script.js';
 import lintStyles from './style.js';
-
-export {LintCommandLineArgs};
 
 type LintResult = ESLint.LintResult;
 type LintMessage = Linter.LintMessage;

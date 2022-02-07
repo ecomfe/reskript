@@ -1,14 +1,9 @@
-import {CommandName} from './shared.js';
+import {CommandInput} from './command.js';
 import {ProjectSettings} from './project.js';
-
-export interface PluginOptions {
-    cwd: string;
-    command: CommandName;
-}
 
 type SettingsPluginReturn = ProjectSettings | Promise<ProjectSettings>;
 
-export type SettingsPluginItem = (current: ProjectSettings, cmd: PluginOptions) => SettingsPluginReturn;
+export type SettingsPluginItem = (current: ProjectSettings, cmd: CommandInput) => SettingsPluginReturn;
 
 export type MayBeSettingsPlugin = SettingsPluginItem | null | undefined | false;
 
