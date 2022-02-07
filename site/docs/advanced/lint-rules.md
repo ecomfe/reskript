@@ -150,14 +150,30 @@ module.exports = {
 2. 调用函数无参数。
 
 规则内容：
+
 ```js
 // good code
-const handleCancel = useCallback(() => {
-    hideModal();
-    close();
-}, [hideModal, close]);
+// 有多个调用语句
+const handleCancel = useCallback(
+    () => {
+        hideModal();
+        close();
+    },
+    [hideModal, close]
+);
+// 有依赖
 const handleAdd = useCallback(() => addCount(1), [addCount]);
+// 虽然只有一个调用语句，但隐藏了返回值
+const handleClear = useCallback(
+    () => {
+        clear();
+    },
+    [clear]
+);
 
 // bad code
+// 仅一个调用语句，返回被调用函数的返回值
 const handleCancel = useCallback(() => hideModal(), [hideModal]);
+// 没有任何依赖
+const handleClear = useCallback(() => clear(), []);
 ```
