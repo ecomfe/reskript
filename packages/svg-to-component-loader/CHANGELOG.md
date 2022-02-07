@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/ecomfe/reskript/compare/v4.0.0...v4.0.1) (2022-02-07)
+
+**Note:** Version bump only for package @reskript/svg-to-component-loader
+
+
+
+
+
 # [4.0.0](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.2...v4.0.0) (2022-02-03)
 
 **Note:** Version bump only for package @reskript/svg-to-component-loader
