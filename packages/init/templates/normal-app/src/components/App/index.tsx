@@ -6,7 +6,7 @@ const App = () => (
         <ul>
             <li>确保<code>node</code>和<code>npm</code>都是最新版本。</li>
             <li>搜索各处的<code>TODO</code>并相应修改。</li>
-            <li>阅读<a href="https://ecomfe.github.io/reskript">reSKRipt的文档</a>了解更多配置和开发方式。</li>
+            <li>阅读<a href="https://reskript.vercel.app">reSKRipt的文档</a>了解更多配置和开发方式。</li>
         </ul>
     </div>
 );

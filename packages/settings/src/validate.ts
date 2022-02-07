@@ -62,6 +62,10 @@ const optionalRuleConfig = (valueSchema: any) => {
 // `schema`并不是一个完全符合JSON Schema的东西
 const schema: any = {
     properties: {
+        provider: {
+            enum: ['webpack'],
+            type: 'string',
+        },
         featureMatrix: {
             additionalProperties: {
                 additionalProperties: true,
@@ -199,7 +203,26 @@ const schema: any = {
                     type: 'boolean',
                 },
                 https: {
-                    type: 'boolean',
+                    anyOf: [
+                        {
+                            properties: {
+                                proxy: {
+                                    type: 'boolean',
+                                },
+                                client: {
+                                    type: 'boolean',
+                                },
+                                serverOptions: {
+                                    type: 'object',
+                                },
+                            },
+                            additionalProperties: false,
+                            type: 'object',
+                        },
+                        {
+                            type: 'boolean',
+                        },
+                    ],
                 },
                 openPage: {
                     type: 'string',

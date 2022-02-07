@@ -1,5 +1,7 @@
-import {ProjectAware} from '@reskript/core';
-import {FeatureMatrix} from '@reskript/settings';
+// @ts-expect-error
+import type {ProjectAware} from '@reskript/core';
+// @ts-expect-error
+import type {FeatureMatrix} from '@reskript/settings';
 
 export type TestTarget = 'react' | 'node';
 

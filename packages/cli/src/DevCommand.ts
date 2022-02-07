@@ -1,8 +1,10 @@
+// @ts-expect-error
 import {Option} from 'clipanion';
+// @ts-expect-error
 import {isEnum} from 'typanion';
 import {WorkMode} from '@reskript/core';
 import {DevCommandLineArgs} from '@reskript/cli-dev';
-import DynamicImportCommand from './DynamicImportCommand';
+import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs> {
     static paths = [['dev']];
@@ -22,6 +24,11 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
             validator: isEnum(['development', 'production']),
             description: 'set build mode, default to "development"',
         }
+    );
+
+    configFile = Option.String<DevCommandLineArgs['configFile']>(
+        '--config',
+        {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );
 
     srcDirectory = Option.String(
@@ -66,6 +73,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         return {
             cwd: this.cwd,
             mode: this.mode,
+            configFile: this.configFile,
             srcDirectory: this.srcDirectory,
             entriesDirectory: this.entriesDirectory,
             buildTarget: this.buildTarget,

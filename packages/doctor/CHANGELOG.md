@@ -3,6 +3,197 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.2...v4.0.0) (2022-02-03)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+# [4.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-02-02)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+# [4.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* **doctor:** 解决V4升级检查的部分错误 ([18ec902](https://github.com/ecomfe/reskript/commit/18ec90268880359b7e7e3f9f9083197f113ca996))
+* **doctor:** 额外检查配置文件中一些CommonJS专用函数和变量的使用 ([341190f](https://github.com/ecomfe/reskript/commit/341190f965b002335c61fb63550a029499c6cbe6))
+
+
+### Features
+
+* **build:** 支持各个loader的ESM化 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([d7451e5](https://github.com/ecomfe/reskript/commit/d7451e5fd6c88aed0bcfdd11e807948a824ce2f3))
+
+
+
+
+
+# [4.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v3.0.6...v4.0.0-beta.0) (2022-01-30)
+
+
+### Code Refactoring
+
+* 核心部分迁移到纯ESM包格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([f9d06b0](https://github.com/ecomfe/reskript/commit/f9d06b0fd802caa002707686d004ca8683f7002f))
+
+
+### Features
+
+* **doctor:** 增加V4迁移文档和检测 ([fa1e55b](https://github.com/ecomfe/reskript/commit/fa1e55bc7d80c18a33998b36328661b4f1a516a9))
+* **settings:** 支持且仅支持.mjs和.ts类型的项目配置 ([#225](https://github.com/ecomfe/reskript/issues/225)) ([5a9586b](https://github.com/ecomfe/reskript/commit/5a9586b053f16d89a7b87b22dd6a4ca84d96edd2))
+* **settings:** 支持自定义配置文件路径 ([#230](https://github.com/ecomfe/reskript/issues/230)) ([2a4ca98](https://github.com/ecomfe/reskript/commit/2a4ca987ae7e193916ed8c7972dbcbff521b4863))
+
+
+### BREAKING CHANGES
+
+* **settings:** 项目配置必须为`reskript.config.{mjs|ts}`，且格式为ESM
+* **settings:** 应用入口配置必须为`xxx.config.{mjs|ts}`，且格式为ESM
+* 发布的包为纯ESM格式，无法通过CommonJS的`require`引入。参考[sinderesorhus的建议](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+
+
+
+
+## [3.0.6](https://github.com/ecomfe/reskript/compare/v3.0.5...v3.0.6) (2022-01-21)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+## [3.0.5](https://github.com/ecomfe/reskript/compare/v3.0.4...v3.0.5) (2022-01-21)
+
+
+### Bug Fixes
+
+* **core:** 修复globby在Windows下跨盘使用的问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([c59ccf2](https://github.com/ecomfe/reskript/commit/c59ccf25fa97f129c3a3686e7450453ecff7eead))
+
+
+
+
+
+## [3.0.4](https://github.com/ecomfe/reskript/compare/v3.0.3...v3.0.4) (2022-01-20)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+## [3.0.3](https://github.com/ecomfe/reskript/compare/v3.0.2...v3.0.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **core:** 所有globby调用兼容Windows系统 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([ae4c142](https://github.com/ecomfe/reskript/commit/ae4c142c39a2932a00f41e0b41abbde011044c6c))
+
+
+
+
+
+## [3.0.2](https://github.com/ecomfe/reskript/compare/v3.0.1...v3.0.2) (2022-01-13)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* **doctor:** 迁移V3的检查包含对配置文件的检查 ([#226](https://github.com/ecomfe/reskript/issues/226)) ([0d97d20](https://github.com/ecomfe/reskript/commit/0d97d207723b90cf45df84daff23a5a31eb3614d))
+
+
+
+
+
+# [3.0.0](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.1...v3.0.0) (2022-01-03)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+# [3.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.0...v3.0.0-beta.1) (2022-01-03)
+
+
+### Bug Fixes
+
+* **doctor:** 修复migrate命令 ([b9f0ba7](https://github.com/ecomfe/reskript/commit/b9f0ba79f575a3fd8ba093120095cea3782e8f92))
+
+
+
+
+
+# [3.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v2.5.3...v3.0.0-beta.0) (2022-01-03)
+
+
+### Features
+
+* **doctor:** 更新migrate支持V3 ([49f3098](https://github.com/ecomfe/reskript/commit/49f30987f7f475fc8ded557f4a82b28e3cbab1fa))
+* 支持eslint 8 ([#176](https://github.com/ecomfe/reskript/issues/176)) ([76acae3](https://github.com/ecomfe/reskript/commit/76acae373762da03b2208088908d7a0022bb0536))
+
+
+### BREAKING CHANGES
+
+* 需要`eslint`升级至`8.x`
+
+
+
+
+
+## [2.5.3](https://github.com/ecomfe/reskript/compare/v2.5.2...v2.5.3) (2021-12-31)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+## [2.5.2](https://github.com/ecomfe/reskript/compare/v2.5.1...v2.5.2) (2021-12-29)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+## [2.5.1](https://github.com/ecomfe/reskript/compare/v2.5.0...v2.5.1) (2021-12-28)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+**Note:** Version bump only for package @reskript/doctor
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 **Note:** Version bump only for package @reskript/doctor

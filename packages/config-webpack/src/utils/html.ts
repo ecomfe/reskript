@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin, {Options as HTMLOptions} from 'html-webpack-plugin';
 import {BuildEntry} from '@reskript/settings';
-import {AppEntry, BuildContext} from '../interface';
+import {AppEntry, BuildContext} from '../interface.js';
 
 const getHTMLConfig = (filename: string, entry: AppEntry, env: BuildEntry): HTMLOptions => {
     const {

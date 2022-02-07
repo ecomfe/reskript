@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="https://ecomfe.github.io/reskript">
-    <img width="200" src="https://ecomfe.github.io/reskript/images/logo.svg">
+  <a href="https://reskript.vercel.app">
+    <img width="200" src="https://reskript.vercel.app/images/logo.svg">
   </a>
 </p>
 <div align="center">基于 React 与 Ant Design 开发的命令行工具套件</div>
 
-本文档对应`2.x`版本，如果你使用`1.x`版本，请参考[V2升级手册](https://ecomfe.github.io/reskript/docs/migration/v2)进行升级。
+本文档对应`4.x`版本，如果你使用其它版本，请参考[升级手册](https://reskript.vercel.app/docs/migration/v4)进行升级。
 
-**[reSKRipt](https://ecomfe.github.io/reskript)** 是基于 [React](https://github.com/facebook/react) 与 [Ant Design](https://github.com/ant-design/ant-design) 开发的一套命令行工具套件，整合了代码检查、单元测试、构建、代码转义和本地调试等一系列功能，意图做到在开发业务时无需关心工具选型。
+**[reSKRipt](https://reskript.vercel.app)** 是基于 [React](https://github.com/facebook/react) 与 [Ant Design](https://github.com/ant-design/ant-design) 开发的一套命令行工具套件，整合了代码检查、单元测试、构建、代码转义和本地调试等一系列功能，意图做到在开发业务时无需关心工具选型。
 
 ## 快速开始
 
@@ -18,7 +18,7 @@ cd my-app
 npm start
 ```
 
-进一步的使用欢迎[参考使用文档](https://ecomfe.github.io/reskript)。
+进一步的使用欢迎[参考使用文档](https://reskript.vercel.app)。
 
 ## 为什么自研
 

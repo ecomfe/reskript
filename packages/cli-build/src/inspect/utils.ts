@@ -1,13 +1,14 @@
-import chalk from 'chalk';
-import matcher from 'matcher';
+// @ts-expect-error
+import * as kolorist from 'kolorist';
+import {isMatch} from 'matcher';
 import {logger, pReduce} from '@reskript/core';
 import {RuleConfig, OptionalRuleConfig, Severity} from '@reskript/settings';
 
 const SEVERITY_PREFIX: Record<Severity, string> = {
     'off': '   ',
-    'print': chalk.bgWhite.black(' I '),
-    'warn': chalk.bgYellow.white(' W '),
-    'error': chalk.bgRed.white(' E '),
+    'print': kolorist.bgWhite(kolorist.black(' I ')),
+    'warn': kolorist.bgYellow(kolorist.white(' W ')),
+    'error': kolorist.bgRed(kolorist.white(' E ')),
 };
 
 export const createPrint = (severity: Severity) => (message: string) => {
@@ -74,7 +75,7 @@ export const run = async (processors: Array<RuleProcessor<any>>, options: Inspec
 
 
 const hasMatchInArray = (value: string, array: string[]) => {
-    return array.some(pattern => matcher.isMatch(value, pattern));
+    return array.some(pattern => isMatch(value, pattern));
 };
 
 // 以`includes`为优先

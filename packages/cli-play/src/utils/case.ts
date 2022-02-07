@@ -1,12 +1,12 @@
-import {findLast, compact} from 'lodash';
+import {findLast, reject, isNil} from 'ramda';
 import parse from 'remark-parse';
 import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
-import unified from 'unified';
+import {unified} from 'unified';
 import {Content, Root, Text, Code, List} from 'mdast';
 import {currentUserName, pMap} from '@reskript/core';
-import {PlayCase, PlayCaseMeta} from '../interface';
-import {formatTime} from './time';
+import {PlayCase, PlayCaseMeta} from '../interface.js';
+import {formatTime} from './time.js';
 
 const parser = unified().use(parse).use(gfm);
 const serializer = unified().use(stringify);
@@ -19,7 +19,7 @@ const stringifyNodesToMarkdown = (nodes: Content[]): string => {
     return serializer.stringify(root);
 };
 
-const findReplCodeBlock = (nodes: Content[]) => findLast(nodes, v => v.type === 'code' && v.lang === 'jsx');
+const findReplCodeBlock = (nodes: Content[]) => findLast(v => v.type === 'code' && v.lang === 'jsx', nodes);
 
 const isListItem = (node: Content) => node.type === 'listItem';
 
@@ -106,7 +106,7 @@ interface ParseContext {
 }
 
 export const splitToCaseNodes = (markdown: string): Content[][] => {
-    const root = parser.parse(markdown) as Root;
+    const root = parser.parse(markdown);
     const {saved, workingInProgress} = root.children.reduce(
         (context, node) => {
             // 每个二级标题是一个用例
@@ -131,7 +131,7 @@ export const parseMarkdownToCases = async (markdown: string): Promise<PlayCase[]
 
     const nodes = splitToCaseNodes(markdown);
     const cases = await pMap(nodes, parseToCase);
-    return compact(cases);
+    return reject(isNil, cases);
 };
 
 export const serializeCaseToMarkdown = (caseToSerialize: PlayCase): string => {
@@ -171,8 +171,13 @@ export const replaceLastRun = async (markdown: string, caseName: string, time: s
     ];
 
     if (mayBeMetaNode.type === 'list') {
-        const start = mayBeMetaNode?.position?.start.offset;
-        const end = mayBeMetaNode?.position?.end.offset;
+        const start = mayBeMetaNode.position?.start.offset;
+        const end = mayBeMetaNode.position?.end.offset;
+
+        if (typeof start !== 'number' || typeof end !== 'number') {
+            throw new Error(`Cannot find a place to insert meta to case ${caseName}`);
+        }
+
         return markdown.slice(0, start) + newMetaContent.join('\n') + markdown.slice(end);
     }
 

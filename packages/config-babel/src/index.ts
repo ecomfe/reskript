@@ -1,11 +1,14 @@
-import path from 'path';
-import {compact} from 'lodash';
-import {sync as resolve} from 'resolve';
+import path from 'node:path';
 import {PluginItem, TransformOptions} from '@babel/core';
-import {fillBabelConfigOptions} from './utils';
-import getParseOnlyBabelConfigFilled from './parseOnly';
-import getTransformBabelConfigFilled from './transform';
-import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface';
+import debugReactComponentFileName from '@reskript/babel-plugin-debug-react-component-file-name';
+import pluginRemovePropTypes from 'babel-plugin-transform-react-remove-prop-types';
+// TODO: https://github.com/facebook/react/pull/23087
+import pluginReactRefresh from 'react-refresh/babel.js';
+import {compact} from '@reskript/core';
+import {fillBabelConfigOptions} from './utils.js';
+import getParseOnlyBabelConfigFilled from './parseOnly.js';
+import getTransformBabelConfigFilled from './transform.js';
+import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
 
 export type {BabelConfigOptions};
 
@@ -30,14 +33,15 @@ export const getBabelConfig = (input?: BabelConfigOptions): TransformOptions => 
     const plugins: Array<PluginItem | false> = [
         // 这东西必须放在最前面，不然其它插件会转义出如`function Wrapper()`这样的函数，这个插件再插入代码就会出问题
         requireFileName(options) && [
-            resolve('@reskript/babel-plugin-debug-react-component-file-name'),
+            debugReactComponentFileName,
             {
                 srcDirectory: path.resolve(cwd, srcDirectory),
+                fullPathPrefix: options.openInEditorPrefix,
             },
         ],
         ...transform.plugins || [],
-        requireReactOptimization && resolve('babel-plugin-transform-react-remove-prop-types'),
-        hot && [resolve('react-refresh/babel'), {skipEnvCheck: true}],
+        requireReactOptimization && pluginRemovePropTypes,
+        hot && [pluginReactRefresh, {skipEnvCheck: true}],
     ];
 
     return {presets: transform.presets, plugins: compact(plugins)};

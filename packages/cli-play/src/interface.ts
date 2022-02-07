@@ -5,6 +5,7 @@ import {ProjectAware} from '@reskript/core';
 export type HostType = 'localhost' | 'loopback' | 'ip' | {} & string;
 
 export interface PlayCommandLineArgs extends ProjectAware {
+    readonly configFile?: string;
     readonly buildTarget: string;
     readonly port: number;
     readonly host: HostType;

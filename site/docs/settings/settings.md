@@ -2,40 +2,66 @@
 title: 配置文件
 ---
 
-你可以在应用的根目录下放置一个`reskript.config.js`文件来声明所有`reSKRipt`需要的配置，该配置文件是一个标准的CommonJS模块，可以通过`exports`对象导出以下的对象：
+你可以在应用的根目录下放置一个`reskript.config.{mjs|ts}`文件来声明所有`reSKRipt`需要的配置，该配置文件是一个标准的ESM模块，你可以编写如下的内容：
 
-- `exports.featureMatrix`：参考[特性矩阵](feature-matrix)。
-- `exports.build`：参考[构建](build)。
-- `exports.devServer`：参考[调试服务器](dev-server)。
-- `exports.plugins`：参考[插件](plugins)。
+```ts
+import {configure} from '@reskript/settings';
 
-一个经典的`reskript.config.js`类似如下：
-
-```js
-exports.featureMatrix = {
-    stable: {
-        // 正式环境的矩阵配置
-    },
-    insiders: {
-        // 小流量的矩阵配置
-    },
-    dev: {
-        // 本地开发的矩阵配置
-    },
-};
-
-exports.build = {
-    appTitle: '我的应用标题',
-};
-
-exports.devServer = {
-    port: 8080,
-};
-
-exports.plugins = [];
+export default configure(
+    'webpack',
+    {
+        // 配置内容
+    }
+)
 ```
 
-`exports`对象中的每一项都是可以省略的，省略时会使用默认配置代替。
+首先，你需要安装`@reskript/settings`包，并从这个包中引入`configure`函数，调用该函数后用于`export default`导出。
+
+`configure`函数有2个参数，第一个参数为底层的构建器，当前仅支持`webpack`，只要写死即可。第二个参数则为具体的配置对象，可以包含以下属性：
+
+- `featureMatrix`：参考[特性矩阵](feature-matrix)。
+- `build`：参考[构建](build)。
+- `devServer`：参考[调试服务器](dev-server)。
+- `plugins`：参考[插件](plugins)。
+
+一个经典的`reskript.config.ts`类似如下：
+
+```ts
+import {configure} from '@reskript/settings';
+
+export default configure(
+    'webpack',
+    {
+        featureMatrix: {
+            stable: {
+                // 正式环境的矩阵配置
+            },
+            insiders: {
+                // 小流量的矩阵配置
+            },
+            dev: {
+                // 本地开发的矩阵配置
+            },
+        },
+        build: {
+            appTitle: '我的应用标题',
+        },
+        devServer: {
+            port: 8080,
+        },
+    }
+);
+```
+
+`configure`对象中的每一项都是可以省略的，省略时会使用默认配置代替。
+
+## 配置文件路径
+
+默认情况下，配置文件是你的项目目录下的`reskript.config.ts`或`reskript.config.mjs`文件。
+
+在`build`、`dev`、`test`和`play`命令中，你可以使用`--config`参数指定一个配置文件。如果你指定配置文件，但这个文件不存在，则命令会异常退出。
+
+如果你没有通过`--config`参数指定配置文件，并且没有任何默认的配置文件，则所有配置项都会使用内置的默认值。
 
 ## 基础类型
 
@@ -46,6 +72,8 @@ exports.plugins = [];
 构建环境是一次构建的最基本上下文，它的定义如下：
 
 ```ts
+type ReskriptDriver = 'webpack';
+
 type WorkMode = 'production' | 'development';
 
 interface ProjectAware {
@@ -63,7 +91,7 @@ interface BuildEnv extends WorkModeAware {
     readonly srcDirectory: string;
     // 当前代码库的包名，默认读取`package.json`中的`name`字段
     readonly hostPackageName: string;
-    // `reskript.config.js`中定义的配置
+    // 项目配置文件中定义的配置
     readonly projectSettings: ProjectSettings;
 }
 ```
@@ -88,7 +116,7 @@ interface RuntimeBuildEnv extends BuildEnv {
 ```ts
 interface BuildEntry extends RuntimeBuildEnv {
     // 构建的特性值
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     // 当前构建的特性矩阵中的目标
     readonly buildTarget: string;
 }

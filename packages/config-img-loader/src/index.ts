@@ -1,7 +1,8 @@
-import {sync as resolve} from 'resolve';
+import {RuleSetUseItem} from 'webpack';
 import gif from 'imagemin-gifsicle';
 import jpeg from 'imagemin-mozjpeg';
 import png from 'imagemin-optipng';
+import {resolve} from '@reskript/core';
 
 const pluginOptions = {
     gifsicle: {
@@ -17,7 +18,7 @@ const pluginOptions = {
     },
 };
 
-export default () => {
+export default async (): Promise<RuleSetUseItem> => {
     const plugins = [
         gif(pluginOptions.gifsicle),
         jpeg(pluginOptions.mozjpeg),
@@ -25,7 +26,7 @@ export default () => {
     ];
 
     return {
-        loader: resolve('img-loader'),
+        loader: await resolve('img-loader'),
         options: {plugins},
     };
 };

@@ -1,7 +1,10 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
-        "jsx": "preserve"
+        "jsx": "react-jsx",
+        "paths": {
+            "react/jsx-runtime": ["node_modules/@types/react/jsx-runtime.d.ts"]
+        }
     },
     "exclude": ["dist"]
 }

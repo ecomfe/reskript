@@ -1,6 +1,8 @@
-import chalk from 'chalk';
+// @ts-expect-error
+import * as kolorist from 'kolorist';
+// @ts-expect-error
 import dedentString from 'dedent';
-import {isInDebugMode} from './flag';
+import {isInDebugMode} from './flag.js';
 
 type LogLevel = 'log' | 'warn' | 'error';
 
@@ -20,7 +22,7 @@ const createLogWith = (level: LogLevel, defaultColor?: Color): Logger => {
     const withColor = (color = defaultColor): LogString => (message, options = {}) => {
         const {dedent = true} = options;
         const dedented = dedent ? dedentString(message) : message;
-        const colorized = color ? chalk[color](dedented) : dedented;
+        const colorized = color ? kolorist[color](dedented) : dedented;
         log(colorized);
     };
 

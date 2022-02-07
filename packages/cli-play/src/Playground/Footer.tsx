@@ -1,7 +1,7 @@
 import {CSSProperties} from 'react';
-import {PlayCase} from '../interface';
-import CaseSelect from './CaseSelect';
-import Button from './Button';
+import {PlayCase} from '../interface.js';
+import CaseSelect from './CaseSelect/index.js';
+import Button from './Button/index.js';
 
 interface Props {
     title: string;
@@ -27,12 +27,17 @@ const titleStyle: CSSProperties = {
     fontSize: 18,
     fontFamily: 'monospace',
     margin: 0,
+    textAlign: 'left',
+    direction: 'rtl',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
 };
 
 export default function Footer({title, cases, selectedCaseIndex, onSelectCase, onSaveCase, onUpdateCase}: Props) {
     return (
         <footer style={wrapperStyle}>
-            <h2 style={titleStyle}>{title}</h2>
+            <h2 style={titleStyle} title={title}>{title}</h2>
             <div>
                 选择用例：
                 <CaseSelect dataSource={cases} value={selectedCaseIndex} onChange={onSelectCase} />

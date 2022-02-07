@@ -1,8 +1,8 @@
-import dependency from './dependency';
-import config from './config';
-import script from './script';
-import entry from './entry';
-import svg from './svg';
+import dependency from './dependency.js';
+import config from './config.js';
+import script from './script.js';
+import entry from './entry.js';
+import svg from './svg.js';
 
 export const run = async (cwd: string) => {
     await dependency(cwd);

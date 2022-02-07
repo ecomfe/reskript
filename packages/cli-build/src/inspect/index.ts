@@ -1,9 +1,9 @@
 import {Stats} from 'webpack';
 import {BuildInspectSettings} from '@reskript/settings';
-import {run, InspectOptions} from './utils';
-import initialResources from './initialResources';
-import duplicatePackages from './duplicatePackages';
-import htmlImportable from './htmlImportable';
+import {run, InspectOptions} from './utils.js';
+import initialResources from './initialResources.js';
+import duplicatePackages from './duplicatePackages.js';
+import htmlImportable from './htmlImportable.js';
 
 export default async (stats: Stats, settings: BuildInspectSettings, options: InspectOptions) => {
     const {children = []} = stats.toJson('normal');

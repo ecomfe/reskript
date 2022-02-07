@@ -1,4 +1,5 @@
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export const resolveComponentFileName = (componentModulePath: string): string => {
     const file = path.basename(componentModulePath, path.extname(componentModulePath));
@@ -22,8 +23,11 @@ export const resolveCasePath = (componentModulePath: string): string => {
     return caseFileName;
 };
 
-export const resolveLocalConfigurationPath = (componentModulePath: string): string => {
+const PLAY_CONFIG_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx'];
+
+export const resolveLocalConfigurationPath = (componentModulePath: string): string | undefined => {
     const directory = path.dirname(componentModulePath);
     const filename = resolveComponentFileName(componentModulePath);
-    return path.join(directory, '__repl__', `${filename}.play.js`);
+    const files = PLAY_CONFIG_EXTENSIONS.map(v => path.join(directory, '__repl__', `${filename}.play${v}`));
+    return files.find(fs.existsSync);
 };

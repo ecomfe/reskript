@@ -11,6 +11,7 @@ export interface BabelConfigOptions {
     readonly displayName?: boolean | 'auto';
     readonly cwd?: string;
     readonly srcDirectory?: string;
+    readonly openInEditorPrefix?: string;
 }
 
 export type BabelConfigOptionsFilled = Required<BabelConfigOptions>;

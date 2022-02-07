@@ -1,8 +1,17 @@
 {
   "name": "@reskript/core",
-  "version": "2.3.0",
-  "main": "dist/index.js",
+  "version": "4.0.0",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./willBreakingInternalUseOnly": "./dist/internal.cjs"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
   "files": [
     "dist"
   ],
@@ -11,31 +20,41 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc -p tsconfig.build.json",
-    "test": "jest",
+    "build": "tsc -p tsconfig.build.json && node scripts/post-build.js && cp dist/internal.d.ts dist/internal.d.cts",
+    "test": "vitest run",
     "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-transform-typescript": "^7.16.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@types/caller": "^1.0.0",
     "@types/dedent": "^0.7.0",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.6",
-    "@types/ramda": "^0.27.46",
+    "@types/node": "^17.0.14",
+    "@types/ramda": "^0.27.64",
     "@types/resolve": "^1.20.1",
-    "eslint": "^7.32.0",
-    "jest": "^27.3.1",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.4.4"
+    "@types/unixify": "^1.0.0",
+    "c8": "^7.10.0",
+    "eslint": "^8.8.0",
+    "rollup": "^2.66.1",
+    "typescript": "^4.6.0-beta",
+    "vite": "^2.7.12",
+    "vitest": "^0.2.5"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
+    "bundle-require": "^3.0.4",
+    "caller": "^1.0.1",
     "dedent": "^0.7.0",
-    "dotenv": "^10.0.0",
-    "dotenv-expand": "^5.1.0",
-    "find-up": "^5.0.0",
+    "dotenv": "^15.0.0",
+    "dotenv-expand": "^6.0.1",
+    "esbuild": "^0.14.16",
+    "find-up": "^6.2.0",
     "g-status": "^2.0.2",
-    "globby": "^11.0.4",
-    "pkg-dir": "^5.0.0",
-    "ramda": "^0.27.1",
-    "resolve": "^1.20.0"
+    "globby": "^13.1.0",
+    "kolorist": "^1.5.1",
+    "pkg-dir": "^6.0.1",
+    "ramda": "^0.28.0",
+    "resolve": "^1.22.0",
+    "unixify": "^1.0.0"
   }
 }

@@ -1,23 +1,25 @@
-import {ProgressPlugin, Compiler} from 'webpack';
+import webpack, {Compiler} from 'webpack';
 import {SingleBar, Options} from 'cli-progress';
-import chalk from 'chalk';
+// @ts-expect-error 这里修复后，下面的`eslint-disable`也删掉
+import * as kolorist from 'kolorist';
 
 const PROGRESS_BAR_OPTIONS: Options = {
     format: (options, params, payload) => {
         const bar = options.formatBar!(params.progress, options);
         const percentage = Math.round((params.progress * 100));
-        const detail = percentage >= 99 ? '' : chalk.white(`- ${payload.message}`);
-        return `${chalk.greenBright('● @reskript/dev')} ${bar} building (${percentage}%) ${detail}`;
+        const detail = percentage >= 99 ? '' : kolorist.white(`- ${payload.message}`);
+        return `${kolorist.lightGreen('● @reskript/dev')} ${bar} building (${percentage}%) ${detail}`;
     },
     formatBar: (progress: number) => {
         const total = 40;
         const active = Math.round(total * progress);
         const remaining = total - active;
-        return chalk.bgGreenBright(' '.repeat(active)) + chalk.bgWhite(' '.repeat(remaining));
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+        return kolorist.bgLightGreen(' '.repeat(active)) + kolorist.bgWhite(' '.repeat(remaining));
     },
 };
 
-export default class ProgressBarPlugin extends ProgressPlugin {
+export default class ProgressBarPlugin extends webpack.ProgressPlugin {
     private readonly progressBar = new SingleBar(PROGRESS_BAR_OPTIONS);
 
     private working = false;

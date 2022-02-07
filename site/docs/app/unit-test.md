@@ -35,7 +35,7 @@ npm install --save-dev @reskript/cli-test @testing-library/react
 
 我们基于[`@testing-library/react`](https://testing-library.com/docs/react-testing-library/example-intro)实现一个最简单的测试：
 
-```js
+```ts
 import {render} from '@testing-library/react';
 import Header from '../index';
 

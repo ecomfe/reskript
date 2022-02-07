@@ -1,5 +1,5 @@
 import {ThirdPartyUse} from '@reskript/settings';
-import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface';
+import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
 
 const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
     uses: ['antd', 'lodash'],
@@ -11,6 +11,7 @@ const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
     displayName: 'auto',
     cwd: process.cwd(),
     srcDirectory: 'src',
+    openInEditorPrefix: '',
 };
 
 export const fillBabelConfigOptions = (options?: BabelConfigOptions): BabelConfigOptionsFilled => {

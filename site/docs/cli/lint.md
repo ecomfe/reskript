@@ -63,7 +63,7 @@ module.exports = {
 
 ### 样式代码检查
 
-很遗憾地，因为种种原因，`skr lint`在样式文件的检查上仅支持当前目录（`process.cwd()`）下的`stylelint.config.js`这一个文件作为自定义配置，不支持任何子目录内的配置文件，也**不支持**诸如`.stylelintrc.json`之类的其它文件：
+很遗憾地，因为种种原因，`skr lint`在样式文件的检查上仅支持当前目录（`process.cwd()`）下的`stylelint.config.cjs`这一个文件作为自定义配置，不支持任何子目录内的配置文件，也**不支持**诸如`.stylelintrc.json`之类的其它文件：
 
 ```js
 module.exports = {
@@ -73,6 +73,39 @@ module.exports = {
     },
 };
 ```
+
+### 支持其它样式语言
+
+`reSKRipt`内置了LESS的`stylelint`配置，你不会遇到缺失`customSyntax`的警告。但**如果你使用SASS等其它语言，则需要做进一步的自定义配置**。
+
+以SASS为例，如果需要自定义配置，你可以安装`postcss-sass`包：
+
+```shell
+# NPM
+npm i -D postcss-sass@latest
+# Yarn
+yarn add -D postcss-sass@latest
+# PNPM
+pnpm i -D postcss-sass@latest
+```
+
+随后在项目目录下新建`stylelint.config.cjs`文件，并填写以下内容：
+
+```js
+const sassSyntax = require('postcss-sass');
+
+module.exports = {
+    extends: require.resolve('@reskript/config-lint/config/stylelint'),
+    overrides: [
+        {
+            files: ['**/*.sass'],
+            customSyntax: sassSyntax,
+        },
+    ],
+};
+```
+
+`stylelint.config.cjs`为`stylelint`的标准配置文件，更详细的使用方式请参考[StyleLint的文档](https://stylelint.io/user-guide/usage/options#customsyntax)。
 
 ## 提交前检查
 

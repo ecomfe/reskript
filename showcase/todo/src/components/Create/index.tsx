@@ -32,7 +32,7 @@ export default function Create({onSubmit}: Props) {
     );
 
     return (
-        <div>
+        <div id="create">
             <DescriptionInput
                 placeholder="What needs to be done?"
                 value={value}

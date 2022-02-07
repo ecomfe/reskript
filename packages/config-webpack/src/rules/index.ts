@@ -1,8 +1,8 @@
 import {RuleSetRule} from 'webpack';
 import {isProjectSourceIn, normalizeRuleMatch} from '@reskript/core';
 import {BuildEntry} from '@reskript/settings';
-import * as loaders from '../loaders';
-import {introduceLoaders} from '../utils/loader';
+import * as loaders from '../loaders/index.js';
+import {introduceLoaders} from '../utils/loader.js';
 
 type LoaderType = keyof typeof loaders;
 
@@ -24,103 +24,119 @@ const assetModuleConfig = (entry: BuildEntry) => {
 // 在第三方代码与项目代码的处理上，使用的策略是“非`cwd`下的全部算第三方代码”，而不是“包含`node_modules`的算第三方”。
 // 这一逻辑取决于在使用monorepo时的形式，当前monorepo下我们要求被引用的包是构建后的。
 
-export const script = (entry: BuildEntry): RuleSetRule => {
+export const script = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const {cwd, projectSettings: {build: {script: {babel}}}} = entry;
     const use = createUseWith(entry);
     const isProjectSource = isProjectSourceIn(cwd);
     const isWorker = (resource: string) => isProjectSource(resource) && /\.worker\.[jt]sx?$/.test(resource);
-    const rulesWithBabelRequirement = (requireBabel: boolean) => {
+    const rulesWithBabelRequirement = async (requireBabel: boolean) => {
         return {
             oneOf: [
                 // 在项目源码内的`.worker.js`，需要`worker-loader`
                 {
                     resource: isWorker,
-                    use: use('worker', requireBabel && 'babel'),
+                    use: await use('worker', requireBabel && 'babel'),
                 },
                 // 项目源码内的其它文件，需要`eslint`检查
                 {
                     resource: isProjectSource,
-                    use: use(requireBabel && 'babel'),
+                    use: await use(requireBabel && 'babel'),
                 },
                 // 第三方代码，按需过`babel`
                 {
-                    use: use(requireBabel && 'babel'),
+                    use: await use(requireBabel && 'babel'),
                 },
             ],
         };
     };
+    const [hasBabel, noBabel] = await Promise.all([rulesWithBabelRequirement(true), rulesWithBabelRequirement(false)]);
 
     return {
         test: /\.[jt]sx?$/,
         oneOf: [
             {
                 resource: normalizeRuleMatch(cwd, babel),
-                ...rulesWithBabelRequirement(true),
+                ...hasBabel,
             },
-            rulesWithBabelRequirement(false),
+            noBabel,
         ],
     };
 };
 
-export const less = (entry: BuildEntry): RuleSetRule => {
+export const less = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
     const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
+    const uses = [
+        use(final, 'css', 'postcss', 'less', 'lessSafe', 'styleResources'),
+        use('classNames', final, 'cssModules', 'postcss', 'less', 'lessSafe', 'styleResources'),
+    ] as const;
+    const [globalLess, less] = await Promise.all(uses);
 
     return {
         test: /\.less$/,
         oneOf: [
             {
                 test: /\.global\.less$/,
-                use: use(final, 'css', 'postCSS', 'less', 'lessSafe', 'styleResources'),
+                use: globalLess,
             },
             {
                 resource: normalizeRuleMatch(cwd, modules),
-                use: use('classNames', final, 'cssModules', 'postCSSModules', 'less', 'lessSafe', 'styleResources'),
+                use: less,
             },
             {
-                use: use(final, 'css', 'postCSS', 'less', 'lessSafe', 'styleResources'),
+                use: globalLess,
             },
         ],
     };
 };
 
-export const css = (entry: BuildEntry): RuleSetRule => {
+export const css = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
     const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
+    const uses = [
+        use(final, 'css', 'postcss'),
+        use('classNames', final, 'cssModules', 'postcss'),
+    ] as const;
+    const [globalCss, css] = await Promise.all(uses);
 
     return {
         test: /\.css$/,
         oneOf: [
             {
                 test: /\.global\.css$/,
-                use: use(final, 'css', 'postCSS'),
+                use: globalCss,
             },
             {
                 resource: normalizeRuleMatch(cwd, modules),
-                use: use('classNames', final, 'cssModules', 'postCSSModules'),
+                use: css,
             },
             {
-                use: use(final, 'css', 'postCSS'),
+                use: globalCss,
             },
         ],
     };
 };
 
-export const image = (entry: BuildEntry): RuleSetRule => {
+export const image = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const use = createUseWith(entry);
 
     return {
         test: /\.(jpe?g|png|gif)$/i,
-        use: use('img'),
+        use: await use('img'),
         ...assetModuleConfig(entry),
     };
 };
 
-export const svg = (entry: BuildEntry): RuleSetRule => {
+export const svg = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const {mode} = entry;
     const use = createUseWith(entry);
+    const uses = [
+        use('babel', 'svgToComponent', mode === 'production' && 'svgo'),
+        use(mode === 'production' && 'svgo'),
+    ] as const;
+    const [svgComponent, svg] = await Promise.all(uses);
 
     return {
         test: /\.svg$/,
@@ -128,20 +144,20 @@ export const svg = (entry: BuildEntry): RuleSetRule => {
             {
                 // 如果挂了`?react`的，就直接转成组件返回
                 resourceQuery: /^\?react$/,
-                use: use('svgToComponent', mode === 'production' && 'svgo'),
+                use: svgComponent,
             },
             {
                 resourceQuery: {
                     not: /^\?react$/,
                 },
-                use: use(mode === 'production' && 'svgo'),
+                use: svg,
                 ...assetModuleConfig(entry),
             },
         ],
     };
 };
 
-export const file = (entry: BuildEntry): RuleSetRule => {
+export const file = async (entry: BuildEntry): Promise<RuleSetRule> => {
     return {
         test: /\.(eot|ttf|woff|woff2)(\?.+)?$/,
         ...assetModuleConfig(entry),

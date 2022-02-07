@@ -1,9 +1,13 @@
-import path from 'path';
-import {collectEntries} from '../index';
+import path from 'node:path';
+import {test, expect} from 'vitest';
+import {dirFromImportMeta} from '@reskript/core';
+import {collectEntries} from '../index.js';
+
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 test('collect all', async () => {
     const entryLocation = {
-        cwd: path.join(__dirname, 'fixtures'),
+        cwd: path.join(currentDirectory, 'fixtures'),
         srcDirectory: 'src',
         entryDirectory: 'pages',
     };

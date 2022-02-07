@@ -1,8 +1,8 @@
-import path from 'path';
+import path from 'node:path';
 import {Configuration} from 'webpack';
-import {omitBy} from 'lodash';
-import findUp from 'find-up';
-import {ConfigurationFactory} from '../interface';
+import {findUp} from 'find-up';
+import {filter} from 'ramda';
+import {ConfigurationFactory} from '../interface.js';
 
 const factory: ConfigurationFactory = async entry => {
     const {cwd} = entry;
@@ -28,7 +28,7 @@ const factory: ConfigurationFactory = async entry => {
     const config: Configuration = {
         devtool: 'source-map',
         resolve: {
-            alias: omitBy(alias, v => !v),
+            alias: filter(v => !!v, alias),
         },
         performance: {
             maxEntrypointSize: Infinity,

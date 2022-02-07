@@ -1,6 +1,11 @@
 {
   "name": "{{packageName}}",
   "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
   "license": "MIT",
   "scripts": {
     "start": "skr dev",

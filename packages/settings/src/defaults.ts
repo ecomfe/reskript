@@ -1,8 +1,9 @@
-import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings} from './interface';
+import {BuildSettings, DevServerSettings, PlaySettings, ProjectSettings, ReskriptDriver} from './interface/index.js';
 
-type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style'> & {
+type PartialBuildSettings = Omit<Partial<BuildSettings>, 'script' | 'style' | 'inspect'> & {
     script?: Partial<BuildSettings['script']>;
     style?: Partial<BuildSettings['style']>;
+    inspect?: Partial<BuildSettings['inspect']>;
 };
 
 const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
@@ -46,7 +47,6 @@ const fillBuildSettings = (settings?: PartialBuildSettings): BuildSettings => {
 
 const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServerSettings => {
     return {
-        https: false,
         port: 8788,
         apiPrefixes: [],
         defaultProxyDomain: '',
@@ -66,6 +66,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
 };
 
 export interface PartialProjectSettings {
+    provider: ReskriptDriver;
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;
@@ -73,8 +74,9 @@ export interface PartialProjectSettings {
     play?: Partial<ProjectSettings['play']>;
 }
 
-export const fillProjectSettings = (settings: PartialProjectSettings = {}): ProjectSettings => {
+export const fillProjectSettings = (settings: PartialProjectSettings): ProjectSettings => {
     return {
+        provider: settings.provider,
         cwd: settings.cwd ?? process.cwd(),
         featureMatrix: settings.featureMatrix ?? {stable: {}, dev: {}},
         build: fillBuildSettings(settings.build),

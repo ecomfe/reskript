@@ -1,6 +1,6 @@
 import {useDebugValue, useRef} from 'react';
 
-export default function useComponentFile(filename: string) {
-    useDebugValue(filename);
-    useRef(filename);
+export default function useComponentFile(displayValue: string, fullValue: string) {
+    useDebugValue(displayValue);
+    useRef(fullValue.replace(/:origin/g, location.origin));
 }
