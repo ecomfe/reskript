@@ -9,7 +9,7 @@ tags: [version release]
 
 很高兴在这一刻向大家介绍`reSKRipt` V2版本的正式发布。
 
-如果你想快速了解如何升级到V2，那么可以参考[V2迁移手册](https://reskript.vercel.app/docs/migration/v2)，此文更多地用于介绍我们的心路历程和V2的版本规划。
+如果你想快速了解如何升级到V2，那么可以参考[V2迁移手册](https://reskript.dev/docs/migration/v2)，此文更多地用于介绍我们的心路历程和V2的版本规划。
 
 ## 唯心 - 关于代号
 
@@ -51,7 +51,7 @@ V1版本的契机无疑是Webpack 5.0的发布，基于Webpack新增的持久缓
 
 我们在V2版本之初，就大幅度调整了项目的构建和配置，这是“内功”的修为。相比于V1，我们全盘TypeScript化了测试用例、引入了一个用于集成测试的五脏俱全的“微型”TodoMVC项目，大面积地清理了历史的代码。
 
-同样地，我们也借此废弃了一部分的配置和参数，并以功能更强、更加正交的能力给予替代，你依然可以通过[V2迁移手册](https://reskript.vercel.app/docs/migration/v2)查阅所有的这些变化。
+同样地，我们也借此废弃了一部分的配置和参数，并以功能更强、更加正交的能力给予替代，你依然可以通过[V2迁移手册](https://reskript.dev/docs/migration/v2)查阅所有的这些变化。
 
 ## 革命 - 全面异步
 
@@ -75,7 +75,7 @@ V1版本的契机无疑是Webpack 5.0的发布，基于Webpack新增的持久缓
 
 我们同样追求更好地适配社区的工具，`skr test`从V2版本开始可以将你的参数全部传递到`jest`之上，以发挥出`jest`完整的能力。
 
-我们还从V2版本开始支持了[TailwindCSS](https://tailwindcss.com/)，你可以通过[简单的配置](https://reskript.vercel.app/docs/settings/build#特殊第三方库的优化)开启使用`tailwind`进行样式开发。
+我们还从V2版本开始支持了[TailwindCSS](https://tailwindcss.com/)，你可以通过[简单的配置](https://reskript.dev/docs/settings/build#特殊第三方库的优化)开启使用`tailwind`进行样式开发。
 
 我们用[clipanion](https://github.com/arcanis/clipanion)作为新的命令行编排框架，并将在未来不久带来命令的自动补全等实用能力，皆在提供最佳的使用体验。
 

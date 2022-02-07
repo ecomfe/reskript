@@ -1,12 +1,15 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolve} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = () => {
+const factory: LoaderFactory = async () => {
+    const resolving = [
+        resolve('@ecomfe/class-names-loader'),
+        resolve('classnames'),
+    ] as const;
+    const [loader, classNamesModule] = await Promise.all(resolving);
     return {
-        loader: resolve('@ecomfe/class-names-loader'),
-        options: {
-            classNamesModule: resolve('classnames'),
-        },
+        loader,
+        options: {classNamesModule},
     };
 };
 

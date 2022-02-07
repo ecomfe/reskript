@@ -3,7 +3,7 @@
         "src",
     ],
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "esnext",
         "target": "es2018",
         "outDir": "dist",
         "noEmit": true,

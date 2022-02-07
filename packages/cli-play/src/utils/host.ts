@@ -1,5 +1,5 @@
-import internalIp from 'internal-ip';
-import {PlayCommandLineArgs} from '../interface';
+import {internalIpV4} from 'internal-ip';
+import {PlayCommandLineArgs} from '@reskript/settings';
 
 export const resolveHost = async (hostType: PlayCommandLineArgs['host']) => {
     if (!hostType) {
@@ -12,7 +12,7 @@ export const resolveHost = async (hostType: PlayCommandLineArgs['host']) => {
         case 'loopback':
             return '127.0.0.1';
         case 'ip': {
-            const ip = await internalIp.v4();
+            const ip = await internalIpV4();
             return ip ?? 'localhost';
         }
         default:

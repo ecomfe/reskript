@@ -18,9 +18,14 @@ mkcert localhost
 1. `npm start`可以跑起来，界面可见，正常使用。
     1. 界面上有一个固定在底部的黑色条（测试自定义模板可用）。
     2. 热更新可用。
+    3. `#app`元素的`inset`样式被正确处理为`top`、`right`、`bottom`、`right`。
+    4. `#app-meta`元素有`justify-content: space-between; align-items: center`样式。
 2. `npm run play`可用，有热更新。
+3. `npm run babel`可用，会显示高亮的代码。
 3. `npm run test`可通过测试。
 4. `npm run lint`可用。
-5. `npm run build`可用，且产出的文件里有一个`todo-index.[hash].js`的文件。
-6. 把`reskript.config.cjs`中的`{prepend: true}`去掉，构建应该会失败。
-7. `App`对应的HTML元素的`inset`样式被正确处理为`top`、`right`、`bottom`、`right`。
+5. `npm run build`可用，且：
+    1. 产出的文件里有一个`todo-index.[hash].js`的文件。
+    2. 产出的`.png`文件比原始文件小，大小约为17KB左右。
+6. `npm run fix`可用，不会报错。
+7. 把`reskript.config.cjs`中的`{prepend: true}`去掉，构建应该会失败。

@@ -1,8 +1,15 @@
 {
   "name": "@reskript/eslint-plugin",
-  "version": "3.0.1",
-  "main": "index.js",
+  "version": "4.0.1",
   "license": "MIT",
+  "type": "commonjs",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
   "files": [
     "rules",
     "index.js",
@@ -16,15 +23,15 @@
     "lint": "eslint --max-warnings=0 rules index.js",
     "test": "jest"
   },
-  "dependencies": {
-    "builtins": "^4.0.0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/eslint-plugin": "^7.16.5",
-    "eslint": "^8.6.0",
+    "eslint": "^8.8.0",
     "jest": "^27.4.5"
+  },
+  "dependencies": {
+    "builtins": "^4.0.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.14.6"

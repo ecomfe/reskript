@@ -1,7 +1,7 @@
-import path from 'path';
-import globby from 'globby';
+import path from 'node:path';
+import {globby} from 'globby';
 import {pFilter} from '@reskript/core';
-import {warn} from '../logger';
+import {warn} from '../logger.js';
 
 const isEntryBroken = async (file: string) => {
     const {default: config} = await import(file);
@@ -15,7 +15,7 @@ export default async (cwd: string) => {
     if (brokenEntries.length) {
         warn(
             'found some legacy entry configurations, move all exports into a single exports.html object',
-            'see: https://reskript.vercel.app/docs/migration/v2#入口配置相关',
+            'see: https://reskript.dev/docs/migration/v2#入口配置相关',
             ...brokenEntries.map(v => path.relative(cwd, v))
         );
     }

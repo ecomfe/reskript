@@ -1,5 +1,6 @@
+import {expect, test} from 'vitest';
 import dedent from 'dedent';
-import {parseMarkdownToCases, replaceCodeBlockForCase} from '../case';
+import {parseMarkdownToCases, replaceCodeBlockForCase} from '../case.js';
 
 const markdown = dedent`
     # Loading reSKRipt Play Case

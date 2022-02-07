@@ -1,14 +1,13 @@
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = ({mode}) => {
+const factory: LoaderFactory = async ({mode}) => {
     if (mode !== 'production') {
         return null;
     }
 
     try {
-        // eslint-disable-next-line global-require
-        const {default: loader} = require('@reskript/config-img-loader');
-        return loader;
+        const {default: loaderFactory} = await import('@reskript/config-img-loader');
+        return loaderFactory();
     }
     catch {
         return null;

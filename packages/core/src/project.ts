@@ -1,10 +1,10 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import fs from 'fs/promises';
-import globby from 'globby';
-import packageDirectory from 'pkg-dir';
-import findUp from 'find-up';
-import {PackageInfo} from './interface';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import fs from 'node:fs/promises';
+import {packageDirectory} from 'pkg-dir';
+import {findUp} from 'find-up';
+import {globby} from 'globby';
+import {PackageInfo} from './interface.js';
 
 export const resolveCacheLocation = async (name: string): Promise<string> => {
     const root = await packageDirectory();

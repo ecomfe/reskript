@@ -1,13 +1,11 @@
-import {stubTrue} from 'lodash';
-import execa from 'execa';
 import eslintPrettyFormatter from 'eslint-formatter-pretty';
 import {Linter, ESLint} from 'eslint';
+import {execa} from 'execa';
 import {logger, gitStatus, findGitRoot} from '@reskript/core';
-import {LintCommandLineArgs, ResolveOptions} from './interface';
-import lintScripts from './script';
-import lintStyles from './style';
-
-export {LintCommandLineArgs};
+import {LintCommandLineArgs} from '@reskript/settings';
+import {ResolveOptions} from './interface.js';
+import lintScripts from './script.js';
+import lintStyles from './style.js';
 
 type LintResult = ESLint.LintResult;
 type LintMessage = Linter.LintMessage;
@@ -15,7 +13,7 @@ type LintMessage = Linter.LintMessage;
 const filterUnwantedReports = (report: LintResult[], cmd: LintCommandLineArgs): LintResult[] => {
     const omitReactUnsafe = cmd.allowUnsafeReactMethod
         ? ({ruleId, message}: LintMessage) => ruleId !== 'camelcase' || !message.startsWith('Identifier \'UNSAFE')
-        : stubTrue;
+        : () => true;
 
     const filterMessage = (report: LintResult): LintResult => {
         const messages = report.messages.filter(omitReactUnsafe);

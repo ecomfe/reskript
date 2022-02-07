@@ -1,4 +1,5 @@
-import replace from '../replace';
+import {describe, test, expect} from 'vitest';
+import replace from '../replace.js';
 
 describe('replace', () => {
     test('safe calc double quote', () => {

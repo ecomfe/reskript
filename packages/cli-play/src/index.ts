@@ -1,18 +1,24 @@
-import path from 'path';
+import path from 'node:path';
 import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMap} from 'webpack-dev-server';
 import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
-import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import {logger, prepareEnvironment, readPackageConfig} from '@reskript/core';
-import {createWebpackConfig} from './webpack';
-import {PlayCommandLineArgs} from './interface';
-import setupServer from './server';
+import {
+    readProjectSettings,
+    BuildEnv,
+    PlayCommandLineArgs,
+    ProjectSettings,
+    strictCheckRequiredDependency,
+} from '@reskript/settings';
+import {logger, prepareEnvironment, readPackageConfig, dirFromImportMeta} from '@reskript/core';
+import {createWebpackConfig} from './webpack.js';
+import setupServer from './server/index.js';
 
-export {PlayCommandLineArgs};
+const currentDirectory = dirFromImportMeta(import.meta.url);
 
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
-    const userProjectSettings = await readProjectSettings(cmd, 'dev');
+    const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
+    const userProjectSettings = await readProjectSettings({commandName: 'play', specifiedFile: configFile, ...cmd});
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {
@@ -21,24 +27,24 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
         },
         devServer: {
             ...userProjectSettings.devServer,
-            port: cmd.port,
+            port: port,
             openPage: '',
             hot: true,
         },
     };
-    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
-    const {name: hostPackageName} = await readPackageConfig(cmd.cwd);
+    await strictCheckRequiredDependency(projectSettings, cwd);
+    const {name: hostPackageName} = await readPackageConfig(cwd);
     const buildEnv: BuildEnv = {
         hostPackageName,
         projectSettings,
+        cwd,
         usage: 'devServer',
         mode: 'development',
-        cwd: cmd.cwd,
         srcDirectory: 'src',
         cache: 'transient',
     };
     const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
-    const enableConcurrentMode = cmd.concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
+    const enableConcurrentMode = concurrentMode ?? projectSettings.play.defaultEnableConcurrentMode;
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
         entries: [
@@ -47,17 +53,17 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
                 config: {
                     html: {
                         title: 'PlayGround',
-                        favicon: path.join(__dirname, 'assets', 'favicon.ico'),
+                        favicon: path.join(currentDirectory, 'assets', 'favicon.ico'),
                     },
                 },
-                template: path.join(__dirname, 'assets', 'playground-entry.ejs'),
+                template: path.join(currentDirectory, 'assets', 'playground-entry.ejs'),
                 file: enableConcurrentMode
-                    ? path.join(__dirname, 'assets', 'playground-entry-cm.js.tpl')
-                    : path.join(__dirname, 'assets', 'playground-entry.js.tpl'),
+                    ? path.join(currentDirectory, 'assets', 'playground-entry-cm.js.tpl')
+                    : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl'),
             },
         ],
-        features: projectSettings.featureMatrix[cmd.buildTarget],
-        buildTarget: cmd.buildTarget || 'dev',
+        features: projectSettings.featureMatrix[buildTarget],
+        buildTarget: buildTarget || 'dev',
         isDefaultTarget: true,
     };
     return buildContext;
@@ -108,7 +114,7 @@ export const run = async (cmd: PlayCommandLineArgs, target: string): Promise<voi
         devServerConfig,
         hot: true,
         entry: 'index',
-        resolveBase: __dirname,
+        resolveBase: currentDirectory,
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);

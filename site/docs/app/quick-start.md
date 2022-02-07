@@ -42,7 +42,7 @@ npm install -D @types/react @types/react-dom
 
 ### 代码检查
 
-在项目目录下创建一个`.eslintrc.js`，内容如下：
+在项目目录下创建一个`.eslintrc.cjs`，内容如下：
 
 ```js
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-再增加一个`stylelint.config.js`，内容如下：
+再增加一个`stylelint.config.cjs`，内容如下：
 
 ```js
 module.exports = {
@@ -68,10 +68,11 @@ module.exports = {
 {
     "include": [
         "src",
+        "./*.ts"
     ],
     "compilerOptions": {
-        "module": "CommonJS",
-        "target": "es2018",
+        "module": "esnext",
+        "target": "esnext",
         "outDir": "dist",
         "noEmit": true,
         "jsx": "react-jsx",
@@ -101,38 +102,24 @@ firefox 64
 
 以上是一个比较精简可用的配置，使用`emit: false`可以让TypeScript不要去处理代码的生成，获得更好的类型检查的性能。
 
-### 别名配置
-
-虽然`reSKRipt`完整地封装了`webpack`的功能，你不再需要自行做任何的配置。但是也正因为`webpack`的配置被隐藏在工具内，会让代码编辑器无法正确地读取配置来提供编码辅助，最为典型的是`import`语句中的路径会因为别名等原因无法找到，显示出预期外的错误。
-
-为此，我们要在项目目录下放一个`webpack.config.js`，里面内容如下：
-
-```js
-const path = require('path');
-
-module.exports = {
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'src'),
-        },
-    },
-};
-```
-
-这个文件不需要包含任何的其它配置，仅仅用作编辑器识别路径别名。它和实际的构建也没有关系，**任何时候你都不需要改动这个文件**。
-
 ### 项目配置
 
-在项目目录下创建一个`reskript.config.js`文件，简单地填空如下内容：
+在项目目录下创建一个`reskript.config.ts`文件，简单地填空如下内容：
 
-```js
-exports.build = {
-    appTitle: '我的第一个应用',
-};
+```ts
+import {configure} from '@reskript/settings';
 
-exports.devServer = {
-    port: 8081,
-};
+export default configure(
+    'webpack',
+    {
+        build: {
+            appTitle: '我的第一个应用',
+        },
+        devServer: {
+            port: 8081,
+        },
+    }
+);
 ```
 
 你可以通过[配置文件](../settings)来了解更多的配置信息。
@@ -145,10 +132,10 @@ exports.devServer = {
 /src
     /entries
         index.tsx # 主入口文件
-.eslintrc.js
-.stylelint.config.js
+.eslintrc.cjs
+.stylelint.config.cjs
 webpack.config.js
-reskript.config.js
+reskript.config.ts
 package.json
 package-lock.json
 ```

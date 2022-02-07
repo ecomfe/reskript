@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import {StrictMode} from 'react';
 import {render, unmountComponentAtNode} from 'react-dom';
 import '@/styles/index.js';
 import App from '@/components/App/index.js';
@@ -10,7 +11,9 @@ export const bootstrap = async () => {
 export const mount = async () => {
     const root = document.getElementById('root')!;
     render(
-        <App />,
+        <StrictMode>
+            <App />
+        </StrictMode>,
         root.appendChild(document.createElement('div'))
     );
 };

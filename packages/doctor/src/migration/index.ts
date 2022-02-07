@@ -1,8 +1,9 @@
 import {logger} from '@reskript/core';
-import * as semver from 'semver';
-import {run as v2} from './v2';
-import {run as v3} from './v3';
-import {readAllDependencies} from './utils';
+import semver from 'semver';
+import {run as v2} from './v2/index.js';
+import {run as v3} from './v3/index.js';
+import {run as v4} from './v4/index.js';
+import {readAllDependencies} from './utils.js';
 
 const resolveCurrentVersion = async (cwd: string) => {
     const dependencies = await readAllDependencies(cwd);
@@ -32,6 +33,9 @@ export const run = async (cwd: string) => {
             await v3(cwd);
             break;
         case 3:
+            await v4(cwd);
+            break;
+        case 4:
             logger.log('You have already installed the latest verion');
             break;
         default:

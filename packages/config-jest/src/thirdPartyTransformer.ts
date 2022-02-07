@@ -1,5 +1,6 @@
+// 在CJS环境下要用`import *`，在ESM环境下要用`import default`
 import * as babel from '@babel/core';
-import {sync as resolve} from 'resolve';
+import pluginTransformCommonJS from '@babel/plugin-transform-modules-commonjs';
 
 // 用来解决`node_modules`下有些包是ESM的问题
 export = {
@@ -11,7 +12,7 @@ export = {
                 {
                     filename,
                     plugins: [
-                        resolve('@babel/plugin-transform-modules-commonjs'),
+                        pluginTransformCommonJS,
                     ],
                 }
             );

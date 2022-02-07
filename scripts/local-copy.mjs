@@ -3,7 +3,7 @@
 // 使用方法：
 //
 // ```
-// node scripts/local-copy.js [--no-build] [--copy-all] -- path-to-project
+// node scripts/local-copy.js [--skip-build] [--copy-all] -- path-to-project
 // ```
 //
 // 以下参数可选：
@@ -25,7 +25,7 @@ if (!destination || !destination.startsWith('/') || destination.includes('node_m
     process.exit(1);
 }
 
-if (!argv.noBuild) {
+if (!argv.skipBuild) {
     console.log('Building...');
     childeProcess.execSync('pnpm run build');
 }

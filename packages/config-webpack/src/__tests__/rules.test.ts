@@ -1,4 +1,5 @@
-import compiler from './compiler';
+import {test, expect} from 'vitest';
+import compiler from './compiler.js';
 
 test('project source babel', async () => {
     const {entryModule} = await compiler('src/plain.js');

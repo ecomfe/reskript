@@ -1,4 +1,5 @@
-import runtimeEntry from '../runtimeEntry';
+import {test, expect} from 'vitest';
+import runtimeEntry from '../runtimeEntry.js';
 
 test('output bundle', async () => {
     const content = await runtimeEntry('test-app');

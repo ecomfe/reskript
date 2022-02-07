@@ -1,5 +1,5 @@
 import {PluginObj} from '@babel/core';
-import {prepareReactImport} from '../importReact';
+import {prepareReactImport} from '../importReact.js';
 
 const plugin = (): PluginObj => {
     return {

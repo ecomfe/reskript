@@ -1,14 +1,14 @@
-import path from 'path';
-import {promises as fs} from 'fs';
-import globby from 'globby';
-import throat from 'throat';
-import highlight from 'cli-highlight';
-import {transformFileAsync, TransformOptions} from '@babel/core';
+import path from 'node:path';
+import {promises as fs} from 'node:fs';
+import pLimit from 'p-limit';
+import {highlight} from 'cli-highlight';
+import {globby} from 'globby';
+import babel, {TransformOptions} from '@babel/core';
 import {logger} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
-import {BabelCommandLineArgs} from './interface';
+import {BabelCommandLineArgs} from '@reskript/settings';
 
-export {BabelCommandLineArgs};
+const {transformFileAsync} = babel;
 
 const changeExtension = (file: string, extension: string) => {
     const normalized = path.normalize(file);
@@ -45,7 +45,7 @@ const transformFile = async (file: string, baseIn: string, baseOut: string, opti
 };
 
 const transformDirectory = async (dir: string, out: string, options: TransformOptions) => {
-    const files = await globby(`${dir.replace(/\/$/, '')}/**/*.{js,jsx,ts,tsx}`);
+    const files = await globby('**/*.{js,jsx,ts,tsx}', {cwd: dir, absolute: true});
     await Promise.all(files.map(f => transformFile(f, dir, out, options)));
 };
 
@@ -93,7 +93,9 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         sourceMaps: !!outDirectory,
         babelrc: false,
     };
-    if (path.extname(file)) {
+    const stat = await fs.stat(file);
+
+    if (stat.isFile()) {
         if (outDirectory) {
             await transformFile(file, path.dirname(file), outDirectory, babelConfig);
         }
@@ -111,8 +113,9 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         await transformDirectory(file, outDirectory, babelConfig);
 
         if (copy) {
-            const files = await globby([`${file}/**`, `!${file}/**/*.{ts,js,tsx,jsx}`]);
-            await Promise.all(files.map(throat(2, f => copyFile(f, file, outDirectory))));
+            const files = await globby(['**', '!**/*.{ts,js,tsx,jsx}'], {cwd: file, absolute: true});
+            const limit = pLimit(2);
+            await Promise.all(files.map(v => limit(copyFile, v, file, outDirectory)));
         }
     }
 };

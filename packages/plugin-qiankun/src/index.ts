@@ -1,8 +1,8 @@
 import {SettingsPlugin, BuildSettings, DevServerSettings} from '@reskript/settings';
 import {Request, Response} from 'webpack-dev-server';
-import {Options} from './interface';
-import htmlEntry from './htmlEntry';
-import runtimeEntry from './runtimeEntry';
+import {Options} from './interface.js';
+import htmlEntry from './htmlEntry.js';
+import runtimeEntry from './runtimeEntry.js';
 
 export default (appName: string, options?: Options): SettingsPlugin => {
     const finalizeBuild: BuildSettings['finalize'] = config => {
@@ -48,13 +48,13 @@ export default (appName: string, options?: Options): SettingsPlugin => {
         return config;
     };
 
-    return settings => {
+    return async settings => {
         return {
             ...settings,
             build: {
                 ...settings.build,
-                finalize: (config, env, internals) => {
-                    const previous = settings.build.finalize?.(config, env, internals);
+                finalize: async (config, env, internals) => {
+                    const previous = await settings.build.finalize(config, env, internals);
                     return finalizeBuild(previous, env, internals);
                 },
             },
@@ -62,8 +62,8 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                 ? settings.devServer
                 : {
                     ...settings.devServer,
-                    finalize: (config, env) => {
-                        const previous = settings.devServer.finalize(config, env);
+                    finalize: async (config, env) => {
+                        const previous = await settings.devServer.finalize(config, env);
                         return finalizeDevServer(previous, env);
                     },
                 },

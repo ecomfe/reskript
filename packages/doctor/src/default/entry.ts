@@ -1,7 +1,7 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import fs from 'fs/promises';
-import {DoctorResult, Rule} from '../interface';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import fs from 'node:fs/promises';
+import {DoctorResult, Rule} from '../interface.js';
 
 const isEntryDirectoryValid = async (entryDirectory: string) => {
     if (!existsSync(entryDirectory)) {

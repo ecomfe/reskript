@@ -1,6 +1,6 @@
 import {readPackageConfig} from '@reskript/core';
-import {warn} from '../logger';
-import {checkInstalledReskriptVersion, isInstalledVersionSatisfies, nodeVersionSatisfies} from '../utils';
+import {warn} from '../logger.js';
+import {checkInstalledReskriptVersion, isInstalledVersionSatisfies, nodeVersionSatisfies} from '../utils.js';
 
 export default async (cwd: string) => {
     const packageInfo = await readPackageConfig(cwd);
@@ -11,21 +11,21 @@ export default async (cwd: string) => {
     if (!isInstalledVersionSatisfies(dependencies, 'eslint', '8.x')) {
         warn(
             'ESLint 8.x is required, please upgrade it',
-            'see: https://reskript.vercel.app/docs/migration/v3#更新ESLint'
+            'see: https://reskript.dev/docs/migration/v3#更新ESLint'
         );
     }
 
     if (!isInstalledVersionSatisfies(dependencies, 'stylelint', '14.x')) {
         warn(
             'StyleLint 14.x is required, please upgrade it',
-            'see: https://reskript.vercel.app/docs/migration/v3#更新StyleLint'
+            'see: https://reskript.dev/docs/migration/v3#更新StyleLint'
         );
     }
 
     if (!nodeVersionSatisfies('>=14.18.0')) {
         warn(
             'node version does\'t satisfy the least requirement, install a node >= 14.18.0',
-            'see: https://reskript.vercel.app/docs/migration/v3#NodeJS版本'
+            'see: https://reskript.dev/docs/migration/v3#NodeJS版本'
         );
     }
 };

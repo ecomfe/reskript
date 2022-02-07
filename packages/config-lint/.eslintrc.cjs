@@ -1,5 +1,5 @@
-require('./dist/patch');
+require('./config/patch.cjs');
 
 module.exports = {
-    extends: './config/eslint.js',
+    extends: './config/eslint.cjs',
 };

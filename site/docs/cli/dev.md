@@ -11,9 +11,10 @@ title: 本地调试
 ```
 --cwd [value]            指定当前工作目录，默认为当前目录
 --mode [value]           设置构建的环境模式，可以为development或production，默认为development
+--config [value]         使用指定的配置文件，默认查找reskript.config.{ts,mjs}
 --src-dir [value]        指定项目源码所在的目录，默认为src
 --build-target [value]   指定调试的特性名称，默认为dev
---proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖reskript.config.js中的devServer.defaultProxyDomain配置
+--proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖项目配置文件中的devServer.defaultProxyDomain配置
 --host [value]           设置默认的本地服务器域，可以用localhost、loopback（对应127.0.0.1）、ip（对应本机的局域网IP），也可以指定一个自定义的域名或IP
 --entry [value]          指定用来调试的入口，即在src/entries下的文件名（不包含后缀名），默认为index
 --strict                 打开严格模式，会稍微影响编译速度，增加更多对源码和依赖的检测
@@ -21,7 +22,7 @@ title: 本地调试
 -h, --help               显示帮助信息
 ```
 
-除命令行参数外，`reskript.config.js`中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
+除命令行参数外，[项目配置文件](../settings#配置文件路径)中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
 
 ## 本地与线上差异
 

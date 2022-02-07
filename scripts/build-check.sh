@@ -2,7 +2,7 @@
 
 # 检查产出里是不是有本地目录像`node_modules/xxx`这样的路径，有的话说明构建的结果是不通用的
 
-node_modules_leak_count=$(grep "node_modules\/[a-zA-Z]" -r packages/*/config packages/*/dist | wc -l | xargs)
+node_modules_leak_count=$(grep -zo "^[^/].*node_modules\/[a-zA-Z]" -r packages/*/config packages/*/dist | wc -l | xargs)
 if [ $node_modules_leak_count -gt 0 ]; then
     echo "found $node_modules_leak_count leaking paths in build assets, please fix it"
     exit 2

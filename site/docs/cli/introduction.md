@@ -20,7 +20,7 @@ title: 命令行介绍
 
 自动安装一个缺失的命令包需要你的项目满足以下要求：
 
-1. 你在安装`@reskript/*`包时，使用了精确的版本号，即在`npm install`、`yarn add`、`pnpm add`时使用`--save-exact`（或`-E`）参数，在你的`package.json`中，版本不是`^x.y.z`的形式，而是一个`x.y.z`的精确版本号。
+1. 你在安装`@reskript/*`包时，使用了精确的版本号，即在`npm install`、`yarn add`、`pnpm add`时使用`--save-exact`（或`-E`）参数，在你的`package.json`中，版本不是`^x.y.z`的形式，而是一个`x.y.z`的精确版本号。
 2. 你的项目必须启用了git版本管理，即在根目录下有`.git`文件夹。
 3. 你的项目在根目录（`.git`文件夹所在目录）下有一个包管理器的版本锁文件，可以是`package-lock.json`、`yarn.lock`或`pnpm-lock.yaml`。
 

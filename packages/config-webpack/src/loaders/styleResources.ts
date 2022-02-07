@@ -1,10 +1,9 @@
-import path from 'path';
-import {sync as resolve} from 'resolve';
-import {compact} from 'lodash';
+import path from 'node:path';
+import {resolve, compact} from '@reskript/core';
 import unixify from 'unixify';
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
+const factory: LoaderFactory = async ({cwd, srcDirectory, projectSettings}) => {
     const {build: {style: {resources}}} = projectSettings;
     const patterns = [
         ...resources,
@@ -12,7 +11,7 @@ const factory: LoaderFactory = ({cwd, srcDirectory, projectSettings}) => {
     ];
 
     return {
-        loader: resolve('style-resources-loader'),
+        loader: await resolve('style-resources-loader'),
         options: {
             patterns: compact(patterns),
             injector: 'append',

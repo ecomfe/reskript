@@ -16,7 +16,7 @@ interface BuildContext {
     readonly srcDirectory: string;
     readonly hostPackageName: string;
     readonly projectSettings: ProjectSettings;
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     readonly buildTarget: string;
     readonly isDefaultTarget: boolean;
     readonly entries: AppEntry[];
@@ -79,7 +79,7 @@ const createBuildConfiguration = async () => {
 如果默认的构建配置外加`reskript.config.js`无法满足，或需要在`reskript.config.js`中的`build.finalize`部分复用一些默认的配置，则可以使用`loaders`对象来创建不同的loader配置：
 
 ```typescript
-import {loaders} from '@reskript/config-webpack';
+import * as loaders from '@reskript/config-webpack/loaders';
 
 loaders: {
     babel,
@@ -88,8 +88,7 @@ loaders: {
     less,
     css,
     cssModules,
-    postCSS,
-    postCSSModules,
+    postcss,
     style,
     styleResources,
     classNames,
@@ -108,11 +107,11 @@ interface BuildEntry extends RuntimeBuildEnv {
     readonly projectSettings: ProjectSettings;
     readonly buildVersion: string;
     readonly buildTime: string;
-    readonly features: FeatureSet;
+    readonly features: Record<string, any>;
     readonly buildTarget: string;
 }
 
-type LoaderFactory = (entry: BuildEntry) => RuleSetLoader | null;
+type LoaderFactory = (entry: BuildEntry) => Promise<RuleSetLoader | null>;
 ```
 
 `BuildEntry`是上文`BuildContext`的子集，参考相同的方式来构建这个对象。

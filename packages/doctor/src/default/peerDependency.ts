@@ -1,4 +1,4 @@
-import {DoctorResult, Rule} from '../interface';
+import {DoctorResult, Rule} from '../interface.js';
 
 const REQUIRED_PEERS = ['eslint', 'stylelint', 'typescript', 'webpack'];
 

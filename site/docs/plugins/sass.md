@@ -21,13 +21,20 @@ npm i -D @reskript/plugin-sass
 
 ### 增加插件
 
-```javascript
-// reskript.config.js
-const {default: sass} = require('@reskript/plugin-sass');
+```ts
+// reskript.config.ts
+import {configure} from '@reskript/settings';
+import sass = require('@reskript/plugin-sass');
 
-exports.plugins = [
-    sass({/* 配置 */}),
-];
+
+export default configure(
+    'webpack',
+    {
+        plugins: [
+            sass({/* 配置 */}),
+        ],
+    }
+);
 ```
 
 ### 配置

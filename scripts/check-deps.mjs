@@ -3,24 +3,7 @@ import path from 'node:path';
 import semver from 'semver';
 
 const RESTRICTED_DEPENDENCIES = [
-    ['imagemin', '7.x'],
-    ['img-loader', '3.x'],
-    ['log-symbols', '4.x'],
-    ['ora', '5.x'],
-    ['globby', '11.x'],
-    ['unified', '9.x'],
-    ['remark-gfm', '1.x'],
-    ['remark-parse', '9.x'],
-    ['remark-stringify', '9.x'],
-    ['find-up', '5.x'],
-    ['pad-stream', '2.x'],
-    ['internal-ip', '6.x'],
-    ['matcher', '4.x'],
-    ['pkg-dir', '5.x'],
-    ['chalk', '4.x'],
-    ['execa', '5.x'],
-    ['matcher', '4.x'],
-    ['tailwindcss', '2.x'],
+    // 终于所有依赖都能最新了哈哈哈！！！
 ];
 
 const checkDependencyFor = restrictedVersionRange => definedVersionRange => {

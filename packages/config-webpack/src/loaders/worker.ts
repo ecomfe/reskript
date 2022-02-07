@@ -1,9 +1,9 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolve} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = () => {
+const factory: LoaderFactory = async () => {
     return {
-        loader: resolve('worker-loader'),
+        loader: await resolve('worker-loader'),
         options: {
             filename: '[name].[contenthash].js',
             inline: 'no-fallback',

@@ -1,5 +1,5 @@
 import {createElement, ComponentType, SVGAttributes, useCallback} from 'react';
-import {PanelType} from '../interface';
+import {PanelType} from '../interface.js';
 import IconEdit from './icons/edit.svg?react';
 import IconInfo from './icons/info.svg?react';
 import IconHelp from './icons/help.svg?react';

@@ -1,9 +1,10 @@
-import {compact} from 'lodash';
-import {sync as resolve} from 'resolve';
 import {PluginItem, TransformOptions} from '@babel/core';
-import {shouldEnable} from './utils';
-import getParseOnlyBabelConfigFilled from './parseOnly';
-import {BabelConfigOptionsFilled} from './interface';
+import pluginLodash from 'babel-plugin-lodash';
+import {compact} from '@reskript/core';
+import addReactDisplayName from '@reskript/babel-plugin-add-react-display-name';
+import {shouldEnable} from './utils.js';
+import getTransformMinimalBabelConfig from './transformMinimal.js';
+import {BabelConfigOptionsFilled} from './interface.js';
 
 const requireLodashOptimization = (options: BabelConfigOptionsFilled) => {
     const {uses, mode} = options;
@@ -16,40 +17,13 @@ const requireDisplayName = (options: BabelConfigOptionsFilled) => {
 };
 
 export default (options: BabelConfigOptionsFilled): TransformOptions => {
-    const minimal = getParseOnlyBabelConfigFilled(options);
-    const {uses, mode} = options;
+    const minimal = getTransformMinimalBabelConfig(options);
     const plugins: Array<PluginItem | false> = [
         // 这东西必须放在最前面，不然`export default class`会被其它插件转义掉没机会确认真实的名字
-        requireDisplayName(options) && resolve('@reskript/babel-plugin-add-react-display-name'),
-        shouldEnable('styled-components', uses) && [
-            resolve('babel-plugin-styled-components'),
-            {
-                displayName: requireDisplayName(options),
-                minify: mode === 'production',
-                meaninglessFileNames: ['index'],
-            },
-        ],
-        shouldEnable('emotion', uses) && [
-            resolve('@emotion/babel-plugin'),
-            {
-                sourceMap: mode === 'development',
-                // TODO: https://github.com/emotion-js/emotion/issues/2305
-                // autoLabel: mode === 'production' ? 'never' : 'always',
-                autoLabel: 'always',
-            },
-        ],
-        shouldEnable('reflect-metadata', uses) && resolve('babel-plugin-transform-typescript-metadata'),
+        requireDisplayName(options) && addReactDisplayName,
         ...minimal.plugins || [],
-        shouldEnable('antd', uses) && [
-            resolve('babel-plugin-import'),
-            {
-                libraryName: 'antd',
-                libraryDirectory: 'es',
-                style: true,
-            },
-        ],
         requireLodashOptimization(options) && [
-            resolve('babel-plugin-lodash'),
+            pluginLodash,
             {
                 id: ['lodash', 'lodash-decorators'],
             },
