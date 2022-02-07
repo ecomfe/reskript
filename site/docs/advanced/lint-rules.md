@@ -140,3 +140,40 @@ module.exports = {
 - 在最后放置`*`符号，则表示别名匹配，如`@i/*`则表示所有`@i/`开头的引用路径都被视为本地包。
 
 当你使用monorepo时，我们建议本地包都用一个作用域，推荐用`@i`作为前缀，则配置值为`@i/*`即可。
+
+
+## no-useless-memo-hooks
+
+检查`useCallback`，如果遇到符合下列全部情况时，告警。
+
+1. `useCallback`函数体仅有一个调用函数，且`dependency`仅有一个是调用函数；
+2. 调用函数无参数。
+
+规则内容：
+
+```js
+// good code
+// 有多个调用语句
+const handleCancel = useCallback(
+    () => {
+        hideModal();
+        close();
+    },
+    [hideModal, close]
+);
+// 有依赖
+const handleAdd = useCallback(() => addCount(1), [addCount]);
+// 虽然只有一个调用语句，但隐藏了返回值
+const handleClear = useCallback(
+    () => {
+        clear();
+    },
+    [clear]
+);
+
+// bad code
+// 仅一个调用语句，返回被调用函数的返回值
+const handleCancel = useCallback(() => hideModal(), [hideModal]);
+// 没有任何依赖
+const handleClear = useCallback(() => clear(), []);
+```
