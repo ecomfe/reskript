@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
+
+
+### Bug Fixes
+
+* **build:** 修复webpack的alias里，regenerator路径错误的问题 ([#251](https://github.com/ecomfe/reskript/issues/251)) ([b828e32](https://github.com/ecomfe/reskript/commit/b828e32348f4dccc2f76f4ea42a4f80022e5ae46))
+
+
+
+
+
 ## [4.0.1](https://github.com/ecomfe/reskript/compare/v4.0.0...v4.0.1) (2022-02-07)
 
 **Note:** Version bump only for package @reskript/config-webpack

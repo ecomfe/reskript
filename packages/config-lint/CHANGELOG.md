@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
+
+
+### Features
+
+* **lint:** 添加useless-memoized-hooks检查规则 ([#192](https://github.com/ecomfe/reskript/issues/192)) ([28d2eb4](https://github.com/ecomfe/reskript/commit/28d2eb4b2325e753eeb5a9e1dba0a65debe20b11))
+
+
+
+
+
 ## [4.0.1](https://github.com/ecomfe/reskript/compare/v4.0.0...v4.0.1) (2022-02-07)
 
 **Note:** Version bump only for package @reskript/config-lint
