@@ -1,6 +1,6 @@
-import childProcess from 'child_process';
-import os from 'os';
-import {promisify} from 'util';
+import childProcess from 'node:child_process';
+import os from 'node:os';
+import {promisify} from 'node:util';
 
 const exec = promisify(childProcess.exec);
 

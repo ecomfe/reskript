@@ -1,5 +1,5 @@
 import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
-import {ScriptDescriptor, ScriptFactoryContext, ScriptFactory, Options, InlineScriptDescriptor} from './interface';
+import {ScriptDescriptor, ScriptFactoryContext, ScriptFactory, Options, InlineScriptDescriptor} from './interface.js';
 
 export type {ScriptFactory, ScriptFactoryContext, ScriptDescriptor, Options};
 

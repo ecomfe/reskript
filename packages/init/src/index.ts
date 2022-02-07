@@ -1,8 +1,8 @@
 #! /usr/bin/env node
 import {logger} from '@reskript/core';
-import preCheckCurrentWorkingDirectory from './check';
-import askForOptions from './ask';
-import run from './run';
+import preCheckCurrentWorkingDirectory from './check.js';
+import askForOptions from './ask.js';
+import run from './run/index.js';
 
 (async () => {
     const cwd = process.argv[2] || process.cwd();

@@ -1,8 +1,16 @@
 {
   "name": "@reskript/config-webpack-dev-server",
-  "version": "2.3.0",
-  "main": "dist/index.js",
+  "version": "4.0.1",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
   "files": [
     "dist"
   ],
@@ -13,41 +21,42 @@
     "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint --max-warnings=0 src",
-    "test": "jest"
+    "test": "vitest run"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.9.2",
-    "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.176",
-    "@types/node": "^16.11.6",
-    "@types/webpack-dev-server": "4.3.1",
-    "eslint": "^7.32.0",
-    "jest": "^27.3.1",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.4.4",
-    "webpack": "^5.51.0",
-    "webpack-dev-server": "^4.4.0"
+    "@types/node": "^17.0.14",
+    "c8": "^7.10.0",
+    "eslint": "^8.8.0",
+    "typescript": "^4.6.0-beta",
+    "vite": "^2.7.12",
+    "vitest": "^0.2.5",
+    "webpack": "^5.68.0",
+    "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
-    "@reskript/config-webpack": "2.3.0",
-    "@reskript/core": "2.3.0",
-    "@reskript/settings": "2.3.0",
-    "@soda/friendly-errors-webpack-plugin": "^1.8.0",
-    "chalk": "^4.1.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
+    "@reskript/config-webpack": "4.0.1",
+    "@reskript/core": "4.0.1",
+    "@reskript/settings": "4.0.1",
+    "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "cli-progress": "^3.9.1",
-    "internal-ip": "^6.2.0",
-    "launch-editor-middleware": "^2.2.1",
-    "lodash": "^4.17.21",
+    "internal-ip": "^7.0.0",
+    "kolorist": "^1.5.1",
+    "launch-editor-middleware": "^2.3.0",
     "proxy-agent": "^5.0.0",
-    "react-refresh": "^0.10.0",
-    "webpack": "^5.61.0",
+    "react-refresh": "^0.11.0",
     "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {
-    "eslint": "7.x",
-    "stylelint": "13.x",
+    "eslint": "8.x",
+    "stylelint": "14.x",
     "typescript": "4.x",
     "webpack": "5.x"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   }
 }

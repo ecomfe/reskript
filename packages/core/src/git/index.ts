@@ -1,6 +1,6 @@
 import {uniq} from 'ramda';
 import status from 'g-status';
-import {filterChanged, filterStaged, filterStagedOnly, extractName} from './utils';
+import {filterChanged, filterStaged, filterStagedOnly, extractName} from './utils.js';
 
 export interface GitStatusResult {
     modified: string[];

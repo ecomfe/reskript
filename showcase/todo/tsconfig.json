@@ -1,6 +1,9 @@
 {
     "include": [
         "src",
+        "e2e",
+        "__tests__",
+        "./*.ts"
     ],
     "compilerOptions": {
         "module": "ESNext",

@@ -1,5 +1,6 @@
+import {describe, test, expect} from 'vitest';
 import {EntryObject} from 'webpack';
-import {addHotModuleToEntry, constructProxyConfiguration} from '../utils';
+import {addHotModuleToEntry, constructProxyConfiguration} from '../utils.js';
 
 type EntryDescription = Exclude<EntryObject[string], string | string[]>;
 

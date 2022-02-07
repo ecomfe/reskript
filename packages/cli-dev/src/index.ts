@@ -1,18 +1,15 @@
 import webpack, {Configuration as WebpackConfiguration} from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
-import {watchProjectSettings} from '@reskript/settings';
+import {watchProjectSettings, DevCommandLineArgs} from '@reskript/settings';
 import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
-import {logger, prepareEnvironment} from '@reskript/core';
+import {logger, prepareEnvironment, dirFromImportMeta} from '@reskript/core';
 import {
     createWebpackDevServerPartial,
     createWebpackDevServerConfig,
     injectDevElements,
 } from '@reskript/config-webpack-dev-server';
-import {DevCommandLineArgs} from './interface';
-import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils';
-
-export {DevCommandLineArgs};
+import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils.js';
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
@@ -33,7 +30,7 @@ const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStar
 
 const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer> => {
     const {buildContext, host, extra, publicPath} = await prepareServerContext(cmd);
-    const hot = buildContext.projectSettings.devServer.hot;
+    const {hot, https} = buildContext.projectSettings.devServer;
     const config = await createWebpackConfig(
         buildContext,
         {
@@ -54,7 +51,7 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
         devServerConfig,
         hot,
         entry: cmd.entry,
-        resolveBase: __dirname,
+        resolveBase: dirFromImportMeta(import.meta.url),
     };
     const devInjected = await injectDevElements(injectOptions);
     const compiler = webpack(devInjected);
@@ -63,7 +60,8 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 
     if (cmd.open) {
         const port = devServerConfig.port!;
-        const openURL = `http://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
+        const protocol = https?.client ? 'https' : 'http';
+        const openURL = `${protocol}://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
         open(openURL);
     }
 
@@ -71,8 +69,9 @@ const startDevServer = async (cmd: DevCommandLineArgs): Promise<WebpackDevServer
 };
 
 export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
-    process.env.NODE_ENV = cmd.mode;
-    await prepareEnvironment(cmd.cwd, cmd.mode);
+    const {mode, cwd, configFile} = cmd;
+    process.env.NODE_ENV = mode;
+    await prepareEnvironment(cwd, mode);
 
     let startingServer = startDevServer(cmd);
     let nextStart: (() => void) | null = null;
@@ -93,6 +92,6 @@ export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
             nextStart();
         }
     };
-    const listen = await watchProjectSettings(cmd, 'dev');
+    const listen = await watchProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd});
     listen(restart);
 };

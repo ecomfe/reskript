@@ -1,9 +1,9 @@
-import {existsSync} from 'fs';
-import path from 'path';
+import {existsSync} from 'node:fs';
+import path from 'node:path';
 import env from 'dotenv';
-import expand from 'dotenv-expand';
-import {findMonorepoRoot, isMonorepo} from './project';
-import {WorkMode} from './interface';
+import {expand} from 'dotenv-expand';
+import {findMonorepoRoot, isMonorepo} from './project.js';
+import {WorkMode} from './interface.js';
 
 export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
     const files = [

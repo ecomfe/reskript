@@ -1,7 +1,8 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = () => {
+const factory: LoaderFactory = async () => {
+    const {default: MiniCssExtractPlugin} = await import('mini-css-extract-plugin');
+
     return {
         loader: MiniCssExtractPlugin.loader,
     };

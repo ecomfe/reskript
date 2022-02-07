@@ -9,7 +9,6 @@ import Target from '%COMPONENT_MODULE_PATH%';
 const playground = {
     componentName: "%COMPONENT_TYPE_NAME%",
     componentFilePath: '%COMPONENT_MODULE_PATH_RELATIVE%',
-    configurationFilePath: '%CONFIGURATION_FILE_PATH%',
     configurationSourceCode: '%CONFIGURATION_SOURCE%',
 };
 

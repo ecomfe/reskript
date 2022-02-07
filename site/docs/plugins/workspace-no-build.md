@@ -46,13 +46,20 @@ npm i -D @reskript/plugin-workspace-no-build
 
 ### 增加插件
 
-```javascript
-// reskript.config.js
-const {default: workspaceNoBuild} = require('@reskript/plugin-workspace-no-build');
+```ts
+// reskript.config.ts
+import {configure} from '@reskript/settings';
+import workspaceNoBuild = require('@reskript/plugin-workspace-no-build');
 
-exports.plugins = [
-    workspaceNoBuild({/* 配置 */}),
-];
+
+export default configure(
+    'webpack',
+    {
+        plugins: [
+            workspaceNoBuild({/* 配置 */}),
+        ],
+    }
+);
 ```
 
 ### 配置

@@ -20,6 +20,6 @@ npm install regenerator-runtime
 
 在`src/entries/index.tsx`或其它的入口中加上：
 
-```js
+```ts
 import 'regenerator-runtime/runtime';
 ```

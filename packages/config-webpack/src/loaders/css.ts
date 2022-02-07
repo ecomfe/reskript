@@ -1,9 +1,9 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolve} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = entry => {
+const factory: LoaderFactory = async entry => {
     return {
-        loader: resolve('css-loader'),
+        loader: await resolve('css-loader'),
         options: {
             sourceMap: entry.projectSettings.build.style.extract,
             modules: false,

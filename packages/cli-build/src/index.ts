@@ -1,6 +1,6 @@
-import path from 'path';
-import fs from 'fs/promises';
-import {compact, difference, uniq} from 'lodash';
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import {reject, isNil, difference} from 'ramda';
 import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';
 import {
@@ -11,13 +11,16 @@ import {
     BuildContext,
     EntryLocation,
 } from '@reskript/config-webpack';
-import {readProjectSettings, BuildEnv, ProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import * as partials from './partial';
-import {BuildCommandLineArgs} from './interface';
-import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report';
-import inspect from './inspect';
-
-export {BuildCommandLineArgs};
+import {
+    readProjectSettings,
+    BuildEnv,
+    BuildCommandLineArgs,
+    ProjectSettings,
+    strictCheckRequiredDependency,
+} from '@reskript/settings';
+import * as partials from './partial.js';
+import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report.js';
+import inspect from './inspect/index.js';
 
 const build = (configuration: Configuration | Configuration[]): Promise<Stats> => {
     const executor = (resolve: (value: Stats) => void) => webpack(
@@ -36,10 +39,10 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
             const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};
             // webpack的`toJson`的定义是错的
             const {errors, warnings} = stats.toJson(toJsonOptions);
-            for (const error of uniq(errors)) {
+            for (const error of reject(isNil, errors ?? [])) {
                 printWebpackResult('error', error as unknown as WebpackResult);
             }
-            for (const warning of uniq(warnings)) {
+            for (const warning of reject(isNil, warnings ?? [])) {
                 printWebpackResult('warn', warning as unknown as WebpackResult);
             }
 
@@ -111,7 +114,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
                     caseSensitiveModuleSource: cmd.strict,
                     typeCheck: cmd.strict,
                 },
-                extras: compact(extras),
+                extras: reject((v: false | Configuration): v is false => !v, extras),
             }
         );
     };
@@ -120,15 +123,16 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
 };
 
 export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
-    process.env.NODE_ENV = cmd.mode;
-    await prepareEnvironment(cmd.cwd, cmd.mode);
+    const {cwd, mode, clean, configFile, analyze} = cmd;
+    process.env.NODE_ENV = mode;
+    await prepareEnvironment(cwd, mode);
 
-    if (cmd.clean) {
-        await fs.rm(path.join(cmd.cwd, 'dist'), {recursive: true, force: true});
+    if (clean) {
+        await fs.rm(path.join(cwd, 'dist'), {recursive: true, force: true});
     }
 
-    const projectSettings = await readProjectSettings(cmd, 'build');
-    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
+    const projectSettings = await readProjectSettings({commandName: 'build', specifiedFile: configFile, ...cmd});
+    await strictCheckRequiredDependency(projectSettings, cwd);
     const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 
     if (!initial) {
@@ -142,5 +146,5 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     const stats = !!configurations.length && await build(configurations);
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
     logger.lineBreak();
-    await inspect(initialStats, projectSettings.build.inspect, {cwd: cmd.cwd, exitOnError: !cmd.analyze});
+    await inspect(initialStats, projectSettings.build.inspect, {cwd, exitOnError: !analyze});
 };

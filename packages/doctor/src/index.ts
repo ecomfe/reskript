@@ -1,14 +1,14 @@
 #! /usr/bin/env node
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 import {logger, isMonorepoRoot} from '@reskript/core';
 
 const resolveChecker = (routeName: string) => {
     switch (routeName) {
-        case 'migrate-v2':
-            return './migration/v2';
+        case 'migrate':
+            return './migration/index.js';
         default:
-            return './default';
+            return './default/index.js';
     }
 };
 

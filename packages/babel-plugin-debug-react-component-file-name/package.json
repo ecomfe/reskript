@@ -1,8 +1,17 @@
 {
   "name": "@reskript/babel-plugin-debug-react-component-file-name",
-  "version": "2.3.0",
-  "main": "dist/index.js",
+  "version": "4.0.1",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./useComponentFile": "./dist/useComponentFile.js"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
   "files": [
     "dist"
   ],
@@ -12,26 +21,29 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
-    "test": "jest",
+    "test": "vitest run",
     "lint": "eslint --max-warnings=0 src"
   },
   "devDependencies": {
-    "@babel/preset-react": "^7.16.0",
-    "@types/babel__core": "^7.1.16",
+    "@babel/plugin-proposal-class-properties": "^7.16.5",
+    "@babel/plugin-transform-classes": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
+    "@reskript/core": "4.0.1",
+    "@types/babel__core": "^7.1.17",
     "@types/babel__traverse": "^7.14.2",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.6",
-    "@types/react": "^17.0.34",
-    "eslint": "^7.32.0",
-    "jest": "^27.3.1",
+    "@types/node": "^17.0.14",
+    "@types/react": "^17.0.38",
+    "c8": "^7.10.0",
+    "eslint": "^8.8.0",
     "react": "^17.0.2",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.4.4"
+    "typescript": "^4.6.0-beta",
+    "vite": "^2.7.12",
+    "vitest": "^0.2.5"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/traverse": "^7.16.0",
-    "@reskript/babel-utils": "2.3.0"
+    "@babel/core": "^7.16.12",
+    "@babel/traverse": "^7.16.5",
+    "@reskript/babel-utils": "4.0.1"
   },
   "peerDependencies": {
     "react": ">= 17"

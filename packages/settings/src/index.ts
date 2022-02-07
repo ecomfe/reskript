@@ -1,50 +1,66 @@
-import path from 'path';
-import {existsSync} from 'fs';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+// @ts-expect-error
 import hasha from 'hasha';
 import chokidar from 'chokidar';
-import {logger, PackageInfo, ProjectAware, readPackageConfig} from '@reskript/core';
-import {ProjectSettings, Listener, Observe, ClientProjectSettings} from './interface';
-import validate from './validate';
-import {fillProjectSettings, PartialProjectSettings} from './defaults';
-import {applyPlugins} from './plugins';
+import {importUserModule, logger, PackageInfo, readPackageConfig} from '@reskript/core';
+import {
+    ProjectSettings,
+    Listener,
+    Observe,
+    ClientProjectSettings,
+    ReskriptDriver,
+    CommandInput,
+} from './interface/index.js';
+import validate from './validate.js';
+import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
+import {applyPlugins} from './plugins.js';
 
-export * from './interface';
+export * from './interface/index.js';
 export {fillProjectSettings, PartialProjectSettings};
 
-const requireSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
-    const location = path.join(cmd.cwd, 'reskript.config.js');
+const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
 
-    if (!existsSync(location)) {
-        return fillProjectSettings({});
+export interface UserSettings extends Omit<PartialProjectSettings, 'provider'> {
+    plugins?: ClientProjectSettings['plugins'];
+}
+
+export interface UserProjectSettings extends UserSettings {
+    provider: ReskriptDriver;
+}
+
+const checkSettingsExists = (file?: string) => {
+    if (file && !existsSync(file)) {
+        logger.error(`Unable to find configuration file ${file}`);
+        process.exit(21);
     }
+};
 
-    // NOTE: 如果要改成原生ESM的话，这里得想个别的办法
-    delete require.cache[location];
-    const {default: requiredSettings} = await import(location) as {default: ClientProjectSettings};
+const locateSettings = (cwd: string): string | null => {
+    const file = SETTINGS_EXTENSIONS.map(v => path.join(cwd, 'reskript.config' + v)).find(existsSync);
+    return file ?? null;
+};
+
+type ResolveProjectSettingsOptions = CommandInput & {specifiedFile?: string};
+
+const importSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
+    const {specifiedFile, ...cmd} = options;
+    const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserProjectSettings}>(
+        specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cmd.cwd, 'reskript.config' + v)),
+        {default: {provider: 'webpack'}}
+    );
 
     try {
-        validate(requiredSettings);
+        validate(userSettings);
     }
     catch (ex) {
         logger.error(ex instanceof Error ? ex.message : `${ex}`);
         process.exit(21);
     }
 
-    const {plugins = [], ...clientSettings} = requiredSettings;
-    const rawSettings = fillProjectSettings(clientSettings);
-    const pluginOptions = {...cmd, command: commandName};
-    return applyPlugins(rawSettings, plugins, pluginOptions);
-};
-
-const computeSettingsHash = async (cwd: string): Promise<string> => {
-    const location = path.join(cwd, 'reskript.config.js');
-
-    if (!existsSync(location)) {
-        return '';
-    }
-
-
-    return hasha.fromFile(location);
+    const {plugins = [], ...clientSettings} = userSettings;
+    const rawSettings: ProjectSettings = {...fillProjectSettings(clientSettings), from: resolved};
+    return applyPlugins(rawSettings, plugins, cmd);
 };
 
 interface CacheContainer {
@@ -57,16 +73,18 @@ interface CacheContainer {
 const cache: CacheContainer = {
     initialized: false,
     hash: '',
-    settings: fillProjectSettings({}),
+    settings: fillProjectSettings({provider: 'webpack'}),
     listen: null,
 };
 
-export const readProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<ProjectSettings> => {
+export const readProjectSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
+    checkSettingsExists(options.specifiedFile);
+
     if (cache.initialized) {
         return cache.settings;
     }
 
-    const settings = await requireSettings(cmd, commandName);
+    const settings = await importSettings(options);
 
     cache.initialized = true;
     cache.settings = settings;
@@ -74,33 +92,37 @@ export const readProjectSettings = async (cmd: ProjectAware, commandName: string
     return settings;
 };
 
-export const watchProjectSettings = async (cmd: ProjectAware, commandName: string): Promise<Observe> => {
+export const watchProjectSettings = async (options: ResolveProjectSettingsOptions): Promise<Observe> => {
+    checkSettingsExists(options.specifiedFile);
+
     if (cache.listen) {
         return cache.listen;
     }
 
-    const settingsLocation = path.join(cmd.cwd, 'reskript.config.js');
+    const settingsLocation = options.specifiedFile ?? locateSettings(options.cwd);
+
+    // 根本没有配置文件，弄个空的回去随便外面怎么折腾
+    if (!settingsLocation) {
+        return () => () => {};
+    }
+
     const listeners = new Set<Listener>();
     const watcher = chokidar.watch(settingsLocation);
     const notify = async (): Promise<void> => {
         // `fs.watch`是不稳定的，一次修改会触发多次，因此用hash做一下比对
-        const newSettingsHash = await computeSettingsHash(cmd.cwd);
+        const newSettingsHash = await hasha.fromFile(settingsLocation);
 
         if (newSettingsHash === cache.hash) {
             return;
         }
 
-        const newSettings = await requireSettings(cmd, commandName);
-
         cache.hash = newSettingsHash;
-        cache.settings = newSettings;
-
-        listeners.forEach(f => f(newSettings));
+        listeners.forEach(f => f());
     };
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     watcher.on('all', notify);
 
-    cache.hash = await computeSettingsHash(cmd.cwd);
+    cache.hash = await hasha.fromFile(settingsLocation);
     cache.listen = (listener: Listener) => {
         listeners.add(listener);
         return () => listeners.delete(listener);
@@ -131,4 +153,8 @@ export const strictCheckRequiredDependency = async (projectSettings: ProjectSett
         logger.error('You require polyfill on build but don\'t have core-js installed.');
         process.exit(13);
     }
+};
+
+export const configure = (provider: 'webpack', settings: UserSettings): UserProjectSettings => {
+    return {...settings, provider};
 };

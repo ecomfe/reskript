@@ -1,5 +1,6 @@
+import {describe, test, expect} from 'vitest';
 import {GitStatusItem} from 'g-status';
-import {filterChanged, filterStaged, filterStagedOnly, extractName} from '../utils';
+import {filterChanged, filterStaged, filterStagedOnly, extractName} from '../utils.js';
 
 // Changes to be committed:
 //     modified:   1

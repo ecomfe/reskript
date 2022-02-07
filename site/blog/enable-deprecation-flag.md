@@ -21,4 +21,4 @@ tags: [cli, flags]
 export SKR_FLAGS=all
 ```
 
-关于标记的具体功能和使用方式，可以参考[命令行介绍文档](https://reskript.vercel.app/docs/cli/introduction#全局控制标记)。
+关于标记的具体功能和使用方式，可以参考[命令行介绍文档](https://reskript.dev/docs/cli/introduction#全局控制标记)。

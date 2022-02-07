@@ -3,14 +3,13 @@
     "packages/*",
     "showcase/*"
   ],
-  "version": "2.3.0",
+  "version": "4.0.1",
   "npmClient": "yarn",
   "exact": true,
   "command": {
     "version": {
       "allowBranch": [
-        "master",
-        "v2"
+        "master"
       ],
       "ignoreChanges": [
         "**/*.md",

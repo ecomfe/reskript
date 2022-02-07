@@ -1,11 +1,11 @@
 import WebpackDevServer from 'webpack-dev-server';
-import internalIp from 'internal-ip';
-import {readProjectSettings, BuildEnv, strictCheckRequiredDependency} from '@reskript/settings';
+import {internalIpV4} from 'internal-ip';
+import {readProjectSettings, BuildEnv, DevCommandLineArgs, strictCheckRequiredDependency} from '@reskript/settings';
 import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
 import {logger, readPackageConfig} from '@reskript/core';
-import {DevCommandLineArgs} from './interface';
 
 export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
+
     if (!hostType) {
         return 'localhost';
     }
@@ -16,7 +16,7 @@ export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
         case 'loopback':
             return '127.0.0.1';
         case 'ip': {
-            const ip = await internalIp.v4();
+            const ip = await internalIpV4();
             return ip ?? 'localhost';
         }
         default:
@@ -44,36 +44,38 @@ export const startServer = async (server: WebpackDevServer): Promise<void> => {
 };
 
 export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
-    const [
-        projectSettings,
-        {name: hostPackageName},
-    ] = await Promise.all([readProjectSettings(cmd, 'dev'), readPackageConfig(cmd.cwd)]);
-    await strictCheckRequiredDependency(projectSettings, cmd.cwd);
+    const {mode, cwd, srcDirectory, entriesDirectory, entry, buildTarget, configFile} = cmd;
+    const reading = [
+        readProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd}),
+        readPackageConfig(cwd),
+    ] as const;
+    const [projectSettings, {name: hostPackageName}] = await Promise.all(reading);
+    await strictCheckRequiredDependency(projectSettings, cwd);
     const entryLocation: EntryLocation = {
-        cwd: cmd.cwd,
-        srcDirectory: cmd.srcDirectory,
-        entryDirectory: cmd.entriesDirectory,
-        only: [cmd.entry],
+        cwd: cwd,
+        srcDirectory: srcDirectory,
+        entryDirectory: entriesDirectory,
+        only: [entry],
     };
     const entries = await collectEntries(entryLocation);
 
     if (!entries.length) {
-        logger.error(`You have specified a missing entry ${cmd.entry}, dev-server is unable to start.`);
+        logger.error(`You have specified a missing entry ${entry}, dev-server is unable to start.`);
         process.exit(21);
     }
 
     const buildEnv: BuildEnv = {
         hostPackageName,
+        cwd,
         usage: 'devServer',
-        mode: cmd.mode ?? 'development',
-        cwd: cmd.cwd,
-        srcDirectory: cmd.srcDirectory,
+        mode: mode ?? 'development',
+        srcDirectory: srcDirectory,
         // `react-refresh`无法在`production`模式下工作，所以在该模式下直接禁用掉热更新
         projectSettings: {
             ...projectSettings,
             devServer: {
                 ...projectSettings.devServer,
-                hot: cmd.mode === 'production' ? false : projectSettings.devServer.hot,
+                hot: mode === 'production' ? false : projectSettings.devServer.hot,
             },
         },
     };
@@ -81,8 +83,8 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
     return {
         ...runtimeBuildEnv,
         entries,
-        features: projectSettings.featureMatrix[cmd.buildTarget],
-        buildTarget: cmd.buildTarget || 'dev',
+        features: projectSettings.featureMatrix[buildTarget],
+        buildTarget: buildTarget || 'dev',
         isDefaultTarget: true,
     };
 };

@@ -1,4 +1,5 @@
-import validate from '../validate';
+import {describe, test, expect} from 'vitest';
+import validate from '../validate.js';
 
 describe('validate', () => {
     test('empty', () => {

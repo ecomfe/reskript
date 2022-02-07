@@ -1,24 +1,13 @@
+# Misc
 node_modules
-*.tgz
 .DS_Store
-/.idea
-/output
-/dist
-/staging-test
-/config/
 yarn-error.log
-/coverage
-
-.DS_Store
+/.idea
+*.tgz
 /*/*/dist
 /*/*/config
-*/*/coverage
+/*/*/coverage
 
-# Yarn
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+# SSL
+localhost-key.pem
+localhost.pem

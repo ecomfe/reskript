@@ -1,9 +1,8 @@
-import {compact} from 'lodash';
 import ora from 'ora';
-import execa from 'execa';
+import {execa} from 'execa';
 import padStream from 'pad-stream';
-import {isInDebugMode} from '@reskript/core';
-import {UserOptions} from '../interface';
+import {isInDebugMode, compact} from '@reskript/core';
+import {UserOptions} from '../interface.js';
 
 const PACKAGE_MANAGER_INSTALL_COMMAND: Record<string, [string, string]> = {
     npm: ['npm', 'install'],
@@ -51,8 +50,8 @@ export default async (cwd: string, options: UserOptions) => {
         'Installing development dependencies',
         ['-D'],
         [
-            'eslint@7.x', // NOTE: `eslint 8.x`需要更新的Node版本，需要下个大版本更新
-            'stylelint@13.x', // NOTE: `stylelint 14.x`是破坏性更新，需要下个大版本
+            'eslint',
+            'stylelint',
             'typescript',
             'webpack',
             options.gerrit ? 'husky@4.x' : 'husky',

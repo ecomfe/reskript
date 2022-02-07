@@ -1,4 +1,5 @@
-import compiler from './compiler';
+import {test, expect} from 'vitest';
+import compiler from './compiler.js';
 
 test('replace', async () => {
     const html = await compiler({FOO: '"foo"', BAR: '1'});

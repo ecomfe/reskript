@@ -1,9 +1,17 @@
-import {sync as resolve} from 'resolve';
-import {LoaderFactory} from '../interface';
+import {resolve} from '@reskript/core';
+import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = () => {
+const factory: LoaderFactory = async () => {
     return {
-        loader: resolve('@reskript/less-safe-loader'),
+        loader: await resolve('loader-of-loader'),
+        options: {
+            resolveLoader: async () => {
+                return {
+                    loader: await resolve('@reskript/less-safe-loader'),
+                    type: 'module',
+                };
+            },
+        },
     };
 };
 

@@ -1,7 +1,7 @@
 import {CSSProperties} from 'react';
-import {PlayCase} from '../interface';
-import CaseSelect from './CaseSelect';
-import Button from './Button';
+import {PlayCase} from '../interface.js';
+import CaseSelect from './CaseSelect/index.js';
+import Button from './Button/index.js';
 
 interface Props {
     title: string;

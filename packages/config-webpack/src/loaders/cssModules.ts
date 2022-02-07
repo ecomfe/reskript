@@ -1,8 +1,9 @@
-import path from 'path';
-import {sync as resolve} from 'resolve';
+import path from 'node:path';
+import {resolve} from '@reskript/core';
+// @ts-expect-error
 import hasha from 'hasha';
 import {paramCase} from 'change-case';
-import {LoaderFactory} from '../interface';
+import {LoaderFactory} from '../interface.js';
 
 const generateScopedStyleName = (name: string, filename: string): string => {
     const hash = hasha(filename + name, {algorithm: 'md5'});
@@ -12,9 +13,9 @@ const generateScopedStyleName = (name: string, filename: string): string => {
 };
 
 
-const factory: LoaderFactory = entry => {
+const factory: LoaderFactory = async entry => {
     return {
-        loader: resolve('css-loader'),
+        loader: await resolve('css-loader'),
         options: {
             sourceMap: entry.projectSettings.build.style.extract,
             importLoaders: true,

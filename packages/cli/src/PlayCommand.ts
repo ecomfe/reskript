@@ -1,7 +1,9 @@
+// @ts-expect-error
 import {isNumber} from 'typanion';
+// @ts-expect-error
 import {Option} from 'clipanion';
-import {PlayCommandLineArgs} from '@reskript/cli-play';
-import DynamicImportCommand from './DynamicImportCommand';
+import {PlayCommandLineArgs} from '@reskript/settings';
+import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class LintCommand extends DynamicImportCommand<PlayCommandLineArgs> {
     static paths = [['play']];
@@ -13,6 +15,11 @@ export default class LintCommand extends DynamicImportCommand<PlayCommandLineArg
     packageName = '@reskript/cli-play';
 
     cwd = Option.String('--cwd', process.cwd(), {description: 'override current working directory'});
+
+    configFile = Option.String<PlayCommandLineArgs['configFile']>(
+        '--config',
+        {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
+    );
 
     buildTarget = Option.String('--build-target', 'dev', {description: 'set build target, default to "dev"'});
 
@@ -40,6 +47,7 @@ export default class LintCommand extends DynamicImportCommand<PlayCommandLineArg
     buildCommandLineArgs() {
         return {
             cwd: this.cwd,
+            configFile: this.configFile,
             buildTarget: this.buildTarget,
             port: this.port,
             host: this.host,

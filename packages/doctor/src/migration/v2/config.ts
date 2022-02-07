@@ -1,27 +1,24 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import {warn, tip} from './logger';
+import {warn, tip} from '../logger.js';
+import {importClientSettings} from '../utils.js';
 
 export default async (cwd: string) => {
-    const settingsLocation = path.join(cwd, 'reskript.config.js');
+    const settings = await importClientSettings(cwd);
 
-    if (!existsSync(settingsLocation)) {
+    if (!settings) {
         return;
     }
-
-    const {default: settings} = await import(settingsLocation);
 
     if (settings.build?.hasOwnProperty('defaultImportOptimization')) {
         warn(
             'build.defaultImportOptimization in reskript.config.js is deprecated',
-            'see: https://reskript.vercel.app/docs/migration/v2#build相关'
+            'see: https://reskript.dev/docs/migration/v2#build相关'
         );
     }
 
     if (typeof settings.devServer?.hot === 'string') {
         warn(
             'devServer.hot in reskript.config.js has changed to boolean',
-            'see: https://reskript.vercel.app/docs/migration/v2#devServer相关'
+            'see: https://reskript.dev/docs/migration/v2#devServer相关'
         );
     }
 
@@ -35,14 +32,14 @@ export default async (cwd: string) => {
     if (settings.play?.wrapper) {
         warn(
             'play.wrapper in reskript.config.js is deprecated and replaced by defaultGlobalSetup',
-            'see: https://reskript.vercel.app/docs/migration/v2#play相关'
+            'see: https://reskript.dev/docs/migration/v2#play相关'
         );
     }
 
     if (settings.play?.injectResources) {
         warn(
             'play.injectResources in reskript.config.js is deprecated and replaced by defaultGlobalSetup',
-            'see: https://reskript.vercel.app/docs/migration/v2#play相关'
+            'see: https://reskript.dev/docs/migration/v2#play相关'
         );
     }
 };

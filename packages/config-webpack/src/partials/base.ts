@@ -1,21 +1,23 @@
-import path from 'path';
-import {existsSync} from 'fs';
-import * as crypto from 'crypto';
-import fs from 'fs/promises';
-import {sync as resolve} from 'resolve';
-import {compact, mapValues} from 'lodash';
+import path from 'node:path';
+import {existsSync} from 'node:fs';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import {map} from 'ramda';
+import {compact, dirFromImportMeta, resolve, findGitRoot, pMap} from '@reskript/core';
 import {paramCase} from 'change-case';
-import {DefinePlugin, ContextReplacementPlugin, EntryObject} from 'webpack';
+import webpack, {EntryObject} from 'webpack';
+import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
-import {findGitRoot, pMap} from '@reskript/core';
 import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
-import {getScriptLintConfig, getStyleLintConfig} from '@reskript/config-lint';
-import {ConfigurationFactory, BuildContext} from '../interface';
-import {createHTMLPluginInstances} from '../utils/html';
-import {convertToWebpackEntry} from '../utils/entry';
-import * as rules from '../rules';
+import {getScriptLintBaseConfig, getStyleLintBaseConfig} from '@reskript/config-lint';
+import {ConfigurationFactory, BuildContext} from '../interface.js';
+import {createHTMLPluginInstances} from '../utils/html.js';
+import {convertToWebpackEntry} from '../utils/entry.js';
+import * as rules from '../rules/index.js';
+
+const {DefinePlugin, ContextReplacementPlugin} = webpack;
 
 const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
     const entries = Object.entries(context);
@@ -32,11 +34,14 @@ const readFileIfExists = async (filename: string) => {
     return Buffer.from('');
 };
 
-const updateHashFromFile = async (hash: crypto.Hash, filename: string) => {
+const updateHashFromFile = async (hash: crypto.Hash, filename: string): Promise<boolean> => {
     if (existsSync(filename)) {
         const buffer = await fs.readFile(filename);
         hash.update(buffer);
+        return true;
     }
+
+    return false;
 };
 
 const computeCacheKey = async (entry: BuildContext): Promise<string> => {
@@ -46,12 +51,11 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
     hash.update(entry.hostPackageName);
     hash.update(entry.cwd);
     // `reSKRipt`自己的版本信息等
-    await updateHashFromFile(hash, path.join(__dirname, '..', '..', 'package.json'));
+    await updateHashFromFile(hash, path.join(dirFromImportMeta(import.meta.url), '..', '..', 'package.json'));
 
-    const settingsLocation = path.join(entry.cwd, 'reskript.config.js');
-    if (existsSync(settingsLocation)) {
-        const buffer = await fs.readFile(settingsLocation);
-        hash.update(buffer);
+    if (entry.projectSettings.from) {
+        hash.update(entry.projectSettings.from);
+        await updateHashFromFile(hash, entry.projectSettings.from);
     }
     else {
         hash.update(JSON.stringify(entry.projectSettings));
@@ -64,8 +68,8 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
 
     const gitRoot = await findGitRoot(entry.cwd) ?? entry.cwd;
     const hashIncludes = [
-        path.join(gitRoot, 'node_modules', '.yarn-integrity'),
         path.join(gitRoot, 'package-lock.json'),
+        path.join(gitRoot, 'yarn.lock'),
         path.join(gitRoot, 'pnpm-lock.yaml'),
         // `package.json`里可能会有`browsers`之类的配置，所以不能只认lock文件
         path.join(gitRoot, 'package.json'),
@@ -81,7 +85,7 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
 
 const toDynamicDefines = (context: Record<string, any>, prefix: string): Record<string, any> => {
     const staticDefines = toDefines(context, prefix);
-    return mapValues(staticDefines, v => DefinePlugin.runtimeValue(() => v, true));
+    return map(v => DefinePlugin.runtimeValue(() => v, true), staticDefines);
 };
 
 // eslint-disable-next-line complexity
@@ -110,6 +114,14 @@ const factory: ConfigurationFactory = async entry => {
             },
         },
     } = entry;
+    const tasks = [
+        computeCacheKey(entry),
+        Promise.all(Object.values(rules).map(rule => rule(entry))),
+        resolve('eslint'),
+        resolve('stylelint'),
+        resolve('regenerator-runtime'),
+    ] as const;
+    const [cacheKey, moduleRules, eslintPath, stylelintPath, regeneratorRuntimePath] = await Promise.all(tasks);
     const buildInfo = {
         mode,
         version: buildVersion,
@@ -122,15 +134,16 @@ const factory: ConfigurationFactory = async entry => {
         ...toDynamicDefines(buildInfo, '$build'),
     };
     const eslintOptions = {
-        eslintPath: resolve('eslint'),
-        baseConfig: getScriptLintConfig(),
+        eslintPath,
+        baseConfig: getScriptLintBaseConfig({cwd}),
         exclude: ['node_modules', 'externals'],
-        extensions: ['js', 'jsx', 'ts', 'tsx'],
+        extensions: ['js', 'cjs', 'mjs', 'jsx', 'ts', 'tsx'],
         emitError: true,
         emitWarning: usage === 'devServer',
     };
     const styleLintOptions = {
-        config: getStyleLintConfig(),
+        stylelintPath,
+        config: getStyleLintBaseConfig({cwd}),
         emitErrors: true,
         allowEmptyInput: true,
         failOnError: mode === 'production',
@@ -141,14 +154,14 @@ const factory: ConfigurationFactory = async entry => {
     const plugins = [
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
-        // TODO: https://github.com/webpack/webpack/pull/11698
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(defines),
         new InterpolateHTMLPlugin(process.env),
+        // @ts-expect-error
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),
+        // @ts-expect-error
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
-    const cacheKey = await computeCacheKey(entry);
 
     return {
         mode,
@@ -167,7 +180,7 @@ const factory: ConfigurationFactory = async entry => {
             publicPath: publicPath || '/assets/',
         },
         module: {
-            rules: Object.values(rules).map(rule => rule(entry)),
+            rules: moduleRules,
         },
         resolve: {
             extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
@@ -175,8 +188,11 @@ const factory: ConfigurationFactory = async entry => {
             alias: {
                 '@': path.join(cwd, srcDirectory),
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
-                'regenerator-runtime': path.dirname(resolve('regenerator-runtime')),
+                'regenerator-runtime': path.dirname(regeneratorRuntimePath),
             },
+            plugins: [
+                new ResolveTypeScriptPlugin(),
+            ],
         },
         cache: cache === 'off'
             ? false

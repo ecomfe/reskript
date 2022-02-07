@@ -1,7 +1,7 @@
-import {UserOptions} from '../interface';
-import copy from './copy';
-import install from './install';
-import husky from './husky';
+import {UserOptions} from '../interface.js';
+import copy from './copy.js';
+import install from './install.js';
+import husky from './husky.js';
 
 export default async (cwd: string, options: UserOptions) => {
     await copy(cwd, options);

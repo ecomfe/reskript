@@ -1,5 +1,5 @@
 import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
-import {escapeRegExp} from 'lodash';
+import escapeRegExp from 'escape-string-regexp';
 
 const findHtmlWebpackPlugin = (compilation: Compilation) => {
     const isResolved = (plugin: WebpackPluginInstance) => {

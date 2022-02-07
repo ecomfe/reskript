@@ -3,6 +3,300 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/ecomfe/reskript/compare/v4.0.0...v4.0.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* **settings:** 调用插件时增加当前命令行的输入参数 ([#247](https://github.com/ecomfe/reskript/issues/247)) ([ca05e41](https://github.com/ecomfe/reskript/commit/ca05e419cb079f2f44a088957dea828134543c99))
+
+
+
+
+
+# [4.0.0](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.2...v4.0.0) (2022-02-03)
+
+
+### Features
+
+* 优化build.finalize的参数类型 ([#244](https://github.com/ecomfe/reskript/issues/244)) ([4fe2677](https://github.com/ecomfe/reskript/commit/4fe267765d6d63d1021cb2956fc8d5721e2568b6))
+* 支持插件配置的值为空值或数组 ([#245](https://github.com/ecomfe/reskript/issues/245)) ([b98c2c8](https://github.com/ecomfe/reskript/commit/b98c2c8df7cd141963690ae53320e2a4ad2e6539))
+
+
+### BREAKING CHANGES
+
+* `plugins`配置为函数时的`commandName`参数增加了`"play"`的可能性，原版本在使用`skr play`时的该参数值为`"dev"`
+
+
+
+
+
+# [4.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.1...v4.0.0-beta.2) (2022-02-02)
+
+
+### Bug Fixes
+
+* **build:** 修复loader-of-loader会无视前置loader的问题 ([400ee50](https://github.com/ecomfe/reskript/commit/400ee50c691d029d4d6a128454436a7a102f69a8))
+* **build:** 把loader-of-loader移到dependencies中 ([02c0a1d](https://github.com/ecomfe/reskript/commit/02c0a1d4faed9c4130840c02b796ea2011cb7f1a))
+* **core:** 修复resolve对低版本Node的兼容性 ([46334c2](https://github.com/ecomfe/reskript/commit/46334c2df438fb8f5c5d940c05f4de7a279ff82a))
+
+
+
+
+
+# [4.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v4.0.0-beta.0...v4.0.0-beta.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* **doctor:** 解决V4升级检查的部分错误 ([18ec902](https://github.com/ecomfe/reskript/commit/18ec90268880359b7e7e3f9f9083197f113ca996))
+* **doctor:** 额外检查配置文件中一些CommonJS专用函数和变量的使用 ([341190f](https://github.com/ecomfe/reskript/commit/341190f965b002335c61fb63550a029499c6cbe6))
+
+
+### Features
+
+* **build:** 支持各个loader的ESM化 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([d7451e5](https://github.com/ecomfe/reskript/commit/d7451e5fd6c88aed0bcfdd11e807948a824ce2f3))
+
+
+
+
+
+# [4.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v3.0.6...v4.0.0-beta.0) (2022-01-30)
+
+
+### Code Refactoring
+
+* 核心部分迁移到纯ESM包格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([f9d06b0](https://github.com/ecomfe/reskript/commit/f9d06b0fd802caa002707686d004ca8683f7002f))
+
+
+### Features
+
+* **build:** 各个插件转为ESM格式 ([#39](https://github.com/ecomfe/reskript/issues/39)) ([1950ace](https://github.com/ecomfe/reskript/commit/1950ace8c05d317b855a7f01b4680e54a011d61f))
+* **doctor:** 增加V4迁移文档和检测 ([fa1e55b](https://github.com/ecomfe/reskript/commit/fa1e55bc7d80c18a33998b36328661b4f1a516a9))
+* **init:** init模板适配新的配置格式 ([#235](https://github.com/ecomfe/reskript/issues/235)) ([6e2601c](https://github.com/ecomfe/reskript/commit/6e2601c893e377717f7ab3132990dd9c6e9ee9e9))
+* **play:** 支持play的组件配置为ts等扩展名 ([#231](https://github.com/ecomfe/reskript/issues/231)) ([ae72706](https://github.com/ecomfe/reskript/commit/ae72706b2c870c8f519cacf88f43075df9a2179d))
+* **settings:** 支持且仅支持.mjs和.ts类型的项目配置 ([#225](https://github.com/ecomfe/reskript/issues/225)) ([5a9586b](https://github.com/ecomfe/reskript/commit/5a9586b053f16d89a7b87b22dd6a4ca84d96edd2))
+* **settings:** 支持异步的finalize函数 ([#233](https://github.com/ecomfe/reskript/issues/233)) ([ce84916](https://github.com/ecomfe/reskript/commit/ce84916af43c8cfb5e547788bf5dea0a8786a344))
+* **settings:** 支持自定义配置文件路径 ([#230](https://github.com/ecomfe/reskript/issues/230)) ([2a4ca98](https://github.com/ecomfe/reskript/commit/2a4ca987ae7e193916ed8c7972dbcbff521b4863))
+
+
+### Performance Improvements
+
+* **build:** 异步检索loader路径优化性能 ([#234](https://github.com/ecomfe/reskript/issues/234)) ([3ace896](https://github.com/ecomfe/reskript/commit/3ace89660fac60986b5daa9c8a07d9cf4a6248c8))
+
+
+### BREAKING CHANGES
+
+* **settings:** 配置中的`build.scripts.finalize`调整为异步函数
+* **settings:** 配置中的`build.finalize`调整为异步函数
+* **settings:** 配置中的`devServer.finalize`调整为异步函数
+* **settings:** 配置中的`build.scripts.finalize`的`internals`参数中的`loaders`和`rules`均调整为异步函数
+* **settings:** `@reskript/config-webpack`不再导出`loaders`和`rules`，对应为`@reskript/config-webpack/loaders`和`@reskript/config-webpack/rules`
+* **settings:** `loaders.postCSS`重命名为`loaders.postcss`
+* **settings:** `loaders.postCSSModules`已经移除，功能与`loaders.postcss`完全一致
+* **settings:** 项目配置必须为`reskript.config.{mjs|ts}`，且格式为ESM
+* **settings:** 应用入口配置必须为`xxx.config.{mjs|ts}`，且格式为ESM
+* 发布的包为纯ESM格式，无法通过CommonJS的`require`引入。参考[sinderesorhus的建议](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+
+
+
+
+## [3.0.6](https://github.com/ecomfe/reskript/compare/v3.0.5...v3.0.6) (2022-01-21)
+
+
+### Bug Fixes
+
+* **init:** 解决init时复制文件路径错误的问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([3cfa54e](https://github.com/ecomfe/reskript/commit/3cfa54e521c944dd79c44181f841e5213e57ccb4))
+
+
+
+
+
+## [3.0.5](https://github.com/ecomfe/reskript/compare/v3.0.4...v3.0.5) (2022-01-21)
+
+
+### Bug Fixes
+
+* **core:** 使用fs.stat判断文件和目录 ([#241](https://github.com/ecomfe/reskript/issues/241)) ([7f18310](https://github.com/ecomfe/reskript/commit/7f183103c320b9cccbaea8c79daa985f962af265))
+* **core:** 修复globby在Windows下跨盘使用的问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([c59ccf2](https://github.com/ecomfe/reskript/commit/c59ccf25fa97f129c3a3686e7450453ecff7eead))
+
+
+
+
+
+## [3.0.4](https://github.com/ecomfe/reskript/compare/v3.0.3...v3.0.4) (2022-01-20)
+
+
+### Bug Fixes
+
+* **core:** 修复globby的safe参数默认值处理问题 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([2c12f57](https://github.com/ecomfe/reskript/commit/2c12f573209e8c409fff35a39420da97265f873d))
+
+
+
+
+
+## [3.0.3](https://github.com/ecomfe/reskript/compare/v3.0.2...v3.0.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **build:** 在svg生成组件后经过babel处理 ([#237](https://github.com/ecomfe/reskript/issues/237)) ([5ea17c3](https://github.com/ecomfe/reskript/commit/5ea17c380440e91e73584a9c871bbedb8d430e33))
+* **core:** 所有globby调用兼容Windows系统 ([#239](https://github.com/ecomfe/reskript/issues/239)) ([ae4c142](https://github.com/ecomfe/reskript/commit/ae4c142c39a2932a00f41e0b41abbde011044c6c))
+* **lint:** 样式文件的lint问题可以被自动修复 ([#232](https://github.com/ecomfe/reskript/issues/232)) ([a154f31](https://github.com/ecomfe/reskript/commit/a154f317d519e366b875534639c13a7b3306f4e9))
+
+
+
+
+
+## [3.0.2](https://github.com/ecomfe/reskript/compare/v3.0.1...v3.0.2) (2022-01-13)
+
+
+### Bug Fixes
+
+* **dev:** 修复无法在编辑器打开组件文件的问题 ([#229](https://github.com/ecomfe/reskript/issues/229)) ([d875199](https://github.com/ecomfe/reskript/commit/d875199b7c7c806487431d1a7ae5efc5380c430e))
+
+
+
+
+
+## [3.0.1](https://github.com/ecomfe/reskript/compare/v3.0.0...v3.0.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* **doctor:** 迁移V3的检查包含对配置文件的检查 ([#226](https://github.com/ecomfe/reskript/issues/226)) ([0d97d20](https://github.com/ecomfe/reskript/commit/0d97d207723b90cf45df84daff23a5a31eb3614d))
+
+
+
+
+
+# [3.0.0](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.1...v3.0.0) (2022-01-03)
+
+**Note:** Version bump only for package reskript
+
+
+
+
+
+# [3.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v3.0.0-beta.0...v3.0.0-beta.1) (2022-01-03)
+
+
+### Bug Fixes
+
+* **doctor:** 修复migrate命令 ([b9f0ba7](https://github.com/ecomfe/reskript/commit/b9f0ba79f575a3fd8ba093120095cea3782e8f92))
+
+
+### Features
+
+* **init:** init命令支持V3版本 ([45e6929](https://github.com/ecomfe/reskript/commit/45e692954fe52202b42495b3ed3c5c0288571934))
+
+
+
+
+
+# [3.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v2.5.3...v3.0.0-beta.0) (2022-01-03)
+
+
+### Bug Fixes
+
+* **lint:** 移除Sentry全局变量 ([b30dcb0](https://github.com/ecomfe/reskript/commit/b30dcb082e16de49aff513e5965df1014e161dd0))
+
+
+### Features
+
+* **cli:** 要求NodeJS版本为14.18.0 ([#209](https://github.com/ecomfe/reskript/issues/209)) ([ad44a36](https://github.com/ecomfe/reskript/commit/ad44a3646df93b645cb7cb6f5a3c5614f13e2a16))
+* **dev:** 废弃https配置的boolean值 ([#223](https://github.com/ecomfe/reskript/issues/223)) ([ed58ffb](https://github.com/ecomfe/reskript/commit/ed58ffb93ed1621522c4bec98191d5dc308eadea))
+* **doctor:** 更新migrate支持V3 ([49f3098](https://github.com/ecomfe/reskript/commit/49f30987f7f475fc8ded557f4a82b28e3cbab1fa))
+* 支持eslint 8 ([#176](https://github.com/ecomfe/reskript/issues/176)) ([76acae3](https://github.com/ecomfe/reskript/commit/76acae373762da03b2208088908d7a0022bb0536))
+* 支持stylelint 14 ([#186](https://github.com/ecomfe/reskript/issues/186)) ([05e24c0](https://github.com/ecomfe/reskript/commit/05e24c0e8f004e7c342c138e00d1b73724545aa3))
+
+
+### BREAKING CHANGES
+
+* **cli:** 需要NodeJS版本14.18.0以上
+* **lint:** `lint`不再默认配置`Sentry`全局变量，需要用户自行配置
+* **dev:** `devServer.https: true`已经废弃，使用`devServer.https: {proxy: true}`代替
+* 需要`eslint`升级至`8.x`
+* 需要`stylelint`升级至`14.x`
+
+
+
+
+
+## [2.5.3](https://github.com/ecomfe/reskript/compare/v2.5.2...v2.5.3) (2021-12-31)
+
+
+### Bug Fixes
+
+* **babel:** cli-babel禁用客户端的babel配置 ([#224](https://github.com/ecomfe/reskript/issues/224)) ([3c2265b](https://github.com/ecomfe/reskript/commit/3c2265bed7c2c8df6dd41fa2d8b1709c0dd829d2))
+
+
+
+
+
+## [2.5.2](https://github.com/ecomfe/reskript/compare/v2.5.1...v2.5.2) (2021-12-29)
+
+
+### Bug Fixes
+
+* **babel:** 处理useComponentFileName对class的边界情况 ([#221](https://github.com/ecomfe/reskript/issues/221)) ([1ed84cb](https://github.com/ecomfe/reskript/commit/1ed84cb88d24d0f85b5cb404c5bf3d56227335bb))
+
+
+
+
+
+## [2.5.1](https://github.com/ecomfe/reskript/compare/v2.5.0...v2.5.1) (2021-12-28)
+
+
+### Bug Fixes
+
+* **build:** 支持import的时候使用.js但指向.ts或.tsx ([#219](https://github.com/ecomfe/reskript/issues/219)) ([4bad498](https://github.com/ecomfe/reskript/commit/4bad49865cd55aa44e5bf41e72436ec91284c822))
+* **build:** 支持项目使用纯ESM格式，配置文件使用cjs ([#218](https://github.com/ecomfe/reskript/issues/218)) ([2646bac](https://github.com/ecomfe/reskript/commit/2646bac2f50e1ff52a0a7a4b088a7b282d6cf614))
+
+
+
+
+
+# [2.5.0](https://github.com/ecomfe/reskript/compare/v2.4.0...v2.5.0) (2021-12-25)
+
+
+### Bug Fixes
+
+* **build:** babel-loader不读取项目中的babel配置 ([#212](https://github.com/ecomfe/reskript/issues/212)) ([b9ea9a3](https://github.com/ecomfe/reskript/commit/b9ea9a3dd1f3b40b26ff40963b1b7e97a2a7617a))
+* **build:** 在build时也同样读用户自定义的lint配置 ([#211](https://github.com/ecomfe/reskript/issues/211)) ([e580bce](https://github.com/ecomfe/reskript/commit/e580bce69a0d1a7f2714409d9611a50688020291))
+* **build:** 处理SVG时转换class到className ([#216](https://github.com/ecomfe/reskript/issues/216)) ([37e7a4b](https://github.com/ecomfe/reskript/commit/37e7a4baadb54320b826423ac33354a10220f488))
+
+
+### Features
+
+* **dev:** 支持HTTPS协议启动调试服务器 ([#217](https://github.com/ecomfe/reskript/issues/217)) ([4646f77](https://github.com/ecomfe/reskript/commit/4646f77e30dd28f8e3f6b408ef81f325dcf1fd37))
+
+
+
+
+
+# [2.4.0](https://github.com/ecomfe/reskript/compare/v2.3.0...v2.4.0) (2021-12-14)
+
+
+### Bug Fixes
+
+* **build:** 对less的calc处理采用更严格的规则 ([#208](https://github.com/ecomfe/reskript/issues/208)) ([67fbbe9](https://github.com/ecomfe/reskript/commit/67fbbe96d85a10fd590d91bbd8e6141e36305ed2))
+* **init:** 指定dir时，安装在运行目录而不是dir ([fa56e01](https://github.com/ecomfe/reskript/commit/fa56e017598615343668c00c168e746972091fb9))
+* **lint:** 有自定义eslint配置时禁用内部配置 ([#203](https://github.com/ecomfe/reskript/issues/203)) ([9558d03](https://github.com/ecomfe/reskript/commit/9558d03afa3b190b9787667063a27371243c148c))
+* **play:** 文件名超长时的样式问题 ([#194](https://github.com/ecomfe/reskript/issues/194)) ([992b9e5](https://github.com/ecomfe/reskript/commit/992b9e57698cb982341565b7fdb652a15f38824e))
+* **plugin-qiankun:** qiankun 模式侧边栏添加最小高度 & 子应用页面内容过宽撑开父容器 ([9042a22](https://github.com/ecomfe/reskript/commit/9042a22899fb19bcf33cdc926411e7443c58748f))
+
+
+### Features
+
+* **build:** 引入psotcss-preset-env ([#204](https://github.com/ecomfe/reskript/issues/204)) ([f910249](https://github.com/ecomfe/reskript/commit/f9102496978c2fbaf2049c18cc0a5250b03daba1))
+* **dev:** 支持组件源码文件调用编辑器打开 ([#201](https://github.com/ecomfe/reskript/issues/201)) ([bd743a6](https://github.com/ecomfe/reskript/commit/bd743a690990f20bd0f8b0edb5da949b82a92adc))
+
+
+
+
+
 # [2.3.0](https://github.com/ecomfe/reskript/compare/v2.2.2...v2.3.0) (2021-11-04)
 
 

@@ -25,13 +25,20 @@ npm i -D @reskript/plugin-qiankun
 
 ### 增加插件
 
-```javascript
-// reskript.config.js
-const {default: qiankun} = require('@reskript/plugin-qiankun');
+```ts
+// reskript.config.ts
+import {configure} from '@reskript/settings';
+import qiankun = require('@reskript/plugin-qiankun');
 
-exports.plugins = [
-    qiankun('myApp', options),
-];
+
+export default configure(
+    'webpack',
+    {
+        plugins: [
+            qiankun({/* 配置 */}),
+        ],
+    }
+);
 ```
 
 ### 配置
@@ -103,7 +110,7 @@ function qiankun(appName: string, options?: Options): SettingsPlugin;
 
 例如希望有一个高度为60的头部，以及一个宽度为140的左边栏，且头部使用深黑色，边栏保持默认颜色，可以如下配置：
 
-```js
+```ts
 {
     header: {
         size: 60,

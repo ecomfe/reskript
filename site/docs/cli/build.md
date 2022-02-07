@@ -11,6 +11,7 @@ title: 构建应用
 ```
 --cwd [value]               指定当前工作目录，默认为当前目录
 --mode [value]              设置构建的环境模式，可以为development或production，默认为production
+--config [value]            使用指定的配置文件，默认查找reskript.config.{ts,mjs}
 --src-dir [value]           指定项目源码所在的目录，默认为src
 --build-target [value]      指定构建的目标特性名称，如果有这个参数，最后会生成一个index.html包含该特性集
 --feature-only [value]      只构建指定的特性名称，其它的特性名称不参与构建
@@ -24,7 +25,7 @@ title: 构建应用
 -h, --help                  显示帮助信息
 ```
 
-除命令行参数外，`reskript.config.js`中的[`build`](../settings/build)配置也会影响构建的行为。
+除命令行参数外，[项目配置文件](../settings#配置文件路径)中的[`build`](../settings/build)配置也会影响构建的行为。
 
 ## 指定目标特性集
 

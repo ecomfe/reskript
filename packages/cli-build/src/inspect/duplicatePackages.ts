@@ -1,13 +1,13 @@
 import {StatsCompilation} from 'webpack';
-import {compact, flatMap, uniq} from 'lodash';
+import {uniq, reject, isNil} from 'ramda';
 import {readPackageConfig} from '@reskript/core';
 import {BuildInspectSettings, SourceFilter} from '@reskript/settings';
-import {RuleProcessor, isIncluded} from './utils';
+import {RuleProcessor, isIncluded} from './utils.js';
 
 const extractUniqueModules = (compilations: StatsCompilation[]): string[] => {
-    const modules = flatMap(compilations, c => c.modules);
+    const modules = compilations.flatMap(c => c.modules);
     const names = modules.map(m => m?.nameForCondition);
-    return uniq(compact(names));
+    return uniq(reject(isNil, names));
 };
 
 interface LibraryInfo {

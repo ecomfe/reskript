@@ -1,13 +1,10 @@
-import path from 'path';
-import fs from 'fs';
-import {merge} from 'lodash';
+import path from 'node:path';
+import fs from 'node:fs';
+import {mergeDeepRight} from 'ramda';
 import {run as runJest} from 'jest-cli';
 import {logger} from '@reskript/core';
 import {JestConfigOptions, getJestConfig} from '@reskript/config-jest';
-import {readProjectSettings, strictCheckRequiredDependency} from '@reskript/settings';
-import {TestCommandLineArgs} from './interface';
-
-export {TestCommandLineArgs};
+import {readProjectSettings, strictCheckRequiredDependency, TestCommandLineArgs} from '@reskript/settings';
 
 const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<string> => {
     const {cwd} = jestConfigOptions;
@@ -21,6 +18,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 
     // 用`import`拿一个CommonJS的模块，拿到的东西要是里面的`default`
     try {
+        // NOTE: 这里没用`importUserModule`是因为反正Jest就不支持ESM，真干了也没用
         const {default: jestConfig} = await import(jestConfigFile);
 
         if ('preset' in jestConfig) {
@@ -31,7 +29,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
             // 如果没有`preset`，那我们认为用户自己声明的是一个“扩展”的配置，需要我们把默认配置合并进去
             const skrConfig = getJestConfig(jestConfigOptions);
             // 用户的覆盖skr的
-            return JSON.stringify(merge(skrConfig, jestConfig));
+            return JSON.stringify(mergeDeepRight(skrConfig, jestConfig));
         }
     }
     catch {
@@ -41,8 +39,8 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
 };
 
 export const run = async (cmd: TestCommandLineArgs): Promise<void> => {
-    const {cwd, target, jestArgs} = cmd;
-    const projectSettings = await readProjectSettings(cmd, 'test');
+    const {cwd, target, jestArgs, configFile} = cmd;
+    const projectSettings = await readProjectSettings({commandName: 'test', specifiedFile: configFile, ...cmd});
     await strictCheckRequiredDependency(projectSettings, cmd.cwd);
     // TODO: `featureMatrix`目前以dev为默认目标，以后可以传入`--test-target`？
     const jestConfigOptions: JestConfigOptions = {cwd, target, features: projectSettings.featureMatrix.dev};
