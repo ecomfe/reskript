@@ -1,41 +1,61 @@
-const path = require('path');
-const fs = require('fs');
 const rule = require('../index');
 const RuleTester = require('eslint').RuleTester;
 
-const code = file => {
-    const filePath = path.join(__dirname, 'fixtures', `${file}.js`);
-    if (fs.existsSync(filePath)) {
-        return fs.readFileSync(filePath, 'utf-8');
-    }
-    return null;
-};
-
-const testCase = (file, errors = []) => {
+const ERROR_MESSAGE = [{messageId: 'hooksDepsNewLine'}];
+const testCase = (code, output) => {
     return {
-        code: code(file),
-        errors: errors.map(messageId => ({messageId})),
+        code,
+        output,
+        errors: output ? ERROR_MESSAGE : [],
         parserOptions: {
             ecmaVersion: 2018,
             sourceType: 'module',
         },
-        output: code(file + '.output'),
     };
 };
 
 const ruleTester = new RuleTester();
 ruleTester.run('deps-break-line', rule, {
     valid: [
-        testCase('valid'),
+        testCase('useMemo(\n()=>{},\n[deps]\n)'),
+        testCase('useDemo(()=>{}, argument2)'),
+        testCase('f(()=>{},[2])'),
+        testCase('const value = useMemo(\n()=>{},\n[deps]\n)'),
+        testCase('const value = useDemo(()=>{}, argument2)'),
+        testCase('const value = f(()=>{},[2])'),
     ],
     invalid: [
         testCase(
-            'invalid',
-            ['hookArgumentsBreakLine']
+            'useMemo(()=>{},[argument2]);',
+            'useMemo(\n()=>{},\n[argument2]\n);'
         ),
         testCase(
-            'variable-invalid',
-            ['hookArgumentsBreakLine']
+            'useMemo(()=>{\n},[argument2]);',
+            'useMemo(\n()=>{\n},\n[argument2]\n);'
+        ),
+        testCase(
+            'useMemo(()=>{},[\nargument2\n]);',
+            'useMemo(\n()=>{},\n[\nargument2\n]\n);'
+        ),
+        testCase(
+            'useMemo(\n()=>{\n},[\nargument2\n]);',
+            'useMemo(\n()=>{\n},\n[\nargument2\n]\n);'
+        ),
+        testCase(
+            'const value = useMemo(()=>{},[argument2]);',
+            'const value = useMemo(\n()=>{},\n[argument2]\n);'
+        ),
+        testCase(
+            'const value = useMemo(()=>{\n},[argument2]);',
+            'const value = useMemo(\n()=>{\n},\n[argument2]\n);'
+        ),
+        testCase(
+            'const value = useMemo(()=>{},[\nargument2\n]);',
+            'const value = useMemo(\n()=>{},\n[\nargument2\n]\n);'
+        ),
+        testCase(
+            'const value = useMemo(\n()=>{\n},[\nargument2\n]);',
+            'const value = useMemo(\n()=>{\n},\n[\nargument2\n]\n);'
         ),
     ],
 });

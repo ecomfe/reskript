@@ -21,19 +21,26 @@ const ruleCallback = context => {
         const args = node.arguments;
 
         if (isArgsValid(args)) {
-            // just work with 2 arguments;
+            // 判断hook是否只包含两个参数
             return;
         }
-        // collect error prev node
+        // 收集前一个错误node的index标记
         const errorIndexes = [];
+        // 将hook，hook参数，hook结尾拼接在一起
         const nodeList = [node, ...args, node];
         const length = nodeList.length - 1;
 
         for (let i = 0; i < length; i++) {
             const currentNode = nodeList[i];
             const nextNode = nodeList[i + 1];
-            if (currentNode.loc.start.line === nextNode.loc.end.line) {
-                // because the last node is the callee function , use previous node`s end index
+            if (
+                currentNode.loc.start.line === nextNode.loc.start.line
+                || currentNode.loc.end.line === nextNode.loc.end.line
+                || currentNode.loc.end.line === nextNode.loc.start.line
+            ) {
+                // i 节点与 i+1 节点的开始行在一行
+                // i 节点的结束行与 i+1 节点的结束行在一行
+                // i 节点的结束行与 i+1 节点的开始行在一行
                 errorIndexes.push(
                     i === length - 1 ? currentNode.range[1] : nextNode.range[0]
                 );
@@ -44,7 +51,7 @@ const ruleCallback = context => {
             context.report({
                 loc: node.loc,
                 node,
-                messageId: 'hookArgumentsBreakLine',
+                messageId: 'hooksDepsNewLine',
                 data: {
                     name: node.callee.name,
                 },
@@ -63,7 +70,7 @@ module.exports = {
         },
         fixable: 'whitespace', // or "code" or "whitespace"
         messages: {
-            hookArgumentsBreakLine: 'Hook {{name}}\'s deps argument should be placed on a new line',
+            hooksDepsNewLine: 'Hook {{name}}\'s deps argument should be placed on a new line',
         },
     },
     create(context) {
@@ -73,5 +80,4 @@ module.exports = {
             'VariableDeclaration VariableDeclarator CallExpression': ruleMethod,
         };
     },
-
 };
