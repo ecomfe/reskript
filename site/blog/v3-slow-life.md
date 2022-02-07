@@ -9,7 +9,7 @@ tags: [version release]
 
 在2022年的伊始，很荣幸向大家介绍`reSKRipt` V3的更新。
 
-对于想快速了解版本间的差异并更新版本的开发者，请参考[V3迁移手册](https://reskript.vercel.app/docs/migration/V3)。V3的变更非常有限，相信你可以很快地完成升级。
+对于想快速了解版本间的差异并更新版本的开发者，请参考[V3迁移手册](https://reskript.dev/docs/migration/V3)。V3的变更非常有限，相信你可以很快地完成升级。
 
 ## 代号
 

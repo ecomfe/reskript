@@ -9,9 +9,9 @@ tags: [build, babel]
 
 `reSKRipt`从`v1.13.0`起，增加了对`Reflect.metadata`的支持，对应TyepScript中的[emitDecoratorMetadata](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)配置项。
 
-考虑到这一功能会生成额外的代码，而大部分应用并不需要，我们将它隐藏在了`build.uses`配置项中，具体可参考[特殊第三方库的优化](https://reskript.vercel.app/docs/settings/build#特殊第三方库的优化)章节的说明。
+考虑到这一功能会生成额外的代码，而大部分应用并不需要，我们将它隐藏在了`build.uses`配置项中，具体可参考[特殊第三方库的优化](https://reskript.dev/docs/settings/build#特殊第三方库的优化)章节的说明。
 
-如果你从现在开始希望使用这一功能，可以将你的[项目配置文件](https://reskript.vercel.app/docs/settings/build#配置文件路径)修改为以下内容：
+如果你从现在开始希望使用这一功能，可以将你的[项目配置文件](https://reskript.dev/docs/settings/build#配置文件路径)修改为以下内容：
 
 ```js
 exports.build = {

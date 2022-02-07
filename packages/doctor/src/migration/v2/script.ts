@@ -40,7 +40,7 @@ export default async (cwd: string) => {
     if (isBrokenTestScript(testScript || '')) {
         warn(
             'package.json contains unsupported args passing to skr test, put all args excluding --target after "--"',
-            'see: https://reskript.vercel.app/docs/migration/v2#test'
+            'see: https://reskript.dev/docs/migration/v2#test'
         );
     }
 
@@ -48,7 +48,7 @@ export default async (cwd: string) => {
     if (buildScript && /--src[ =]/.test(buildScript)) {
         warn(
             'package.json is passing --src arg to skr build, rename it to --src-dir',
-            'see: https://reskript.vercel.app/docs/migration/v2#build'
+            'see: https://reskript.dev/docs/migration/v2#build'
         );
     }
 
@@ -56,13 +56,13 @@ export default async (cwd: string) => {
     if (devScript && /--src[ =]/.test(devScript)) {
         warn(
             'package.json is passing --src arg to skr dev, rename it to --src-dir',
-            'see: https://reskript.vercel.app/docs/migration/v2#dev'
+            'see: https://reskript.dev/docs/migration/v2#dev'
         );
     }
     if (devScript && /--open[ =]/.test(devScript)) {
         warn(
             'package.json is passing --open arg to skr dev, change it to --host with different value',
-            'see: https://reskript.vercel.app/docs/migration/v2#dev'
+            'see: https://reskript.dev/docs/migration/v2#dev'
         );
     }
 
@@ -70,7 +70,7 @@ export default async (cwd: string) => {
     if (babelScript && /--out[ =]/.test(babelScript)) {
         warn(
             'package.json is passing --out arg to skr babel, rename it to --out-dir',
-            'see: https://reskript.vercel.app/docs/migration/v2#babel'
+            'see: https://reskript.dev/docs/migration/v2#babel'
         );
     }
 };

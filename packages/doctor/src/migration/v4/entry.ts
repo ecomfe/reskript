@@ -7,7 +7,7 @@ export default async (cwd: string) => {
     if (entryFiles.length) {
         warn(
             'entry configurations have to change to .ts (recommended) or .mjs and be written in ESM',
-            'see: https://reskript.vercel.app/docs/migration/v4#入口配置调整',
+            'see: https://reskript.dev/docs/migration/v4#入口配置调整',
             ...entryFiles.map(v => path.relative(cwd, v))
         );
     }

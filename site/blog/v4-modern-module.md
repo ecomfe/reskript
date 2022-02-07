@@ -9,7 +9,7 @@ tags: [version release]
 
 在2021年的新春之际，我们也在忙碌地准备着`reSKRipt` V4版本的发布，在自身重构、与社区协作的多重努力之下，最终完成了这个最为关键的内部重构版本，很高兴向大家介绍变化并不那么大但又处处全新的V4。
 
-对于想快速了解版本间的差异并更新版本的开发者，请参考[V4迁移手册](https://reskript.vercel.app/docs/migration/V4)。V4版本的最大变化是各类配置（项目配置`reskript.config.js`、入口配置`entries/*.config.js`）的调整，我们已经在近10个项目中进行了验证性的升级，以确保大多数项目可以低成本地成功升级。
+对于想快速了解版本间的差异并更新版本的开发者，请参考[V4迁移手册](https://reskript.dev/docs/migration/V4)。V4版本的最大变化是各类配置（项目配置`reskript.config.js`、入口配置`entries/*.config.js`）的调整，我们已经在近10个项目中进行了验证性的升级，以确保大多数项目可以低成本地成功升级。
 
 ## 代号
 
@@ -78,7 +78,7 @@ const RESTRICTED_DEPENDENCIES = [
 
 ## 后续
 
-如果你在之前看过[V4迁移手册](https://reskript.vercel.app/docs/migration/V4)，可能会发现我们的配置文件格式做了一个重大的调整，通过`configure`函数导出配置时，增加了一个额外的参数：
+如果你在之前看过[V4迁移手册](https://reskript.dev/docs/migration/V4)，可能会发现我们的配置文件格式做了一个重大的调整，通过`configure`函数导出配置时，增加了一个额外的参数：
 
 ```ts
 export default configure(

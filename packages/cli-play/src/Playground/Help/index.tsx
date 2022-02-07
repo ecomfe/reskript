@@ -14,7 +14,7 @@ export default function Help({configurationSourceCode, componentFilePath}: Props
                 可以通过
                 <a
                     target="_blank"
-                    href="https://reskript.vercel.app/docs/advanced/debug-component#组件调试配置"
+                    href="https://reskript.dev/docs/advanced/debug-component#组件调试配置"
                     rel="noopener noreferrer"
                 >
                     组件调试配置文件

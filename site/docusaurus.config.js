@@ -3,7 +3,7 @@ module.exports = {
     tagline: '基于React与Ant Design的应用开发命令行工具套件',
     baseUrl: process.env.BASE_URL || '/',
     favicon: 'favicon.ico',
-    url: 'https://reskript.vercel.app',
+    url: 'https://reskript.dev',
     themeConfig: {
         colorMode: {
             defaultMode: 'light',
