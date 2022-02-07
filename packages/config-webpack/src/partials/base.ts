@@ -188,7 +188,7 @@ const factory: ConfigurationFactory = async entry => {
             alias: {
                 '@': path.join(cwd, srcDirectory),
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
-                'regenerator-runtime': regeneratorRuntimePath,
+                'regenerator-runtime': path.dirname(regeneratorRuntimePath),
             },
             plugins: [
                 new ResolveTypeScriptPlugin(),
