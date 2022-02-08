@@ -1,4 +1,0 @@
-useInvalidDemo(
-()=>{},
-[argument2]
-);
