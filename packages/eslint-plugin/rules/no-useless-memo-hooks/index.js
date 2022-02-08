@@ -6,7 +6,7 @@ const isHookCallExpressionArgs = node => node.arguments.length === 2 && isArrayE
 
 const hasMoreDepNode = depNode => depNode.elements.length !== 1;
 
-const findOnlyStatement = node => {
+const findOnlyInvalidStatement = node => {
     switch (node.body.type) {
         case 'CallExpression':
         case 'Identifier':
@@ -20,9 +20,6 @@ const findOnlyStatement = node => {
             if (onlyStatement.type === 'ReturnStatement') {
                 return onlyStatement.argument;
             }
-            if (onlyStatement.type === 'ExpressionStatement') {
-                return onlyStatement.expression;
-            }
         }
     }
 };
@@ -34,7 +31,7 @@ const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
     switch (expressionNode.type) {
         case 'ArrowFunctionExpression':
         case 'FunctionExpression': {
-            const node = findOnlyStatement(expressionNode);
+            const node = findOnlyInvalidStatement(expressionNode);
             const firstDepNode = depNode.elements[0];
             if (
                 node && firstDepNode
