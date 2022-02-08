@@ -1,12 +1,12 @@
-const isOriginalMemoHook = name => name === 'useCallback' || name === 'useMemo';
+const isNativeMemoHook = name => name === 'useCallback' || name === 'useMemo';
 
 const isArrayExpression = node => node.type === 'ArrayExpression';
 
-const isHookCallExpressionArgs = node => node.arguments.length === 2 && isArrayExpression(node.arguments[1]);
-
-const depNodeIsCallExpression = depNode => depNode.type === 'CallExpression';
-
-const hasMoreDepNode = depNode => depNode.elements.length !== 1;
+const isOnlyOneCallExpressionHookDep = node =>
+    node.arguments.length === 2
+    && isArrayExpression(node.arguments[1])
+    && node.arguments[1].elements
+    && node.arguments[1].elements.length === 1;
 
 const findOnlyInvalidStatement = node => {
     switch (node.body.type) {
@@ -52,19 +52,14 @@ const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
 };
 
 const ruleCallback = context => node => {
-    if (!isOriginalMemoHook(node.callee.name)) {
-        return;
-    }
-    if (depNodeIsCallExpression(node.arguments[1])) {
-        return;
-    }
-    if (hasMoreDepNode(node.arguments[1])) {
-        return;
-    }
     if (
-        isHookCallExpressionArgs(node)
-        && isOnlyReturnMemoizedWithHookDeps(node.arguments[0], node.arguments[1])
+        !isNativeMemoHook(node.callee.name)
+        || !isOnlyOneCallExpressionHookDep(node)
     ) {
+        return;
+    }
+
+    if (isOnlyReturnMemoizedWithHookDeps(node.arguments[0], node.arguments[1])) {
         context.report({
             node,
             loc: node.loc,
