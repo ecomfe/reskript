@@ -1,12 +1,14 @@
-const isOriginalMemoHook = name => name === 'useCallback' || name === 'useMemo';
+const isNativeMemoHook = name => name === 'useCallback' || name === 'useMemo';
 
 const isArrayExpression = node => node.type === 'ArrayExpression';
 
-const isHookCallExpressionArgs = node => node.arguments.length === 2 && isArrayExpression(node.arguments[1]);
+const isOnlyOneCallExpressionHookDep = node =>
+    node.arguments.length === 2
+    && isArrayExpression(node.arguments[1])
+    && node.arguments[1].elements
+    && node.arguments[1].elements.length === 1;
 
-const hasMoreDepNode = depNode => depNode.elements.length !== 1;
-
-const findOnlyStatement = node => {
+const findOnlyInvalidStatement = node => {
     switch (node.body.type) {
         case 'CallExpression':
         case 'Identifier':
@@ -20,9 +22,6 @@ const findOnlyStatement = node => {
             if (onlyStatement.type === 'ReturnStatement') {
                 return onlyStatement.argument;
             }
-            if (onlyStatement.type === 'ExpressionStatement') {
-                return onlyStatement.expression;
-            }
         }
     }
 };
@@ -34,7 +33,7 @@ const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
     switch (expressionNode.type) {
         case 'ArrowFunctionExpression':
         case 'FunctionExpression': {
-            const node = findOnlyStatement(expressionNode);
+            const node = findOnlyInvalidStatement(expressionNode);
             const firstDepNode = depNode.elements[0];
             if (
                 node && firstDepNode
@@ -53,16 +52,14 @@ const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
 };
 
 const ruleCallback = context => node => {
-    if (!isOriginalMemoHook(node.callee.name)) {
-        return;
-    }
-    if (hasMoreDepNode(node.arguments[1])) {
-        return;
-    }
     if (
-        isHookCallExpressionArgs(node)
-        && isOnlyReturnMemoizedWithHookDeps(node.arguments[0], node.arguments[1])
+        !isNativeMemoHook(node.callee.name)
+        || !isOnlyOneCallExpressionHookDep(node)
     ) {
+        return;
+    }
+
+    if (isOnlyReturnMemoizedWithHookDeps(node.arguments[0], node.arguments[1])) {
         context.report({
             node,
             loc: node.loc,
