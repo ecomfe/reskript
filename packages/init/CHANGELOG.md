@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/ecomfe/reskript/compare/v4.1.0...v4.1.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* **init:** 修复init因加载CommonJS模块无法运行的问题 ([#255](https://github.com/ecomfe/reskript/issues/255)) ([9a15b15](https://github.com/ecomfe/reskript/commit/9a15b15fd28de26739fbb00da5288704fba1c9ea))
+
+
+
+
+
 # [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
 
 **Note:** Version bump only for package @reskript/init

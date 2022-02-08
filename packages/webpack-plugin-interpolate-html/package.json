@@ -1,6 +1,6 @@
 {
   "name": "@reskript/webpack-plugin-interpolate-html",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,7 +27,7 @@
     "escape-string-regexp": "^5.0.0"
   },
   "devDependencies": {
-    "@reskript/core": "4.1.0",
+    "@reskript/core": "4.1.1",
     "@types/node": "^17.0.14",
     "c8": "^7.10.0",
     "eslint": "^8.8.0",
