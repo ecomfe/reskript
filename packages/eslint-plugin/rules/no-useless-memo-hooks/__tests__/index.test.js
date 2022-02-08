@@ -31,6 +31,7 @@ ruleTester.run('no-useless-memo-hooks', rule, {
         testCase('dep-more-valid'),
         testCase('custom-memo-hook-valid'),
         testCase('arrow-hide-return-valid'),
+        testCase('dynamic-depend-array-valid'),
     ],
     invalid: [
         testCase(

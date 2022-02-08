@@ -4,6 +4,8 @@ const isArrayExpression = node => node.type === 'ArrayExpression';
 
 const isHookCallExpressionArgs = node => node.arguments.length === 2 && isArrayExpression(node.arguments[1]);
 
+const depNodeIsCallExpression = depNode => depNode.type === 'CallExpression';
+
 const hasMoreDepNode = depNode => depNode.elements.length !== 1;
 
 const findOnlyInvalidStatement = node => {
@@ -51,6 +53,9 @@ const isOnlyReturnMemoizedWithHookDeps = (expressionNode, depNode) => {
 
 const ruleCallback = context => node => {
     if (!isOriginalMemoHook(node.callee.name)) {
+        return;
+    }
+    if (depNodeIsCallExpression(node.arguments[1])) {
         return;
     }
     if (hasMoreDepNode(node.arguments[1])) {
