@@ -1,5 +1,15 @@
 import {resolve} from '@reskript/core';
+import less from 'less';
 import {LoaderFactory} from '../interface.js';
+import {safeLess} from '../utils/safeLess.js';
+
+type Less = typeof less;
+
+class SafeLess {
+    install(less: Less, pluginManager: Less.PluginManager) {
+        pluginManager.addPreProcessor({process: safeLess}, 999);
+    }
+}
 
 const factory: LoaderFactory = async ({projectSettings}) => {
     const importing = [
@@ -13,12 +23,14 @@ const factory: LoaderFactory = async ({projectSettings}) => {
     return {
         loader,
         options: {
+            implementation: less,
             sourceMap: extract,
             lessOptions: {
                 math: 'always',
                 javascriptEnabled: true,
                 modifyVars: lessVariables,
                 plugins: [
+                    new SafeLess(),
                     new NpmImport({prefix: '~'}),
                     new LessPluginFunctions({alwaysOverride: true}),
                 ],

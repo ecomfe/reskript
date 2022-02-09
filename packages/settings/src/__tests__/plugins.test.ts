@@ -1,7 +1,7 @@
 import {test, expect, vi} from 'vitest';
 import {ProjectAware} from '@reskript/core';
 import {fillProjectSettings} from '../defaults.js';
-import {ProjectSettings, SettingsPlugin} from '../interface.js';
+import {ProjectSettings, SettingsPlugin} from '../interface/index.js';
 import {applyPlugins} from '../plugins.js';
 
 test('one plugin', async () => {
@@ -16,8 +16,8 @@ test('one plugin', async () => {
             },
         };
     });
-    const options = {cwd: 'cwd', command: 'build'};
-    const output = await applyPlugins(settings, [plugin], options);
+    const options = {cwd: 'cwd', commandName: 'build'};
+    const output = await applyPlugins(settings, [plugin], options as any);
     expect(plugin).toHaveBeenCalled();
     // @ts-expect-error
     expect(plugin.mock.calls[0][0]).toBe(settings);
@@ -46,7 +46,7 @@ test('multiple plugins', async () => {
             },
         };
     };
-    const output = await applyPlugins(settings, [port, domain], {cwd: '', command: 'build'});
+    const output = await applyPlugins(settings, [port, domain], {cwd: '', commandName: 'build'} as any);
     expect(output.devServer.port).toBe(8000);
     expect(output.devServer.defaultProxyDomain).toBe('random.api.js');
 });
@@ -72,7 +72,7 @@ test('plugins factory', async () => {
         };
     };
     const factory = vi.fn(() => [port, domain]);
-    const output = await applyPlugins(settings, factory, {cwd: '', command: 'build'});
+    const output = await applyPlugins(settings, factory, {cwd: '', commandName: 'build'} as any);
     expect(factory).toHaveBeenCalled();
     expect(factory.mock.calls[0][0]).toBe('build');
     expect(output.devServer.port).toBe(8000);
