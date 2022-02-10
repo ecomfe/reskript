@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-dev",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -31,10 +31,10 @@
     "webpack": "^5.68.0"
   },
   "dependencies": {
-    "@reskript/config-webpack": "4.1.1",
-    "@reskript/config-webpack-dev-server": "4.1.1",
-    "@reskript/core": "4.1.1",
-    "@reskript/settings": "4.1.1",
+    "@reskript/config-webpack": "4.1.2",
+    "@reskript/config-webpack-dev-server": "4.1.2",
+    "@reskript/core": "4.1.2",
+    "@reskript/settings": "4.1.2",
     "better-opn": "^3.0.2",
     "internal-ip": "^7.0.0",
     "proxy-agent": "^5.0.0",

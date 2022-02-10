@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* **settings:** 调整配置文件校验逻辑，移除devServer.https的boolean值 ([#259](https://github.com/ecomfe/reskript/issues/259)) ([b2c2a45](https://github.com/ecomfe/reskript/commit/b2c2a45a928fc6312cd66078f172dd1a9ef15abf))
+
+
+
+
+
 ## [4.1.1](https://github.com/ecomfe/reskript/compare/v4.1.0...v4.1.1) (2022-02-08)
 
 **Note:** Version bump only for package @reskript/webpack-plugin-extra-script
