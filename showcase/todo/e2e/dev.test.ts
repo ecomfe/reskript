@@ -34,3 +34,10 @@ test('tailwind works', async ({page}) => {
     expect(styles.justifyContent).toBe('space-between');
     expect(styles.alignItems).toBe('center');
 });
+
+test('safe less works', async ({page}) => {
+    await page.goto('http://localhost:9876');
+    const styles = await page.locator('#create > input').evaluate(element => getComputedStyle(element));
+    expect(styles.height).toBe('64px');
+    expect(styles.fontSize).toBe('24px');
+});

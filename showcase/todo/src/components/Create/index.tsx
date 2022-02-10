@@ -1,12 +1,7 @@
 import {useCallback, useState, ChangeEvent, KeyboardEvent} from 'react';
-import styled from 'styled-components';
 import {Input} from 'antd';
 import {TodoItemDraft} from '@/api/todo';
-
-const DescriptionInput = styled(Input)`
-    height: 64px;
-    font-size: 24px;
-`;
+import c from './index.less';
 
 interface Props {
     onSubmit: (draft: TodoItemDraft) => void;
@@ -33,7 +28,8 @@ export default function Create({onSubmit}: Props) {
 
     return (
         <div id="create">
-            <DescriptionInput
+            <Input
+                className={c.input}
                 placeholder="What needs to be done?"
                 value={value}
                 onChange={updateValue}
