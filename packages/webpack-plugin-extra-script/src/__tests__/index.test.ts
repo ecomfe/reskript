@@ -23,8 +23,6 @@ test('factory', async () => {
     const html = await compiler(factory);
     expect(html.includes('src="/extra.js"')).toBe(true);
     expect(factory).toHaveBeenCalled();
-    // @ts-expect-error
-    expect(typeof factory.mock.calls[0][0]).toBe('object');
 });
 
 test('prepend', async () => {

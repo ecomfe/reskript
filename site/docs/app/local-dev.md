@@ -32,7 +32,9 @@ export default configure(
     {
         devServer: {
             port: 8081,
-            https: true,
+            https: {
+                proxy: true,
+            },
             apiPrefixes: ['/api'],
             defaultProxyDomain: 'randomuser.me',
         },

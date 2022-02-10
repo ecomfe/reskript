@@ -1,13 +1,26 @@
 import {dirFromImportMeta} from '@reskript/core';
-import {readProjectSettings} from '@reskript/settings';
+import {readProjectSettings, CommandInput} from '@reskript/settings';
 import {test, expect} from 'vitest';
 import {BuildContext} from '../interface.js';
 import {createWebpackConfig} from '../index.js';
 
+const BUILD_CMD: CommandInput = {
+    commandName: 'build',
+    cwd: '',
+    mode: 'production',
+    srcDirectory: 'src',
+    entriesDirectory: 'entries',
+    strict: false,
+    analyze: false,
+    clean: false,
+    profile: false,
+    sourceMaps: false,
+};
+
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
-test('returns configuration', async () => {
-    const projectSettings = await readProjectSettings({cwd: currentDirectory}, 'build');
+test.only('returns configuration', async () => {
+    const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
     const context: BuildContext = {
         cwd: currentDirectory,
         mode: 'development',
@@ -42,7 +55,7 @@ test('can specify a custom webpack entry descriptor', async () => {
         features: {},
         buildTarget: 'stable',
         isDefaultTarget: false,
-        projectSettings: await readProjectSettings({cwd: currentDirectory}, 'build'),
+        projectSettings: await readProjectSettings({...BUILD_CMD, cwd: currentDirectory}),
         entries: [
             {
                 name: 'service-worker',

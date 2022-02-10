@@ -1,17 +1,29 @@
 import {describe, test, expect, vi} from 'vitest';
 import {TransformOptions} from '@babel/core';
-import {Configuration} from 'webpack';
 import {dirFromImportMeta} from '@reskript/core';
-import {readProjectSettings} from '@reskript/settings';
+import {readProjectSettings, CommandInput, FinalizableWebpackConfiguration} from '@reskript/settings';
 import {createWebpackConfig} from '../index.js';
 import {BuildContext} from '../interface.js';
+
+const BUILD_CMD: CommandInput = {
+    commandName: 'build',
+    cwd: '',
+    mode: 'production',
+    srcDirectory: 'src',
+    entriesDirectory: 'entries',
+    strict: false,
+    analyze: false,
+    clean: false,
+    profile: false,
+    sourceMaps: false,
+};
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
 describe('finalize', () => {
     test('can receive a fully resolved webpack config and modify it', async () => {
-        const finalize = vi.fn((config: Configuration) => ({...config, mode: 'production' as const}));
-        const projectSettings = await readProjectSettings({cwd: currentDirectory}, 'build');
+        const finalize = vi.fn((config: FinalizableWebpackConfiguration) => ({...config, mode: 'production' as const}));
+        const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -35,18 +47,14 @@ describe('finalize', () => {
         };
         const config = await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
-        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
-        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0].module).toBe('object');
-        // @ts-expect-error
-        expect(typeof finalize.mock.calls[0][1]).toBe('object');
         expect(config.mode).toBe('production');
     });
 
     test('can modify babel config', async () => {
         const finalize = vi.fn((config: TransformOptions) => ({...config, comments: false}));
-        const projectSettings = await readProjectSettings({cwd: currentDirectory}, 'build');
+        const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -73,11 +81,7 @@ describe('finalize', () => {
         };
         await createWebpackConfig(context);
         expect(finalize).toHaveBeenCalled();
-        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0]).toBe('object');
-        // @ts-expect-error
         expect(typeof finalize.mock.calls[0][0].presets).toBe('object');
-        // @ts-expect-error
-        expect(typeof finalize.mock.calls[0][1]).toBe('object');
     });
 });

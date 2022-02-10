@@ -1,1 +1,2 @@
 // stub settings
+export default {};

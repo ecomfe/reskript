@@ -203,26 +203,19 @@ const schema: any = {
                     type: 'boolean',
                 },
                 https: {
-                    anyOf: [
-                        {
-                            properties: {
-                                proxy: {
-                                    type: 'boolean',
-                                },
-                                client: {
-                                    type: 'boolean',
-                                },
-                                serverOptions: {
-                                    type: 'object',
-                                },
-                            },
-                            additionalProperties: false,
-                            type: 'object',
-                        },
-                        {
+                    properties: {
+                        proxy: {
                             type: 'boolean',
                         },
-                    ],
+                        client: {
+                            type: 'boolean',
+                        },
+                        serverOptions: {
+                            type: 'object',
+                        },
+                    },
+                    additionalProperties: false,
+                    type: 'object',
                 },
                 openPage: {
                     type: 'string',
@@ -268,5 +261,5 @@ const schema: any = {
 };
 
 export default (value: any): void => {
-    validate(schema, value, {name: 'Your reskript.config.js'});
+    validate(schema, value, {name: 'Your reSKRipt config'});
 };
