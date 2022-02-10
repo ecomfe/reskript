@@ -1,16 +1,13 @@
-name: NodeJS CI
+name: NodeJS 16 CI
 
 on:
   push:
     branches: [master, v*-**]
   pull_request:
     branches: [master, v*-**]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: pnpm/action-setup@v2.0.1
       with:
@@ -23,14 +20,7 @@ jobs:
     - run: pnpm install
     - run: pnpm run build
     - run: pnpm run lint
+    - run: npx playwright install-deps
     - run: pnpm run test
-      env:
-        CI: true
-    - name: Setup NodeJS 14
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - name: Unit Test NodeJS 14
-      run: pnpm run test
       env:
         CI: true

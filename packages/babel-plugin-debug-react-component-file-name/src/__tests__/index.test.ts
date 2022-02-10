@@ -47,6 +47,6 @@ test('call React.cloneElement', () => testFixture('src/react-clone-element.js', 
 
 test('has more than 1 parameters', () => testFixture('src/multiple-parameters.js', false));
 
-test.only('class component', () => testFixture('src/class-component.js', false));
+test('class component', () => testFixture('src/class-component.js', false));
 
 test('outside src directory', () => testFixture('outside-src.js', false));

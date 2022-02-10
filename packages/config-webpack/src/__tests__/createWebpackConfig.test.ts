@@ -19,7 +19,7 @@ const BUILD_CMD: CommandInput = {
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
-test.only('returns configuration', async () => {
+test('returns configuration', async () => {
     const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
     const context: BuildContext = {
         cwd: currentDirectory,
