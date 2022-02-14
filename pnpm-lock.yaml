@@ -121,23 +121,39 @@ importers:
 
   packages/build-utils:
     specifiers:
+      '@reskript/core': 4.3.0
+      '@types/cssnano': ^5.0.0
       '@types/node': ^17.0.14
+      '@types/postcss-preset-env': ^6.7.3
       '@types/xml2js': ^0.4.9
       c8: ^7.10.0
       change-case: ^4.1.2
+      cssnano: ^5.0.17
       eslint: ^8.8.0
+      less-plugin-functions: ^1.0.0
+      less-plugin-npm-import: ^2.1.0
+      postcss: ^8.4.6
+      postcss-preset-env: ^7.3.1
       typescript: ^4.6.0-beta
       vite: ^2.7.13
       vitest: ^0.2.5
       xml2js: ^0.4.23
     dependencies:
+      '@reskript/core': link:../core
       change-case: 4.1.2
+      cssnano: 5.0.17_postcss@8.4.6
+      less-plugin-functions: 1.0.0
+      less-plugin-npm-import: 2.1.0
+      postcss-preset-env: 7.3.3_postcss@8.4.6
       xml2js: 0.4.23
     devDependencies:
+      '@types/cssnano': 5.0.0
       '@types/node': 17.0.17
+      '@types/postcss-preset-env': 6.7.3
       '@types/xml2js': 0.4.9
       c8: 7.11.0
       eslint: 8.9.0
+      postcss: 8.4.6
       typescript: 4.6.0-dev.20220211
       vite: 2.8.2
       vitest: 0.2.8_c8@7.11.0
@@ -625,6 +641,7 @@ importers:
     specifiers:
       '@reskript/build-utils': 4.3.0
       '@reskript/core': 4.3.0
+      '@reskript/settings': 4.3.0
       '@types/dedent': ^0.7.0
       '@types/node': ^17.0.14
       c8: ^7.10.0
@@ -639,6 +656,7 @@ importers:
     dependencies:
       '@reskript/build-utils': link:../build-utils
       '@reskript/core': link:../core
+      '@reskript/settings': link:../settings
       connect-history-api-fallback: 1.6.0
       dedent: 0.7.0
     devDependencies:
@@ -656,6 +674,7 @@ importers:
     specifiers:
       '@babel/core': ^7.17.2
       '@ecomfe/class-names-loader': ^2.0.0
+      '@reskript/build-utils': 4.3.0
       '@reskript/config-babel': 4.3.0
       '@reskript/config-img-loader': 4.3.0
       '@reskript/config-lint': 4.3.0
@@ -664,10 +683,8 @@ importers:
       '@reskript/svg-to-component-loader': 4.3.0
       '@reskript/webpack-plugin-extra-script': 4.3.0
       '@reskript/webpack-plugin-interpolate-html': 4.3.0
-      '@types/cssnano': ^5.0.0
       '@types/less': ^3.0.3
       '@types/node': ^17.0.16
-      '@types/postcss-preset-env': ^6.7.3
       '@types/tailwindcss': ^3.0.7
       '@types/workbox-webpack-plugin': ^5.1.8
       babel-loader: ^8.2.3
@@ -676,7 +693,6 @@ importers:
       change-case: ^4.1.2
       classnames: ^2.3.1
       css-loader: ^6.6.0
-      cssnano: ^5.0.17
       eslint: ^8.8.0
       eslint-webpack-plugin: ^3.1.1
       file-loader: ^6.2.0
@@ -686,13 +702,10 @@ importers:
       html-webpack-plugin: ^5.5.0
       less: ^4.1.2
       less-loader: ^10.2.0
-      less-plugin-functions: ^1.0.0
-      less-plugin-npm-import: ^2.1.0
       loader-of-loader: ^1.0.3
       mini-css-extract-plugin: ^2.5.3
       postcss: ^8.4.6
       postcss-loader: ^6.2.1
-      postcss-preset-env: ^7.3.1
       ramda: ^0.28.0
       regenerator-runtime: ^0.13.9
       resolve-typescript-plugin: ^1.1.5
@@ -715,6 +728,7 @@ importers:
     dependencies:
       '@babel/core': 7.17.2
       '@ecomfe/class-names-loader': 2.0.0_webpack@5.68.0
+      '@reskript/build-utils': link:../build-utils
       '@reskript/config-babel': link:../config-babel
       '@reskript/config-lint': link:../config-lint
       '@reskript/core': link:../core
@@ -727,7 +741,6 @@ importers:
       change-case: 4.1.2
       classnames: 2.3.1
       css-loader: 6.6.0_webpack@5.68.0
-      cssnano: 5.0.17_postcss@8.4.6
       eslint-webpack-plugin: 3.1.1_eslint@8.9.0+webpack@5.68.0
       file-loader: 6.2.0_webpack@5.68.0
       find-up: 6.3.0
@@ -736,13 +749,10 @@ importers:
       html-webpack-plugin: 5.5.0_webpack@5.68.0
       less: 4.1.2
       less-loader: 10.2.0_less@4.1.2+webpack@5.68.0
-      less-plugin-functions: 1.0.0
-      less-plugin-npm-import: 2.1.0
       loader-of-loader: 1.0.3
       mini-css-extract-plugin: 2.5.3_webpack@5.68.0
       postcss: 8.4.6
       postcss-loader: 6.2.1_postcss@8.4.6+webpack@5.68.0
-      postcss-preset-env: 7.3.3_postcss@8.4.6
       ramda: 0.28.0
       regenerator-runtime: 0.13.9
       resolve-typescript-plugin: 1.1.5_webpack@5.68.0
@@ -759,10 +769,8 @@ importers:
       worker-loader: 3.0.8_webpack@5.68.0
     devDependencies:
       '@reskript/config-img-loader': link:../config-img-loader
-      '@types/cssnano': 5.0.0
       '@types/less': 3.0.3
       '@types/node': 17.0.17
-      '@types/postcss-preset-env': 6.7.3
       '@types/tailwindcss': 3.0.7
       '@types/workbox-webpack-plugin': 5.1.8
       c8: 7.11.0

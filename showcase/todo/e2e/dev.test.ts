@@ -18,6 +18,12 @@ test('has footer', async ({page}) => {
     await expect(page.locator('#app-footer')).toHaveText('TodoMVC by reSKRipt');
 });
 
+test('less variable works', async ({page}) => {
+    await page.goto('http://localhost:9876');
+    const styles = await page.locator('#batch').evaluate(element => getComputedStyle(element));
+    expect(styles.color).toBe('rgb(24, 144, 255)');
+});
+
 test('postcss works', async ({page}) => {
     await page.goto('http://localhost:9876');
     const styles = await page.locator('#app').evaluate(element => Object.values(getComputedStyle(element)));
