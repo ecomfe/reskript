@@ -3,16 +3,16 @@ import webpack from 'webpack';
 import {reject, isNil} from 'ramda';
 import {dirFromImportMeta, resolve} from '@reskript/core';
 import {createWebpackConfig as createBaseWebpackConfig, BuildContext} from '@reskript/config-webpack';
+import {resolveDevHost} from '@reskript/build-utils';
 import * as loaders from '@reskript/config-webpack/loaders';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
 import {PlayCommandLineArgs} from '@reskript/settings';
 import {resolveComponentName} from './utils/path.js';
-import {resolveHost} from './utils/host.js';
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
 export const createWebpackConfig = async (target: string, cmd: PlayCommandLineArgs, buildContext: BuildContext) => {
-    const hostType = await resolveHost(cmd.host);
+    const hostType = await resolveDevHost(cmd.host);
     const extra = await createWebpackDevServerPartial(buildContext, hostType);
     const baseConfig = await createBaseWebpackConfig(buildContext, {extras: [extra]});
     const enableConcurrentMode = cmd.concurrentMode ?? buildContext.projectSettings.play.defaultEnableConcurrentMode;

@@ -31,12 +31,12 @@
     "webpack": "^5.68.0"
   },
   "dependencies": {
+    "@reskript/build-utils": "4.3.0",
     "@reskript/config-webpack": "4.3.0",
     "@reskript/config-webpack-dev-server": "4.3.0",
     "@reskript/core": "4.3.0",
     "@reskript/settings": "4.3.0",
     "better-opn": "^3.0.2",
-    "internal-ip": "^7.0.0",
     "proxy-agent": "^5.0.0",
     "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0"

@@ -3,7 +3,6 @@ import {existsSync} from 'node:fs';
 import childProcess from 'node:child_process';
 import {promisify} from 'node:util';
 import {logger} from '@reskript/core';
-import {BuildContext} from '../interface.js';
 
 const exec = promisify(childProcess.exec);
 
@@ -18,7 +17,12 @@ export const revision = async (): Promise<string> => {
     }
 };
 
-export const hasServiceWorker = (context: BuildContext) => {
-    const serviceWorkerSource = path.join(context.cwd, context.srcDirectory, 'service-worker.js');
+interface ProjectLocation {
+    cwd: string;
+    srcDirectory: string;
+}
+
+export const hasServiceWorker = ({cwd, srcDirectory}: ProjectLocation) => {
+    const serviceWorkerSource = path.join(cwd, srcDirectory, 'service-worker.js');
     return existsSync(serviceWorkerSource);
 };

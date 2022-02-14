@@ -3,13 +3,13 @@ import fs from 'node:fs/promises';
 import {reject, isNil, difference} from 'ramda';
 import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';
+import {EntryLocation} from '@reskript/build-utils';
 import {
     createWebpackConfig,
     collectEntries,
     createRuntimeBuildEnv,
     checkProjectSettings,
     BuildContext,
-    EntryLocation,
 } from '@reskript/config-webpack';
 import {
     readProjectSettings,

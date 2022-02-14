@@ -1,35 +1,15 @@
 import WebpackDevServer from 'webpack-dev-server';
-import {internalIpV4} from 'internal-ip';
 import {readProjectSettings, BuildEnv, DevCommandLineArgs, strictCheckRequiredDependency} from '@reskript/settings';
-import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
+import {EntryLocation, resolveDevHost} from '@reskript/build-utils';
+import {BuildContext, collectEntries, createRuntimeBuildEnv} from '@reskript/config-webpack';
 import {logger, readPackageConfig} from '@reskript/core';
-
-export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
-
-    if (!hostType) {
-        return 'localhost';
-    }
-
-    switch (hostType) {
-        case 'localhost':
-            return 'localhost';
-        case 'loopback':
-            return '127.0.0.1';
-        case 'ip': {
-            const ip = await internalIpV4();
-            return ip ?? 'localhost';
-        }
-        default:
-            return hostType;
-    }
-};
 
 export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
     if (!hostType) {
         return undefined;
     }
 
-    const host = await resolveHost(hostType);
+    const host = await resolveDevHost(hostType);
     return `http://${host}:${port}/assets/`;
 };
 
