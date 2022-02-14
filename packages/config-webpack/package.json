@@ -47,7 +47,6 @@
     "@reskript/config-babel": "4.3.0",
     "@reskript/config-lint": "4.3.0",
     "@reskript/core": "4.3.0",
-    "@reskript/less-safe-loader": "4.3.0",
     "@reskript/settings": "4.3.0",
     "@reskript/svg-to-component-loader": "4.3.0",
     "@reskript/webpack-plugin-extra-script": "4.3.0",

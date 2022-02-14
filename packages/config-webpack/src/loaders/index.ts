@@ -4,7 +4,6 @@ export {default as css} from './css.js';
 export {default as cssModules} from './cssModules.js';
 export {default as postcss} from './postcss.js';
 export {default as less} from './less.js';
-export {default as lessSafe} from './lessSafe.js';
 export {default as img} from './img.js';
 export {default as worker} from './worker.js';
 export {default as styleResources} from './styleResources.js';

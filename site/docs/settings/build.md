@@ -503,7 +503,6 @@ type LoaderType =
     | 'cssModules'
     | 'postcss'
     | 'less'
-    | 'lessSafe'
     | 'url'
     | 'img'
     | 'worker'
