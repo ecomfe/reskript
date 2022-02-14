@@ -37,6 +37,7 @@
   "dependencies": {
     "@reskript/build-utils": "4.3.0",
     "@reskript/core": "4.3.0",
+    "@reskript/settings": "4.3.0",
     "connect-history-api-fallback": "^1.6.0",
     "dedent": "^0.7.0"
   },

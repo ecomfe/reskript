@@ -31,6 +31,11 @@ export default configure(
                 resources: [
                     path.join(path.dirname(fileURLToPath(import.meta.url)), 'src', 'styles', 'inject.less'),
                 ],
+                lessVariables: {
+                    '@primary-color': '#1890ff',
+                    '@primary-color-active': '#40a9ff',
+                    '@primary-color-hover': '#096dd9',
+                },
             },
             finalize: webpackConfig => {
                 webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
