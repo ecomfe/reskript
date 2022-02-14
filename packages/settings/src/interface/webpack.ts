@@ -44,7 +44,6 @@ export type LoaderType =
     | 'cssModules'
     | 'postcss'
     | 'less'
-    | 'lessSafe'
     | 'img'
     | 'worker'
     | 'styleResources'
