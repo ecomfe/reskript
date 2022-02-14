@@ -7,9 +7,10 @@ import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {compact} from '@reskript/core';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
+import {constructProxyConfiguration} from '@reskript/build-utils';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import ProgressBarPlugin from './ProgressBarPlugin.js';
-import {addHotModuleToEntry, constructProxyConfiguration} from './utils.js';
+import {addHotModuleToEntry} from './utils.js';
 
 const getDevServerMessages = (host: string, port: number, https: boolean, openPage: string = ''): string[] => [
     `Your application is running here: ${https ? 'https' : 'http'}://${host}:${port}/${openPage}`,

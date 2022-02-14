@@ -1,7 +1,7 @@
 import {internalIpV4} from 'internal-ip';
-import {PlayCommandLineArgs} from '@reskript/settings';
+import {HostType} from '@reskript/settings';
 
-export const resolveHost = async (hostType: PlayCommandLineArgs['host']) => {
+export const resolveDevHost = async (hostType: HostType | undefined) => {
     if (!hostType) {
         return 'localhost';
     }

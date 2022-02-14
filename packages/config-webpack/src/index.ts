@@ -1,7 +1,5 @@
 import path from 'node:path';
-import {existsSync} from 'node:fs';
-import fs from 'node:fs/promises';
-import {pMap, logger, compact} from '@reskript/core';
+import {pMap, logger, dirFromImportMeta} from '@reskript/core';
 import {Configuration} from 'webpack';
 import {
     BuildEnv,
@@ -11,32 +9,52 @@ import {
     BuildInternals,
     FinalizableWebpackConfiguration,
 } from '@reskript/settings';
+import {
+    EntryOptions,
+    AppEntry,
+    EntryLocation,
+    collectAppEntries,
+    revision,
+    hasServiceWorker,
+    checkFeatureMatrixSchema,
+    checkPreCommitHookWhenLintDisabled,
+} from '@reskript/build-utils';
 import * as rules from './rules/index.js';
-import {revision, hasServiceWorker} from './utils/info.js';
 import {mergeBuiltin} from './utils/merge.js';
-import {checkFeatureMatrixSchema, checkPreCommitHookWhenLintDisabled} from './utils/validate.js';
 import {createHTMLPluginInstances} from './utils/html.js';
-import {resolveEntry} from './utils/entry.js';
 import {introduceLoader, introduceLoaders} from './utils/loader.js';
-import {AppEntry, BuildContext, EntryLocation, StrictOptions} from './interface.js';
+import {BuildContext, EntryConfig, StrictOptions} from './interface.js';
 import {partials, strict as strictPartial} from './partials/index.js';
 
 export {createHTMLPluginInstances};
 export * from './interface.js';
 
-export const collectEntries = async (location: EntryLocation): Promise<AppEntry[]> => {
-    const {cwd, srcDirectory, entryDirectory, only} = location;
-    const directory = path.join(cwd, srcDirectory, entryDirectory);
+const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
 
-    if (!existsSync(directory)) {
-        logger.error(`No ${srcDirectory}/${entryDirectory} directory found`);
-        process.exit(24);
+const DEFAULT_HTML_TEMPLATE = path.resolve(dirFromImportMeta(import.meta.url), 'assets', 'default-html.ejs');
+
+const validateEntryConfig = (config: EntryConfig, file: string) => {
+    const keys = Object.keys(config);
+
+    if (keys.some(v => !ALLOWED_ENTRY_KEYS.has(v))) {
+        logger.error(`Entry configuration ${file} has invalid keys, only "entry" and "html" are allowed.`);
+        process.exit(21);
     }
+};
 
-    const files = await fs.readdir(directory);
-    const shouldInclude = (name: string) => (only ? only.includes(name) : true);
-    const mayBeEntries = await pMap(files, f => resolveEntry(path.resolve(directory, f), shouldInclude));
-    return compact(mayBeEntries);
+export const collectEntries = async (location: EntryLocation): Promise<Array<AppEntry<EntryConfig>>> => {
+    const options: EntryOptions<EntryConfig> = {
+        ...location,
+        templateExtension: '.ejs',
+        defaultTemplate: DEFAULT_HTML_TEMPLATE,
+        transformConfig: (imported, resolved) => {
+            const value = imported ?? {};
+            validateEntryConfig(value, resolved ?? '[unknown-file]');
+            return value;
+        },
+    };
+
+    return collectAppEntries(options);
 };
 
 export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuildEnv> => {

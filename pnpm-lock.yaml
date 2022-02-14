@@ -122,6 +122,7 @@ importers:
   packages/build-utils:
     specifiers:
       '@reskript/core': 4.3.0
+      '@reskript/settings': 4.3.0
       '@types/cssnano': ^5.0.0
       '@types/node': ^17.0.14
       '@types/postcss-preset-env': ^6.7.3
@@ -130,21 +131,28 @@ importers:
       change-case: ^4.1.2
       cssnano: ^5.0.17
       eslint: ^8.8.0
+      internal-ip: ^7.0.0
       less-plugin-functions: ^1.0.0
       less-plugin-npm-import: ^2.1.0
       postcss: ^8.4.6
       postcss-preset-env: ^7.3.1
+      proxy-agent: ^5.0.0
+      ramda: ^0.28.0
       typescript: ^4.6.0-beta
       vite: ^2.7.13
       vitest: ^0.2.5
       xml2js: ^0.4.23
     dependencies:
       '@reskript/core': link:../core
+      '@reskript/settings': link:../settings
       change-case: 4.1.2
       cssnano: 5.0.17_postcss@8.4.6
+      internal-ip: 7.0.0
       less-plugin-functions: 1.0.0
       less-plugin-npm-import: 2.1.0
       postcss-preset-env: 7.3.3_postcss@8.4.6
+      proxy-agent: 5.0.0
+      ramda: 0.28.0
       xml2js: 0.4.23
     devDependencies:
       '@types/cssnano': 5.0.0
@@ -212,6 +220,7 @@ importers:
 
   packages/cli-build:
     specifiers:
+      '@reskript/build-utils': 4.3.0
       '@reskript/config-webpack': 4.3.0
       '@reskript/core': 4.3.0
       '@reskript/settings': 4.3.0
@@ -227,6 +236,7 @@ importers:
       webpack: ^5.68.0
       webpack-bundle-analyzer: ^4.5.0
     dependencies:
+      '@reskript/build-utils': link:../build-utils
       '@reskript/config-webpack': link:../config-webpack
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
@@ -245,6 +255,7 @@ importers:
 
   packages/cli-dev:
     specifiers:
+      '@reskript/build-utils': 4.3.0
       '@reskript/config-webpack': 4.3.0
       '@reskript/config-webpack-dev-server': 4.3.0
       '@reskript/core': 4.3.0
@@ -253,19 +264,18 @@ importers:
       '@types/node': ^17.0.16
       better-opn: ^3.0.2
       eslint: ^8.8.0
-      internal-ip: ^7.0.0
       proxy-agent: ^5.0.0
       typescript: ^4.6.0-beta
       webpack: ^5.68.0
       webpack-dev-server: ^4.7.4
       webpack-merge: ^5.8.0
     dependencies:
+      '@reskript/build-utils': link:../build-utils
       '@reskript/config-webpack': link:../config-webpack
       '@reskript/config-webpack-dev-server': link:../config-webpack-dev-server
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       better-opn: 3.0.2
-      internal-ip: 7.0.0
       proxy-agent: 5.0.0
       webpack-dev-server: 4.7.4_webpack@5.68.0
       webpack-merge: 5.8.0
@@ -310,6 +320,7 @@ importers:
   packages/cli-play:
     specifiers:
       '@monaco-editor/react': ^4.3.1
+      '@reskript/build-utils': 4.3.0
       '@reskript/config-webpack': 4.3.0
       '@reskript/config-webpack-dev-server': 4.3.0
       '@reskript/core': 4.3.0
@@ -329,7 +340,6 @@ importers:
       debounce: ^1.2.1
       dedent: ^0.7.0
       eslint: ^8.8.0
-      internal-ip: ^7.0.0
       loader-of-loader: ^1.0.3
       localforage: ^1.10.0
       marked: ^4.0.12
@@ -349,6 +359,7 @@ importers:
       webpack-dev-server: ^4.7.4
     dependencies:
       '@monaco-editor/react': 4.3.1_react-dom@17.0.2+react@17.0.2
+      '@reskript/build-utils': link:../build-utils
       '@reskript/config-webpack': link:../config-webpack
       '@reskript/config-webpack-dev-server': link:../config-webpack-dev-server
       '@reskript/core': link:../core
@@ -356,7 +367,6 @@ importers:
       body-parser: 1.19.1
       chokidar: 3.5.3
       debounce: 1.2.1
-      internal-ip: 7.0.0
       loader-of-loader: 1.0.3
       localforage: 1.10.0
       marked: 4.0.12
@@ -784,6 +794,7 @@ importers:
   packages/config-webpack-dev-server:
     specifiers:
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.4
+      '@reskript/build-utils': 4.3.0
       '@reskript/config-webpack': 4.3.0
       '@reskript/core': 4.3.0
       '@reskript/settings': 4.3.0
@@ -793,10 +804,8 @@ importers:
       c8: ^7.10.0
       cli-progress: ^3.9.1
       eslint: ^8.8.0
-      internal-ip: ^7.0.0
       kolorist: ^1.5.1
       launch-editor-middleware: ^2.3.0
-      proxy-agent: ^5.0.0
       react-refresh: ^0.11.0
       typescript: ^4.6.0-beta
       vite: ^2.8.0
@@ -806,15 +815,14 @@ importers:
       webpack-merge: ^5.8.0
     dependencies:
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.4_5ef818c3919d9e29bf1bd49b40aeefcd
+      '@reskript/build-utils': link:../build-utils
       '@reskript/config-webpack': link:../config-webpack
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       '@soda/friendly-errors-webpack-plugin': 1.8.1_webpack@5.68.0
       cli-progress: 3.10.0
-      internal-ip: 7.0.0
       kolorist: 1.5.1
       launch-editor-middleware: 2.3.0
-      proxy-agent: 5.0.0
       react-refresh: 0.11.0
       webpack-merge: 5.8.0
     devDependencies:

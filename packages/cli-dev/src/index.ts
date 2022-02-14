@@ -3,13 +3,14 @@ import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
 import {watchProjectSettings, DevCommandLineArgs} from '@reskript/settings';
 import {BuildContext, createWebpackConfig} from '@reskript/config-webpack';
+import {resolveDevHost} from '@reskript/build-utils';
 import {logger, prepareEnvironment, dirFromImportMeta} from '@reskript/core';
 import {
     createWebpackDevServerPartial,
     createWebpackDevServerConfig,
     injectDevElements,
 } from '@reskript/config-webpack-dev-server';
-import {createBuildContext, resolveHost, resolvePublicPath, startServer} from './utils.js';
+import {createBuildContext, resolvePublicPath, startServer} from './utils.js';
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
@@ -21,7 +22,7 @@ interface ServerStartContext {
 }
 
 const prepareServerContext = async (cmd: DevCommandLineArgs): Promise<ServerStartContext> => {
-    const [buildContext, host] = await Promise.all([createBuildContext(cmd), resolveHost(cmd.host)]);
+    const [buildContext, host] = await Promise.all([createBuildContext(cmd), resolveDevHost(cmd.host)]);
     const buildingPartial = createWebpackDevServerPartial(buildContext, host);
     const resolvingPublicPath = resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
     const [extra, publicPath] = await Promise.all([buildingPartial, resolvingPublicPath]);

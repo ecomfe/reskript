@@ -31,6 +31,7 @@
     "webpack": "^5.68.0"
   },
   "dependencies": {
+    "@reskript/build-utils": "4.3.0",
     "@reskript/config-webpack": "4.3.0",
     "@reskript/core": "4.3.0",
     "@reskript/settings": "4.3.0",
