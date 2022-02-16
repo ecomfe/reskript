@@ -76,7 +76,7 @@ export default function App() {
                     <WorkerStatus />
                     {todos.length} things waiting
                 </span>
-                {$features.batch && <BatchLabel onFinish={requestList} />}
+                {skr.features.batch && <BatchLabel onFinish={requestList} />}
             </Meta>
             <List dataSource={todos} onToggleItem={toggleItem} />
         </Layout>

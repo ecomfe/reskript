@@ -1,5 +1,5 @@
 import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
-import escapeRegExp from 'escape-string-regexp';
+import {interpolateEntryContent} from '@reskript/build-utils';
 
 const findHtmlWebpackPlugin = (compilation: Compilation) => {
     const isResolved = (plugin: WebpackPluginInstance) => {
@@ -33,15 +33,7 @@ export default class InterpolateHTMLWebpackPlugin {
         afterTemplateExecution.tap(
             'interpolate-html-webpack-plugin',
             (data: {html: string}) => {
-                const html = Object.entries(this.replacements).reduce(
-                    (html, [key, value]) => (
-                        value === undefined
-                            ? html
-                            : html.replace(new RegExp(`%${escapeRegExp(key)}%`, 'g'), value)
-                    ),
-                    data.html
-                );
-                data.html = html;
+                data.html = interpolateEntryContent(data.html, this.replacements);
             }
         );
     }

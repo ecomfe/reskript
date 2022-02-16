@@ -5,7 +5,7 @@ const config: UserSettings = {
     ...baseConfig,
     devServer: {
         ...baseConfig.devServer,
-        port: 9876,
+        port: 9976,
         https: undefined,
     },
 };

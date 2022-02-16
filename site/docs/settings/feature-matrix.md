@@ -31,17 +31,17 @@ export default configure(
 
 ### 引用特性
 
-在项目的源码中，可以使用`$features.someKey`来引用某一个特性。引用特性的代码类似于`process.env.NODE_ENV`，必须是一个完整的串，不可以有任何的动态性，例如下面的写法都是**不可用**的：
+在项目的源码中，可以使用`skr.features.someKey`来引用某一个特性。引用特性的代码类似于`process.env.NODE_ENV`，必须是一个完整的串，不可以有任何的动态性，例如下面的写法都是**不可用**的：
 
 ```ts
 const myKey = 'someKey';
-$features[myKey];
+skr.features[myKey];
 
-for (const key of $features) {
+for (const key of skr.features) {
     // ...
 }
 
-Object.keys($features).filter(k => k.startsWith('app'));
+Object.keys(skr.features).filter(k => k.startsWith('app'));
 ```
 
 ### 推荐特性名

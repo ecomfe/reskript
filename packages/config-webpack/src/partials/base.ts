@@ -11,6 +11,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
+import {constructDefines, DefineContext} from '@reskript/build-utils';
 import {getScriptLintBaseConfig, getStyleLintBaseConfig} from '@reskript/config-lint';
 import {ConfigurationFactory, BuildContext} from '../interface.js';
 import {createHTMLPluginInstances} from '../utils/html.js';
@@ -18,12 +19,6 @@ import {convertToWebpackEntry} from '../utils/entry.js';
 import * as rules from '../rules/index.js';
 
 const {DefinePlugin, ContextReplacementPlugin} = webpack;
-
-const toDefines = (context: Record<string, any>, prefix: string): Record<string, string> => {
-    const entries = Object.entries(context);
-    const defines = entries.map(([key, value]) => [prefix + '.' + key, JSON.stringify(value)]);
-    return defines.reduce((output, [key, value]) => Object.assign(output, {[key]: value}), {});
-};
 
 const readFileIfExists = async (filename: string) => {
     if (existsSync(filename)) {
@@ -83,8 +78,8 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
     return key;
 };
 
-const toDynamicDefines = (context: Record<string, any>, prefix: string): Record<string, any> => {
-    const staticDefines = toDefines(context, prefix);
+const constructDynamicDefines = (context: DefineContext): Record<string, any> => {
+    const staticDefines = constructDefines(context);
     return map(v => DefinePlugin.runtimeValue(() => v, true), staticDefines);
 };
 
@@ -122,16 +117,13 @@ const factory: ConfigurationFactory = async entry => {
         resolve('regenerator-runtime'),
     ] as const;
     const [cacheKey, moduleRules, eslintPath, stylelintPath, regeneratorRuntimePath] = await Promise.all(tasks);
-    const buildInfo = {
+    const defines: DefineContext = {
+        features,
         mode,
-        version: buildVersion,
-        target: buildTarget,
-        time: buildTime,
-    };
-    const defines = {
-        ...toDynamicDefines(process.env, 'process.env'),
-        ...toDynamicDefines(features, '$features'),
-        ...toDynamicDefines(buildInfo, '$build'),
+        buildVersion,
+        buildTarget,
+        buildTime,
+        env: process.env,
     };
     const eslintOptions = {
         eslintPath,
@@ -155,7 +147,7 @@ const factory: ConfigurationFactory = async entry => {
         ...htmlPlugins,
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
-        new DefinePlugin(defines),
+        new DefinePlugin(constructDynamicDefines(defines)),
         new InterpolateHTMLPlugin(process.env),
         // @ts-expect-error
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),

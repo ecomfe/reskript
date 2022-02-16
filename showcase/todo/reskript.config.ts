@@ -23,6 +23,7 @@ export default configure(
         build: {
             appTitle: 'TodoMVC - reSKRipt',
             favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
+            appContainerId: 'root',
             uses: ['antd', 'styled-components', 'tailwind'],
             script: {
                 polyfill: false,
@@ -32,9 +33,9 @@ export default configure(
                     path.join(path.dirname(fileURLToPath(import.meta.url)), 'src', 'styles', 'inject.less'),
                 ],
                 lessVariables: {
-                    '@primary-color': '#1890ff',
-                    '@primary-color-active': '#40a9ff',
-                    '@primary-color-hover': '#096dd9',
+                    '@app-primary-color': '#1890ff',
+                    '@app-primary-color-active': '#40a9ff',
+                    '@app-primary-color-hover': '#096dd9',
                 },
             },
             finalize: webpackConfig => {

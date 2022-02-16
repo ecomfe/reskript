@@ -22,8 +22,7 @@ const config: Record<string, any> = {
         'jest': true,
     },
     globals: {
-        $features: true,
-        $build: true,
+        skr: true,
     },
     rules: {
         'operator-linebreak': [

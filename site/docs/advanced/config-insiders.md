@@ -86,9 +86,9 @@ function FooBar() {
 
 `process.env`中的所有内容都通过`DefinePlugin`注入了，可以直接以`process.env.FOO_BAR`的形式来使用。
 
-在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在[项目配置文件](../settings#配置文件路径)里的`featureMatrix`中的东西，都可以用`$features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
+在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在[项目配置文件](../settings#配置文件路径)里的`featureMatrix`中的东西，都可以用`skr.features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
 
-另外你还能用`$build.`前缀来拿到当前构建的一些元信息，这个元信息的结构大致如下：
+另外你还能用`skr.build.`前缀来拿到当前构建的一些元信息，这个元信息的结构大致如下：
 
 ```ts
 interface BuildInfo {
@@ -99,7 +99,7 @@ interface BuildInfo {
 }
 ```
 
-**你不能直接用`$build`对象哦，必须用`$build.version`这样的常量才会被替换**。
+**你不能直接用`skr.build`对象哦，必须用`skr.build.version`这样的常量才会被替换**。
 
 ### 严格模式
 

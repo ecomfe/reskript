@@ -1,3 +1,5 @@
+import {BuildEntry} from '@reskript/settings';
+
 export interface EntryLocation {
     cwd: string;
     srcDirectory: string;
@@ -5,14 +7,18 @@ export interface EntryLocation {
     only?: string[];
 }
 
+interface EntryConfigBase {
+    templateData?: Record<string, unknown>;
+}
+
 export interface AppEntry<C> {
     readonly file: string;
     readonly name: string;
-    readonly template: string | null;
-    readonly config: C;
+    readonly template: string;
+    readonly config: C & EntryConfigBase;
 }
 
-export type TransformConfig<C> = (imported: any, resolved: string | undefined) => C;
+export type TransformConfig<C> = (imported: any, resolved: string | undefined) => C & EntryConfigBase;
 
 export interface ResolveOptions<C> {
     /** 模板文件的后缀名，如`.ejs`或`.html` */
@@ -24,4 +30,9 @@ export interface ResolveOptions<C> {
 }
 
 export interface EntryOptions<C> extends EntryLocation, ResolveOptions<C> {
+}
+
+export interface BuildContext<C> extends BuildEntry {
+    readonly isDefaultTarget: boolean;
+    readonly entries: Array<AppEntry<C>>;
 }

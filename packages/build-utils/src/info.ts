@@ -3,10 +3,11 @@ import {existsSync} from 'node:fs';
 import childProcess from 'node:child_process';
 import {promisify} from 'node:util';
 import {logger} from '@reskript/core';
+import {BuildEnv, RuntimeBuildEnv} from '@reskript/settings';
 
 const exec = promisify(childProcess.exec);
 
-export const revision = async (): Promise<string> => {
+const revision = async (): Promise<string> => {
     try {
         const output = await exec('git rev-parse --short HEAD');
         return output.stdout.toString().trim();
@@ -15,6 +16,17 @@ export const revision = async (): Promise<string> => {
         logger.log('Not a git repository, fallback to default revision');
         return '0000000';
     }
+};
+
+export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuildEnv> => {
+    const now = new Date();
+    const buildVersion = await revision();
+
+    return {
+        ...env,
+        buildVersion,
+        buildTime: now.toISOString(),
+    };
 };
 
 interface ProjectLocation {

@@ -28,10 +28,12 @@
     "@types/node": "^17.0.16",
     "eslint": "^8.8.0",
     "typescript": "^4.6.0-beta",
+    "vite": "^2.8.2",
     "webpack": "^5.68.0"
   },
   "dependencies": {
     "@reskript/build-utils": "4.3.0",
+    "@reskript/config-vite": "4.3.0",
     "@reskript/config-webpack": "4.3.0",
     "@reskript/config-webpack-dev-server": "4.3.0",
     "@reskript/core": "4.3.0",
@@ -46,6 +48,7 @@
     "eslint": "8.x",
     "stylelint": "14.x",
     "typescript": "4.x",
+    "vite": "2.x",
     "webpack": "5.x"
   },
   "peerDependenciesMeta": {
@@ -53,6 +56,12 @@
       "optional": true
     },
     "typescript": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
       "optional": true
     }
   }

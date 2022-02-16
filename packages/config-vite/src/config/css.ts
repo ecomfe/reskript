@@ -1,24 +1,30 @@
-import {UserConfig} from 'vite';
 import {lessConfig, postcssConfig} from '@reskript/build-utils';
+import {ConfigFactory} from '../interface.js';
 
-interface Options {
-    cwd: string;
-    extract: boolean;
-    variables: Record<string, string>;
-    tailwind: boolean;
-    minify: boolean;
-}
+const factory: ConfigFactory = async context => {
+    const settings = context.projectSettings;
+    const lessOptions = {
+        cwd: context.cwd,
+        variables: settings.build.style.lessVariables,
+        resources: settings.build.style.resources,
+    };
+    const postcssOptions = {
+        cwd: context.cwd,
+        tailwind: settings.build.uses.includes('tailwind'),
+        minify: context.mode === 'production',
+    };
 
-export default async ({cwd, extract, variables, tailwind, minify}: Options): Promise<UserConfig> => {
     return {
         build: {
-            cssCodeSplit: !extract,
+            cssCodeSplit: !settings.build.style.extract,
         },
         css: {
             preprocessorOptions: {
-                less: await lessConfig({variables}),
+                less: await lessConfig(lessOptions),
             },
-            postcss: await postcssConfig({cwd, tailwind, minify}),
+            postcss: await postcssConfig(postcssOptions),
         },
     };
 };
+
+export default factory;

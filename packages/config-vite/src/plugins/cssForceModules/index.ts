@@ -13,15 +13,23 @@ interface Options {
 const DEFAULT_ENABLE_MODULES = (id: string) => !id.includes('node_modules');
 
 export default function cssForceModulesPlugin({enableModules = DEFAULT_ENABLE_MODULES}: Options = {}): Plugin {
+    const root = {value: process.cwd()};
+
     return {
         name: 'reskript:css-force-modules',
+        async configResolved(config) {
+            root.value = config.root;
+        },
         enforce: 'pre',
         async resolveId(source, importer, options) {
-            if (!enableModules(source)) {
+            const resolved = await this.resolve(source, importer, {...options, skipSelf: true});
+
+            if (!resolved || !enableModules(resolved.id)) {
                 return;
             }
 
-            const id = source.replace(/\?used$/, '');
+            // 我至今没搞懂Vite什么时候会加上`?used`这一段
+            const id = resolved.id.replace(/\?used$/, '');
             const extension = path.extname(id);
 
             // 1. 是样式文件
@@ -33,8 +41,7 @@ export default function cssForceModulesPlugin({enableModules = DEFAULT_ENABLE_MO
                 // 为了让预处理器能正确地找到对应的文件和，我们必须保持当前文件的`id`在修改后能保留原始的目录信息，
                 // 即`path.dirname(resolved.id)`和`path.dirname(source)`是一样的。
                 // 因此，我们不能按照Vite推荐的方法，在这里用`virturl:xxx`这样的虚拟路径，只能在原路径上做处理。
-                const resolved = await this.resolve(source, importer, {skipSelf: true, ...options});
-                return resolved && `${resolved.id.replace(/\?used$/, '')}${VIRTUAL_ID_PADDING}.module${extension}`;
+                return `${id}${VIRTUAL_ID_PADDING}.module${extension}`;
             }
         },
         async load(id) {
@@ -44,9 +51,9 @@ export default function cssForceModulesPlugin({enableModules = DEFAULT_ENABLE_MO
 
             const extension = path.extname(id);
             const file = id.slice(0, -(VIRTUAL_ID_PADDING.length + `.module${extension}`.length));
-            return {
-                code: await fs.readFile(file, 'utf-8'),
-            };
+            // 不知道为什么，这个路径在测试的时候是硬盘上的绝对路径，在实际用的时候是基于`root`的相对路径
+            const code = await fs.readFile(file.startsWith(root.value) ? file : path.join(root.value, file), 'utf-8');
+            return code;
         },
     };
 }

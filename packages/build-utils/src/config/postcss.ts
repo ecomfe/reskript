@@ -1,4 +1,4 @@
-import {resolveFrom} from '@reskript/core';
+import {compact, resolveFrom} from '@reskript/core';
 import presetEnv from 'postcss-preset-env';
 import nano from 'cssnano';
 
@@ -20,5 +20,5 @@ export default async ({cwd, tailwind, minify}: Options) => {
         presetEnv(),
         minify && nano(),
     ];
-    return {plugins};
+    return {plugins: compact(plugins)};
 };

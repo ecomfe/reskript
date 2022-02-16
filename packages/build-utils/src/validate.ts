@@ -2,7 +2,7 @@ import path from 'node:path';
 import {existsSync} from 'node:fs';
 import {equals} from 'ramda';
 import {logger, findGitRoot, readPackageConfig} from '@reskript/core';
-import {FeatureMatrix} from '@reskript/settings';
+import {FeatureMatrix, ProjectSettings} from '@reskript/settings';
 
 const toStringTag = Object.prototype.toString;
 
@@ -13,7 +13,7 @@ const getSchema = (obj: Record<string, any>): Array<[string, string]> => {
     return entries.map(([key, value]) => [key, toStringTag.call(value)] as [string, string]);
 };
 
-export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
+const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
     const featurePairs = Object.entries(features);
     // 计算每一个feature的结构是不是一样，如果有结构不一样的，则直接报错退出
     const baseSchema = getSchema(featurePairs[0][1]);
@@ -36,7 +36,7 @@ export const checkFeatureMatrixSchema = (features: FeatureMatrix): void => {
     }
 };
 
-export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
+const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
     const gitRoot = await findGitRoot(cwd) ?? cwd;
     if (existsSync(path.join(gitRoot, '.husky', 'pre-commit'))) {
         return;
@@ -62,5 +62,13 @@ export const checkPreCommitHookWhenLintDisabled = async (cwd: string) => {
         `;
         logger.warn(warning);
         process.exit(21);
+    }
+};
+
+export const validateProjectSettings = (settings: ProjectSettings): void => {
+    checkFeatureMatrixSchema(settings.featureMatrix);
+
+    if (settings.build.reportLintErrors === false) {
+        checkPreCommitHookWhenLintDisabled(settings.cwd);
     }
 };

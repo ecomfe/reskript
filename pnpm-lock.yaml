@@ -32,7 +32,7 @@ importers:
       c8: ^7.10.0
       eslint: ^8.8.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
     dependencies:
       '@babel/core': 7.17.2
@@ -66,7 +66,7 @@ importers:
       eslint: ^8.8.0
       react: ^17.0.2
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
     dependencies:
       '@babel/core': 7.17.2
@@ -101,7 +101,7 @@ importers:
       eslint: ^8.8.0
       glob: ^7.2.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
     dependencies:
       glob: 7.2.0
@@ -130,7 +130,9 @@ importers:
       c8: ^7.10.0
       change-case: ^4.1.2
       cssnano: ^5.0.17
+      escape-string-regexp: ^5.0.0
       eslint: ^8.8.0
+      globby: ^13.1.1
       internal-ip: ^7.0.0
       less-plugin-functions: ^1.0.0
       less-plugin-npm-import: ^2.1.0
@@ -139,7 +141,7 @@ importers:
       proxy-agent: ^5.0.0
       ramda: ^0.28.0
       typescript: ^4.6.0-beta
-      vite: ^2.7.13
+      vite: ^2.8.2
       vitest: ^0.2.5
       xml2js: ^0.4.23
     dependencies:
@@ -147,6 +149,8 @@ importers:
       '@reskript/settings': link:../settings
       change-case: 4.1.2
       cssnano: 5.0.17_postcss@8.4.6
+      escape-string-regexp: 5.0.0
+      globby: 13.1.1
       internal-ip: 7.0.0
       less-plugin-functions: 1.0.0
       less-plugin-npm-import: 2.1.0
@@ -256,6 +260,7 @@ importers:
   packages/cli-dev:
     specifiers:
       '@reskript/build-utils': 4.3.0
+      '@reskript/config-vite': 4.3.0
       '@reskript/config-webpack': 4.3.0
       '@reskript/config-webpack-dev-server': 4.3.0
       '@reskript/core': 4.3.0
@@ -266,11 +271,13 @@ importers:
       eslint: ^8.8.0
       proxy-agent: ^5.0.0
       typescript: ^4.6.0-beta
+      vite: ^2.8.2
       webpack: ^5.68.0
       webpack-dev-server: ^4.7.4
       webpack-merge: ^5.8.0
     dependencies:
       '@reskript/build-utils': link:../build-utils
+      '@reskript/config-vite': link:../config-vite
       '@reskript/config-webpack': link:../config-webpack
       '@reskript/config-webpack-dev-server': link:../config-webpack-dev-server
       '@reskript/core': link:../core
@@ -284,6 +291,7 @@ importers:
       '@types/node': 17.0.17
       eslint: 8.9.0
       typescript: 4.6.0-dev.20220211
+      vite: 2.8.2
       webpack: 5.68.0
 
   packages/cli-lint:
@@ -353,7 +361,7 @@ importers:
       socket.io-client: ^4.4.0
       typescript: ^4.6.0-beta
       unified: ^10.1.1
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
       webpack-dev-server: ^4.7.4
@@ -460,7 +468,7 @@ importers:
       react-refresh: ^0.11.0
       rollup: ^2.67.1
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
     dependencies:
       '@babel/core': 7.17.2
@@ -650,27 +658,41 @@ importers:
   packages/config-vite:
     specifiers:
       '@reskript/build-utils': 4.3.0
+      '@reskript/config-babel': 4.3.0
       '@reskript/core': 4.3.0
       '@reskript/settings': 4.3.0
       '@types/dedent': ^0.7.0
+      '@types/lodash.template': ^4.5.0
       '@types/node': ^17.0.14
+      '@vitejs/plugin-react': ^1.2.0
       c8: ^7.10.0
+      classnames: ^2.3.1
       connect-history-api-fallback: ^1.6.0
       dedent: ^0.7.0
       eslint: ^8.8.0
+      globby: ^13.1.1
+      lodash.template: ^4.5.0
+      ramda: ^0.28.0
       react: ^17.0.2
       rollup: ^2.66.1
       typescript: ^4.6.0-beta
-      vite: ^2.7.13
+      vite: ^2.8.2
       vitest: ^0.2.5
     dependencies:
       '@reskript/build-utils': link:../build-utils
+      '@reskript/config-babel': link:../config-babel
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
+      '@vitejs/plugin-react': 1.2.0
+      classnames: 2.3.1
       connect-history-api-fallback: 1.6.0
       dedent: 0.7.0
+      globby: 13.1.1
+      lodash.template: 4.5.0
+      ramda: 0.28.0
     devDependencies:
       '@types/dedent': 0.7.0
+      '@types/lodash.template': 4.5.0
       '@types/node': 17.0.17
       c8: 7.11.0
       eslint: 8.9.0
@@ -721,7 +743,6 @@ importers:
       resolve-typescript-plugin: ^1.1.5
       semver: ^7.3.5
       style-loader: ^3.3.1
-      style-resources-loader: ^1.5.0
       stylelint: ^14.4.0
       stylelint-webpack-plugin: ^3.1.1
       svgo: ^2.8.0
@@ -729,7 +750,7 @@ importers:
       typescript: ^4.6.0-beta
       unixify: ^1.0.0
       url-loader: ^4.1.0
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
       webpack-merge: ^5.8.0
@@ -767,7 +788,6 @@ importers:
       regenerator-runtime: 0.13.9
       resolve-typescript-plugin: 1.1.5_webpack@5.68.0
       style-loader: 3.3.1_webpack@5.68.0
-      style-resources-loader: 1.5.0_webpack@5.68.0
       stylelint: 14.5.0
       stylelint-webpack-plugin: 3.1.1_stylelint@14.5.0+webpack@5.68.0
       svgo: 2.8.0
@@ -808,7 +828,7 @@ importers:
       launch-editor-middleware: ^2.3.0
       react-refresh: ^0.11.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
       webpack-dev-server: ^4.7.4
@@ -865,7 +885,7 @@ importers:
       rollup: ^2.67.1
       typescript: ^4.6.0-beta
       unixify: ^1.0.0
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
     dependencies:
       bundle-require: 3.0.4_esbuild@0.14.21
@@ -978,7 +998,7 @@ importers:
       eslint: ^8.8.0
       qiankun: ^2.6.3
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack-dev-server: ^4.7.4
     dependencies:
@@ -1052,7 +1072,7 @@ importers:
       hasha: ^5.2.0
       schema-utils: ^4.0.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
       webpack-dev-server: ^4.7.4
@@ -1095,7 +1115,7 @@ importers:
       eslint: ^8.8.0
       html-webpack-plugin: ^5.5.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
     devDependencies:
@@ -1111,18 +1131,18 @@ importers:
 
   packages/webpack-plugin-interpolate-html:
     specifiers:
+      '@reskript/build-utils': 4.3.0
       '@reskript/core': 4.3.0
       '@types/node': ^17.0.16
       c8: ^7.10.0
-      escape-string-regexp: ^5.0.0
       eslint: ^8.8.0
       html-webpack-plugin: ^5.5.0
       typescript: ^4.6.0-beta
-      vite: ^2.8.0
+      vite: ^2.8.2
       vitest: ^0.3.0
       webpack: ^5.68.0
     dependencies:
-      escape-string-regexp: 5.0.0
+      '@reskript/build-utils': link:../build-utils
     devDependencies:
       '@reskript/core': link:../core
       '@types/node': 17.0.17
@@ -1165,6 +1185,7 @@ importers:
       stylelint: ^14.4.0
       tailwindcss: ^3.0.19
       typescript: ^4.6.0-beta
+      vite: ^2.8.2
       webpack: ^5.68.0
     dependencies:
       antd: 4.18.6_react-dom@17.0.2+react@17.0.2
@@ -1197,6 +1218,7 @@ importers:
       react-dom: 17.0.2_react@17.0.2
       stylelint: 14.5.0
       typescript: 4.6.0-dev.20220211
+      vite: 2.8.2
       webpack: 5.68.0
 
 packages:
@@ -2611,6 +2633,26 @@ packages:
     dependencies:
       '@babel/core': 7.17.2
       '@babel/plugin-transform-react-jsx': 7.16.7_@babel+core@7.17.2
+
+  /@babel/plugin-transform-react-jsx-self/7.16.7_@babel+core@7.17.2:
+    resolution: {integrity: sha512-oe5VuWs7J9ilH3BCCApGoYjHoSO48vkjX2CbA5bFVhIuO2HKxA3vyF7rleA4o6/4rTDbk6r8hBW7Ul8E+UZrpA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.17.2
+      '@babel/helper-plugin-utils': 7.16.7
+    dev: false
+
+  /@babel/plugin-transform-react-jsx-source/7.16.7_@babel+core@7.17.2:
+    resolution: {integrity: sha512-rONFiQz9vgbsnaMtQlZCjIRwhJvlrPET8TabIUK2hzlXw9B9s2Ieaxte1SCOOXMbWRHodbKixNf3BLcWVOQ8Bw==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.17.2
+      '@babel/helper-plugin-utils': 7.16.7
+    dev: false
 
   /@babel/plugin-transform-react-jsx/7.16.7_@babel+core@7.16.12:
     resolution: {integrity: sha512-8D16ye66fxiE8m890w0BpPpngG9o9OVBBy0gH2E+2AR7qMR2ZpTYJEqLxAsoroenMId0p/wMW+Blc0meDgu0Ag==}
@@ -4631,6 +4673,14 @@ packages:
       picomatch: 2.3.1
       rollup: 2.67.2
 
+  /@rollup/pluginutils/4.1.2:
+    resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: false
+
   /@rushstack/eslint-patch/1.1.0:
     resolution: {integrity: sha512-JLo+Y592QzIE+q7Dl2pMUtt4q8SKYI5jDrZxrozEQxnGVOyYE+GWK9eLkwTaeN9DDctlaRAQ3TBmzZ1qdLE30A==}
     dev: false
@@ -5003,6 +5053,16 @@ packages:
     resolution: {integrity: sha512-1YXyYH83h6We1djyoUEqTlVyQtCfJAFXELSKW2ZRtjHD4hQ82CC4lvrv5D0l0FLcKBaiPbXyi3MpMsI9ZRgKsw==}
     dev: true
 
+  /@types/lodash.template/4.5.0:
+    resolution: {integrity: sha512-4LgHxK16IPbGR7TmXpPvNT7iNGsLCdQY6Rc0mi1a/JECt8et/D4hx6NMVAJej/d932sj1mJsg0QYHKL189O0Qw==}
+    dependencies:
+      '@types/lodash': 4.14.178
+    dev: true
+
+  /@types/lodash/4.14.178:
+    resolution: {integrity: sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==}
+    dev: true
+
   /@types/marked/4.0.2:
     resolution: {integrity: sha512-auNrZ/c0w6wsM9DccwVxWHssrMDezHUAXNesdp2RQrCVCyrQbOiSq7yqdJKrUQQpw9VTm7CGYJH2A/YG7jjrjQ==}
     dev: true
@@ -5311,6 +5371,22 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.11.0
       eslint-visitor-keys: 3.3.0
+    dev: false
+
+  /@vitejs/plugin-react/1.2.0:
+    resolution: {integrity: sha512-Rywwt0IXXg6yQ0hv3cMT3mtdDcGIw31mGaa+MMMAT651LhoXLF2yFy4LrakiTs7UKs7RPBo9eNgaS8pgl2A6Qw==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@babel/core': 7.17.2
+      '@babel/plugin-transform-react-jsx': 7.16.7_@babel+core@7.17.2
+      '@babel/plugin-transform-react-jsx-development': 7.16.7_@babel+core@7.17.2
+      '@babel/plugin-transform-react-jsx-self': 7.16.7_@babel+core@7.17.2
+      '@babel/plugin-transform-react-jsx-source': 7.16.7_@babel+core@7.17.2
+      '@rollup/pluginutils': 4.1.2
+      react-refresh: 0.11.0
+      resolve: 1.22.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@webassemblyjs/ast/1.11.1:
@@ -8739,6 +8815,10 @@ packages:
   /estree-walker/1.0.1:
     resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
 
+  /estree-walker/2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
+    dev: false
+
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
@@ -11784,7 +11864,6 @@ packages:
 
   /lodash._reinterpolate/3.0.0:
     resolution: {integrity: sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=}
-    dev: true
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
@@ -11823,13 +11902,11 @@ packages:
     dependencies:
       lodash._reinterpolate: 3.0.0
       lodash.templatesettings: 4.2.0
-    dev: true
 
   /lodash.templatesettings/4.2.0:
     resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
     dependencies:
       lodash._reinterpolate: 3.0.0
-    dev: true
 
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=}
@@ -16813,19 +16890,6 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.68.0
-    dev: false
-
-  /style-resources-loader/1.5.0_webpack@5.68.0:
-    resolution: {integrity: sha512-fIfyvQ+uvXaCBGGAgfh+9v46ARQB1AWdaop2RpQw0PBVuROsTBqGvx8dj0kxwjGOAyq3vepe4AOK3M6+Q/q2jw==}
-    engines: {node: '>=8.9'}
-    peerDependencies:
-      webpack: ^3.0.0 || ^4.0.0 || ^5.0.0
-    dependencies:
-      glob: 7.2.0
-      loader-utils: 2.0.2
-      schema-utils: 2.7.1
-      tslib: 2.3.1
       webpack: 5.68.0
     dev: false
 

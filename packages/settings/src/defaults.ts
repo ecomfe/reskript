@@ -66,7 +66,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
 };
 
 export interface PartialProjectSettings {
-    provider: ReskriptDriver;
+    driver: ReskriptDriver;
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     build?: PartialBuildSettings;
@@ -76,7 +76,7 @@ export interface PartialProjectSettings {
 
 export const fillProjectSettings = (settings: PartialProjectSettings): ProjectSettings => {
     return {
-        provider: settings.provider,
+        driver: settings.driver,
         cwd: settings.cwd ?? process.cwd(),
         featureMatrix: settings.featureMatrix ?? {stable: {}, dev: {}},
         build: fillBuildSettings(settings.build),

@@ -35,6 +35,6 @@ test('has component render', async ({page}) => {
 
 test('play config works', async ({page}) => {
     await page.goto('http://localhost:9875');
-    const value = await page.locator('#create').evaluate(element => element.parentElement?.style.padding);
-    expect(value).toBe('20px');
+    const value = await page.locator('#create').evaluate(element => element.parentElement?.style.cssText);
+    expect(value).toBe('padding: 20px;');
 });

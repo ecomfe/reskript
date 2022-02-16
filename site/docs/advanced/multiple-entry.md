@@ -80,7 +80,7 @@ export default configure(
 <html>
 <head>
     <meta charset="utf-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title><%= templateData.title %></title>
     <style>
         #loading {
             color: #0571bd;
@@ -94,6 +94,10 @@ export default configure(
 </body>
 </html>
 ```
+
+:::note
+请注意，与`html-webpack-plugin`不同的是，在模板中你需要通过`templateData.*`来获得相应的参数。
+:::
 
 这个文件不需要单独写`meta[viewport]`和`meta[app-version]`，它们会自动生成，但是`meta[charset]`却是必须的。在构建后，我们看到的`dist/index-stable.html`将是以下内容（格式化后）：
 
@@ -122,7 +126,39 @@ export default configure(
 
 在无需配置`index.js`与`index.ejs`的关系的情况下，构建系统会自动识别它们的关联并通过指定的`.ejs`文件生成最终的HTML文件。
 
+## 配置模板数据
+
+如果你需要在自己的入口HTML模板（如`index.ejs`）中使用一些自定义的变量，则可以在`src/entries`下，放置一个与入口JavaScript文件同名的`.config.{mjs|ts}`文件，如`src/entries/hello.config.{mjs|ts}`文件，并放置以下内容：
+
+```ts
+export const templateData = {
+    foo: 123,
+    bar: 'abc',
+};
+```
+
+此后，你可以在模板`.ejs`文件中使用诸如`<%= templateData.foo %>`来引用这些数据。
+
+除了自定义的数据外，`reSKRipt`也为模板提供了一些通用的数据，参考一下类型：
+
+```ts
+interface BuiltInTempalteData {
+    mode: string;
+    buildVersion: string;
+    buildTime: string;
+    buildTarget: string;
+    buildIdentifier: string;
+    title: string;
+    favicon: string;
+    appContainerId: string;
+};
+```
+
 ## 配置HTML生成
+
+:::note
+该配置仅限于引擎为`webpack`。
+:::
 
 众所周知地，基于`webpack`的工具使用[html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)生成HTML文件，这个插件有着众多的配置，我们同样可以对它进行自定义。
 
@@ -161,6 +197,10 @@ export const html = {
 总而言之，同名的`.config.{mjs|ts}`中的`export const html`将会提供一个用于`html-webpack-plugin`的配置，用于控制生成HTML的逻辑。
 
 ## 自定义入口配置
+
+:::note
+入口配置仅限于`webpack`引擎。
+:::
 
 在正常逻辑下，`reSKRipt`会根据入口（`src/entries/*`）文件生成对应的带有哈希的文件。如果你熟悉[Webpack的入口配置](https://webpack.js.org/concepts/entry-points/#entrydescription-object)，我们支持你做一些自定义的配置。
 

@@ -62,8 +62,8 @@ const optionalRuleConfig = (valueSchema: any) => {
 // `schema`并不是一个完全符合JSON Schema的东西
 const schema: any = {
     properties: {
-        provider: {
-            enum: ['webpack'],
+        driver: {
+            enum: ['webpack', 'vite'],
             type: 'string',
         },
         featureMatrix: {
