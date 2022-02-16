@@ -21,12 +21,12 @@ export {fillProjectSettings, PartialProjectSettings};
 
 const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
 
-export interface UserSettings extends Omit<PartialProjectSettings, 'provider'> {
+export interface UserSettings extends Omit<PartialProjectSettings, 'driver'> {
     plugins?: ClientProjectSettings['plugins'];
 }
 
 export interface UserProjectSettings extends UserSettings {
-    provider: ReskriptDriver;
+    driver: ReskriptDriver;
 }
 
 const checkSettingsExists = (file?: string) => {
@@ -47,7 +47,7 @@ const importSettings = async (options: ResolveProjectSettingsOptions): Promise<P
     const {specifiedFile, ...cmd} = options;
     const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserProjectSettings}>(
         specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cmd.cwd, 'reskript.config' + v)),
-        {default: {provider: 'webpack'}}
+        {default: {driver: 'webpack'}}
     );
 
     try {
@@ -73,7 +73,7 @@ interface CacheContainer {
 const cache: CacheContainer = {
     initialized: false,
     hash: '',
-    settings: fillProjectSettings({provider: 'webpack'}),
+    settings: fillProjectSettings({driver: 'webpack'}),
     listen: null,
 };
 
@@ -155,6 +155,6 @@ export const strictCheckRequiredDependency = async (projectSettings: ProjectSett
     }
 };
 
-export const configure = (provider: 'webpack', settings: UserSettings): UserProjectSettings => {
-    return {...settings, provider};
+export const configure = (driver: ReskriptDriver, settings: UserSettings): UserProjectSettings => {
+    return {...settings, driver};
 };

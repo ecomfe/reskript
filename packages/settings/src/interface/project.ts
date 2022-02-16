@@ -9,7 +9,7 @@ import {CommandName, ReskriptDriver} from './shared.js';
 export interface ProjectSettings extends ProjectAware {
     // 从哪里来的配置
     readonly from?: string;
-    readonly provider: ReskriptDriver;
+    readonly driver: ReskriptDriver;
     readonly featureMatrix: FeatureMatrix;
     readonly build: BuildSettings;
     readonly devServer: DevServerSettings;

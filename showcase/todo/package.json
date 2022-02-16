@@ -7,6 +7,7 @@
     "build": "rm -rf node_modules/.cache && skr build --clean --strict",
     "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
+    "start-vite": "skr dev --config=reskript-vite.config.ts",
     "lint": "skr lint --strict",
     "test": "npm run babel > /dev/null && npm run fix && npm run build && skr test --target=react && playwright test",
     "play": "skr play --config=reskript-e2e.config.ts --port=9875 src/components/Create/index.tsx",
@@ -39,6 +40,7 @@
     "react-dom": "^17.0.2",
     "stylelint": "^14.4.0",
     "typescript": "^4.6.0-beta",
+    "vite": "^2.8.2",
     "webpack": "^5.68.0"
   },
   "dependencies": {

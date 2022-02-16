@@ -1,10 +1,8 @@
-import WebpackDevServer from 'webpack-dev-server';
-import {readProjectSettings, BuildEnv, DevCommandLineArgs, strictCheckRequiredDependency} from '@reskript/settings';
-import {EntryLocation, resolveDevHost} from '@reskript/build-utils';
-import {BuildContext, collectEntries, createRuntimeBuildEnv} from '@reskript/config-webpack';
+import {BuildEnv, DevCommandLineArgs, ProjectSettings} from '@reskript/settings';
+import {BuildContext, resolveDevHost, createRuntimeBuildEnv, AppEntry} from '@reskript/build-utils';
 import {logger, readPackageConfig} from '@reskript/core';
 
-export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
+const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
     if (!hostType) {
         return undefined;
     }
@@ -13,31 +11,15 @@ export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], po
     return `http://${host}:${port}/assets/`;
 };
 
-export const startServer = async (server: WebpackDevServer): Promise<void> => {
-    try {
-        await server.start();
-    }
-    catch (ex) {
-        logger.error(ex instanceof Error ? ex.message : `${ex}`);
-        process.exit(22);
-    }
-};
+interface BuildContextOptions<C> {
+    cmd: DevCommandLineArgs;
+    projectSettings: ProjectSettings;
+    entries: Array<AppEntry<C>>;
+}
 
-export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
-    const {mode, cwd, srcDirectory, entriesDirectory, entry, buildTarget, configFile} = cmd;
-    const reading = [
-        readProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd}),
-        readPackageConfig(cwd),
-    ] as const;
-    const [projectSettings, {name: hostPackageName}] = await Promise.all(reading);
-    await strictCheckRequiredDependency(projectSettings, cwd);
-    const entryLocation: EntryLocation = {
-        cwd: cwd,
-        srcDirectory: srcDirectory,
-        entryDirectory: entriesDirectory,
-        only: [entry],
-    };
-    const entries = await collectEntries(entryLocation);
+export const createBuildContext = async <C>({cmd, projectSettings, entries}: BuildContextOptions<C>) => {
+    const {mode, cwd, srcDirectory, entry, buildTarget} = cmd;
+    const {name: hostPackageName} = await readPackageConfig(cwd);
 
     if (!entries.length) {
         logger.error(`You have specified a missing entry ${entry}, dev-server is unable to start.`);
@@ -60,11 +42,59 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
         },
     };
     const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
-    return {
+    const buildContext: BuildContext<C> = {
         ...runtimeBuildEnv,
         entries,
         features: projectSettings.featureMatrix[buildTarget],
         buildTarget: buildTarget || 'dev',
         isDefaultTarget: true,
+    };
+    return buildContext;
+};
+
+export interface ServerStartContext<C> {
+    buildContext: BuildContext<C>;
+    host: DevCommandLineArgs['host'];
+    publicPath: string | undefined;
+}
+
+interface ServerContextOptions<C> {
+    cmd: DevCommandLineArgs;
+    buildContext: BuildContext<C>;
+}
+
+export const prepareServerContext = async <C>({cmd, buildContext}: ServerContextOptions<C>) => {
+    const host = await resolveDevHost(cmd.host);
+    const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
+    const serverContext: ServerStartContext<C> = {buildContext, host, publicPath};
+    return serverContext;
+};
+
+interface RestartContext {
+    inProgress: Promise<() => Promise<void>>;
+    nextStart: (() => void) | null;
+}
+
+export const restartable = (start: () => RestartContext['inProgress']) => {
+    const context: RestartContext = {
+        inProgress: start(),
+        nextStart: null,
+    };
+    return async () => {
+        logger.log('Detected reSKRipt config change, restarting dev server...');
+
+        if (context.nextStart) {
+            return;
+        }
+
+        context.nextStart = () => {
+            context.inProgress = start();
+            context.nextStart = null;
+        };
+        const stop = await context.inProgress;
+        await stop();
+        if (context.nextStart) {
+            context.nextStart();
+        }
     };
 };

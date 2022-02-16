@@ -67,8 +67,8 @@ export const less = async (entry: BuildEntry): Promise<RuleSetRule> => {
     const use = createUseWith(entry);
     const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
     const uses = [
-        use(final, 'css', 'postcss', 'less', 'styleResources'),
-        use('classNames', final, 'cssModules', 'postcss', 'less', 'styleResources'),
+        use(final, 'css', 'postcss', 'less'),
+        use('classNames', final, 'cssModules', 'postcss', 'less'),
     ] as const;
     const [globalLess, less] = await Promise.all(uses);
 

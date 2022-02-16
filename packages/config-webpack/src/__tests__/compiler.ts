@@ -13,8 +13,8 @@ interface CompileResult {
     assets?: StatsAsset[];
 }
 
-export default async (entry: string, partialProjectSettings?: Omit<PartialProjectSettings, 'provider'>) => {
-    const projectSettings = fillProjectSettings({provider: 'webpack', ...partialProjectSettings});
+export default async (entry: string, partialProjectSettings?: Omit<PartialProjectSettings, 'driver'>) => {
+    const projectSettings = fillProjectSettings({driver: 'webpack', ...partialProjectSettings});
     const context: BuildContext = {
         cwd: path.resolve(currentDirectory, 'fixtures'),
         mode: 'development',

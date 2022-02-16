@@ -506,7 +506,6 @@ type LoaderType =
     | 'url'
     | 'img'
     | 'worker'
-    | 'styleResources'
     | 'classNames'
     | 'cssExtract'
     | 'svg'

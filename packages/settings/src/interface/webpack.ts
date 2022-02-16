@@ -46,7 +46,6 @@ export type LoaderType =
     | 'less'
     | 'img'
     | 'worker'
-    | 'styleResources'
     | 'classNames'
     | 'cssExtract'
     | 'svgo'

@@ -91,6 +91,9 @@ declare module '*.svg?react' {
 }
 
 // 全局替换
-declare const $features: Record<string, unknown>;
+interface ReskriptGlobal {
+    features: Record<string, unknown>;
+    build: {version: string, time: string, target: string};
+}
 
-declare const $build: {version: string; time: string; target: string};
+declare const skr: ReskriptGlobal;

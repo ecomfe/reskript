@@ -1,7 +1,8 @@
 import path from 'node:path';
 import webpack from 'webpack';
 import WebpackDevServer, {Configuration as DevServerConfiguration, ProxyConfigMap} from 'webpack-dev-server';
-import {createRuntimeBuildEnv, BuildContext} from '@reskript/config-webpack';
+import {BuildContext} from '@reskript/config-webpack';
+import {createRuntimeBuildEnv} from '@reskript/build-utils';
 import {createWebpackDevServerConfig, injectDevElements} from '@reskript/config-webpack-dev-server';
 import {
     readProjectSettings,

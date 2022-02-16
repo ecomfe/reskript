@@ -3,14 +3,8 @@ import fs from 'node:fs/promises';
 import {reject, isNil, difference} from 'ramda';
 import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap, prepareEnvironment, readPackageConfig} from '@reskript/core';
-import {EntryLocation} from '@reskript/build-utils';
-import {
-    createWebpackConfig,
-    collectEntries,
-    createRuntimeBuildEnv,
-    checkProjectSettings,
-    BuildContext,
-} from '@reskript/config-webpack';
+import {EntryLocation, createRuntimeBuildEnv, validateProjectSettings} from '@reskript/build-utils';
+import {createWebpackConfig, collectEntries, BuildContext} from '@reskript/config-webpack';
 import {
     readProjectSettings,
     BuildEnv,
@@ -70,7 +64,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
         process.exit(21);
     }
 
-    checkProjectSettings(projectSettings);
+    validateProjectSettings(projectSettings);
     drawFeatureMatrix(projectSettings, cmd.featureOnly);
 
     const {name: hostPackageName} = await readPackageConfig(cmd.cwd);

@@ -3,7 +3,7 @@ import {fillProjectSettings} from '@reskript/settings';
 import plugin from '../index.js';
 
 test('build to umd', async () => {
-    const projectSettings = fillProjectSettings({provider: 'webpack'});
+    const projectSettings = fillProjectSettings({driver: 'webpack'});
     const settings = await plugin('test-app')(projectSettings, {cwd: process.cwd(), command: 'dev'});
     const webpackConfig = await settings.build.finalize({}, {} as any, {} as any);
     expect(webpackConfig.output?.libraryTarget).toBe('umd');
@@ -11,7 +11,7 @@ test('build to umd', async () => {
 });
 
 test('dev server container', async () => {
-    const projectSettings = fillProjectSettings({provider: 'webpack'});
+    const projectSettings = fillProjectSettings({driver: 'webpack'});
     const settings = await plugin('test-app')(projectSettings, {cwd: process.cwd(), command: 'dev'});
     expect(typeof settings.devServer.finalize).toBe('function');
 });

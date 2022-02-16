@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title><%= templateData.title %></title>
     <style>
         #app-footer {
             position: fixed;
@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-    <div id="root">
+    <div id="<%= templateData.appContainerId %>">
         <div id="app-footer">
             TodoMVC by reSKRipt
         </div>

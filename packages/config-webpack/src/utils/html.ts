@@ -1,34 +1,26 @@
 import HtmlWebpackPlugin, {Options as HTMLOptions} from 'html-webpack-plugin';
 import {BuildEntry} from '@reskript/settings';
-import {AppEntry} from '@reskript/build-utils';
+import {constructEntryTemplateData, AppEntry} from '@reskript/build-utils';
 import {EntryConfig, BuildContext} from '../interface.js';
 
 const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: BuildEntry): HTMLOptions => {
     const {
-        mode,
         projectSettings: {
             build: {
                 appTitle,
                 favicon,
-                appContainerId,
             },
         },
         buildVersion,
         buildTime,
         buildTarget,
     } = env;
-    const {name, config, template} = entry;
+    const {name, template} = entry;
     const buildIdentifier = `${buildVersion}/${buildTarget}@${buildTime}`;
 
     const baseConfig = {
         favicon,
         filename,
-        appContainerId,
-        mode,
-        buildVersion,
-        buildTime,
-        buildTarget,
-        buildIdentifier,
         title: appTitle,
         meta: {
             viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
@@ -49,7 +41,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: Buil
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
         },
-        ...config.html,
+        templateParameters: () => ({templateData: constructEntryTemplateData(env, entry)}),
     };
 
     return template ? Object.assign(baseConfig, {template}) : baseConfig;

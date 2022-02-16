@@ -1,5 +1,5 @@
-import {RuntimeBuildEnv, BuildEntry} from '@reskript/settings';
-import {AppEntry} from '@reskript/build-utils';
+import {BuildEntry} from '@reskript/settings';
+import {BuildContext as BuildContextGeneric} from '@reskript/build-utils';
 import {Configuration, RuleSetUseItem, EntryObject} from 'webpack';
 
 type EntryDescriptor = Exclude<EntryObject[string], string | string[]>;
@@ -9,14 +9,9 @@ export interface EntryConfig {
     html?: Record<string, any>;
 }
 
-export interface BuildContext extends RuntimeBuildEnv {
-    readonly features: Record<string, any>;
-    readonly buildTarget: string;
-    readonly isDefaultTarget: boolean;
-    readonly entries: Array<AppEntry<EntryConfig>>;
-}
-
 export type LoaderFactory = (entry: BuildEntry) => Promise<RuleSetUseItem | null>;
+
+export type BuildContext = BuildContextGeneric<EntryConfig>;
 
 export type ConfigurationFactory = (entry: BuildContext) => Configuration | Promise<Configuration>;
 

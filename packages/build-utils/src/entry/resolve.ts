@@ -8,7 +8,7 @@ const ALLOWED_ENTRY_EXTENSIONS = ['.tsx', '.ts', '.jsx', '.js'];
 
 const CONFIG_EXTENSIONS = ['.ts', '.mjs'];
 
-const readEntryConfig = async <C>(fileBaseName: string, transform: TransformConfig<C>): Promise<C> => {
+const readEntryConfig = async <C>(fileBaseName: string, transform: TransformConfig<C>) => {
     try {
         // `importUserModule`如果没有`defaultValue`是会抛异常的，但我们又需要返回`undefined`
         const defualtValue = {};

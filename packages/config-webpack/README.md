@@ -63,9 +63,9 @@ const createBuildConfiguration = async () => {
     const buildContext: BuildContext = {
         ...runtimeBuildEnv,
         entries,
-        // 对应feature matrix的设置，里面每一个属性都对应代码中的`$features.xxx`
+        // 对应feature matrix的设置，里面每一个属性都对应代码中的`skr.features.xxx`
         features: projectSettings.featureMatrix[featureName],
-        // 会最终生成在代码中的`$build.target`的值
+        // 会最终生成在代码中的`skr.build.target`的值
         buildTarget: 'stable',
         // 如果是默认的构建目标的话，会生成`index.html`，不然会生成`index-${buildTarget}.html`
         isDefaultTarget: false,
@@ -90,7 +90,6 @@ loaders: {
     cssModules,
     postcss,
     style,
-    styleResources,
     classNames,
 }
 ```

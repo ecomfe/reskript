@@ -7,12 +7,12 @@ import cssBind from '../index.js';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
-const build = async () => {
+const build = async (classNamesModule: string) => {
     const config: InlineConfig = {
         root: path.join(currentDirectory, 'fixtures'),
         logLevel: 'warn',
         plugins: [
-            cssBind({classNamesModule: path.join(currentDirectory, 'fixtures', 'classNames')}),
+            cssBind({classNamesModule}),
         ],
     };
     const bundle = await vite.build(config) as RollupOutput;
@@ -20,11 +20,11 @@ const build = async () => {
 };
 
 test('bind to function', async () => {
-    const code = await build();
+    const code = await build('classnames/bind');
     expect(code.includes('Unable to assign class name')).toBe(true);
 });
 
 test('custom classNames module', async () => {
-    const code = await build();
+    const code = await build(path.join(currentDirectory, 'fixtures', 'classNames'));
     expect(code.includes('internal-class-')).toBe(true);
 });

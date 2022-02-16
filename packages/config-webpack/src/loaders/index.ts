@@ -6,7 +6,6 @@ export {default as postcss} from './postcss.js';
 export {default as less} from './less.js';
 export {default as img} from './img.js';
 export {default as worker} from './worker.js';
-export {default as styleResources} from './styleResources.js';
 export {default as classNames} from './classNames.js';
 export {default as cssExtract} from './cssExtract.js';
 export {default as svgo} from './svgo.js';

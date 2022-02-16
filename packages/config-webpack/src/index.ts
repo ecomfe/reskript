@@ -1,23 +1,13 @@
 import path from 'node:path';
 import {pMap, logger, dirFromImportMeta} from '@reskript/core';
 import {Configuration} from 'webpack';
-import {
-    BuildEnv,
-    RuntimeBuildEnv,
-    ProjectSettings,
-    warnAndExitOnInvalidFinalizeReturn,
-    BuildInternals,
-    FinalizableWebpackConfiguration,
-} from '@reskript/settings';
+import {warnAndExitOnInvalidFinalizeReturn, BuildInternals, FinalizableWebpackConfiguration} from '@reskript/settings';
 import {
     EntryOptions,
     AppEntry,
     EntryLocation,
     collectAppEntries,
-    revision,
     hasServiceWorker,
-    checkFeatureMatrixSchema,
-    checkPreCommitHookWhenLintDisabled,
 } from '@reskript/build-utils';
 import * as rules from './rules/index.js';
 import {mergeBuiltin} from './utils/merge.js';
@@ -55,17 +45,6 @@ export const collectEntries = async (location: EntryLocation): Promise<Array<App
     };
 
     return collectAppEntries(options);
-};
-
-export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuildEnv> => {
-    const now = new Date();
-    const buildVersion = await revision();
-
-    return {
-        ...env,
-        buildVersion,
-        buildTime: now.toISOString(),
-    };
 };
 
 const createPartialWith = (context: BuildContext) => async (name: keyof typeof partials) => {
@@ -110,12 +89,4 @@ export const createWebpackConfig = async (context: BuildContext, options: Option
     const finalized = await context.projectSettings.build.finalize(internalCreated, context, internals);
     warnAndExitOnInvalidFinalizeReturn(finalized, 'build');
     return finalized;
-};
-
-export const checkProjectSettings = (settings: ProjectSettings): void => {
-    checkFeatureMatrixSchema(settings.featureMatrix);
-
-    if (settings.build.reportLintErrors === false) {
-        checkPreCommitHookWhenLintDisabled(settings.cwd);
-    }
 };
