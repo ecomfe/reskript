@@ -386,6 +386,8 @@ importers:
       '@babel/plugin-proposal-throw-expressions': ^7.16.5
       '@babel/plugin-syntax-dynamic-import': ^7.8.3
       '@babel/plugin-syntax-import-meta': ^7.10.4
+      '@babel/plugin-transform-react-constant-elements': ^7.16.7
+      '@babel/plugin-transform-react-inline-elements': ^7.16.7
       '@babel/plugin-transform-typescript': ^7.16.7
       '@babel/preset-env': ^7.16.5
       '@babel/preset-react': ^7.16.5
@@ -424,6 +426,8 @@ importers:
       '@babel/plugin-proposal-throw-expressions': 7.16.7_@babel+core@7.17.2
       '@babel/plugin-syntax-dynamic-import': 7.8.3_@babel+core@7.17.2
       '@babel/plugin-syntax-import-meta': 7.10.4_@babel+core@7.17.2
+      '@babel/plugin-transform-react-constant-elements': 7.16.7_@babel+core@7.17.2
+      '@babel/plugin-transform-react-inline-elements': 7.16.7_@babel+core@7.17.2
       '@babel/preset-env': 7.16.11_@babel+core@7.17.2
       '@babel/preset-react': 7.16.7_@babel+core@7.17.2
       '@babel/preset-typescript': 7.16.7_@babel+core@7.17.2
@@ -1296,6 +1300,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/helper-explode-assignable-expression': 7.16.7
+      '@babel/types': 7.17.0
+    dev: false
+
+  /@babel/helper-builder-react-jsx/7.16.7:
+    resolution: {integrity: sha512-XKorXOl2868Un8/XK2o4GLlXr8Q08KthWI5W3qyCkh6tCGf5Ncg3HR4oN2UO+sqPoAlcMgz9elFW/FZvAHYotA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-annotate-as-pure': 7.16.7
       '@babel/types': 7.17.0
     dev: false
 
@@ -2212,6 +2224,16 @@ packages:
       '@babel/helper-plugin-utils': 7.16.7
     dev: false
 
+  /@babel/plugin-transform-react-constant-elements/7.16.7_@babel+core@7.17.2:
+    resolution: {integrity: sha512-lF+cfsyTgwWkcw715J88JhMYJ5GpysYNLhLP1PkvkhTRN7B3e74R/1KsDxFxhRpSn0UUD3IWM4GvdBR2PEbbQQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.17.2
+      '@babel/helper-plugin-utils': 7.16.7
+    dev: false
+
   /@babel/plugin-transform-react-display-name/7.16.7_@babel+core@7.17.2:
     resolution: {integrity: sha512-qgIg8BcZgd0G/Cz916D5+9kqX0c7nPZyXaP8R2tLNN5tkyIZdG5fEwBrxwplzSnjC1jvQmyMNVwUCZPcbGY7Pg==}
     engines: {node: '>=6.9.0'}
@@ -2220,6 +2242,17 @@ packages:
     dependencies:
       '@babel/core': 7.17.2
       '@babel/helper-plugin-utils': 7.16.7
+
+  /@babel/plugin-transform-react-inline-elements/7.16.7_@babel+core@7.17.2:
+    resolution: {integrity: sha512-jFGuZSebHob02zhrXsJhnI8xcemiDfdlJa1KR2LUfVj/4y9G2iwbJNGVsiH8mW6HEQVh5XwzWWbo/YoroDlQRg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.17.2
+      '@babel/helper-builder-react-jsx': 7.16.7
+      '@babel/helper-plugin-utils': 7.16.7
+    dev: false
 
   /@babel/plugin-transform-react-jsx-development/7.16.7_@babel+core@7.17.2:
     resolution: {integrity: sha512-RMvQWvpla+xy6MlBpPlrKZCMRs2AGiHOGHY3xRwl0pEeim348dDyxeH4xBsMPbIMhujeq7ihE702eM2Ew0Wo+A==}
