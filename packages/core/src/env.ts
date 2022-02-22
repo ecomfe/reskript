@@ -8,8 +8,8 @@ import {WorkMode} from './interface.js';
 export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
     const files = [
         path.join(cwd, `.env.${mode}.local`),
-        path.join(cwd, `.env.${mode}`),
         path.join(cwd, '.env.local'),
+        path.join(cwd, `.env.${mode}`),
         path.join(cwd, '.env'),
     ];
 
