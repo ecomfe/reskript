@@ -4,18 +4,18 @@ import padStream from 'pad-stream';
 import {isInDebugMode, compact} from '@reskript/core';
 import {UserOptions} from '../interface.js';
 
-const PACKAGE_MANAGER_INSTALL_COMMAND: Record<string, [string, string]> = {
-    npm: ['npm', 'install'],
+const PACKAGE_MANAGER_INSTALL_COMMAND: Record<string, string[]> = {
+    npm: ['npm', 'install', '--legacy-peer'],
     yarn: ['yarn', 'add'],
     pnpm: ['pnpm', 'add'],
 };
 
 const installWith = (cwd: string, packageManager: string) => {
-    const [command, route] = PACKAGE_MANAGER_INSTALL_COMMAND[packageManager];
+    const [command, route, ...args] = PACKAGE_MANAGER_INSTALL_COMMAND[packageManager];
 
     return async (description: string, flags: string[], dependencies: Array<string | false>) => {
         const spinner = ora(description);
-        const cmd = execa(command, [route, ...flags, ...compact(dependencies)], {cwd});
+        const cmd = execa(command, [route, ...args, ...flags, ...compact(dependencies)], {cwd});
 
         if (isInDebugMode()) {
             spinner.stopAndPersist();
