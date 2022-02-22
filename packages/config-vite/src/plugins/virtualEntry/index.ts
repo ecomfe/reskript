@@ -21,7 +21,7 @@ export default function viertualEntryPlugin(options: VirtualEntryOptions): Plugi
         htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
     };
     const render = (devElements: boolean) => {
-        const html = injectElements(options.content, {...options, devElements});
+        const html = injectElements(options.content, {...options, devElements, root: root.value});
         return interpolateEntryContent(html, process.env);
     };
 

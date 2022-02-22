@@ -1,5 +1,13 @@
-export {ClientProjectSettings, ProjectSettings} from './project.js';
-export {BuildEntry, BuildEnv, CommandName, ReskriptDriver, RuntimeBuildEnv} from './shared.js';
+export {ClientProjectSettings, ProjectSettings, WebpackProjectSettings, ViteProjectSettings} from './project.js';
+export {
+    BuildEntry,
+    BuildEnv,
+    CommandName,
+    ReskriptDriver,
+    RuntimeBuildEnv,
+    WebpackBuildEntry,
+    ViteBuildEntry,
+} from './shared.js';
 export {FeatureMatrix} from './featureMatrix.js';
 export {
     BuildInspectInitialResource,
@@ -12,6 +20,8 @@ export {
     Severity,
     SourceFilter,
     ThirdPartyUse,
+    WebpackBuildSettings,
+    ViteBuildSettings,
 } from './build.js';
 export {
     CommandInput,
@@ -24,7 +34,7 @@ export {
     PlayCommandLineArgs,
     TestCommandLineArgs,
 } from './command.js';
-export {DevServerHttps, DevServerSettings} from './devServer.js';
+export {DevServerHttps, DevServerSettings, WebpackDevServerSettings, ViteDevServerSettings} from './devServer.js';
 export {PlaySettings} from './play.js';
 export {SettingsPluginItem, SettingsPlugin} from './plugin.js';
 export {

@@ -21,8 +21,8 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "rm -rf dist config && tsc -p tsconfig.build.json && node scripts/post-build.js",
+    "clean": "rm -rf dist config",
+    "build": "tsc -p tsconfig.build.json && node scripts/post-build.js",
     "lint": "eslint --max-warnings=0 src scripts",
     "test": "echo 'No test in @reskript/config-lint'"
   },

@@ -1,11 +1,13 @@
 import {createServer, InlineConfig} from 'vite';
 import open from 'better-opn';
 import {logger} from '@reskript/core';
-import {DevCommandLineArgs} from '@reskript/settings';
+import {DevCommandLineArgs, ViteProjectSettings} from '@reskript/settings';
 import {createViteConfig, ViteOptions} from '@reskript/config-vite';
-import {ServerStartContext} from './utils.js';
+import {ServerStartContext as ServerStartContextGeneric} from './utils.js';
 
-export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartContext<unknown>) => {
+type ServerStartContext = ServerStartContextGeneric<unknown, ViteProjectSettings>;
+
+export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartContext) => {
     const {buildContext, host, publicPath} = serverContext;
     const {port, https} = buildContext.projectSettings.devServer;
 

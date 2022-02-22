@@ -1,4 +1,4 @@
-import {BuildEntry} from '@reskript/settings';
+import {BuildEntry, ProjectSettings} from '@reskript/settings';
 
 export interface EntryLocation {
     cwd: string;
@@ -32,7 +32,7 @@ export interface ResolveOptions<C> {
 export interface EntryOptions<C> extends EntryLocation, ResolveOptions<C> {
 }
 
-export interface BuildContext<C> extends BuildEntry {
+export interface BuildContext<C, S extends ProjectSettings = ProjectSettings> extends BuildEntry<S> {
     readonly isDefaultTarget: boolean;
     readonly entries: Array<AppEntry<C>>;
 }

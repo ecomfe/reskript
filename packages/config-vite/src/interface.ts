@@ -1,8 +1,8 @@
 import {UserConfig} from 'vite';
 import {BuildContext as BuildContextGeneric} from '@reskript/build-utils';
-import {HostType} from '@reskript/settings';
+import {HostType, ViteProjectSettings} from '@reskript/settings';
 
-export type BuildContext = BuildContextGeneric<unknown>;
+export type BuildContext = BuildContextGeneric<unknown, ViteProjectSettings>;
 
 export interface ViteOptions {
     clean: boolean;

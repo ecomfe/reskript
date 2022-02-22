@@ -1,10 +1,10 @@
 import sass from 'sass';
 import {normalizeRuleMatch, resolve} from '@reskript/core';
-import {SettingsPlugin, BuildSettings, LoaderType} from '@reskript/settings';
+import {SettingsPlugin, LoaderType, WebpackBuildSettings} from '@reskript/settings';
 import {SassLoaderOptions} from './interface.js';
 
 export default (options: SassLoaderOptions = {}): SettingsPlugin => {
-    const finalizeBuild: BuildSettings['finalize'] = async (config, entry, internals) => {
+    const finalizeBuild: WebpackBuildSettings['finalize'] = async (config, entry, internals) => {
         const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
         const final: LoaderType = (usage === 'build' && extract) ? 'cssExtract' : 'style';
         const sassUse = {
@@ -56,6 +56,10 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
     };
 
     return settings => {
+        if (settings.driver === 'vite') {
+            throw new Error('Vite driver not supported by plugin-sass');
+        }
+
         return {
             ...settings,
             build: {

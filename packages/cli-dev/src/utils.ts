@@ -11,13 +11,14 @@ const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: num
     return `http://${host}:${port}/assets/`;
 };
 
-interface BuildContextOptions<C> {
+interface BuildContextOptions<C, S extends ProjectSettings> {
     cmd: DevCommandLineArgs;
-    projectSettings: ProjectSettings;
+    projectSettings: S;
     entries: Array<AppEntry<C>>;
 }
 
-export const createBuildContext = async <C>({cmd, projectSettings, entries}: BuildContextOptions<C>) => {
+export const createBuildContext = async <C, S extends ProjectSettings>(options: BuildContextOptions<C, S>) => {
+    const {cmd, projectSettings, entries} = options;
     const {mode, cwd, srcDirectory, entry, buildTarget} = cmd;
     const {name: hostPackageName} = await readPackageConfig(cwd);
 
@@ -26,7 +27,7 @@ export const createBuildContext = async <C>({cmd, projectSettings, entries}: Bui
         process.exit(21);
     }
 
-    const buildEnv: BuildEnv = {
+    const buildEnv: BuildEnv<S> = {
         hostPackageName,
         cwd,
         usage: 'devServer',
@@ -42,7 +43,7 @@ export const createBuildContext = async <C>({cmd, projectSettings, entries}: Bui
         },
     };
     const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
-    const buildContext: BuildContext<C> = {
+    const buildContext: BuildContext<C, S> = {
         ...runtimeBuildEnv,
         entries,
         features: projectSettings.featureMatrix[buildTarget],
@@ -52,21 +53,22 @@ export const createBuildContext = async <C>({cmd, projectSettings, entries}: Bui
     return buildContext;
 };
 
-export interface ServerStartContext<C> {
-    buildContext: BuildContext<C>;
+export interface ServerStartContext<C, S extends ProjectSettings> {
+    buildContext: BuildContext<C, S>;
     host: DevCommandLineArgs['host'];
     publicPath: string | undefined;
 }
 
-interface ServerContextOptions<C> {
+interface ServerContextOptions<C, S extends ProjectSettings> {
     cmd: DevCommandLineArgs;
-    buildContext: BuildContext<C>;
+    buildContext: BuildContext<C, S>;
 }
 
-export const prepareServerContext = async <C>({cmd, buildContext}: ServerContextOptions<C>) => {
+export const prepareServerContext = async <C, S extends ProjectSettings>(options: ServerContextOptions<C, S>) => {
+    const {cmd, buildContext} = options;
     const host = await resolveDevHost(cmd.host);
     const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
-    const serverContext: ServerStartContext<C> = {buildContext, host, publicPath};
+    const serverContext: ServerStartContext<C, S> = {buildContext, host, publicPath};
     return serverContext;
 };
 

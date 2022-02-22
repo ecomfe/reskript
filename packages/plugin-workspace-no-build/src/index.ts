@@ -11,6 +11,10 @@ import {
 } from './utils.js';
 
 export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}) => {
+    if (settings.driver === 'vite') {
+        throw new Error('Vite driver not supported by plugin-workspace-no-build');
+    }
+
     const isWorkspace = await isMonorepo(cwd);
 
     if (!isWorkspace) {

@@ -76,8 +76,17 @@ export interface BuildSettings {
     readonly excludeFeatures: string[];
     readonly style: BuildStyleSettings;
     readonly script: BuildScriptSettings;
-    // 最终手动处理webpack配置
-    readonly finalize: WebpackFinalize;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
+}
+
+export interface WebpackBuildSettings extends BuildSettings {
+    // 最终手动处理webpack配置
+    readonly finalize: WebpackFinalize;
+}
+
+export interface ViteBuildSettings extends BuildSettings {
+    // 最终手动处理vite配置
+    // TODO: 支持Vite的`finalize`
+    readonly finalize: unknown;
 }

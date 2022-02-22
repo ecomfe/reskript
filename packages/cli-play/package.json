@@ -19,7 +19,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
+    "build": "tsc -p tsconfig.build.json && cp -r src/assets dist && cpy --cwd=src --parents **/*.css **/*.svg ../dist",
     "lint": "eslint --max-warnings=0 src",
     "test": "vitest --run"
   },

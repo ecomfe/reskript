@@ -19,7 +19,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && cp -r src/assets dist",
     "lint": "eslint --max-warnings=0 src",
     "test": "vitest run"
   },

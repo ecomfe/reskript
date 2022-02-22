@@ -5,9 +5,18 @@ import {createBuildContext, prepareServerContext, restartable, ServerStartContex
 
 process.env.OPEN_MATCH_HOST_ONLY = 'true';
 
-type CollectEntries<C> = (location: EntryLocation) => Promise<Array<AppEntry<C>>>;
+type CollectEntry<C> = (location: EntryLocation) => Promise<Array<AppEntry<C>>>;
 
-type ServerStart<C> = (cmd: DevCommandLineArgs, context: ServerStartContext<C>) => Promise<() => Promise<void>>;
+type ServerStart<C, S extends ProjectSettings> = (
+    cmd: DevCommandLineArgs,
+    context: ServerStartContext<C, S>
+) => Promise<() => Promise<void>>;
+
+interface CreateStartOptions<C, S extends ProjectSettings> {
+    collectEntries: CollectEntry<C>;
+    projectSettings: S;
+    start: ServerStart<C, S>;
+}
 
 const createStart = async (cmd: DevCommandLineArgs, projectSettings: ProjectSettings) => {
     const entryLocation: EntryLocation = {
@@ -17,7 +26,8 @@ const createStart = async (cmd: DevCommandLineArgs, projectSettings: ProjectSett
         only: [cmd.entry],
     };
 
-    const create = async <C>(collectEntries: CollectEntries<C>, start: ServerStart<C>) => {
+    const create = async <C, S extends ProjectSettings>(options: CreateStartOptions<C, S>) => {
+        const {collectEntries, projectSettings, start} = options;
         const entries = await collectEntries(entryLocation);
         const buildContext = await createBuildContext({cmd, projectSettings, entries});
         const serverContext = await prepareServerContext({cmd, buildContext});
@@ -27,12 +37,12 @@ const createStart = async (cmd: DevCommandLineArgs, projectSettings: ProjectSett
     if (projectSettings.driver === 'webpack') {
         const importing = [import('@reskript/config-webpack'), import('./webpack.js')] as const;
         const [{collectEntries}, {start}] = await Promise.all(importing);
-        return create(collectEntries, start);
+        return create({collectEntries, projectSettings, start});
     }
     else {
         const importing = [import('@reskript/config-vite'), import('./vite.js')] as const;
         const [{collectEntries}, {start}] = await Promise.all(importing);
-        return create(collectEntries, start);
+        return create({collectEntries, projectSettings, start});
     }
 };
 

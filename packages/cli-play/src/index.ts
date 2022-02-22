@@ -10,6 +10,7 @@ import {
     PlayCommandLineArgs,
     ProjectSettings,
     strictCheckRequiredDependency,
+    WebpackProjectSettings,
 } from '@reskript/settings';
 import {logger, prepareEnvironment, readPackageConfig, dirFromImportMeta} from '@reskript/core';
 import {createWebpackConfig} from './webpack.js';
@@ -20,6 +21,12 @@ const currentDirectory = dirFromImportMeta(import.meta.url);
 const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
     const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
     const userProjectSettings = await readProjectSettings({commandName: 'play', specifiedFile: configFile, ...cmd});
+
+
+    if (userProjectSettings.driver === 'vite') {
+        throw new Error('Vite driver not supported by plugin-sass');
+    }
+
     const projectSettings: ProjectSettings = {
         ...userProjectSettings,
         build: {
@@ -35,7 +42,7 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
     };
     await strictCheckRequiredDependency(projectSettings, cwd);
     const {name: hostPackageName} = await readPackageConfig(cwd);
-    const buildEnv: BuildEnv = {
+    const buildEnv: BuildEnv<WebpackProjectSettings> = {
         hostPackageName,
         projectSettings,
         cwd,

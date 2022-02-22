@@ -9,8 +9,8 @@ import {
     readProjectSettings,
     BuildEnv,
     BuildCommandLineArgs,
-    ProjectSettings,
     strictCheckRequiredDependency,
+    WebpackProjectSettings,
 } from '@reskript/settings';
 import * as partials from './partial.js';
 import {drawFeatureMatrix, drawBuildReport, printWebpackResult, WebpackResult} from './report.js';
@@ -51,7 +51,7 @@ const build = (configuration: Configuration | Configuration[]): Promise<Stats> =
     return new Promise(executor);
 };
 
-const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: ProjectSettings) => {
+const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: WebpackProjectSettings) => {
     const featureNames = difference(Object.keys(projectSettings.featureMatrix), projectSettings.build.excludeFeatures);
 
     if (cmd.featureOnly && !featureNames.includes(cmd.featureOnly)) {
@@ -78,7 +78,7 @@ const createConfigurations = async (cmd: BuildCommandLineArgs, projectSettings: 
 
     const featureNamesToUse = cmd.featureOnly ? [cmd.featureOnly] : featureNames;
     const toConfiguration = async (featureName: string): Promise<Configuration> => {
-        const buildEnv: BuildEnv = {
+        const buildEnv: BuildEnv<WebpackProjectSettings> = {
             hostPackageName,
             projectSettings,
             usage: 'build',
@@ -126,6 +126,11 @@ export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     }
 
     const projectSettings = await readProjectSettings({commandName: 'build', specifiedFile: configFile, ...cmd});
+
+    if (projectSettings.driver === 'vite') {
+        throw new Error('Vite driver not supported by plugin-sass');
+    }
+
     await strictCheckRequiredDependency(projectSettings, cwd);
     const [initial, ...configurations] = await createConfigurations(cmd, projectSettings);
 

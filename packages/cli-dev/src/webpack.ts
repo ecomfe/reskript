@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import open from 'better-opn';
-import {DevCommandLineArgs} from '@reskript/settings';
+import {DevCommandLineArgs, WebpackProjectSettings} from '@reskript/settings';
 import {createWebpackConfig, EntryConfig} from '@reskript/config-webpack';
 import {dirFromImportMeta, logger} from '@reskript/core';
 import {
@@ -10,6 +10,8 @@ import {
     injectDevElements,
 } from '@reskript/config-webpack-dev-server';
 import {ServerStartContext} from './utils.js';
+
+type WebpackServerStartContext = ServerStartContext<EntryConfig, WebpackProjectSettings>;
 
 export const startServer = async (server: WebpackDevServer): Promise<void> => {
     try {
@@ -21,7 +23,7 @@ export const startServer = async (server: WebpackDevServer): Promise<void> => {
     }
 };
 
-export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartContext<EntryConfig>) => {
+export const start = async (cmd: DevCommandLineArgs, serverContext: WebpackServerStartContext) => {
     const {buildContext, host, publicPath} = serverContext;
     const {hot, https} = buildContext.projectSettings.devServer;
     const extra = await createWebpackDevServerPartial(buildContext, host);

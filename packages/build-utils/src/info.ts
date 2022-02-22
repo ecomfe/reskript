@@ -3,7 +3,7 @@ import {existsSync} from 'node:fs';
 import childProcess from 'node:child_process';
 import {promisify} from 'node:util';
 import {logger} from '@reskript/core';
-import {BuildEnv, RuntimeBuildEnv} from '@reskript/settings';
+import {BuildEnv, ProjectSettings, RuntimeBuildEnv} from '@reskript/settings';
 
 const exec = promisify(childProcess.exec);
 
@@ -18,15 +18,16 @@ const revision = async (): Promise<string> => {
     }
 };
 
-export const createRuntimeBuildEnv = async (env: BuildEnv): Promise<RuntimeBuildEnv> => {
+export const createRuntimeBuildEnv = async <S extends ProjectSettings>(env: BuildEnv<S>) => {
     const now = new Date();
     const buildVersion = await revision();
 
-    return {
+    const runtimeEnv: RuntimeBuildEnv<S> = {
         ...env,
         buildVersion,
         buildTime: now.toISOString(),
     };
+    return runtimeEnv;
 };
 
 interface ProjectLocation {
