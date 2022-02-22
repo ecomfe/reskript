@@ -1,7 +1,12 @@
 import {describe, test, expect, vi} from 'vitest';
 import {TransformOptions} from '@babel/core';
 import {dirFromImportMeta} from '@reskript/core';
-import {readProjectSettings, CommandInput, FinalizableWebpackConfiguration} from '@reskript/settings';
+import {
+    readProjectSettings,
+    CommandInput,
+    FinalizableWebpackConfiguration,
+    WebpackProjectSettings,
+} from '@reskript/settings';
 import {createWebpackConfig} from '../index.js';
 import {BuildContext} from '../interface.js';
 
@@ -23,7 +28,8 @@ const currentDirectory = dirFromImportMeta(import.meta.url);
 describe('finalize', () => {
     test('can receive a fully resolved webpack config and modify it', async () => {
         const finalize = vi.fn((config: FinalizableWebpackConfiguration) => ({...config, mode: 'production' as const}));
-        const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
+        const options = {...BUILD_CMD, cwd: currentDirectory};
+        const projectSettings = await readProjectSettings(options) as WebpackProjectSettings;
         const withFinalize = {
             ...projectSettings,
             build: {
@@ -54,7 +60,8 @@ describe('finalize', () => {
 
     test('can modify babel config', async () => {
         const finalize = vi.fn((config: TransformOptions) => ({...config, comments: false}));
-        const projectSettings = await readProjectSettings({...BUILD_CMD, cwd: currentDirectory});
+        const options = {...BUILD_CMD, cwd: currentDirectory};
+        const projectSettings = await readProjectSettings(options) as WebpackProjectSettings;
         const withFinalize = {
             ...projectSettings,
             build: {

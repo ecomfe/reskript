@@ -13,7 +13,12 @@ import {
     CommandInput,
 } from './interface/index.js';
 import validate from './validate.js';
-import {fillProjectSettings, PartialProjectSettings} from './defaults.js';
+import {
+    fillProjectSettings,
+    PartialProjectSettings,
+    PartialViteProjectSettings,
+    PartialWebpackProjectSettings,
+} from './defaults.js';
 import {applyPlugins} from './plugins.js';
 
 export * from './interface/index.js';
@@ -21,13 +26,15 @@ export {fillProjectSettings, PartialProjectSettings};
 
 const SETTINGS_EXTENSIONS = ['.ts', '.mjs'];
 
-export interface UserSettings extends Omit<PartialProjectSettings, 'driver'> {
+interface PluginSetting {
     plugins?: ClientProjectSettings['plugins'];
 }
 
-export interface UserProjectSettings extends UserSettings {
-    driver: ReskriptDriver;
-}
+type WebpackUserSetting = Omit<PartialWebpackProjectSettings, 'driver'> & PluginSetting;
+
+type ViteUserSetting = Omit<PartialViteProjectSettings, 'driver'> & PluginSetting;
+
+export type UserSettings = PartialProjectSettings & PluginSetting;
 
 const checkSettingsExists = (file?: string) => {
     if (file && !existsSync(file)) {
@@ -45,7 +52,7 @@ type ResolveProjectSettingsOptions = CommandInput & {specifiedFile?: string};
 
 const importSettings = async (options: ResolveProjectSettingsOptions): Promise<ProjectSettings> => {
     const {specifiedFile, ...cmd} = options;
-    const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserProjectSettings}>(
+    const {resolved, value: {default: userSettings}} = await importUserModule<{default: UserSettings}>(
         specifiedFile ? [specifiedFile] : SETTINGS_EXTENSIONS.map(v => path.join(cmd.cwd, 'reskript.config' + v)),
         {default: {driver: 'webpack'}}
     );
@@ -155,6 +162,8 @@ export const strictCheckRequiredDependency = async (projectSettings: ProjectSett
     }
 };
 
-export const configure = (driver: ReskriptDriver, settings: UserSettings): UserProjectSettings => {
+export function configure(driver: 'webpack', settings: WebpackUserSetting): UserSettings;
+export function configure(driver: 'vite', settings: ViteUserSetting): UserSettings;
+export function configure(driver: ReskriptDriver, settings: any): UserSettings {
     return {...settings, driver};
-};
+}

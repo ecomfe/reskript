@@ -8,7 +8,7 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {compact} from '@reskript/core';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {constructProxyConfiguration} from '@reskript/build-utils';
-import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import {warnAndExitOnInvalidFinalizeReturn, WebpackBuildEntry} from '@reskript/settings';
 import ProgressBarPlugin from './ProgressBarPlugin.js';
 import {addHotModuleToEntry} from './utils.js';
 
@@ -54,7 +54,7 @@ interface Options {
 }
 
 // 这个函数的实现暂时没有异步的逻辑，但对外暴露为异步接口给未来调整留空间
-export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, options: Options) => {
+export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry, options: Options) => {
     const {targetEntry, proxyDomain, extra = {}} = options;
     const {
         apiPrefixes,

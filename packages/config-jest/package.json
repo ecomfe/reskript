@@ -20,8 +20,8 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "rm -rf dist config && tsc -p tsconfig.build.json && node scripts/post-build.mjs",
+    "clean": "rm -rf dist config",
+    "build": "tsc -p tsconfig.build.json && node scripts/post-build.mjs",
     "lint": "eslint --max-warnings=0 src",
     "test": "echo 'No test in @reskript/config-jest'"
   },

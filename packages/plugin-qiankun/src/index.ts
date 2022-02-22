@@ -1,11 +1,11 @@
-import {SettingsPlugin, BuildSettings, DevServerSettings} from '@reskript/settings';
+import {SettingsPlugin, WebpackBuildSettings, WebpackDevServerSettings} from '@reskript/settings';
 import {Request, Response} from 'webpack-dev-server';
 import {Options} from './interface.js';
 import htmlEntry from './htmlEntry.js';
 import runtimeEntry from './runtimeEntry.js';
 
 export default (appName: string, options?: Options): SettingsPlugin => {
-    const finalizeBuild: BuildSettings['finalize'] = config => {
+    const finalizeBuild: WebpackBuildSettings['finalize'] = config => {
         config.output = {
             ...config.output,
             library: `${appName}-[name]`,
@@ -15,7 +15,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
         return config;
     };
 
-    const finalizeDevServer: DevServerSettings['finalize'] = config => {
+    const finalizeDevServer: WebpackDevServerSettings['finalize'] = config => {
         const {setupMiddlewares} = config;
         config.setupMiddlewares = (middlewares, devServer) => {
             devServer.app?.get(
@@ -49,6 +49,10 @@ export default (appName: string, options?: Options): SettingsPlugin => {
     };
 
     return async settings => {
+        if (settings.driver === 'vite') {
+            throw new Error('Vite driver not supported by plugin-qiankun');
+        }
+
         return {
             ...settings,
             build: {

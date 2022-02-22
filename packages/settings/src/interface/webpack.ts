@@ -1,5 +1,5 @@
 import {Configuration, RuleSetRule, RuleSetUseItem} from 'webpack';
-import {BuildEntry} from './shared.js';
+import {WebpackBuildEntry} from './shared.js';
 
 type NotOptinal<T> = Exclude<T, undefined>;
 
@@ -24,9 +24,9 @@ export interface FinalizableWebpackConfiguration extends Configuration {
 }
 
 
-export type RuleFactory = (buildEntry: BuildEntry) => Promise<RuleSetRule>;
+export type RuleFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetRule>;
 
-export type LoaderFactory = (buildEntry: BuildEntry) => Promise<RuleSetUseItem | null>;
+export type LoaderFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetUseItem | null>;
 
 export interface InternalRules {
     readonly script: RuleFactory;
@@ -53,12 +53,12 @@ export type LoaderType =
 
 export interface BuildInternals {
     readonly rules: InternalRules;
-    readonly loader: (name: LoaderType, buildEntry: BuildEntry) => Promise<RuleSetUseItem | null>;
-    readonly loaders: (names: Array<LoaderType | false>, buildEntry: BuildEntry) => Promise<RuleSetUseItem[]>;
+    readonly loader: (name: LoaderType, buildEntry: WebpackBuildEntry) => Promise<RuleSetUseItem | null>;
+    readonly loaders: (names: Array<LoaderType | false>, buildEntry: WebpackBuildEntry) => Promise<RuleSetUseItem[]>;
 }
 
 export type WebpackFinalize = (
     webpackConfig: FinalizableWebpackConfiguration,
-    buildEntry: BuildEntry,
+    buildEntry: WebpackBuildEntry,
     internals: BuildInternals
 ) => FinalizableWebpackConfiguration | Promise<FinalizableWebpackConfiguration>;

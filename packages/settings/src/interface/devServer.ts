@@ -1,6 +1,6 @@
 import {ServerOptions} from 'node:https';
 import {Configuration} from 'webpack-dev-server';
-import {BuildEntry} from './shared.js';
+import {WebpackBuildEntry} from './shared.js';
 
 export type DevServerHttps = {proxy?: boolean} & ({client?: false} | {client: true, serverOptions?: ServerOptions});
 
@@ -19,6 +19,14 @@ export interface DevServerSettings {
     readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
+}
+
+export interface WebpackDevServerSettings extends DevServerSettings {
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
-    readonly finalize: (serverConfig: Configuration, env: BuildEntry) => Configuration | Promise<Configuration>;
+    readonly finalize: (serverConfig: Configuration, env: WebpackBuildEntry) => Configuration | Promise<Configuration>;
+}
+
+export interface ViteDevServerSettings extends DevServerSettings {
+    // TODO: 支持Vite的`finalize`
+    readonly finalize: unknown;
 }

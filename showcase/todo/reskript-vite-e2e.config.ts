@@ -1,7 +1,6 @@
-import {UserSettings} from '@reskript/settings';
 import baseConfig from './reskript-vite.config';
 
-const config: UserSettings = {
+const config = {
     ...baseConfig,
     devServer: {
         ...baseConfig.devServer,

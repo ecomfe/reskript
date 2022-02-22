@@ -1,3 +1,4 @@
+import path from 'node:path';
 // @ts-expect-error
 import dedent from 'dedent';
 import {ListenOptions} from './interface.js';
@@ -72,17 +73,18 @@ const viteClientScript = ({protocol, host, port}: ListenOptions) => {
 
 const faviconLink = (favicon: string) => `<link rel="icon" href="${favicon}">`;
 
-const entryScript = (entry: string) => `<script type="module" src="${entry}"></script>`;
+const entryScript = (entry: string) => `<script type="module" src="/${entry}"></script>`;
 
 interface Options extends ListenOptions {
+    root: string;
     devElements: boolean;
     favicon?: string;
     entry: string;
 }
 
-export default (html: string, {devElements, favicon, entry, ...listen}: Options) => {
+export default (html: string, {devElements, favicon, entry, root, ...listen}: Options) => {
     const head = [
-        favicon ? faviconLink(favicon) : '',
+        favicon ? faviconLink(favicon.startsWith('/') ? path.relative(root, favicon) : favicon) : '',
         devElements ? reactRefreshScript(listen) : '',
         devElements ? viteClientScript(listen) : '',
     ];

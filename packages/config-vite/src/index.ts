@@ -5,6 +5,7 @@ import {EntryLocation, AppEntry, EntryOptions, collectAppEntries} from '@reskrip
 import {BuildContext, ViteOptions} from './interface.js';
 import buildConfig from './config/build.js';
 import cssConfig from './config/css.js';
+import baseConfig from './config/base.js';
 import resolveConfig from './config/resolve.js';
 import serverConfig from './config/server.js';
 import defineConfig from './config/define.js';
@@ -12,14 +13,14 @@ import pluginsConfig from './config/plugins.js';
 
 export type {ViteOptions} from './interface.js';
 
-const factories = [buildConfig, cssConfig, resolveConfig, serverConfig, defineConfig, pluginsConfig];
+const factories = [baseConfig, buildConfig, cssConfig, resolveConfig, serverConfig, defineConfig, pluginsConfig];
 
 export const collectEntries = async (location: EntryLocation): Promise<Array<AppEntry<unknown>>> => {
     const options: EntryOptions<unknown> = {
         ...location,
         templateExtension: '.ejs',
         defaultTemplate: path.join(dirFromImportMeta(import.meta.url), 'assets', 'default-html.ejs'),
-        transformConfig: imported => imported,
+        transformConfig: imported => imported ?? {},
     };
 
     return collectAppEntries(options);

@@ -21,9 +21,9 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && cp -r src/assets dist",
+    "build": "tsc -p tsconfig.build.json && cp -r src/assets dist",
     "lint": "eslint --max-warnings=0 src",
-    "test": "vitest --run"
+    "test": "vitest --run --threads=false"
   },
   "devDependencies": {
     "@reskript/config-img-loader": "4.3.0",

@@ -1,7 +1,6 @@
-import {UserSettings} from '@reskript/settings';
 import baseConfig from './reskript.config';
 
-const config: UserSettings = {
+const config = {
     ...baseConfig,
     devServer: {
         ...baseConfig.devServer,

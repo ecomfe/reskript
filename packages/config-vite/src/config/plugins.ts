@@ -4,15 +4,15 @@ import react from '@vitejs/plugin-react';
 import template from 'lodash.template';
 import {normalizeRuleMatch, pMap, resolve} from '@reskript/core';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
-import {AppEntry, BuildContext, constructEntryTemplateData, resolveDevHost} from '@reskript/build-utils';
-import {ConfigFactory} from '../interface.js';
+import {AppEntry, constructEntryTemplateData, resolveDevHost} from '@reskript/build-utils';
+import {BuildContext, ConfigFactory} from '../interface.js';
 import cssBind from '../plugins/cssBind/index.js';
 import cssForceModules from '../plugins/cssForceModules/index.js';
 import svgToComponent from '../plugins/svgToComponent/index.js';
 import virtualEntry, {VirtualEntryOptions} from '../plugins/virtualEntry/index.js';
 
 // 与`html-webpack-plugin`的`.ejs`处理对齐
-const resolveTemplateContent = async (context: BuildContext<unknown>, entry: AppEntry<unknown>) => {
+const resolveTemplateContent = async (context: BuildContext, entry: AppEntry<unknown>) => {
     const content = await fs.readFile(entry.template, 'utf8');
     const templateData = constructEntryTemplateData(context, entry);
     const render = template(content, {interpolate: /<%=([\s\S]+?)%>/g, variable: 'templateData'});
