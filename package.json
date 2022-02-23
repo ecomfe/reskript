@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "lerna run --parallel --no-bail lint",
+    "lint": "lerna run --parallel --no-bail --concurrency=4 lint",
     "test": "lerna run --concurrency=1 test",
     "build": "lerna run build",
     "build-clean": "lerna run --parallel clean && npm run build",
