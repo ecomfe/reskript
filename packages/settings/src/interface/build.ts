@@ -1,6 +1,7 @@
 import {TransformOptions} from '@babel/core';
 import {BuildEntry} from './shared.js';
 import {WebpackFinalize} from './webpack.js';
+import {ViteFinalize} from './vite.js';
 
 export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
@@ -87,6 +88,5 @@ export interface WebpackBuildSettings extends BuildSettings {
 
 export interface ViteBuildSettings extends BuildSettings {
     // 最终手动处理vite配置
-    // TODO: 支持Vite的`finalize`
-    readonly finalize: unknown;
+    readonly finalize: ViteFinalize;
 }

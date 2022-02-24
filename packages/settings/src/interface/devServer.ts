@@ -1,7 +1,8 @@
 import {IncomingMessage, ServerResponse} from 'node:http';
-import {ServerOptions} from 'node:https';
+import {ServerOptions as HttpsServerOptions} from 'node:https';
 import {Configuration} from 'webpack-dev-server';
-import {WebpackBuildEntry} from './shared.js';
+import {ServerOptions} from 'vite';
+import {ViteBuildEntry, WebpackBuildEntry} from './shared.js';
 
 export type RequestHandler = (req: IncomingMessage, res: ServerResponse, next: (err?: Error) => void) => void;
 
@@ -21,7 +22,12 @@ export interface MiddlewareCustomization {
     after: MiddlewareHook;
 }
 
-export type DevServerHttps = {proxy?: boolean} & ({client?: false} | {client: true, serverOptions?: ServerOptions});
+interface ClientHttps {
+    client: true;
+    serverOptions?: HttpsServerOptions;
+}
+
+export type DevServerHttps = {proxy?: boolean} & ({client?: false} | ClientHttps);
 
 export interface DevServerSettings {
     // 是否以HTTPS协议代理请求及启动调试服务器
@@ -48,6 +54,5 @@ export interface WebpackDevServerSettings extends DevServerSettings {
 }
 
 export interface ViteDevServerSettings extends DevServerSettings {
-    // TODO: 支持Vite的`finalize`
-    readonly finalize: unknown;
+    readonly finalize: (serverConfig: ServerOptions, env: ViteBuildEntry) => ServerOptions | Promise<ServerOptions>;
 }

@@ -63,8 +63,7 @@ const fillWebpackBuildSettings = (settings?: PartialBuildSettings<WebpackBuildSe
 const fillViteBuildSettings = (settings?: PartialBuildSettings<ViteBuildSettings>): ViteBuildSettings => {
     return {
         ...fillBuildSettings(settings),
-        // TODO: 支持Vite的`finalize`
-        finalize: settings?.finalize ?? null,
+        finalize: settings?.finalize ?? (config => config),
     };
 };
 
@@ -91,8 +90,7 @@ const fillWebpackDevServerSettings = (settings?: Partial<WebpackDevServerSetting
 const fillViteDevServerSettings = (settings?: Partial<ViteDevServerSettings>): ViteDevServerSettings => {
     return {
         ...fillDevServerSettings(settings),
-        // TODO: 支持Vite的`finalize`
-        finalize: settings?.finalize ?? null,
+        finalize: settings?.finalize ?? (config => config),
     };
 };
 

@@ -1,4 +1,4 @@
-import {SettingsPlugin, WebpackDevServerSettings} from '@reskript/settings';
+import {SettingsPlugin, WebpackDevServerSettings, WebpackProjectSettings} from '@reskript/settings';
 import {Options} from './interface.js';
 import htmlEntry from './htmlEntry.js';
 import runtimeEntry from './runtimeEntry.js';
@@ -32,7 +32,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
             throw new Error('Vite driver not supported by plugin-qiankun');
         }
 
-        return {
+        const next: WebpackProjectSettings = {
             ...settings,
             build: {
                 ...settings.build,
@@ -62,5 +62,6 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                     },
                 },
         };
+        return next;
     };
 };

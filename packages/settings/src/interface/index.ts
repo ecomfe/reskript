@@ -55,6 +55,7 @@ export {
     RuleFactory,
     WebpackFinalize,
 } from './webpack.js';
+export {FinalizableViteConfiguration, ViteFinalize} from './vite.js';
 
 export type Listener = () => void;
 

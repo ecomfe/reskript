@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import react from '@vitejs/plugin-react';
 import template from 'lodash.template';
 import {normalizeRuleMatch, pMap, resolve} from '@reskript/core';
+import {warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {AppEntry, constructEntryTemplateData, resolveDevHost} from '@reskript/build-utils';
 import {BuildContext, ConfigFactory} from '../interface.js';
@@ -39,8 +40,11 @@ const factory: ConfigFactory = async (context, options) => {
         srcDirectory: context.srcDirectory,
         openInEditorPrefix: ':origin/__open_in_editor__?file=',
     };
+    const finalizedBabelConfig = await settings.build.script.finalize(getBabelConfig(babelOptions), context);
+    warnAndExitOnInvalidFinalizeReturn(finalizedBabelConfig, 'build.script');
+
     const reactOptions = {
-        babel: await settings.build.script.finalize(getBabelConfig(babelOptions), context),
+        babel: finalizedBabelConfig,
         fastRefresh: context.usage === 'devServer' ? settings.devServer.hot : false,
     };
     const host = await resolveDevHost(options.host ?? 'localhost');

@@ -23,7 +23,6 @@ export interface FinalizableWebpackConfiguration extends Configuration {
     optimization: NotOptinal<Configuration['optimization']>;
 }
 
-
 export type RuleFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetRule>;
 
 export type LoaderFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetUseItem | null>;
