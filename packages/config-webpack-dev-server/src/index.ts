@@ -7,7 +7,7 @@ import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {compact} from '@reskript/core';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
-import {constructProxyConfiguration} from '@reskript/build-utils';
+import {constructProxyConfiguration, createMiddlewareHook} from '@reskript/build-utils';
 import {warnAndExitOnInvalidFinalizeReturn, WebpackBuildEntry} from '@reskript/settings';
 import ProgressBarPlugin from './ProgressBarPlugin.js';
 import {addHotModuleToEntry} from './utils.js';
@@ -63,6 +63,7 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
         https,
         port,
         hot,
+        customizeMiddleware,
     } = buildEntry.projectSettings.devServer;
     const proxyOptions = {
         https: https?.proxy ?? false,
@@ -105,8 +106,18 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
             type: https?.client ? 'https' : 'http',
             options: https?.client ? https.serverOptions : undefined,
         },
-        setupMiddlewares: middlewares => {
-            middlewares.unshift({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
+        setupMiddlewares: (middlewares, server) => {
+            if (!server.app) {
+                throw new Error('Webpack dev server not launched');
+            }
+
+            const before = createMiddlewareHook();
+            const after = createMiddlewareHook();
+            customizeMiddleware({before, after});
+            middlewares.unshift(...before.items());
+            middlewares.push(...after.items());
+            middlewares.unshift({path: '/__open_in_editor__', middleware: launchInEditor()});
+
             return middlewares;
         },
     };

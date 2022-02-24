@@ -1,6 +1,25 @@
+import {IncomingMessage, ServerResponse} from 'node:http';
 import {ServerOptions} from 'node:https';
 import {Configuration} from 'webpack-dev-server';
 import {WebpackBuildEntry} from './shared.js';
+
+export type RequestHandler = (req: IncomingMessage, res: ServerResponse, next: (err?: Error) => void) => void;
+
+export type Middleware = RequestHandler | {name?: string, path?: string, middleware: RequestHandler};
+
+export interface MiddlewareHook {
+    use: (route: string, fn: RequestHandler) => void;
+    get: (route: string, fn: RequestHandler) => void;
+    post: (route: string, fn: RequestHandler) => void;
+    put: (route: string, fn: RequestHandler) => void;
+    delete: (route: string, fn: RequestHandler) => void;
+    patch: (route: string, fn: RequestHandler) => void;
+}
+
+export interface MiddlewareCustomization {
+    before: MiddlewareHook;
+    after: MiddlewareHook;
+}
 
 export type DevServerHttps = {proxy?: boolean} & ({client?: false} | {client: true, serverOptions?: ServerOptions});
 
@@ -19,6 +38,8 @@ export interface DevServerSettings {
     readonly hot: boolean;
     // 服务启动后打开的页面
     readonly openPage: string;
+    // 对调试服务器追加一些配置或功能
+    readonly customizeMiddleware: (customization: MiddlewareCustomization) => void;
 }
 
 export interface WebpackDevServerSettings extends DevServerSettings {

@@ -223,6 +223,9 @@ const schema: any = {
                 port: {
                     type: 'number',
                 },
+                customizeMiddleware: {
+                    instanceof: 'Function',
+                },
                 finalize: {
                     instanceof: 'Function',
                 },

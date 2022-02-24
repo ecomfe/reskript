@@ -15,3 +15,4 @@ export {validateProjectSettings} from './validate.js';
 export {ProxyOptions, constructProxyConfiguration} from './proxy.js';
 export {resolveDevHost} from './host.js';
 export {constructDefines, DefineContext} from './define.js';
+export {createMiddlewareHook} from './devServer.js';
