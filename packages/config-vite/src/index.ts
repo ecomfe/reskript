@@ -1,6 +1,7 @@
 import path from 'node:path';
 import {UserConfig, mergeConfig} from 'vite';
 import {dirFromImportMeta, logger} from '@reskript/core';
+import {FinalizableViteConfiguration, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {EntryLocation, AppEntry, EntryOptions, collectAppEntries} from '@reskript/build-utils';
 import {BuildContext, ViteOptions} from './interface.js';
 import buildConfig from './config/build.js';
@@ -33,6 +34,15 @@ export const createViteConfig = async (context: BuildContext, options: ViteOptio
     }
 
     const parts = await Promise.all(factories.map(v => v(context, options)));
-    const config = parts.reduce((output, current) => mergeConfig(output, current));
-    return config;
+    const config = parts.reduce((output, current) => mergeConfig(output, current)) as FinalizableViteConfiguration;
+    const serverFinalized = {
+        ...config,
+        server: await context.projectSettings.devServer.finalize(config.server, context),
+    };
+    warnAndExitOnInvalidFinalizeReturn(serverFinalized, 'devServer');
+
+    const finalized = await context.projectSettings.build.finalize(serverFinalized, context);
+    warnAndExitOnInvalidFinalizeReturn(finalized, 'build');
+
+    return finalized;
 };
