@@ -96,6 +96,20 @@ declare module '@babel/plugin-syntax-import-meta' {
     export default target;
 }
 
+declare module '@babel/plugin-transform-react-constant-elements' {
+    import {PluginTarget} from '@babel/core';
+
+    const target: PluginTarget;
+    export default target;
+}
+
+declare module '@babel/plugin-transform-react-inline-elements' {
+    import {PluginTarget} from '@babel/core';
+
+    const target: PluginTarget;
+    export default target;
+}
+
 declare module 'babel-plugin-styled-components' {
     import {PluginTarget} from '@babel/core';
 

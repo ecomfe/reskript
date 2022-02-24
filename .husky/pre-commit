@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 node scripts/check-deps.mjs
-lerna run --exclude-dependents --since HEAD lint
+npx lerna run --exclude-dependents --since HEAD lint

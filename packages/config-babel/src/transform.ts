@@ -1,5 +1,7 @@
 import {PluginItem, TransformOptions} from '@babel/core';
 import pluginLodash from 'babel-plugin-lodash';
+import pluginReactConstantElement from '@babel/plugin-transform-react-constant-elements';
+import pluginReactInlineElement from '@babel/plugin-transform-react-inline-elements';
 import {compact} from '@reskript/core';
 import addReactDisplayName from '@reskript/babel-plugin-add-react-display-name';
 import {shouldEnable} from './utils.js';
@@ -28,6 +30,12 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 id: ['lodash', 'lodash-decorators'],
             },
         ],
+        // https://babeljs.io/docs/en/babel-plugin-transform-react-constant-elements
+        // https://github.com/facebook/react/issues/3226
+        pluginReactConstantElement,
+        // https://babeljs.io/docs/en/babel-plugin-transform-react-inline-elements
+        // https://github.com/facebook/react/issues/3228
+        pluginReactInlineElement,
     ];
 
     return {
