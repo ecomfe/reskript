@@ -37,7 +37,6 @@
     "@reskript/settings": "4.3.0",
     "dedent": "^0.7.0",
     "esbuild": "^0.14.21",
-    "qiankun": "^2.6.3",
-    "webpack-dev-server": "^4.7.4"
+    "qiankun": "^2.6.3"
   }
 }

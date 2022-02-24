@@ -7,7 +7,25 @@ title: 调试服务器配置
 [项目配置文件](../settings#配置文件路径)中的`devServer`是对`webpack-dev-server`配置的进一步抽象，它的结构如下：
 
 ```ts
-export type DevServerHttps = {proxy: boolean} & ({} | {client: true, serverOptions?: ServerOptions});
+type DevServerHttps = {proxy: boolean} & ({} | {client: true, serverOptions?: ServerOptions});
+
+type RequestHandler = (req: IncomingMessage, res: ServerResponse, next: (err?: Error) => void) => void;
+
+type Middleware = RequestHandler | {name?: string, path?: string, middleware: RequestHandler};
+
+interface MiddlewareHook {
+    use: (route: string, fn: RequestHandler) => void;
+    get: (route: string, fn: RequestHandler) => void;
+    post: (route: string, fn: RequestHandler) => void;
+    put: (route: string, fn: RequestHandler) => void;
+    delete: (route: string, fn: RequestHandler) => void;
+    patch: (route: string, fn: RequestHandler) => void;
+}
+
+interface MiddlewareCustomization {
+    before: MiddlewareHook;
+    after: MiddlewareHook;
+}
 
 interface DevServerSettings {
     // 是否以HTTPS协议代理请求及启动调试服务器
@@ -26,6 +44,8 @@ interface DevServerSettings {
     readonly openPage: string;
     // 开辟Node服务器的参数
     readonly serverOptions: ServerOptions;
+    // 对调试服务器追加一些配置或功能
+    readonly customizeMiddleware: (customization: MiddlewareCustomization) => void;
     // 在最终调整配置，可以任意处理，原则上这个函数处理后的对象不会再被内部的逻辑修改
     readonly finalize: (serverConfig: WebpackDevServerConfiguration, env: BuildEntry) => WebpackDevServerConfiguration | Promise<WebpackDevServerConfiguration>;
 }
@@ -186,6 +206,41 @@ export default configure(
 :::note
 当你使用`--mode=production`启动调试服务器时，会始终关闭热更新以保持与生产环境尽可能的一致。
 :::
+
+## 自定义中间件
+
+如果你希望简单地在调试服务器上增加一些路由处理，可以使用`customizeMiddleware`配置。这个配置是一个函数，它会传入这样的一个对象：
+
+```ts
+{
+    before: MiddlewareHook;
+    after: MiddlewareHook;
+}
+```
+
+其中`MiddlewareHook`是一个经过封装、便于使用的对象，它很像一个`express`的路由，你可以通过挂在上面的`get`、`post`、`put`、`delete`、`patch`等函数注册一个路由处理。例如你需要增加一个路由返回健康检查：
+
+```ts
+import {configure} from '@reskript/settings';
+
+export default configure(
+    'webpack' // 或'vite'
+    {
+        devServer: {
+            customizeMiddleware: ({before}) => {
+                before.get(
+                    '/ok',
+                    (req, res) => {
+                        res.end('OK');
+                    },
+                );
+            },
+        },
+    }
+);
+```
+
+在传入的参数中，`before`上挂载的路由将应用在默认的中间件之前，`after`的则在默认中间件之后。值得注意的是`historyApiFallback`是包含在默认中间件内的，因此如果你要注册一个路由，则建议放到`before`之中。
 
 ## 扩展配置
 

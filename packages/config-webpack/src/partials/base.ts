@@ -57,6 +57,7 @@ const computeCacheKey = async (entry: BuildContext): Promise<string> => {
         hash.update(entry.projectSettings.build.script.finalize.toString());
         hash.update(entry.projectSettings.build.finalize.toString());
         if (entry.usage === 'devServer') {
+            hash.update(entry.projectSettings.devServer.customizeMiddleware.toString());
             hash.update(entry.projectSettings.devServer.finalize.toString());
         }
     }

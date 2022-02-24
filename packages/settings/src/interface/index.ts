@@ -34,7 +34,16 @@ export {
     PlayCommandLineArgs,
     TestCommandLineArgs,
 } from './command.js';
-export {DevServerHttps, DevServerSettings, WebpackDevServerSettings, ViteDevServerSettings} from './devServer.js';
+export {
+    DevServerHttps,
+    DevServerSettings,
+    WebpackDevServerSettings,
+    ViteDevServerSettings,
+    Middleware,
+    MiddlewareHook,
+    MiddlewareCustomization,
+    RequestHandler,
+} from './devServer.js';
 export {PlaySettings} from './play.js';
 export {SettingsPluginItem, SettingsPlugin} from './plugin.js';
 export {

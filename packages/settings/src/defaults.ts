@@ -76,6 +76,7 @@ const fillDevServerSettings = (settings?: Partial<DevServerSettings>): DevServer
         proxyRewrite: {},
         hot: true,
         openPage: '',
+        customizeMiddleware: hook => hook,
         ...settings,
     };
 };
