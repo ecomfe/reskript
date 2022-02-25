@@ -7,7 +7,7 @@ describe('injectIntoHtml', () => {
             '<html><head></head></html>',
             {headStart: 'foo'}
         );
-        expect(output.includes('<head>foo')).toBe(true);
+        expect(output.includes('<head>foo</head>')).toBe(true);
     });
 
     test('head start no head', () => {
@@ -15,7 +15,7 @@ describe('injectIntoHtml', () => {
             '<html></html>',
             {headStart: 'foo'}
         );
-        expect(output.includes('<head>foo')).toBe(true);
+        expect(output.includes('<head>foo</head>')).toBe(true);
     });
 
     test('head end has head', () => {
@@ -23,7 +23,7 @@ describe('injectIntoHtml', () => {
             '<html><head></head></html>',
             {headEnd: 'foo'}
         );
-        expect(output.includes('foo</head>')).toBe(true);
+        expect(output.includes('<head>foo</head>')).toBe(true);
     });
 
     test('head end no head', () => {
@@ -31,7 +31,7 @@ describe('injectIntoHtml', () => {
             '<html></html>',
             {headStart: 'foo'}
         );
-        expect(output.includes('foo</head>')).toBe(true);
+        expect(output.includes('<head>foo</head>')).toBe(true);
     });
 
     test('body start has head', () => {
@@ -39,7 +39,7 @@ describe('injectIntoHtml', () => {
             '<html><head></head></html>',
             {bodyStart: 'foo'}
         );
-        expect(output.includes('</head>foo')).toBe(true);
+        expect(output.includes('<head></head>foo')).toBe(true);
     });
 
     test('body start no head', () => {

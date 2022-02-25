@@ -38,11 +38,12 @@ const build = async (options: Omit<VirtualEntryOptions, 'port' | 'host' | 'proto
 };
 
 test.only('entry', async () => {
-    const {code} = await build({name: 'index', entry: '/index.ts'});
+    const {code} = await build({name: 'index', entry: 'index.ts'});
+    console.log(code);
     expect(code.includes('Hello World')).toBe(true);
 });
 
 test('favicon', async () => {
-    const {html} = await build({name: 'index', entry: '/index.ts', favicon: 'favicon.ico'});
+    const {html} = await build({name: 'index', entry: 'index.ts', favicon: 'favicon.ico'});
     expect(html.includes('link rel="icon"')).toBe(true);
 });

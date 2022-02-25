@@ -53,7 +53,7 @@ const factory: ConfigFactory = async (context, options) => {
             host,
             name: entry.name,
             entry: path.relative(context.cwd, entry.file),
-            content: await resolveTemplateContent(context, entry),
+            content: settings.build.transformEntryHtml(await resolveTemplateContent(context, entry)),
             favicon: settings.build.favicon,
             appContainerId: settings.build.appContainerId,
             protocol: settings.devServer.https?.client ? 'https' : 'http',

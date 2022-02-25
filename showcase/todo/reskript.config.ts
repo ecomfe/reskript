@@ -1,10 +1,20 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import injectHtml, {Options as InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
-import ExtraScriptPlugin from '@reskript/webpack-plugin-extra-script';
 import qiankun from '@reskript/plugin-qiankun';
 
-const EXTERNAL_NONE = 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js';
+const injectOptions: InjectHtmlOptions = {
+    headStart: [
+        {
+            tag: 'script',
+            attributes: {
+                async: true,
+                src: 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js',
+            },
+        },
+    ],
+};
 
 export default configure(
     'webpack',
@@ -39,7 +49,6 @@ export default configure(
                 },
             },
             finalize: webpackConfig => {
-                webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
                 webpackConfig.optimization.splitChunks = {
                     cacheGroups: {
                         vendors: {
@@ -67,6 +76,7 @@ export default configure(
             },
         },
         plugins: commandName => [
+            injectHtml(injectOptions),
             commandName !== 'play' && qiankun('TodoMVC'),
         ],
     }

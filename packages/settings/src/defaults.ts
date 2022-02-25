@@ -22,6 +22,7 @@ const fillBuildSettings = (settings?: PartialBuildSettings<BuildSettings>): Buil
         reportLintErrors: true,
         largeAssetSize: 8 * 1024,
         appTitle: settings?.appTitle ?? 'Reskript App',
+        transformEntryHtml: html => html,
         excludeFeatures: ['dev'],
         ...settings,
         script: {

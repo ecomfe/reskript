@@ -765,7 +765,7 @@ importers:
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       '@reskript/svg-to-component-loader': link:../svg-to-component-loader
-      '@reskript/webpack-plugin-extra-script': link:../webpack-plugin-extra-script
+      '@reskript/webpack-plugin-extra-script': 4.3.0_webpack@5.68.0
       '@reskript/webpack-plugin-interpolate-html': link:../webpack-plugin-interpolate-html
       babel-loader: 8.2.3_900eac683bef8a6b239b47efcf24e8a9
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -986,6 +986,33 @@ importers:
       eslint: 8.9.0
       typescript: 4.6.0-dev.20220211
 
+  packages/plugin-inject-html:
+    specifiers:
+      '@reskript/build-utils': 4.3.0
+      '@reskript/core': 4.3.0
+      '@reskript/settings': 4.3.0
+      '@types/dedent': ^0.7.0
+      '@types/node': ^17.0.16
+      escape-goat: ^4.0.0
+      eslint: ^8.8.0
+      html-webpack-plugin: ^5.5.0
+      typescript: ^4.6.0-beta
+      vite: ^2.8.2
+      webpack: ^5.68.0
+    dependencies:
+      '@reskript/build-utils': link:../build-utils
+      '@reskript/core': link:../core
+      '@reskript/settings': link:../settings
+      escape-goat: 4.0.0
+    devDependencies:
+      '@types/dedent': 0.7.0
+      '@types/node': 17.0.17
+      eslint: 8.9.0
+      html-webpack-plugin: 5.5.0_webpack@5.68.0
+      typescript: 4.6.0-dev.20220211
+      vite: 2.8.2
+      webpack: 5.68.0
+
   packages/plugin-qiankun:
     specifiers:
       '@reskript/core': 4.3.0
@@ -1105,28 +1132,6 @@ importers:
       typescript: 4.6.0-dev.20220211
       webpack: 5.68.0
 
-  packages/webpack-plugin-extra-script:
-    specifiers:
-      '@reskript/core': 4.3.0
-      '@types/node': ^17.0.16
-      c8: ^7.10.0
-      eslint: ^8.8.0
-      html-webpack-plugin: ^5.5.0
-      typescript: ^4.6.0-beta
-      vite: ^2.8.2
-      vitest: ^0.3.0
-      webpack: ^5.68.0
-    devDependencies:
-      '@reskript/core': link:../core
-      '@types/node': 17.0.17
-      c8: 7.11.0
-      eslint: 8.9.0
-      html-webpack-plugin: 5.5.0_webpack@5.68.0
-      typescript: 4.6.0-dev.20220211
-      vite: 2.8.2
-      vitest: 0.3.4_c8@7.11.0
-      webpack: 5.68.0
-
   packages/webpack-plugin-interpolate-html:
     specifiers:
       '@reskript/build-utils': 4.3.0
@@ -1163,9 +1168,9 @@ importers:
       '@reskript/cli-play': 4.3.0
       '@reskript/cli-test': 4.3.0
       '@reskript/config-lint': 4.3.0
+      '@reskript/plugin-inject-html': 4.3.0
       '@reskript/plugin-qiankun': 4.3.0
       '@reskript/settings': 4.3.0
-      '@reskript/webpack-plugin-extra-script': 4.3.0
       '@testing-library/react': ^12.1.2
       '@types/ramda': ^0.27.64
       '@types/react': ^17.0.39
@@ -1203,9 +1208,9 @@ importers:
       '@reskript/cli-play': link:../../packages/cli-play
       '@reskript/cli-test': link:../../packages/cli-test
       '@reskript/config-lint': link:../../packages/config-lint
+      '@reskript/plugin-inject-html': link:../../packages/plugin-inject-html
       '@reskript/plugin-qiankun': link:../../packages/plugin-qiankun
       '@reskript/settings': link:../../packages/settings
-      '@reskript/webpack-plugin-extra-script': link:../../packages/webpack-plugin-extra-script
       '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
       '@types/ramda': 0.27.64
       '@types/react': 17.0.39
@@ -4599,6 +4604,15 @@ packages:
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: false
+
+  /@reskript/webpack-plugin-extra-script/4.3.0_webpack@5.68.0:
+    resolution: {integrity: sha512-zCQh+Z+v8GPlNg/2AfRrZIyPniHdKxRd/IVdlA4KSqtl9fTAvzjq6gF7/wvlQEQb6dZ38msgIhH6ihHyk3mHZw==}
+    engines: {node: '>=14.18.0 || >= 16.0.0'}
+    peerDependencies:
+      webpack: 5.x
+    dependencies:
+      webpack: 5.68.0
     dev: false
 
   /@rollup/plugin-babel/5.3.0_547cd3ea24f922738c048e23d3ce4e1c:
@@ -8546,6 +8560,11 @@ packages:
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
+
+  /escape-goat/4.0.0:
+    resolution: {integrity: sha512-2Sd4ShcWxbx6OY1IHyla/CVNwvg7XwZVoXZHcSu9w9SReNP1EzzD5T8NWKIR38fIqEns9kDWKUQTXXAmlDrdPg==}
+    engines: {node: '>=12'}
+    dev: false
 
   /escape-html/1.0.3:
     resolution: {integrity: sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=}

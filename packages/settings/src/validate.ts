@@ -109,6 +109,9 @@ const schema: any = {
                 publicPath: {
                     type: 'string',
                 },
+                transformEntryHtml: {
+                    instanceof: 'Function',
+                },
                 finalize: {
                     instanceof: 'Function',
                 },
