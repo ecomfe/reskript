@@ -677,6 +677,7 @@ importers:
       rollup: ^2.66.1
       typescript: ^4.6.0-beta
       vite: ^2.8.2
+      vite-plugin-pwa: ^0.11.13
       vitest: ^0.2.5
     dependencies:
       '@reskript/build-utils': link:../build-utils
@@ -690,6 +691,7 @@ importers:
       globby: 13.1.1
       lodash.template: 4.5.0
       ramda: 0.28.0
+      vite-plugin-pwa: 0.11.13_vite@2.8.2
     devDependencies:
       '@types/dedent': 0.7.0
       '@types/lodash.template': 4.5.0
@@ -713,7 +715,6 @@ importers:
       '@reskript/core': 4.3.0
       '@reskript/settings': 4.3.0
       '@reskript/svg-to-component-loader': 4.3.0
-      '@reskript/webpack-plugin-extra-script': 4.3.0
       '@reskript/webpack-plugin-interpolate-html': 4.3.0
       '@types/less': ^3.0.3
       '@types/node': ^17.0.16
@@ -765,7 +766,6 @@ importers:
       '@reskript/core': link:../core
       '@reskript/settings': link:../settings
       '@reskript/svg-to-component-loader': link:../svg-to-component-loader
-      '@reskript/webpack-plugin-extra-script': 4.3.0_webpack@5.68.0
       '@reskript/webpack-plugin-interpolate-html': link:../webpack-plugin-interpolate-html
       babel-loader: 8.2.3_900eac683bef8a6b239b47efcf24e8a9
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -4604,15 +4604,6 @@ packages:
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
-    dev: false
-
-  /@reskript/webpack-plugin-extra-script/4.3.0_webpack@5.68.0:
-    resolution: {integrity: sha512-zCQh+Z+v8GPlNg/2AfRrZIyPniHdKxRd/IVdlA4KSqtl9fTAvzjq6gF7/wvlQEQb6dZ38msgIhH6ihHyk3mHZw==}
-    engines: {node: '>=14.18.0 || >= 16.0.0'}
-    peerDependencies:
-      webpack: 5.x
-    dependencies:
-      webpack: 5.68.0
     dev: false
 
   /@rollup/plugin-babel/5.3.0_547cd3ea24f922738c048e23d3ce4e1c:
@@ -17922,6 +17913,24 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.0
       vfile-message: 3.1.0
+    dev: false
+
+  /vite-plugin-pwa/0.11.13_vite@2.8.2:
+    resolution: {integrity: sha512-Ssj14m3TRVLfkFEAWSMcFE2d1cSdEZyrVTzfY2lSL+umHYvcIFHVDAY143sygtBCb44OPczsAOmWwBTxwOvh7g==}
+    peerDependencies:
+      vite: ^2.0.0
+    dependencies:
+      debug: 4.3.3
+      fast-glob: 3.2.11
+      pretty-bytes: 5.6.0
+      rollup: 2.67.2
+      vite: 2.8.2
+      workbox-build: 6.4.2
+      workbox-window: 6.4.2
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - acorn
+      - supports-color
     dev: false
 
   /vite/2.8.2:

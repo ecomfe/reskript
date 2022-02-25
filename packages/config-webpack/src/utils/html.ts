@@ -1,28 +1,9 @@
 import HtmlWebpackPlugin, {Options as HtmlOptions} from 'html-webpack-plugin';
 import {BuildEntry} from '@reskript/settings';
 import {constructEntryTemplateData, AppEntry} from '@reskript/build-utils';
-import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
+import {WebpackPluginInstance} from 'webpack';
 import {EntryConfig, BuildContext} from '../interface.js';
-
-export default class TransformHtmlWebpackPlugin {
-    readonly transform: (html: string) => string;
-
-    constructor(transform: (html: string) => string) {
-        this.transform = transform;
-    }
-
-    apply(compiler: Compiler) {
-        compiler.hooks.compilation.tap('extra-script-webpack-plugin', compilation => this.inject(compilation));
-    }
-
-    inject(compilation: Compilation) {
-        const {afterTemplateExecution} = HtmlWebpackPlugin.getHooks(compilation);
-        afterTemplateExecution.tap(
-            'transform-html-webpack-plugin',
-            data => ({...data, html: this.transform(data.html)})
-        );
-    }
-}
+import {TransformHtmlWebpackPlugin} from './plugin.js';
 
 const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: BuildEntry): HtmlOptions => {
     const {
