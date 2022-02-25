@@ -1,6 +1,19 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import injectHtml, {Options as InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
+
+const injectOptions: InjectHtmlOptions = {
+    headStart: [
+        {
+            tag: 'script',
+            attributes: {
+                async: true,
+                src: 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js',
+            },
+        },
+    ],
+};
 
 export default configure(
     'vite',
@@ -45,5 +58,8 @@ export default configure(
                 },
             },
         },
+        plugins: [
+            injectHtml(injectOptions),
+        ],
     }
 );

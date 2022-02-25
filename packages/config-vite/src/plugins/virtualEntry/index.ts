@@ -36,7 +36,7 @@ export default function viertualEntryPlugin(options: VirtualEntryOptions): Plugi
             server.middlewares.use(history(historyOPtions));
             server.middlewares.use(
                 `/${options.name}.html`,
-                (req, res) => {
+                async (req, res) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'text/html');
                     res.end(render(true));

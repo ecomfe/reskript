@@ -1,9 +1,30 @@
-import HtmlWebpackPlugin, {Options as HTMLOptions} from 'html-webpack-plugin';
+import HtmlWebpackPlugin, {Options as HtmlOptions} from 'html-webpack-plugin';
 import {BuildEntry} from '@reskript/settings';
 import {constructEntryTemplateData, AppEntry} from '@reskript/build-utils';
+import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
 import {EntryConfig, BuildContext} from '../interface.js';
 
-const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: BuildEntry): HTMLOptions => {
+export default class TransformHtmlWebpackPlugin {
+    readonly transform: (html: string) => string;
+
+    constructor(transform: (html: string) => string) {
+        this.transform = transform;
+    }
+
+    apply(compiler: Compiler) {
+        compiler.hooks.compilation.tap('extra-script-webpack-plugin', compilation => this.inject(compilation));
+    }
+
+    inject(compilation: Compilation) {
+        const {afterTemplateExecution} = HtmlWebpackPlugin.getHooks(compilation);
+        afterTemplateExecution.tap(
+            'transform-html-webpack-plugin',
+            data => ({...data, html: this.transform(data.html)})
+        );
+    }
+}
+
+const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: BuildEntry): HtmlOptions => {
     const {
         projectSettings: {
             build: {
@@ -36,7 +57,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: Buil
             minifyJS: true,
             removeAttributeQuotes: false,
             removeEmptyAttributes: true,
-            removeOptionalTags: true,
+            removeOptionalTags: false,
             removeRedundantAttributes: true,
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
@@ -60,11 +81,11 @@ const createHTMLPluginWith = (buildEntry: BuildEntry) => {
     };
 };
 
-export const createHTMLPluginInstances = (buildContext: BuildContext): HtmlWebpackPlugin[] => {
-    const {isDefaultTarget, buildTarget, entries} = buildContext;
+export const createHTMLPluginInstances = (buildContext: BuildContext): WebpackPluginInstance[] => {
+    const {isDefaultTarget, buildTarget, entries, projectSettings: {build: {transformEntryHtml}}} = buildContext;
     const createInstanceWithSuffix = createHTMLPluginWith(buildContext);
     const pluginsWithinTarget = entries.map(createInstanceWithSuffix('-' + buildTarget));
     const pluginsOfDefault = isDefaultTarget ? entries.map(createInstanceWithSuffix('')) : [];
 
-    return [...pluginsWithinTarget, ...pluginsOfDefault];
+    return [...pluginsWithinTarget, ...pluginsOfDefault, new TransformHtmlWebpackPlugin(transformEntryHtml)];
 };
