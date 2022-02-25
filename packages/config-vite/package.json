@@ -46,7 +46,8 @@
     "dedent": "^0.7.0",
     "globby": "^13.1.1",
     "lodash.template": "^4.5.0",
-    "ramda": "^0.28.0"
+    "ramda": "^0.28.0",
+    "vite-plugin-pwa": "^0.11.13"
   },
   "peerDependencies": {
     "vite": "2.x"

@@ -40,7 +40,7 @@ export default (appName: string, options?: Options): SettingsPlugin => {
                     const previous = await settings.build.finalize(config, env, internals);
                     previous.output = {
                         ...previous.output,
-                        library: `${appName}-[name]`,
+                        library: `${appName}`,
                         libraryTarget: 'umd',
                         globalObject: 'window',
                     };

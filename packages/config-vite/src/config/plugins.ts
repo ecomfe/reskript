@@ -1,23 +1,43 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import react from '@vitejs/plugin-react';
+import {VitePWA as pwa, VitePWAOptions} from 'vite-plugin-pwa';
 import template from 'lodash.template';
 import {normalizeRuleMatch, pMap, resolve} from '@reskript/core';
 import {warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
-import {AppEntry, constructEntryTemplateData, resolveDevHost} from '@reskript/build-utils';
+import {
+    AppEntry,
+    constructEntryTemplateData,
+    hasServiceWorker,
+    injectIntoHtml,
+    resolveDevHost,
+    serviceWorkerRegistryScript,
+} from '@reskript/build-utils';
 import {BuildContext, ConfigFactory} from '../interface.js';
 import cssBind from '../plugins/cssBind/index.js';
 import cssForceModules from '../plugins/cssForceModules/index.js';
 import svgToComponent from '../plugins/svgToComponent/index.js';
 import virtualEntry, {VirtualEntryOptions} from '../plugins/virtualEntry/index.js';
 
-// 与`html-webpack-plugin`的`.ejs`处理对齐
 const resolveTemplateContent = async (context: BuildContext, entry: AppEntry<unknown>) => {
     const content = await fs.readFile(entry.template, 'utf8');
     const templateData = constructEntryTemplateData(context, entry);
     const render = template(content, {interpolate: /<%=([\s\S]+?)%>/g, variable: 'templateData'});
     return render(templateData);
+};
+
+const injectServiceWorkerScript = (html: string, enabled: boolean, context: BuildContext) => {
+    if (!enabled) {
+        return html;
+    }
+
+    const serviceWorkerLocation = {
+        pubicPath: context.projectSettings.build.publicPath,
+        path: `assets/service-worker-${context.buildTarget}.js`,
+    };
+    const scriptHtml = serviceWorkerRegistryScript(serviceWorkerLocation);
+    return injectIntoHtml(html, {headEnd: scriptHtml});
 };
 
 const factory: ConfigFactory = async (context, options) => {
@@ -48,12 +68,19 @@ const factory: ConfigFactory = async (context, options) => {
         fastRefresh: context.usage === 'devServer' ? settings.devServer.hot : false,
     };
     const host = await resolveDevHost(options.host ?? 'localhost');
+    const requireServiceWorker = context.usage === 'build' && hasServiceWorker(context);
     const toVirtualEntryPlugin = async (entry: AppEntry<unknown>) => {
         const entryOptions: VirtualEntryOptions = {
             host,
             name: entry.name,
             entry: path.relative(context.cwd, entry.file),
-            content: settings.build.transformEntryHtml(await resolveTemplateContent(context, entry)),
+            content: settings.build.transformEntryHtml(
+                injectServiceWorkerScript(
+                    await resolveTemplateContent(context, entry),
+                    requireServiceWorker,
+                    context
+                )
+            ),
             favicon: settings.build.favicon,
             appContainerId: settings.build.appContainerId,
             protocol: settings.devServer.https?.client ? 'https' : 'http',
@@ -61,6 +88,20 @@ const factory: ConfigFactory = async (context, options) => {
         };
         return virtualEntry(entryOptions);
     };
+    const pwaOptions: Partial<VitePWAOptions> = {
+        mode: context.mode,
+        strategies: 'injectManifest',
+        srcDir: context.srcDirectory,
+        outDir: 'dist/assets',
+        // TODO: 现在无法产出多个
+        filename: 'service-worker.js',
+        injectRegister: false,
+        injectManifest: {
+            swSrc: path.join(context.cwd, context.srcDirectory, 'service-worker.js'),
+            swDest: `service-worker-${context.buildTarget}.js`,
+        },
+    };
+
     return {
         plugins: [
             react.default(reactOptions),
@@ -68,6 +109,7 @@ const factory: ConfigFactory = async (context, options) => {
             cssBind({classNamesModule}),
             cssForceModules({enableModules: normalizeRuleMatch(context.cwd, settings.build.style.modules)}),
             svgToComponent(svgToComponentOptions),
+            requireServiceWorker && pwa(pwaOptions),
         ],
     };
 };

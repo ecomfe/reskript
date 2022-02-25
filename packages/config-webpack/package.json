@@ -48,7 +48,6 @@
     "@reskript/core": "4.3.0",
     "@reskript/settings": "4.3.0",
     "@reskript/svg-to-component-loader": "4.3.0",
-    "@reskript/webpack-plugin-extra-script": "4.3.0",
     "@reskript/webpack-plugin-interpolate-html": "4.3.0",
     "babel-loader": "^8.2.3",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",

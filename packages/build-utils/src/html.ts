@@ -86,3 +86,24 @@ export const injectIntoHtml = (html: string, options: InjectionOptions) => {
         headStart
     );
 };
+
+interface ServiceWorkerLocation {
+    publicPath?: string;
+    path: string;
+}
+
+export const serviceWorkerRegistryScript = ({publicPath, path}: ServiceWorkerLocation) => {
+    const baseUrl = (publicPath && publicPath !== 'auto') ? publicPath : '/';
+    return `
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener(
+                    'load',
+                    function () {
+                        navigator.serviceWorker.register('${baseUrl + path}');
+                    }
+                );
+            }
+        </script>
+    `;
+};

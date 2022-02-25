@@ -1,23 +1,9 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import {InjectManifest, InjectManifestOptions} from 'workbox-webpack-plugin';
-import ExtraScriptPlugin, {ScriptFactoryContext} from '@reskript/webpack-plugin-extra-script';
-import {BuildContext, ConfigurationFactory} from '../interface.js';
-
-const generateRegisterScript = (buildContext: BuildContext, scriptContext: ScriptFactoryContext) => {
-    const publicPath = scriptContext.publicPath === 'auto' ? '/' : scriptContext.publicPath;
-    const serviceWorkerURL = `${publicPath}assets/service-worker-${buildContext.buildTarget}.js`;
-    return `
-        if ('serviceWorker' in navigator) {
-            window.addEventListener(
-                'load',
-                function () {
-                    navigator.serviceWorker.register('${serviceWorkerURL}');
-                }
-            );
-        }
-    `;
-};
+import {injectIntoHtml, serviceWorkerRegistryScript} from '@reskript/build-utils';
+import {TransformHtmlWebpackPlugin} from '../utils/plugin.js';
+import {ConfigurationFactory} from '../interface.js';
 
 const requireManifestInjection = async (source: string) => {
     const content = await fs.readFile(source, 'utf-8');
@@ -25,12 +11,14 @@ const requireManifestInjection = async (source: string) => {
 };
 
 const factory: ConfigurationFactory = async entry => {
-    const {mode, cwd, srcDirectory, buildTarget} = entry;
+    const {mode, cwd, srcDirectory, buildTarget, projectSettings} = entry;
     const serviceWorkerSource = path.join(cwd, srcDirectory, 'service-worker.js');
-    const injectServieWorkerRegistrationPlugin = new ExtraScriptPlugin(
-        context => ({content: generateRegisterScript(entry, context)}),
-        {prepend: true}
-    );
+    const serviceWorkerLocation = {
+        pubicPath: projectSettings.build.publicPath,
+        path: `assets/service-worker-${buildTarget}.js`,
+    };
+    const scriptHtml = serviceWorkerRegistryScript(serviceWorkerLocation);
+    const transformPlugin = new TransformHtmlWebpackPlugin(html => injectIntoHtml(html, {headEnd: scriptHtml}));
 
     const shouldInjectManifest = await requireManifestInjection(serviceWorkerSource);
     if (shouldInjectManifest) {
@@ -42,7 +30,7 @@ const factory: ConfigurationFactory = async entry => {
         return {
             plugins: [
                 new InjectManifest(options),
-                injectServieWorkerRegistrationPlugin,
+                transformPlugin,
             ],
         };
     }
@@ -55,7 +43,7 @@ const factory: ConfigurationFactory = async entry => {
             },
         },
         plugins: [
-            injectServieWorkerRegistrationPlugin,
+            transformPlugin,
         ],
     };
 };
