@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
+import {pathToFileURL} from 'node:url';
 import {mergeDeepRight} from 'ramda';
 import {run as runJest} from 'jest-cli';
 import {logger} from '@reskript/core';
@@ -19,7 +20,7 @@ const resolveJestConfig = async (jestConfigOptions: JestConfigOptions): Promise<
     // 用`import`拿一个CommonJS的模块，拿到的东西要是里面的`default`
     try {
         // NOTE: 这里没用`importUserModule`是因为反正Jest就不支持ESM，真干了也没用
-        const {default: jestConfig} = await import(jestConfigFile);
+        const {default: jestConfig} = await import(pathToFileURL(jestConfigFile).toString());
 
         if ('preset' in jestConfig) {
             // 如果用户的配置里有`preset`，那它应该已经声明了基于`@reskript/config-jest`来配置，直接返回就行

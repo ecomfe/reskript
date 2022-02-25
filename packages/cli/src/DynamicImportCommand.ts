@@ -1,5 +1,6 @@
 import path from 'node:path';
 import {existsSync} from 'node:fs';
+import {pathToFileURL} from 'node:url';
 import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
 // @ts-expect-error
@@ -48,7 +49,7 @@ export default abstract class DynamicImportCommand<A> extends Command {
         const dynamicImport = async () => {
             // 这个不能放到外面去，`resolve`本身就是找不到模块会报错的，所以自动安装后要重找一下
             const packageEntry = await resolve(this.packageName);
-            const {run} = await import(packageEntry) as CommandDefinition<A>;
+            const {run} = await import(pathToFileURL(packageEntry).toString()) as CommandDefinition<A>;
             return run;
         };
 

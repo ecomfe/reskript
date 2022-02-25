@@ -1,5 +1,6 @@
 import {existsSync} from 'node:fs';
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {readPackageConfig} from '@reskript/core';
 import semver from 'semver';
 import {warn} from './logger.js';
@@ -35,6 +36,6 @@ export const importClientSettings = async (cwd: string) => {
         return;
     }
 
-    const {default: settings} = await import(settingsLocation);
+    const {default: settings} = await import(pathToFileURL(settingsLocation).toString());
     return settings;
 };

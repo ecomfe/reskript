@@ -1,10 +1,11 @@
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {globby} from 'globby';
 import {pFilter} from '@reskript/core';
 import {warn} from '../logger.js';
 
 const isEntryBroken = async (file: string) => {
-    const {default: config} = await import(file);
+    const {default: config} = await import(pathToFileURL(file).toString());
     const keys = Object.keys(config);
     return keys.some(v => v !== 'entry' && v !== 'html');
 };
