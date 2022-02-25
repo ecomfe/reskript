@@ -4,7 +4,8 @@
   "version": "4.3.0",
   "description": "待办列表示例",
   "scripts": {
-    "build": "rm -rf node_modules/.cache && skr build --clean --strict",
+    "build": "rm -rf node_modules/.cache && skr build --clean --strict --build-target=stable",
+    "build-vite": "rm -rf node_modules/.cache && skr build --clean --strict --build-target=stable --config=reskript-vite.config.ts",
     "analyze": "skr build --clean --strict --analyze --build-target=stable",
     "start": "skr dev",
     "start-vite": "skr dev --config=reskript-vite.config.ts",

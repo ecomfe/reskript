@@ -72,7 +72,7 @@ const factory: ConfigFactory = async (context, options) => {
     const toVirtualEntryPlugin = async (entry: AppEntry<unknown>) => {
         const entryOptions: VirtualEntryOptions = {
             host,
-            name: entry.name,
+            name: `${entry.name}-${context.buildTarget}`,
             entry: path.relative(context.cwd, entry.file),
             content: settings.build.transformEntryHtml(
                 injectServiceWorkerScript(
@@ -93,12 +93,12 @@ const factory: ConfigFactory = async (context, options) => {
         strategies: 'injectManifest',
         srcDir: context.srcDirectory,
         outDir: 'dist/assets',
-        // TODO: 现在无法产出多个
         filename: 'service-worker.js',
         injectRegister: false,
+        manifest: false,
         injectManifest: {
             swSrc: path.join(context.cwd, context.srcDirectory, 'service-worker.js'),
-            swDest: `service-worker-${context.buildTarget}.js`,
+            swDest: path.join(context.cwd, 'dist', 'assets', `service-worker-${context.buildTarget}.js`),
         },
     };
 

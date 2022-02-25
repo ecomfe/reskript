@@ -39,7 +39,6 @@ const build = async (options: Omit<VirtualEntryOptions, 'port' | 'host' | 'proto
 
 test.only('entry', async () => {
     const {code} = await build({name: 'index', entry: 'index.ts'});
-    console.log(code);
     expect(code.includes('Hello World')).toBe(true);
 });
 

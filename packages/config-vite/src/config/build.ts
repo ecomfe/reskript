@@ -5,7 +5,7 @@ const factory: ConfigFactory = async (context, options) => {
     const settings = context.projectSettings;
     const input = context.entries.reduce(
         (input, current) => {
-            input[current.name] = path.join(context.cwd, `${current.name}.html`);
+            input[current.name] = path.join(context.cwd, `${current.name}-${context.buildTarget}.html`);
             return input;
         },
         {} as Record<string, string>
@@ -19,9 +19,6 @@ const factory: ConfigFactory = async (context, options) => {
             assetsInlineLimit: settings.build.largeAssetSize,
             sourcemap: options.sourceMaps,
             emptyOutDir: options.clean,
-            commonjsOptions: {
-                include: '**/node_modules/**',
-            },
             rollupOptions: {input},
         },
     };
