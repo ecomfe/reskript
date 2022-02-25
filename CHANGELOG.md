@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* init的tsconfig未包含配置文件 ([#263](https://github.com/ecomfe/reskript/issues/263)) ([d70a8a2](https://github.com/ecomfe/reskript/commit/d70a8a2d3ccb13b69446564eb77e6d67235e3761))
+* **plugin-workspace-no-build:** 修复Windows下的路径问题 ([#262](https://github.com/ecomfe/reskript/issues/262)) ([96b4968](https://github.com/ecomfe/reskript/commit/96b49684f43491b2ced61fb904554272fdec9f5f))
+* 加载.env文件顺序错误 ([#260](https://github.com/ecomfe/reskript/issues/260)) ([94be01b](https://github.com/ecomfe/reskript/commit/94be01b3a4377cf2f7fe602fb7f6d0b05ecb276b))
+
+
+### Features
+
+* **babel:** 添加react代码性能优化转换 ([#261](https://github.com/ecomfe/reskript/issues/261)) ([38252e6](https://github.com/ecomfe/reskript/commit/38252e67fb20a0352a3417ffc3078b0d52ccabe4))
+
+
+
+
+
 ## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
 
 

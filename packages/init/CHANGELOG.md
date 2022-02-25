@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* init的tsconfig未包含配置文件 ([#263](https://github.com/ecomfe/reskript/issues/263)) ([d70a8a2](https://github.com/ecomfe/reskript/commit/d70a8a2d3ccb13b69446564eb77e6d67235e3761))
+
+
+
+
+
 ## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
 
 **Note:** Version bump only for package @reskript/init

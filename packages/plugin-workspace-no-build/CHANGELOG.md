@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 修复Windows下的路径问题 ([#262](https://github.com/ecomfe/reskript/issues/262)) ([96b4968](https://github.com/ecomfe/reskript/commit/96b49684f43491b2ced61fb904554272fdec9f5f))
+
+
+
+
+
 ## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
 
 **Note:** Version bump only for package @reskript/plugin-workspace-no-build

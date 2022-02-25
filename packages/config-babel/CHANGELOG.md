@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Features
+
+* **babel:** 添加react代码性能优化转换 ([#261](https://github.com/ecomfe/reskript/issues/261)) ([38252e6](https://github.com/ecomfe/reskript/commit/38252e67fb20a0352a3417ffc3078b0d52ccabe4))
+
+
+
+
+
 ## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
 
 **Note:** Version bump only for package @reskript/config-babel
