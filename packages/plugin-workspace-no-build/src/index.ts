@@ -31,7 +31,13 @@ export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}
 
     const incomingBabelFilter = normalizeRuleMatch(cwd, settings.build.script.babel);
     const incomingModulesFilter = normalizeRuleMatch(cwd, settings.build.style.modules);
-    const includedSiblingDirectories = includedSiblings.map(v => v.directory);
+    const isSiblingSource = (resource: string) => {
+        if (resource.includes('node_modules')) {
+            return false;
+        }
+
+        return includedSiblings.some(v => !path.relative(v.directory, resource).startsWith('..'));
+    };
     return {
         ...settings,
         build: {
@@ -39,18 +45,12 @@ export default (options: Options = {}): SettingsPlugin => async (settings, {cwd}
             style: options.styles
                 ? {
                     ...settings.build.style,
-                    modules: (resource: string) => {
-                        const shouldProcess = incomingModulesFilter(resource);
-                        return shouldProcess || includedSiblingDirectories.some(v => resource.startsWith(v));
-                    },
+                    modules: (resource: string) => incomingModulesFilter(resource) || isSiblingSource(resource),
                 }
                 : settings.build.style,
             script: {
                 ...settings.build.script,
-                babel: (resource: string) => {
-                    const shouldProcess = incomingBabelFilter(resource);
-                    return shouldProcess || includedSiblingDirectories.some(v => resource.startsWith(v));
-                },
+                babel: (resource: string) => incomingBabelFilter(resource) || isSiblingSource(resource),
             },
             finalize: async (config, env, internals) => {
                 const previous = await settings.build.finalize(config, env, internals);
