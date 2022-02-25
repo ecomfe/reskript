@@ -12,7 +12,7 @@ import serverConfig from './config/server.js';
 import defineConfig from './config/define.js';
 import pluginsConfig from './config/plugins.js';
 
-export type {ViteOptions} from './interface.js';
+export type {ViteOptions, BuildContext} from './interface.js';
 
 const factories = [baseConfig, buildConfig, cssConfig, resolveConfig, serverConfig, defineConfig, pluginsConfig];
 
