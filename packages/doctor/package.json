@@ -1,6 +1,6 @@
 {
   "name": "@reskript/doctor",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,8 +28,8 @@
     "typescript": "^4.6.0-beta"
   },
   "dependencies": {
-    "@reskript/core": "4.2.0",
-    "@reskript/settings": "4.2.0",
+    "@reskript/core": "4.2.1",
+    "@reskript/settings": "4.2.1",
     "globby": "^13.1.1",
     "log-symbols": "^5.1.0",
     "ora": "^6.0.1",
