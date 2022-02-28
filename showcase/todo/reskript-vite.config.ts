@@ -57,6 +57,15 @@ export default configure(
                     cert: path.resolve('./localhost.pem'),
                 },
             },
+            customizeMiddleware: ({before}) => {
+                before.get(
+                    '/ok',
+                    (req, res) => {
+                        res.setHeader('content-type', 'text/plain');
+                        res.end('OK');
+                    }
+                );
+            },
         },
         plugins: [
             injectHtml(injectOptions),

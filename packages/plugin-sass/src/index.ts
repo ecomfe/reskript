@@ -57,7 +57,7 @@ export default (options: SassLoaderOptions = {}): SettingsPlugin => {
 
     return settings => {
         if (settings.driver === 'vite') {
-            throw new Error('Vite driver not supported by plugin-sass');
+            throw new Error('Sass is supported by vite natively, you don\'t have to use plugin-sass');
         }
 
         return {

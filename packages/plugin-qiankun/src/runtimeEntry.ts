@@ -3,13 +3,13 @@ import {build, BuildOptions} from 'esbuild';
 import dedent from 'dedent';
 import {dirFromImportMeta} from '@reskript/core';
 
-const content = (appName: string) => dedent`
+const content = (appName: string, index: string) => dedent`
     import {registerMicroApps, start} from 'qiankun';
 
     const apps = [
         {
             name: '${appName}',
-            entry: '/assets/index.html',
+            entry: '${index}',
             container: '#apps',
             activeRule: '/',
         },
@@ -18,10 +18,10 @@ const content = (appName: string) => dedent`
     start();
 `;
 
-export default async (appName: string) => {
+export default async (appName: string, index: string) => {
     const options: BuildOptions = {
         stdin: {
-            contents: content(appName),
+            contents: content(appName, index),
             resolveDir: dirFromImportMeta(import.meta.url),
         },
         bundle: true,

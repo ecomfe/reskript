@@ -42,7 +42,7 @@ export {
     Middleware,
     MiddlewareHook,
     MiddlewareCustomization,
-    RequestHandler,
+    CustomizeMiddleware,
 } from './devServer.js';
 export {PlaySettings} from './play.js';
 export {SettingsPluginItem, SettingsPlugin} from './plugin.js';
