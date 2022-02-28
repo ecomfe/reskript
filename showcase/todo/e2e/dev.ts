@@ -70,4 +70,16 @@ export default ({driver, config, port}: Options) => {
         const text = await response.text();
         expect(text).toBe('OK');
     });
+
+    test(`[${driver}] portal works`, async ({request}) => {
+        const response = await request.get(`http://localhost:${port}/__skr__/ok`, {failOnStatusCode: true});
+        const text = await response.text();
+        expect(text).toBe('OK');
+    });
+
+    test(`[${driver}] portal custom route works`, async ({request}) => {
+        const response = await request.get(`http://localhost:${port}/__skr__/e2e`, {failOnStatusCode: true});
+        const text = await response.text();
+        expect(text).toBe('For Test');
+    });
 };

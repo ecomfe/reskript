@@ -18,7 +18,7 @@ import setupServer from './server/index.js';
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
-const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildContext> => {
+const collectBuildContext = async (cmd: PlayCommandLineArgs, target: string): Promise<BuildContext> => {
     const {cwd, buildTarget, port, concurrentMode, configFile} = cmd;
     const userProjectSettings = await readProjectSettings({commandName: 'play', specifiedFile: configFile, ...cmd});
 
@@ -38,6 +38,13 @@ const collectBuildContext = async (cmd: PlayCommandLineArgs): Promise<BuildConte
             port: port,
             openPage: '',
             hot: true,
+        },
+        portal: {
+            ...userProjectSettings.portal,
+            setup: (app, helper) => {
+                userProjectSettings.portal.setup(app, helper);
+                setupServer(app, target);
+            },
         },
     };
     await strictCheckRequiredDependency(projectSettings, cwd);
@@ -81,9 +88,7 @@ const isProxyMap = (proxy: DevServerConfiguration['proxy']): proxy is ProxyConfi
     return !proxy || !Array.isArray(proxy);
 };
 
-const registerSersvice = (config: DevServerConfiguration | undefined, target: string): DevServerConfiguration => {
-    const previousSetup = config?.setupMiddlewares;
-
+const registerSersvice = (config: DevServerConfiguration | undefined): DevServerConfiguration => {
     if (!isProxyMap(config?.proxy)) {
         logger.error('Sorry we don\'t allow devServer.proxy to be an array');
         process.exit(21);
@@ -91,12 +96,6 @@ const registerSersvice = (config: DevServerConfiguration | undefined, target: st
 
     return {
         ...config,
-        setupMiddlewares: (middlewares, devServer) => {
-            if (devServer.app) {
-                setupServer(devServer.app, target);
-            }
-            return previousSetup?.(middlewares, devServer) ?? middlewares;
-        },
         proxy: {
             ...config?.proxy,
             '/io-play': {
@@ -111,11 +110,11 @@ export const run = async (cmd: PlayCommandLineArgs, target: string): Promise<voi
     process.env.NODE_ENV = 'development';
     await prepareEnvironment(cmd.cwd, 'development');
 
-    const buildContext = await collectBuildContext(cmd);
+    const buildContext = await collectBuildContext(cmd, target);
     const config = await createWebpackConfig(target, cmd, buildContext);
     const devServerConfig = await createWebpackDevServerConfig(
         buildContext,
-        {targetEntry: 'index', extra: registerSersvice(config.devServer, target)}
+        {targetEntry: 'index', extra: registerSersvice(config.devServer)}
     );
     const injectOptions = {
         config,

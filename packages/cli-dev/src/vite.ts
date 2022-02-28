@@ -16,6 +16,7 @@ export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartC
         sourceMaps: true,
         host: cmd.host,
         proxyDomain: cmd.proxyDomain,
+        defaultEntry: cmd.entry,
     };
     const config = await createViteConfig(buildContext, configOptions);
     const serverOptions: InlineConfig = {

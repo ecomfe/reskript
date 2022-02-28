@@ -39,6 +39,7 @@
     "@reskript/build-utils": "4.3.0",
     "@reskript/config-babel": "4.3.0",
     "@reskript/core": "4.3.0",
+    "@reskript/portal": "4.3.0",
     "@reskript/settings": "4.3.0",
     "@vitejs/plugin-react": "^1.2.0",
     "classnames": "^2.3.1",

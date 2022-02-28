@@ -9,6 +9,7 @@ import {compact} from '@reskript/core';
 import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {constructProxyConfiguration, createMiddlewareHook} from '@reskript/build-utils';
 import {warnAndExitOnInvalidFinalizeReturn, WebpackBuildEntry} from '@reskript/settings';
+import {createPortal, router} from '@reskript/portal';
 import ProgressBarPlugin from './ProgressBarPlugin.js';
 import {addHotModuleToEntry} from './utils.js';
 
@@ -110,6 +111,10 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
             if (!server.app) {
                 throw new Error('Webpack dev server not launched');
             }
+
+            const portal = createPortal();
+            buildEntry.projectSettings.portal.setup(portal, {router});
+            server.app.use('/__skr__', portal);
 
             const before = createMiddlewareHook();
             const after = createMiddlewareHook();

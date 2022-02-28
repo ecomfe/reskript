@@ -2,27 +2,44 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
 import vite, {InlineConfig} from 'vite';
-import {RollupOutput} from 'rollup';
+import {RollupOutput, OutputAsset, OutputChunk} from 'rollup';
 import virtualEntry, {VirtualEntryOptions} from '../index.js';
 
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
-const build = async (options: Omit<VirtualEntryOptions, 'port' | 'host' | 'protocol' | 'content'>) => {
+const createEntry = (name: string) => {
+    return {
+        name,
+        entry: path.join(currentDirectory, 'fixtures', `${name}-stable.html`),
+        content: `<!DOCTYPE html><html><body><script type="module" src="/${name}.ts"></script></body></html>`,
+    };
+};
+
+const build = async (options: Pick<VirtualEntryOptions, 'favicon'>) => {
+    const entries = [
+        createEntry('index'),
+        createEntry('about'),
+    ];
     const entryOptions: VirtualEntryOptions = {
         ...options,
+        entries,
         protocol: 'http',
         host: 'localhost',
         port: 9998,
-        content: '<!DOCTYPE html><html><body></body></html>',
+        defaultEntry: entries[0],
+        buildTarget: 'stable',
+        portal: () => {},
+        customizeMiddleware: () => {},
     };
     const config: InlineConfig = {
         root: path.join(currentDirectory, 'fixtures'),
         logLevel: 'warn',
         build: {
             rollupOptions: {
-                input: {
-                    [options.name]: path.join(currentDirectory, 'fixtures', `${options.name}.html`),
-                },
+                input: Object.entries(entries).reduce(
+                    (input, [name, {entry}]) => Object.assign(input, {[name]: entry}),
+                    {} as Record<string, string>
+                ),
             },
         },
         plugins: [
@@ -30,19 +47,24 @@ const build = async (options: Omit<VirtualEntryOptions, 'port' | 'host' | 'proto
         ],
     };
     const bundle = await vite.build(config) as RollupOutput;
-    const htmlAsset = bundle.output.find(v => path.extname(v.fileName) === '.html');
     return {
-        code: bundle.output[0].code,
-        html: htmlAsset?.type === 'asset' ? htmlAsset.source.toString() : '',
+        assets: bundle.output.filter((v: any): v is OutputAsset => v.type === 'asset'),
+        chunks: bundle.output.filter((v: any): v is OutputChunk => v.type === 'chunk'),
     };
 };
 
-test.only('entry', async () => {
-    const {code} = await build({name: 'index', entry: 'index.ts'});
-    expect(code.includes('Hello World')).toBe(true);
+test('entry', async () => {
+    const {chunks} = await build({});
+    expect(chunks.some(v => v.code.includes('Hello World'))).toBe(true);
+    expect(chunks.some(v => v.code.includes('About Me'))).toBe(true);
 });
 
 test('favicon', async () => {
-    const {html} = await build({name: 'index', entry: 'index.ts', favicon: 'favicon.ico'});
-    expect(html.includes('link rel="icon"')).toBe(true);
+    const {assets} = await build({favicon: 'favicon.ico'});
+    expect(assets.every(v => v.source.toString().includes('link rel="icon"'))).toBe(true);
+});
+
+test('multiple entries', async () => {
+    const {assets} = await build({});
+    expect(assets.length).toBe(2);
 });

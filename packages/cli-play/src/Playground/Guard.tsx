@@ -25,7 +25,7 @@ export default function Guard({children}: Props) {
     useEffect(
         () => {
             (async () => {
-                const text = await fetch('/play/ok').then(r => r.text());
+                const text = await fetch('/__skr__/play/ok').then(r => r.text());
                 setOk(text === 'OK');
             })();
         },

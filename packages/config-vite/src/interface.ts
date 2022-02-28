@@ -11,6 +11,7 @@ export interface ViteOptions {
     host?: HostType;
     cacheDirectory?: string;
     proxyDomain?: string;
+    defaultEntry?: string;
 }
 
 export type ConfigFactory = (context: BuildContext, options: ViteOptions) => Promise<UserConfig>;

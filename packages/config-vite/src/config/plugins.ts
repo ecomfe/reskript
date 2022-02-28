@@ -14,11 +14,13 @@ import {
     resolveDevHost,
     serviceWorkerRegistryScript,
 } from '@reskript/build-utils';
+import {createPortal, router} from '@reskript/portal';
 import {BuildContext, ConfigFactory} from '../interface.js';
+import portal from '../plugins/portal/index.js';
 import cssBind from '../plugins/cssBind/index.js';
 import cssForceModules from '../plugins/cssForceModules/index.js';
 import svgToComponent from '../plugins/svgToComponent/index.js';
-import virtualEntry, {VirtualEntryOptions} from '../plugins/virtualEntry/index.js';
+import virtualEntry, {EntryTarget, VirtualEntryOptions} from '../plugins/virtualEntry/index.js';
 
 const resolveTemplateContent = async (context: BuildContext, entry: AppEntry<unknown>) => {
     const content = await fs.readFile(entry.template, 'utf8');
@@ -69,10 +71,9 @@ const factory: ConfigFactory = async (context, options) => {
     };
     const host = await resolveDevHost(options.host ?? 'localhost');
     const requireServiceWorker = context.usage === 'build' && hasServiceWorker(context);
-    const toVirtualEntryPlugin = async (entry: AppEntry<unknown>) => {
-        const entryOptions: VirtualEntryOptions = {
-            host,
-            name: `${entry.name}-${context.buildTarget}`,
+    const toEntryTarget = async (entry: AppEntry<unknown>): Promise<EntryTarget> => {
+        return {
+            name: entry.name,
             entry: path.relative(context.cwd, entry.file),
             content: settings.build.transformEntryHtml(
                 injectServiceWorkerScript(
@@ -81,13 +82,21 @@ const factory: ConfigFactory = async (context, options) => {
                     context
                 )
             ),
-            favicon: settings.build.favicon,
-            appContainerId: settings.build.appContainerId,
-            protocol: settings.devServer.https?.client ? 'https' : 'http',
-            port: options.port ?? settings.devServer.port,
-            customizeMiddleware: context.projectSettings.devServer.customizeMiddleware,
         };
-        return virtualEntry(entryOptions);
+    };
+    const portalApp = createPortal();
+    settings.portal.setup(portalApp, {router});
+    const entries = await pMap(context.entries, toEntryTarget);
+    const entryOptions: VirtualEntryOptions = {
+        entries,
+        host,
+        buildTarget: context.buildTarget,
+        defaultEntry: entries.find(v => v.name === options.defaultEntry) ?? entries[0],
+        favicon: settings.build.favicon,
+        appContainerId: settings.build.appContainerId,
+        protocol: settings.devServer.https?.client ? 'https' : 'http',
+        port: options.port ?? settings.devServer.port,
+        customizeMiddleware: context.projectSettings.devServer.customizeMiddleware,
     };
     const pwaOptions: Partial<VitePWAOptions> = {
         mode: context.mode,
@@ -106,7 +115,8 @@ const factory: ConfigFactory = async (context, options) => {
     return {
         plugins: [
             react.default(reactOptions),
-            ...await pMap(context.entries, toVirtualEntryPlugin),
+            portal({app: portalApp}),
+            virtualEntry(entryOptions),
             cssBind({classNamesModule}),
             cssForceModules({enableModules: normalizeRuleMatch(context.cwd, settings.build.style.modules)}),
             svgToComponent(svgToComponentOptions),

@@ -22,22 +22,29 @@ const faviconLink = (favicon: string) => `<link rel="icon" href="${favicon}">`;
 
 const entryScript = (entry: string) => `<script type="module" src="/${entry}"></script>`;
 
+const appContainer = (id: string) => `<div id="${id}"></div>`;
+
 interface Options extends ListenOptions {
     root: string;
     devElements: boolean;
-    favicon?: string;
     entry: string;
+    favicon?: string;
+    appContainerId?: string;
 }
 
-export default (html: string, {devElements, favicon, entry, root, ...listen}: Options) => {
+export default (html: string, {devElements, favicon, entry, root, appContainerId, ...listen}: Options) => {
     const head = [
         favicon ? faviconLink(favicon.startsWith('/') ? path.relative(root, favicon) : favicon) : '',
         devElements ? reactRefreshScript(listen) : '',
         devElements ? viteClientScript(listen) : '',
     ];
+    const body = [
+        entryScript(entry),
+        appContainerId ? appContainer(appContainerId) : '',
+    ];
     const options = {
         headEnd: head.filter(v => !!v).join('\n'),
-        bodyEnd: entryScript(entry),
+        bodyEnd: body.filter(v => !!v).join('\n'),
     };
     return injectIntoHtml(html, options);
 };
