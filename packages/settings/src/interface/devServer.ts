@@ -4,17 +4,15 @@ import {Configuration} from 'webpack-dev-server';
 import {ServerOptions} from 'vite';
 import {ViteBuildEntry, WebpackBuildEntry} from './shared.js';
 
-export type RequestHandler = (req: IncomingMessage, res: ServerResponse, next: (err?: Error) => void) => void;
-
-export type Middleware = RequestHandler | {name?: string, path?: string, middleware: RequestHandler};
+export type Middleware = (req: IncomingMessage, res: ServerResponse, next: (err?: Error) => void) => void;
 
 export interface MiddlewareHook {
-    use: (route: string, fn: RequestHandler) => void;
-    get: (route: string, fn: RequestHandler) => void;
-    post: (route: string, fn: RequestHandler) => void;
-    put: (route: string, fn: RequestHandler) => void;
-    delete: (route: string, fn: RequestHandler) => void;
-    patch: (route: string, fn: RequestHandler) => void;
+    use: (route: string, fn: Middleware) => void;
+    get: (route: string, fn: Middleware) => void;
+    post: (route: string, fn: Middleware) => void;
+    put: (route: string, fn: Middleware) => void;
+    delete: (route: string, fn: Middleware) => void;
+    patch: (route: string, fn: Middleware) => void;
 }
 
 export interface MiddlewareCustomization {
@@ -28,6 +26,8 @@ interface ClientHttps {
 }
 
 export type DevServerHttps = {proxy?: boolean} & ({client?: false} | ClientHttps);
+
+export type CustomizeMiddleware = (customization: MiddlewareCustomization) => void;
 
 export interface DevServerSettings {
     // 是否以HTTPS协议代理请求及启动调试服务器
@@ -45,7 +45,7 @@ export interface DevServerSettings {
     // 服务启动后打开的页面
     readonly openPage: string;
     // 对调试服务器追加一些配置或功能
-    readonly customizeMiddleware: (customization: MiddlewareCustomization) => void;
+    readonly customizeMiddleware: CustomizeMiddleware;
 }
 
 export interface WebpackDevServerSettings extends DevServerSettings {

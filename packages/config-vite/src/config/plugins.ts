@@ -85,6 +85,7 @@ const factory: ConfigFactory = async (context, options) => {
             appContainerId: settings.build.appContainerId,
             protocol: settings.devServer.https?.client ? 'https' : 'http',
             port: options.port ?? settings.devServer.port,
+            customizeMiddleware: context.projectSettings.devServer.customizeMiddleware,
         };
         return virtualEntry(entryOptions);
     };

@@ -64,4 +64,10 @@ export default ({driver, config, port}: Options) => {
         const styles = await page.locator('#worker-status').evaluate(element => getComputedStyle(element));
         expect(styles.backgroundColor).toBe('rgb(40, 200, 64)');
     });
+
+    test(`[${driver}] customize middleware works`, async ({request}) => {
+        const response = await request.get(`http://localhost:${port}/ok`, {failOnStatusCode: true});
+        const text = await response.text();
+        expect(text).toBe('OK');
+    });
 };

@@ -1,15 +1,20 @@
-import {Middleware, RequestHandler, MiddlewareHook} from '@reskript/settings';
+import {Middleware, MiddlewareHook} from '@reskript/settings';
+
+interface MiddlewareInternal {
+    path: string;
+    middleware: Middleware;
+}
 
 interface MiddlewareHookInternal extends MiddlewareHook {
-    items: () => Middleware[];
+    items: () => MiddlewareInternal[];
 }
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 export const createMiddlewareHook = (): MiddlewareHookInternal => {
-    const container: Middleware[] = [];
-    const withMethod = (method: Method) => (route: string, fn: RequestHandler) => {
-        const middleware: Middleware = {
+    const container: MiddlewareInternal[] = [];
+    const withMethod = (method: Method) => (route: string, fn: Middleware) => {
+        const middleware: MiddlewareInternal = {
             path: route,
             middleware: (req, res, next) => {
                 if (req.method === method) {
@@ -24,7 +29,7 @@ export const createMiddlewareHook = (): MiddlewareHookInternal => {
     };
 
     return {
-        use: (route: string, fn: RequestHandler) => {
+        use: (route: string, fn: Middleware) => {
             container.push({path: route, middleware: fn});
         },
         get: withMethod('GET'),
