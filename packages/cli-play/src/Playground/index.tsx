@@ -64,7 +64,7 @@ function MainContent(props: Props) {
             const selectedCase = cases?.[index];
             if (selectedCase) {
                 updateSource(selectedCase.code);
-                await fetch(`/play/cases/${selectedCase.name}/TOUCH`, {method: 'PUT'});
+                await fetch(`/__skr__/play/cases/${selectedCase.name}/TOUCH`, {method: 'PUT'});
             }
         },
         [cases, setCaseState, updateSource]

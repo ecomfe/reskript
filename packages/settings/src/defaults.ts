@@ -7,6 +7,7 @@ import {
     ViteBuildSettings,
     WebpackDevServerSettings,
     ViteDevServerSettings,
+    PortalSettings,
 } from './interface/index.js';
 
 type PartialBuildSettings<S extends BuildSettings> = Omit<Partial<S>, 'script' | 'style' | 'inspect'> & {
@@ -102,10 +103,18 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
     };
 };
 
+const fillPortalSettings = (settings?: Partial<PortalSettings>): PortalSettings => {
+    return {
+        setup: () => {},
+        ...settings,
+    };
+};
+
 interface PartialProjectSettingsBase {
     cwd?: ProjectSettings['cwd'];
     featureMatrix?: ProjectSettings['featureMatrix'];
     play?: Partial<ProjectSettings['play']>;
+    portal?: Partial<ProjectSettings['portal']>;
 }
 
 export interface PartialWebpackProjectSettings extends PartialProjectSettingsBase {
@@ -132,6 +141,7 @@ export const fillProjectSettings = (settings: PartialProjectSettings): ProjectSe
             build: fillViteBuildSettings(settings.build),
             devServer: fillViteDevServerSettings(settings.devServer),
             play: fillPlaySettings(settings.play),
+            portal: fillPortalSettings(settings.portal),
         };
     }
 
@@ -142,5 +152,6 @@ export const fillProjectSettings = (settings: PartialProjectSettings): ProjectSe
         build: fillWebpackBuildSettings(settings.build),
         devServer: fillWebpackDevServerSettings(settings.devServer),
         play: fillPlaySettings(settings.play),
+        portal: fillPortalSettings(settings.portal),
     };
 };

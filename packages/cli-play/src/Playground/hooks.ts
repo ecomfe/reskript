@@ -68,7 +68,7 @@ export const useDynamicComponent = ({componentName, componentType, injects}: Dyn
 };
 
 const listCases = async () => {
-    const response = await fetch('/play/cases');
+    const response = await fetch('/__skr__/play/cases');
     const cases = await response.json() as PlayCase[];
     return cases;
 };
@@ -88,7 +88,7 @@ export const useCases = (source: string) => {
                 code: source,
             };
             const response = await fetch(
-                '/play/cases',
+                '/__skr__/play/cases',
                 {
                     method: 'POST',
                     body: JSON.stringify(caseToSave),
@@ -113,7 +113,7 @@ export const useCases = (source: string) => {
             }
 
             const response = await fetch(
-                `/play/cases/${encodeURIComponent(currentCase.name)}`,
+                `/__skr__/play/cases/${encodeURIComponent(currentCase.name)}`,
                 {
                     method: 'PUT',
                     body: JSON.stringify({code: source}),

@@ -5,12 +5,14 @@ import {FeatureMatrix} from './featureMatrix.js';
 import {PlaySettings} from './play.js';
 import {SettingsPlugin} from './plugin.js';
 import {CommandName} from './shared.js';
+import {PortalSettings} from './portal.js';
 
 export interface ProjectSettingsBase extends ProjectAware {
     // 从哪里来的配置
     readonly from?: string;
     readonly featureMatrix: FeatureMatrix;
     readonly play: PlaySettings;
+    readonly portal: PortalSettings;
 }
 
 export interface WebpackProjectSettings extends ProjectSettingsBase {

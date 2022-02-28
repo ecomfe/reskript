@@ -56,6 +56,7 @@ export {
     WebpackFinalize,
 } from './webpack.js';
 export {FinalizableViteConfiguration, ViteFinalize} from './vite.js';
+export {PortalSettings, SetupPortal, PortalHelper} from './portal.js';
 
 export type Listener = () => void;
 

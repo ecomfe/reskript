@@ -248,6 +248,15 @@ const schema: any = {
             additionalProperties: false,
             type: 'object',
         },
+        portal: {
+            properties: {
+                setup: {
+                    instanceof: 'Function',
+                },
+            },
+            additionalProperties: false,
+            type: 'object',
+        },
         plugins: {
             anyOf: [
                 {
