@@ -1,6 +1,5 @@
 import path from 'node:path';
 import fs from 'node:fs';
-// @ts-expect-error
 import {Cli, Builtins} from 'clipanion';
 import {logger, dirFromImportMeta} from '@reskript/core';
 import BabelCommand from './BabelCommand.js';

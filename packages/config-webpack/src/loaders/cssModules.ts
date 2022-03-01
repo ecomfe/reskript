@@ -1,6 +1,5 @@
 import path from 'node:path';
 import {resolve} from '@reskript/core';
-// @ts-expect-error
 import hasha from 'hasha';
 import {paramCase} from 'change-case';
 import {LoaderFactory} from '../interface.js';

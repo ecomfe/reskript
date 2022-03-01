@@ -1,12 +1,16 @@
 import path from 'node:path';
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
-import {LoaderContext} from 'webpack';
 import {dirFromImportMeta} from '@reskript/core';
-import {PlaySettings} from '@reskript/settings';
-import {resolveLocalConfigurationPath} from './utils/path.js';
+import {resolveLocalConfigurationPath} from '../utils/path.js';
 
-const currentDirectory = dirFromImportMeta(import.meta.url);
+const rootDirectory = path.resolve(dirFromImportMeta(import.meta.url), '..');
+
+export const resolveEntryPath = (enableConcurrentMode: boolean) => {
+    return enableConcurrentMode
+        ? path.join(rootDirectory, 'assets', 'playground-entry-cm.js.tpl')
+        : path.join(rootDirectory, 'assets', 'playground-entry.js.tpl');
+};
 
 const readAsSourceString = async (filename: string | undefined): Promise<string> => {
     if (!filename) {
@@ -21,7 +25,7 @@ const readAsSourceString = async (filename: string | undefined): Promise<string>
 const configurationBlockCode = async (name: string, modulePath: string | undefined): Promise<string> => {
     if (modulePath && existsSync(modulePath)) {
         const content = await fs.readFile(
-            path.join(currentDirectory, 'assets', 'configuration-block.js.tpl'),
+            path.join(rootDirectory, 'assets', 'configuration-block.js.tpl'),
             'utf-8'
         );
         return content.replace(/%MODULE_NAME%/g, name).replace('%CONFIGURATION_PATH%', modulePath);
@@ -30,25 +34,18 @@ const configurationBlockCode = async (name: string, modulePath: string | undefin
     return '';
 };
 
-interface LoaderOptions extends PlaySettings {
+export interface BuildEntryOptions {
     componentTypeName: string;
     componentModulePath: string;
     globalSetupModulePath: string | undefined;
     cwd: string;
 }
 
-export default async function playEntryLoader(this: LoaderContext<LoaderOptions>, content: any) {
-    if (this.cacheable) {
-        this.cacheable();
-    }
-
-    const callback = this.async();
-
-    const options = this.getOptions();
+export const buildEntryScript = async (content: string, options: BuildEntryOptions) => {
     const configurationFilePath = resolveLocalConfigurationPath(options.componentModulePath);
     const readingSources = [
         readAsSourceString(configurationFilePath),
-        fs.readFile(path.join(currentDirectory, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
+        fs.readFile(path.join(rootDirectory, 'assets', 'configuration-initialize.js.tpl'), 'utf-8'),
         configurationBlockCode('globalConfiguration', options.globalSetupModulePath),
         configurationBlockCode('localConfiguration', resolveLocalConfigurationPath(options.componentModulePath)),
     ] as const;
@@ -59,7 +56,7 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
         localConfigurationBlock,
     ] = await Promise.all(readingSources);
     const replacements: Array<[RegExp, string]> = [
-        [/%PLAYGROUND_PATH%/g, path.resolve(currentDirectory, 'Playground')],
+        [/%PLAYGROUND_PATH%/g, path.resolve(rootDirectory, 'Playground')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
         [/%CONFIGURATION_SOURCE%/g, configurationSource],
@@ -70,7 +67,7 @@ export default async function playEntryLoader(this: LoaderContext<LoaderOptions>
     ];
     const source = replacements.reduce(
         (source, [from, to]) => source.replace(from, to),
-        content.toString()
+        content
     );
-    callback(null, source);
-}
+    return source;
+};

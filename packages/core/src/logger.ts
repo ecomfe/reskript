@@ -42,6 +42,10 @@ export default {
     log: createLogWith('log'),
     warn: createLogWith('warn', 'yellow'),
     error: createLogWith('error', 'red'),
+    infoHighlight: (message: any) => {
+        // eslint-disable-next-line no-console
+        console.log(`${kolorist.bgBlue(kolorist.white(' I '))} ${message}`);
+    },
     debug: (message: any) => {
         if (isInDebugMode()) {
             // eslint-disable-next-line no-console

@@ -1,6 +1,5 @@
 import {StatsCompilation} from 'webpack';
 import {uniqBy, sum, mean} from 'ramda';
-// @ts-expect-error
 import prettyBytes from 'pretty-bytes';
 import {BuildInspectInitialResource} from '@reskript/settings';
 import {RuleProcessor} from './utils.js';
