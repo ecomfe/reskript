@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import {InjectManifest, InjectManifestOptions} from 'workbox-webpack-plugin';
+import {InjectManifest} from 'workbox-webpack-plugin';
 import {injectIntoHtml, serviceWorkerRegistryScript} from '@reskript/build-utils';
 import {TransformHtmlWebpackPlugin} from '../utils/plugin.js';
 import {ConfigurationFactory} from '../interface.js';
@@ -22,7 +22,7 @@ const factory: ConfigurationFactory = async entry => {
 
     const shouldInjectManifest = await requireManifestInjection(serviceWorkerSource);
     if (shouldInjectManifest) {
-        const options: InjectManifestOptions = {
+        const options = {
             mode,
             swSrc: serviceWorkerSource,
             swDest: `service-worker-${buildTarget}.js`,

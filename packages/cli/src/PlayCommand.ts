@@ -1,6 +1,4 @@
-// @ts-expect-error
 import {isNumber} from 'typanion';
-// @ts-expect-error
 import {Option} from 'clipanion';
 import {PlayCommandLineArgs} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';

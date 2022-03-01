@@ -1,6 +1,4 @@
-// @ts-expect-error
 import {Option} from 'clipanion';
-// @ts-expect-error
 import {isEnum} from 'typanion';
 import {TestCommandLineArgs} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';

@@ -5,7 +5,6 @@ import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
 // @ts-expect-error
 import {installPackage} from '@antfu/install-pkg';
-// @ts-expect-error
 import {Command} from 'clipanion';
 import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';
 
@@ -111,7 +110,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
         const packageConfig = await readPackageConfig(packageRoot);
         const dependencies = {...packageConfig.dependencies, ...packageConfig.devDependencies};
 
-        // @ts-expect-error
         return dependencies['@reskript/cli'] === this.cli.binaryVersion;
     }
 
@@ -157,7 +155,6 @@ export default abstract class DynamicImportCommand<A> extends Command {
 
         try {
             await installPackage(
-                // @ts-expect-error
                 `${this.packageName}@${this.cli.binaryVersion}`,
                 {silent: true, additionalArgs: ['-E']}
             );

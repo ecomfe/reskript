@@ -43,7 +43,7 @@ const copy = async packageName => {
         await cpy(
             [...files, 'package.json'],
             target,
-            {cwd: path.resolve(`packages/${packageName}`), parents: true}
+            {cwd: path.resolve(`packages/${packageName}`)}
         );
     }
     else {

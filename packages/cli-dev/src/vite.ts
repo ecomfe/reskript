@@ -35,7 +35,7 @@ export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartC
 
     const protocol = https?.client ? 'https' : 'http';
     const url = `${protocol}://${host}:${port}/${buildContext.projectSettings.devServer.openPage}`;
-    logger.log(`Your application is running here: ${url}`);
+    logger.infoHighlight(`Your application is running here: ${url}`);
 
     if (cmd.open) {
         open(url);

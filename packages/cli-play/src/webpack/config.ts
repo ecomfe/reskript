@@ -7,7 +7,8 @@ import {resolveDevHost} from '@reskript/build-utils';
 import * as loaders from '@reskript/config-webpack/loaders';
 import {createWebpackDevServerPartial} from '@reskript/config-webpack-dev-server';
 import {PlayCommandLineArgs} from '@reskript/settings';
-import {resolveComponentName} from './utils/path.js';
+import {resolveComponentName} from '../utils/path.js';
+import {resolveEntryPath} from '../utils/entry.js';
 
 const currentDirectory = dirFromImportMeta(import.meta.url);
 
@@ -16,9 +17,7 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
     const extra = await createWebpackDevServerPartial(buildContext, hostType);
     const baseConfig = await createBaseWebpackConfig(buildContext, {extras: [extra]});
     const enableConcurrentMode = cmd.concurrentMode ?? buildContext.projectSettings.play.defaultEnableConcurrentMode;
-    const playEntryPath = enableConcurrentMode
-        ? path.join(currentDirectory, 'assets', 'playground-entry-cm.js.tpl')
-        : path.join(currentDirectory, 'assets', 'playground-entry.js.tpl');
+    const playEntryPath = resolveEntryPath(enableConcurrentMode);
     const componentTypeName = resolveComponentName(target);
     const entryLoaders = [
         await loaders.babel(buildContext),
@@ -30,7 +29,6 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
                         loader: path.join(currentDirectory, 'loader.js'),
                         type: 'module',
                         options: {
-                            ...buildContext.projectSettings.play,
                             componentTypeName,
                             cwd: buildContext.cwd,
                             componentModulePath: path.resolve(buildContext.cwd, target),

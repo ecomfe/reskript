@@ -1,6 +1,5 @@
 import path from 'node:path';
 import {existsSync} from 'node:fs';
-// @ts-expect-error
 import hasha from 'hasha';
 import chokidar from 'chokidar';
 import {importUserModule, logger, PackageInfo, readPackageConfig} from '@reskript/core';
