@@ -1,16 +1,16 @@
 import {RuleSetRule} from 'webpack';
 import {isProjectSourceIn, normalizeRuleMatch} from '@reskript/core';
-import {BuildEntry} from '@reskript/settings';
+import {WebpackBuildEntry} from '@reskript/settings';
 import * as loaders from '../loaders/index.js';
 import {introduceLoaders} from '../utils/loader.js';
 
 type LoaderType = keyof typeof loaders;
 
-const createUseWith = (entry: BuildEntry) => {
+const createUseWith = (entry: WebpackBuildEntry) => {
     return (...names: Array<LoaderType | false>) => introduceLoaders(names, entry);
 };
 
-const assetModuleConfig = (entry: BuildEntry) => {
+const assetModuleConfig = (entry: WebpackBuildEntry) => {
     return {
         type: 'asset',
         parser: {
@@ -24,7 +24,7 @@ const assetModuleConfig = (entry: BuildEntry) => {
 // 在第三方代码与项目代码的处理上，使用的策略是“非`cwd`下的全部算第三方代码”，而不是“包含`node_modules`的算第三方”。
 // 这一逻辑取决于在使用monorepo时的形式，当前monorepo下我们要求被引用的包是构建后的。
 
-export const script = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const script = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     const {cwd, projectSettings: {build: {script: {babel}}}} = entry;
     const use = createUseWith(entry);
     const isProjectSource = isProjectSourceIn(cwd);
@@ -62,7 +62,7 @@ export const script = async (entry: BuildEntry): Promise<RuleSetRule> => {
     };
 };
 
-export const less = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const less = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
     const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
@@ -90,7 +90,7 @@ export const less = async (entry: BuildEntry): Promise<RuleSetRule> => {
     };
 };
 
-export const css = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const css = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     const {cwd, usage, projectSettings: {build: {style: {modules, extract}}}} = entry;
     const use = createUseWith(entry);
     const final = (usage === 'build' && extract) ? 'cssExtract' : 'style';
@@ -118,7 +118,7 @@ export const css = async (entry: BuildEntry): Promise<RuleSetRule> => {
     };
 };
 
-export const image = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const image = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     const use = createUseWith(entry);
 
     return {
@@ -128,7 +128,7 @@ export const image = async (entry: BuildEntry): Promise<RuleSetRule> => {
     };
 };
 
-export const svg = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const svg = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     const {mode} = entry;
     const use = createUseWith(entry);
     const uses = [
@@ -156,7 +156,7 @@ export const svg = async (entry: BuildEntry): Promise<RuleSetRule> => {
     };
 };
 
-export const file = async (entry: BuildEntry): Promise<RuleSetRule> => {
+export const file = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     return {
         test: /\.(eot|ttf|woff|woff2)(\?.+)?$/,
         ...assetModuleConfig(entry),

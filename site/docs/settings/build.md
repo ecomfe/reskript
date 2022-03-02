@@ -11,7 +11,7 @@ title: 构建配置
 export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 interface BuildStyleSettings {
-    // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
+    // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题，仅webpack引擎支持
     readonly extract: boolean;
     // 用于编译LESS的变量资源文件列表。每个文件均会被注入到所有的LESS文件前面，作为全局可用的资源
     readonly resources: string[];
@@ -100,12 +100,18 @@ interface BuildSettings {
     readonly style: BuildStyleSettings;
     // 控制脚本编译的配置
     readonly script: BuildScriptSettings;
-    // 最终手动处理webpack配置，第一个参数的类型并不完全对应Webpack配置，具体见下文
-    readonly finalize: (webpackConfig: WebpackConfiguration, buildEntry: BuildEntry, internals: BuildInternals) => WebpackConfiguration | Promise<WebpackConfiguration>;
+    // 最终手动处理配置，根据选择的引擎，参数为对应的webpack或vite配置。第3个参数仅支持webpack引擎
+    readonly finalize: (config: Configuration, buildEntry: BuildEntry, internals: BuildInternals) => Configuration | Promise<Configuration>;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
 }
 ```
+
+:::note
+`build.style.extract`仅在webpack引擎中支持，使用vite作为引擎时，默认样式会被提取到单独的CSS文件中。
+
+`build.finalize`根据引擎的不同参数不同，第一个参数为该引擎对应的配置对象。使用webpack引擎时，有第3个`internals`参数。
+:::
 
 虽然上面的类型定义中每个字段都是必须的，但在实际使用时有默认值填充的机制，通常一个应用需要`appTitle`与`favicon`配置，其它的配置都可以省略。多数配置请参考上方代码中的注释了解其作用，对于一些比较特殊的自定义扩展点，会在下文中说明。
 
@@ -238,6 +244,10 @@ export default configure(
 ## 样式相关
 
 ### 提取样式
+
+:::note
+仅支持webpack引擎。
+:::
 
 使用`build.style.extract`可以将样式提取到独立的`.css`文件中：
 
@@ -394,9 +404,9 @@ npx --no-install husky install \
 
 因此，我们强制要求在`pre-commit`时进行代码检查，避免在事后处理复杂的问题。使用`--staged`参数可以只检查即将提交的变动，不会消耗太多时间。
 
-## 自定义调整`webpack`配置
+## 自定义调整webpack配置
 
-如果你对`reSKRipt`生成的`webpack`并不满意，想要自己做一些调整，可以使用`build.finalize`来实现。这个配置项是一个函数，第一个参数为最终生成的`webpack`配置对象，第二个参数为一个`BuildEntry`对象。
+如果你对`reSKRipt`生成的webpack并不满意，想要自己做一些调整，可以使用`build.finalize`来实现。这个配置项是一个函数，第一个参数为最终生成的`webpack`配置对象，第二个参数为一个`BuildEntry`对象。
 
 例如，你希望复制一些文件到最终生成的代码中，可以通过`copy-webpack-plugin`来实现：
 
@@ -566,7 +576,33 @@ export default configure(
 请注意，`loaders`函数中的参数顺序依然是自右向左的，这与`webpack`的`loader`一致。
 :::
 
+## 自定义调整vite配置
+
+当使用的构建引擎为vite时，同样可以通过`build.finalize`调整配置，例如我们在明确自己项目的结构的情况下，想要通过`optimizeDeps`配置做一下优化，则可以这样来配置：
+
+```ts
+import CopyPlugin from 'copy-webpack-plugin';
+
+export default configure(
+    'vite',
+    {
+        build: {
+            finalize: viteConfig => {
+                viteConfig.optimizeDeps = viteConfig.optimizeDeps ?? {};
+                viteConfig.optimizeDeps.include = viteConfig.optimizeDeps.include ?? [];
+                viteConfig.optimizeDeps.include.push('custom.ts');
+                return viteConfig;
+            },
+        },
+    }
+);
+```
+
 ## 检查最终构建产物
+
+:::note
+仅支持webpack引擎。
+:::
 
 在要求比较严格的项目中，有需要对最终产物的组成进行检查，并应用一些自动化的规则，确保如资源数量、大小等符合预期。
 

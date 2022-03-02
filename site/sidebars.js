@@ -59,6 +59,7 @@ module.exports = {
             type: 'category',
             label: '插件',
             items: [
+                'plugins/inject-html',
                 'plugins/sass',
                 'plugins/qiankun',
                 'plugins/workspace-no-build',

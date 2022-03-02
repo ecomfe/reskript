@@ -16,7 +16,7 @@ const factory: ConfigFactory = async context => {
 
     return {
         build: {
-            cssCodeSplit: !settings.build.style.extract,
+            cssCodeSplit: true,
         },
         css: {
             preprocessorOptions: {

@@ -1,4 +1,4 @@
-import {BuildEntry, WebpackProjectSettings} from '@reskript/settings';
+import {WebpackBuildEntry, WebpackProjectSettings} from '@reskript/settings';
 import {BuildContext as BuildContextGeneric} from '@reskript/build-utils';
 import {Configuration, RuleSetUseItem, EntryObject} from 'webpack';
 
@@ -9,7 +9,7 @@ export interface EntryConfig {
     html?: Record<string, any>;
 }
 
-export type LoaderFactory = (entry: BuildEntry) => Promise<RuleSetUseItem | null>;
+export type LoaderFactory = (entry: WebpackBuildEntry) => Promise<RuleSetUseItem | null>;
 
 export type BuildContext = BuildContextGeneric<EntryConfig, WebpackProjectSettings>;
 

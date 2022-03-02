@@ -27,6 +27,8 @@ export const collectEntries = async (location: EntryLocation): Promise<Array<App
     return collectAppEntries(options);
 };
 
+// TODO: 要支持`reportLintErrors`
+
 export const createViteConfig = async (context: BuildContext, options: ViteOptions): Promise<UserConfig> => {
     if (context.entries.length !== 1) {
         logger.error('Currently vite driver only supports one application entry.');

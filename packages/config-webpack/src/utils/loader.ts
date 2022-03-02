@@ -1,16 +1,16 @@
 import {compact} from '@reskript/core';
 import {RuleSetUseItem} from 'webpack';
-import {BuildEntry, LoaderType} from '@reskript/settings';
+import {WebpackBuildEntry, LoaderType} from '@reskript/settings';
 import * as loaders from '../loaders/index.js';
 
-export const introduceLoader = (name: LoaderType, entry: BuildEntry): Promise<RuleSetUseItem | null> => {
+export const introduceLoader = (name: LoaderType, entry: WebpackBuildEntry): Promise<RuleSetUseItem | null> => {
     const factory = loaders[name];
     return factory(entry);
 };
 
-type MayBeLoaderType = LoaderType | false;
+type MayBeLoader = LoaderType | false;
 
-export const introduceLoaders = async (names: MayBeLoaderType[], entry: BuildEntry): Promise<RuleSetUseItem[]> => {
+export const introduceLoaders = async (names: MayBeLoader[], entry: WebpackBuildEntry): Promise<RuleSetUseItem[]> => {
     const items = await Promise.all(compact(names).map(v => introduceLoader(v, entry)));
     return compact(items);
 };

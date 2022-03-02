@@ -1,14 +1,15 @@
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback, useEffect, lazy, Suspense} from 'react';
 import styled from 'styled-components';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
 import WorkerStatus from '@/components/WorkerStatus';
-import Create from '../Create';
 import List from '../List';
 import BatchLabel from './BatchLabel';
 import './lintIgnore';
 import c from './index.less';
 import './lintIgnore.global.css';
 import decoration from './decoration.png';
+
+const Create = lazy(() => import('../Create'));
 
 const Header = styled.h1`
     font-size: 100px;
@@ -70,7 +71,9 @@ export default function App() {
             <Header>
                 <Title>todos</Title>
             </Header>
-            <Create onSubmit={createNew} />
+            <Suspense fallback={<div style={{height: 64}} />}>
+                <Create onSubmit={createNew} />
+            </Suspense>
             <Meta id="app-meta" className="flex items-center justify-between">
                 <span className="flex items-center gap-1">
                     <WorkerStatus />
