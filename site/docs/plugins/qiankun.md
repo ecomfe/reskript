@@ -2,6 +2,10 @@
 title: 自动接入Qiankun
 ---
 
+:::note
+本插件仅支持webpack引擎。vite的构建结果因使用`<script type="module">`，无法与qiankun兼容。
+:::
+
 ## 插件说明
 
 在构建时期处理与[qiankun](https://qiankun.umijs.org/)的整合问题。

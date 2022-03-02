@@ -134,6 +134,10 @@ unset https_proxy
 
 ### 监听第三方代码变更
 
+:::note
+仅针对webpack引擎。
+:::
+
 默认情况下，`skr dev`不会监听`node_modules`下的代码的变化。我们有理由相信这些代码并不会频繁变更，而大量的监听会影响调试服务器的性能和内存占用。
 
 如果你正好在调试第三方的包，需要主动去修改包的源码来确认问题，那么你可能不希望每一次修改都要重启服务。此时你可以通过`devServer.finalize`来控制第三方包的监听：
@@ -244,7 +248,7 @@ export default configure(
 
 ## 扩展配置
 
-如果你需要最终再对`webpack-dev-server`的配置做自己的调整，可以使用`devServer.finalize`配置。这个配置是一个函数，第一个参数是最终生成的`webpack-dev-server`配置对象，第二个参数是`BuildEntry`对象。
+如果你需要最终再对webpack引擎下的`webpack-dev-server`的配置，或者vite引擎下的`server`配置做自己的调整，可以使用`devServer.finalize`配置。这个配置是一个函数，第一个参数是服务器的配置对象（在webpack引擎下是`devServer`配置项，在vite引擎下是`server`配置项），第二个参数是`BuildEntry`对象。
 
 在上文中你已经看到如何利用这一配置实现对第三方代码的变更的监听。再比如你想要给调试服务器增加一个`/version`的路由，访问时返回当前产品的版本号，也是可以通过扩展来实现的：
 

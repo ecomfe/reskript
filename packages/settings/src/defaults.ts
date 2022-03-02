@@ -8,64 +8,89 @@ import {
     WebpackDevServerSettings,
     ViteDevServerSettings,
     PortalSettings,
+    BuildScriptSettings,
+    WebpackBuildStyleSettings,
+    ViteBuildStyleSettings,
+    BuildInspectSettings,
+    ThirdPartyUse,
 } from './interface/index.js';
 
-type PartialBuildSettings<S extends BuildSettings> = Omit<Partial<S>, 'script' | 'style' | 'inspect'> & {
-    script?: Partial<BuildSettings['script']>;
-    style?: Partial<BuildSettings['style']>;
-    inspect?: Partial<BuildSettings['inspect']>;
+const SHARED_BUILD_SETTINGS = {
+    uses: ['antd', 'lodash'] as ThirdPartyUse[],
+    thirdParty: false,
+    reportLintErrors: true,
+    largeAssetSize: 8 * 1024,
+    appTitle: 'Reskript App',
+    transformEntryHtml: (html: string) => html,
+    excludeFeatures: ['dev'],
 };
 
-const fillBuildSettings = (settings?: PartialBuildSettings<BuildSettings>): BuildSettings => {
+const fillScriptSettings = (settings?: Partial<BuildScriptSettings>): BuildScriptSettings => {
     return {
-        uses: ['antd', 'lodash'],
-        thirdParty: false,
-        reportLintErrors: true,
-        largeAssetSize: 8 * 1024,
-        appTitle: settings?.appTitle ?? 'Reskript App',
-        transformEntryHtml: html => html,
-        excludeFeatures: ['dev'],
+        babel: true,
+        polyfill: true,
+        displayName: true,
+        finalize: config => config,
         ...settings,
-        script: {
-            babel: true,
-            polyfill: true,
-            displayName: true,
-            finalize: config => config,
-            ...settings?.script,
-        },
-        style: {
-            extract: false,
-            resources: [],
-            lessVariables: {},
-            modules: true,
-            ...settings?.style,
-        },
-        inspect: {
-            duplicatePackages: 'off',
-            htmlImportable: 'off',
-            ...settings?.inspect,
-            initialResources: {
-                count: 'print',
-                totalSize: 'print',
-                sizeDeviation: 'off',
-                disallowImports: 'off',
-                ...settings?.inspect?.initialResources,
-            },
+    };
+};
+
+const fillViteStyleSettings = (settings?: Partial<ViteBuildStyleSettings>): ViteBuildStyleSettings => {
+    return {
+        resources: [],
+        lessVariables: {},
+        modules: true,
+        ...settings,
+    };
+};
+
+const fillWebpackStyleSettings = (settings?: Partial<WebpackBuildStyleSettings>): WebpackBuildStyleSettings => {
+    return {
+        extract: false,
+        ...fillViteStyleSettings(settings),
+    };
+};
+
+const fillInspectSettings = (settings?: Partial<BuildInspectSettings>): BuildInspectSettings => {
+    return {
+        duplicatePackages: 'off',
+        htmlImportable: 'off',
+        ...settings,
+        initialResources: {
+            count: 'print',
+            totalSize: 'print',
+            sizeDeviation: 'off',
+            disallowImports: 'off',
+            ...settings?.initialResources,
         },
     };
 };
 
+type PartialBuildSettings<S extends BuildSettings> = Omit<Partial<S>, 'script' | 'style' | 'inspect'> & {
+    script?: Partial<BuildSettings['script']>;
+    style?: Partial<WebpackBuildSettings['style'] | ViteBuildSettings['style']>;
+    inspect?: Partial<BuildSettings['inspect']>;
+};
+
 const fillWebpackBuildSettings = (settings?: PartialBuildSettings<WebpackBuildSettings>): WebpackBuildSettings => {
     return {
-        ...fillBuildSettings(settings),
-        finalize: settings?.finalize ?? (config => config),
+        ...SHARED_BUILD_SETTINGS,
+        finalize: config => config,
+        ...settings,
+        script: fillScriptSettings(settings?.script),
+        style: fillWebpackStyleSettings(settings?.style),
+        inspect: fillInspectSettings(settings?.inspect),
     };
 };
 
 const fillViteBuildSettings = (settings?: PartialBuildSettings<ViteBuildSettings>): ViteBuildSettings => {
     return {
-        ...fillBuildSettings(settings),
-        finalize: settings?.finalize ?? (config => config),
+        ...SHARED_BUILD_SETTINGS,
+        finalize: config => config,
+        ...settings,
+        script: fillScriptSettings(settings?.script),
+        style: fillViteStyleSettings(settings?.style),
+        inspect: fillInspectSettings(settings?.inspect),
     };
 };
 
