@@ -1,14 +1,14 @@
 import {UserConfig} from 'vite';
 import {BuildContext as BuildContextGeneric} from '@reskript/build-utils';
-import {HostType, ViteProjectSettings} from '@reskript/settings';
+import {ViteProjectSettings} from '@reskript/settings';
 
 export type BuildContext = BuildContextGeneric<unknown, ViteProjectSettings>;
 
 export interface ViteOptions {
     clean: boolean;
     sourceMaps: boolean;
+    publicPath: string;
     port?: number;
-    host?: HostType;
     cacheDirectory?: string;
     proxyDomain?: string;
     defaultEntry?: string;

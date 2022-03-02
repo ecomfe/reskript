@@ -11,7 +11,6 @@ import {
     constructEntryTemplateData,
     hasServiceWorker,
     injectIntoHtml,
-    resolveDevHost,
     serviceWorkerRegistryScript,
 } from '@reskript/build-utils';
 import {createPortal, router} from '@reskript/portal';
@@ -69,7 +68,6 @@ const factory: ConfigFactory = async (context, options) => {
         babel: finalizedBabelConfig,
         fastRefresh: context.usage === 'devServer' ? settings.devServer.hot : false,
     };
-    const host = await resolveDevHost(options.host ?? 'localhost');
     const requireServiceWorker = context.usage === 'build' && hasServiceWorker(context);
     const toEntryTarget = async (entry: AppEntry<unknown>): Promise<EntryTarget> => {
         return {
@@ -89,13 +87,11 @@ const factory: ConfigFactory = async (context, options) => {
     const entries = await pMap(context.entries, toEntryTarget);
     const entryOptions: VirtualEntryOptions = {
         entries,
-        host,
         buildTarget: context.buildTarget,
         defaultEntry: entries.find(v => v.name === options.defaultEntry) ?? entries[0],
         favicon: settings.build.favicon,
         appContainerId: settings.build.appContainerId,
-        protocol: settings.devServer.https?.client ? 'https' : 'http',
-        port: options.port ?? settings.devServer.port,
+        publicPath: options.publicPath,
         customizeMiddleware: context.projectSettings.devServer.customizeMiddleware,
     };
     const pwaOptions: Partial<VitePWAOptions> = {

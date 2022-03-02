@@ -1,4 +1,4 @@
-import {constructProxyConfiguration, resolveDevHost} from '@reskript/build-utils';
+import {constructProxyConfiguration} from '@reskript/build-utils';
 import {ConfigFactory} from '../interface.js';
 
 const factory: ConfigFactory = async (context, options) => {
@@ -13,7 +13,7 @@ const factory: ConfigFactory = async (context, options) => {
     return {
         server: {
             port: options.port ?? settings.devServer.port,
-            host: await resolveDevHost(options.host),
+            host: '0.0.0.0',
             https: settings.devServer.https?.client && settings.devServer.https.serverOptions,
             open: false,
             proxy: constructProxyConfiguration(proxyOptions),

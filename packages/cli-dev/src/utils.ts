@@ -8,7 +8,7 @@ const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: num
     }
 
     const host = await resolveDevHost(hostType);
-    return `http://${host}:${port}/assets/`;
+    return `http://${host}:${port}/`;
 };
 
 interface BuildContextOptions<C, S extends ProjectSettings> {

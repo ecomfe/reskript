@@ -14,10 +14,9 @@ export const run = async (buildContext: BuildContext, cmd: PlayCommandLineArgs, 
     const options: ViteOptions = {
         clean: false,
         sourceMaps: true,
-        port: cmd.port,
-        host: cmd.host,
         proxyDomain: buildContext.projectSettings.devServer.defaultProxyDomain,
         defaultEntry: 'index',
+        publicPath: '/',
     };
     const config = await createViteConfig(entryModified, options);
     const pluginOptions = {

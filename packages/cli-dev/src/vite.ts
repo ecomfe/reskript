@@ -1,4 +1,4 @@
-import {createServer, InlineConfig} from 'vite';
+import {createServer} from 'vite';
 import open from 'better-opn';
 import {logger} from '@reskript/core';
 import {DevCommandLineArgs, ViteProjectSettings} from '@reskript/settings';
@@ -14,18 +14,12 @@ export const start = async (cmd: DevCommandLineArgs, serverContext: ServerStartC
     const configOptions: ViteOptions = {
         clean: true,
         sourceMaps: true,
-        host: cmd.host,
+        publicPath: publicPath ?? '/',
         proxyDomain: cmd.proxyDomain,
         defaultEntry: cmd.entry,
     };
     const config = await createViteConfig(buildContext, configOptions);
-    const serverOptions: InlineConfig = {
-        ...config,
-        base: publicPath,
-        mode: cmd.mode,
-        configFile: false,
-    };
-    const server = await createServer(serverOptions);
+    const server = await createServer({...config, configFile: false});
 
     if (buildContext.projectSettings.from) {
         server.watcher.add(buildContext.projectSettings.from);
