@@ -32,20 +32,20 @@
     "eslint": "^8.10.0",
     "postcss": "^8.4.7",
     "typescript": "next",
-    "vite": "^2.8.5",
+    "vite": "^2.8.6",
     "vitest": "^0.5.9"
   },
   "dependencies": {
     "@reskript/core": "4.3.0",
     "@reskript/settings": "4.3.0",
     "change-case": "^4.1.2",
-    "cssnano": "^5.0.17",
+    "cssnano": "^5.1.0",
     "escape-string-regexp": "^5.0.0",
     "globby": "^13.1.1",
     "internal-ip": "^7.0.0",
     "less-plugin-functions": "^1.0.0",
     "less-plugin-npm-import": "^2.1.0",
-    "postcss-preset-env": "^7.4.1",
+    "postcss-preset-env": "^7.4.2",
     "proxy-agent": "^5.0.0",
     "ramda": "^0.28.0",
     "xml2js": "^0.4.23"

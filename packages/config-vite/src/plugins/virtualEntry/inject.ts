@@ -2,11 +2,10 @@ import path from 'node:path';
 // @ts-expect-error
 import dedent from 'dedent';
 import {injectIntoHtml} from '@reskript/build-utils';
-import {ListenOptions} from './interface.js';
 
-const reactRefreshScript = ({protocol, host, port}: ListenOptions) => dedent`
+const reactRefreshScript = (publicPath: string) => dedent`
     <script type="module">
-        import RefreshRuntime from '${protocol}://${host}:${port}/@react-refresh'
+        import RefreshRuntime from '${publicPath}@react-refresh'
         RefreshRuntime.injectIntoGlobalHook(window)
         window.$RefreshReg$ = () => {}
         window.$RefreshSig$ = () => (type) => type
@@ -14,32 +13,36 @@ const reactRefreshScript = ({protocol, host, port}: ListenOptions) => dedent`
     </script>
 `;
 
-const viteClientScript = ({protocol, host, port}: ListenOptions) => {
-    return `<script type="module" src="${protocol}://${host}:${port}/@vite/client"></script>`;
+const viteClientScript = (publicPath: string) => {
+    return `<script type="module" src="${publicPath}@vite/client"></script>`;
 };
 
 const faviconLink = (favicon: string) => `<link rel="icon" href="${favicon}">`;
 
-const entryScript = (entry: string) => `<script type="module" src="/${entry}"></script>`;
+const entryScript = (entry: string, publicPath: string) => {
+    const url = publicPath + entry;
+    return `<script type="module" src="${url}"></script>`;
+};
 
 const appContainer = (id: string) => `<div id="${id}"></div>`;
 
-interface Options extends ListenOptions {
+interface Options {
     root: string;
     devElements: boolean;
     entry: string;
+    publicPath: string;
     favicon?: string;
     appContainerId?: string;
 }
 
-export default (html: string, {devElements, favicon, entry, root, appContainerId, ...listen}: Options) => {
+export default (html: string, {devElements, favicon, entry, root, appContainerId, publicPath}: Options) => {
     const head = [
         favicon ? faviconLink(favicon.startsWith('/') ? path.relative(root, favicon) : favicon) : '',
-        devElements ? reactRefreshScript(listen) : '',
-        devElements ? viteClientScript(listen) : '',
+        devElements ? reactRefreshScript(publicPath) : '',
+        devElements ? viteClientScript(publicPath) : '',
     ];
     const body = [
-        entryScript(entry),
+        entryScript(entry, publicPath),
         appContainerId ? appContainer(appContainerId) : '',
     ];
     const options = {

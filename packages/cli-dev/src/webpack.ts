@@ -35,7 +35,7 @@ export const start = async (cmd: DevCommandLineArgs, serverContext: WebpackServe
                 caseSensitiveModuleSource: cmd.strict,
                 typeCheck: false,
             },
-            extras: [extra, {output: {publicPath}}],
+            extras: [extra, {output: {publicPath: publicPath && publicPath + 'assets/'}}],
         }
     );
     const devServerConfig = await createWebpackDevServerConfig(

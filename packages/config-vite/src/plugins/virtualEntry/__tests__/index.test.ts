@@ -23,12 +23,9 @@ const build = async (options: Pick<VirtualEntryOptions, 'favicon'>) => {
     const entryOptions: VirtualEntryOptions = {
         ...options,
         entries,
-        protocol: 'http',
-        host: 'localhost',
-        port: 9998,
+        publicPath: '/',
         defaultEntry: entries[0],
         buildTarget: 'stable',
-        portal: () => {},
         customizeMiddleware: () => {},
     };
     const config: InlineConfig = {

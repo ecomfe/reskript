@@ -3,6 +3,7 @@ import {ConfigFactory} from '../interface.js';
 const factory: ConfigFactory = async (context, options) => {
     return {
         mode: context.mode,
+        base: options.publicPath,
         cacheDir: options.cacheDirectory ?? 'node_modules/.cache/vite',
     };
 };

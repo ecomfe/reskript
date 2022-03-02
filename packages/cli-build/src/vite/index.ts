@@ -23,6 +23,7 @@ const runBuild = async (cmd: BuildCommandLineArgs, buildContext: BuildContext) =
             clean: false,
             sourceMaps: cmd.sourceMaps,
             cacheDirectory: cmd.cacheDirectory,
+            publicPath: buildContext.projectSettings.build.publicPath ?? '/',
         }
     );
     const output = await viteBuild({...config, logLevel: 'warn'});

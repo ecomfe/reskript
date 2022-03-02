@@ -11,13 +11,8 @@ export interface ResourceOptions {
     content: string;
 }
 
-export interface ListenOptions {
-    protocol: 'http' | 'https';
-    host: string;
-    port: number;
-}
-
-export interface ServerOptions extends ResourceOptions, ListenOptions {
+export interface ServerOptions extends ResourceOptions {
+    publicPath: string;
     customizeMiddleware: CustomizeMiddleware;
 }
 

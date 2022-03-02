@@ -36,9 +36,9 @@
     "@types/unixify": "^1.0.0",
     "c8": "^7.10.0",
     "eslint": "^8.10.0",
-    "rollup": "^2.68.0",
+    "rollup": "^2.69.0",
     "typescript": "next",
-    "vite": "^2.8.5",
+    "vite": "^2.8.6",
     "vitest": "^0.5.9"
   },
   "dependencies": {

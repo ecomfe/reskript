@@ -30,9 +30,9 @@
     "c8": "^7.10.0",
     "eslint": "^8.10.0",
     "react": "^17.0.2",
-    "rollup": "^2.68.0",
+    "rollup": "^2.69.0",
     "typescript": "next",
-    "vite": "^2.8.5",
+    "vite": "^2.8.6",
     "vitest": "^0.5.9"
   },
   "dependencies": {
@@ -47,7 +47,7 @@
     "dedent": "^0.7.0",
     "globby": "^13.1.1",
     "lodash.template": "^4.5.0",
-    "magic-string": "^0.25.7",
+    "magic-string": "^0.25.8",
     "ramda": "^0.28.0",
     "vite-plugin-pwa": "^0.11.13"
   },
