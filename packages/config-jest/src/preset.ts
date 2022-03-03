@@ -41,7 +41,7 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
             $features: options?.features ?? {},
         },
         moduleDirectories: ['src', 'node_modules'],
-        moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx', 'd.ts'],
+        moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx'],
         transform: {
             'node_modules/.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/thirdPartyTransformer`,
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,

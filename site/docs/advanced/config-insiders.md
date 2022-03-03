@@ -76,7 +76,7 @@ function FooBar() {
 
 ### 文件支持
 
-只认`.js`、`.jsx`、`.ts`、`.tsx`、`.d.ts`这几类文件作为脚本。
+只认`.js`、`.jsx`、`.ts`、`.tsx`这几类文件作为脚本。
 
 引入包时的主字段的顺序是`browser -> module -> main`，所以浏览器兼容的实现会被优先引入。
 

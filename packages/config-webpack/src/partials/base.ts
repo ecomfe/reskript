@@ -183,7 +183,7 @@ const factory: ConfigurationFactory = async entry => {
             rules: moduleRules,
         },
         resolve: {
-            extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
+            extensions: ['.js', '.jsx', '.ts', '.tsx'],
             mainFields: ['browser', 'module', 'main'],
             alias: {
                 '@': path.join(cwd, srcDirectory),
