@@ -12,7 +12,8 @@
     "node": ">=14.18.0 || >= 16.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "client.d.ts"
   ],
   "publishConfig": {
     "access": "public"
