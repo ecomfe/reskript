@@ -44,6 +44,7 @@
     "@vitejs/plugin-react": "^1.2.0",
     "classnames": "^2.3.1",
     "connect-history-api-fallback": "^1.6.0",
+    "core-js-compat": "^3.21.1",
     "dedent": "^0.7.0",
     "globby": "^13.1.1",
     "lodash.template": "^4.5.0",

@@ -16,8 +16,23 @@ export default ({driver, config, port}: Options) => {
             ['dev', '--no-open', `--config=${config}`],
             {stdio: 'pipe'}
         );
+        const executor = (resolve: (value: void) => void, reject: (error: Error) => void) => {
+            let output = '';
+            process.stdout.on(
+                'data',
+                data => {
+                    output += data.toString();
+                    if (output.includes('Your application is running')) {
+                        resolve();
+                    }
+                    else if (output.includes('ERROR')) {
+                        reject(new Error('server failed to start'));
+                    }
+                }
+            );
+        };
         devServer.current = process;
-        await new Promise(resolve => process.stdout.on('data', resolve));
+        await new Promise(executor);
     });
 
     test.afterAll(() => {

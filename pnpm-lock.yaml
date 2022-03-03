@@ -677,6 +677,7 @@ importers:
       c8: ^7.10.0
       classnames: ^2.3.1
       connect-history-api-fallback: ^1.6.0
+      core-js-compat: ^3.21.1
       dedent: ^0.7.0
       eslint: ^8.10.0
       globby: ^13.1.1
@@ -698,6 +699,7 @@ importers:
       '@vitejs/plugin-react': 1.2.0
       classnames: 2.3.1
       connect-history-api-fallback: 1.6.0
+      core-js-compat: 3.21.1
       dedent: 0.7.0
       globby: 13.1.1
       lodash.template: 4.5.0
@@ -712,7 +714,7 @@ importers:
       eslint: 8.10.0
       react: 17.0.2
       rollup: 2.69.0
-      typescript: 4.7.0-dev.20220302
+      typescript: 4.7.0-dev.20220303
       vite: 2.8.6
       vitest: 0.5.9_c8@7.11.0
 
@@ -17095,6 +17097,12 @@ packages:
 
   /typescript/4.7.0-dev.20220302:
     resolution: {integrity: sha512-v08QY17yLZ7ReaDeB/CXvUF/+Fu6xMFUdYMy3TcYIHP/yqTGTnQvdtlYAOQozZ1RTMOMv2L5TgZCWavkJaMUpg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.7.0-dev.20220303:
+    resolution: {integrity: sha512-Lhmh5V02dsae865qHgdZyygJQp7MuErTHJF63NB/by1vXBtuLEUnHoPWbZOGa5lemklMP+VGSjVH6jJyGjabLQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

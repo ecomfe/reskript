@@ -11,10 +11,20 @@ import resolveConfig from './config/resolve.js';
 import serverConfig from './config/server.js';
 import defineConfig from './config/define.js';
 import pluginsConfig from './config/plugins.js';
+import optimizeDepsConfig from './config/optimizeDeps.js';
 
 export type {ViteOptions, BuildContext} from './interface.js';
 
-const factories = [baseConfig, buildConfig, cssConfig, resolveConfig, serverConfig, defineConfig, pluginsConfig];
+const factories = [
+    baseConfig,
+    buildConfig,
+    cssConfig,
+    resolveConfig,
+    serverConfig,
+    defineConfig,
+    pluginsConfig,
+    optimizeDepsConfig,
+];
 
 export const collectEntries = async (location: EntryLocation): Promise<Array<AppEntry<unknown>>> => {
     const options: EntryOptions<unknown> = {
@@ -29,12 +39,14 @@ export const collectEntries = async (location: EntryLocation): Promise<Array<App
 
 // TODO: 要支持`reportLintErrors`
 
-export const createViteConfig = async (context: BuildContext, options: ViteOptions): Promise<UserConfig> => {
+export const createViteConfig = async (context: BuildContext, input: ViteOptions): Promise<UserConfig> => {
     if (context.entries.length !== 1) {
         logger.error('Currently vite driver only supports one application entry.');
         process.exit(24);
     }
 
+    // 兼容一下`publicPath`有没有最后的`/`的情况
+    const options = {...input, publicPath: input.publicPath + (input.publicPath.endsWith('/') ? '' : '/')};
     const parts = await Promise.all(factories.map(v => v(context, options)));
     const config = parts.reduce((output, current) => mergeConfig(output, current)) as FinalizableViteConfiguration;
     const serverFinalized = {

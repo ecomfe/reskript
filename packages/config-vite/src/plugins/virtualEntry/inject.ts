@@ -42,7 +42,9 @@ export default (html: string, {devElements, favicon, entry, root, appContainerId
         devElements ? viteClientScript(publicPath) : '',
     ];
     const body = [
-        entryScript(entry, publicPath),
+        // 在`dev`模式下，根据`--host`参数不同，这里可能需要绝对路径（比如配合qiankun这种跨域加载），
+        // 但在`build`下，一定是固定的路径，不然会找不到资源
+        entryScript(entry, devElements ? publicPath : '/'),
         appContainerId ? appContainer(appContainerId) : '',
     ];
     const options = {
