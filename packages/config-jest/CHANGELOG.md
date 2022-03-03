@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/ecomfe/reskript/compare/v4.2.1...v4.3.0) (2022-03-03)
+
+
+### Bug Fixes
+
+* **test:** 不要把d.ts文件作为可执行文件处理 ([#269](https://github.com/ecomfe/reskript/issues/269)) ([047e6fc](https://github.com/ecomfe/reskript/commit/047e6fc97d9f6534be0b6baa838385c2df560fb8))
+
+
+
+
+
 ## [4.2.1](https://github.com/ecomfe/reskript/compare/v4.2.0...v4.2.1) (2022-02-25)
 
 **Note:** Version bump only for package @reskript/config-jest

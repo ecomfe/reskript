@@ -1,6 +1,6 @@
 {
   "name": "@reskript/svg-to-component-loader",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
