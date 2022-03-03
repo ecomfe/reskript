@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v4.3.0...v5.0.0-beta.0) (2022-03-03)
+
+
+### Features
+
+* **build:** 在Vite引擎中支持publicPath ([#200](https://github.com/ecomfe/reskript/issues/200)) ([c4da054](https://github.com/ecomfe/reskript/commit/c4da054ed4e2a3c704c2d54dc3777801b343167e))
+* **dev:** 实现Vite的dev基础功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([2e46749](https://github.com/ecomfe/reskript/commit/2e46749180f47810abf9171d74d0b85820d98d55))
+* **play:** 支持Vite引擎的play功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([bb7e629](https://github.com/ecomfe/reskript/commit/bb7e62936582c62098e3bea31ee93f286eaa81a6))
+
+
+### BREAKING CHANGES
+
+* **dev:** `@reskript/config-webpack`和`build.finalize`中的`styleResources`相关的功能已经移除，由内置的less插件实现
+* **dev:** `$features`改名为`skr.features`，`$build`改名为`skr.build`
+* **dev:** 自定义HTML模板中，只能使用`templateData.*`获取模板数据
+* **dev:** 原入口配置中的`export const html`中，用于模板数据的部分，更新为`export const templateData`
+
+
+
+
+
 # [4.3.0](https://github.com/ecomfe/reskript/compare/v4.2.1...v4.3.0) (2022-03-03)
 
 **Note:** Version bump only for package @reskript/babel-plugin-debug-react-component-file-name

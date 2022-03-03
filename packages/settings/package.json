@@ -1,6 +1,6 @@
 {
   "name": "@reskript/settings",
-  "version": "4.3.0",
+  "version": "5.0.0-beta.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -35,7 +35,7 @@
     "webpack": "^5.69.1"
   },
   "dependencies": {
-    "@reskript/core": "4.3.0",
+    "@reskript/core": "5.0.0-beta.0",
     "chokidar": "^3.5.2",
     "express": "^4.17.3",
     "hasha": "^5.2.0",

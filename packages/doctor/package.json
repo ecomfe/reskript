@@ -1,6 +1,6 @@
 {
   "name": "@reskript/doctor",
-  "version": "4.3.0",
+  "version": "5.0.0-beta.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,8 +28,8 @@
     "typescript": "next"
   },
   "dependencies": {
-    "@reskript/core": "4.3.0",
-    "@reskript/settings": "4.3.0",
+    "@reskript/core": "5.0.0-beta.0",
+    "@reskript/settings": "5.0.0-beta.0",
     "globby": "^13.1.1",
     "log-symbols": "^5.1.0",
     "ora": "^6.1.0",
