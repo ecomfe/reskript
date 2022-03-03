@@ -10,7 +10,7 @@ fi
 
 # 如果产出的配置文件里有`{}`这种空对象，那基本上不可能是源码直接引入的，而是构建出了问题
 
-empty_leak_count=$(grep -E " [a-zA-Z]+: {}" -r packages/*/config | wc -l | xargs)
+empty_leak_count=$(grep -E " [a-zA-Z]+: {}" -r packages/*/config | grep -v features | wc -l | xargs)
 if [ $empty_leak_count -gt 0 ]; then
     echo "found $empty_leak_count empty object in exported configurations, please fix it"
     exit 2
