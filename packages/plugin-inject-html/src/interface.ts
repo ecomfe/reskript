@@ -1,3 +1,5 @@
+import {CommandName} from '@reskript/settings';
+
 export interface TagDescription {
     tag: string;
     attributes?: Record<string, string | true | undefined>;
@@ -5,9 +7,10 @@ export interface TagDescription {
     children?: string;
 }
 
-export interface Options {
+export interface InjectHtmlOptions {
     headStart?: TagDescription[];
     headEnd?: TagDescription[];
     bodyStart?: TagDescription[];
     bodyEnd?: TagDescription[];
+    enableOnCommand?: CommandName[];
 }

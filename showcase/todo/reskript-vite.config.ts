@@ -1,6 +1,6 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import injectHtml, {Options as InjectHtmlOptions} from '@reskript/plugin-inject-html';
+import injectHtml, {InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
 
 const injectOptions: InjectHtmlOptions = {

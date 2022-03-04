@@ -1,9 +1,9 @@
 import {htmlEscape} from 'escape-goat';
 import {ProjectSettings, SettingsPlugin} from '@reskript/settings';
 import {injectIntoHtml} from '@reskript/build-utils';
-import {TagDescription, Options} from './interface.js';
+import {TagDescription, InjectHtmlOptions} from './interface.js';
 
-export type {Options};
+export type {InjectHtmlOptions};
 
 const attributeToString = (name: string, value: string | true | undefined) => {
     if (value === undefined) {
@@ -27,7 +27,7 @@ const toHtmlString = (description: TagDescription) => {
     return `<${description.tag}${attributes}>${description.children ?? ''}${tagEnd}`;
 };
 
-export default (options: Options): SettingsPlugin => {
+export default (options: InjectHtmlOptions): SettingsPlugin => {
     const enhance = <T extends ProjectSettings>(settings: T): T => {
         return {
             ...settings,
@@ -47,5 +47,11 @@ export default (options: Options): SettingsPlugin => {
         };
     };
 
-    return async settings => enhance(settings);
+    return async (settings, cmd) => {
+        if (options.enableOnCommand && !options.enableOnCommand.includes(cmd.commandName)) {
+            return settings;
+        }
+
+        return enhance(settings);
+    };
 };
