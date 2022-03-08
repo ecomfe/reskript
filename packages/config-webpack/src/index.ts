@@ -11,12 +11,12 @@ import {
 } from '@reskript/build-utils';
 import * as rules from './rules/index.js';
 import {mergeBuiltin} from './utils/merge.js';
-import {createHTMLPluginInstances} from './utils/html.js';
+import {createHtmlPluginInstances, createTransformHtmlPluginInstance} from './utils/html.js';
 import {introduceLoader, introduceLoaders} from './utils/loader.js';
 import {BuildContext, EntryConfig, StrictOptions} from './interface.js';
 import {partials, strict as strictPartial} from './partials/index.js';
 
-export {createHTMLPluginInstances};
+export {createHtmlPluginInstances, createTransformHtmlPluginInstance};
 export * from './interface.js';
 
 const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);

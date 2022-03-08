@@ -28,7 +28,7 @@ const toHtmlString = (description: TagDescription) => {
 };
 
 export default (options: InjectHtmlOptions): SettingsPlugin => {
-    const enhance = <T extends ProjectSettings>(settings: T): T => {
+    const enhance = <S extends ProjectSettings>(settings: S): S => {
         return {
             ...settings,
             build: {

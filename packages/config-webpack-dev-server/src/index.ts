@@ -6,7 +6,7 @@ import {merge} from 'webpack-merge';
 import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {compact} from '@reskript/core';
-import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
+import {createHtmlPluginInstances, BuildContext} from '@reskript/config-webpack';
 import {constructProxyConfiguration, createMiddlewareHook} from '@reskript/build-utils';
 import {warnAndExitOnInvalidFinalizeReturn, WebpackBuildEntry} from '@reskript/settings';
 import {createPortal, router} from '@reskript/portal';
@@ -19,7 +19,7 @@ const getDevServerMessages = (host: string, port: number, https: boolean, openPa
 
 export const createWebpackDevServerPartial = async (context: BuildContext, host = 'localhost') => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage, https}}} = context;
-    const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
+    const htmlPlugins = createHtmlPluginInstances({...context, isDefaultTarget: true});
     const messageOptions = {
         compilationSuccessInfo: {
             messages: getDevServerMessages(host, port, !!https?.client, openPage),

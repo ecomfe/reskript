@@ -14,7 +14,7 @@ import InterpolateHTMLPlugin from '@reskript/webpack-plugin-interpolate-html';
 import {constructDefines, DefineContext} from '@reskript/build-utils';
 import {getScriptLintBaseConfig, getStyleLintBaseConfig} from '@reskript/config-lint';
 import {ConfigurationFactory, BuildContext} from '../interface.js';
-import {createHTMLPluginInstances} from '../utils/html.js';
+import {createHtmlPluginInstances, createTransformHtmlPluginInstance} from '../utils/html.js';
 import {convertToWebpackEntry} from '../utils/entry.js';
 import * as rules from '../rules/index.js';
 
@@ -142,10 +142,11 @@ const factory: ConfigurationFactory = async entry => {
         failOnError: mode === 'production',
         files: `${srcDirectory}/**/*.{css,less}`,
     };
-    const htmlPlugins = thirdParty ? [] : createHTMLPluginInstances(entry);
+    const htmlPlugins = thirdParty ? [] : createHtmlPluginInstances(entry);
     const cssOutput = thirdParty ? 'index.css' : '[name].[contenthash].css';
     const plugins = [
         ...htmlPlugins,
+        createTransformHtmlPluginInstance(entry),
         (usage === 'build' && extract) && new MiniCssExtractPlugin({filename: cssOutput}),
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(constructDynamicDefines(defines)),

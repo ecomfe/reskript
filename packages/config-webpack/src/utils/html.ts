@@ -62,11 +62,15 @@ const createHTMLPluginWith = (buildEntry: BuildEntry) => {
     };
 };
 
-export const createHTMLPluginInstances = (buildContext: BuildContext): WebpackPluginInstance[] => {
-    const {isDefaultTarget, buildTarget, entries, projectSettings: {build: {transformEntryHtml}}} = buildContext;
+export const createHtmlPluginInstances = (buildContext: BuildContext): WebpackPluginInstance[] => {
+    const {isDefaultTarget, buildTarget, entries} = buildContext;
     const createInstanceWithSuffix = createHTMLPluginWith(buildContext);
     const pluginsWithinTarget = entries.map(createInstanceWithSuffix('-' + buildTarget));
     const pluginsOfDefault = isDefaultTarget ? entries.map(createInstanceWithSuffix('')) : [];
 
-    return [...pluginsWithinTarget, ...pluginsOfDefault, new TransformHtmlWebpackPlugin(transformEntryHtml)];
+    return [...pluginsWithinTarget, ...pluginsOfDefault];
+};
+
+export const createTransformHtmlPluginInstance = (buildContext: BuildContext): TransformHtmlWebpackPlugin => {
+    return new TransformHtmlWebpackPlugin(buildContext.projectSettings.build.transformEntryHtml);
 };

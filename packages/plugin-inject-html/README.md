@@ -1,5 +1,3 @@
-# @reskript/plugin-qiankun
+# @reskript/plugin-inject-html
 
-在构建时期处理与[qiankun](https://qiankun.umijs.org/)的整合问题。
-
-具体文档请参考：https://reskript.dev/docs/plugins/qiankun
+可以向构建产生的HTML中注入指定的标签元素。
