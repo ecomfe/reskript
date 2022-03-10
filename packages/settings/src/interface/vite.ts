@@ -1,15 +1,22 @@
 import {UserConfig} from 'vite';
 import {ViteBuildEntry} from './shared.js';
 
-type NotOptinal<T> = Exclude<T, undefined>;
+type NotOptional<T> = Exclude<T, undefined>;
+
+type Build = NotOptional<UserConfig['build']>;
+
+interface FinalizableBuild extends Build {
+    rollupOptions: NotOptional<Build['rollupOptions']>;
+}
 
 export interface FinalizableViteConfiguration extends UserConfig {
-    define: NotOptinal<UserConfig['define']>;
-    plugins: NotOptinal<UserConfig['plugins']>;
+    define: NotOptional<UserConfig['define']>;
+    plugins: NotOptional<UserConfig['plugins']>;
     resolve: UserConfig['resolve'] & {alias: Record<string, string>};
-    css: NotOptinal<UserConfig['css']>;
-    server: NotOptinal<UserConfig['server']>;
-    build: NotOptinal<UserConfig['build']>;
+    css: NotOptional<UserConfig['css']>;
+    server: NotOptional<UserConfig['server']>;
+    build: FinalizableBuild;
+    optimizeDeps: NotOptional<UserConfig['optimizeDeps']>;
 }
 
 export type ViteFinalize = (
