@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-qiankun",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0-beta.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,9 +33,9 @@
     "vitest": "^0.5.9"
   },
   "dependencies": {
-    "@reskript/core": "5.0.0-beta.0",
-    "@reskript/plugin-utils": "5.0.0-beta.0",
-    "@reskript/settings": "5.0.0-beta.0",
+    "@reskript/core": "5.0.0-beta.1",
+    "@reskript/plugin-utils": "5.0.0-beta.1",
+    "@reskript/settings": "5.0.0-beta.1",
     "dedent": "^0.7.0",
     "esbuild": "^0.14.23",
     "qiankun": "^2.6.3"

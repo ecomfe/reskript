@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2022-03-10)
+
+
+### Features
+
+* **plugin-inject-html:** 支持plugin-inject-plugin仅在指定的命令下启用 ([9e9ab97](https://github.com/ecomfe/reskript/commit/9e9ab97358ad0339d76d54d8c5ab1b8c30492774))
+* **plugin-utils:** 增加插件相关的工具包 ([#275](https://github.com/ecomfe/reskript/issues/275)) ([5b82848](https://github.com/ecomfe/reskript/commit/5b828489c2ee96a612f8faecfb18a4d34fb14228))
+
+
+### Performance Improvements
+
+* **build:** 预处理antd和core-js的打包 ([0559a6e](https://github.com/ecomfe/reskript/commit/0559a6e42b3c50fc3445cb91224a531c25d9c31d))
+
+
+
+
+
 # [5.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v4.3.0...v5.0.0-beta.0) (2022-03-03)
 
 
