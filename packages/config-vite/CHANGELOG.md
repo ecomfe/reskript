@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* **config-vite:** 修复调用core-js-compat的错误 ([72e0b3b](https://github.com/ecomfe/reskript/commit/72e0b3bb4e0dc2ece71e65d1213184a6aff286d5))
+
+
+
+
+
 # [5.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2022-03-10)
 
 

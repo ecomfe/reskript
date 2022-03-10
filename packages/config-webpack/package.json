@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-webpack",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,7 +26,7 @@
     "test": "vitest --run --threads=false"
   },
   "devDependencies": {
-    "@reskript/config-img-loader": "5.0.0-beta.1",
+    "@reskript/config-img-loader": "5.0.0",
     "@types/less": "^3.0.3",
     "@types/node": "^17.0.21",
     "@types/tailwindcss": "^3.0.9",
@@ -42,13 +42,13 @@
   "dependencies": {
     "@babel/core": "^7.17.5",
     "@ecomfe/class-names-loader": "^2.0.0",
-    "@reskript/build-utils": "5.0.0-beta.1",
-    "@reskript/config-babel": "5.0.0-beta.1",
-    "@reskript/config-lint": "5.0.0-beta.1",
-    "@reskript/core": "5.0.0-beta.1",
-    "@reskript/settings": "5.0.0-beta.1",
-    "@reskript/svg-to-component-loader": "5.0.0-beta.1",
-    "@reskript/webpack-plugin-interpolate-html": "5.0.0-beta.1",
+    "@reskript/build-utils": "5.0.0",
+    "@reskript/config-babel": "5.0.0",
+    "@reskript/config-lint": "5.0.0",
+    "@reskript/core": "5.0.0",
+    "@reskript/settings": "5.0.0",
+    "@reskript/svg-to-component-loader": "5.0.0",
+    "@reskript/webpack-plugin-interpolate-html": "5.0.0",
     "babel-loader": "^8.2.3",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "change-case": "^4.1.2",
