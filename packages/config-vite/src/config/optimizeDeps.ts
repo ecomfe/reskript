@@ -4,9 +4,14 @@ import fs from 'node:fs/promises';
 import compat from 'core-js-compat';
 import {ConfigFactory} from '../interface.js';
 
-const readBrowsersListQuery = (cwd: string) => {
+const readBrowsersListQuery = async (cwd: string) => {
     const file = path.join(cwd, '.browserslistrc');
-    return existsSync(file) ? fs.readFile(file, 'utf8') : 'defaults';
+    if (existsSync(file)) {
+        const content = await fs.readFile(file, 'utf8');
+        return content.trim().split('\n');
+    }
+
+    return ['defaults'];
 };
 
 const readCoreJsVersion = async (cwd: string) => {

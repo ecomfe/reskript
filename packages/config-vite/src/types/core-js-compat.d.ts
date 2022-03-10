@@ -1,6 +1,6 @@
 declare module 'core-js-compat' {
     interface CompatOptions {
-        targets: string;
+        targets: string | string[];
         filter?: RegExp;
         version?: string;
     }
