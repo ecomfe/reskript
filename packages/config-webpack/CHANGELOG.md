@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+
+### Bug Fixes
+
+* **build:** 找回Webpack的入口配置下的html导出 ([#278](https://github.com/ecomfe/reskript/issues/278)) ([303668e](https://github.com/ecomfe/reskript/commit/303668e238b053825efcc873d4939f65ca67e463))
+
+
+
+
+
 # [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
 
 **Note:** Version bump only for package @reskript/config-webpack

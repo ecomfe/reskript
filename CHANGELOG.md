@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+
+### Bug Fixes
+
+* **build:** 修复对core-js的预处理逻辑 ([#277](https://github.com/ecomfe/reskript/issues/277)) ([f82c6a0](https://github.com/ecomfe/reskript/commit/f82c6a0b5a15516be149104c62177b1fd22e169c))
+* **build:** 找回Webpack的入口配置下的html导出 ([#278](https://github.com/ecomfe/reskript/issues/278)) ([303668e](https://github.com/ecomfe/reskript/commit/303668e238b053825efcc873d4939f65ca67e463))
+
+
+### Features
+
+* **doctor:** 增加V5迁移检查 ([c06a1f8](https://github.com/ecomfe/reskript/commit/c06a1f8fb47e9ce0f37508ba8947c29bdb6b748d))
+
+
+
+
+
 # [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
 
 

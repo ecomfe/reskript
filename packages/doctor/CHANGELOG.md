@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+
+### Features
+
+* **doctor:** 增加V5迁移检查 ([c06a1f8](https://github.com/ecomfe/reskript/commit/c06a1f8fb47e9ce0f37508ba8947c29bdb6b748d))
+
+
+
+
+
 # [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
 
 **Note:** Version bump only for package @reskript/doctor
