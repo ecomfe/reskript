@@ -28,7 +28,7 @@ const resolveCoreJsModules = async (cwd: string, required: boolean) => {
 
     const [query, coreJsVersion] = await Promise.all([readBrowsersListQuery(cwd), readCoreJsVersion(cwd)]);
     const {list} = compat({targets: query, version: coreJsVersion});
-    return list.map(v => `core-js/modules/${v}`);
+    return list.map(v => `core-js/modules/${v}.js`);
 };
 
 const resolveAntdModules = async (cwd: string, required: boolean) => {
