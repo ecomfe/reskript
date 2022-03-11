@@ -36,6 +36,9 @@ export const run = async (cwd: string) => {
             await v4(cwd);
             break;
         case 4:
+            logger.error('Version 5 is fully compatible with V4, feel safe to go on');
+            break;
+        case 5:
             logger.log('You have already installed the latest verion');
             break;
         default:
