@@ -43,6 +43,7 @@ const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: Buil
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
         },
+        ...entry.config.html,
         templateParameters: () => ({templateData: constructEntryTemplateData(env, entry)}),
     };
 
