@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* **build:** 修复*.var.less未自动注入的问题 ([#279](https://github.com/ecomfe/reskript/issues/279)) ([65db818](https://github.com/ecomfe/reskript/commit/65db818545b8366450612a48abbf14201f9ea6c2))
+
+
+### Features
+
+* **init:** 初始化模板支持选择Vite引擎 ([#280](https://github.com/ecomfe/reskript/issues/280)) ([905bbec](https://github.com/ecomfe/reskript/commit/905bbec692db3ae04b00dbbfbf3560f6113ac30d))
+
+
+
+
+
 # [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
 
 
