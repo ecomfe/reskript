@@ -5,6 +5,7 @@ const factory: ConfigFactory = async context => {
     const settings = context.projectSettings;
     const lessOptions = {
         cwd: context.cwd,
+        srcDirectory: context.srcDirectory,
         variables: settings.build.style.lessVariables,
         resources: settings.build.style.resources,
     };

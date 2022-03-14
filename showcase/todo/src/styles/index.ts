@@ -1,1 +1,1 @@
-import './app.global.css';
+import './app.global.less';

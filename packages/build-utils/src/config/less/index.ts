@@ -18,27 +18,24 @@ class SafeLess {
     }
 }
 
-const resolveInjection = async (cwd: string, resources: string[]) => {
-    if (!resources.length) {
-        return '';
-    }
-
-    const resolvedResources = await globby(resources, {cwd, absolute: true});
+const resolveInjection = async (cwd: string, src: string, resources: string[]) => {
+    const resolvedResources = await globby([...resources, `${src}/styles/*.var.less`], {cwd, absolute: true});
     const injections = await pMap(resolvedResources, v => fs.readFile(v, 'utf-8'));
     return injections.join('\n\n');
 };
 
 export interface LessConfigOptions {
     cwd: string;
+    srcDirectory: string;
     variables: Record<string, string>;
     resources: string[];
 }
 
-export default async ({cwd, variables, resources}: LessConfigOptions) => {
+export default async ({cwd, srcDirectory, variables, resources}: LessConfigOptions) => {
     const resolving = [
         import('less-plugin-npm-import'),
         import('less-plugin-functions'),
-        resolveInjection(cwd, resources),
+        resolveInjection(cwd, srcDirectory, resources),
     ] as const;
     const [{default: NpmImport}, {default: LessPluginFunctions}, injection] = await Promise.all(resolving);
 
