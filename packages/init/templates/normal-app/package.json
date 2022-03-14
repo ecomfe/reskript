@@ -10,7 +10,7 @@
   "scripts": {
     "start": "skr dev",
     "build": "skr build --clean",
-    "analyze": "yarn build --analyze --build-target=stable",
+    "analyze": "npm run build -- --analyze --build-target=stable",
     "lint": "skr lint",
     "lint-staged": "skr lint --staged --fix --auto-stage",
     "test": "skr test --target=react"

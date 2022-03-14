@@ -1,5 +1,6 @@
 export interface UserOptions {
-    packageManager: 'npm' | 'yarn';
+    driver: 'webpack' | 'vite';
+    packageManager: 'npm' | 'yarn' | 'pnpm';
     packageName: string;
     appTitle: string;
     gerrit: boolean;

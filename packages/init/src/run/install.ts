@@ -53,7 +53,7 @@ export default async (cwd: string, options: UserOptions) => {
             'eslint',
             'stylelint',
             'typescript',
-            'webpack',
+            options.driver,
             options.gerrit ? 'husky@4.x' : 'husky',
             '@types/react',
             '@types/react-dom',

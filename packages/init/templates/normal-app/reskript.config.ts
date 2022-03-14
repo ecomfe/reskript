@@ -1,7 +1,7 @@
 import {configure} from '@reskript/settings';
 
 export default configure(
-    'webpack',
+    '{{driver}}',
     {
         // https://reskript.dev/docs/settings/feature-matrix
         featureMatrix: {

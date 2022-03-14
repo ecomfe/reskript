@@ -3,6 +3,12 @@ import {UserOptions} from './interface.js';
 
 const questions: QuestionCollection<UserOptions> = [
     {
+        name: 'driver',
+        message: 'Choose your build engine',
+        type: 'list',
+        choices: ['webpack', 'vite'],
+    },
+    {
         name: 'packageManager',
         message: 'Choose your package manager',
         type: 'list',
