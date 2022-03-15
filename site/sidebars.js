@@ -53,6 +53,7 @@ module.exports = {
                 'advanced/browsers-list',
                 'advanced/web-worker',
                 'advanced/debug-component',
+                'advanced/vite-enhanced',
             ],
         },
         {
@@ -72,6 +73,7 @@ module.exports = {
                 'migration/v2',
                 'migration/v3',
                 'migration/v4',
+                'migration/v5',
             ],
         },
         'faq',
