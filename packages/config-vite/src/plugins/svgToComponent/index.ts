@@ -28,6 +28,7 @@ export default function svgComponentPlugin({displayName = false}: Options = {}):
             if (id.startsWith(VIRTURL_ID_PREFIX)) {
                 // Vite会把`//`给处理成`/`，所以这里在去掉前缀的时候，又要保留路径上的`/`
                 const resource = id.slice(VIRTURL_ID_PREFIX.length - 1);
+                this.addWatchFile(resource);
                 const svgSource = await fs.readFile(resource, 'utf-8');
                 const code = await transformSvgToComponent(svgSource, {resource, displayName});
                 return code;

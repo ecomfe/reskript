@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import {Plugin} from 'vite';
 import {buildEntryScript, resolveEntryPath, BuildEntryOptions} from '../utils/entry.js';
 
+
 interface Options extends BuildEntryOptions {
     enableConcurrentMode: boolean;
 }
@@ -10,6 +11,15 @@ export default function playEntryPlugin(options: Options): Plugin {
     return {
         name: 'reskript:play-entry',
         enforce: 'pre',
+        async config() {
+            return {
+                optimizeDeps: {
+                    entries: [
+                        options.componentModulePath,
+                    ],
+                },
+            };
+        },
         resolveId(id) {
             if (id === '/playground-entry.jsx') {
                 return id;

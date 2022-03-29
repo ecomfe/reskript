@@ -6,7 +6,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./plugins": "./dist/plugins/index.js"
   },
   "engines": {
     "node": ">=14.18.0 || >= 16.0.0"

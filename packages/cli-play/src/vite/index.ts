@@ -30,14 +30,6 @@ export const run = async (buildContext: BuildContext, cmd: PlayCommandLineArgs, 
     };
     const socketProxyEnabeld: UserConfig = {
         ...config,
-        resolve: {
-            ...config.resolve,
-            alias: {
-                ...config.resolve?.alias,
-                // 可能和这个有关：https://github.com/vitejs/vite/issues/6215
-                'react/jsx-runtime': 'react/jsx-runtime.js',
-            },
-        },
         server: {
             ...config.server,
             proxy: {

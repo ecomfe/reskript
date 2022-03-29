@@ -2,6 +2,7 @@
 import {createRoot} from 'react-dom';
 import Playground from '%PLAYGROUND_PATH%';
 import Target from '%COMPONENT_MODULE_PATH%';
+import '%STYLE_PATH%';
 %CONFIGURATION_INITIALIZE_BLOCK%
 %GLOBAL_CONFIGURATION_BLOCK%
 %LOCAL_CONFIGURATION_BLOCK%

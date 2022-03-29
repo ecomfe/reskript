@@ -63,6 +63,7 @@ const factory: ConfigFactory = async context => {
                 'src/entries/*/index.*',
             ],
             include: [
+                'react',
                 ...coreJsModules,
                 ...antdModules,
             ],

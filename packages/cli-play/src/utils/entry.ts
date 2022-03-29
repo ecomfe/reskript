@@ -57,6 +57,7 @@ export const buildEntryScript = async (content: string, options: BuildEntryOptio
     ] = await Promise.all(readingSources);
     const replacements: Array<[RegExp, string]> = [
         [/%PLAYGROUND_PATH%/g, path.resolve(rootDirectory, 'Playground')],
+        [/%STYLE_PATH%/g, path.resolve(rootDirectory, 'Playground', 'style.css')],
         [/%COMPONENT_MODULE_PATH%/g, options.componentModulePath],
         [/%COMPONENT_MODULE_PATH_RELATIVE%/g, path.relative(options.cwd, options.componentModulePath)],
         [/%CONFIGURATION_SOURCE%/g, configurationSource],
