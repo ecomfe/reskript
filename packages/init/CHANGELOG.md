@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/ecomfe/reskript/compare/v5.2.0...v5.2.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **init:** 项目模板细节问题 ([#283](https://github.com/ecomfe/reskript/issues/283)) ([265f244](https://github.com/ecomfe/reskript/commit/265f244fe8ca859c3420691d448e36703d726dde))
+
+
+
+
+
 # [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/ecomfe/reskript/compare/v5.2.0...v5.2.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **play:** 修复Vite下play不能运行的问题 ([#282](https://github.com/ecomfe/reskript/issues/282)) ([2c6cc83](https://github.com/ecomfe/reskript/commit/2c6cc83144faf90f6462c58b45612d4a0a5e361f))
+
+
+
+
+
 # [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
 
 **Note:** Version bump only for package @reskript/cli-play

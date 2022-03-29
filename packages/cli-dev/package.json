@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-dev",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -32,12 +32,12 @@
     "webpack": "^5.69.1"
   },
   "dependencies": {
-    "@reskript/build-utils": "5.2.0",
-    "@reskript/config-vite": "5.2.0",
-    "@reskript/config-webpack": "5.2.0",
-    "@reskript/config-webpack-dev-server": "5.2.0",
-    "@reskript/core": "5.2.0",
-    "@reskript/settings": "5.2.0",
+    "@reskript/build-utils": "5.2.1",
+    "@reskript/config-vite": "5.2.1",
+    "@reskript/config-webpack": "5.2.1",
+    "@reskript/config-webpack-dev-server": "5.2.1",
+    "@reskript/core": "5.2.1",
+    "@reskript/settings": "5.2.1",
     "better-opn": "^3.0.2",
     "proxy-agent": "^5.0.0",
     "webpack-dev-server": "^4.7.4",

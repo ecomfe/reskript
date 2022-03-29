@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-vite",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -37,11 +37,11 @@
     "vitest": "^0.5.9"
   },
   "dependencies": {
-    "@reskript/build-utils": "5.2.0",
-    "@reskript/config-babel": "5.2.0",
-    "@reskript/core": "5.2.0",
-    "@reskript/portal": "5.2.0",
-    "@reskript/settings": "5.2.0",
+    "@reskript/build-utils": "5.2.1",
+    "@reskript/config-babel": "5.2.1",
+    "@reskript/core": "5.2.1",
+    "@reskript/portal": "5.2.1",
+    "@reskript/settings": "5.2.1",
     "@vitejs/plugin-react": "^1.2.0",
     "classnames": "^2.3.1",
     "connect-history-api-fallback": "^1.6.0",
