@@ -13,7 +13,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import childeProcess from 'node:child_process';
-import cpy from 'cpy';
 import yargs from 'yargs';
 import {hideBin} from 'yargs/helpers';
 
@@ -40,14 +39,15 @@ const copy = async packageName => {
     const {files} = JSON.parse(fs.readFileSync(`packages/${packageName}/package.json`, 'utf-8'));
 
     if (files) {
-        await cpy(
-            [...files, 'package.json'],
-            target,
+        childeProcess.spawnSync(
+            'cp',
+            ['-r', ...files, 'package.json', target],
             {cwd: path.resolve(`packages/${packageName}`)}
         );
     }
     else {
-        await cpy(`packages/${packageName}/**`, target);
+        console.error(`Please add files field to packages/${packageName}/package.json`);
+        process.exit(3);
     }
 
     console.log(`Copied ${packageName}`);
