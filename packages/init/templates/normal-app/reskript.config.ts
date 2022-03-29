@@ -20,4 +20,4 @@ export default configure(
             defaultProxyDomain: 'example.com',
         },
     }
-)
+);

@@ -68,6 +68,7 @@ export default async (cwd: string, options: UserOptions) => {
             '@reskript/cli-build',
             '@reskript/cli-lint',
             '@reskript/config-lint',
+            '@reskript/settings',
             options.tasks.includes('test') && '@reskript/cli-test',
             options.tasks.includes('play') && '@reskript/cli-play',
         ]
