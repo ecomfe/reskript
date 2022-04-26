@@ -14,7 +14,7 @@ title: 使用SVG图形
 import image from './image.svg';
 
 <img src={image} />
-<div style={{backgroundImage: image}} />
+<div style={{backgroundImage: `url(${image})`}} />
 ```
 
 这种形式是最简单、基础的，我们就不再详细讲解了。
