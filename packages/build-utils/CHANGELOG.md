@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/ecomfe/reskript/compare/v5.2.1...v5.3.0) (2022-05-11)
+
+
+### Bug Fixes
+
+* **dev:** proxy配置兼容Vite ([#290](https://github.com/ecomfe/reskript/issues/290)) ([0a0be8d](https://github.com/ecomfe/reskript/commit/0a0be8d3dcb34e185001a4a1d7055ac2be97a53f))
+
+
+
+
+
 ## [5.2.1](https://github.com/ecomfe/reskript/compare/v5.2.0...v5.2.1) (2022-03-29)
 
 **Note:** Version bump only for package @reskript/build-utils

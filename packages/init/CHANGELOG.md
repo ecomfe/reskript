@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0](https://github.com/ecomfe/reskript/compare/v5.2.1...v5.3.0) (2022-05-11)
+
+
+### Features
+
+* **babel:** 支持skr babel调用时传递--uses参数 ([#285](https://github.com/ecomfe/reskript/issues/285)) ([3dc2407](https://github.com/ecomfe/reskript/commit/3dc2407e8005293abfb9868ac46081288a8a1e20))
+
+
+
+
+
 ## [5.2.1](https://github.com/ecomfe/reskript/compare/v5.2.0...v5.2.1) (2022-03-29)
 
 
