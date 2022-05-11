@@ -24,28 +24,28 @@
     "test": "vitest --run"
   },
   "devDependencies": {
-    "@types/cli-progress": "^3.9.2",
-    "@types/node": "^17.0.21",
-    "c8": "^7.10.0",
-    "eslint": "^8.10.0",
+    "@types/cli-progress": "^3.11.0",
+    "@types/node": "^17.0.32",
+    "c8": "^7.11.2",
+    "eslint": "^8.15.0",
     "typescript": "next",
-    "vite": "^2.8.6",
-    "vitest": "^0.5.9",
-    "webpack": "^5.69.1",
-    "webpack-dev-server": "^4.7.4"
+    "vite": "^2.9.8",
+    "vitest": "^0.12.4",
+    "webpack": "^5.72.1",
+    "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.6",
     "@reskript/build-utils": "5.2.1",
     "@reskript/config-webpack": "5.2.1",
     "@reskript/core": "5.2.1",
     "@reskript/portal": "5.2.1",
     "@reskript/settings": "5.2.1",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
-    "cli-progress": "^3.9.1",
+    "cli-progress": "^3.11.0",
     "kolorist": "^1.5.1",
     "launch-editor-middleware": "^2.3.0",
-    "react-refresh": "^0.11.0",
+    "react-refresh": "^0.13.0",
     "webpack-merge": "^5.8.0"
   },
   "peerDependencies": {

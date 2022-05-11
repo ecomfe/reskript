@@ -24,16 +24,16 @@
     "test": "echo 'No test in @reskript/plugin-workspace-no-build'"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
+    "@types/node": "^17.0.32",
     "@types/semver": "^7.3.9",
-    "eslint": "^8.10.0",
+    "eslint": "^8.15.0",
     "typescript": "next",
-    "webpack": "^5.69.1"
+    "webpack": "^5.72.1"
   },
   "dependencies": {
     "@reskript/core": "5.2.1",
     "@reskript/settings": "5.2.1",
-    "semver": "^7.3.5"
+    "semver": "^7.3.7"
   },
   "peerDependencies": {
     "webpack": "5.x"

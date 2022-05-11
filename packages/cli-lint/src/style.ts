@@ -51,6 +51,7 @@ const adaptStyleResultToScriptResult = (result: StyleLintResult): LintResult => 
         fixableWarningCount: 0,
         fatalErrorCount: 0,
         usedDeprecatedRules: [],
+        suppressedMessages: [],
     };
 };
 

@@ -25,19 +25,19 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/node": "^17.0.21",
-    "c8": "^7.10.0",
-    "eslint": "^8.10.0",
+    "@types/node": "^17.0.32",
+    "c8": "^7.11.2",
+    "eslint": "^8.15.0",
     "typescript": "next",
-    "vite": "^2.8.6",
-    "vitest": "^0.5.9"
+    "vite": "^2.9.8",
+    "vitest": "^0.12.4"
   },
   "dependencies": {
     "@reskript/core": "5.2.1",
     "@reskript/plugin-utils": "5.2.1",
     "@reskript/settings": "5.2.1",
     "dedent": "^0.7.0",
-    "esbuild": "^0.14.23",
-    "qiankun": "^2.6.3"
+    "esbuild": "^0.14.38",
+    "qiankun": "^2.7.0"
   }
 }

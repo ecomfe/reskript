@@ -29,9 +29,9 @@ interface PluginSetting {
     plugins?: ClientProjectSettings['plugins'];
 }
 
-type WebpackUserSetting = Omit<PartialWebpackProjectSettings, 'driver'> & PluginSetting;
+export type WebpackUserSetting = Omit<PartialWebpackProjectSettings, 'driver'> & PluginSetting;
 
-type ViteUserSetting = Omit<PartialViteProjectSettings, 'driver'> & PluginSetting;
+export type ViteUserSetting = Omit<PartialViteProjectSettings, 'driver'> & PluginSetting;
 
 export type UserSettings = PartialProjectSettings & PluginSetting;
 

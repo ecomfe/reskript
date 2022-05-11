@@ -16,9 +16,9 @@ export = {
                     ],
                 }
             );
-            return result?.code ?? src;
+            return {code: result?.code ?? src};
         }
 
-        return src;
+        return {code: src};
     },
 };

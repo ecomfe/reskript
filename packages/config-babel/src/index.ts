@@ -2,8 +2,8 @@ import path from 'node:path';
 import {PluginItem, TransformOptions} from '@babel/core';
 import debugReactComponentFileName from '@reskript/babel-plugin-debug-react-component-file-name';
 import pluginRemovePropTypes from 'babel-plugin-transform-react-remove-prop-types';
-// TODO: https://github.com/facebook/react/pull/23087
-import pluginReactRefresh from 'react-refresh/babel.js';
+// @ts-expect-error
+import pluginReactRefresh from 'react-refresh/babel';
 import {compact} from '@reskript/core';
 import {fillBabelConfigOptions} from './utils.js';
 import getParseOnlyBabelConfigFilled from './parseOnly.js';

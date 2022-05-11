@@ -153,7 +153,6 @@ const factory: ConfigurationFactory = async entry => {
         new InterpolateHTMLPlugin(process.env),
         // @ts-expect-error
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),
-        // @ts-expect-error
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
 

@@ -74,6 +74,7 @@ export default function App() {
             <Suspense fallback={<div style={{height: 64}} />}>
                 <Create onSubmit={createNew} />
             </Suspense>
+            {/* @ts-expect-error */}
             <Meta id="app-meta" className="flex items-center justify-between">
                 <span className="flex items-center gap-1">
                     <WorkerStatus />
