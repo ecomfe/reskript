@@ -7,5 +7,5 @@
 ## 使用方法
 
 ```shell
-npx @reskript/init [dir]
+npx @reskript/init@latest [dir]
 ```

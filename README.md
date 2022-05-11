@@ -13,7 +13,7 @@
 
 ```shel
 mkdir my-app
-npx @reskript/init my-app
+npx @reskript/init@latest my-app
 cd my-app
 npm start
 ```

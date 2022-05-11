@@ -1,4 +1,5 @@
 import {WorkMode, WorkModeAware, ProjectAware} from '@reskript/core';
+import {ThirdPartyUse} from './build.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type HostType = 'localhost' | 'loopback' | 'ip' | {} & string;
@@ -9,6 +10,7 @@ export interface BabelCommandLineArgs {
     clean: boolean;
     outDirectory?: string;
     copy: boolean;
+    uses: ThirdPartyUse[];
 }
 
 export interface BuildCommandLineArgs extends WorkModeAware {

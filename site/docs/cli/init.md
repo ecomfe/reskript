@@ -7,7 +7,7 @@ title: 初始化项目
 你可以使用`npx`来执行`@reskript/init`并在指定目录初始化一个项目。
 
 ```shell
-npx @reskript/init [dir]
+npx @reskript/init@latest [dir]
 ```
 
 如果未指定`dir`参数，则在当前目录下执行。

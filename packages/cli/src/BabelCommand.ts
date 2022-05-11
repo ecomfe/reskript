@@ -1,7 +1,7 @@
 import {Option} from 'clipanion';
 import {isEnum} from 'typanion';
 import {WorkMode} from '@reskript/core';
-import {BabelCommandLineArgs} from '@reskript/settings';
+import {BabelCommandLineArgs, ThirdPartyUse} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class BabelCommand extends DynamicImportCommand<BabelCommandLineArgs> {
@@ -32,6 +32,8 @@ export default class BabelCommand extends DynamicImportCommand<BabelCommandLineA
 
     file = Option.String();
 
+    uses: ThirdPartyUse[] = Option.Array('--uses', [], {description: 'indicate usage of third party frameworks'});
+
     buildCommandLineArgs() {
         return {
             mode: this.mode,
@@ -39,6 +41,7 @@ export default class BabelCommand extends DynamicImportCommand<BabelCommandLineA
             outDirectory: this.outDirectory,
             clean: this.clean,
             copy: this.copy,
+            uses: this.uses,
         };
     }
 

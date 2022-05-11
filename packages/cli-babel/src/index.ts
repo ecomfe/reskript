@@ -71,7 +71,7 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
         return;
     }
 
-    const {outDirectory, clean, copy, mode, polyfill} = cmd;
+    const {outDirectory, clean, copy, mode, polyfill, uses} = cmd;
 
     if (outDirectory) {
         if (clean) {
@@ -84,6 +84,7 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
     const babelConfigOptions: BabelConfigOptions = {
         mode,
         polyfill,
+        uses,
         hot: false,
         hostType: 'application',
         modules: false,
