@@ -258,17 +258,21 @@ const schema: any = {
             type: 'object',
         },
         plugins: {
-            anyOf: [
-                {
-                    items: {
+            items: {
+                anyOf: [
+                    // 这个递归嵌套其实不完全，但够用了
+                    {
+                        items: {
+                            instanceof: 'Function',
+                        },
+                        type: 'array',
+                    },
+                    {
                         instanceof: 'Function',
                     },
-                    type: 'array',
-                },
-                {
-                    instanceof: 'Function',
-                },
-            ],
+                ],
+            },
+            type: 'array',
         },
     },
     additionalProperties: false,
