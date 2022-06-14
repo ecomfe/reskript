@@ -11,7 +11,7 @@ title: 向HTML注入内容
 ### 安装
 
 ```shell
-npm i -D @reskript/plugin-inject-plugin
+npm i -D @reskript/plugin-inject-html
 ```
 
 ### 增加插件
