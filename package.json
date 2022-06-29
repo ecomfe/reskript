@@ -29,6 +29,7 @@
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
     "semver": "^7.3.7",
+    "typescript": "next",
     "yargs": "^17.4.1"
   },
   "resolutions": {

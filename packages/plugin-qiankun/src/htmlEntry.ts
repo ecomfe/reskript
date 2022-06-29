@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-// @ts-expect-error
 import dedent from 'dedent';
 import {Options, TemplateConfig, PlaceholderConfig} from './interface.js';
 

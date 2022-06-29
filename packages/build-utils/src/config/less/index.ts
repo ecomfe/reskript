@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import {globby} from 'globby';
 import {pMap} from '@reskript/core';
+import less from 'less';
 import {safeLess} from './safeLess.js';
 
 type Less = typeof less;

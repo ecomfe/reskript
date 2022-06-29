@@ -1,5 +1,4 @@
 import {build, BuildOptions} from 'esbuild';
-// @ts-expect-error
 import dedent from 'dedent';
 import {dirFromImportMeta} from '@reskript/core';
 

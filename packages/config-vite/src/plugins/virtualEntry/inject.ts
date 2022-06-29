@@ -1,5 +1,4 @@
 import path from 'node:path';
-// @ts-expect-error
 import dedent from 'dedent';
 import {injectIntoHtml} from '@reskript/build-utils';
 

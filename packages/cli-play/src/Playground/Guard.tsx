@@ -1,5 +1,4 @@
 import {ReactNode, useEffect, useState} from 'react';
-// @ts-expect-error
 import dedent from 'dedent';
 import Notice from './Notice/index.js';
 

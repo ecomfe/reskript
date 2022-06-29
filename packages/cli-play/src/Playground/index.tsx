@@ -1,5 +1,4 @@
 import {useState, CSSProperties, ReactNode, useCallback} from 'react';
-// @ts-expect-error
 import dedent from 'dedent';
 import Guard from './Guard.js';
 import Sidebar from './Sidebar/index.js';

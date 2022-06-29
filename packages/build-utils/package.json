@@ -25,8 +25,10 @@
   },
   "devDependencies": {
     "@types/cssnano": "^5.1.0",
+    "@types/less": "^3.0.3",
     "@types/node": "^17.0.32",
     "@types/postcss-preset-env": "^6.7.3",
+    "@types/ramda": "^0.28.12",
     "@types/xml2js": "^0.4.11",
     "c8": "^7.11.2",
     "eslint": "^8.15.0",

@@ -5,7 +5,7 @@ import dedent from 'dedent';
 
 export const router = express.Router;
 
-export const createPortal = () => {
+export const createPortal = (): Application => {
     const app = express();
 
     app.use(express.json());
