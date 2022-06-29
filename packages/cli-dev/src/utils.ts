@@ -1,14 +1,15 @@
-import {BuildEnv, DevCommandLineArgs, ProjectSettings} from '@reskript/settings';
+import {BuildEnv, DevCommandLineArgs, DevServerSettings, ProjectSettings} from '@reskript/settings';
 import {BuildContext, resolveDevHost, createRuntimeBuildEnv, AppEntry} from '@reskript/build-utils';
 import {logger, readPackageConfig} from '@reskript/core';
 
-const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
+const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], settings: DevServerSettings) => {
     if (!hostType) {
         return undefined;
     }
 
     const host = await resolveDevHost(hostType);
-    return `http://${host}:${port}/`;
+    const protocol = settings.https?.client ? 'https' : 'http';
+    return `${protocol}://${host}:${settings.port}/`;
 };
 
 interface BuildContextOptions<C, S extends ProjectSettings> {
@@ -67,7 +68,7 @@ interface ServerContextOptions<C, S extends ProjectSettings> {
 export const prepareServerContext = async <C, S extends ProjectSettings>(options: ServerContextOptions<C, S>) => {
     const {cmd, buildContext} = options;
     const host = await resolveDevHost(cmd.host);
-    const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
+    const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer);
     const serverContext: ServerStartContext<C, S> = {buildContext, host, publicPath};
     return serverContext;
 };
