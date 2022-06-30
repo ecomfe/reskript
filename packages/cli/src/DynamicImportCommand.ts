@@ -14,7 +14,7 @@ const isErrorWithCode = (error: any): error is NodeJS.ErrnoException => {
 
 type PackageManager = 'npm' | 'yarn' | 'pnpm';
 
-type InstallReuslt = 'installed' | 'canceled' | 'noPackageManager' | 'failed';
+type InstallResult = 'installed' | 'canceled' | 'noPackageManager' | 'failed';
 
 export default abstract class DynamicImportCommand<A> extends Command {
     protected readonly packageName: string = '';
@@ -133,7 +133,7 @@ export default abstract class DynamicImportCommand<A> extends Command {
         return null;
     }
 
-    private async installCommandPackage(): Promise<InstallReuslt> {
+    private async installCommandPackage(): Promise<InstallResult> {
         const question = {
             type: 'confirm',
             name: 'ok',
