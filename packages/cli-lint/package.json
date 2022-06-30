@@ -25,11 +25,11 @@
   },
   "devDependencies": {
     "@reskript/settings": "5.3.0",
-    "@types/eslint": "^8.4.2",
-    "@types/node": "^17.0.32",
-    "@types/ramda": "^0.28.12",
-    "eslint": "^8.15.0",
-    "stylelint": "^14.8.2",
+    "@types/eslint": "^8.4.3",
+    "@types/node": "^18.0.0",
+    "@types/ramda": "^0.28.14",
+    "eslint": "^8.18.0",
+    "stylelint": "^14.9.1",
     "typescript": "next"
   },
   "dependencies": {
@@ -37,7 +37,7 @@
     "@reskript/core": "5.3.0",
     "eslint-formatter-pretty": "^4.1.0",
     "execa": "^6.0.0",
-    "globby": "^13.1.1",
+    "globby": "^13.1.2",
     "ramda": "^0.28.0"
   },
   "peerDependencies": {
