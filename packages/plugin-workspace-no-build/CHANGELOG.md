@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/ecomfe/reskript/compare/v5.3.0...v5.4.0) (2022-07-01)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
 # [5.3.0](https://github.com/ecomfe/reskript/compare/v5.2.1...v5.3.0) (2022-05-11)
 
 **Note:** Version bump only for package @reskript/plugin-workspace-no-build
