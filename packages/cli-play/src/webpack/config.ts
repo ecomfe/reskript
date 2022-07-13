@@ -57,6 +57,10 @@ export const createWebpackConfig = async (target: string, cmd: PlayCommandLineAr
         },
         resolve: {
             ...baseConfig.resolve,
+            modules: [
+                ...(baseConfig.resolve.modules ?? ['node_modules']),
+                path.join(cmd.cwd, 'node_modules'),
+            ],
             fallback: {
                 ...baseConfig.resolve?.fallback,
                 // React要从`17.0.3`开始才会有`exports`配置，这之前的版本在ESM下是必须加`.js`后续的。

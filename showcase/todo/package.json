@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@emotion/react": "^11.9.3",
     "@playwright/test": "^1.23.0",
     "@reskript/cli": "5.6.1",
     "@reskript/cli-babel": "5.6.1",
@@ -29,6 +30,7 @@
     "@reskript/cli-play": "5.6.1",
     "@reskript/cli-test": "5.6.1",
     "@reskript/config-lint": "5.6.1",
+    "@reskript/plugin-experimental": "5.6.1",
     "@reskript/plugin-inject-html": "5.6.1",
     "@reskript/plugin-qiankun": "5.6.1",
     "@reskript/settings": "5.6.1",
@@ -37,7 +39,6 @@
     "@types/ramda": "^0.28.14",
     "@types/react": "~18.0.14",
     "@types/react-dom": "~18.0.5",
-    "@types/styled-components": "^5.1.25",
     "eslint": "^8.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,12 +48,12 @@
     "webpack": "^5.73.0"
   },
   "dependencies": {
+    "@emotion/styled": "^11.9.3",
     "antd": "^4.21.4",
     "core-js": "^3.23.3",
     "localforage": "^1.10.0",
     "nanoid": "^4.0.0",
     "ramda": "^0.28.0",
-    "styled-components": "^5.3.5",
     "tailwindcss": "^3.1.4"
   }
 }

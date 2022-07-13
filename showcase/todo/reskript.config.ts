@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import injectHtml, {InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
 import qiankun from '@reskript/plugin-qiankun';
+import {buildFast} from '@reskript/plugin-experimental';
 
 const injectOptions: InjectHtmlOptions = {
     headStart: [
@@ -34,7 +35,7 @@ export default configure(
             appTitle: 'TodoMVC - reSKRipt',
             favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
             appContainerId: 'root',
-            uses: ['antd', 'styled-components', 'tailwind'],
+            uses: ['antd', 'emotion', 'tailwind'],
             script: {
                 polyfill: false,
             },
@@ -49,6 +50,7 @@ export default configure(
                 },
             },
             finalize: webpackConfig => {
+                webpackConfig.optimization.minimize = false;
                 webpackConfig.optimization.splitChunks = {
                     cacheGroups: {
                         vendors: {
@@ -76,6 +78,7 @@ export default configure(
             },
         },
         plugins: commandName => [
+            buildFast(),
             injectHtml(injectOptions),
             commandName !== 'play' && qiankun('TodoMVC'),
         ],

@@ -31,7 +31,6 @@
     "@types/less": "^3.0.3",
     "@types/node": "^18.0.0",
     "@types/ramda": "^0.28.14",
-    "@types/tailwindcss": "^3.0.11",
     "@types/workbox-webpack-plugin": "^5.1.8",
     "c8": "^7.11.3",
     "eslint": "^8.18.0",

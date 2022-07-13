@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect, lazy, Suspense} from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
 import WorkerStatus from '@/components/WorkerStatus';
 import List from '../List';
@@ -15,7 +15,6 @@ const Header = styled.h1`
     font-size: 100px;
     margin: 0;
     text-align: center;
-    color: rgba(175, 47, 47, .15);
 `;
 
 const Title = styled.span`
@@ -34,6 +33,11 @@ const Layout = styled.div`
     gap: 20px;
     max-width: 800px;
     margin: 0 auto;
+
+    /* 测试组件选择器是否有效 */
+    ${Header} {
+        color: rgba(175, 47, 47, .15);
+    }
 `;
 
 export default function App() {

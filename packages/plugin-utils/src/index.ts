@@ -6,4 +6,4 @@ export {
     chainViteFinalize,
     chainWebpackFinalize,
 } from './chain.js';
-export {onlyOnCommand} from './condition.js';
+export {onlyOnCommand, onlyOnBuildLike} from './condition.js';

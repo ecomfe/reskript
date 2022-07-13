@@ -1,0 +1,65 @@
+{
+  "name": "@reskript/plugin-experimental",
+  "version": "5.6.1",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
+    "test": "echo 'No test in @reskript/plugin-inject-html'"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "antd": "^4.21.4",
+    "eslint": "^8.18.0",
+    "typescript": "next",
+    "webpack": "^5.73.0"
+  },
+  "dependencies": {
+    "loader-of-loader": "^1.0.3",
+    "@reskript/build-utils": "5.6.1",
+    "@reskript/core": "5.6.1",
+    "@reskript/plugin-utils": "5.6.1",
+    "@reskript/settings": "5.6.1",
+    "@swc/core": "^1.2.218",
+    "@swc/helpers": "^0.4.3"
+  },
+  "optionalDependencies": {
+    "@next/swc-android-arm-eabi": "12.2.2",
+    "@next/swc-android-arm64": "12.2.2",
+    "@next/swc-darwin-arm64": "12.2.2",
+    "@next/swc-darwin-x64": "12.2.2",
+    "@next/swc-freebsd-x64": "12.2.2",
+    "@next/swc-linux-arm-gnueabihf": "12.2.2",
+    "@next/swc-linux-arm64-gnu": "12.2.2",
+    "@next/swc-linux-arm64-musl": "12.2.2",
+    "@next/swc-linux-x64-gnu": "12.2.2",
+    "@next/swc-linux-x64-musl": "12.2.2",
+    "@next/swc-win32-arm64-msvc": "12.2.2",
+    "@next/swc-win32-ia32-msvc": "12.2.2",
+    "@next/swc-win32-x64-msvc": "12.2.2"
+  },
+  "peerDependencies": {
+    "antd": "4.x"
+  },
+  "peerDependenciesMeta": {
+    "antd": {
+      "optional": true
+    }
+  }
+}

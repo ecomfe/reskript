@@ -50,6 +50,12 @@ export default ({driver, config, port}: Options) => {
         expect(styles.color).toBe('rgb(24, 144, 255)');
     });
 
+    test(`[${driver}] emotion component selector works`, async ({page}) => {
+        await page.goto(`http://localhost:${port}`);
+        const styles = await page.locator('h1').evaluate(element => getComputedStyle(element));
+        expect(styles.color).toBe('rgba(175, 47, 47, 0.15)');
+    });
+
     test(`[${driver}] postcss works`, async ({page}) => {
         await page.goto(`http://localhost:${port}`);
         const styles = await page.locator('#app').evaluate(element => Object.values(getComputedStyle(element)));
