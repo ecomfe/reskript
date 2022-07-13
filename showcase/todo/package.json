@@ -54,5 +54,20 @@
     "ramda": "^0.28.0",
     "styled-components": "^5.3.5",
     "tailwindcss": "^3.1.4"
+  },
+  "optionalDependencies": {
+    "@next/swc-android-arm-eabi": "12.2.2",
+    "@next/swc-android-arm64": "12.2.2",
+    "@next/swc-darwin-arm64": "12.2.2",
+    "@next/swc-darwin-x64": "12.2.2",
+    "@next/swc-freebsd-x64": "12.2.2",
+    "@next/swc-linux-arm-gnueabihf": "12.2.2",
+    "@next/swc-linux-arm64-gnu": "12.2.2",
+    "@next/swc-linux-arm64-musl": "12.2.2",
+    "@next/swc-linux-x64-gnu": "12.2.2",
+    "@next/swc-linux-x64-musl": "12.2.2",
+    "@next/swc-win32-arm64-msvc": "12.2.2",
+    "@next/swc-win32-ia32-msvc": "12.2.2",
+    "@next/swc-win32-x64-msvc": "12.2.2"
   }
 }

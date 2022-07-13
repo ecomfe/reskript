@@ -3,7 +3,8 @@
         "src",
         "e2e",
         "__tests__",
-        "./*.ts"
+        "./*.ts",
+        "swc"
     ],
     "compilerOptions": {
         "module": "ESNext",

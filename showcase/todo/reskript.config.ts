@@ -3,6 +3,7 @@ import {fileURLToPath} from 'node:url';
 import injectHtml, {InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
 import qiankun from '@reskript/plugin-qiankun';
+import swc from './swc/plugin';
 
 const injectOptions: InjectHtmlOptions = {
     headStart: [
@@ -76,6 +77,7 @@ export default configure(
             },
         },
         plugins: commandName => [
+            swc(),
             injectHtml(injectOptions),
             commandName !== 'play' && qiankun('TodoMVC'),
         ],
