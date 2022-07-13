@@ -20,6 +20,8 @@ export default (): SettingsPluginItem => {
                         internals.rules.css(buildEntry),
                         internals.rules.svg(buildEntry),
                         internals.rules.file(buildEntry),
+                        internals.rules.image(buildEntry),
+                        internals.rules.script(buildEntry),
                     ] as const;
                     const builtinRules = await Promise.all(loadingRules);
                     const config = await settings.build.finalize(configIn, buildEntry, internals);
@@ -31,40 +33,42 @@ export default (): SettingsPluginItem => {
                                 {
                                     loader: path.join(currentDirectory, 'loader'),
                                     options: {
-                                        externalHelpers: true,
-                                        parser: {
-                                            syntax: 'typescript',
-                                            dynamicImport: true,
-                                            decorators: false,
-                                            jsx: true,
-                                            importAssertions: true,
-                                        },
-                                        experimental: {
-                                            keepImportAssertions: true,
-                                            plugins: [],
-                                        },
-                                        transform: {
-                                            legacyDecorator: false,
-                                            decoratorMetadata: false,
-                                            useDefineForClassFields: false,
-                                            react: {
-                                                importSource: '@emotion/react',
-                                                runtime: 'automatic',
-                                                throwIfNamespace: true,
-                                                development: false,
-                                                useBuiltins: true,
-                                                refresh: false,
+                                        jsc: {
+                                            externalHelpers: true,
+                                            parser: {
+                                                syntax: 'typescript',
+                                                dynamicImport: true,
+                                                decorators: false,
+                                                jsx: true,
+                                                importAssertions: true,
                                             },
-                                            optimizer: {
-                                                simplify: false,
-                                                globals: {
-                                                    envs: {
-                                                        NODE_ENV: '"production"',
-                                                        'skr.features.batch': 'true',
+                                            experimental: {
+                                                keepImportAssertions: true,
+                                                plugins: [],
+                                            },
+                                            transform: {
+                                                legacyDecorator: false,
+                                                decoratorMetadata: false,
+                                                useDefineForClassFields: false,
+                                                react: {
+                                                    importSource: '@emotion/react',
+                                                    runtime: 'automatic',
+                                                    throwIfNamespace: true,
+                                                    development: false,
+                                                    useBuiltins: true,
+                                                    refresh: false,
+                                                },
+                                                optimizer: {
+                                                    simplify: false,
+                                                    globals: {
+                                                        envs: {
+                                                            NODE_ENV: '"production"',
+                                                            'skr.features.batch': 'true',
+                                                        },
                                                     },
                                                 },
                                             },
-                                        },
+                                        }
                                     },
                                 },
                             ],

@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@emotion/react": "^11.9.3",
     "@playwright/test": "^1.23.0",
     "@reskript/cli": "5.4.0",
     "@reskript/cli-babel": "5.4.0",
@@ -32,6 +33,7 @@
     "@reskript/plugin-inject-html": "5.4.0",
     "@reskript/plugin-qiankun": "5.4.0",
     "@reskript/settings": "5.4.0",
+    "@swc/helpers": "^0.4.3",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^27.5.0",
     "@types/ramda": "^0.28.14",

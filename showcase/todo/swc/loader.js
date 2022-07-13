@@ -5,6 +5,10 @@
 const transform = require('./binding').transform;
 const transformSync = require('./binding').transformSync;
 
+function toBuffer(t) {
+    return Buffer.from(JSON.stringify(t));
+}
+
 function makeLoader() {
     return function (source, inputSourceMap) {
         // Make the loader async
@@ -84,10 +88,10 @@ function makeLoader() {
 
         try {
             if (sync) {
-                const output = transformSync(source, true, programmaticOptions);
+                const output = transformSync(source, true, toBuffer(programmaticOptions));
                 callback(null, output.code, parseMap ? JSON.parse(output.map) : output.map);
             } else {
-                transform(source, true, programmaticOptions).then(
+                transform(source, true, toBuffer(programmaticOptions)).then(
                     output => {
                         callback(null, output.code, parseMap ? JSON.parse(output.map) : output.map);
                     },
