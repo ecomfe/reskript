@@ -1043,6 +1043,7 @@ importers:
       antd: ^4.21.4
       eslint: ^8.18.0
       loader-of-loader: ^1.0.3
+      terser-webpack-plugin: ^5.3.3
       typescript: next
       webpack: ^5.73.0
     dependencies:
@@ -1053,6 +1054,7 @@ importers:
       '@swc/core': 1.2.218
       '@swc/helpers': 0.4.3
       loader-of-loader: 1.0.3
+      terser-webpack-plugin: 5.3.3_3564bnmd7kbgr2mygyaqvh5bu4
     optionalDependencies:
       '@next/swc-android-arm-eabi': 12.2.2
       '@next/swc-android-arm64': 12.2.2
@@ -17269,7 +17271,6 @@ packages:
       serialize-javascript: 6.0.0
       terser: 5.14.1
       webpack: 5.73.0_@swc+core@1.2.218
-    dev: true
 
   /terser-webpack-plugin/5.3.3_webpack@5.73.0:
     resolution: {integrity: sha512-Fx60G5HNYknNTNQnzQ1VePRuu89ZVYWfjRAeT5rITuCY/1b08s49e5kSQwHDirKZWuoKOBRFS98EUUoZ9kLEwQ==}
@@ -18343,7 +18344,6 @@ packages:
       - '@swc/core'
       - esbuild
       - uglify-js
-    dev: true
 
   /websocket-driver/0.7.4:
     resolution: {integrity: sha512-b17KeDIQVjvb0ssuSDF2cYXSg2iztliJ4B9WdsuB6J952qCPKmnVq4DyW5motImXHDC1cBT/1UezrJVsKw5zjg==}

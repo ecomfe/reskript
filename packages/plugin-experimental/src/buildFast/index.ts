@@ -1,5 +1,6 @@
 import path from 'path';
 import {fileURLToPath} from 'url';
+import TerserPlugin from 'terser-webpack-plugin';
 import {resolve, normalizeRuleMatch, WorkMode} from '@reskript/core';
 import {onlyOnBuildLike, chainWebpackFinalize} from '@reskript/plugin-utils';
 import {ProjectSettings, SettingsPlugin} from '@reskript/settings';
@@ -111,7 +112,9 @@ const factory = (mode: WorkMode): SettingsPlugin => async settings => {
                 ...builtinRules,
             ];
             config.resolve.alias['@swc/helpers'] = path.resolve(await resolve('@swc/helpers'), '..', '..');
-            // TODO: 拿esbuild做压缩
+            config.optimization.minimizer = [
+                new TerserPlugin({minify: TerserPlugin.esbuildMinify}),
+            ];
             return config;
         }
     );
