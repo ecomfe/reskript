@@ -33,6 +33,19 @@ describe('constructProxyConfiguration', () => {
         expect(proxy['/foo'].rewrite('/foo')).toBe('/bar');
     });
 
+    test('rewrite with protocol', () => {
+        const options = {
+            https: false,
+            prefixes: [],
+            rewrite: {
+                '/foo': 'https://app.me:8888/bar',
+            },
+            targetDomain: 'app.me',
+        };
+        const proxy = constructProxyConfiguration(options);
+        expect(proxy['/foo'].target).toBe('https://app.me:8888');
+    });
+
     test('agent', () => {
         const httpProxy = process.env.http_proxy;
         // eslint-disable-next-line camelcase

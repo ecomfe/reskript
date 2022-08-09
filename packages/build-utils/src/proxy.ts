@@ -25,7 +25,7 @@ export const constructProxyConfiguration = (options: ProxyOptions) => {
     const proxy = rules.reduce(
         (proxy, [prefix, target]) => {
             // 假设我们要配置`{'/api': 'example.com/gateway'}，那么`/api/list`要变成`example.com/gateway/list`
-            const parsedUrl = new URL(`${https ? 'https' : 'http'}://${target}`);
+            const parsedUrl = new URL(/^https?:\/\//.test(target) ? target : `${https ? 'https' : 'http'}://${target}`);
             // 此处的`pathPrefix`就是`/gateway`
             const pathPrefix = parsedUrl.pathname;
             // 这个正则相当于`^\/api`
