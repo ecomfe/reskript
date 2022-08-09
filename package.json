@@ -30,6 +30,7 @@
     "lerna": "^5.1.6",
     "semver": "^7.3.7",
     "typescript": "next",
+    "undici": "^5.8.2",
     "yargs": "^17.5.1"
   },
   "resolutions": {
