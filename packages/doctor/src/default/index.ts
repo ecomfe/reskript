@@ -37,6 +37,7 @@ export const run = async (packageDirectory: string) => {
         clean: false,
         profile: false,
         sourceMaps: true,
+        watch: false,
     };
     const projectSettings = await readProjectSettings({commandName: 'build', ...args});
     const packageInfo = await readPackageConfig(packageDirectory);

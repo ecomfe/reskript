@@ -15,6 +15,7 @@ const BUILD_CMD: CommandInput = {
     clean: false,
     profile: false,
     sourceMaps: false,
+    watch: false,
 };
 
 test('one plugin', async () => {

@@ -21,6 +21,7 @@ const BUILD_CMD: CommandInput = {
     clean: false,
     profile: false,
     sourceMaps: false,
+    watch: false,
 };
 
 const currentDirectory = dirFromImportMeta(import.meta.url);

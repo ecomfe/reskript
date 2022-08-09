@@ -66,6 +66,8 @@ export default class BuildCommand extends DynamicImportCommand<BuildCommandLineA
 
     cacheDirectory = Option.String('--cache-dir', {description: 'specify the directory to store build cache'});
 
+    watch = Option.Boolean('--watch', false, {description: 'watch for changes and rebuild, require --build-target'});
+
     buildCommandLineArgs() {
         return {
             cwd: this.cwd,
@@ -82,6 +84,7 @@ export default class BuildCommand extends DynamicImportCommand<BuildCommandLineA
             sourceMaps: this.sourceMaps,
             clean: this.clean,
             cacheDirectory: this.cacheDirectory,
+            watch: this.watch,
         };
     }
 }

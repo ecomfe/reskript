@@ -13,7 +13,7 @@ export const pFilter = <T>(array: T[], callback: (item: T, index: number) => Pro
 
 export const pReduce = <T, U>(array: T[], callback: (output: U, item: T, index: number) => Promise<U>, initial: U) => {
     return array.reduce(
-        async (previous, item, index) => {
+        async (previous: Promise<U>, item, index) => {
             const output = await previous;
             return callback(output, item, index);
         },

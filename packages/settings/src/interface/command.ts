@@ -26,6 +26,7 @@ export interface BuildCommandLineArgs extends WorkModeAware {
     readonly profile: boolean;
     readonly sourceMaps: boolean;
     readonly cacheDirectory?: string;
+    readonly watch: boolean;
 }
 
 export interface DevCommandLineArgs extends WorkModeAware {

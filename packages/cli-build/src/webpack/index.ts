@@ -3,34 +3,38 @@ import webpack, {Configuration, Stats} from 'webpack';
 import {logger, pMap} from '@reskript/core';
 import {createWebpackConfig, BuildContext, EntryConfig} from '@reskript/config-webpack';
 import {BuildCommandLineArgs, WebpackProjectSettings} from '@reskript/settings';
-import {BuildRunOptions} from '../interface.js';
+import {BuildRunOptions, WatchRunOptions} from '../interface.js';
 import * as partials from './partial.js';
 import {drawBuildReport, printWebpackResult, WebpackResult} from './report.js';
 import inspect from './inspect/index.js';
 
+function printOnWebpackCallback(err: Error | null | undefined, stats: Stats | undefined): asserts stats is Stats {
+    if (err) {
+        logger.error(err.toString());
+        process.exit(22);
+    }
+
+    if (!stats) {
+        logger.error('Unknown error: webpack does not return its build stats');
+        process.exit(22);
+    }
+
+    const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};
+    // webpack的`toJson`的定义是错的
+    const {errors, warnings} = stats.toJson(toJsonOptions);
+    for (const error of reject(isNil, errors ?? [])) {
+        printWebpackResult('error', error as unknown as WebpackResult);
+    }
+    for (const warning of reject(isNil, warnings ?? [])) {
+        printWebpackResult('warn', warning as unknown as WebpackResult);
+    }
+}
+
 const runBuild = (configuration: Configuration[]): Promise<Stats> => {
     const executor = (resolve: (value: Stats) => void) => webpack(
         configuration as Configuration, // https://github.com/Microsoft/TypeScript/issues/14107
-        (err?: Error, stats?: Stats) => {
-            if (err) {
-                logger.error(err.toString());
-                process.exit(22);
-            }
-
-            if (!stats) {
-                logger.error('Unknown error: webpack does not return its build stats');
-                process.exit(22);
-            }
-
-            const toJsonOptions = {all: false, errors: true, warnings: true, assets: true};
-            // webpack的`toJson`的定义是错的
-            const {errors, warnings} = stats.toJson(toJsonOptions);
-            for (const error of reject(isNil, errors ?? [])) {
-                printWebpackResult('error', error as unknown as WebpackResult);
-            }
-            for (const warning of reject(isNil, warnings ?? [])) {
-                printWebpackResult('warn', warning as unknown as WebpackResult);
-            }
+        (err, stats) => {
+            printOnWebpackCallback(err, stats);
 
             if (stats.hasErrors()) {
                 process.exit(22);
@@ -71,4 +75,15 @@ export const build = async (options: BuildRunOptions<EntryConfig, WebpackProject
     drawBuildReport(stats ? [initialStats, stats] : [initialStats]);
     logger.lineBreak();
     await inspect(initialStats, projectSettings.build.inspect, {cwd: cmd.cwd, exitOnError: !cmd.analyze});
+};
+
+
+export const watch = async (options: WatchRunOptions<EntryConfig, WebpackProjectSettings>) => {
+    const {cmd, buildContext} = options;
+    const configuration = await toConfiguration(cmd, buildContext);
+    const compiler = webpack(configuration);
+    compiler.watch(
+        {aggregateTimeout: 300},
+        printOnWebpackCallback
+    );
 };

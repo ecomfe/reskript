@@ -22,6 +22,7 @@ title: 构建应用
 --no-source-maps            构建时不产出source map
 --clean                     构建前删除上一次构建的产出
 --cache-dir                 指定构建缓存的存放目录，默认为node_modules/.cache/webpack
+--watch                     启用变更监听，构建完成后不退出，文件变动时更新构建
 -h, --help                  显示帮助信息
 ```
 
@@ -68,6 +69,13 @@ skr build --entries-only=foo --entries-only=bar
 ## 严格模式
 
 当使用`--strict`参数后，构建会进入严格模式，请参考[配置解密 - 严格模式](../advanced/config-insiders#严格模式)了解这个开关的作用。
+
+## Watch模式
+
+使用`skr build --watch`可以在构建结束后监听文件变更并更新构建，但有以下限制：
+
+- 你需要通过`--build-target`参数指定构建的目标，假如没有指定则使用`dev`作为默认的目标，这一行为与`skr dev`相同。
+- 如果你有使用[Service Worker生成](../advanced/service-worker.md)，那么文件变更时会有一些警告信息。我们已知此问题，如果对你的使用有影响，请[提交需求给我们](https://github.com/ecomfe/reskript/issues/new)。
 
 ## 产出分析
 
