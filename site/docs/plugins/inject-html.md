@@ -11,7 +11,7 @@ title: 向HTML注入内容
 ### 安装
 
 ```shell
-npm i -D @reskript/plugin-inject-plugin
+npm i -D @reskript/plugin-inject-html
 ```
 
 ### 增加插件
@@ -19,7 +19,7 @@ npm i -D @reskript/plugin-inject-plugin
 ```ts
 // reskript.config.ts
 import {configure} from '@reskript/settings';
-import injectHtml = require('@reskript/plugin-inject-html');
+import injectHtml from '@reskript/plugin-inject-html';
 
 export default configure(
     'webpack',
@@ -58,7 +58,7 @@ function injectHtml(options?: Options): SettingsPlugin;
 ```ts
 // reskript.config.ts
 import {configure} from '@reskript/settings';
-import injectHtml = require('@reskript/plugin-inject-html');
+import injectHtml from '@reskript/plugin-inject-html';
 
 const injectOptions = {
     headEnd: [
