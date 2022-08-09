@@ -465,6 +465,8 @@ export default configure(
 
 在这种时候，你只能完全重写整个`module.rules`配置，我们在`build.finalize`函数的第三个参数`internals`中提供了了`rules`对象来让你进一步复用某些规则，`rules`中有以下的规则：
 
+- `url`：将`?url`的引入处理为资源的URL路径。
+- `raw`：将`?raw`的引入处理为资源的内容文本。
 - `script`：处理`.js`、`.jsx`、`.ts`、`.tsx`等脚本文件。
 - `less`：处理`.less`样式文件。
 - `css`：处理`.css`样式文件。
@@ -481,6 +483,8 @@ export default configure(
         build: {
             finalize: (webpackConfig, buildEntry, internals) => {
                 const loadingRules = [
+                    internals.rules.url(buildEntry),
+                    internals.rules.raw(buildEntry),
                     internals.rules.script(buildEntry),
                     internals.rules.less(buildEntry),
                     internals.rules.css(buildEntry),

@@ -52,3 +52,15 @@ test('worker query', async () => {
     );
     expect(entryModule?.identifier?.includes('worker-loader')).toBe(true);
 });
+
+test('url', async () => {
+    const {assets} = await compiler('src/importUrl.js');
+    expect(assets?.length).toBe(2);
+    expect(assets?.[1].name.includes('.svg')).toBe(true);
+    expect(assets?.[1].name.includes('?url')).toBe(false);
+});
+
+test('raw', async () => {
+    const {assets} = await compiler('src/importRaw.js');
+    expect(assets?.length).toBe(1);
+});

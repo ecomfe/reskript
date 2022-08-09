@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@reskript/config-img-loader": "5.4.0",
+    "@types/babel__core": "^7.1.19",
     "@types/less": "^3.0.3",
     "@types/node": "^18.0.0",
     "@types/ramda": "^0.28.14",

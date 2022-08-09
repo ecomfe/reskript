@@ -21,6 +21,25 @@ const assetModuleConfig = (entry: WebpackBuildEntry) => {
     };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const url = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
+    return {
+        resourceQuery: /^\?url$/,
+        type: 'asset/resource',
+        generator: {
+            filename: '[hash][ext]',
+        },
+    };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const raw = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
+    return {
+        resourceQuery: /^\?raw$/,
+        type: 'asset/source',
+    };
+};
+
 // 在第三方代码与项目代码的处理上，使用的策略是“非`cwd`下的全部算第三方代码”，而不是“包含`node_modules`的算第三方”。
 // 这一逻辑取决于在使用monorepo时的形式，当前monorepo下我们要求被引用的包是构建后的。
 
@@ -52,6 +71,9 @@ export const script = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => 
 
     return {
         test: /\.[jt]sx?$/,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         oneOf: [
             {
                 resource: normalizeRuleMatch(cwd, babel),
@@ -74,6 +96,9 @@ export const less = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
 
     return {
         test: /\.less$/,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         oneOf: [
             {
                 test: /\.global\.less$/,
@@ -102,6 +127,9 @@ export const css = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
 
     return {
         test: /\.css$/,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         oneOf: [
             {
                 test: /\.global\.css$/,
@@ -123,6 +151,9 @@ export const image = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
 
     return {
         test: /\.(jpe?g|png|gif)$/i,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         use: await use('img'),
         ...assetModuleConfig(entry),
     };
@@ -139,6 +170,9 @@ export const svg = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
 
     return {
         test: /\.svg$/,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         oneOf: [
             {
                 // 如果挂了`?react`的，就直接转成组件返回
@@ -159,6 +193,9 @@ export const svg = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
 export const file = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
     return {
         test: /\.(eot|ttf|woff|woff2)(\?.+)?$/,
+        resourceQuery: {
+            not: /^\?raw|url$/,
+        },
         ...assetModuleConfig(entry),
     };
 };

@@ -28,6 +28,8 @@ export type RuleFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetRule
 export type LoaderFactory = (buildEntry: WebpackBuildEntry) => Promise<RuleSetUseItem | null>;
 
 export interface InternalRules {
+    readonly url: RuleFactory;
+    readonly raw: RuleFactory;
     readonly script: RuleFactory;
     readonly less: RuleFactory;
     readonly css: RuleFactory;

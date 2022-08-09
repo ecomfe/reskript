@@ -42,7 +42,9 @@ export default async (entry: string, partialProjectSettings?: WebpackUserSetting
     };
     Object.assign(context.projectSettings.build, {reportLintErrors: false});
     const config = await createWebpackConfig(context);
+    config.devtool = false;
     config.entry = path.join(currentDirectory, 'fixtures', entry);
+    config.target = 'node';
     config.output = {
         path: path.join(currentDirectory, 'output'),
         filename: 'bundle.js',
