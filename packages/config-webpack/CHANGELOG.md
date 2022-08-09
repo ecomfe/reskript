@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.6.0](https://github.com/ecomfe/reskript/compare/v5.4.0...v5.6.0) (2022-08-09)
+
+
+### Features
+
+* **build:** 支持watch参数 ([#305](https://github.com/ecomfe/reskript/issues/305)) ([2648e91](https://github.com/ecomfe/reskript/commit/2648e9119712bb6c4834f97f44aaad2744c00fdb))
+* **build:** 支持指定引入模块为URL或内容字符串 ([#303](https://github.com/ecomfe/reskript/issues/303)) ([f002bdb](https://github.com/ecomfe/reskript/commit/f002bdb41054f3e33dbde0e76e2e0414a2444609))
+
+
+
+
+
+# [5.5.0](https://github.com/ecomfe/reskript/compare/v5.4.0...v5.5.0) (2022-08-09)
+
+
+### Features
+
+* **build:** 支持watch参数 ([#305](https://github.com/ecomfe/reskript/issues/305)) ([2648e91](https://github.com/ecomfe/reskript/commit/2648e9119712bb6c4834f97f44aaad2744c00fdb))
+* **build:** 支持指定引入模块为URL或内容字符串 ([#303](https://github.com/ecomfe/reskript/issues/303)) ([f002bdb](https://github.com/ecomfe/reskript/commit/f002bdb41054f3e33dbde0e76e2e0414a2444609))
+
+
+
+
+
 # [5.4.0](https://github.com/ecomfe/reskript/compare/v5.3.0...v5.4.0) (2022-07-01)
 
 

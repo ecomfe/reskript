@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.6.0](https://github.com/ecomfe/reskript/compare/v5.4.0...v5.6.0) (2022-08-09)
+
+
+### Features
+
+* **dev:** proxyRewrite配置支持直接指定协议 ([#306](https://github.com/ecomfe/reskript/issues/306)) ([aae8cb9](https://github.com/ecomfe/reskript/commit/aae8cb97400b2dd3f9ca45d16df0278d0de3008b))
+
+
+
+
+
+# [5.5.0](https://github.com/ecomfe/reskript/compare/v5.4.0...v5.5.0) (2022-08-09)
+
+
+### Features
+
+* **dev:** proxyRewrite配置支持直接指定协议 ([#306](https://github.com/ecomfe/reskript/issues/306)) ([aae8cb9](https://github.com/ecomfe/reskript/commit/aae8cb97400b2dd3f9ca45d16df0278d0de3008b))
+
+
+
+
+
 # [5.4.0](https://github.com/ecomfe/reskript/compare/v5.3.0...v5.4.0) (2022-07-01)
 
 **Note:** Version bump only for package @reskript/build-utils
