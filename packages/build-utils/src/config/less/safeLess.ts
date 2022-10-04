@@ -20,7 +20,7 @@ const findMatchedEndBracketIndex = (source: string, start: number, skip: number 
 
 const replaceCalcCallExpression = (expression: string) => {
     const calcBody = expression.slice(CALC_EXPRESSION_START.length, -CALC_EXPRESSION_END.length);
-    const innerBracketMatch = /^~['"](.+)['"]$/.exec(calcBody);
+    const innerBracketMatch = /^~\s*['"](.+)\s*['"]$/.exec(calcBody);
     const bareBody = innerBracketMatch ? innerBracketMatch[1] : calcBody;
     const varUsageReplacedBody = bareBody.replace(
         /@([a-zA-Z0-9-]+)/g,

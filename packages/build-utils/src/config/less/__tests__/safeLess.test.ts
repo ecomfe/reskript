@@ -56,4 +56,14 @@ describe('safeLess', () => {
         const input = '.rem-calc(30px)';
         expect(safeLess(input)).toBe(input);
     });
+
+    test('single quote has whitespace', () => {
+        const input = 'height: calc(~ \'100vh - 160px\')';
+        expect(safeLess(input)).toBe('height: ~\'calc(100vh - 160px)\'');
+    });
+
+    test.only('compex', () => {
+        const input = 'left: calc(~\'100% -\'( @switch-sm-pin-size + @switch-padding))';
+        expect(input).toBe(input);
+    });
 });
