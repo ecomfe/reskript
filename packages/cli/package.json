@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,14 +28,14 @@
     "test": "echo 'No test in @reskript/cli'"
   },
   "devDependencies": {
-    "@reskript/settings": "5.6.0",
+    "@reskript/settings": "5.6.1",
     "@types/node": "^18.0.0",
     "eslint": "^8.18.0",
     "typescript": "next"
   },
   "dependencies": {
     "@antfu/install-pkg": "^0.1.0",
-    "@reskript/core": "5.6.0",
+    "@reskript/core": "5.6.1",
     "clipanion": "^3.2.0-rc.11",
     "enquirer": "^2.3.6",
     "pkg-dir": "^6.0.1",

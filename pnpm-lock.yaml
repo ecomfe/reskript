@@ -22,7 +22,7 @@ importers:
       husky: 8.0.1
       lerna: 5.1.6
       semver: 7.3.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       undici: 5.8.2
       yargs: 17.5.1
 
@@ -31,8 +31,8 @@ importers:
       '@babel/core': ^7.18.6
       '@babel/preset-react': ^7.18.6
       '@babel/traverse': ^7.18.6
-      '@reskript/babel-utils': 5.6.0
-      '@reskript/core': 5.6.0
+      '@reskript/babel-utils': 5.6.1
+      '@reskript/core': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/node': ^18.0.0
       c8: ^7.11.3
@@ -51,7 +51,7 @@ importers:
       '@types/node': 18.0.0
       c8: 7.11.3
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
@@ -62,8 +62,8 @@ importers:
       '@babel/plugin-transform-classes': ^7.18.6
       '@babel/preset-react': ^7.18.6
       '@babel/traverse': ^7.18.6
-      '@reskript/babel-utils': 5.6.0
-      '@reskript/core': 5.6.0
+      '@reskript/babel-utils': 5.6.1
+      '@reskript/core': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/babel__traverse': ^7.17.1
       '@types/node': ^18.0.0
@@ -90,7 +90,7 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       react: 18.2.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
@@ -98,7 +98,7 @@ importers:
     specifiers:
       '@babel/core': ^7.18.6
       '@babel/traverse': ^7.18.6
-      '@reskript/core': 5.6.0
+      '@reskript/core': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/babel__traverse': ^7.17.1
       '@types/glob': ^7.2.0
@@ -121,14 +121,14 @@ importers:
       '@types/node': 18.0.0
       c8: 7.11.3
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
   packages/build-utils:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/cssnano': ^5.1.0
       '@types/less': ^3.0.3
       '@types/node': ^18.0.0
@@ -176,15 +176,15 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       postcss: 8.4.14
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
   packages/cli:
     specifiers:
       '@antfu/install-pkg': ^0.1.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       clipanion: ^3.2.0-rc.11
       enquirer: ^2.3.6
@@ -195,7 +195,7 @@ importers:
     dependencies:
       '@antfu/install-pkg': 0.1.0
       '@reskript/core': link:../core
-      clipanion: 3.2.0-rc.11
+      clipanion: 3.2.0-rc.11_typanion@3.9.0
       enquirer: 2.3.6
       pkg-dir: 6.0.1
       typanion: 3.9.0
@@ -203,14 +203,14 @@ importers:
       '@reskript/settings': link:../settings
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/cli-babel:
     specifiers:
       '@babel/core': ^7.18.6
-      '@reskript/config-babel': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/config-babel': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/node': ^18.0.0
       cli-highlight: ^2.1.11
@@ -230,15 +230,15 @@ importers:
       '@types/babel__core': 7.1.19
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/cli-build:
     specifiers:
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-vite': 5.6.0
-      '@reskript/config-webpack': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-vite': 5.6.1
+      '@reskript/config-webpack': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       '@types/ramda': ^0.28.14
       eslint: ^8.18.0
@@ -269,18 +269,18 @@ importers:
       '@types/ramda': 0.28.14
       eslint: 8.18.0
       rollup: 2.75.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       webpack: 5.73.0
 
   packages/cli-dev:
     specifiers:
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-vite': 5.6.0
-      '@reskript/config-webpack': 5.6.0
-      '@reskript/config-webpack-dev-server': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-vite': 5.6.1
+      '@reskript/config-webpack': 5.6.1
+      '@reskript/config-webpack-dev-server': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/express': ^4.17.13
       '@types/node': ^18.0.0
       better-opn: ^3.0.2
@@ -306,15 +306,15 @@ importers:
       '@types/express': 4.17.13
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       webpack: 5.73.0
 
   packages/cli-lint:
     specifiers:
-      '@reskript/config-lint': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/config-lint': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/eslint': ^8.4.3
       '@types/node': ^18.0.0
       '@types/ramda': ^0.28.14
@@ -339,17 +339,17 @@ importers:
       '@types/ramda': 0.28.14
       eslint: 8.18.0
       stylelint: 14.9.1
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/cli-play:
     specifiers:
       '@monaco-editor/react': ^4.4.5
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-vite': 5.6.0
-      '@reskript/config-webpack': 5.6.0
-      '@reskript/config-webpack-dev-server': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-vite': 5.6.1
+      '@reskript/config-webpack': 5.6.1
+      '@reskript/config-webpack-dev-server': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/body-parser': ^1.19.2
       '@types/debounce': ^1.2.1
       '@types/dedent': ^0.7.0
@@ -419,16 +419,16 @@ importers:
       eslint: 8.18.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
       webpack: 5.73.0
 
   packages/cli-test:
     specifiers:
-      '@reskript/config-jest': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/config-jest': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       '@types/ramda': ^0.28.14
       eslint: ^8.18.0
@@ -445,7 +445,7 @@ importers:
       '@types/node': 18.0.0
       '@types/ramda': 0.28.14
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/config-babel:
     specifiers:
@@ -469,10 +469,10 @@ importers:
       '@babel/preset-typescript': ^7.18.6
       '@babel/traverse': ^7.18.6
       '@emotion/babel-plugin': ^11.9.2
-      '@reskript/babel-plugin-add-react-display-name': 5.6.0
-      '@reskript/babel-plugin-debug-react-component-file-name': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/babel-plugin-add-react-display-name': 5.6.1
+      '@reskript/babel-plugin-debug-react-component-file-name': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@rollup/plugin-babel': ^5.3.1
       '@types/babel__core': ^7.1.19
       '@types/node': ^18.0.0
@@ -526,13 +526,13 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       rollup: 2.75.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
   packages/config-img-loader:
     specifiers:
-      '@reskript/core': 5.6.0
+      '@reskript/core': 5.6.1
       '@types/imagemin-gifsicle': ^7.0.1
       '@types/imagemin-mozjpeg': ^8.0.1
       '@types/imagemin-optipng': ^5.2.1
@@ -558,16 +558,16 @@ importers:
       '@types/imagemin-optipng': 5.2.1
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       webpack: 5.73.0
 
   packages/config-jest:
     specifiers:
       '@babel/core': ^7.18.6
       '@babel/plugin-transform-modules-commonjs': ^7.18.6
-      '@reskript/config-babel': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/config-babel': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/enzyme': ^3.10.12
       '@types/enzyme-adapter-react-16': ^1.0.6
@@ -612,7 +612,7 @@ importers:
       '@types/resolve': 1.20.2
       eslint: 8.18.0
       prettier: 2.7.1
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/config-lint:
     specifiers:
@@ -622,9 +622,9 @@ importers:
       '@babel/plugin-transform-typescript': ^7.18.6
       '@ecomfe/eslint-config': ^7.4.0
       '@ecomfe/stylelint-config': ^1.1.2
-      '@reskript/config-babel': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/eslint-plugin': 5.6.0
+      '@reskript/config-babel': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/eslint-plugin': 5.6.1
       '@rollup/plugin-babel': ^5.3.1
       '@rushstack/eslint-patch': ^1.1.4
       '@types/node': ^18.0.0
@@ -654,10 +654,10 @@ importers:
       '@reskript/core': link:../core
       '@reskript/eslint-plugin': link:../eslint-plugin
       '@rushstack/eslint-patch': 1.1.4
-      '@typescript-eslint/eslint-plugin': 5.30.0_rmpbb6uned5lcwm7dphozhb3nu
-      '@typescript-eslint/parser': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/eslint-plugin': 5.30.0_oqhpeshe665ly7fqjbrank3etm
+      '@typescript-eslint/parser': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       eslint-plugin-babel: 5.3.1_eslint@8.18.0
-      eslint-plugin-jest: 26.5.3_gr25hdlgf5bwi67jc2p3n2abdm
+      eslint-plugin-jest: 26.5.3_4jgkciyxbbjj2cnvxsze677lpy
       eslint-plugin-react: 7.30.1_eslint@8.18.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.18.0
       eslint-plugin-reskript: 0.1.2
@@ -673,15 +673,15 @@ importers:
       eslint: 8.18.0
       prettier: 2.7.1
       rollup: 2.75.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/config-vite:
     specifiers:
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-babel': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/portal': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-babel': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/portal': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/connect-history-api-fallback': ^1.3.5
       '@types/dedent': ^0.7.0
       '@types/lodash.template': ^4.5.1
@@ -728,7 +728,7 @@ importers:
       eslint: 8.18.0
       react: 18.2.0
       rollup: 2.75.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
@@ -736,14 +736,14 @@ importers:
     specifiers:
       '@babel/core': ^7.18.6
       '@ecomfe/class-names-loader': ^2.0.0
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-babel': 5.6.0
-      '@reskript/config-img-loader': 5.6.0
-      '@reskript/config-lint': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
-      '@reskript/svg-to-component-loader': 5.6.0
-      '@reskript/webpack-plugin-interpolate-html': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-babel': 5.6.1
+      '@reskript/config-img-loader': 5.6.1
+      '@reskript/config-lint': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
+      '@reskript/svg-to-component-loader': 5.6.1
+      '@reskript/webpack-plugin-interpolate-html': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/less': ^3.0.3
       '@types/node': ^18.0.0
@@ -805,7 +805,7 @@ importers:
       eslint-webpack-plugin: 3.2.0_mkwqxzk3byw3tt5etnkhd5uru4
       file-loader: 6.2.0_webpack@5.73.0
       find-up: 6.3.0
-      fork-ts-checker-webpack-plugin: 7.2.11_dcirr7krvnbu5r77ilzie3g4vi
+      fork-ts-checker-webpack-plugin: 7.2.11_abphysfipddzhz6ongnnef7bki
       hasha: 5.2.2
       html-webpack-plugin: 5.5.0_webpack@5.73.0
       less: 4.1.3
@@ -838,7 +838,7 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       semver: 7.3.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13_less@4.1.3
       vitest: 0.16.0_c8@7.11.3+less@4.1.3
       webpack: 5.73.0
@@ -846,11 +846,11 @@ importers:
   packages/config-webpack-dev-server:
     specifiers:
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.7
-      '@reskript/build-utils': 5.6.0
-      '@reskript/config-webpack': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/portal': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/config-webpack': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/portal': 5.6.1
+      '@reskript/settings': 5.6.1
       '@soda/friendly-errors-webpack-plugin': ^1.8.1
       '@types/cli-progress': ^3.11.0
       '@types/node': ^18.0.0
@@ -884,7 +884,7 @@ importers:
       '@types/node': 18.0.0
       c8: 7.11.3
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
       webpack: 5.73.0
@@ -949,14 +949,14 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       rollup: 2.75.7
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
   packages/doctor:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       '@types/semver': ^7.3.10
       eslint: ^8.18.0
@@ -976,7 +976,7 @@ importers:
       '@types/node': 18.0.0
       '@types/semver': 7.3.10
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/eslint-plugin:
     specifiers:
@@ -997,7 +997,7 @@ importers:
 
   packages/init:
     specifiers:
-      '@reskript/core': 5.6.0
+      '@reskript/core': 5.6.1
       '@types/inquirer': ^8.2.1
       '@types/node': ^18.0.0
       eslint: ^8.18.0
@@ -1018,13 +1018,13 @@ importers:
       '@types/inquirer': 8.2.1
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/plugin-inject-html:
     specifiers:
-      '@reskript/build-utils': 5.6.0
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/dedent': ^0.7.0
       '@types/node': ^18.0.0
       escape-goat: ^4.0.0
@@ -1043,15 +1043,15 @@ importers:
       '@types/node': 18.0.0
       eslint: 8.18.0
       html-webpack-plugin: 5.5.0_webpack@5.73.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       webpack: 5.73.0
 
   packages/plugin-qiankun:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/plugin-utils': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/plugin-utils': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/dedent': ^0.7.0
       '@types/node': ^18.0.0
       c8: ^7.11.3
@@ -1074,15 +1074,15 @@ importers:
       '@types/node': 18.0.0
       c8: 7.11.3
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
 
   packages/plugin-sass:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/plugin-utils': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/plugin-utils': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       '@types/sass': ^1.43.1
       eslint: ^8.18.0
@@ -1100,13 +1100,13 @@ importers:
       '@types/node': 18.0.0
       '@types/sass': 1.43.1
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       webpack: 5.73.0
 
   packages/plugin-utils:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       eslint: ^8.18.0
       typescript: next
@@ -1116,12 +1116,12 @@ importers:
     devDependencies:
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
 
   packages/plugin-workspace-no-build:
     specifiers:
-      '@reskript/core': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/core': 5.6.1
+      '@reskript/settings': 5.6.1
       '@types/node': ^18.0.0
       '@types/semver': ^7.3.10
       eslint: ^8.18.0
@@ -1136,7 +1136,7 @@ importers:
       '@types/node': 18.0.0
       '@types/semver': 7.3.10
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       webpack: 5.73.0
 
   packages/portal:
@@ -1158,13 +1158,13 @@ importers:
       '@types/express': 4.17.13
       '@types/node': 18.0.0
       eslint: 8.18.0
-      ts-node: 10.8.1_vkkkim3vdga2y7i32kkyiuk3fq
-      typescript: 4.8.0-dev.20220809
+      ts-node: 10.8.1_c2pxt7nxb3qjegd3rerd76psjm
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
 
   packages/settings:
     specifiers:
-      '@reskript/core': 5.6.0
+      '@reskript/core': 5.6.1
       '@types/babel__core': ^7.1.19
       '@types/express': ^4.17.13
       '@types/node': ^18.0.0
@@ -1192,14 +1192,14 @@ importers:
       '@types/node': 18.0.0
       c8: 7.11.3
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
       webpack: 5.73.0
 
   packages/svg-to-component-loader:
     specifiers:
-      '@reskript/build-utils': 5.6.0
+      '@reskript/build-utils': 5.6.1
       '@types/node': ^18.0.0
       eslint: ^8.18.0
       typescript: next
@@ -1209,13 +1209,13 @@ importers:
     devDependencies:
       '@types/node': 18.0.0
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       webpack: 5.73.0
 
   packages/webpack-plugin-interpolate-html:
     specifiers:
-      '@reskript/build-utils': 5.6.0
-      '@reskript/core': 5.6.0
+      '@reskript/build-utils': 5.6.1
+      '@reskript/core': 5.6.1
       '@types/node': ^18.0.0
       c8: ^7.11.3
       eslint: ^8.18.0
@@ -1232,7 +1232,7 @@ importers:
       c8: 7.11.3
       eslint: 8.18.0
       html-webpack-plugin: 5.5.0_webpack@5.73.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       vitest: 0.16.0_c8@7.11.3
       webpack: 5.73.0
@@ -1240,17 +1240,17 @@ importers:
   showcase/todo:
     specifiers:
       '@playwright/test': ^1.23.0
-      '@reskript/cli': 5.6.0
-      '@reskript/cli-babel': 5.6.0
-      '@reskript/cli-build': 5.6.0
-      '@reskript/cli-dev': 5.6.0
-      '@reskript/cli-lint': 5.6.0
-      '@reskript/cli-play': 5.6.0
-      '@reskript/cli-test': 5.6.0
-      '@reskript/config-lint': 5.6.0
-      '@reskript/plugin-inject-html': 5.6.0
-      '@reskript/plugin-qiankun': 5.6.0
-      '@reskript/settings': 5.6.0
+      '@reskript/cli': 5.6.1
+      '@reskript/cli-babel': 5.6.1
+      '@reskript/cli-build': 5.6.1
+      '@reskript/cli-dev': 5.6.1
+      '@reskript/cli-lint': 5.6.1
+      '@reskript/cli-play': 5.6.1
+      '@reskript/cli-test': 5.6.1
+      '@reskript/config-lint': 5.6.1
+      '@reskript/plugin-inject-html': 5.6.1
+      '@reskript/plugin-qiankun': 5.6.1
+      '@reskript/settings': 5.6.1
       '@testing-library/react': ^13.3.0
       '@types/jest': ^27.5.0
       '@types/ramda': ^0.28.14
@@ -1302,7 +1302,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       stylelint: 14.9.1
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       vite: 2.9.13
       webpack: 5.73.0
 
@@ -3114,8 +3114,8 @@ packages:
       '@babel/core': 7.18.6
       '@babel/eslint-parser': 7.18.2_adaaawmztyaoftgelr4r3k6qwu
       '@babel/eslint-plugin': 7.17.7_a4sa3qzka4aqdiwldsemtyw33a
-      '@typescript-eslint/eslint-plugin': 5.30.0_rmpbb6uned5lcwm7dphozhb3nu
-      '@typescript-eslint/parser': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/eslint-plugin': 5.30.0_oqhpeshe665ly7fqjbrank3etm
+      '@typescript-eslint/parser': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       eslint: 8.18.0
       eslint-plugin-react: 7.30.1_eslint@8.18.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.18.0
@@ -5194,7 +5194,7 @@ packages:
     dependencies:
       '@types/yargs-parser': 21.0.0
 
-  /@typescript-eslint/eslint-plugin/5.30.0_rmpbb6uned5lcwm7dphozhb3nu:
+  /@typescript-eslint/eslint-plugin/5.30.0_oqhpeshe665ly7fqjbrank3etm:
     resolution: {integrity: sha512-lvhRJ2pGe2V9MEU46ELTdiHgiAFZPKtLhiU5wlnaYpMc2+c1R8fh8i80ZAa665drvjHKUJyRRGg3gEm1If54ow==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -5205,23 +5205,23 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/parser': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       '@typescript-eslint/scope-manager': 5.30.0
-      '@typescript-eslint/type-utils': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
-      '@typescript-eslint/utils': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/type-utils': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
+      '@typescript-eslint/utils': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       debug: 4.3.4
       eslint: 8.18.0
       functional-red-black-tree: 1.0.1
       ignore: 5.2.0
       regexpp: 3.2.0
       semver: 7.3.7
-      tsutils: 3.21.0_lkskxv5y3w4xrkans5mmxodg54
-      typescript: 4.8.0-dev.20220809
+      tsutils: 3.21.0_pjkr2eg6dvipn6fbnpzt7nansq
+      typescript: 4.9.0-dev.20221004
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@typescript-eslint/parser/5.30.0_rzevdyce4rb7rzwvytliojh6qu:
+  /@typescript-eslint/parser/5.30.0_vylqeeutdsk3gjxdpcx6lqvima:
     resolution: {integrity: sha512-2oYYUws5o2liX6SrFQ5RB88+PuRymaM2EU02/9Ppoyu70vllPnHVO7ioxDdq/ypXHA277R04SVjxvwI8HmZpzA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -5233,10 +5233,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.30.0
       '@typescript-eslint/types': 5.30.0
-      '@typescript-eslint/typescript-estree': 5.30.0_lkskxv5y3w4xrkans5mmxodg54
+      '@typescript-eslint/typescript-estree': 5.30.0_pjkr2eg6dvipn6fbnpzt7nansq
       debug: 4.3.4
       eslint: 8.18.0
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5249,7 +5249,7 @@ packages:
       '@typescript-eslint/visitor-keys': 5.30.0
     dev: false
 
-  /@typescript-eslint/type-utils/5.30.0_rzevdyce4rb7rzwvytliojh6qu:
+  /@typescript-eslint/type-utils/5.30.0_vylqeeutdsk3gjxdpcx6lqvima:
     resolution: {integrity: sha512-GF8JZbZqSS+azehzlv/lmQQ3EU3VfWYzCczdZjJRxSEeXDQkqFhCBgFhallLDbPwQOEQ4MHpiPfkjKk7zlmeNg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -5259,11 +5259,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/utils': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/utils': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       debug: 4.3.4
       eslint: 8.18.0
-      tsutils: 3.21.0_lkskxv5y3w4xrkans5mmxodg54
-      typescript: 4.8.0-dev.20220809
+      tsutils: 3.21.0_pjkr2eg6dvipn6fbnpzt7nansq
+      typescript: 4.9.0-dev.20221004
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5273,7 +5273,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
-  /@typescript-eslint/typescript-estree/5.30.0_lkskxv5y3w4xrkans5mmxodg54:
+  /@typescript-eslint/typescript-estree/5.30.0_pjkr2eg6dvipn6fbnpzt7nansq:
     resolution: {integrity: sha512-hDEawogreZB4n1zoqcrrtg/wPyyiCxmhPLpZ6kmWfKF5M5G0clRLaEexpuWr31fZ42F96SlD/5xCt1bT5Qm4Nw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -5288,13 +5288,13 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.7
-      tsutils: 3.21.0_lkskxv5y3w4xrkans5mmxodg54
-      typescript: 4.8.0-dev.20220809
+      tsutils: 3.21.0_pjkr2eg6dvipn6fbnpzt7nansq
+      typescript: 4.9.0-dev.20221004
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@typescript-eslint/utils/5.30.0_rzevdyce4rb7rzwvytliojh6qu:
+  /@typescript-eslint/utils/5.30.0_vylqeeutdsk3gjxdpcx6lqvima:
     resolution: {integrity: sha512-0bIgOgZflLKIcZsWvfklsaQTM3ZUbmtH0rJ1hKyV3raoUYyeZwcjQ8ZUJTzS7KnhNcsVT1Rxs7zeeMHEhGlltw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -5303,7 +5303,7 @@ packages:
       '@types/json-schema': 7.0.11
       '@typescript-eslint/scope-manager': 5.30.0
       '@typescript-eslint/types': 5.30.0
-      '@typescript-eslint/typescript-estree': 5.30.0_lkskxv5y3w4xrkans5mmxodg54
+      '@typescript-eslint/typescript-estree': 5.30.0_pjkr2eg6dvipn6fbnpzt7nansq
       eslint: 8.18.0
       eslint-scope: 5.1.1
       eslint-utils: 3.0.0_eslint@8.18.0
@@ -6698,8 +6698,10 @@ packages:
     engines: {node: '>= 12'}
     dev: false
 
-  /clipanion/3.2.0-rc.11:
+  /clipanion/3.2.0-rc.11_typanion@3.9.0:
     resolution: {integrity: sha512-fugY+N5uPop31VDYhjTc31DwPjCCLx6kmvdlFTf8fztpOxwplopiZr1XSHSA2qNmfpcXlJZKJsXMkxvXmdzK7g==}
+    peerDependencies:
+      typanion: '*'
     dependencies:
       typanion: 3.9.0
     dev: false
@@ -6985,8 +6987,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -8376,7 +8378,7 @@ packages:
       eslint-rule-composer: 0.3.0
     dev: false
 
-  /eslint-plugin-jest/26.5.3_gr25hdlgf5bwi67jc2p3n2abdm:
+  /eslint-plugin-jest/26.5.3_4jgkciyxbbjj2cnvxsze677lpy:
     resolution: {integrity: sha512-sICclUqJQnR1bFRZGLN2jnSVsYOsmPYYnroGCIMVSvTS3y8XR3yjzy1EcTQmk6typ5pRgyIWzbjqxK6cZHEZuQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -8389,8 +8391,8 @@ packages:
       jest:
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.30.0_rmpbb6uned5lcwm7dphozhb3nu
-      '@typescript-eslint/utils': 5.30.0_rzevdyce4rb7rzwvytliojh6qu
+      '@typescript-eslint/eslint-plugin': 5.30.0_oqhpeshe665ly7fqjbrank3etm
+      '@typescript-eslint/utils': 5.30.0_vylqeeutdsk3gjxdpcx6lqvima
       eslint: 8.18.0
     transitivePeerDependencies:
       - supports-color
@@ -8985,7 +8987,7 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
-  /fork-ts-checker-webpack-plugin/7.2.11_dcirr7krvnbu5r77ilzie3g4vi:
+  /fork-ts-checker-webpack-plugin/7.2.11_abphysfipddzhz6ongnnef7bki:
     resolution: {integrity: sha512-2e5+NyTUTE1Xq4fWo7KFEQblCaIvvINQwUX3jRmEGlgCTc1Ecqw/975EfQrQ0GEraxJTnp8KB9d/c8hlCHUMJA==}
     engines: {node: '>=12.13.0', yarn: '>=1.0.0'}
     peerDependencies:
@@ -9007,7 +9009,7 @@ packages:
       schema-utils: 3.1.1
       semver: 7.3.7
       tapable: 2.2.1
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
       webpack: 5.73.0
     dev: false
 
@@ -16478,6 +16480,37 @@ packages:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: false
 
+  /ts-node/10.8.1_c2pxt7nxb3qjegd3rerd76psjm:
+    resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 18.0.0
+      acorn: 8.7.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.0-dev.20221004
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
   /ts-node/10.8.1_qiyc72axg2v44xl4yovan2v55u:
     resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
     hasBin: true
@@ -16509,37 +16542,6 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node/10.8.1_vkkkim3vdga2y7i32kkyiuk3fq:
-    resolution: {integrity: sha512-Wwsnao4DQoJsN034wePSg5nZiw4YKXf56mPIAeD6wVmiv+RytNSWqc2f3fKvcUoV+Yn2+yocD71VOfQHbmVX4g==}
-    hasBin: true
-    peerDependencies:
-      '@swc/core': '>=1.2.50'
-      '@swc/wasm': '>=1.2.50'
-      '@types/node': '*'
-      typescript: '>=2.7'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      '@swc/wasm':
-        optional: true
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.9
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.3
-      '@types/node': 18.0.0
-      acorn: 8.7.1
-      acorn-walk: 8.2.0
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 4.8.0-dev.20220809
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: true
-
   /ts-toolbelt/6.15.5:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
     dev: true
@@ -16554,14 +16556,14 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsutils/3.21.0_lkskxv5y3w4xrkans5mmxodg54:
+  /tsutils/3.21.0_pjkr2eg6dvipn6fbnpzt7nansq:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.8.0-dev.20220809
+      typescript: 4.9.0-dev.20221004
     dev: false
 
   /tty-table/4.1.6:
@@ -16661,8 +16663,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript/4.8.0-dev.20220809:
-    resolution: {integrity: sha512-MfDvCrf/GqKM/GwLuhs2ykgauNUg2TCR5YzIDj+b2scDwRE9XCRcgQAWh29omMmGFIAhP91QXKt+aXV0hchkxw==}
+  /typescript/4.9.0-dev.20221004:
+    resolution: {integrity: sha512-FPgB6PfD+nQ4Sv164FSNZU4LVHZ9gbVVzvYY+mJmji6ORRi9MsX3od1Upjx5V5Qm9BCr2LeI18UK+RBkbMR9sg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 

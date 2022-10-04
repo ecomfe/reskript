@@ -1,6 +1,6 @@
 {
   "name": "@reskript/core",
-  "version": "5.6.0",
+  "version": "5.6.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

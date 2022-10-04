@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.1](https://github.com/ecomfe/reskript/compare/v5.6.0...v5.6.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* **build:** 修复处理less的calc表达式时有空格的情况 ([#309](https://github.com/ecomfe/reskript/issues/309)) ([05ced9e](https://github.com/ecomfe/reskript/commit/05ced9e1ec08fbd44b7bb06d1cd5536919161b31))
+* **plugin-qiankun:** 生成HTML增加dir属性 ([#314](https://github.com/ecomfe/reskript/issues/314)) ([5ee8ce4](https://github.com/ecomfe/reskript/commit/5ee8ce4c1641d9f8f51f085105c67acccb97f385))
+
+
+
+
+
 # [5.6.0](https://github.com/ecomfe/reskript/compare/v5.4.0...v5.6.0) (2022-08-09)
 
 
