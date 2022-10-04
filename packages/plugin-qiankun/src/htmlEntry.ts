@@ -29,7 +29,7 @@ const defaultTemplate = (appName: string, config?: TemplateConfig) => {
 
     return dedent`
         <!DOCTYPE html>
-        <html>
+        <html dir="ltr">
         <head>
             <meta charset="utf-8">
             <title>${appName} - Qiankun</title>
