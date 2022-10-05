@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-lint",
-  "version": "5.6.1",
+  "version": "5.7.0-beta.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,7 +24,7 @@
     "test": "echo 'No test in @reskript/cli-lint'"
   },
   "devDependencies": {
-    "@reskript/settings": "5.6.1",
+    "@reskript/settings": "5.7.0-beta.0",
     "@types/eslint": "^8.4.6",
     "@types/node": "^18.8.2",
     "@types/ramda": "^0.28.15",
@@ -33,8 +33,8 @@
     "typescript": "next"
   },
   "dependencies": {
-    "@reskript/config-lint": "5.6.1",
-    "@reskript/core": "5.6.1",
+    "@reskript/config-lint": "5.7.0-beta.0",
+    "@reskript/core": "5.7.0-beta.0",
     "eslint-formatter-pretty": "^4.1.0",
     "execa": "^6.0.0",
     "globby": "^13.1.2",
