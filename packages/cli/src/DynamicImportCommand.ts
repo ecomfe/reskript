@@ -3,7 +3,6 @@ import {existsSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {packageDirectory} from 'pkg-dir';
 import enquirer from 'enquirer';
-// @ts-expect-error
 import {installPackage} from '@antfu/install-pkg';
 import {Command} from 'clipanion';
 import {CommandDefinition, findGitRoot, logger, readPackageConfig, resolveFrom} from '@reskript/core';

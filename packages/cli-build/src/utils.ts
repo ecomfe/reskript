@@ -1,6 +1,5 @@
 import path from 'node:path';
 import {uniqBy, sortWith, ascend, isEmpty, difference} from 'ramda';
-// @ts-expect-error
 import * as kolorist from 'kolorist';
 import {readPackageConfig, logger} from '@reskript/core';
 import {BuildCommandLineArgs, BuildEnv, ProjectSettings} from '@reskript/settings';

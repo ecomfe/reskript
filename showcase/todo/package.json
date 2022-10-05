@@ -20,8 +20,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@emotion/react": "^11.9.3",
-    "@playwright/test": "^1.23.0",
+    "@emotion/react": "^11.10.4",
+    "@playwright/test": "^1.26.1",
     "@reskript/cli": "5.6.1",
     "@reskript/cli-babel": "5.6.1",
     "@reskript/cli-build": "5.6.1",
@@ -34,26 +34,26 @@
     "@reskript/plugin-inject-html": "5.6.1",
     "@reskript/plugin-qiankun": "5.6.1",
     "@reskript/settings": "5.6.1",
-    "@testing-library/react": "^13.3.0",
+    "@testing-library/react": "^13.4.0",
     "@types/jest": "^27.5.0",
-    "@types/ramda": "^0.28.14",
-    "@types/react": "~18.0.14",
-    "@types/react-dom": "~18.0.5",
-    "eslint": "^8.18.0",
+    "@types/ramda": "^0.28.15",
+    "@types/react": "~18.0.21",
+    "@types/react-dom": "~18.0.6",
+    "eslint": "^8.24.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "stylelint": "^14.9.1",
+    "stylelint": "^14.13.0",
     "typescript": "next",
     "vite": "^2.9.13",
-    "webpack": "^5.73.0"
+    "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@emotion/styled": "^11.9.3",
-    "antd": "^4.21.4",
-    "core-js": "^3.23.3",
+    "@emotion/styled": "^11.10.4",
+    "antd": "^4.23.4",
+    "core-js": "^3.25.5",
     "localforage": "^1.10.0",
     "nanoid": "^4.0.0",
     "ramda": "^0.28.0",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.8"
   }
 }

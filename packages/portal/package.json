@@ -26,9 +26,9 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/express": "^4.17.13",
-    "@types/node": "^18.0.0",
-    "eslint": "^8.18.0",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.8.2",
+    "eslint": "^8.24.0",
     "ts-node": "^10.8.1",
     "typescript": "next",
     "vite": "^2.9.13"

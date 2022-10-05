@@ -24,9 +24,9 @@
     "test": "echo 'No test in @reskript/cli-test'"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@types/ramda": "^0.28.14",
-    "eslint": "^8.18.0",
+    "@types/node": "^18.8.2",
+    "@types/ramda": "^0.28.15",
+    "eslint": "^8.24.0",
     "typescript": "next"
   },
   "dependencies": {

@@ -1,6 +1,5 @@
 import webpack, {Compiler} from 'webpack';
 import {SingleBar, Options} from 'cli-progress';
-// @ts-expect-error 这里修复后，下面的`eslint-disable`也删掉
 import * as kolorist from 'kolorist';
 
 const PROGRESS_BAR_OPTIONS: Options = {
@@ -14,7 +13,6 @@ const PROGRESS_BAR_OPTIONS: Options = {
         const total = 40;
         const active = Math.round(total * progress);
         const remaining = total - active;
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         return kolorist.bgLightGreen(' '.repeat(active)) + kolorist.bgWhite(' '.repeat(remaining));
     },
 };

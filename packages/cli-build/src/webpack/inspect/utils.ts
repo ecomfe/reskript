@@ -1,4 +1,3 @@
-// @ts-expect-error
 import * as kolorist from 'kolorist';
 import {isMatch} from 'matcher';
 import {logger, pReduce} from '@reskript/core';

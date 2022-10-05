@@ -23,17 +23,17 @@
     "test": "echo 'No test in @reskript/init'"
   },
   "devDependencies": {
-    "@types/inquirer": "^8.2.1",
-    "@types/node": "^18.0.0",
-    "eslint": "^8.18.0",
+    "@types/inquirer": "^9.0.2",
+    "@types/node": "^18.8.2",
+    "eslint": "^8.24.0",
     "typescript": "next"
   },
   "dependencies": {
     "@reskript/core": "5.6.1",
     "execa": "^6.0.0",
     "globby": "^13.1.2",
-    "inquirer": "^9.0.0",
+    "inquirer": "^9.1.2",
     "ora": "^6.1.2",
-    "pad-stream": "^3.0.0"
+    "pad-stream": "^4.0.0"
   }
 }

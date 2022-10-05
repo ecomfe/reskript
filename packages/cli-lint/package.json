@@ -25,11 +25,11 @@
   },
   "devDependencies": {
     "@reskript/settings": "5.6.1",
-    "@types/eslint": "^8.4.3",
-    "@types/node": "^18.0.0",
-    "@types/ramda": "^0.28.14",
-    "eslint": "^8.18.0",
-    "stylelint": "^14.9.1",
+    "@types/eslint": "^8.4.6",
+    "@types/node": "^18.8.2",
+    "@types/ramda": "^0.28.15",
+    "eslint": "^8.24.0",
+    "stylelint": "^14.13.0",
     "typescript": "next"
   },
   "dependencies": {
