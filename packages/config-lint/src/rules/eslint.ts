@@ -12,14 +12,11 @@ const config: Record<string, any> = {
     parserOptions: {
         babelOptions: getParseOnlyBabelConfig({mode: 'development'}),
     },
-    plugins: ['jest', '@reskript'],
+    plugins: ['@reskript'],
     settings: {
         react: {
             version: '17.0',
         },
-    },
-    env: {
-        'jest': true,
     },
     globals: {
         skr: true,

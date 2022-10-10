@@ -24,9 +24,9 @@
     "test": "echo 'No test in @reskript/plugin-sass'"
   },
   "devDependencies": {
-    "@types/node": "^18.8.2",
+    "@types/node": "^18.8.3",
     "@types/sass": "^1.43.1",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "typescript": "next",
     "webpack": "^5.74.0"
   },
@@ -35,7 +35,7 @@
     "@reskript/plugin-utils": "5.7.0-beta.0",
     "@reskript/settings": "5.7.0-beta.0",
     "sass": "^1.55.0",
-    "sass-loader": "^13.0.2"
+    "sass-loader": "^13.1.0"
   },
   "peerDependencies": {
     "webpack": "5.x"

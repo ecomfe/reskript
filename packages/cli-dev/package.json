@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
-    "@types/node": "^18.8.2",
-    "eslint": "^8.24.0",
+    "@types/node": "^18.8.3",
+    "eslint": "^8.25.0",
     "typescript": "next",
     "vite": "^2.9.13",
     "webpack": "^5.74.0"

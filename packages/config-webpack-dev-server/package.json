@@ -25,17 +25,17 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.0",
-    "@types/node": "^18.8.2",
+    "@types/node": "^18.8.3",
     "c8": "^7.11.3",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "typescript": "next",
     "vite": "^2.9.13",
-    "vitest": "^0.23.4",
+    "vitest": "^0.24.0",
     "webpack": "^5.74.0",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
     "@reskript/build-utils": "5.7.0-beta.0",
     "@reskript/config-webpack": "5.7.0-beta.0",
     "@reskript/core": "5.7.0-beta.0",

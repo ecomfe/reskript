@@ -24,9 +24,9 @@
     "test": "echo 'No test in @reskript/plugin-workspace-no-build'"
   },
   "devDependencies": {
-    "@types/node": "^18.8.2",
+    "@types/node": "^18.8.3",
     "@types/semver": "^7.3.12",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "typescript": "next",
     "webpack": "^5.74.0"
   },

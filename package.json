@@ -27,7 +27,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "husky": "^8.0.1",
-    "lerna": "^5.5.4",
+    "lerna": "^5.6.2",
     "semver": "^7.3.8",
     "typescript": "next",
     "undici": "^5.11.0",

@@ -27,15 +27,15 @@
   "devDependencies": {
     "@babel/plugin-transform-typescript": "^7.19.3",
     "@reskript/core": "5.7.0-beta.0",
-    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-babel": "^6.0.0",
     "@types/babel__core": "^7.1.19",
-    "@types/node": "^18.8.2",
+    "@types/node": "^18.8.3",
     "c8": "^7.11.3",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "rollup": "^2.79.1",
     "typescript": "next",
     "vite": "^2.9.13",
-    "vitest": "^0.23.4"
+    "vitest": "^0.24.0"
   },
   "dependencies": {
     "@babel/core": "^7.19.3",
