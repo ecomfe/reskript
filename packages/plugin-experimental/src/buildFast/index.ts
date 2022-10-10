@@ -112,7 +112,7 @@ const factory = (mode: WorkMode): SettingsPlugin => async settings => {
             ];
             config.resolve.alias['@swc/helpers'] = path.resolve(await resolve('@swc/helpers'), '..', '..');
             config.optimization.minimizer = [
-                new TerserPlugin({minify: TerserPlugin.esbuildMinify}),
+                new TerserPlugin({minify: TerserPlugin.swcMinify}),
             ];
             return config;
         }
