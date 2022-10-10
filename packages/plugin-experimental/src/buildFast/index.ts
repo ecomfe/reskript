@@ -70,7 +70,7 @@ const swcLoader = async (mode: WorkMode, settings: ProjectSettings) => {
 
 const factory = (mode: WorkMode): SettingsPlugin => async settings => {
     if (settings.driver !== 'webpack') {
-        throw new Error('VITE IS BAD');
+        throw new Error('Vite driver not supported by plugin-experimental#buildFast');
     }
 
     if (settings.build.uses.includes('antd')) {
@@ -79,7 +79,7 @@ const factory = (mode: WorkMode): SettingsPlugin => async settings => {
 
     return chainWebpackFinalize(
         settings,
-        async (configIn, buildEntry, internals) => {
+        async (config, buildEntry, internals) => {
             const {cwd, projectSettings: {build: {script: {babel}}}} = buildEntry;
             const loadingRules = [
                 internals.rules.less(buildEntry),
@@ -89,7 +89,6 @@ const factory = (mode: WorkMode): SettingsPlugin => async settings => {
                 internals.rules.image(buildEntry),
             ] as const;
             const builtinRules = await Promise.all(loadingRules);
-            const config = await settings.build.finalize(configIn, buildEntry, internals);
             config.module.rules = [
                 {
                     test: /\.[jt]sx?$/,
