@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.7.1](https://github.com/ecomfe/reskript/compare/v5.7.0...v5.7.1) (2022-10-10)
+
+### Bug Fixes
+
+- **plugin-experimental:** buildFast 插件过多地执行了用户的 finalize ([a50605c](https://github.com/ecomfe/reskript/commit/a50605c68bcfb7d5054d420674b3aaf309bee0c9))
+- **plugin-experimental:** 使用 SWC 进行压缩 ([22d07d9](https://github.com/ecomfe/reskript/commit/22d07d9f787a87bfb77a6ed687abddf236da0183))
+
 # [5.7.0](https://github.com/ecomfe/reskript/compare/v5.7.0-beta.0...v5.7.0) (2022-10-10)
 
 **Note:** Version bump only for package reskript
