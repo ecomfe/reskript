@@ -1,16 +1,11 @@
 {
-  "packages": [
-    "packages/*",
-    "showcase/*"
-  ],
-  "version": "5.7.0-beta.0",
+  "packages": ["packages/*", "showcase/*"],
+  "version": "5.7.0",
   "npmClient": "yarn",
   "exact": true,
   "command": {
     "version": {
-      "allowBranch": [
-        "master"
-      ],
+      "allowBranch": ["master"],
       "ignoreChanges": [
         "**/*.md",
         "**/example/**",
