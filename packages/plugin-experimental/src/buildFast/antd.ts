@@ -22,19 +22,19 @@ const parseModulesFromEntry = async (entry: string): Promise<AntdExport[]> => {
 };
 
 const prepareComponent = ({componentName, moduleName}: AntdExport) => {
-    const file = path.join(currentDirectory, 'exports', componentName);
+    const file = path.join(currentDirectory, 'exports', componentName) + '.js';
 
     if (existsSync(file)) {
         return;
     }
 
     if (componentName === 'version') {
-        fs.writeFile(file, 'export {default} from `antd/es/version');
+        fs.writeFile(file, 'export {default} from `antd/es/version/index.js');
     }
     else {
         const lines = [
-            `import 'antd/es/${moduleName}/style';`,
-            `export {default} from 'antd/es/${moduleName}';`,
+            `import 'antd/es/${moduleName}/style/index.js';`,
+            `export {default} from 'antd/es/${moduleName}/index.js';`,
         ];
         fs.writeFile(file, lines.join('\n'));
     }

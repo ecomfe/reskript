@@ -1,5 +1,5 @@
 import {useCallback, useState, ChangeEvent, KeyboardEvent} from 'react';
-import {Input} from 'antd';
+import {Input, InputProps} from 'antd';
 import {TodoItemDraft} from '@/api/todo';
 import c from './index.less';
 
@@ -25,16 +25,17 @@ export default function Create({onSubmit}: Props) {
         },
         [onSubmit, value]
     );
+    const inputProps: InputProps = {
+        className: c.input,
+        placeholder: 'What needs to be done?',
+        value: value,
+        onChange: updateValue,
+        onKeyDown: submit,
+    };
 
     return (
         <div id="create">
-            <Input
-                className={c.input}
-                placeholder="What needs to be done?"
-                value={value}
-                onChange={updateValue}
-                onKeyDown={submit}
-            />
+            <Input {...inputProps} />
         </div>
     );
 }
