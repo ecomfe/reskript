@@ -64,6 +64,7 @@ module.exports = {
                 'plugins/sass',
                 'plugins/qiankun',
                 'plugins/workspace-no-build',
+                'plugins/experimental',
             ],
         },
         {
