@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-sass",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -31,9 +31,9 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@reskript/core": "5.7.1",
-    "@reskript/plugin-utils": "5.7.1",
-    "@reskript/settings": "5.7.1",
+    "@reskript/core": "5.7.2",
+    "@reskript/plugin-utils": "5.7.2",
+    "@reskript/settings": "5.7.2",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@reskript/svg-to-component-loader",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,6 +30,6 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@reskript/build-utils": "5.7.1"
+    "@reskript/build-utils": "5.7.2"
   }
 }

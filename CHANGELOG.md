@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.7.2](https://github.com/ecomfe/reskript/compare/v5.7.1...v5.7.2) (2022-10-12)
+
+### Bug Fixes
+
+- **plugin-experimental:** 处理 antd 组件时自动生成文件增加后缀 ([9c62dce](https://github.com/ecomfe/reskript/commit/9c62dcec8fd887b986d4d4b1cea3cb52ddecee23))
+
 ## [5.7.1](https://github.com/ecomfe/reskript/compare/v5.7.0...v5.7.1) (2022-10-10)
 
 ### Bug Fixes

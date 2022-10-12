@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-inject-html",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,9 +33,9 @@
     "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@reskript/build-utils": "5.7.1",
-    "@reskript/core": "5.7.1",
-    "@reskript/settings": "5.7.1",
+    "@reskript/build-utils": "5.7.2",
+    "@reskript/core": "5.7.2",
+    "@reskript/settings": "5.7.2",
     "escape-goat": "^4.0.0"
   }
 }

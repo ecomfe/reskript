@@ -1,6 +1,6 @@
 {
   "name": "@reskript/eslint-plugin",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "commonjs",
   "main": "./index.js",
