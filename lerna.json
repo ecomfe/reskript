@@ -1,6 +1,6 @@
 {
   "packages": ["packages/*", "showcase/*"],
-  "version": "5.7.2",
+  "version": "5.7.3",
   "npmClient": "yarn",
   "exact": true,
   "command": {
