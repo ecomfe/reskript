@@ -19,7 +19,7 @@ import {partials, strict as strictPartial} from './partials/index.js';
 export {createHtmlPluginInstances, createTransformHtmlPluginInstance};
 export * from './interface.js';
 
-const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html']);
+const ALLOWED_ENTRY_KEYS = new Set(['entry', 'html', 'templateData']);
 
 const DEFAULT_HTML_TEMPLATE = path.resolve(dirFromImportMeta(import.meta.url), 'assets', 'default-html.ejs');
 
@@ -27,7 +27,8 @@ const validateEntryConfig = (config: EntryConfig, file: string) => {
     const keys = Object.keys(config);
 
     if (keys.some(v => !ALLOWED_ENTRY_KEYS.has(v))) {
-        logger.error(`Entry configuration ${file} has invalid keys, only "entry" and "html" are allowed.`);
+        const keys = [...ALLOWED_ENTRY_KEYS].map(v => `"${v}"`).join(', ');
+        logger.error(`Entry configuration ${file} has invalid keys, only ${keys} are allowed.`);
         process.exit(21);
     }
 };

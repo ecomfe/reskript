@@ -1,3 +1,3 @@
 import run from './play';
 
-run({driver: 'webpack', config: 'reskript-e2e.config.ts', port: 9966});
+run({driver: 'webpack', config: 'reskript-e2e.config.ts', port: 8966});

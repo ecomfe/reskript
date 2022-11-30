@@ -6,7 +6,7 @@ const enhance = <S extends UserSettings>(settings: S): S => {
         ...settings,
         devServer: {
             ...settings.devServer,
-            port: 9976,
+            port: 8976,
             https: undefined,
             customizeMiddleware: ({before}) => {
                 before.get(

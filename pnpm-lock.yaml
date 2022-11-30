@@ -1314,6 +1314,7 @@ importers:
       '@reskript/settings': 5.7.2
       '@testing-library/react': ^13.4.0
       '@types/jest': ^27.5.0
+      '@types/node': ^18.8.3
       '@types/ramda': ^0.28.15
       '@types/react': 18.x
       '@types/react-dom': 18.x
@@ -1355,6 +1356,7 @@ importers:
       '@reskript/settings': link:../../packages/settings
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@types/jest': 27.5.2
+      '@types/node': 18.8.3
       '@types/ramda': 0.28.15
       '@types/react': 18.0.21
       '@types/react-dom': 18.0.6
@@ -1362,7 +1364,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       stylelint: 14.13.0
-      typescript: 4.9.0-dev.20221012
+      typescript: 5.0.0-dev.20221130
       vite: 2.9.13
       webpack: 5.74.0
 
@@ -17533,6 +17535,12 @@ packages:
     resolution: {integrity: sha512-EqJR8s/4zlC8nKMNB3ImSY/lv0bKnEJ2H4UPHzDC306qKgIRexh2Q/446811kG++20Q4TiFhV7LjLSBtgA3OrA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+
+  /typescript/5.0.0-dev.20221130:
+    resolution: {integrity: sha512-exBY4QPpf0oLOfRYPHqlDivq8r1hfn3kREaytBEN0eA+Lwc3ycvvDkY92zqWlpvORmi2HDrkPIj2R/mw6eQzcg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /uglify-js/3.17.3:
     resolution: {integrity: sha512-JmMFDME3iufZnBpyKL+uS78LRiC+mK55zWfM5f/pWBJfpOttXAqYfdDGRukYhJuyRinvPVAtUhvy7rlDybNtFg==}

@@ -56,20 +56,20 @@ export default ({driver, config, port}: Options) => {
     };
 
     test(`[${driver}] has component render`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         await waitElementVisible(page);
         await expect(page.locator('#create > input')).toHaveAttribute('placeholder', 'What needs to be done?');
     });
 
     test(`[${driver}] play config works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         await waitElementVisible(page);
         const value = await page.locator('#create').evaluate(element => element.parentElement?.style.cssText);
         expect(value).toBe('padding: 20px;');
     });
 
     test(`[${driver}] play api works`, async ({request}) => {
-        const response = await request.get(`http://localhost:${port}/__skr__/play/ok`);
+        const response = await request.get(`http://127.0.0.1:${port}/__skr__/play/ok`);
         const text = await response.text();
         expect(text).toBe('OK');
     });

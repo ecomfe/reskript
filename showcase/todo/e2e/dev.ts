@@ -40,24 +40,24 @@ export default ({driver, config, port}: Options) => {
     });
 
     test(`[${driver}] has footer`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
-        await expect(page.locator('#app-footer')).toHaveText('TodoMVC by reSKRipt');
+        await page.goto(`http://127.0.0.1:${port}`);
+        await expect(page.locator('#app-footer')).toContainText('TodoMVC by reSKRipt');
     });
 
     test(`[${driver}] less variable works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#batch').evaluate(element => getComputedStyle(element));
         expect(styles.color).toBe('rgb(24, 144, 255)');
     });
 
     test(`[${driver}] emotion component selector works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('h1').evaluate(element => getComputedStyle(element));
         expect(styles.color).toBe('rgba(175, 47, 47, 0.15)');
     });
 
     test(`[${driver}] postcss works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#app').evaluate(element => Object.values(getComputedStyle(element)));
         expect(styles).toContain('top');
         expect(styles).toContain('right');
@@ -67,39 +67,39 @@ export default ({driver, config, port}: Options) => {
     });
 
     test(`[${driver}] tailwind works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#app-meta').evaluate(element => getComputedStyle(element));
         expect(styles.justifyContent).toBe('space-between');
         expect(styles.alignItems).toBe('center');
     });
 
     test(`[${driver}] safe less works`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#create > input').evaluate(element => getComputedStyle(element));
         expect(styles.height).toBe('64px');
         expect(styles.fontSize).toBe('24px');
     });
 
     test(`[${driver}] worker`, async ({page}) => {
-        await page.goto(`http://localhost:${port}`);
+        await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#worker-status').evaluate(element => getComputedStyle(element));
         expect(styles.backgroundColor).toBe('rgb(40, 200, 64)');
     });
 
     test(`[${driver}] customize middleware works`, async ({request}) => {
-        const response = await request.get(`http://localhost:${port}/ok`, {failOnStatusCode: true});
+        const response = await request.get(`http://127.0.0.1:${port}/ok`, {failOnStatusCode: true});
         const text = await response.text();
         expect(text).toBe('OK');
     });
 
     test(`[${driver}] portal works`, async ({request}) => {
-        const response = await request.get(`http://localhost:${port}/__skr__/ok`, {failOnStatusCode: true});
+        const response = await request.get(`http://127.0.0.1:${port}/__skr__/ok`, {failOnStatusCode: true});
         const text = await response.text();
         expect(text).toBe('OK');
     });
 
     test(`[${driver}] portal custom route works`, async ({request}) => {
-        const response = await request.get(`http://localhost:${port}/__skr__/e2e`, {failOnStatusCode: true});
+        const response = await request.get(`http://127.0.0.1:${port}/__skr__/e2e`, {failOnStatusCode: true});
         const text = await response.text();
         expect(text).toBe('For Test');
     });
