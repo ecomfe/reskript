@@ -24,14 +24,14 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "husky": "^8.0.1",
+    "@commitlint/cli": "^17.4.1",
+    "@commitlint/config-conventional": "^17.4.0",
+    "husky": "^8.0.3",
     "lerna": "^5.6.2",
     "semver": "^7.3.8",
     "typescript": "next",
-    "undici": "^5.11.0",
-    "yargs": "^17.6.0"
+    "undici": "^5.14.0",
+    "yargs": "^17.6.2"
   },
   "resolutions": {
     "@types/react": "18.x",

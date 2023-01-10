@@ -28,14 +28,14 @@
   },
   "devDependencies": {
     "@reskript/core": "5.7.3",
-    "@types/node": "^18.8.3",
+    "@types/node": "^18.11.18",
     "c8": "^7.11.3",
-    "eslint": "^8.25.0",
+    "eslint": "^8.31.0",
     "html-webpack-plugin": "^5.5.0",
     "typescript": "next",
-    "vite": "^2.9.13",
-    "vitest": "^0.24.0",
-    "webpack": "^5.74.0"
+    "vite": "^2.9.15",
+    "vitest": "^0.24.5",
+    "webpack": "^5.75.0"
   },
   "peerDependencies": {
     "webpack": "5.x"

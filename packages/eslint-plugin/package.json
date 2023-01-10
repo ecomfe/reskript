@@ -24,10 +24,10 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
+    "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/eslint-plugin": "^7.19.1",
-    "eslint": "^8.25.0",
+    "eslint": "^8.31.0",
     "jest": "^27.5.1"
   },
   "dependencies": {

@@ -13,7 +13,6 @@ export default function () {
   function Foo() {
     return /*#__PURE__*/React.createElement(\\"div\\", null);
   }
-
   Foo.displayName = \\"Foo\\";
   return Foo;
 }
@@ -40,6 +39,5 @@ exports[`return jsx 1`] = `
 function Foo() {
   return /*#__PURE__*/React.createElement(\\"div\\", null);
 }
-
 Foo.displayName = \\"Foo\\";"
 `;
