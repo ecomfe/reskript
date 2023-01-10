@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.7.4](https://github.com/ecomfe/reskript/compare/v5.7.3...v5.7.4) (2023-01-10)
+
+### Bug Fixes
+
+- **babel:** 解决 babel 插件在 ESM 和 CJS 下的结构兼容性问题 ([ee90c47](https://github.com/ecomfe/reskript/commit/ee90c47afd61f4950c65b1675275a7b99352c54d))
+
 ## [5.7.3](https://github.com/ecomfe/reskript/compare/v5.7.2...v5.7.3) (2022-11-30)
 
 ### Bug Fixes
