@@ -5,7 +5,7 @@ import pluginRemovePropTypes from 'babel-plugin-transform-react-remove-prop-type
 // @ts-expect-error
 import pluginReactRefresh from 'react-refresh/babel';
 import {compact} from '@reskript/core';
-import {fillBabelConfigOptions} from './utils.js';
+import {compatPluginTarget, fillBabelConfigOptions} from './utils.js';
 import getParseOnlyBabelConfigFilled from './parseOnly.js';
 import getTransformBabelConfigFilled from './transform.js';
 import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
@@ -40,8 +40,8 @@ export const getBabelConfig = (input?: BabelConfigOptions): TransformOptions => 
             },
         ],
         ...transform.plugins || [],
-        requireReactOptimization && pluginRemovePropTypes,
-        hot && [pluginReactRefresh, {skipEnvCheck: true}],
+        requireReactOptimization && compatPluginTarget(pluginRemovePropTypes),
+        hot && [compatPluginTarget(pluginReactRefresh), {skipEnvCheck: true}],
     ];
 
     return {presets: transform.presets, plugins: compact(plugins)};

@@ -1,3 +1,4 @@
+import {PluginTarget} from '@babel/core';
 import {ThirdPartyUse} from '@reskript/settings';
 import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
 
@@ -20,4 +21,18 @@ export const fillBabelConfigOptions = (options?: BabelConfigOptions): BabelConfi
 
 export const shouldEnable = (library: ThirdPartyUse, config: ThirdPartyUse[]) => {
     return config.includes(library);
+};
+
+type PluginTargetNeedCompat = PluginTarget | {default: PluginTarget};
+
+export const compatPluginTarget = (target: PluginTargetNeedCompat): PluginTarget => {
+    if (!target || typeof target !== 'object') {
+        return target;
+    }
+
+    if ('default' in target) {
+        return compatPluginTarget(target.default);
+    }
+
+    return target;
 };

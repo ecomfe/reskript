@@ -3,7 +3,7 @@ import pluginImport from 'babel-plugin-import';
 import pluginStyledComponents from 'babel-plugin-styled-components';
 import pluginEmotion from '@emotion/babel-plugin';
 import pluginTypeScriptMetadata from 'babel-plugin-transform-typescript-metadata';
-import {shouldEnable} from './utils.js';
+import {compatPluginTarget, shouldEnable} from './utils.js';
 import getParseOnlyBabelConfigFilled from './parseOnly.js';
 import {BabelConfigOptionsFilled} from './interface.js';
 
@@ -20,7 +20,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
     const {uses, mode} = options;
     const plugins: Array<PluginItem | false> = [
         shouldEnable('styled-components', uses) && [
-            pluginStyledComponents,
+            compatPluginTarget(pluginStyledComponents),
             {
                 displayName: requireDisplayName(options),
                 minify: mode === 'production',
@@ -28,7 +28,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
             },
         ],
         shouldEnable('emotion', uses) && [
-            pluginEmotion,
+            compatPluginTarget(pluginEmotion),
             {
                 sourceMap: mode === 'development',
                 // TODO: https://github.com/emotion-js/emotion/issues/2305
@@ -36,10 +36,10 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 autoLabel: 'always',
             },
         ],
-        shouldEnable('reflect-metadata', uses) && pluginTypeScriptMetadata,
+        shouldEnable('reflect-metadata', uses) && compatPluginTarget(pluginTypeScriptMetadata),
         ...parseOnly.plugins || [],
         shouldEnable('antd', uses) && [
-            pluginImport,
+            compatPluginTarget(pluginImport),
             {
                 libraryName: 'antd',
                 libraryDirectory: 'es',

@@ -4,7 +4,7 @@ import pluginReactConstantElement from '@babel/plugin-transform-react-constant-e
 import pluginReactInlineElement from '@babel/plugin-transform-react-inline-elements';
 import {compact} from '@reskript/core';
 import addReactDisplayName from '@reskript/babel-plugin-add-react-display-name';
-import {shouldEnable} from './utils.js';
+import {compatPluginTarget, shouldEnable} from './utils.js';
 import getTransformMinimalBabelConfig from './transformMinimal.js';
 import {BabelConfigOptionsFilled} from './interface.js';
 
@@ -22,20 +22,20 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
     const minimal = getTransformMinimalBabelConfig(options);
     const plugins: Array<PluginItem | false> = [
         // 这东西必须放在最前面，不然`export default class`会被其它插件转义掉没机会确认真实的名字
-        requireDisplayName(options) && addReactDisplayName,
+        requireDisplayName(options) && compatPluginTarget(addReactDisplayName),
         ...minimal.plugins || [],
         requireLodashOptimization(options) && [
-            pluginLodash,
+            compatPluginTarget(pluginLodash),
             {
                 id: ['lodash', 'lodash-decorators'],
             },
         ],
         // https://babeljs.io/docs/en/babel-plugin-transform-react-constant-elements
         // https://github.com/facebook/react/issues/3226
-        pluginReactConstantElement,
+        compatPluginTarget(pluginReactConstantElement),
         // https://babeljs.io/docs/en/babel-plugin-transform-react-inline-elements
         // https://github.com/facebook/react/issues/3228
-        pluginReactInlineElement,
+        compatPluginTarget(pluginReactInlineElement),
     ];
 
     return {

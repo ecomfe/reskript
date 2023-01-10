@@ -14,7 +14,7 @@ import pluginThrowExpressions from '@babel/plugin-proposal-throw-expressions';
 import pluginDynamicImport from '@babel/plugin-syntax-dynamic-import';
 import pluginImportMeta from '@babel/plugin-syntax-import-meta';
 import {BabelConfigOptionsFilled} from './interface.js';
-import {shouldEnable} from './utils.js';
+import {compatPluginTarget, shouldEnable} from './utils.js';
 
 // 因为要转CJS，不能依赖`@reskript/core`提供的`compact`
 const hasValue = (value: PluginItem | false): value is PluginItem => !!value;
@@ -23,7 +23,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
     const {polyfill, modules, uses} = options;
     const presets: Array<PluginItem | false> = [
         [
-            presetEnv,
+            compatPluginTarget(presetEnv),
             {
                 modules,
                 bugfixes: true,
@@ -32,9 +32,9 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 corejs: polyfill ? {version: 3, proposals: true} : undefined,
             },
         ],
-        presetTypeScript,
+        compatPluginTarget(presetTypeScript),
         [
-            presetReact,
+            compatPluginTarget(presetReact),
             {
                 runtime: 'automatic',
                 importSource: shouldEnable('emotion', uses) ? '@emotion/react' : 'react',
@@ -42,23 +42,23 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
         ],
     ];
     const plugins: PluginItem[] = [
-        [pluginDecorators, {legacy: true}],
-        pluginClassProperties,
-        pluginDoExpressions,
+        [compatPluginTarget(pluginDecorators), {legacy: true}],
+        compatPluginTarget(pluginClassProperties),
+        compatPluginTarget(pluginDoExpressions),
         // export Foo from './Foo';
-        pluginExportDefaultFrom,
+        compatPluginTarget(pluginExportDefaultFrom),
         // export {Foo} from './Foo';
-        pluginExportNamespaceFrom,
+        compatPluginTarget(pluginExportNamespaceFrom),
         // const foo = obejct.foo ?? 'default';
-        pluginNullishCoalescingOperator,
+        compatPluginTarget(pluginNullishCoalescingOperator),
         // 1_234_567
-        pluginNumericSeparator,
+        compatPluginTarget(pluginNumericSeparator),
         // object?.foo?.bar
-        pluginOptionalChaining,
+        compatPluginTarget(pluginOptionalChaining),
         // const valid = input.isValid() || throw new Error('Invalid')
-        pluginThrowExpressions,
-        pluginDynamicImport,
-        pluginImportMeta,
+        compatPluginTarget(pluginThrowExpressions),
+        compatPluginTarget(pluginDynamicImport),
+        compatPluginTarget(pluginImportMeta),
     ];
 
     return {
