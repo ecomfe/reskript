@@ -51,13 +51,11 @@ const getHTMLConfig = (filename: string, entry: AppEntry<EntryConfig>, env: Buil
 };
 
 const createHTMLPluginWith = (buildEntry: BuildEntry) => {
-    const {usage} = buildEntry;
-
     return (suffix: string) => (entry: AppEntry<EntryConfig>): HtmlWebpackPlugin => {
 
         // 在build的时候，因为静态资源是放在`assets`下，这也是`output`配置项的值，所以HTML要放到外面一层，即`../`下，
         // 不过在调试的时候，启动`webpack-dev-server`没有这个情况，所以又不需要`../`
-        const filename = (usage === 'build' ? '../' : '') + `${entry.name}${suffix}.html`;
+        const filename = `${entry.name}${suffix}.html`;
         const pluginConfig = getHTMLConfig(filename, entry, buildEntry);
         return new HtmlWebpackPlugin(pluginConfig);
     };

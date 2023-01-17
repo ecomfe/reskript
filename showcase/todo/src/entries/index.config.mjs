@@ -1,5 +1,5 @@
 export const entry = {
-    filename: 'todo-index.[contenthash].js',
+    filename: 'assets/todo-index.[contenthash].js',
 };
 
 export const templateData = {

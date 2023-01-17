@@ -5,7 +5,7 @@ const factory: LoaderFactory = async () => {
     return {
         loader: await resolve('worker-loader'),
         options: {
-            filename: '[name].[contenthash].js',
+            filename: 'assets/[name].[contenthash].js',
             inline: 'no-fallback',
         },
     };

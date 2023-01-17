@@ -143,7 +143,7 @@ const factory: ConfigurationFactory = async entry => {
         files: `${srcDirectory}/**/*.{css,less}`,
     };
     const htmlPlugins = thirdParty ? [] : createHtmlPluginInstances(entry);
-    const cssOutput = thirdParty ? 'index.css' : '[name].[contenthash].css';
+    const cssOutput = thirdParty ? 'assets/index.css' : 'assets/[name].[contenthash].css';
     const plugins = [
         ...htmlPlugins,
         createTransformHtmlPluginInstance(entry),
@@ -167,9 +167,10 @@ const factory: ConfigurationFactory = async entry => {
             {} as EntryObject
         ),
         output: {
-            path: path.join(cwd, 'dist', 'assets'),
-            filename: '[name].[chunkhash].js',
-            publicPath: publicPath || '/assets/',
+            path: path.join(cwd, 'dist'),
+            filename: 'assets/[name].[chunkhash].js',
+            assetModuleFilename: 'assets/[hash][ext]',
+            publicPath: publicPath || '/',
         },
         module: {
             rules: moduleRules,
