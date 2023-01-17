@@ -25,7 +25,7 @@ const factory: ConfigurationFactory = async entry => {
         const options = {
             mode,
             swSrc: serviceWorkerSource,
-            swDest: `service-worker-${buildTarget}.js`,
+            swDest: `assets/service-worker-${buildTarget}.js`,
         };
         return {
             plugins: [
@@ -39,7 +39,7 @@ const factory: ConfigurationFactory = async entry => {
         entry: {
             serviceWorker: {
                 import: serviceWorkerSource,
-                filename: `service-worker-${buildTarget}.js`,
+                filename: `assets/service-worker-${buildTarget}.js`,
             },
         },
         plugins: [

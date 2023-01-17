@@ -27,7 +27,7 @@ export const url = async (entry: WebpackBuildEntry): Promise<RuleSetRule> => {
         resourceQuery: /^\?url$/,
         type: 'asset/resource',
         generator: {
-            filename: '[hash][ext]',
+            filename: 'assets/[hash][ext]',
         },
     };
 };
