@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* **dev:** 让dev时的publicPath逻辑与build相同 ([625576a](https://github.com/ecomfe/reskript/commit/625576a4ddf1dad7eecfb0015a830bbcc6e71ed8))
+* **plugin-qiankun:** 修复首页不会被插件处理的问题 ([24e846e](https://github.com/ecomfe/reskript/commit/24e846ed3149a75d77197f846ea55a0bad664818))
+
+
+
+
+
 # [6.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0-beta.0) (2023-01-17)
 
 **Note:** Version bump only for package @reskript/plugin-qiankun
