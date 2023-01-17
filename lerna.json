@@ -5,7 +5,7 @@
   "exact": true,
   "command": {
     "version": {
-      "allowBranch": ["master"],
+      "allowBranch": ["master", "v6"],
       "ignoreChanges": [
         "**/*.md",
         "**/example/**",
