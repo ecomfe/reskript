@@ -39,9 +39,9 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
             path: path.join(cwd, 'dist'),
             // 不要让构建时的`publicPath`影响调试，调试永远走本地，
             // 使用本地的地址用于兼容微前端环境：https://github.com/ecomfe/reskript/issues/62
-            publicPath: '/assets/',
+            publicPath: '/',
             // 在使用热更新时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
-            filename: '[name].[contenthash].js',
+            filename: 'assets/[name].[contenthash].js',
         },
         plugins: compact(plugins),
     };
@@ -85,7 +85,7 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
             },
         },
         devMiddleware: {
-            publicPath: '/assets/',
+            publicPath: '/',
             stats: 'none',
         },
         // 微前端跨域用
