@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0-beta.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* **build:** 修正Webpack的产出生成规则 ([c8812f3](https://github.com/ecomfe/reskript/commit/c8812f3cad751b49ca214376dfeee9ecd24c50d2))
+
+
+### BREAKING CHANGES
+
+* **build:** 如果有使用自定义`{entry}.config.mjs`并配置了`filename`选项，产出结构会发生变化。可在`filename`的值前缀加上`assets/`来修复。
+* **build:** 如果配置中有自定义的`publicPath`，需要去掉配置值最后的`assets/`部分。
+
+
+
+
+
 ## [5.7.4](https://github.com/ecomfe/reskript/compare/v5.7.3...v5.7.4) (2023-01-10)
 
 **Note:** Version bump only for package @reskript/showcase-todo
