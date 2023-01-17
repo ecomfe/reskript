@@ -29,20 +29,40 @@ export default (appName: string, options?: Options): SettingsPlugin => async (se
     const middlewareEnhanced = chainCustomizeMiddleware(
         finalizeEnhanced,
         ({before, after}) => {
-            before.get('/__qiankun_entry__.js', async (req, res) => {
-                res.setHeader('Access-Control-Allow-Origin', '*');
-                res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-                res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
-                res.setHeader('Content-Type', 'application/javascript');
-                const script = await runtimeEntry(appName, `/${cmd.entry}-${cmd.buildTarget}.html`);
-                res.end(script);
-            });
+            before.get(
+                '/__qiankun_entry__.js',
+                async (req, res) => {
+                    res.setHeader('Access-Control-Allow-Origin', '*');
+                    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+                    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+                    res.setHeader('Content-Type', 'application/javascript');
+                    const script = await runtimeEntry(appName, `/${cmd.entry}-${cmd.buildTarget}.html`);
+                    res.end(script);
+                }
+            );
+            // 首页好像不会进到`historyApiFallback`的逻辑里，所以单独拦截一次
+            before.get(
+                '/',
+                async (req, res, next) => {
+                    if (req.url === '/') {
+                        const html = await htmlEntry(appName, options);
+                        res.setHeader('Content-Type', 'text/html');
+                        res.end(html);
+                    }
+                    else {
+                        next();
+                    }
+                }
+            );
             // 要首先让`historyApiFallback`把找不到的文件回退到这个页，再去响应它的请求才可以，所以这里必须放在其它的中间件后面
-            after.get('/__qiankun__.html', async (req, res) => {
-                const html = await htmlEntry(appName, options);
-                res.setHeader('Content-Type', 'text/html');
-                res.end(html);
-            });
+            after.get(
+                '/__qiankun__.html',
+                async (req, res) => {
+                    const html = await htmlEntry(appName, options);
+                    res.setHeader('Content-Type', 'text/html');
+                    res.end(html);
+                }
+            );
         }
     );
     const historyApiEnhanced: WebpackProjectSettings = {
