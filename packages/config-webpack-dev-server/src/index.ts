@@ -100,7 +100,7 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
             },
         },
         historyApiFallback: {
-            index: `/assets/${targetEntry}.html`,
+            index: `/${targetEntry}.html`,
             disableDotRule: true,
         },
         server: {

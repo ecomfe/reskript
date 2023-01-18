@@ -39,6 +39,11 @@ export default ({driver, config, port}: Options) => {
         devServer.current?.kill();
     });
 
+    test(`[${driver}] history api fallback`, async ({page}) => {
+        await page.goto(`http://127.0.0.1:${port}/foo/bar`);
+        await expect(page.locator('#app-footer')).toContainText('TodoMVC by reSKRipt');
+    });
+
     test(`[${driver}] has footer`, async ({page}) => {
         await page.goto(`http://127.0.0.1:${port}`);
         await expect(page.locator('#app-footer')).toContainText('TodoMVC by reSKRipt');
