@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2023-01-18)
+
+
+### Bug Fixes
+
+* **dev:** 修复historyApiFallback路径错误 ([34d8e1a](https://github.com/ecomfe/reskript/commit/34d8e1a6905a133c4573868f8928799fda15af68))
+
+
+
+
+
 # [6.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.0...v6.0.0-beta.1) (2023-01-17)
 
 **Note:** Version bump only for package @reskript/showcase-todo
