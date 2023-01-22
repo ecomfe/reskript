@@ -31,8 +31,8 @@
     "c8": "^7.11.3",
     "eslint": "^8.31.0",
     "typescript": "next",
-    "vite": "^2.9.15",
-    "vitest": "^0.24.5"
+    "vite": "^4.0.4",
+    "vitest": "^0.27.2"
   },
   "dependencies": {
     "@babel/core": "^7.20.12",

@@ -27,9 +27,9 @@
     "@types/node": "^18.11.18",
     "@types/ramda": "^0.28.20",
     "eslint": "^8.31.0",
-    "rollup": "^2.79.1",
+    "rollup": "^3.10.1",
     "typescript": "next",
-    "vite": "^2.9.15",
+    "vite": "^4.0.4",
     "webpack": "^5.75.0"
   },
   "dependencies": {
@@ -50,7 +50,7 @@
     "eslint": "8.x",
     "stylelint": "14.x",
     "typescript": "4.x",
-    "vite": "2.x",
+    "vite": "4.x",
     "webpack": "5.x"
   },
   "peerDependenciesMeta": {

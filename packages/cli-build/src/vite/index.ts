@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import {build as viteBuild} from 'vite';
-import {RollupOutput} from 'rollup';
+import {RollupOutput, RollupWatcher} from 'rollup';
 import {AppEntry} from '@reskript/build-utils';
 import {logger} from '@reskript/core';
 import {BuildCommandLineArgs, ViteProjectSettings} from '@reskript/settings';
@@ -9,7 +9,7 @@ import {createViteConfig, BuildContext} from '@reskript/config-vite';
 import {BuildRunOptions, WatchRunOptions} from '../interface.js';
 import {drawBuildReport} from './report.js';
 
-const isBuildOutput = (value: any): value is RollupOutput => 'output' in value;
+const isBuildOutput = (value: RollupOutput | RollupWatcher): value is RollupOutput => 'output' in value;
 
 const copyToDefaultHtmlWith = (directory: string, buildTarget: string) => (entry: AppEntry<unknown>) => fs.copyFile(
     path.join(directory, `${entry.name}-${buildTarget}.html`),

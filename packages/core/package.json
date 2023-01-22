@@ -36,10 +36,10 @@
     "@types/unixify": "^1.0.0",
     "c8": "^7.11.3",
     "eslint": "^8.31.0",
-    "rollup": "^2.79.1",
+    "rollup": "^3.10.1",
     "typescript": "next",
-    "vite": "^2.9.15",
-    "vitest": "^0.24.5"
+    "vite": "^4.0.4",
+    "vitest": "^0.27.2"
   },
   "dependencies": {
     "bundle-require": "^3.1.2",

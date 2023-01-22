@@ -31,7 +31,7 @@
     "eslint": "^8.31.0",
     "ts-node": "^10.8.1",
     "typescript": "next",
-    "vite": "^2.9.15"
+    "vite": "^4.0.4"
   },
   "dependencies": {
     "dedent": "^0.7.0",

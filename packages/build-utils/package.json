@@ -34,8 +34,8 @@
     "eslint": "^8.31.0",
     "postcss": "^8.4.21",
     "typescript": "next",
-    "vite": "^2.9.15",
-    "vitest": "^0.24.5"
+    "vite": "^4.0.4",
+    "vitest": "^0.27.2"
   },
   "dependencies": {
     "@reskript/core": "6.0.0-beta.2",
