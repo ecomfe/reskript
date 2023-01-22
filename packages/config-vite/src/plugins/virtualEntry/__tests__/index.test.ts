@@ -1,7 +1,7 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
-import vite, {InlineConfig} from 'vite';
+import {build as viteBuild, InlineConfig} from 'vite';
 import {RollupOutput, OutputAsset, OutputChunk} from 'rollup';
 import virtualEntry, {VirtualEntryOptions} from '../index.js';
 
@@ -43,7 +43,7 @@ const build = async (options: Pick<VirtualEntryOptions, 'favicon'>) => {
             virtualEntry(entryOptions),
         ],
     };
-    const bundle = await vite.build(config) as RollupOutput;
+    const bundle = await viteBuild(config) as RollupOutput;
     return {
         assets: bundle.output.filter((v: any): v is OutputAsset => v.type === 'asset'),
         chunks: bundle.output.filter((v: any): v is OutputChunk => v.type === 'chunk'),

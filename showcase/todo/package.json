@@ -45,7 +45,7 @@
     "react-dom": "^18.2.0",
     "stylelint": "^14.16.1",
     "typescript": "next",
-    "vite": "^2.9.15",
+    "vite": "^4.0.4",
     "webpack": "^5.75.0"
   },
   "dependencies": {

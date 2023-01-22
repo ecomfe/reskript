@@ -110,7 +110,8 @@ const factory: ConfigFactory = async (context, options) => {
 
     return {
         plugins: [
-            react.default(reactOptions),
+            // @ts-expect-error
+            react(reactOptions),
             portal({app: portalApp}),
             virtualEntry(entryOptions),
             cssBind({classNamesModule}),

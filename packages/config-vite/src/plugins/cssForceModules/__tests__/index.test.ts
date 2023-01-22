@@ -1,7 +1,7 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
-import vite, {InlineConfig} from 'vite';
+import {build as viteBuild, InlineConfig} from 'vite';
 import {RollupOutput} from 'rollup';
 import cssForceModules from '../index.js';
 
@@ -15,7 +15,7 @@ const build = async () => {
             cssForceModules(),
         ],
     };
-    const bundle = await vite.build(config) as RollupOutput;
+    const bundle = await viteBuild(config) as RollupOutput;
     const cssAsset = bundle.output.find(v => path.extname(v.fileName) === '.css');
     return cssAsset?.type === 'asset' ? cssAsset.source.toString() : '';
 };

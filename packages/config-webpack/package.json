@@ -36,8 +36,8 @@
     "eslint": "^8.31.0",
     "semver": "^7.3.8",
     "typescript": "next",
-    "vite": "^2.9.15",
-    "vitest": "^0.24.5",
+    "vite": "^4.0.4",
+    "vitest": "^0.27.2",
     "webpack": "^5.75.0"
   },
   "dependencies": {

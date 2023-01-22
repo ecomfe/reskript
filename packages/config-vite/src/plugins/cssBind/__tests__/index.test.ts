@@ -1,7 +1,7 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
-import vite, {InlineConfig} from 'vite';
+import {build as viteBuild, InlineConfig} from 'vite';
 import {RollupOutput} from 'rollup';
 import cssBind from '../index.js';
 
@@ -15,7 +15,7 @@ const build = async (classNamesModule: string) => {
             cssBind({classNamesModule}),
         ],
     };
-    const bundle = await vite.build(config) as RollupOutput;
+    const bundle = await viteBuild(config) as RollupOutput;
     return bundle.output[0].code;
 };
 

@@ -34,7 +34,7 @@
     "@types/resolve": "^1.20.2",
     "eslint": "^8.31.0",
     "prettier": "^2.8.2",
-    "rollup": "^2.79.1",
+    "rollup": "^3.10.1",
     "typescript": "next"
   },
   "dependencies": {

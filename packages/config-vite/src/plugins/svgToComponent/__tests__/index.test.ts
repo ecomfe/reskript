@@ -1,7 +1,7 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {test, expect} from 'vitest';
-import vite, {InlineConfig} from 'vite';
+import {build as viteBuild, InlineConfig} from 'vite';
 import {RollupOutput} from 'rollup';
 import svgToComponent, {Options} from '../index.js';
 
@@ -15,7 +15,7 @@ const build = async (options?: Options) => {
             svgToComponent(options),
         ],
     };
-    const bundle = await vite.build(config) as RollupOutput;
+    const bundle = await viteBuild(config) as RollupOutput;
     return bundle;
 };
 
@@ -23,13 +23,13 @@ test('to component', async () => {
     const bundle = await build();
     const code = bundle.output[0].code;
     expect(code.includes('dangerouslySetInnerHTML')).toBe(true);
-    expect(code.includes('displayName')).toBe(false);
+    expect(code.includes('displayName="')).toBe(false);
 });
 
 test('display name', async () => {
     const bundle = await build({displayName: true});
     const code = bundle.output[0].code;
-    expect(code.includes('displayName')).toBe(true);
+    expect(code.includes('displayName="')).toBe(true);
 });
 
 test('no svg assest', async () => {

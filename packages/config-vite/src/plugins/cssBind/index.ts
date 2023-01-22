@@ -77,8 +77,10 @@ export default function cssBindPlugin({classNamesModule = 'classnames/bind'}: Op
             if (id === BIND_MODULE_ID) {
                 const resolved = await this.resolve(classNamesModule);
                 if (resolved) {
-                    const code = await fs.readFile(resolved.id, 'utf-8');
-                    const transformed = await transformWithEsbuild(code, resolved.id, {format: 'esm'});
+                    // `resolved.id`里有`?v=c018794f`这样的部分，要去掉
+                    const name = resolved.id.replace(/\?.+$/, '');
+                    const code = await fs.readFile(name, 'utf-8');
+                    const transformed = await transformWithEsbuild(code, name, {format: 'esm'});
                     return transformed.code;
                 }
             }
