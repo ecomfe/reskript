@@ -99,4 +99,6 @@ export interface ViteBuildSettings extends BuildSettings {
     readonly finalize: ViteFinalize;
     // 样式相关配置
     readonly style: ViteBuildStyleSettings;
+    // 启用旧浏览器兼容
+    readonly legacy: boolean;
 }

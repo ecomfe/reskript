@@ -91,6 +91,7 @@ const fillViteBuildSettings = (settings?: PartialBuildSettings<ViteBuildSettings
         script: fillScriptSettings(settings?.script),
         style: fillViteStyleSettings(settings?.style),
         inspect: fillInspectSettings(settings?.inspect),
+        legacy: false,
     };
 };
 
