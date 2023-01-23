@@ -6,6 +6,7 @@ const factory: ConfigFactory = async (context, options) => {
         mode: context.mode,
         base: options.publicPath,
         cacheDir: options.cacheDirectory ?? await resolveCacheLocation('vite'),
+        appType: 'mpa',
     };
 };
 
