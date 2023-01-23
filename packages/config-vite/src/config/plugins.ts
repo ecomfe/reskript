@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import react from '@vitejs/plugin-react';
+import legacy from '@vitejs/plugin-legacy';
 import {VitePWA as pwa, VitePWAOptions} from 'vite-plugin-pwa';
 import template from 'lodash.template';
 import {normalizeRuleMatch, pMap, resolve} from '@reskript/core';
@@ -118,6 +119,8 @@ const factory: ConfigFactory = async (context, options) => {
             cssForceModules({enableModules: normalizeRuleMatch(context.cwd, settings.build.style.modules)}),
             svgToComponent(svgToComponentOptions),
             requireServiceWorker && pwa(pwaOptions),
+            // @ts-expect-error
+            settings.build.legacy && legacy(),
         ],
     };
 };

@@ -30,6 +30,7 @@ export default configure(
             },
         },
         build: {
+            legacy: true,
             appTitle: 'TodoMVC - reSKRipt',
             favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
             appContainerId: 'root',

@@ -75,6 +75,9 @@ const schema: any = {
         },
         build: {
             properties: {
+                legacy: {
+                    type: 'boolean',
+                },
                 uses: {
                     items: {
                         enum: ['antd', 'lodash', 'styled-components', 'emotion', 'reflect-metadata', 'tailwind'],
