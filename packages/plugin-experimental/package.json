@@ -58,7 +58,7 @@
     "@next/swc-win32-x64-msvc": "12.2.2"
   },
   "peerDependencies": {
-    "antd": "4.x"
+    "antd": ">= 4"
   },
   "peerDependenciesMeta": {
     "antd": {

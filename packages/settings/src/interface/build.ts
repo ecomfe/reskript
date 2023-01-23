@@ -3,7 +3,7 @@ import {BuildEntry} from './shared.js';
 import {WebpackFinalize} from './webpack.js';
 import {ViteFinalize} from './vite.js';
 
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
+export type ThirdPartyUse = 'antd@4' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 export interface BuildStyleSettingsBase {
     // 用于编译LESS的变量资源文件列表。每个文件均会被注入到所有的LESS文件前面，作为全局可用的资源

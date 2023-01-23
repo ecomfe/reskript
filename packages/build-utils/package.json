@@ -45,7 +45,6 @@
     "escape-string-regexp": "^5.0.0",
     "globby": "^13.1.3",
     "internal-ip": "^7.0.0",
-    "less-plugin-functions": "^1.0.0",
     "less-plugin-npm-import": "^2.1.0",
     "postcss-preset-env": "^7.8.3",
     "proxy-agent": "^5.0.0",

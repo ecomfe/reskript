@@ -27,6 +27,7 @@ export default function Create({onSubmit}: Props) {
     );
     const inputProps: InputProps = {
         className: c.input,
+        style: {fontSize: 24},
         placeholder: 'What needs to be done?',
         value: value,
         onChange: updateValue,

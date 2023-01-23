@@ -7,7 +7,7 @@ describe('validate', () => {
     });
 
     test('uses pass', () => {
-        expect(() => validate({build: {uses: ['antd']}})).not.toThrow();
+        expect(() => validate({build: {uses: ['antd@4']}})).not.toThrow();
     });
 
     test('uses invalid value', () => {

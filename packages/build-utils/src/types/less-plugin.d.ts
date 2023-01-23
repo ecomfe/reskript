@@ -4,9 +4,3 @@ declare module 'less-plugin-npm-import' {
         constructor(options: any);
     }
 }
-
-declare module 'less-plugin-functions' {
-    export default class LessPluginFunctions {
-        constructor(options:any);
-    }
-}

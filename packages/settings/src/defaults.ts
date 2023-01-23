@@ -16,7 +16,7 @@ import {
 } from './interface/index.js';
 
 const SHARED_BUILD_SETTINGS = {
-    uses: ['antd', 'lodash'] as ThirdPartyUse[],
+    uses: ['lodash'] as ThirdPartyUse[],
     thirdParty: false,
     reportLintErrors: true,
     largeAssetSize: 8 * 1024,

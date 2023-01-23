@@ -7,8 +7,8 @@ title: 构建配置
 [项目配置文件](../settings#配置文件路径)中的`build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
 
 ```ts
-// 以下是工具内置了优化的相关第三方库
-export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
+// 以下是工具内置了优化的相关第三方库，其中antd在使用4.x版本时，可启用antd@4的优化
+export type ThirdPartyUse = 'antd@4' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
 interface BuildStyleSettings {
     // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题，仅webpack引擎支持
@@ -182,23 +182,21 @@ export default configure(
 - `reflect-metadata`：在构建TypeScript文件中的装饰器语法时，会额外增加对`Reflect.metadata`相关的代码，主要用于NestJS、或InversifyJS等库。
 - `tailwind`：在样式处理上引入[tailwind](https://tailwindcss.com/)的处理。这个声明仅仅让样式处理支持`tailwind`，但你需要自己安装`tailwindcss`、生成`tailwind.config.js`并自行在CSS中通过`@tailwind`引入相关的样式。
 
-`reSKRipt`在默认选项下，这一配置的值为`['antd', 'lodash']`，即默认启用这2个库的相关优化：
+`reSKRipt`在默认选项下，这一配置的值为`['lodash']`，即默认启用这个库的相关优化：
 
 ```ts
 // 最终lodash中其它函数都会消失
 import {filter, map} from 'lodash';
-// 会引入Button组件的源码和样式，其它组件的内容会消失
-import {Button} from 'antd';
 ```
 
-如果你自定义这个配置，那么默认的`antd`和`lodash`优化会被取消，你需要自己补充这两个值。假设你在使用着`antd`和`lodash`的同时，又希望使用`styled-components`，则可以这么写：
+如果你自定义这个配置，那么默认的`lodash`优化会被取消，你需要自己补充这两个值。假设你在使用着`lodash`的同时，又希望使用`styled-components`，则可以这么写：
 
 ```ts
 export default configure(
     'webpack',
     {
         build: {
-            uses: ['antd', 'lodash', 'styled-components'],
+            uses: ['lodash', 'styled-components'],
         },
     }
 );
@@ -211,13 +209,33 @@ export default configure(
     'webpack',
     {
         build: {
-            uses: ['antd'],
+            uses: [],
         },
     }
 );
 ```
 
-**另外，`antd`和`lodash`的优化还会与CDN的使用产生冲突，如果你已经决定通过CDN全量引入`antd`和`lodash`，则需要将这个优化关闭。**
+如果你依然在使用`antd`的`4.x`版本，那么建议手动启用`antd@4`的优化，它会自动引入`babel-plugin-import`等功能，减小打包的体积：
+
+```ts
+export default configure(
+    'webpack',
+    {
+        build: {
+            uses: ['antd@4', 'lodash'],
+        },
+    }
+);
+```
+
+在开启`antd@4`优化后，引入单个组件会拆解为对组件的源码和样式的引用，其它组件的内容会消失
+
+```ts
+// 会引入Button组件的源码和样式，其它组件的内容会消失
+import {Button} from 'antd';
+```
+
+**另外，`antd@4`和`lodash`的优化还会与CDN的使用产生冲突，如果你已经决定通过CDN全量引入`antd`和`lodash`，则需要将这个优化关闭。**
 
 ### 扩展`babel`配置
 
