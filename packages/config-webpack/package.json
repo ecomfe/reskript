@@ -69,7 +69,6 @@
     "postcss-loader": "^7.0.2",
     "ramda": "^0.28.0",
     "regenerator-runtime": "^0.13.11",
-    "resolve-typescript-plugin": "^1.2.0",
     "style-loader": "^3.3.1",
     "stylelint": "^14.16.1",
     "stylelint-webpack-plugin": "^3.3.0",
@@ -85,7 +84,7 @@
     "eslint": "8.x",
     "stylelint": "14.x",
     "typescript": "4.x",
-    "webpack": "5.x"
+    "webpack": "^5.74.0"
   },
   "peerDependenciesMeta": {
     "typescript": {

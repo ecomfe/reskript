@@ -6,7 +6,6 @@ import {map} from 'ramda';
 import {compact, dirFromImportMeta, resolve, findGitRoot, pMap} from '@reskript/core';
 import {paramCase} from 'change-case';
 import webpack, {EntryObject} from 'webpack';
-import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
@@ -183,9 +182,11 @@ const factory: ConfigurationFactory = async entry => {
                 ...hostPackageName ? {[hostPackageName]: path.join(cwd, 'src')} : {},
                 'regenerator-runtime': path.dirname(regeneratorRuntimePath),
             },
-            plugins: [
-                new ResolveTypeScriptPlugin(),
-            ],
+            extensionAlias: {
+                '.js': ['.ts', '.js'],
+                '.mjs': ['.mts', '.mjs'],
+                '.cjs': ['.cts', '.cjs'],
+            },
         },
         cache: cache === 'off'
             ? false

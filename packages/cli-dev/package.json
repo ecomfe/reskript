@@ -49,7 +49,7 @@
     "stylelint": "14.x",
     "typescript": "4.x",
     "vite": "4.x",
-    "webpack": "5.x"
+    "webpack": "^5.74.0"
   },
   "peerDependenciesMeta": {
     "core-js": {
