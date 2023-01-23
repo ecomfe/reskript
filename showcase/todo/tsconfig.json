@@ -18,7 +18,6 @@
         "noUnusedLocals": false,
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
-        "keyofStringsOnly": true,
         "skipLibCheck": true,
         "paths": {
             "@/*": ["./src/*"]

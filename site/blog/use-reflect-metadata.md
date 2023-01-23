@@ -15,8 +15,8 @@ tags: [build, babel]
 
 ```js
 exports.build = {
-    uses: ['antd', 'lodash', 'reflect-metadata'],
+    uses: ['lodash', 'reflect-metadata'],
 };
 ```
 
-需要注意的是，如果你原本没有`build.uses`配置，那么自定义该配置会导致默认值（`[antd', 'lodash']`）失效，因此需要自己重新补充上这2个值。
+需要注意的是，如果你原本没有`build.uses`配置，那么自定义该配置会导致默认值（`['lodash']`）失效，因此需要自己重新补充上这2个值。

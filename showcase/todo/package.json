@@ -13,7 +13,7 @@
     "test": "npm run babel > /dev/null && npm run fix && npm run build && skr test --target=react && npx playwright install && playwright test",
     "play": "skr play --config=reskript-e2e.config.ts --port=9875 src/components/Create/index.tsx",
     "play-vite": "skr play --config=reskript-vite-e2e.config.ts --port=9875 src/components/Create/index.tsx",
-    "babel": "skr babel src/components/Create/index.tsx --uses=antd | grep antd/es/input",
+    "babel": "skr babel src/components/App/index.tsx --uses=emotion | grep 'Header,'",
     "fix": "echo '' >> src/components/App/index.less && skr lint --fix"
   },
   "keywords": [],
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.10.5",
-    "antd": "^4.24.7",
+    "antd": "^5.1.6",
     "core-js": "^3.27.1",
     "localforage": "^1.10.0",
     "nanoid": "^4.0.0",

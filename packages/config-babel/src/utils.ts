@@ -3,7 +3,7 @@ import {ThirdPartyUse} from '@reskript/settings';
 import {BabelConfigOptions, BabelConfigOptionsFilled} from './interface.js';
 
 const DEFAULT_OPTIONS: BabelConfigOptionsFilled = {
-    uses: ['antd', 'lodash'],
+    uses: ['lodash'],
     mode: 'development',
     hot: false,
     hostType: 'application',

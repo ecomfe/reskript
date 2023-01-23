@@ -35,7 +35,7 @@ export default configure(
             appTitle: 'TodoMVC - reSKRipt',
             favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
             appContainerId: 'root',
-            uses: ['antd', 'emotion', 'tailwind'],
+            uses: ['emotion', 'tailwind'],
             script: {
                 polyfill: false,
             },

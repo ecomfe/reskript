@@ -78,13 +78,6 @@ export default ({driver, config, port}: Options) => {
         expect(styles.alignItems).toBe('center');
     });
 
-    test(`[${driver}] safe less works`, async ({page}) => {
-        await page.goto(`http://127.0.0.1:${port}`);
-        const styles = await page.locator('#create > input').evaluate(element => getComputedStyle(element));
-        expect(styles.height).toBe('64px');
-        expect(styles.fontSize).toBe('24px');
-    });
-
     test(`[${driver}] worker`, async ({page}) => {
         await page.goto(`http://127.0.0.1:${port}`);
         const styles = await page.locator('#worker-status').evaluate(element => getComputedStyle(element));

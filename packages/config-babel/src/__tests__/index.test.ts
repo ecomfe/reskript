@@ -41,7 +41,7 @@ describe('base config', () => {
 describe('third party use', () => {
     test('antd', () => {
         const base = getTransformBabelConfig({...options, uses: []});
-        const config = getTransformBabelConfig({...options, uses: ['antd']});
+        const config = getTransformBabelConfig({...options, uses: ['antd@4']});
         expect(pluginLengthDifference(base, config)).toBe(1);
     });
 

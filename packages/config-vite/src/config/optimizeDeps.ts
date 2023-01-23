@@ -52,7 +52,7 @@ const factory: ConfigFactory = async context => {
     const {uses, script: {polyfill}} = context.projectSettings.build;
     const resolvingDeps = [
         resolveCoreJsModules(context.cwd, polyfill),
-        resolveAntdModules(context.cwd, uses.includes('antd')),
+        resolveAntdModules(context.cwd, uses.includes('antd@4')),
     ];
     const [coreJsModules, antdModules] = await Promise.all(resolvingDeps);
     const emotionModules = uses.includes('emotion') ? ['@emotion/styled/base'] : [];
@@ -71,7 +71,7 @@ const factory: ConfigFactory = async context => {
                 ...emotionModules,
             ],
             // 因为`antd`被拆开了，所以一但用户说自己用`antd`，那就不需要整个去预处理了，哪怕从`entries`源码里扫出来也不要处理
-            exclude: uses.includes('antd') ? ['antd'] : [],
+            exclude: uses.includes('antd@4') ? ['antd'] : [],
         },
         debug: true,
     };

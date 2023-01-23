@@ -38,7 +38,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
         ],
         shouldEnable('reflect-metadata', uses) && compatPluginTarget(pluginTypeScriptMetadata),
         ...parseOnly.plugins || [],
-        shouldEnable('antd', uses) && [
+        shouldEnable('antd@4', uses) && [
             compatPluginTarget(pluginImport),
             {
                 libraryName: 'antd',

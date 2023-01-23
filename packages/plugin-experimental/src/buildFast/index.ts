@@ -9,6 +9,15 @@ import {prepareAntdReplacement} from './antd.js';
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const swcLoader = async (mode: WorkMode, settings: ProjectSettings) => {
+
+    const modularizeImports: Record<string, {transform: string}> = {};
+    if (settings.build.uses.includes('antd@4')) {
+        modularizeImports.antd = {transform: `${currentDirectory}/exports/{{member}}`};
+    }
+    if (settings.build.uses.includes('lodash')) {
+        modularizeImports.lodash = {transform: 'lodash/{{member}}'};
+    }
+
     return {
         loader: await resolve('loader-of-loader'),
         options: {
@@ -17,15 +26,8 @@ const swcLoader = async (mode: WorkMode, settings: ProjectSettings) => {
                     loader: path.join(currentDirectory, 'loader.js'),
                     type: 'module',
                     options: {
+                        modularizeImports,
                         sourceMaps: true,
-                        modularizeImports: {
-                            antd: {
-                                transform: `${currentDirectory}/exports/{{member}}`,
-                            },
-                            lodash: {
-                                transform: 'lodash/{{member}}',
-                            },
-                        },
                         emotion: {
                             enabled: settings.build.uses.includes('emotion'),
                             sourceMap: true,
@@ -73,7 +75,7 @@ const factory = (mode: WorkMode): SettingsPlugin => async settings => {
         throw new Error('Vite driver not supported by plugin-experimental#buildFast');
     }
 
-    if (settings.build.uses.includes('antd')) {
+    if (settings.build.uses.includes('antd@4')) {
         await prepareAntdReplacement(settings.cwd);
     }
 

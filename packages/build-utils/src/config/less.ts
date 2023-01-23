@@ -2,11 +2,10 @@ import fs from 'node:fs/promises';
 import {globby} from 'globby';
 import {pMap} from '@reskript/core';
 import less from 'less';
-import {safeLess} from './safeLess.js';
 
 type Less = typeof less;
 
-class SafeLess {
+class LessInjection {
     private readonly injection: string = '';
 
     constructor(injection: string) {
@@ -14,7 +13,6 @@ class SafeLess {
     }
 
     install(less: Less, pluginManager: Less.PluginManager) {
-        pluginManager.addPreProcessor({process: safeLess}, 999);
         pluginManager.addPreProcessor({process: code => code + '\n\n\n' + this.injection}, 998);
     }
 }
@@ -33,21 +31,16 @@ export interface LessConfigOptions {
 }
 
 export default async ({cwd, srcDirectory, variables, resources}: LessConfigOptions) => {
-    const resolving = [
-        import('less-plugin-npm-import'),
-        import('less-plugin-functions'),
-        resolveInjection(cwd, srcDirectory, resources),
-    ] as const;
-    const [{default: NpmImport}, {default: LessPluginFunctions}, injection] = await Promise.all(resolving);
+    const resolving = [import('less-plugin-npm-import'), resolveInjection(cwd, srcDirectory, resources)] as const;
+    const [{default: NpmImport}, injection] = await Promise.all(resolving);
 
     return {
         math: 'always',
         javascriptEnabled: true,
         modifyVars: variables,
         plugins: [
-            new SafeLess(injection),
+            new LessInjection(injection),
             new NpmImport({prefix: '~'}),
-            new LessPluginFunctions({alwaysOverride: true}),
         ],
         compress: false,
     };
