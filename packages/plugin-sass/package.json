@@ -38,6 +38,6 @@
     "sass-loader": "^13.2.0"
   },
   "peerDependencies": {
-    "webpack": "5.x"
+    "webpack": "^5.74.0"
   }
 }
