@@ -4,7 +4,7 @@ import pLimit from 'p-limit';
 import {highlight} from 'cli-highlight';
 import {globby} from 'globby';
 import babel, {TransformOptions} from '@babel/core';
-import {logger} from '@reskript/core';
+import {logger, resolveDependencyVersion} from '@reskript/core';
 import {getTransformBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BabelCommandLineArgs} from '@reskript/settings';
 
@@ -66,6 +66,16 @@ const printInConsole = (code: string | null | undefined) => {
     console.log(highlight(code, {language: 'javascript'}));
 };
 
+const coreJsVersion = async () => {
+    try {
+        const version = await resolveDependencyVersion('core-js', process.cwd());
+        return version;
+    }
+    catch {
+        return 3;
+    }
+};
+
 export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void> => {
     if (!file) {
         return;
@@ -83,8 +93,8 @@ export const run = async (cmd: BabelCommandLineArgs, file: string): Promise<void
 
     const babelConfigOptions: BabelConfigOptions = {
         mode,
-        polyfill,
         uses,
+        polyfill: polyfill ? await coreJsVersion() : false,
         hot: false,
         hostType: 'application',
         modules: false,
