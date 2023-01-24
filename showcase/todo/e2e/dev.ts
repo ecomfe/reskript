@@ -80,6 +80,7 @@ export default ({driver, config, port}: Options) => {
 
     test(`[${driver}] worker`, async ({page}) => {
         await page.goto(`http://127.0.0.1:${port}`);
+        await page.waitForTimeout(500);
         const styles = await page.locator('#worker-status').evaluate(element => getComputedStyle(element));
         expect(styles.backgroundColor).toBe('rgb(40, 200, 64)');
     });

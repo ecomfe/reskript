@@ -6,7 +6,7 @@ export interface BabelConfigOptions {
     readonly mode?: WorkMode;
     readonly hot?: boolean;
     readonly hostType?: 'application' | 'library';
-    readonly polyfill?: boolean;
+    readonly polyfill?: boolean | string | number;
     readonly modules?: false | 'commonjs';
     readonly displayName?: boolean | 'auto';
     readonly cwd?: string;

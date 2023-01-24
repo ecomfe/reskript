@@ -1,5 +1,6 @@
 import path from 'node:path';
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
+import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {bundleRequire} from 'bundle-require';
 import resolveCore from 'resolve';
@@ -49,7 +50,7 @@ export interface UserModuleResult<T> {
 }
 
 export const importUserModule = async <T>(tries: string[], defaultValue?: T): Promise<UserModuleResult<T>> => {
-    const target = tries.find(fs.existsSync);
+    const target = tries.find(existsSync);
 
     if (target) {
         const {mod} = await bundleRequire({filepath: target});
@@ -64,3 +65,11 @@ export const importUserModule = async <T>(tries: string[], defaultValue?: T): Pr
 };
 
 export const dirFromImportMeta = (importMetaUrl: string) => path.dirname(fileURLToPath(importMetaUrl));
+
+export const resolveDependencyVersion = async (name: string, cwd: string): Promise<string> => {
+    const resolve = resolveFrom(cwd);
+    const location = await resolve(`${name}/package.json`);
+    const content = await fs.readFile(location, 'utf-8');
+    const {version} = JSON.parse(content);
+    return version;
+};
