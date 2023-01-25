@@ -32,8 +32,6 @@ npm run test --target=react src/components -- -- --coverage --maxWorkers=3 --max
 
 ## 测试组件
 
-如果要对组件测试，你需要使用`skr test --target=react`来跑。在这个模式下，会引入[enzyme](https://www.npmjs.com/package/enzyme)，并且会切换到`jsdom`作为运行时，执行的性能会有比较大的下降。
+如果要对组件测试，你需要使用`skr test --target=react`来跑。在这个模式下，会切换到`jsdom`作为运行时，执行的性能会有比较大的下降。
 
 你可以与[testing-library](https://testing-library.com/docs/react-testing-library/intro)整合来进行组件与hook的单元测试。
-
-**`enzyme`当前并没有针对`react@17`的适配，但我们发现大部分的单元测试也跑得起来。**
