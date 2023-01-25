@@ -11,11 +11,7 @@ const STATIC_EXTENSIONS = [
 
 const reactJestConfig = (configBasePath: string) => {
     return {
-        testEnvironment: 'jsdom',
-        setupFiles: [`${unixify(configBasePath)}/setUp`],
-        snapshotSerializers: [
-            resolve.sync('enzyme-to-json/serializer'),
-        ],
+        testEnvironment: unixify(`${configBasePath}/dom`),
     };
 };
 

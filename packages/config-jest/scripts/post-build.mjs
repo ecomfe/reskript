@@ -8,9 +8,6 @@ const dumpAsModule = (json, destination) => {
     // 有几个东西是用了`resolve('xxx')`变成了绝对路径，在这里要换回来再替换成`require.resolve`
     const modified = {
         ...json,
-        snapshotSerializers: [
-            '%REQUIRE(\'enzyme-to-json/serializer\')%',
-        ],
         moduleNameMapper: {
             ...json.moduleNameMapper,
             '\\.(css|less)$': '%REQUIRE(\'identity-obj-proxy\')%',
