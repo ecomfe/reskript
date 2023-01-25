@@ -10,7 +10,7 @@
     "./config/*": "./config/*.js"
   },
   "engines": {
-    "node": ">=14.18.0 || >= 16.0.0"
+    "node": ">=14.18.0 || >= 16.10.0"
   },
   "files": [
     "dist",
@@ -27,9 +27,7 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.20",
-    "@types/enzyme": "^3.10.12",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^27.5.0",
+    "@types/jest": "^29.2.6",
     "@types/node": "^18.11.18",
     "@types/ramda": "^0.28.20",
     "@types/resolve": "^1.20.2",
@@ -43,11 +41,9 @@
     "@reskript/config-babel": "6.0.0-beta.2",
     "@reskript/core": "6.0.0-beta.2",
     "@reskript/settings": "6.0.0-beta.2",
-    "babel-jest": "^27.5.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
-    "enzyme-to-json": "^3.6.2",
+    "babel-jest": "^29.4.0",
     "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.4.0",
     "jest-raw-loader": "^1.0.1",
     "ramda": "^0.28.0",
     "resolve": "^1.22.1",

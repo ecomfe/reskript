@@ -9,7 +9,7 @@
     ".": "./dist/index.js"
   },
   "engines": {
-    "node": ">=14.18.0 || >= 16.0.0"
+    "node": ">=14.18.0 || >= 16.10.0"
   },
   "files": [
     "dist"
@@ -33,7 +33,7 @@
     "@reskript/config-jest": "6.0.0-beta.2",
     "@reskript/core": "6.0.0-beta.2",
     "@reskript/settings": "6.0.0-beta.2",
-    "jest-cli": "^27.5.1",
+    "jest-cli": "^29.4.0",
     "ramda": "^0.28.0"
   },
   "peerDependencies": {
