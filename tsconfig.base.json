@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
-        "module": "nodenext",
+        "module": "NodeNext",
         "target": "ES2018",
         "allowJs": false,
         "esModuleInterop": true,
-        "moduleResolution": "nodenext",
+        "moduleResolution": "NodeNext",
         "strict": true,
         "noFallthroughCasesInSwitch": true,
         "skipLibCheck": true,

@@ -24,7 +24,7 @@ export default class BuildCommand extends DynamicImportCommand<BuildCommandLineA
         }
     );
 
-    configFile = Option.String<BuildCommandLineArgs['configFile']>(
+    configFile = Option.String(
         '--config',
         {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );

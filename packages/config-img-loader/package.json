@@ -27,9 +27,9 @@
     "@types/imagemin-gifsicle": "^7.0.1",
     "@types/imagemin-mozjpeg": "^8.0.1",
     "@types/imagemin-optipng": "^5.2.1",
-    "@types/node": "^18.11.18",
-    "eslint": "^8.31.0",
-    "typescript": "next",
+    "@types/node": "^18.14.2",
+    "eslint": "^8.35.0",
+    "typescript": "5.0.0-dev.20230125",
     "webpack": "^5.75.0"
   },
   "dependencies": {
