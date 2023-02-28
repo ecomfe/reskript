@@ -29,14 +29,14 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0-beta.2",
-    "@types/node": "^18.11.18",
-    "eslint": "^8.31.0",
-    "typescript": "next"
+    "@types/node": "^18.14.2",
+    "eslint": "^8.35.0",
+    "typescript": "5.0.0-dev.20230125"
   },
   "dependencies": {
     "@antfu/install-pkg": "^0.1.1",
     "@reskript/core": "6.0.0-beta.2",
-    "clipanion": "3.2.0-rc.12",
+    "clipanion": "3.2.0",
     "enquirer": "^2.3.6",
     "pkg-dir": "^7.0.0",
     "typanion": "^3.12.1"

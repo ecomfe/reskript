@@ -54,6 +54,7 @@ const coreJsVersion = async (cwd: string) => {
 
 const factory: ConfigFactory = async (context, options) => {
     const settings = context.projectSettings;
+    // TODO: 这个应该不对，要用`resolveFrom`从当前目录找
     const classNamesModule = await resolve('classnames/bind');
     const svgToComponentOptions = {
         displayName: settings.build.script.displayName === 'auto'
