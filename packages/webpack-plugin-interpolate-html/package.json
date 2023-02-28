@@ -28,13 +28,13 @@
   },
   "devDependencies": {
     "@reskript/core": "6.0.0-beta.2",
-    "@types/node": "^18.11.18",
-    "c8": "^7.11.3",
-    "eslint": "^8.31.0",
+    "@types/node": "^18.14.2",
+    "c8": "^7.13.0",
+    "eslint": "^8.35.0",
     "html-webpack-plugin": "^5.5.0",
-    "typescript": "next",
-    "vite": "^4.0.4",
-    "vitest": "^0.27.2",
+    "typescript": "5.0.0-dev.20230125",
+    "vite": "^4.1.4",
+    "vitest": "^0.29.1",
     "webpack": "^5.75.0"
   },
   "peerDependencies": {

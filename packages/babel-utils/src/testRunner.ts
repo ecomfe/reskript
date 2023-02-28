@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import babel from '@babel/core';
-import glob from 'glob';
+import {globSync} from 'glob';
 
 type Test = (description: string, execute: () => void) => void;
 
@@ -34,8 +34,8 @@ export const createTestRunner = (cwd: string, tools: TestTools, babelOptions: ba
 
     return (suite?: string) => {
         const fixtures = suite
-            ? glob.sync(`${cwd}/fixtures/${suite}/**/*.{js,tsx}`)
-            : glob.sync(`${cwd}/fixtures/**/*.{js,tsx}`);
+            ? globSync(`${cwd}/fixtures/${suite}/**/*.{js,tsx}`)
+            : globSync(`${cwd}/fixtures/**/*.{js,tsx}`);
         for (const fixture of fixtures) {
             const code = fs.readFileSync(fixture, 'utf-8');
             const description = code.split('\n')[0].substring(3);

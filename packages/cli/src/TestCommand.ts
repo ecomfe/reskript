@@ -14,7 +14,7 @@ export default class LintCommand extends DynamicImportCommand<TestCommandLineArg
 
     cwd = Option.String('--cwd', process.cwd(), {description: 'override current working directory'});
 
-    configFile = Option.String<TestCommandLineArgs['configFile']>(
+    configFile = Option.String(
         '--config',
         {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );

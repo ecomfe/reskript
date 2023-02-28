@@ -17,6 +17,7 @@ export default async ({cwd, tailwind, minify}: Options) => {
     };
     const plugins = [
         tailwind && await importTailwind(),
+        // @ts-expect-error 官方类型错误
         presetEnv(),
         minify && nano(),
     ];

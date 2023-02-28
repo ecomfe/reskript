@@ -53,6 +53,7 @@ export const importUserModule = async <T>(tries: string[], defaultValue?: T): Pr
     const target = tries.find(existsSync);
 
     if (target) {
+        // TODO: https://github.com/egoist/bundle-require/issues/35
         const {mod} = await bundleRequire({filepath: target});
         return {resolved: target, value: mod};
     }

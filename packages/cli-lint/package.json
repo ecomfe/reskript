@@ -25,18 +25,18 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0-beta.2",
-    "@types/eslint": "^8.4.10",
-    "@types/node": "^18.11.18",
-    "@types/ramda": "^0.28.20",
-    "eslint": "^8.31.0",
+    "@types/eslint": "^8.21.1",
+    "@types/node": "^18.14.2",
+    "@types/ramda": "^0.28.23",
+    "eslint": "^8.35.0",
     "stylelint": "^14.16.1",
-    "typescript": "next"
+    "typescript": "5.0.0-dev.20230125"
   },
   "dependencies": {
     "@reskript/config-lint": "6.0.0-beta.2",
     "@reskript/core": "6.0.0-beta.2",
     "eslint-formatter-pretty": "^4.1.0",
-    "execa": "^6.0.0",
+    "execa": "^7.0.0",
     "globby": "^13.1.3",
     "ramda": "^0.28.0"
   },

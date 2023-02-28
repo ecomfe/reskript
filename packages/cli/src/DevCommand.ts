@@ -1,7 +1,7 @@
 import {Option} from 'clipanion';
 import {isEnum} from 'typanion';
 import {WorkMode} from '@reskript/core';
-import {DevCommandLineArgs} from '@reskript/settings';
+import {DevCommandLineArgs, HostType} from '@reskript/settings';
 import DynamicImportCommand from './DynamicImportCommand.js';
 
 export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs> {
@@ -24,7 +24,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         }
     );
 
-    configFile = Option.String<DevCommandLineArgs['configFile']>(
+    configFile = Option.String(
         '--config',
         {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );
@@ -48,7 +48,7 @@ export default class DevCommand extends DynamicImportCommand<DevCommandLineArgs>
         {description: 'set api proxy domain, only domain part (www.example.com) is required'}
     );
 
-    host = Option.String<DevCommandLineArgs['host']>(
+    host = Option.String<HostType>(
         '--host',
         {description: 'default server host, "localhost" or "loopback" or "ip" or custom host string'}
     );

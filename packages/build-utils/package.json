@@ -24,29 +24,27 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@types/cssnano": "^5.1.0",
     "@types/less": "^3.0.3",
-    "@types/node": "^18.11.18",
-    "@types/postcss-preset-env": "^7.7.0",
-    "@types/ramda": "^0.28.20",
+    "@types/node": "^18.14.2",
+    "@types/ramda": "^0.28.23",
     "@types/xml2js": "^0.4.11",
-    "c8": "^7.11.3",
-    "eslint": "^8.31.0",
+    "c8": "^7.13.0",
+    "eslint": "^8.35.0",
     "postcss": "^8.4.21",
-    "typescript": "next",
-    "vite": "^4.0.4",
-    "vitest": "^0.27.2"
+    "typescript": "5.0.0-dev.20230125",
+    "vite": "^4.1.4",
+    "vitest": "^0.29.1"
   },
   "dependencies": {
     "@reskript/core": "6.0.0-beta.2",
     "@reskript/settings": "6.0.0-beta.2",
     "change-case": "^4.1.2",
-    "cssnano": "^5.1.14",
+    "cssnano": "^5.1.15",
     "escape-string-regexp": "^5.0.0",
     "globby": "^13.1.3",
     "internal-ip": "^7.0.0",
     "less-plugin-npm-import": "^2.1.0",
-    "postcss-preset-env": "^7.8.3",
+    "postcss-preset-env": "^8.0.1",
     "proxy-agent": "^5.0.0",
     "ramda": "^0.28.0",
     "xml2js": "^0.4.23"
