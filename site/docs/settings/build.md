@@ -104,6 +104,8 @@ interface BuildSettings {
     readonly finalize: (config: Configuration, buildEntry: BuildEntry, internals: BuildInternals) => Configuration | Promise<Configuration>;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
+    // 仅Vite引擎支持，指定启用@vitejs/plugin-legacy
+    readonly legacy: boolean;
 }
 ```
 
@@ -111,6 +113,8 @@ interface BuildSettings {
 `build.style.extract`仅在webpack引擎中支持，使用vite作为引擎时，默认样式会被提取到单独的CSS文件中。
 
 `build.finalize`根据引擎的不同参数不同，第一个参数为该引擎对应的配置对象。使用webpack引擎时，有第3个`internals`参数。
+
+`build.legacy`仅在vite引擎中支持。
 :::
 
 虽然上面的类型定义中每个字段都是必须的，但在实际使用时有默认值填充的机制，通常一个应用需要`appTitle`与`favicon`配置，其它的配置都可以省略。多数配置请参考上方代码中的注释了解其作用，对于一些比较特殊的自定义扩展点，会在下文中说明。
@@ -175,7 +179,7 @@ export default configure(
 
 通过[项目配置文件](../settings#配置文件路径)中的`build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
 
-- `antd`：对`antd`的导入进行优化，可以参考[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)的相关说明。
+- `antd@4`：对`antd 4.x`的导入进行优化，可以参考[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)的相关说明。
 - `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
 - `styled-components`：对`styled-components`的使用进行构建期的优化，可以参考[babel-plugin-styled-components](https://www.npmjs.com/package/babel-plugin-styled-components)的相关说明。
 - `emotion`：对`emotion`样式解决方案进行处理，这个插件是[`emotion`部分功能的必须依赖](https://emotion.sh/docs/@emotion/babel-plugin#features)。**使用`emotion`要求你的`react`版本在`16.14.0`以上。**
@@ -734,7 +738,7 @@ export default configure(
 如果最终产出的HTML不符合要求，会出现类似的错误并异常退出：
 
 ```
-E  The last script in index-stable.html doesn't reference to an entry script, this can break micro-frontend frameworks like qiankun.
+The last script in index-stable.html doesn't reference to an entry script, this can break micro-frontend frameworks like qiankun.
 ```
 
 如果有一部分产出的HTML是由你自己控制，且不与微前端框架整合，你可以使用`includes`或`excludes`来控制被检查的HTML文件：

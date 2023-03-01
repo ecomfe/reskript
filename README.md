@@ -5,7 +5,9 @@
 </p>
 <div align="center">基于 React 与 Ant Design 开发的命令行工具套件</div>
 
-本文档对应`5.x`版本，如果你使用其它版本，请参考[升级手册](https://reskript.dev/docs/migration/v5)进行升级。
+本文档对应`6.x`版本，如果你使用其它版本，请参考[升级手册](https://reskript.dev/docs/migration/v6)进行升级。
+
+**6.x版本对应antd 5.x，如果你使用4.x版本，请参考[第三方库优化](https://reskript.dev/docs/settings/build#%E7%89%B9%E6%AE%8A%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E4%BC%98%E5%8C%96)进行配置。**
 
 **[reSKRipt](https://reskript.dev)** 是基于 [React](https://github.com/facebook/react) 与 [Ant Design](https://github.com/ant-design/ant-design) 开发的一套命令行工具套件，整合了代码检查、单元测试、构建、代码转义和本地调试等一系列功能，意图做到在开发业务时无需关心工具选型。
 
