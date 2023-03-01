@@ -3,6 +3,7 @@ import semver from 'semver';
 import {run as v2} from './v2/index.js';
 import {run as v3} from './v3/index.js';
 import {run as v4} from './v4/index.js';
+import {run as v6} from './v6/index.js';
 import {readAllDependencies} from './utils.js';
 
 const resolveCurrentVersion = async (cwd: string) => {
@@ -39,6 +40,9 @@ export const run = async (cwd: string) => {
             logger.error('Version 5 is fully compatible with V4, feel safe to go on');
             break;
         case 5:
+            await v6(cwd);
+            break;
+        case 6:
             logger.log('You have already installed the latest verion');
             break;
         default:
