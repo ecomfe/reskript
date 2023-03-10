@@ -481,8 +481,8 @@ export default configure(
     'webpack',
     {
         build: {
-            finalize: (webpackConfig, buildEntry, internals) => {
-                const loadingRules = [
+            finalize: async (webpackConfig, buildEntry, internals) => {
+                const rules = [
                     internals.rules.url(buildEntry),
                     internals.rules.raw(buildEntry),
                     internals.rules.script(buildEntry),
@@ -564,7 +564,7 @@ export default configure(
     'webpack',
     {
         build: {
-            finalize: (webpackConfig, buildEntry, internals) => {
+            finalize: async (webpackConfig, buildEntry, internals) => {
                 const sassRule = {
                     test: /\.s[ac]ss$/,
                     use: [
