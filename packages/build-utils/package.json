@@ -1,6 +1,6 @@
 {
   "name": "@reskript/build-utils",
-  "version": "6.0.0-beta.2",
+  "version": "6.0.0-beta.3",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -36,8 +36,8 @@
     "vitest": "^0.29.1"
   },
   "dependencies": {
-    "@reskript/core": "6.0.0-beta.2",
-    "@reskript/settings": "6.0.0-beta.2",
+    "@reskript/core": "6.0.0-beta.3",
+    "@reskript/settings": "6.0.0-beta.3",
     "change-case": "^4.1.2",
     "cssnano": "^5.1.15",
     "escape-string-regexp": "^5.0.0",

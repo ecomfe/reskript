@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2023-03-24)
+
+
+### Bug Fixes
+
+* **babel:** 修复babel转码时未完全对齐项目引入的core-js版本的问题 ([6aa0cd8](https://github.com/ecomfe/reskript/commit/6aa0cd87e5fdff88584106c442b0ee872bdd7baf))
+
+
+### Features
+
+* **build:** 为Vite引擎增加legacy配置 ([3bd75c5](https://github.com/ecomfe/reskript/commit/3bd75c5e51a7e6b36b1b64164904700ddea681aa))
+* **build:** 更新支持antd 5.x ([f08babf](https://github.com/ecomfe/reskript/commit/f08babf051899dacfd25baec06ce932b1e6893a2))
+* **test:** 升级Jest至29.x版本 ([601df55](https://github.com/ecomfe/reskript/commit/601df55c4f7ff063ab473ac53c4e7a943b178f40))
+* 支持Vite 4.x版本 ([e772828](https://github.com/ecomfe/reskript/commit/e772828ea7b5bb569c200cb5a7977e332df4755b))
+
+
+### BREAKING CHANGES
+
+* **test:** `jest`版本升级为`29.x`，snapshot测试等结果可能发生变化
+* **test:** 移除了对`enzyme`的使用，请使用`@testing-library/react`进行组件测试
+* **test:** NodeJS版本要求`16.10`及以上
+* **build:** 如需要继续使用`antd 4.x`版本，需手动指定`build.uses`加入`antd@4`值
+* **build:** 移除`less-plugin-functions`的支持
+* **build:** 移除原有对`.less`文件中的`calc`的特殊处理，如果有对`antd`的变量替换成CSS变量等特殊应用，会出现编译错误
+* 需要更新Vite至4.x版本配合使用
+
+
+
+
+
 # [6.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2023-01-18)
 
 
