@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0-beta.3](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.2...v6.0.0-beta.3) (2023-03-24)
+
+
+### Features
+
+* **doctor:** 增加V6迁移检查 ([d2d7aad](https://github.com/ecomfe/reskript/commit/d2d7aada0690ad5ba987f8591115c4760a211176))
+* **test:** 升级Jest至29.x版本 ([601df55](https://github.com/ecomfe/reskript/commit/601df55c4f7ff063ab473ac53c4e7a943b178f40))
+
+
+### BREAKING CHANGES
+
+* **test:** `jest`版本升级为`29.x`，snapshot测试等结果可能发生变化
+* **test:** 移除了对`enzyme`的使用，请使用`@testing-library/react`进行组件测试
+* **test:** NodeJS版本要求`16.10`及以上
+
+
+
+
+
 # [6.0.0-beta.2](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.1...v6.0.0-beta.2) (2023-01-18)
 
 **Note:** Version bump only for package @reskript/doctor
