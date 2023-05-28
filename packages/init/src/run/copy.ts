@@ -18,7 +18,7 @@ export default async (cwd: string, options: UserOptions) => {
         const content = await fs.readFile(path.join(templateDirectory, file), 'utf-8');
         await fs.writeFile(
             destination,
-            content.replace(/\{\{(\w+)\}\}/g, (match, key) => (options as any)[key].toString())
+            content.replace(/\{\{(\w+)\}\}/g, (match, key) => (options as Record<string, any>)[key].toString())
         );
     };
     await Promise.all(files.map(copyFile));

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import {existsSync} from 'node:fs';
-import {Configuration} from 'webpack';
+import {Configuration, WebpackPluginInstance} from 'webpack';
 import {compact} from '@reskript/core';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -13,8 +13,8 @@ export default (options: StrictOptions = {}, cwd: string): Configuration => {
         typeCheck = false,
     } = options;
 
-    const plugins = [
-        caseSensitiveModuleSource && new CaseSensitivePathsPlugin() as any,
+    const plugins: Array<WebpackPluginInstance | false> = [
+        caseSensitiveModuleSource && new CaseSensitivePathsPlugin(),
         typeCheck && existsSync(path.join(cwd, 'tsconfig.json')) && new ForkTsCheckerWebpackPlugin(),
     ];
 

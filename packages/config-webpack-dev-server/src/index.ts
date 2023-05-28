@@ -29,7 +29,7 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
     const plugins = [
         ...htmlPlugins,
         // TODO: https://github.com/webpack/webpack/pull/11698
-        new FriendlyErrorsWebpackPlugin(messageOptions) as any,
+        new FriendlyErrorsWebpackPlugin(messageOptions),
         hot && new ReactRefreshWebpackPlugin({overlay: false, forceEnable: true}),
         new ProgressBarPlugin(),
     ];
@@ -43,6 +43,7 @@ export const createWebpackDevServerPartial = async (context: BuildContext, host 
             // 在使用热更新时是无法使用`chunkhash`的，因此在调试时使用普通的`hash`
             filename: 'assets/[name].[contenthash].js',
         },
+        // @ts-expect-error 上面的`FriendlyErrorsWebpackPlugin`官方类型错误
         plugins: compact(plugins),
     };
     return configuration;

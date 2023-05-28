@@ -27,22 +27,22 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-transform-classes": "^7.21.0",
-    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-react": "^7.22.3",
     "@reskript/core": "6.0.0-beta.3",
-    "@types/babel__core": "^7.20.0",
-    "@types/babel__traverse": "^7.18.3",
-    "@types/node": "^18.14.2",
-    "@types/react": "~18.0.28",
+    "@types/babel__core": "^7.20.1",
+    "@types/babel__traverse": "^7.20.0",
+    "@types/node": "^20.2.5",
+    "@types/react": "~18.2.7",
     "c8": "^7.13.0",
-    "eslint": "^8.35.0",
+    "eslint": "^8.41.0",
     "react": "^18.2.0",
-    "typescript": "5.0.0-dev.20230125",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.1"
+    "typescript": "next",
+    "vite": "^4.3.9",
+    "vitest": "^0.31.1"
   },
   "dependencies": {
-    "@babel/core": "^7.21.0",
-    "@babel/traverse": "^7.21.2",
+    "@babel/core": "^7.22.1",
+    "@babel/traverse": "^7.22.1",
     "@reskript/babel-utils": "6.0.0-beta.3"
   },
   "peerDependencies": {
