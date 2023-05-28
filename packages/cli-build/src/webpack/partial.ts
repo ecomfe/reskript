@@ -2,12 +2,13 @@ import {Configuration} from 'webpack';
 import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import {BuildContext} from '@reskript/config-webpack';
 
+// @ts-expect-error 官方类型错误
 export const analyze = (context: BuildContext): Configuration => (
     context.isDefaultTarget
         ? {
             plugins: [
                 // TODO: https://github.com/webpack/webpack/pull/11698
-                new BundleAnalyzerPlugin({analyzerMode: 'static', generateStatsFile: true}) as any,
+                new BundleAnalyzerPlugin({analyzerMode: 'static', generateStatsFile: true}),
             ],
         }
         : {}

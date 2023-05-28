@@ -25,14 +25,14 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.0",
-    "@types/node": "^18.14.2",
+    "@types/node": "^20.2.5",
     "c8": "^7.13.0",
-    "eslint": "^8.35.0",
-    "typescript": "5.0.0-dev.20230125",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.1",
-    "webpack": "^5.75.0",
-    "webpack-dev-server": "^4.11.1"
+    "eslint": "^8.41.0",
+    "typescript": "next",
+    "vite": "^4.3.9",
+    "vitest": "^0.31.1",
+    "webpack": "^5.84.1",
+    "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
@@ -43,15 +43,15 @@
     "@reskript/settings": "6.0.0-beta.3",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "cli-progress": "^3.12.0",
-    "kolorist": "^1.7.0",
+    "kolorist": "^1.8.0",
     "launch-editor-middleware": "^2.6.0",
     "react-refresh": "^0.14.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.9.0"
   },
   "peerDependencies": {
     "eslint": "8.x",
     "stylelint": "14.x",
-    "typescript": "4.x",
+    "typescript": "4.x || 5.x",
     "webpack": "^5.74.0"
   },
   "peerDependenciesMeta": {

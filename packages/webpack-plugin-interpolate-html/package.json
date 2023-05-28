@@ -28,14 +28,14 @@
   },
   "devDependencies": {
     "@reskript/core": "6.0.0-beta.3",
-    "@types/node": "^18.14.2",
+    "@types/node": "^20.2.5",
     "c8": "^7.13.0",
-    "eslint": "^8.35.0",
-    "html-webpack-plugin": "^5.5.0",
-    "typescript": "5.0.0-dev.20230125",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.1",
-    "webpack": "^5.75.0"
+    "eslint": "^8.41.0",
+    "html-webpack-plugin": "^5.5.1",
+    "typescript": "next",
+    "vite": "^4.3.9",
+    "vitest": "^0.31.1",
+    "webpack": "^5.84.1"
   },
   "peerDependencies": {
     "webpack": "^5.74.0"

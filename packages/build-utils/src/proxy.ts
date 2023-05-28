@@ -1,12 +1,5 @@
 import escapeStringRegexp from 'escape-string-regexp';
-import ProxyAgent from 'proxy-agent';
-
-const createAgent = (possibleProxyURL?: string) => {
-    if (possibleProxyURL) {
-        return new ProxyAgent(possibleProxyURL);
-    }
-    return undefined;
-};
+import {ProxyAgent} from 'proxy-agent';
 
 export interface ProxyOptions {
     https: boolean;
@@ -17,7 +10,7 @@ export interface ProxyOptions {
 
 export const constructProxyConfiguration = (options: ProxyOptions) => {
     const {https, prefixes, rewrite, targetDomain} = options;
-    const agent = createAgent(process.env[https ? 'https_proxy' : 'http_proxy']);
+    const agent = new ProxyAgent();
     const rules = [
         ...Object.entries(rewrite),
         ...prefixes.map(path => [path, `${targetDomain}${path}`]),

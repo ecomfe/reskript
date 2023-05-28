@@ -24,17 +24,17 @@
     "test": "echo 'No test in @reskript/cli-test'"
   },
   "devDependencies": {
-    "@types/node": "^18.14.2",
-    "@types/ramda": "^0.28.23",
-    "eslint": "^8.35.0",
-    "typescript": "5.0.0-dev.20230125"
+    "@types/node": "^20.2.5",
+    "@types/ramda": "^0.29.2",
+    "eslint": "^8.41.0",
+    "typescript": "next"
   },
   "dependencies": {
     "@reskript/config-jest": "6.0.0-beta.3",
     "@reskript/core": "6.0.0-beta.3",
     "@reskript/settings": "6.0.0-beta.3",
-    "jest-cli": "^29.4.3",
-    "ramda": "^0.28.0"
+    "jest-cli": "^29.5.0",
+    "ramda": "^0.29.0"
   },
   "peerDependencies": {
     "core-js": "3.x"
