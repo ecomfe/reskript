@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-jest",
-  "version": "6.0.0-beta.3",
+  "version": "6.0.0-beta.4",
   "license": "MIT",
   "type": "commonjs",
   "main": "./dist/index.js",
@@ -38,9 +38,9 @@
   "dependencies": {
     "@babel/core": "^7.22.1",
     "@babel/plugin-transform-modules-commonjs": "^7.21.5",
-    "@reskript/config-babel": "6.0.0-beta.3",
-    "@reskript/core": "6.0.0-beta.3",
-    "@reskript/settings": "6.0.0-beta.3",
+    "@reskript/config-babel": "6.0.0-beta.4",
+    "@reskript/core": "6.0.0-beta.4",
+    "@reskript/settings": "6.0.0-beta.4",
     "babel-jest": "^29.5.0",
     "identity-obj-proxy": "^3.0.0",
     "jest-environment-jsdom": "^29.5.0",
