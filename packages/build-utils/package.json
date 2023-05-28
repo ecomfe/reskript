@@ -25,28 +25,28 @@
   },
   "devDependencies": {
     "@types/less": "^3.0.3",
-    "@types/node": "^18.14.2",
-    "@types/ramda": "^0.28.23",
+    "@types/node": "^20.2.5",
+    "@types/ramda": "^0.29.2",
     "@types/xml2js": "^0.4.11",
     "c8": "^7.13.0",
-    "eslint": "^8.35.0",
-    "postcss": "^8.4.21",
-    "typescript": "5.0.0-dev.20230125",
-    "vite": "^4.1.4",
-    "vitest": "^0.29.1"
+    "eslint": "^8.41.0",
+    "postcss": "^8.4.23",
+    "typescript": "next",
+    "vite": "^4.3.9",
+    "vitest": "^0.31.1"
   },
   "dependencies": {
     "@reskript/core": "6.0.0-beta.3",
     "@reskript/settings": "6.0.0-beta.3",
     "change-case": "^4.1.2",
-    "cssnano": "^5.1.15",
+    "cssnano": "^6.0.1",
     "escape-string-regexp": "^5.0.0",
-    "globby": "^13.1.3",
+    "globby": "^13.1.4",
     "internal-ip": "^7.0.0",
     "less-plugin-npm-import": "^2.1.0",
-    "postcss-preset-env": "^8.0.1",
-    "proxy-agent": "^5.0.0",
-    "ramda": "^0.28.0",
-    "xml2js": "^0.4.23"
+    "postcss-preset-env": "^8.4.1",
+    "proxy-agent": "^6.2.1",
+    "ramda": "^0.29.0",
+    "xml2js": "^0.6.0"
   }
 }

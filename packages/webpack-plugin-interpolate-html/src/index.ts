@@ -29,7 +29,8 @@ export default class InterpolateHTMLWebpackPlugin {
             return;
         }
 
-        const {afterTemplateExecution} = (HtmlWebpackPlugin as any).getHooks(compilation);
+        // @ts-expect-error 需要`HTMLWebpackPlugin`上的静态方法
+        const {afterTemplateExecution} = HtmlWebpackPlugin.getHooks(compilation);
         afterTemplateExecution.tap(
             'interpolate-html-webpack-plugin',
             (data: {html: string}) => {

@@ -29,9 +29,9 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0-beta.3",
-    "@types/node": "^18.14.2",
-    "eslint": "^8.35.0",
-    "typescript": "5.0.0-dev.20230125"
+    "@types/node": "^20.2.5",
+    "eslint": "^8.41.0",
+    "typescript": "next"
   },
   "dependencies": {
     "@antfu/install-pkg": "^0.1.1",
