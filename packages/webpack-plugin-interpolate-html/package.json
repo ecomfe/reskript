@@ -21,21 +21,21 @@
     "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint --max-warnings=0 src",
-    "test": "vitest --run"
+    "test": "vitest run"
   },
   "dependencies": {
     "@reskript/build-utils": "6.0.0-beta.4"
   },
   "devDependencies": {
     "@reskript/core": "6.0.0-beta.4",
-    "@types/node": "^20.2.5",
-    "c8": "^7.13.0",
-    "eslint": "^8.41.0",
-    "html-webpack-plugin": "^5.5.1",
-    "typescript": "next",
+    "@types/node": "^20.3.3",
+    "c8": "^8.0.0",
+    "eslint": "^8.44.0",
+    "html-webpack-plugin": "^5.5.3",
+    "typescript": "5.2.0-dev.20230612",
     "vite": "^4.3.9",
-    "vitest": "^0.31.1",
-    "webpack": "^5.84.1"
+    "vitest": "^0.32.2",
+    "webpack": "^5.88.1"
   },
   "peerDependencies": {
     "webpack": "^5.74.0"

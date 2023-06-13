@@ -24,13 +24,13 @@
     "test": "echo 'No test in @reskript/cli-build'"
   },
   "devDependencies": {
-    "@types/node": "^20.2.5",
-    "@types/ramda": "^0.29.2",
-    "eslint": "^8.41.0",
-    "rollup": "^3.23.0",
-    "typescript": "next",
+    "@types/node": "^20.3.3",
+    "@types/ramda": "^0.29.3",
+    "eslint": "^8.44.0",
+    "rollup": "^3.26.0",
+    "typescript": "5.2.0-dev.20230612",
     "vite": "^4.3.9",
-    "webpack": "^5.84.1"
+    "webpack": "^5.88.1"
   },
   "dependencies": {
     "@reskript/build-utils": "6.0.0-beta.4",
@@ -43,12 +43,12 @@
     "pretty-bytes": "^6.1.0",
     "ramda": "^0.29.0",
     "tty-table": "^4.2.1",
-    "webpack-bundle-analyzer": "^4.8.0"
+    "webpack-bundle-analyzer": "^4.9.0"
   },
   "peerDependencies": {
     "core-js": "3.x",
     "eslint": "8.x",
-    "stylelint": "14.x",
+    "stylelint": "15.x",
     "typescript": "4.x || 5.x",
     "vite": "4.x",
     "webpack": "^5.74.0"

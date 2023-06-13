@@ -10,5 +10,10 @@ export default async () => {
                 '@emotion/babel-plugin': emotionBabelPlugin,
             },
         },
+        test: {
+            include: [
+                '**/__tests__/**/*.test.[jt]s',
+            ],
+        },
     };
 };

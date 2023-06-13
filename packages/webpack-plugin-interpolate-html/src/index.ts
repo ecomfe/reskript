@@ -2,7 +2,7 @@ import {Compilation, Compiler, WebpackPluginInstance} from 'webpack';
 import {interpolateEntryContent} from '@reskript/build-utils';
 
 const findHtmlWebpackPlugin = (compilation: Compilation) => {
-    const isResolved = (plugin: WebpackPluginInstance) => {
+    const isResolved = (plugin: any): plugin is WebpackPluginInstance => {
         return plugin.constructor && plugin.constructor.name === 'HtmlWebpackPlugin';
     };
 

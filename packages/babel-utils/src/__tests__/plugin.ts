@@ -6,6 +6,7 @@ const plugin = (): PluginObj => {
         visitor: {
             Program(path) {
                 const callee = prepareReactImport(path, 'useEffect');
+                // @ts-expect-error 看起来`babel`的类型有问题
                 path.pushContainer('body', callee);
             },
         },
