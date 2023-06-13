@@ -1,5 +1,6 @@
 import {useState, useCallback, useEffect, lazy, Suspense} from 'react';
 import styled from '@emotion/styled';
+import {css} from '@emotion/react';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
 import WorkerStatus from '@/components/WorkerStatus';
 import List from '../List';
@@ -27,9 +28,13 @@ const Meta = styled.aside`
     color: #a6a6a6;
 `;
 
-const Layout = styled.div`
+const verticalFlex = css`
     display: flex;
     flex-direction: column;
+`;
+
+const Layout = styled.div`
+    ${verticalFlex};
     gap: 20px;
     max-width: 800px;
     margin: 0 auto;

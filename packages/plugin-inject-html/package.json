@@ -25,12 +25,12 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/node": "^20.2.5",
-    "eslint": "^8.41.0",
-    "html-webpack-plugin": "^5.5.1",
-    "typescript": "next",
+    "@types/node": "^20.3.3",
+    "eslint": "^8.44.0",
+    "html-webpack-plugin": "^5.5.3",
+    "typescript": "5.2.0-dev.20230612",
     "vite": "^4.3.9",
-    "webpack": "^5.84.1"
+    "webpack": "^5.88.1"
   },
   "dependencies": {
     "@reskript/build-utils": "6.0.0-beta.4",

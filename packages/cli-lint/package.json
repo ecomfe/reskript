@@ -25,24 +25,24 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0-beta.4",
-    "@types/eslint": "^8.40.0",
-    "@types/node": "^20.2.5",
-    "@types/ramda": "^0.29.2",
-    "eslint": "^8.41.0",
-    "stylelint": "^14.16.1",
-    "typescript": "next"
+    "@types/eslint": "^8.40.2",
+    "@types/node": "^20.3.3",
+    "@types/ramda": "^0.29.3",
+    "eslint": "^8.44.0",
+    "stylelint": "^15.9.0",
+    "typescript": "5.2.0-dev.20230612"
   },
   "dependencies": {
     "@reskript/config-lint": "6.0.0-beta.4",
     "@reskript/core": "6.0.0-beta.4",
     "eslint-formatter-pretty": "^5.0.0",
     "execa": "^7.1.1",
-    "globby": "^13.1.4",
+    "globby": "^13.2.1",
     "ramda": "^0.29.0"
   },
   "peerDependencies": {
     "eslint": "8.x",
-    "stylelint": "14.x",
+    "stylelint": "15.x",
     "typescript": "4.x || 5.x"
   },
   "peerDependenciesMeta": {

@@ -28,4 +28,11 @@ export default async (cwd: string) => {
             'see: https://reskript.dev/docs/migration/v6#工具版本更新'
         );
     }
+
+    if (dependencies.stylelint && !isInstalledVersionSatisfies(dependencies, 'stylelint', '15.x')) {
+        warn(
+            'stylelint 15.x is required, please upgrade it',
+            'see: https://reskript.dev/docs/migration/v6#工具版本更新'
+        );
+    }
 };
