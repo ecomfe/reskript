@@ -75,6 +75,7 @@ module.exports = {
                 'migration/v3',
                 'migration/v4',
                 'migration/v5',
+                'migration/v6',
             ],
         },
         'faq',
