@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "lerna run --no-bail lint",
-    "test": "lerna run --concurrency=1 test",
+    "test": "lerna run test",
     "build": "lerna run build",
     "build-clean": "lerna run clean && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
