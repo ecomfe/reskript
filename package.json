@@ -18,7 +18,6 @@
     "ci": "pnpm install --frozen-lockfile && npm run build-clean && npm run lint && npm run test",
     "preversion": "npm run ci",
     "prepack": "pnpm install --frozen-lockfile && npm run build-clean && sh scripts/build-check.sh",
-    "version": "pnpm install && git add pnpm-lock.yaml",
     "deploy": "lerna publish from-package",
     "deploy-next": "npm run deploy -- --dist-tag=next --pre-dist-tag=next",
     "prepare": "husky install"
