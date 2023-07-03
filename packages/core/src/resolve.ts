@@ -6,25 +6,27 @@ import {bundleRequire} from 'bundle-require';
 import resolveCore from 'resolve';
 import caller from 'caller';
 
-export const resolveFrom = (base: string) => (id: string) => {
-    const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
-        id,
-        {basedir: base},
-        (err, resolved) => {
-            if (err) {
-                return reject(err);
-            }
-            if (!resolved) {
-                return reject(new Error(`ENOENT, unable to resolve ${id}`));
-            }
+export function resolveFrom(base: string) {
+    return (id: string) => {
+        const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
+            id,
+            {basedir: base},
+            (err, resolved) => {
+                if (err) {
+                    return reject(err);
+                }
+                if (!resolved) {
+                    return reject(new Error(`ENOENT, unable to resolve ${id}`));
+                }
 
-            resolve(resolved);
-        }
-    );
-    return new Promise(execute);
-};
+                resolve(resolved);
+            }
+        );
+        return new Promise(execute);
+    };
+}
 
-export const resolve = (id: string) => {
+export function resolve(id: string) {
     const callerUrl = caller();
     const callerPath = callerUrl.startsWith('file://') ? fileURLToPath(callerUrl) : callerUrl;
     const execute = (resolve: (resolved: string) => void, reject: (error: Error) => void) => resolveCore(
@@ -42,14 +44,14 @@ export const resolve = (id: string) => {
         }
     );
     return new Promise(execute);
-};
+}
 
 export interface UserModuleResult<T> {
     resolved?: string;
     value: T;
 }
 
-export const importUserModule = async <T>(tries: string[], defaultValue?: T): Promise<UserModuleResult<T>> => {
+export async function importUserModule<T>(tries: string[], defaultValue?: T): Promise<UserModuleResult<T>> {
     const target = tries.find(existsSync);
 
     if (target) {
@@ -63,14 +65,24 @@ export const importUserModule = async <T>(tries: string[], defaultValue?: T): Pr
     }
 
     throw new Error(`Unable to find module ${tries.join(', ')}`);
-};
+}
 
 export const dirFromImportMeta = (importMetaUrl: string) => path.dirname(fileURLToPath(importMetaUrl));
 
-export const resolveDependencyVersion = async (name: string, cwd: string): Promise<string> => {
+export async function resolveDependencyVersion(name: string, cwd: string): Promise<string> {
     const resolve = resolveFrom(cwd);
     const location = await resolve(`${name}/package.json`);
     const content = await fs.readFile(location, 'utf-8');
     const {version} = JSON.parse(content);
     return version;
-};
+}
+
+export async function resolveCoreJsVersion(cwd: string) {
+    try {
+        const version = await resolveDependencyVersion('core-js', cwd);
+        return version;
+    }
+    catch {
+        return 3;
+    }
+}

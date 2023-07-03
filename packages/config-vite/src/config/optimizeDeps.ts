@@ -2,6 +2,7 @@ import path from 'node:path';
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import compat from 'core-js-compat';
+import {resolveDependencyVersion} from '@reskript/core';
 import {ConfigFactory} from '../interface.js';
 
 const readBrowsersListQuery = async (cwd: string) => {
@@ -15,9 +16,12 @@ const readBrowsersListQuery = async (cwd: string) => {
 };
 
 const readCoreJsVersion = async (cwd: string) => {
-    const file = path.join(cwd, 'node_modules', 'core-js', 'package.json');
-    const content = await fs.readFile(file, 'utf-8');
-    const {version} = JSON.parse(content);
+    const version = await resolveDependencyVersion('core-js', cwd);
+
+    if (!version) {
+        throw new Error('core-js not installed');
+    }
+
     return version;
 };
 

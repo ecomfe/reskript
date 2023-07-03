@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
 import {VitePWA as pwa, VitePWAOptions} from 'vite-plugin-pwa';
 import template from 'lodash.template';
-import {normalizeRuleMatch, pMap, resolve, resolveDependencyVersion} from '@reskript/core';
+import {normalizeRuleMatch, pMap, resolve, resolveCoreJsVersion} from '@reskript/core';
 import {warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {
@@ -42,16 +42,6 @@ const injectServiceWorkerScript = (html: string, enabled: boolean, context: Buil
     return injectIntoHtml(html, {headEnd: scriptHtml});
 };
 
-const coreJsVersion = async (cwd: string) => {
-    try {
-        const version = await resolveDependencyVersion('core-js', cwd);
-        return version;
-    }
-    catch {
-        return 3;
-    }
-};
-
 const factory: ConfigFactory = async (context, options) => {
     const settings = context.projectSettings;
     // TODO: 这个应该不对，要用`resolveFrom`从当前目录找
@@ -67,7 +57,7 @@ const factory: ConfigFactory = async (context, options) => {
         // `@vitejs/plugin-react`本身就会加上热更新，这里再加会冲突
         hot: false,
         hostType: 'application',
-        polyfill: settings.build.script.polyfill ? await coreJsVersion(context.cwd) : false,
+        polyfill: settings.build.script.polyfill ? await resolveCoreJsVersion(context.cwd) : false,
         displayName: settings.build.script.displayName,
         cwd: context.cwd,
         srcDirectory: context.srcDirectory,

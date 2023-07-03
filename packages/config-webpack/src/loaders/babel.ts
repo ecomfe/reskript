@@ -1,17 +1,7 @@
-import {resolve, resolveDependencyVersion} from '@reskript/core';
+import {resolve, resolveCoreJsVersion} from '@reskript/core';
 import {getBabelConfig, BabelConfigOptions} from '@reskript/config-babel';
 import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
 import {LoaderFactory} from '../interface.js';
-
-const coreJsVersion = async (cwd: string) => {
-    try {
-        const version = await resolveDependencyVersion('core-js', cwd);
-        return version;
-    }
-    catch {
-        return 3;
-    }
-};
 
 const factory: LoaderFactory = async (entry: BuildEntry) => {
     const {usage, mode, cwd, srcDirectory, projectSettings: {build, devServer}} = entry;
@@ -23,7 +13,7 @@ const factory: LoaderFactory = async (entry: BuildEntry) => {
         mode,
         uses,
         displayName,
-        polyfill: polyfill ? await coreJsVersion(cwd) : false,
+        polyfill: polyfill ? await resolveCoreJsVersion(cwd) : false,
         // 对于需要构建产物用的场合，默认不给热更新
         hot: usage === 'devServer' ? hot : false,
         hostType: 'application',
