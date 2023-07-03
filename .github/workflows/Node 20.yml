@@ -1,4 +1,4 @@
-name: NodeJS 14 CI
+name: NodeJS 20 CI
 
 on:
   push:
@@ -9,25 +9,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: pnpm/action-setup@v2.0.1
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup NodeJS
+      uses: actions/setup-node@v3
       with:
-        version: 6.x
-    - uses: actions/checkout@v2
-    - name: Setup Node 14
-      uses: actions/setup-node@v1
+        node-version: 20.x
+
+    - uses: pnpm/action-setup@v2
+      name: Install PNPM
       with:
-        node-version: 14.x
-    - name: Install Dependency
-      run: pnpm install
+        version: 8.x
+        run_install: |
+          - args: [--frozen-lockfile]
+
     - name: Build
       run: pnpm run build
+
     - name: Lint
-      run: pnpm run lint -- --concurrency=4
+      run: pnpm run lint
       env:
         NODE_OPTIONS: --max-old-space-size=4096
+
     - name: Install Playwright
       working-directory: showcase/todo
       run: npx playwright install-deps chromium && npx playwright install chromium
+
     - name: Test
       run: pnpm run test
       env:
