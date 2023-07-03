@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0) (2023-07-03)
+
+
+### Code Refactoring
+
+* **lint:** 升级stylelint至15.x版本 ([0e9b700](https://github.com/ecomfe/reskript/commit/0e9b700f33b8acc5cc9d5969fec4d35730879bcd))
+
+
+### Features
+
+* **test:** 升级Jest至29.x版本 ([#317](https://github.com/ecomfe/reskript/issues/317)) ([92b1e8b](https://github.com/ecomfe/reskript/commit/92b1e8bc4c4aa40862b51b1477a835218e59b11b))
+
+
+### BREAKING CHANGES
+
+* **lint:** 部分stylelint规则废弃，需增加`stylistic/`前缀
+* **test:** `jest`版本升级为`29.x`，snapshot测试等结果可能发生变化
+* **test:** 移除了对`enzyme`的使用，请使用`@testing-library/react`进行组件测试
+* **test:** NodeJS版本要求`16.10`及以上
+
+
+
+
+
 # [6.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2023-05-28)
 
 **Note:** Version bump only for package @reskript/plugin-utils

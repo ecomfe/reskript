@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0) (2023-07-03)
+
+
+### Code Refactoring
+
+* **lint:** 升级stylelint至15.x版本 ([0e9b700](https://github.com/ecomfe/reskript/commit/0e9b700f33b8acc5cc9d5969fec4d35730879bcd))
+
+
+### Features
+
+* **build:** 为Vite引擎增加legacy配置 ([51fe424](https://github.com/ecomfe/reskript/commit/51fe42421e9d763e6f6825cb31a8a4763e8b589e))
+* **build:** 更新支持antd 5.x ([9b35d55](https://github.com/ecomfe/reskript/commit/9b35d55c2d619fec12c602fccf355d706cb108b1))
+* **test:** 升级Jest至29.x版本 ([#317](https://github.com/ecomfe/reskript/issues/317)) ([92b1e8b](https://github.com/ecomfe/reskript/commit/92b1e8bc4c4aa40862b51b1477a835218e59b11b))
+* 支持Vite 4.x版本 ([2d6cbcf](https://github.com/ecomfe/reskript/commit/2d6cbcf766772e0075a286bb2a3f7709cdfebc04))
+
+
+### BREAKING CHANGES
+
+* **lint:** 部分stylelint规则废弃，需增加`stylistic/`前缀
+* **test:** `jest`版本升级为`29.x`，snapshot测试等结果可能发生变化
+* **test:** 移除了对`enzyme`的使用，请使用`@testing-library/react`进行组件测试
+* **test:** NodeJS版本要求`16.10`及以上
+* **build:** 如需要继续使用`antd 4.x`版本，需手动指定`build.uses`加入`antd@4`值
+* **build:** 移除`less-plugin-functions`的支持
+* **build:** 移除原有对`.less`文件中的`calc`的特殊处理，如果有对`antd`的变量替换成CSS变量等特殊应用，会出现编译错误
+* 需要更新Vite至4.x版本配合使用
+
+
+
+
+
 # [6.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2023-05-28)
 
 **Note:** Version bump only for package @reskript/settings

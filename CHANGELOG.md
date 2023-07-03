@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0) (2023-07-03)
+
+
+### Bug Fixes
+
+* **babel:** 修复babel转码时未完全对齐项目引入的core-js版本的问题 ([088f72d](https://github.com/ecomfe/reskript/commit/088f72dccf49f10d3f6d5c2c627188d24166a7ae))
+* **build:** 修复Vite下core-js路径处理错误的问题 ([#327](https://github.com/ecomfe/reskript/issues/327)) ([7d36aad](https://github.com/ecomfe/reskript/commit/7d36aad143da9b4b6fd828af2c62b19270f6bbbb))
+* **build:** 修正Webpack的产出生成规则 ([6ed07e5](https://github.com/ecomfe/reskript/commit/6ed07e53835b6fb49130a3efaa718c40ffd3c893))
+* **dev:** 修复historyApiFallback路径错误 ([200b673](https://github.com/ecomfe/reskript/commit/200b67380518533d77e9cf6eb4ee5e7af25ed511))
+* **dev:** 让dev时的publicPath逻辑与build相同 ([ff28747](https://github.com/ecomfe/reskript/commit/ff28747b57890c8141856c13ca3648ac5d37deb2))
+* **plugin-qiankun:** 修复首页不会被插件处理的问题 ([c5fb1cc](https://github.com/ecomfe/reskript/commit/c5fb1ccc432de9205b35fa5b9e061f43d7ac3c2c))
+
+
+### Code Refactoring
+
+* **lint:** 升级stylelint至15.x版本 ([0e9b700](https://github.com/ecomfe/reskript/commit/0e9b700f33b8acc5cc9d5969fec4d35730879bcd))
+
+
+### Features
+
+* **build:** 为Vite引擎增加legacy配置 ([51fe424](https://github.com/ecomfe/reskript/commit/51fe42421e9d763e6f6825cb31a8a4763e8b589e))
+* **build:** 更新支持antd 5.x ([9b35d55](https://github.com/ecomfe/reskript/commit/9b35d55c2d619fec12c602fccf355d706cb108b1))
+* **doctor:** 增加V6迁移检查 ([4a0b8b1](https://github.com/ecomfe/reskript/commit/4a0b8b1c476906062f242f3717238cb714b5279c))
+* **test:** 升级Jest至29.x版本 ([#317](https://github.com/ecomfe/reskript/issues/317)) ([92b1e8b](https://github.com/ecomfe/reskript/commit/92b1e8bc4c4aa40862b51b1477a835218e59b11b))
+* 支持Vite 4.x版本 ([2d6cbcf](https://github.com/ecomfe/reskript/commit/2d6cbcf766772e0075a286bb2a3f7709cdfebc04))
+
+
+### Performance Improvements
+
+* **build:** 移除resolve-typescript-plugin插件 ([f02ce7a](https://github.com/ecomfe/reskript/commit/f02ce7af56ba73d9c50b3e447ef00a31a590d13e))
+
+
+### BREAKING CHANGES
+
+* **lint:** 部分stylelint规则废弃，需增加`stylistic/`前缀
+* **test:** `jest`版本升级为`29.x`，snapshot测试等结果可能发生变化
+* **test:** 移除了对`enzyme`的使用，请使用`@testing-library/react`进行组件测试
+* **test:** NodeJS版本要求`16.10`及以上
+* **build:** 如需要继续使用`antd 4.x`版本，需手动指定`build.uses`加入`antd@4`值
+* **build:** 移除`less-plugin-functions`的支持
+* **build:** 移除原有对`.less`文件中的`calc`的特殊处理，如果有对`antd`的变量替换成CSS变量等特殊应用，会出现编译错误
+* **build:** 需要使用Webpack `5.74.0`以上版本
+* 需要更新Vite至4.x版本配合使用
+* **build:** 如果有使用自定义`{entry}.config.mjs`并配置了`filename`选项，产出结构会发生变化。可在`filename`的值前缀加上`assets/`来修复。
+* **build:** 如果配置中有自定义的`publicPath`，需要去掉配置值最后的`assets/`部分。
+
+
+
+
+
 # [6.0.0-beta.4](https://github.com/ecomfe/reskript/compare/v6.0.0-beta.3...v6.0.0-beta.4) (2023-05-28)
 
 **Note:** Version bump only for package reskript
