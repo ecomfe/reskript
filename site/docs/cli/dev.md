@@ -23,7 +23,7 @@ title: 本地调试
 -h, --help               显示帮助信息
 ```
 
-除命令行参数外，[项目配置文件](../settings#配置文件路径)中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
+除命令行参数外，[项目配置文件](../settings/setting)中的[`devServer`](../settings/dev-server)配置也会影响构建的行为。
 
 ## 本地与线上差异
 
