@@ -26,7 +26,7 @@ title: 构建应用
 -h, --help                  显示帮助信息
 ```
 
-除命令行参数外，[项目配置文件](../settings#配置文件路径)中的[`build`](../settings/build)配置也会影响构建的行为。
+除命令行参数外，[项目配置文件](../settings/setting)中的[`build`](../settings/build)配置也会影响构建的行为。
 
 ## 指定目标特性集
 

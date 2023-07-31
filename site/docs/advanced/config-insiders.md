@@ -61,8 +61,8 @@ function FooBar() {
 无论是`build`还是`dev`，都会把缓存写到文件系统中（这可以让`skr dev`打开无比迅速），以下内容会参与到缓存的key的计算中：
 
 - `package.json`的内容。
-- [项目配置文件](../settings#配置文件路径)的路径。
-- [项目配置文件](../settings#配置文件路径)的内容。
+- [项目配置文件](../settings/setting)的路径。
+- [项目配置文件](../settings/setting)的内容。
 - `package-lock.json`、`yarn.lock`或`pnpm-lock.yaml`的内容。
 - `.browserslistrc`的内容。
 - 执行的命令，即`build`或`dev`之类的。
@@ -86,7 +86,7 @@ function FooBar() {
 
 `process.env`中的所有内容都通过`DefinePlugin`注入了，可以直接以`process.env.FOO_BAR`的形式来使用。
 
-在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在[项目配置文件](../settings#配置文件路径)里的`featureMatrix`中的东西，都可以用`skr.features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
+在[特性矩阵](../settings/feature-matrix)中有说过，所有声明在[项目配置文件](../settings/setting)里的`featureMatrix`中的东西，都可以用`skr.features.fooBar`来拿到，这也是用`DefinePlugin`来实现的。
 
 另外你还能用`skr.build.`前缀来拿到当前构建的一些元信息，这个元信息的结构大致如下：
 

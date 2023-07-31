@@ -4,7 +4,7 @@ title: 单组件调试配置
 
 ## 配置结构
 
-[项目配置文件](../settings#配置文件路径)中的`play`用来配置调试单个组件时的相关行为：
+[项目配置文件](../settings/setting)中的`play`用来配置调试单个组件时的相关行为：
 
 ```ts
 interface PlaySettings {

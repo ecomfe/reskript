@@ -4,7 +4,7 @@ title: 构建配置
 
 ## 配置结构
 
-[项目配置文件](../settings#配置文件路径)中的`build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
+[项目配置文件](../settings/setting)中的`build`对象用来控制与构建相关的行为，包括`webpack`、`babel`、`less`等。该配置有如下的结构：
 
 ```ts
 // 以下是工具内置了优化的相关第三方库，其中antd在使用4.x版本时，可启用antd@4的优化
@@ -177,7 +177,7 @@ export default configure(
 
 社区上有许多的库需要构建期工具的支持才能取得更好的使用效果。`reSKRipt`在长远的计划上会精选支持高质量、持续维护、对生产效率有足够帮助的库。但默认打开所有相关的优化必定会拖慢构建速度，因此提供了选项由使用者指定你所用的库。
 
-通过[项目配置文件](../settings#配置文件路径)中的`build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
+通过[项目配置文件](../settings/setting)中的`build.uses`配置可以指定你使用的库，这个属性是一个枚举字符串的数组，当前支持以下值：
 
 - `antd@4`：对`antd 4.x`的导入进行优化，可以参考[babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)的相关说明。
 - `lodash`：对`lodash`的导入进行优化，可以参考[babel-plugin-lodash](https://www.npmjs.com/package/babel-plugin-lodash)的说明。**这个优化只会在`production`模式下启用。**
@@ -636,7 +636,7 @@ export default configure(
 
 在要求比较严格的项目中，有需要对最终产物的组成进行检查，并应用一些自动化的规则，确保如资源数量、大小等符合预期。
 
-你可以使用[项目配置文件](../settings#配置文件路径)中的`build.inspect`来配置构建产物的检查规则，具体的配置结构参考上文。
+你可以使用[项目配置文件](../settings/setting)中的`build.inspect`来配置构建产物的检查规则，具体的配置结构参考上文。
 
 ### 规则配置
 
