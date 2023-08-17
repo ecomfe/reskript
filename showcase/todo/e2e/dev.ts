@@ -102,4 +102,10 @@ export default ({driver, config, port}: Options) => {
         const text = await response.text();
         expect(text).toBe('For Test');
     });
+
+    test(`[${driver}] public assets`, async ({request}) => {
+        const response = await request.get(`http://127.0.0.1:${port}/about.html`, {failOnStatusCode: true});
+        const text = await response.text();
+        expect(text.includes('关于此网站')).toBe(true);
+    });
 };

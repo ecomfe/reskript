@@ -1,5 +1,6 @@
 import {Plugin} from 'vite';
 import history from 'connect-history-api-fallback';
+import serveStatic from 'serve-static';
 import {createMiddlewareHook} from '@reskript/build-utils';
 import {ServerOptions} from './interface.js';
 
@@ -18,6 +19,7 @@ export default function viertualEntryServerPlugin(options: ServerOptions): Plugi
             const after = createMiddlewareHook();
             options.customizeMiddleware({before, after});
             before.items().forEach(v => server.middlewares.use(v.path, v.middleware));
+            server.middlewares.use(serveStatic(server.config.publicDir));
             // @ts-expect-error
             server.middlewares.use(history(historyOptions));
             server.middlewares.use(
