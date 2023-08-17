@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.1](https://github.com/ecomfe/reskript/compare/v6.0.0...v6.0.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* **dev:** 在Vite引擎支持public资源访问 ([cb4ae20](https://github.com/ecomfe/reskript/commit/cb4ae20f5b83cf486f05b5a121c9d9f79c5eb519))
+
+
+
+
+
 # [6.0.0](https://github.com/ecomfe/reskript/compare/v5.7.4...v6.0.0) (2023-07-03)
 
 
