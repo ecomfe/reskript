@@ -22,17 +22,17 @@
     "test": "echo 'No test in @reskript/doctor'"
   },
   "devDependencies": {
-    "@types/node": "^20.3.3",
+    "@types/node": "^20.5.0",
     "@types/semver": "^7.5.0",
-    "eslint": "^8.44.0",
+    "eslint": "^8.47.0",
     "typescript": "5.2.0-dev.20230612"
   },
   "dependencies": {
     "@reskript/core": "6.0.0",
     "@reskript/settings": "6.0.0",
-    "globby": "^13.2.1",
+    "globby": "^13.2.2",
     "log-symbols": "^5.1.0",
-    "ora": "^6.3.1",
-    "semver": "^7.5.3"
+    "ora": "^7.0.1",
+    "semver": "^7.5.4"
   }
 }

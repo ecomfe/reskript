@@ -24,8 +24,8 @@
     "test": "echo 'No test in @reskript/plugin-utils'"
   },
   "devDependencies": {
-    "@types/node": "^20.3.3",
-    "eslint": "^8.44.0",
+    "@types/node": "^20.5.0",
+    "eslint": "^8.47.0",
     "typescript": "5.2.0-dev.20230612"
   },
   "dependencies": {

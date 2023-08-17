@@ -25,19 +25,19 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0",
-    "@types/eslint": "^8.40.2",
-    "@types/node": "^20.3.3",
+    "@types/eslint": "^8.44.2",
+    "@types/node": "^20.5.0",
     "@types/ramda": "^0.29.3",
-    "eslint": "^8.44.0",
-    "stylelint": "^15.9.0",
+    "eslint": "^8.47.0",
+    "stylelint": "^15.10.2",
     "typescript": "5.2.0-dev.20230612"
   },
   "dependencies": {
     "@reskript/config-lint": "6.0.0",
     "@reskript/core": "6.0.0",
     "eslint-formatter-pretty": "^5.0.0",
-    "execa": "^7.1.1",
-    "globby": "^13.2.1",
+    "execa": "^7.2.0",
+    "globby": "^13.2.2",
     "ramda": "^0.29.0"
   },
   "peerDependencies": {

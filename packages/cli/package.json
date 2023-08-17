@@ -29,16 +29,16 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.0",
-    "@types/node": "^20.3.3",
-    "eslint": "^8.44.0",
+    "@types/node": "^20.5.0",
+    "eslint": "^8.47.0",
     "typescript": "5.2.0-dev.20230612"
   },
   "dependencies": {
     "@antfu/install-pkg": "^0.1.1",
     "@reskript/core": "6.0.0",
     "clipanion": "3.2.1",
-    "enquirer": "^2.3.6",
+    "enquirer": "^2.4.1",
     "pkg-dir": "^7.0.0",
-    "typanion": "^3.13.0"
+    "typanion": "^3.14.0"
   }
 }

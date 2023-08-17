@@ -25,15 +25,15 @@
   },
   "devDependencies": {
     "@types/less": "^3.0.3",
-    "@types/node": "^20.3.3",
+    "@types/node": "^20.5.0",
     "@types/ramda": "^0.29.3",
     "@types/xml2js": "^0.4.11",
-    "c8": "^8.0.0",
-    "eslint": "^8.44.0",
-    "postcss": "^8.4.24",
+    "c8": "^8.0.1",
+    "eslint": "^8.47.0",
+    "postcss": "^8.4.28",
     "typescript": "5.2.0-dev.20230612",
-    "vite": "^4.3.9",
-    "vitest": "^0.32.2"
+    "vite": "^4.4.9",
+    "vitest": "^0.34.1"
   },
   "dependencies": {
     "@reskript/core": "6.0.0",
@@ -41,12 +41,12 @@
     "change-case": "^4.1.2",
     "cssnano": "^6.0.1",
     "escape-string-regexp": "^5.0.0",
-    "globby": "^13.2.1",
+    "globby": "^13.2.2",
     "internal-ip": "^8.0.0",
     "less-plugin-npm-import": "^2.1.0",
-    "postcss-preset-env": "^8.5.1",
-    "proxy-agent": "^6.2.1",
+    "postcss-preset-env": "^9.1.1",
+    "proxy-agent": "^6.3.0",
     "ramda": "^0.29.0",
-    "xml2js": "^0.6.0"
+    "xml2js": "^0.6.2"
   }
 }

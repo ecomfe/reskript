@@ -24,10 +24,10 @@
     "test": "echo 'No test in @reskript/svg-to-component-loader'"
   },
   "devDependencies": {
-    "@types/node": "^20.3.3",
-    "eslint": "^8.44.0",
+    "@types/node": "^20.5.0",
+    "eslint": "^8.47.0",
     "typescript": "5.2.0-dev.20230612",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.2"
   },
   "dependencies": {
     "@reskript/build-utils": "6.0.0"
