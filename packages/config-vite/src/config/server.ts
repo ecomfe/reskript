@@ -13,6 +13,7 @@ const factory: ConfigFactory = async (context, options) => {
     return {
         server: {
             port: options.port ?? settings.devServer.port,
+            strictPort: true,
             host: '0.0.0.0',
             https: settings.devServer.https?.client && settings.devServer.https.serverOptions,
             open: false,
