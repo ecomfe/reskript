@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.2](https://github.com/ecomfe/reskript/compare/v6.0.1...v6.0.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* **dev:** 修复webpack下--host参数失效问题 ([6ddeaed](https://github.com/ecomfe/reskript/commit/6ddeaed04bf7fb1a3c8023d94eed5b641fdcee0b))
+
+
+
+
+
 ## [6.0.1](https://github.com/ecomfe/reskript/compare/v6.0.0...v6.0.1) (2023-08-17)
 
 **Note:** Version bump only for package @reskript/cli-dev

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.2](https://github.com/ecomfe/reskript/compare/v6.0.1...v6.0.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* **dev:** 禁用Vite下自动递增端口的功能 ([2f58560](https://github.com/ecomfe/reskript/commit/2f58560f1afe1ae305662dee720e913bd7662217))
+
+
+
+
+
 ## [6.0.1](https://github.com/ecomfe/reskript/compare/v6.0.0...v6.0.1) (2023-08-17)
 
 
