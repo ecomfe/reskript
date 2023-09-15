@@ -24,7 +24,7 @@ export const startServer = async (server: WebpackDevServer): Promise<void> => {
 };
 
 export const start = async (cmd: DevCommandLineArgs, serverContext: WebpackServerStartContext) => {
-    const {buildContext, host} = serverContext;
+    const {buildContext, host, publicPath} = serverContext;
     const {hot, https} = buildContext.projectSettings.devServer;
     const extra = await createWebpackDevServerPartial(buildContext, host);
     const config = await createWebpackConfig(
@@ -35,7 +35,7 @@ export const start = async (cmd: DevCommandLineArgs, serverContext: WebpackServe
                 caseSensitiveModuleSource: cmd.strict,
                 typeCheck: false,
             },
-            extras: [extra],
+            extras: [extra, {output: {publicPath}}],
         }
     );
     const devServerConfig = await createWebpackDevServerConfig(
