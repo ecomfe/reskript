@@ -26,10 +26,10 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
-    "lerna": "^7.1.5",
+    "lerna": "^7.3.0",
     "semver": "^7.5.4",
-    "typescript": "5.2.0-dev.20230612",
-    "undici": "^5.23.0",
+    "typescript": "next",
+    "undici": "^5.24.0",
     "yargs": "^17.7.2"
   },
   "resolutions": {

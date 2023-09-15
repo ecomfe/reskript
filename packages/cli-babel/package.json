@@ -26,12 +26,12 @@
   "devDependencies": {
     "@reskript/settings": "6.0.1",
     "@types/babel__core": "^7.20.1",
-    "@types/node": "^20.5.0",
-    "eslint": "^8.47.0",
-    "typescript": "5.2.0-dev.20230612"
+    "@types/node": "^20.6.1",
+    "eslint": "^8.49.0",
+    "typescript": "next"
   },
   "dependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.22.19",
     "@reskript/config-babel": "6.0.1",
     "@reskript/core": "6.0.1",
     "cli-highlight": "^2.1.11",

@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/node": "^20.5.0",
-    "eslint": "^8.47.0",
+    "@types/node": "^20.6.1",
+    "eslint": "^8.49.0",
     "html-webpack-plugin": "^5.5.3",
-    "typescript": "5.2.0-dev.20230612",
+    "typescript": "next",
     "vite": "^4.4.9",
     "webpack": "^5.88.2"
   },

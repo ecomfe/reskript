@@ -24,16 +24,16 @@
     "test": "echo 'No test in @reskript/plugin-sass'"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
-    "eslint": "^8.47.0",
-    "typescript": "5.2.0-dev.20230612",
+    "@types/node": "^20.6.1",
+    "eslint": "^8.49.0",
+    "typescript": "next",
     "webpack": "^5.88.2"
   },
   "dependencies": {
     "@reskript/core": "6.0.1",
     "@reskript/plugin-utils": "6.0.1",
     "@reskript/settings": "6.0.1",
-    "sass": "^1.65.1",
+    "sass": "^1.67.0",
     "sass-loader": "^13.3.2"
   },
   "peerDependencies": {

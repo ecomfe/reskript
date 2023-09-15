@@ -22,10 +22,10 @@
     "test": "echo 'No test in @reskript/doctor'"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
-    "@types/semver": "^7.5.0",
-    "eslint": "^8.47.0",
-    "typescript": "5.2.0-dev.20230612"
+    "@types/node": "^20.6.1",
+    "@types/semver": "^7.5.2",
+    "eslint": "^8.49.0",
+    "typescript": "next"
   },
   "dependencies": {
     "@reskript/core": "6.0.1",

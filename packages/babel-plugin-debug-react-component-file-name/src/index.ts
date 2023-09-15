@@ -45,8 +45,10 @@ export default function debugReactComponentFileName(): babel.PluginObj<PluginSta
     return {
         visitor: {
             ClassDeclaration(declaration, state) {
-                state.declaredClassNames = state.declaredClassNames ?? new Set<string>();
-                state.declaredClassNames.add(declaration.node.id.name);
+                if (declaration.node.id) {
+                    state.declaredClassNames = state.declaredClassNames ?? new Set<string>();
+                    state.declaredClassNames.add(declaration.node.id.name);
+                }
             },
             ClassExpression(expression, state) {
                 if (expression.node.id) {
