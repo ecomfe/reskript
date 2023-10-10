@@ -4,18 +4,17 @@
         "*.ts"
     ],
     "compilerOptions": {
-        "module": "esnext",
-        "target": "es2018",
+        "module": "ESNext",
+        "target": "ES2018",
         "outDir": "dist",
         "noEmit": true,
         "jsx": "react-jsx",
         "esModuleInterop": true,
-        "moduleResolution": "node",
+        "moduleResolution": "Bundler",
         "strict": true,
         "noUnusedLocals": false,
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
-        "keyofStringsOnly": true,
         "skipLibCheck": true,
         "paths": {
             "@/*": ["./src/*"]
