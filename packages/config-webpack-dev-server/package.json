@@ -24,13 +24,13 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@types/cli-progress": "^3.11.2",
-    "@types/node": "^20.6.1",
+    "@types/cli-progress": "^3.11.3",
+    "@types/node": "^20.8.4",
     "c8": "^8.0.1",
-    "eslint": "^8.49.0",
+    "eslint": "^8.51.0",
     "typescript": "next",
-    "vite": "^4.4.9",
-    "vitest": "^0.34.4",
+    "vite": "^4.4.11",
+    "vitest": "^0.34.6",
     "webpack": "^5.88.2",
     "webpack-dev-server": "^4.15.1"
   },
@@ -44,7 +44,7 @@
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
     "cli-progress": "^3.12.0",
     "kolorist": "^1.8.0",
-    "launch-editor-middleware": "^2.6.0",
+    "launch-editor-middleware": "^2.6.1",
     "react-refresh": "^0.14.0",
     "webpack-merge": "^5.9.0"
   },

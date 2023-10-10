@@ -22,9 +22,9 @@
     "test": "echo 'No test in @reskript/doctor'"
   },
   "devDependencies": {
-    "@types/node": "^20.6.1",
-    "@types/semver": "^7.5.2",
-    "eslint": "^8.49.0",
+    "@types/node": "^20.8.4",
+    "@types/semver": "^7.5.3",
+    "eslint": "^8.51.0",
     "typescript": "next"
   },
   "dependencies": {

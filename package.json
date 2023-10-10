@@ -23,13 +23,13 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
+    "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
     "lerna": "^7.3.0",
     "semver": "^7.5.4",
     "typescript": "next",
-    "undici": "^5.24.0",
+    "undici": "^5.25.4",
     "yargs": "^17.7.2"
   },
   "resolutions": {

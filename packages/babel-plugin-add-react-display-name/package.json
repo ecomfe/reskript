@@ -26,17 +26,17 @@
   "devDependencies": {
     "@babel/preset-react": "^7.22.15",
     "@reskript/core": "6.0.2",
-    "@types/babel__core": "^7.20.1",
-    "@types/node": "^20.6.1",
+    "@types/babel__core": "^7.20.2",
+    "@types/node": "^20.8.4",
     "c8": "^8.0.1",
-    "eslint": "^8.49.0",
+    "eslint": "^8.51.0",
     "typescript": "next",
-    "vite": "^4.4.9",
-    "vitest": "^0.34.4"
+    "vite": "^4.4.11",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
-    "@babel/core": "^7.22.19",
-    "@babel/traverse": "^7.22.19",
+    "@babel/core": "^7.23.0",
+    "@babel/traverse": "^7.23.0",
     "@reskript/babel-utils": "6.0.2"
   }
 }

@@ -23,9 +23,9 @@
     "test": "echo 'No test in @reskript/init'"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.3",
-    "@types/node": "^20.6.1",
-    "eslint": "^8.49.0",
+    "@types/inquirer": "^9.0.4",
+    "@types/node": "^20.8.4",
+    "eslint": "^8.51.0",
     "typescript": "next"
   },
   "dependencies": {

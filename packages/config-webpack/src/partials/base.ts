@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import {map} from 'ramda';
 import {compact, dirFromImportMeta, resolve, findGitRoot, pMap} from '@reskript/core';
-import {paramCase} from 'change-case';
+import {kebabCase} from 'change-case';
 import webpack, {EntryObject} from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
@@ -196,7 +196,7 @@ const factory: ConfigurationFactory = async entry => {
                         type: 'filesystem',
                         version: cacheKey,
                         cacheDirectory: cacheDirectory ? path.join(cwd, cacheDirectory) : undefined,
-                        name: `${paramCase(entry.usage)}-${paramCase(entry.mode)}`,
+                        name: `${kebabCase(entry.usage)}-${kebabCase(entry.mode)}`,
                     }
                     : {type: 'memory'}
             ),

@@ -24,11 +24,11 @@
     "test": "echo 'No test in @reskript/config-img-loader'"
   },
   "devDependencies": {
-    "@types/imagemin-gifsicle": "^7.0.1",
-    "@types/imagemin-mozjpeg": "^8.0.1",
-    "@types/imagemin-optipng": "^5.2.1",
-    "@types/node": "^20.6.1",
-    "eslint": "^8.49.0",
+    "@types/imagemin-gifsicle": "^7.0.2",
+    "@types/imagemin-mozjpeg": "^8.0.2",
+    "@types/imagemin-optipng": "^5.2.2",
+    "@types/node": "^20.8.4",
+    "eslint": "^8.51.0",
     "typescript": "next",
     "webpack": "^5.88.2"
   },

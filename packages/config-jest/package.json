@@ -26,18 +26,18 @@
     "test": "echo 'No test in @reskript/config-jest'"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.1",
-    "@types/jest": "^29.5.4",
-    "@types/node": "^20.6.1",
-    "@types/ramda": "^0.29.4",
-    "@types/resolve": "^1.20.2",
-    "eslint": "^8.49.0",
+    "@types/babel__core": "^7.20.2",
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.8.4",
+    "@types/ramda": "^0.29.6",
+    "@types/resolve": "^1.20.3",
+    "eslint": "^8.51.0",
     "prettier": "^3.0.3",
     "typescript": "next"
   },
   "dependencies": {
-    "@babel/core": "^7.22.19",
-    "@babel/plugin-transform-modules-commonjs": "^7.22.15",
+    "@babel/core": "^7.23.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
     "@reskript/config-babel": "6.0.2",
     "@reskript/core": "6.0.2",
     "@reskript/settings": "6.0.2",
@@ -45,8 +45,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-raw-loader": "^1.0.1",
-    "ramda": "^0.29.0",
-    "resolve": "^1.22.5",
+    "ramda": "^0.29.1",
+    "resolve": "^1.22.6",
     "unixify": "^1.0.0"
   },
   "peerDependencies": {

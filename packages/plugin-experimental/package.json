@@ -24,9 +24,9 @@
     "test": "echo 'No test in @reskript/plugin-inject-html'"
   },
   "devDependencies": {
-    "@types/node": "^20.6.1",
+    "@types/node": "^20.8.4",
     "antd": "^4.24.14",
-    "eslint": "^8.49.0",
+    "eslint": "^8.51.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "next",
@@ -37,25 +37,25 @@
     "@reskript/core": "6.0.2",
     "@reskript/plugin-utils": "6.0.2",
     "@reskript/settings": "6.0.2",
-    "@swc/core": "^1.3.85",
-    "@swc/helpers": "^0.5.2",
+    "@swc/core": "^1.3.92",
+    "@swc/helpers": "^0.5.3",
     "loader-of-loader": "^1.0.3",
     "terser-webpack-plugin": "^5.3.9"
   },
   "optionalDependencies": {
     "@next/swc-android-arm-eabi": "13.2.4",
     "@next/swc-android-arm64": "13.2.4",
-    "@next/swc-darwin-arm64": "13.4.19",
-    "@next/swc-darwin-x64": "13.4.19",
+    "@next/swc-darwin-arm64": "13.5.4",
+    "@next/swc-darwin-x64": "13.5.4",
     "@next/swc-freebsd-x64": "13.2.4",
     "@next/swc-linux-arm-gnueabihf": "13.2.4",
-    "@next/swc-linux-arm64-gnu": "13.4.19",
-    "@next/swc-linux-arm64-musl": "13.4.19",
-    "@next/swc-linux-x64-gnu": "13.4.19",
-    "@next/swc-linux-x64-musl": "13.4.19",
-    "@next/swc-win32-arm64-msvc": "13.4.19",
-    "@next/swc-win32-ia32-msvc": "13.4.19",
-    "@next/swc-win32-x64-msvc": "13.4.19"
+    "@next/swc-linux-arm64-gnu": "13.5.4",
+    "@next/swc-linux-arm64-musl": "13.5.4",
+    "@next/swc-linux-x64-gnu": "13.5.4",
+    "@next/swc-linux-x64-musl": "13.5.4",
+    "@next/swc-win32-arm64-msvc": "13.5.4",
+    "@next/swc-win32-ia32-msvc": "13.5.4",
+    "@next/swc-win32-x64-msvc": "13.5.4"
   },
   "peerDependencies": {
     "antd": ">= 4"

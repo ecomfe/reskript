@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.2",
-    "@types/node": "^20.6.1",
-    "eslint": "^8.49.0",
+    "@types/node": "^20.8.4",
+    "eslint": "^8.51.0",
     "typescript": "next"
   },
   "dependencies": {

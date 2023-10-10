@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@reskript/settings": "6.0.2",
-    "@types/eslint": "^8.44.2",
-    "@types/node": "^20.6.1",
-    "@types/ramda": "^0.29.4",
-    "eslint": "^8.49.0",
+    "@types/eslint": "^8.44.3",
+    "@types/node": "^20.8.4",
+    "@types/ramda": "^0.29.6",
+    "eslint": "^8.51.0",
     "stylelint": "^15.10.3",
     "typescript": "next"
   },
@@ -38,7 +38,7 @@
     "eslint-formatter-pretty": "^5.0.0",
     "execa": "^8.0.1",
     "globby": "^13.2.2",
-    "ramda": "^0.29.0"
+    "ramda": "^0.29.1"
   },
   "peerDependencies": {
     "eslint": "8.x",
