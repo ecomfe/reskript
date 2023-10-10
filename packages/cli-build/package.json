@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-build",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,11 +33,11 @@
     "webpack": "^5.88.2"
   },
   "dependencies": {
-    "@reskript/build-utils": "6.0.2",
-    "@reskript/config-vite": "6.0.2",
-    "@reskript/config-webpack": "6.0.2",
-    "@reskript/core": "6.0.2",
-    "@reskript/settings": "6.0.2",
+    "@reskript/build-utils": "6.0.3",
+    "@reskript/config-vite": "6.0.3",
+    "@reskript/config-webpack": "6.0.3",
+    "@reskript/core": "6.0.3",
+    "@reskript/settings": "6.0.3",
     "kolorist": "^1.8.0",
     "matcher": "^5.0.0",
     "pretty-bytes": "^6.1.1",

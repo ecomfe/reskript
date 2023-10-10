@@ -1,6 +1,6 @@
 {
   "name": "@reskript/init",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -29,7 +29,7 @@
     "typescript": "next"
   },
   "dependencies": {
-    "@reskript/core": "6.0.2",
+    "@reskript/core": "6.0.3",
     "execa": "^8.0.1",
     "globby": "^13.2.2",
     "inquirer": "^9.2.11",

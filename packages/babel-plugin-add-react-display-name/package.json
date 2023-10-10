@@ -1,6 +1,6 @@
 {
   "name": "@reskript/babel-plugin-add-react-display-name",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.22.15",
-    "@reskript/core": "6.0.2",
+    "@reskript/core": "6.0.3",
     "@types/babel__core": "^7.20.2",
     "@types/node": "^20.8.4",
     "c8": "^8.0.1",
@@ -37,6 +37,6 @@
   "dependencies": {
     "@babel/core": "^7.23.0",
     "@babel/traverse": "^7.23.0",
-    "@reskript/babel-utils": "6.0.2"
+    "@reskript/babel-utils": "6.0.3"
   }
 }

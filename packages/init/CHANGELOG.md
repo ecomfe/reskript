@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.3](https://github.com/ecomfe/reskript/compare/v6.0.2...v6.0.3) (2023-10-10)
+
+
+### Bug Fixes
+
+* **init:** 更新新项目代码模板 ([#346](https://github.com/ecomfe/reskript/issues/346)) ([878568f](https://github.com/ecomfe/reskript/commit/878568f58db06ef07570ceefd13fb10f4b5b8676))
+
+
+
+
+
 ## [6.0.2](https://github.com/ecomfe/reskript/compare/v6.0.1...v6.0.2) (2023-09-15)
 
 **Note:** Version bump only for package @reskript/init

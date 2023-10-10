@@ -1,6 +1,6 @@
 {
   "name": "@reskript/config-vite",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -39,11 +39,11 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
-    "@reskript/build-utils": "6.0.2",
-    "@reskript/config-babel": "6.0.2",
-    "@reskript/core": "6.0.2",
-    "@reskript/portal": "6.0.2",
-    "@reskript/settings": "6.0.2",
+    "@reskript/build-utils": "6.0.3",
+    "@reskript/config-babel": "6.0.3",
+    "@reskript/core": "6.0.3",
+    "@reskript/portal": "6.0.3",
+    "@reskript/settings": "6.0.3",
     "@vitejs/plugin-legacy": "^4.1.1",
     "@vitejs/plugin-react": "^4.1.0",
     "classnames": "^2.3.2",
