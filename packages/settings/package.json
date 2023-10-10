@@ -6,7 +6,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./client": "./client.d.ts"
   },
   "engines": {
     "node": ">=14.18.0 || >= 16.10.0"
