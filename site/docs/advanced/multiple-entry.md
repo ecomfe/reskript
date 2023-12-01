@@ -15,7 +15,7 @@ title: 多应用入口
 ```
 /my-app
     /src
-        /entrise
+        /entries
             index.tsx
             hello.tsx
     reskript.config.ts
