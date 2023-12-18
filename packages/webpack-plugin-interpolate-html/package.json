@@ -1,6 +1,6 @@
 {
   "name": "@reskript/webpack-plugin-interpolate-html",
-  "version": "6.0.3",
+  "version": "6.1.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,10 +24,10 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@reskript/build-utils": "6.0.3"
+    "@reskript/build-utils": "6.1.0"
   },
   "devDependencies": {
-    "@reskript/core": "6.0.3",
+    "@reskript/core": "6.1.0",
     "@types/node": "^20.8.4",
     "c8": "^8.0.1",
     "eslint": "^8.51.0",
