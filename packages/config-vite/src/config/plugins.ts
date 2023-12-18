@@ -85,7 +85,7 @@ const factory: ConfigFactory = async (context, options) => {
         };
     };
     const portalApp = createPortal();
-    settings.portal.setup(portalApp, {router});
+    await settings.portal.setup(portalApp, {router});
     const entries = await pMap(context.entries, toEntryTarget);
     const entryOptions: VirtualEntryOptions = {
         entries,

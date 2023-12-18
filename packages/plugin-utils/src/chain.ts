@@ -67,8 +67,8 @@ export const chainSetupPortal = <S extends ProjectSettings>(settings: S, chain: 
         ...settings,
         portal: {
             ...settings.portal,
-            setup: (app, helper) => {
-                settings.portal.setup(app, helper);
+            setup: async (app, helper) => {
+                await settings.portal.setup(app, helper);
                 chain(app, helper);
             },
         },

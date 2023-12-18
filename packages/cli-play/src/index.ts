@@ -28,8 +28,8 @@ const enhanceProjectSettings = <S extends ProjectSettings>(settings: S, cmd: Pla
         },
         portal: {
             ...settings.portal,
-            setup: (app, helper) => {
-                settings.portal.setup(app, helper);
+            setup: async (app, helper) => {
+                await settings.portal.setup(app, helper);
                 setupServer(app, target);
             },
         },

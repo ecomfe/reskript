@@ -73,6 +73,8 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
         rewrite: proxyRewrite,
         targetDomain: proxyDomain || defaultProxyDomain,
     };
+    const portal = createPortal();
+    await buildEntry.projectSettings.portal.setup(portal, {router});
     const baseConfig: DevServerConfiguration = {
         port,
         proxy: constructProxyConfiguration(proxyOptions),
@@ -113,10 +115,7 @@ export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry
                 throw new Error('Webpack dev server not launched');
             }
 
-            const portal = createPortal();
-            buildEntry.projectSettings.portal.setup(portal, {router});
             server.app.use('/__skr__', portal);
-
             const before = createMiddlewareHook();
             const after = createMiddlewareHook();
             customizeMiddleware({before, after});
