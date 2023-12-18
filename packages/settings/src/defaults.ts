@@ -131,7 +131,7 @@ const fillPlaySettings = (settings?: Partial<PlaySettings>): PlaySettings => {
 
 const fillPortalSettings = (settings?: Partial<PortalSettings>): PortalSettings => {
     return {
-        setup: () => {},
+        setup: () => Promise.resolve(),
         ...settings,
     };
 };
