@@ -28,6 +28,14 @@ title: 管理自定义环境变量
 /packages/{package}/.env.{mode}.local
 ```
 
+除此之外，对于`build`、`dev`、`test`、`play`命令，你可以使用`--env-file`参数传递一个或多个自定义的环境变量文件：
+
+```shell
+skr build --env-file=.env.team --env-file=.env.me
+```
+
+使用`--env-file`传递的文件优先级高于内置的逻辑，多个`--env-file`传递文件越靠后的优先级越高。上面的代码将以`.env.me`为最高优先级，`.env.team`次之，再次之为内置的读取逻辑。
+
 :::caution
 不要在`.env.*`文件中放置任何敏感信息，不要将`.env.*.local`文件提交到远程仓库中。
 :::

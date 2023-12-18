@@ -15,6 +15,7 @@ export interface BabelCommandLineArgs {
 
 export interface BuildCommandLineArgs extends WorkModeAware {
     readonly configFile?: string;
+    readonly envFiles?: string[];
     readonly srcDirectory: string;
     readonly entriesDirectory: string;
     readonly buildTarget?: string;
@@ -31,6 +32,7 @@ export interface BuildCommandLineArgs extends WorkModeAware {
 
 export interface DevCommandLineArgs extends WorkModeAware {
     readonly configFile?: string;
+    readonly envFiles?: string[];
     readonly srcDirectory: string;
     readonly entriesDirectory: string;
     readonly buildTarget: string;
@@ -53,6 +55,7 @@ export interface LintCommandLineArgs {
 
 export interface PlayCommandLineArgs extends ProjectAware {
     readonly configFile?: string;
+    readonly envFiles?: string[];
     readonly buildTarget: string;
     readonly port: number;
     readonly host: HostType;
@@ -64,6 +67,7 @@ export type TestTarget = 'react' | 'node';
 
 export interface TestCommandLineArgs extends ProjectAware {
     readonly configFile?: string;
+    readonly envFiles?: string[];
     readonly target: TestTarget;
     readonly jestArgs: string[];
 }
