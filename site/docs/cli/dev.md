@@ -12,6 +12,7 @@ title: 本地调试
 --cwd [value]            指定当前工作目录，默认为当前目录
 --mode [value]           设置构建的环境模式，可以为development或production，默认为development
 --config [value]         使用指定的配置文件，默认查找reskript.config.{ts,mjs}
+--env-file [value...]       提供一个或多个自定义的环境变量（.env）文件
 --src-dir [value]        指定项目源码所在的目录，默认为src
 --build-target [value]   指定调试的特性名称，默认为dev
 --proxy-domain [domain]  设置后端API代理的目标地址，用来覆盖项目配置文件中的devServer.defaultProxyDomain配置

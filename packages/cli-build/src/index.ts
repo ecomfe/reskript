@@ -75,7 +75,7 @@ const build = async (cmd: BuildCommandLineArgs, projectSettings: ProjectSettings
 export const run = async (cmd: BuildCommandLineArgs): Promise<void> => {
     const {cwd, mode, configFile} = cmd;
     process.env.NODE_ENV = mode;
-    await prepareEnvironment(cwd, mode);
+    await prepareEnvironment(cwd, mode, cmd.envFiles);
 
     if (cmd.analyze && !cmd.buildTarget) {
         logger.error('--analyze must be used with --build-target to specify only one target');

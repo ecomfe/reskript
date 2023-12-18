@@ -83,7 +83,7 @@ const collectBuildContext = async <S extends ProjectSettings>(settings: S, cmd: 
 
 export const run = async (cmd: PlayCommandLineArgs, target: string): Promise<void> => {
     process.env.NODE_ENV = 'development';
-    await prepareEnvironment(cmd.cwd, 'development');
+    await prepareEnvironment(cmd.cwd, 'development', cmd.envFiles);
 
     const projectSettings = await buildProjectSettings(cmd, target);
 

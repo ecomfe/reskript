@@ -19,6 +19,11 @@ export default class LintCommand extends DynamicImportCommand<TestCommandLineArg
         {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );
 
+    envFiles = Option.Array(
+        '--env-file',
+        {description: 'Expand custom .env files to override built-in ones'}
+    );
+
     target = Option.String<TestCommandLineArgs['target']>(
         '--target',
         'node',
@@ -34,6 +39,7 @@ export default class LintCommand extends DynamicImportCommand<TestCommandLineArg
         return {
             cwd: this.cwd,
             configFile: this.configFile,
+            envFiles: this.envFiles,
             target: this.target,
             jestArgs: this.jestArgs,
         };

@@ -19,6 +19,11 @@ export default class LintCommand extends DynamicImportCommand<PlayCommandLineArg
         {description: 'specify a custom configuration file, default to "reskript.config.{ts|mjs}"'}
     );
 
+    envFiles = Option.Array(
+        '--env-file',
+        {description: 'Expand custom .env files to override built-in ones'}
+    );
+
     buildTarget = Option.String('--build-target', 'dev', {description: 'set build target, default to "dev"'});
 
     port = Option.String(
@@ -46,6 +51,7 @@ export default class LintCommand extends DynamicImportCommand<PlayCommandLineArg
         return {
             cwd: this.cwd,
             configFile: this.configFile,
+            envFiles: this.envFiles,
             buildTarget: this.buildTarget,
             port: this.port,
             host: this.host,

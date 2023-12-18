@@ -5,7 +5,7 @@ import {expand} from 'dotenv-expand';
 import {findMonorepoRoot, isMonorepo} from './project.js';
 import {WorkMode} from './interface.js';
 
-export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
+export const prepareEnvironment = async (cwd: string, mode: WorkMode, custom: string[] | undefined) => {
     const files = [
         path.join(cwd, `.env.${mode}.local`),
         path.join(cwd, '.env.local'),
@@ -22,6 +22,11 @@ export const prepareEnvironment = async (cwd: string, mode: WorkMode) => {
             path.join(root, '.env.local'),
             path.join(root, `.env.${mode}.local`)
         );
+    }
+
+    if (custom) {
+        // 自定义的优先级最高，越往后的越高，所以正好要反过来
+        files.unshift(...custom.slice().reverse().map(v => path.resolve(cwd, v)));
     }
 
     for (const file of files) {

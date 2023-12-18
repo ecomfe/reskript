@@ -11,6 +11,7 @@ title: 调试单个组件
 ```
 --cwd [value]           指定当前工作目录，默认为当前目录
 --config [value]        使用指定的配置文件，默认查找reskript.config.{ts,mjs}
+--env-file [value...]       提供一个或多个自定义的环境变量（.env）文件
 --build-target [value]  指定调试的特性名称，默认为dev
 --port [value]          指定监听的端口，默认使用9999端口
 --host [value]          设置默认的本地服务器域，可以用localhost、loopback（对应127.0.0.1）、ip（对应本机的局域网IP），也可以指定一个自定义的域名或IP

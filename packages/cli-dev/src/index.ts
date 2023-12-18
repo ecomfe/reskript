@@ -48,7 +48,7 @@ const createStart = async (cmd: DevCommandLineArgs, projectSettings: ProjectSett
 
 export const run = async (cmd: DevCommandLineArgs): Promise<void> => {
     process.env.NODE_ENV = cmd.mode;
-    await prepareEnvironment(cmd.cwd, cmd.mode);
+    await prepareEnvironment(cmd.cwd, cmd.mode, cmd.envFiles);
 
     const projectSettings = await readProjectSettings({commandName: 'dev', specifiedFile: cmd.configFile, ...cmd});
     const start = await createStart(cmd, projectSettings);
