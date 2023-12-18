@@ -46,14 +46,14 @@ importers:
         specifier: ^7.23.0
         version: 7.23.0
       '@reskript/babel-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../babel-utils
     devDependencies:
       '@babel/preset-react':
         specifier: ^7.22.15
         version: 7.22.15(@babel/core@7.23.0)
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@types/babel__core':
         specifier: ^7.20.2
@@ -72,10 +72,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/babel-plugin-debug-react-component-file-name:
     dependencies:
@@ -86,7 +86,7 @@ importers:
         specifier: ^7.23.0
         version: 7.23.0
       '@reskript/babel-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../babel-utils
     devDependencies:
       '@babel/plugin-proposal-class-properties':
@@ -99,7 +99,7 @@ importers:
         specifier: ^7.22.15
         version: 7.22.15(@babel/core@7.23.0)
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@types/babel__core':
         specifier: ^7.20.2
@@ -127,10 +127,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/babel-utils:
     dependencies:
@@ -145,7 +145,7 @@ importers:
         specifier: ^7.23.0
         version: 7.23.0
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@types/babel__core':
         specifier: ^7.20.2
@@ -170,18 +170,18 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/build-utils:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       change-case:
         specifier: ^5.0.2
@@ -240,10 +240,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/cli:
     dependencies:
@@ -251,7 +251,7 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       clipanion:
         specifier: 3.2.1
@@ -267,7 +267,7 @@ importers:
         version: 3.14.0
     devDependencies:
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@types/node':
         specifier: ^20.8.4
@@ -285,10 +285,10 @@ importers:
         specifier: ^7.23.0
         version: 7.23.0
       '@reskript/config-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-babel
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       cli-highlight:
         specifier: ^2.1.11
@@ -304,7 +304,7 @@ importers:
         version: 4.0.0
     devDependencies:
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@types/babel__core':
         specifier: ^7.20.2
@@ -322,19 +322,19 @@ importers:
   packages/cli-build:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-vite':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-vite
       '@reskript/config-webpack':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       core-js:
         specifier: 3.x
@@ -378,7 +378,7 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -386,22 +386,22 @@ importers:
   packages/cli-dev:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-vite':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-vite
       '@reskript/config-webpack':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack
       '@reskript/config-webpack-dev-server':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack-dev-server
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       better-opn:
         specifier: ^3.0.2
@@ -436,7 +436,7 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -444,10 +444,10 @@ importers:
   packages/cli-lint:
     dependencies:
       '@reskript/config-lint':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-lint
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       eslint-formatter-pretty:
         specifier: ^5.0.0
@@ -463,7 +463,7 @@ importers:
         version: 0.29.1
     devDependencies:
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@types/eslint':
         specifier: ^8.44.3
@@ -490,22 +490,22 @@ importers:
         specifier: ^4.6.0
         version: 4.6.0(monaco-editor@0.44.0)(react-dom@18.2.0)(react@18.2.0)
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-vite':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-vite
       '@reskript/config-webpack':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack
       '@reskript/config-webpack-dev-server':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack-dev-server
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       body-parser:
         specifier: ^1.20.2
@@ -606,10 +606,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -617,13 +617,13 @@ importers:
   packages/cli-test:
     dependencies:
       '@reskript/config-jest':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-jest
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       core-js:
         specifier: 3.x
@@ -708,13 +708,13 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0
       '@reskript/babel-plugin-add-react-display-name':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../babel-plugin-add-react-display-name
       '@reskript/babel-plugin-debug-react-component-file-name':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../babel-plugin-debug-react-component-file-name
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       babel-plugin-import:
         specifier: ^1.13.8
@@ -742,7 +742,7 @@ importers:
         specifier: ^7.22.15
         version: 7.22.15(@babel/core@7.23.0)
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@rollup/plugin-babel':
         specifier: ^6.0.4
@@ -767,15 +767,15 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/config-img-loader:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       imagemin:
         specifier: ^8.0.1
@@ -824,13 +824,13 @@ importers:
         specifier: ^7.23.0
         version: 7.23.0(@babel/core@7.23.0)
       '@reskript/config-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-babel
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       babel-jest:
         specifier: ^29.7.0
@@ -906,13 +906,13 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(stylelint@15.10.3)
       '@reskript/config-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-babel
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/eslint-plugin':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../eslint-plugin
       '@rushstack/eslint-patch':
         specifier: ^1.5.1
@@ -982,19 +982,19 @@ importers:
   packages/config-vite:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-babel
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/portal':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../portal
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@vitejs/plugin-legacy':
         specifier: ^4.1.1
@@ -1079,25 +1079,25 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(webpack@5.88.2)
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-babel
       '@reskript/config-lint':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-lint
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@reskript/svg-to-component-loader':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../svg-to-component-loader
       '@reskript/webpack-plugin-interpolate-html':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../webpack-plugin-interpolate-html
       babel-loader:
         specifier: ^9.1.3
@@ -1188,7 +1188,7 @@ importers:
         version: 3.0.8(webpack@5.88.2)
     devDependencies:
       '@reskript/config-img-loader':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-img-loader
       '@types/babel__core':
         specifier: ^7.20.2
@@ -1230,19 +1230,19 @@ importers:
         specifier: ^0.5.11
         version: 0.5.11(react-refresh@0.14.0)(webpack-dev-server@4.15.1)(webpack@5.88.2)
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/config-webpack':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../config-webpack
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/portal':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../portal
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@soda/friendly-errors-webpack-plugin':
         specifier: ^1.8.1
@@ -1283,10 +1283,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -1380,18 +1380,18 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/doctor:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       globby:
         specifier: ^13.2.2
@@ -1444,7 +1444,7 @@ importers:
   packages/init:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       execa:
         specifier: ^8.0.1
@@ -1478,16 +1478,16 @@ importers:
   packages/plugin-experimental:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/plugin-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../plugin-utils
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       '@swc/core':
         specifier: ^1.3.92
@@ -1567,13 +1567,13 @@ importers:
   packages/plugin-inject-html:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       escape-goat:
         specifier: ^4.0.0
@@ -1596,7 +1596,7 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -1604,13 +1604,13 @@ importers:
   packages/plugin-qiankun:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/plugin-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../plugin-utils
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       dedent:
         specifier: ^1.5.1
@@ -1639,21 +1639,21 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
 
   packages/plugin-sass:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/plugin-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../plugin-utils
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       sass:
         specifier: ^1.69.1
@@ -1678,10 +1678,10 @@ importers:
   packages/plugin-utils:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
     devDependencies:
       '@types/node':
@@ -1697,10 +1697,10 @@ importers:
   packages/plugin-workspace-no-build:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../settings
       semver:
         specifier: ^7.5.4
@@ -1751,12 +1751,12 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
 
   packages/settings:
     dependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       chokidar:
         specifier: ^3.5.3
@@ -1794,10 +1794,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -1805,7 +1805,7 @@ importers:
   packages/svg-to-component-loader:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
     devDependencies:
       '@types/node':
@@ -1824,11 +1824,11 @@ importers:
   packages/webpack-plugin-interpolate-html:
     dependencies:
       '@reskript/build-utils':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../build-utils
     devDependencies:
       '@reskript/core':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../core
       '@types/node':
         specifier: ^20.8.4
@@ -1847,10 +1847,10 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.21.0)
+        version: 0.34.6(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -1892,40 +1892,40 @@ importers:
         specifier: ^1.38.1
         version: 1.38.1
       '@reskript/cli':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli
       '@reskript/cli-babel':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-babel
       '@reskript/cli-build':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-build
       '@reskript/cli-dev':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-dev
       '@reskript/cli-lint':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-lint
       '@reskript/cli-play':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-play
       '@reskript/cli-test':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/cli-test
       '@reskript/config-lint':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/config-lint
       '@reskript/plugin-experimental':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/plugin-experimental
       '@reskript/plugin-inject-html':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/plugin-inject-html
       '@reskript/plugin-qiankun':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/plugin-qiankun
       '@reskript/settings':
-        specifier: 6.0.3
+        specifier: 6.1.0
         version: link:../../packages/settings
       '@testing-library/react':
         specifier: ^14.0.0
@@ -1956,7 +1956,7 @@ importers:
         version: 5.3.0-dev.20231009
       vite:
         specifier: ^4.4.11
-        version: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+        version: 4.4.11(@types/node@20.8.4)(less@4.2.0)
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
@@ -6646,7 +6646,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.23.0)
       '@types/babel__core': 7.20.2
       react-refresh: 0.14.0
-      vite: 4.4.11(@types/node@20.8.4)(terser@5.21.0)
+      vite: 4.4.11(@types/node@20.8.4)(less@4.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -19325,7 +19325,6 @@ packages:
       rollup: 3.29.4
     optionalDependencies:
       fsevents: 2.3.3
-    dev: true
 
   /vite@4.4.11(@types/node@20.8.4)(terser@5.21.0):
     resolution: {integrity: sha512-ksNZJlkcU9b0lBwAGZGGaZHCMqHsc8OpgtoYhsQ4/I2v5cnpmmmqe5pM4nv/4Hn6G/2GhTdj0DhZh2e+Er1q5A==}
