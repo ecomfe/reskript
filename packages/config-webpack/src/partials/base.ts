@@ -183,9 +183,9 @@ const factory: ConfigurationFactory = async entry => {
                 'regenerator-runtime': path.dirname(regeneratorRuntimePath),
             },
             extensionAlias: {
-                '.js': ['.ts', '.js'],
-                '.mjs': ['.mts', '.mjs'],
-                '.cjs': ['.cts', '.cjs'],
+                '.js': ['.ts', '.js', '.jsx', '.tsx'],
+                '.mjs': ['.mts', '.mjs', '.mtsx', '.mjsx'],
+                '.cjs': ['.cts', '.cjs', '.ctsx', '.cjsx'],
             },
         },
         cache: cache === 'off'
