@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
+
+
+### Bug Fixes
+
+* **build:** core-js的具体版本没有最终在babel配置中生效 ([8d508dc](https://github.com/ecomfe/reskript/commit/8d508dc4bdb0ce2abeb8ad362296cda54995c71b))
+* **init:** 将vite和stylelint版本控制在兼容的范围内 ([c5f7537](https://github.com/ecomfe/reskript/commit/c5f753771aeb1fd99b072763d15e2a9e8a29a8be))
+
+
+
+
+
 # [6.1.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.1.0) (2023-12-18)
 
 
