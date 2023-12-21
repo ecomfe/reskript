@@ -29,7 +29,7 @@ export default (options: BabelConfigOptionsFilled): TransformOptions => {
                 bugfixes: true,
                 debug: false,
                 useBuiltIns: polyfill ? 'usage' : false,
-                corejs: polyfill ? {version: 3, proposals: true} : undefined,
+                corejs: polyfill ? {version: polyfill === true ? 3 : polyfill, proposals: true} : undefined,
             },
         ],
         compatPluginTarget(presetTypeScript),
