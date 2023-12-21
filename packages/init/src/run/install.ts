@@ -51,9 +51,9 @@ export default async (cwd: string, options: UserOptions) => {
         ['-D'],
         [
             'eslint',
-            'stylelint',
+            'stylelint@15.x',
             'typescript',
-            options.driver,
+            options.driver === 'vite' ? 'vite@4.x' : 'webpack',
             options.gerrit ? 'husky@4.x' : 'husky',
             '@types/react',
             '@types/react-dom',
