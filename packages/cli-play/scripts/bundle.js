@@ -31,7 +31,7 @@ const config = {
             fileName: () => 'index.js',
         },
         rollupOptions: {
-            external: ['react', 'react-dom'],
+            external: [/^react(\/|$)/, /^react-dom(\/|$)/],
         },
     },
     plugins: [
