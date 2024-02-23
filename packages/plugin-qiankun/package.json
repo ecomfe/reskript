@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-qiankun",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,9 +33,9 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
-    "@reskript/core": "6.1.1",
-    "@reskript/plugin-utils": "6.1.1",
-    "@reskript/settings": "6.1.1",
+    "@reskript/core": "6.2.0",
+    "@reskript/plugin-utils": "6.2.0",
+    "@reskript/settings": "6.2.0",
     "dedent": "^1.5.1",
     "esbuild": "^0.19.4",
     "qiankun": "^2.10.13"

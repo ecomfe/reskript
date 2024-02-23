@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* **build:** core-js的具体版本没有最终在babel配置中生效 ([4b21652](https://github.com/ecomfe/reskript/commit/4b216529fbf26c84891b27b3cde8429438dc053b))
+* **build:** 支持纯ESM解析到tsx文件 ([#352](https://github.com/ecomfe/reskript/issues/352)) ([7778d13](https://github.com/ecomfe/reskript/commit/7778d135fd022efd14d186eaf6d80a4ad05b6459))
+* **init:** 将vite和stylelint版本控制在兼容的范围内 ([cee8703](https://github.com/ecomfe/reskript/commit/cee870375b1efd84f7ff7a5189e0fadf3ad22ded))
+* **play:** 解决Playground误打包了react/jsx-runtime的问题 ([df8c54d](https://github.com/ecomfe/reskript/commit/df8c54d8ee988c6968dd6d4369d866269fc1cbad))
+
+
+### Features
+
+* **build:** 增加--env-file参数支持自定义环境变量文件 ([#315](https://github.com/ecomfe/reskript/issues/315)) ([08b5d33](https://github.com/ecomfe/reskript/commit/08b5d337a6c063bb07aa18667c3e528568b36d7c))
+* **portal:** 支持异步初始化portal ([#351](https://github.com/ecomfe/reskript/issues/351)) ([060f600](https://github.com/ecomfe/reskript/commit/060f600382599f461c9f48a7b95a0e613413e5c0))
+
+
+
+
+
 ## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
 
 

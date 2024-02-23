@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* **build:** core-js的具体版本没有最终在babel配置中生效 ([4b21652](https://github.com/ecomfe/reskript/commit/4b216529fbf26c84891b27b3cde8429438dc053b))
+
+
+
+
+
 ## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
 
 

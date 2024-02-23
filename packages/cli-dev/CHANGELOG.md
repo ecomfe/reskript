@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
+
+
+### Features
+
+* **build:** 增加--env-file参数支持自定义环境变量文件 ([#315](https://github.com/ecomfe/reskript/issues/315)) ([08b5d33](https://github.com/ecomfe/reskript/commit/08b5d337a6c063bb07aa18667c3e528568b36d7c))
+
+
+
+
+
 ## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
 
 **Note:** Version bump only for package @reskript/cli-dev

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* **build:** 支持纯ESM解析到tsx文件 ([#352](https://github.com/ecomfe/reskript/issues/352)) ([7778d13](https://github.com/ecomfe/reskript/commit/7778d135fd022efd14d186eaf6d80a4ad05b6459))
+
+
+
+
+
 ## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
 
 **Note:** Version bump only for package @reskript/config-webpack

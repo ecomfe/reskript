@@ -3,7 +3,7 @@
     "packages/*",
     "showcase/*"
   ],
-  "version": "6.1.1",
+  "version": "6.2.0",
   "npmClient": "pnpm",
   "exact": true,
   "command": {

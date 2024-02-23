@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* **init:** 将vite和stylelint版本控制在兼容的范围内 ([cee8703](https://github.com/ecomfe/reskript/commit/cee870375b1efd84f7ff7a5189e0fadf3ad22ded))
+
+
+
+
+
 ## [6.1.1](https://github.com/ecomfe/reskript/compare/v6.1.0...v6.1.1) (2023-12-21)
 
 
