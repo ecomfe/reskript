@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.2.1](https://github.com/ecomfe/reskript/compare/v6.2.0...v6.2.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* **build:** 移除对SVG的cleanupIds优化 ([361b8c6](https://github.com/ecomfe/reskript/commit/361b8c666512d8d005a65cc6349fd321b31a8711))
+
+
+
+
+
 # [6.2.0](https://github.com/ecomfe/reskript/compare/v6.0.3...v6.2.0) (2024-02-23)
 
 

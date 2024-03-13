@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-test",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,9 +30,9 @@
     "typescript": "next"
   },
   "dependencies": {
-    "@reskript/config-jest": "6.2.0",
-    "@reskript/core": "6.2.0",
-    "@reskript/settings": "6.2.0",
+    "@reskript/config-jest": "6.2.1",
+    "@reskript/core": "6.2.1",
+    "@reskript/settings": "6.2.1",
     "jest-cli": "^29.7.0",
     "ramda": "^0.29.1"
   },
