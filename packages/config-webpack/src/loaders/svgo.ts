@@ -15,7 +15,6 @@ const factory: LoaderFactory = async () => {
                 {name: 'cleanupAttrs'},
                 {name: 'minifyStyles'},
                 {name: 'convertStyleToAttrs'},
-                {name: 'cleanupIds'},
                 {name: 'removeEmptyText'},
                 {name: 'removeEmptyContainers'},
                 {name: 'convertColors'},
