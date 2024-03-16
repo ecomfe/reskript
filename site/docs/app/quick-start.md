@@ -90,6 +90,7 @@ module.exports = {
     }
 }
 ```
+以上是一个比较精简可用的配置，使用`noEmit: true`可以让TypeScript不要去处理代码的生成，获得更好的类型检查的性能。
 
 ### 浏览器兼容性配置
 
@@ -99,8 +100,6 @@ module.exports = {
 chrome 76
 firefox 64
 ```
-
-以上是一个比较精简可用的配置，使用`emit: false`可以让TypeScript不要去处理代码的生成，获得更好的类型检查的性能。
 
 ### 项目配置
 
@@ -122,7 +121,7 @@ export default configure(
 );
 ```
 
-你可以通过[配置文件](../settings)来了解更多的配置信息。
+你可以通过[配置文件](../settings/setting)来了解更多的配置信息。
 
 ## 编写入口代码
 

@@ -8,7 +8,7 @@ title: 特性矩阵配置
 
 ### 定义矩阵
 
-在[项目配置文件](../settings#配置文件路径)中增加`featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
+在[项目配置文件](../settings/setting)中增加`featureMatrix`导出，它是一个对象，且至少包含一个叫做`dev`的属性：
 
 ```ts
 export default configure(

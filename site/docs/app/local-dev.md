@@ -24,7 +24,7 @@ GET https://randomuser.me/api?results=10&page=1
 
 ## 配置代理
 
-打开项目中的[项目配置文件](../settings#配置文件路径)，可以找到原本的`devServer`配置。在最初的[第一个应用](./quick-start)章节中，我们仅在这个对象中声明了`port`属性。此刻，我们为它加上几个新的配置：
+打开项目中的[项目配置文件](../settings/setting)，可以找到原本的`devServer`配置。在最初的[第一个应用](./quick-start)章节中，我们仅在这个对象中声明了`port`属性。此刻，我们为它加上几个新的配置：
 
 ```ts
 export default configure(
@@ -140,5 +140,5 @@ export default function UserList() {
 
 本章节展示了前端应用与后端服务连通的方式，可以看到`reSKRipt`的一系列功能：
 
-- 通过[项目配置文件](../settings#配置文件路径)中的`devServer`可以配置指定的URL前缀代理至后端，也可以配置后端服务的所在域名。
+- 通过[项目配置文件](../settings/setting)中的`devServer`可以配置指定的URL前缀代理至后端，也可以配置后端服务的所在域名。
 - 被代理的请求将完全透明地返回后端的响应，前端可以接收响应后进行视图的开发。

@@ -20,7 +20,7 @@ title: FAQ
 
 > 我想使用`tailwind`来写样式。
 
-参考[settings/build#特殊第三方库的优化]章节，在[项目配置文件](settings#配置文件路径)中的`build.uses`配置中加上`"tailwind"`，并根据[官网文档](https://docs.tailwindchina.com/docs/installation#-1)初始化配置、引入样式即可。
+参考[settings/build#特殊第三方库的优化]章节，在[项目配置文件](settings/setting)中的`build.uses`配置中加上`"tailwind"`，并根据[官网文档](https://docs.tailwindchina.com/docs/installation#-1)初始化配置、引入样式即可。
 
 > 我在项目中用多个入口文件分割子项目，希望只构建其中一个或几个并上线。
 
@@ -30,7 +30,7 @@ title: FAQ
 
 > 我发现有一个第三方包使用了新的JavaScript语法，不经过babel处理就没办法在低版本浏览器中运行。
 
-参考[增加babel编译的文件](settings/build#增加babel编译的文件)一章，通过[项目配置文件](settings#配置文件路径)中的`build.script.finalize`配置让babel处理第三方包。
+参考[增加babel编译的文件](settings/build#增加babel编译的文件)一章，通过[项目配置文件](settings/setting)中的`build.script.finalize`配置让babel处理第三方包。
 
 > 我希望某个入口构建产出的文件没有哈希，用于给他人直接引用。
 
@@ -38,7 +38,7 @@ title: FAQ
 
 > 我修改了项目中的`webpack.config.js`但没有效果。
 
-项目根目录下的`webpack.config.js`仅用于部分IDE识别`import`的别名，本身不参与任何构建。如果需要对构建进行自定义调整，请修改[项目配置文件](settings#配置文件路径)，具体参考：
+项目根目录下的`webpack.config.js`仅用于部分IDE识别`import`的别名，本身不参与任何构建。如果需要对构建进行自定义调整，请修改[项目配置文件](settings/setting)，具体参考：
 
 - [调整webpack配置](settings/build#自定义调整webpack配置)。
 - [调整webpack-dev-server配置](settings/dev-server#扩展配置)。

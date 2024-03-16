@@ -18,7 +18,7 @@ module.exports = {
             type: 'category',
             label: '配置',
             items: [
-                'settings/settings',
+                'settings/setting',
                 'settings/feature-matrix',
                 'settings/build',
                 'settings/dev-server',
