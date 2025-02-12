@@ -49,7 +49,7 @@ npm i -D @reskript/plugin-workspace-no-build
 ```ts
 // reskript.config.ts
 import {configure} from '@reskript/settings';
-import workspaceNoBuild = require('@reskript/plugin-workspace-no-build');
+import workspaceNoBuild from '@reskript/plugin-workspace-no-build';
 
 
 export default configure(
